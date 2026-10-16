@@ -3,99 +3,114 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Input submitted to an existing session.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownSessionInputParam::class)
+/** Input submitted to an existing session. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownSessionInputParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionInputParamAgentSessionInputComputerUseApprovalRequestResult::class, name = "agent.session.input.computer_use_approval_request_result"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionInputParamAgentSessionInputMessage::class, name = "agent.session.input.message"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionInputParamAgentSessionInputCancel::class, name = "agent.session.input.cancel"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionInputParamAgentSessionInputToolResult::class, name = "agent.session.input.tool_result")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = SessionInputParamAgentSessionInputComputerUseApprovalRequestResult::class,
+        name = "agent.session.input.computer_use_approval_request_result",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = SessionInputParamAgentSessionInputMessage::class,
+        name = "agent.session.input.message",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = SessionInputParamAgentSessionInputCancel::class,
+        name = "agent.session.input.cancel",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = SessionInputParamAgentSessionInputToolResult::class,
+        name = "agent.session.input.tool_result",
+    ),
 )
 sealed interface SessionInputParam
 
 /** A [SessionInputParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownSessionInputParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownSessionInputParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : SessionInputParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Cancels the session's active turn.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Cancels the session's active turn. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SessionInputParamAgentSessionInputCancel(
-    /**
-     * The type of the object. Always `agent.session.input.cancel`.
-     */
+    /** The type of the object. Always `agent.session.input.cancel`. */
     val type: SessionInputParamAgentSessionInputCancelTypeEnum
 ) : SessionInputParam
 
-/**
- * Responds to a pending Computer Use approval request.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Responds to a pending Computer Use approval request. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SessionInputParamAgentSessionInputComputerUseApprovalRequestResult(
     /**
      * The type of the object. Always `agent.session.input.computer_use_approval_request_result`.
      */
     val type: SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938,
-    /**
-     * The registered request ID from the required action.
-     */
+    /** The registered request ID from the required action. */
     @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String,
-    /**
-     * The response for this request type.
-     */
-    val response: ComputerUseApprovalResponseParam
+    /** The response for this request type. */
+    val response: ComputerUseApprovalResponseParam,
 ) : SessionInputParam
 
-/**
- * Adds one or more user messages and starts a turn.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Adds one or more user messages and starts a turn. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SessionInputParamAgentSessionInputMessage(
-    /**
-     * The type of the object. Always `agent.session.input.message`.
-     */
+    /** The type of the object. Always `agent.session.input.message`. */
     val type: SessionInputParamAgentSessionInputMessageTypeEnum,
-    /**
-     * The user messages to add to the session.
-     */
-    val input: List<InputMessageParam>
+    /** The user messages to add to the session. */
+    val input: List<InputMessageParam>,
 ) : SessionInputParam
 
-/**
- * Submits the result of a function call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Submits the result of a function call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SessionInputParamAgentSessionInputToolResult(
-    /**
-     * The type of the object. Always `agent.session.input.tool_result`.
-     */
+    /** The type of the object. Always `agent.session.input.tool_result`. */
     val type: SessionInputParamAgentSessionInputToolResultTypeEnum,
-    /**
-     * The ID of the turn that requested the function call.
-     */
+    /** The ID of the turn that requested the function call. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The ID of the function call.
-     */
+    /** The ID of the function call. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * Whether the function call succeeded.
-     */
+    /** Whether the function call succeeded. */
     val success: Boolean,
-    /**
-     * The function result when the call succeeded.
-     */
+    /** The function result when the call succeeded. */
     val output: FunctionCallOutputParam? = null,
-    /**
-     * The error message when the call failed.
-     */
-    val error: String? = null
+    /** The error message when the call failed. */
+    val error: String? = null,
 ) : SessionInputParam

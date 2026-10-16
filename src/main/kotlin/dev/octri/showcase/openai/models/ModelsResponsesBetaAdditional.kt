@@ -3,56 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `BetaAdditionalTools` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaAdditionalTools` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaAdditionalTools(
-    /**
-     * The type of the item. Always `additional_tools`.
-     */
+    /** The type of the item. Always `additional_tools`. */
     val type: BetaAdditionalToolsTypeEnum,
-    /**
-     * The unique ID of the additional tools item.
-     */
+    /** The unique ID of the additional tools item. */
     val id: String,
-    /**
-     * The role that provided the additional tools.
-     */
+    /** The role that provided the additional tools. */
     val role: BetaMessageRole,
-    /**
-     * The additional tool definitions made available at this item.
-     */
+    /** The additional tool definitions made available at this item. */
     val tools: List<BetaTool>,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that produced this item. */
+    val agent: BetaAgentTag? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * Typed representation of the `BetaAdditionalToolsItemParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaAdditionalToolsItemParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaAdditionalToolsItemParam(
-    /**
-     * The item type. Always `additional_tools`.
-     */
+    /** The item type. Always `additional_tools`. */
     val type: BetaAdditionalToolsItemParamTypeEnum,
-    /**
-     * The role that provided the additional tools. Only `developer` is supported.
-     */
+    /** The role that provided the additional tools. Only `developer` is supported. */
     val role: BetaAdditionalToolsItemParamRoleEnum,
-    /**
-     * A list of additional tools made available at this item.
-     */
+    /** A list of additional tools made available at this item. */
     val tools: List<BetaTool>,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
-    val id: String? = null
+    /** Optional `string` value serialized in the `id` wire field. */
+    val id: String? = null,
 ) : BetaItem

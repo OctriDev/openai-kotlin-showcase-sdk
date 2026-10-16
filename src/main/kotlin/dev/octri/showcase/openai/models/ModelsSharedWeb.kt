@@ -3,202 +3,211 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Action type "find_in_page": Searches for a pattern within a loaded page.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Action type "find_in_page": Searches for a pattern within a loaded page. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WebSearchActionFind(
-    /**
-     * The action type.
-     */
+    /** The action type. */
     val type: WebSearchActionFindTypeEnum,
-    /**
-     * The pattern or text to search for within the page.
-     */
+    /** The pattern or text to search for within the page. */
     val pattern: String,
-    /**
-     * The URL of the page searched for the pattern, when available.
-     */
-    val url: String? = null
+    /** The URL of the page searched for the pattern, when available. */
+    val url: String? = null,
 ) : WebSearchToolCallAction
 
-/**
- * Action type "open_page" - Opens a specific URL from search results.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Action type "open_page" - Opens a specific URL from search results. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WebSearchActionOpenPage(
-    /**
-     * The action type.
-     */
+    /** The action type. */
     val type: WebSearchActionOpenPageTypeEnum,
-    /**
-     * The URL opened by the model.
-     */
-    val url: String? = null
+    /** The URL opened by the model. */
+    val url: String? = null,
 ) : WebSearchToolCallAction
 
-/**
- * A source used in the search.
- */
+/** A source used in the search. */
 data class WebSearchActionSearchSourcesItem(
-    /**
-     * The type of source. Always `url`.
-     */
+    /** The type of source. Always `url`. */
     val type: WebSearchActionSearchSourcesItemTypeEnum,
-    /**
-     * The URL of the source.
-     */
-    val url: String
+    /** The URL of the source. */
+    val url: String,
 )
 
-/**
- * Action type "search" - Performs a web search query.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Action type "search" - Performs a web search query. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WebSearchActionSearch(
-    /**
-     * The action type.
-     */
+    /** The action type. */
     val type: WebSearchActionSearchTypeEnum,
-    /**
-     * The search query.
-     */
+    /** The search query. */
     val query: String? = null,
-    /**
-     * The search queries.
-     */
+    /** The search queries. */
     val queries: List<String>? = null,
-    /**
-     * The sources used in the search.
-     */
-    val sources: List<WebSearchActionSearchSourcesItem>? = null
+    /** The sources used in the search. */
+    val sources: List<WebSearchActionSearchSourcesItem>? = null,
 ) : WebSearchToolCallAction
 
-/**
- * The approximate location of the user.
- */
+/** The approximate location of the user. */
 data class WebSearchApproximateLocation(
-    /**
-     * The type of location approximation. Always `approximate`.
-     */
+    /** The type of location approximation. Always `approximate`. */
     val type: WebSearchApproximateLocationTypeEnum? = null,
-    /**
-     * Optional `string` value serialized in the `country` wire field.
-     */
+    /** Optional `string` value serialized in the `country` wire field. */
     val country: String? = null,
-    /**
-     * Optional `string` value serialized in the `region` wire field.
-     */
+    /** Optional `string` value serialized in the `region` wire field. */
     val region: String? = null,
-    /**
-     * Optional `string` value serialized in the `city` wire field.
-     */
+    /** Optional `string` value serialized in the `city` wire field. */
     val city: String? = null,
-    /**
-     * Optional `string` value serialized in the `timezone` wire field.
-     */
-    val timezone: String? = null
+    /** Optional `string` value serialized in the `timezone` wire field. */
+    val timezone: String? = null,
 )
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ * This tool searches the web for relevant results to use in a response. Learn more about the web
+ * search tool.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WebSearchPreviewTool(
     /**
-     * The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
+     * The type of the web search tool. One of `web_search_preview` or
+     * `web_search_preview_2025_03_11`.
      */
     val type: WebSearchPreviewToolTypeEnum,
+    /** Optional API value serialized in the `user_location` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_location")
+    val userLocation: ApproximateLocation? = null,
     /**
-     * Optional API value serialized in the `user_location` wire field.
+     * High level guidance for the amount of context window space to use for the search. One of
+     * `low`, `medium`, or `high`. `medium` is the default.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_location") val userLocation: ApproximateLocation? = null,
-    /**
-     * High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size") val searchContextSize: SearchContextSize? = null,
-    /**
-     * Optional array value serialized in the `search_content_types` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("search_content_types") val searchContentTypes: List<SearchContentType>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size")
+    val searchContextSize: SearchContextSize? = null,
+    /** Optional array value serialized in the `search_content_types` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("search_content_types")
+    val searchContentTypes: List<SearchContentType>? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * Filters for the search.
- */
+/** Filters for the search. */
 data class WebSearchToolFilters(
     /**
-     * Allowed domains for the search. If not provided, all domains are allowed. Subdomains of the provided domains are allowed as well. Example: `["pubmed.ncbi.nlm.nih.gov"]`
+     * Allowed domains for the search. If not provided, all domains are allowed. Subdomains of the
+     * provided domains are allowed as well. Example: `["pubmed.ncbi.nlm.nih.gov"]`
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
+    val allowedDomains: List<String>? = null
 )
 
-/**
- * Search the Internet for sources related to the prompt. Learn more about the web search tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Search the Internet for sources related to the prompt. Learn more about the web search tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WebSearchTool(
-    /**
-     * The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
-     */
+    /** The type of the web search tool. One of `web_search` or `web_search_2025_08_26`. */
     val type: WebSearchToolTypeEnum,
     /**
-     * Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.
+     * Allow live internet access for web search. Defaults to true when omitted. When false, the web
+     * search tool runs in offline/cache-only mode and will not fetch new external content.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_web_access") val externalWebAccess: Boolean? = null,
-    /**
-     * Filters for the search.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_web_access")
+    val externalWebAccess: Boolean? = null,
+    /** Filters for the search. */
     val filters: WebSearchToolFilters? = null,
     /**
-     * The approximate location of the user. If omitted or null, defaults to the United States. To avoid this fallback, pass `{"type": "approximate"}` without location fields. To localize results, provide the relevant location fields.
+     * The approximate location of the user. If omitted or null, defaults to the United States. To
+     * avoid this fallback, pass `{"type": "approximate"}` without location fields. To localize
+     * results, provide the relevant location fields.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_location") val userLocation: WebSearchApproximateLocation? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("user_location")
+    val userLocation: WebSearchApproximateLocation? = null,
     /**
-     * High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
+     * High level guidance for the amount of context window space to use for the search. One of
+     * `low`, `medium`, or `high`. `medium` is the default.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size") val searchContextSize: WebSearchToolSearchContextSizeEnum? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size")
+    val searchContextSize: WebSearchToolSearchContextSizeEnum? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * The results of a web search tool call. See the web search guide for more information.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The results of a web search tool call. See the web search guide for more information. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WebSearchToolCall(
-    /**
-     * The unique ID of the web search tool call.
-     */
+    /** The unique ID of the web search tool call. */
     val id: String,
-    /**
-     * The type of the web search tool call. Always `web_search_call`.
-     */
+    /** The type of the web search tool call. Always `web_search_call`. */
     val type: WebSearchToolCallTypeEnum,
-    /**
-     * The status of the web search tool call.
-     */
+    /** The status of the web search tool call. */
     val status: WebSearchCallStatus,
     /**
-     * An object describing the specific action taken in this web search call. Includes details on how the model used the web (search, open_page, find_in_page).
+     * An object describing the specific action taken in this web search call. Includes details on
+     * how the model used the web (search, open_page, find_in_page).
      */
-    val action: WebSearchToolCallAction? = null
+    val action: WebSearchToolCallAction? = null,
 ) : ConversationItem, Item, ItemResource, OutputItem, ItemField
 
 /**
- * An object describing the specific action taken in this web search call. Includes details on how the model used the web (search, open_page, find_in_page).
+ * An object describing the specific action taken in this web search call. Includes details on how
+ * the model used the web (search, open_page, find_in_page).
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownWebSearchToolCallAction::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownWebSearchToolCallAction::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WebSearchActionSearch::class, name = "search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WebSearchActionOpenPage::class, name = "open_page"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WebSearchActionFind::class, name = "find_in_page")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = WebSearchActionSearch::class,
+        name = "search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = WebSearchActionOpenPage::class,
+        name = "open_page",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = WebSearchActionFind::class,
+        name = "find_in_page",
+    ),
 )
 sealed interface WebSearchToolCallAction
 
 /** A [WebSearchToolCallAction] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownWebSearchToolCallAction @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownWebSearchToolCallAction
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : WebSearchToolCallAction {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

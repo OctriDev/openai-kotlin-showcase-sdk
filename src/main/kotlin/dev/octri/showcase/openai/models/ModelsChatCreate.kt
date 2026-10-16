@@ -3,350 +3,402 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Approximate location parameters for the search.
- */
+/** Approximate location parameters for the search. */
 data class CreateChatCompletionRequestVariant1WebSearchOptionsUserLocation(
-    /**
-     * The type of location approximation. Always `approximate`.
-     */
+    /** The type of location approximation. Always `approximate`. */
     val type: CreateChatCompletionRequestVariant1WebSearchOptionsUserLocationTypeEnum,
-    /**
-     * Approximate location parameters for the search.
-     */
-    val approximate: WebSearchLocation
+    /** Approximate location parameters for the search. */
+    val approximate: WebSearchLocation,
 )
 
 /**
- * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+ * This tool searches the web for relevant results to use in a response. Learn more about the web
+ * search tool.
  */
 data class CreateChatCompletionRequestVariant1WebSearchOptions(
+    /** Approximate location parameters for the search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_location")
+    val userLocation: CreateChatCompletionRequestVariant1WebSearchOptionsUserLocation? = null,
     /**
-     * Approximate location parameters for the search.
+     * High level guidance for the amount of context window space to use for the search. One of
+     * `low`, `medium`, or `high`. `medium` is the default.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_location") val userLocation: CreateChatCompletionRequestVariant1WebSearchOptionsUserLocation? = null,
-    /**
-     * High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size") val searchContextSize: WebSearchContextSize? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size")
+    val searchContextSize: WebSearchContextSize? = null,
 )
 
 /**
- * Parameters for audio output. Required when audio output is requested with `modalities: "audio"]`. \[Learn more.
+ * Parameters for audio output. Required when audio output is requested with `modalities: "audio"]`.
+ * \[Learn more.
  */
 data class CreateChatCompletionRequestVariant1Audio(
     /**
-     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `nova`, `onyx`, `sage`, `shimmer`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Custom voices must be created from audio samples.
+     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`,
+     * `coral`, `echo`, `fable`, `nova`, `onyx`, `sage`, `shimmer`, `marin`, and `cedar`. You may
+     * also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Custom
+     * voices must be created from audio samples.
      */
     val voice: VoiceIdsOrCustomVoice,
     /**
      * Specifies the output audio format. Must be one of `wav`, `mp3`, `flac`, `opus`, or `pcm16`.
      */
-    val format: CreateChatCompletionRequestVariant1AudioFormatEnum
+    val format: CreateChatCompletionRequestVariant1AudioFormatEnum,
 )
 
-/**
- * Typed representation of the `CreateChatCompletionRequest` API schema.
- */
+/** Typed representation of the `CreateChatCompletionRequest` API schema. */
 class CreateChatCompletionRequest(
     /**
-     * A list of messages comprising the conversation so far. Depending on the model you use, different message types (modalities) are supported, like text, images, and audio.
+     * A list of messages comprising the conversation so far. Depending on the model you use,
+     * different message types (modalities) are supported, like text, images, and audio.
      */
     val messages: List<ChatCompletionRequestMessage>,
     /**
-     * Model ID used to generate the response, like `gpt-6-astra` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the model guide to browse and compare available models.
+     * Model ID used to generate the response, like `gpt-6-astra` or `o3`. OpenAI offers a wide
+     * range of models with different capabilities, performance characteristics, and price points.
+     * Refer to the model guide to browse and compare available models.
      */
     val model: ModelIdsShared,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
     /**
-     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at each token position, each with an associated log probability. In some cases, the number of returned tokens may be fewer than requested. `logprobs` must be set to `true` if this parameter is used.
+     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at
+     * each token position, each with an associated log probability. In some cases, the number of
+     * returned tokens may be fewer than requested. `logprobs` must be set to `true` if this
+     * parameter is used.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: Long? = null,
-    /**
-     * Optional API value serialized in the `temperature` wire field.
-     */
+    /** Optional API value serialized in the `temperature` wire field. */
     val temperature: Double? = null,
-    /**
-     * Optional API value serialized in the `top_p` wire field.
-     */
+    /** Optional API value serialized in the `top_p` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates by better bucketing similar requests and to help OpenAI detect and prevent abuse. Learn more.
+     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
+     * `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your
+     * end-users. Used to boost cache hit rates by better bucketing similar requests and to help
+     * OpenAI detect and prevent abuse. Learn more.
      */
     val user: String? = null,
+    /** Optional API value serialized in the `safety_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
+    /** Optional `string` value serialized in the `prompt_cache_key` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
+    val promptCacheKey: String? = null,
+    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
+    val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
     /**
-     * Optional API value serialized in the `safety_identifier` wire field.
+     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI
+     * automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to
+     * content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints.
+     * For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation,
+     * without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit
+     * breakpoint. The `ttl`…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options")
+    val promptCacheOptions: PromptCacheOptionsParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
+    val serviceTier: ServiceTier? = null,
     /**
-     * Optional `string` value serialized in the `prompt_cache_key` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
-    /**
-     * Optional API value serialized in the `prompt_cache_retention` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
-    /**
-     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl`…
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options") val promptCacheOptions: PromptCacheOptionsParam? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTier? = null,
-    /**
-     * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: `["text"]` The `gpt-4o-audio-preview` model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: `["text", "audio"]`
+     * Output types that you would like the model to generate. Most models are capable of generating
+     * text, which is the default: `["text"]` The `gpt-4o-audio-preview` model can also be used to
+     * generate audio. To request that this model generate both text and audio responses, you can
+     * use: `["text", "audio"]`
      */
     val modalities: ResponseModalities? = null,
     val verbosity: Verbosity? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
+    val reasoningEffort: ReasoningEffort? = null,
     /**
-     * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.
+     * An upper bound for the number of tokens that can be generated for a completion, including
+     * visible output tokens and reasoning tokens.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens")
+    val maxCompletionTokens: Long? = null,
     /**
-     * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+     * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
+     * frequency in the text so far, decreasing the model's likelihood to repeat the same line
+     * verbatim.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("frequency_penalty") val frequencyPenalty: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("frequency_penalty")
+    val frequencyPenalty: Double? = null,
     /**
-     * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+     * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
+     * in the text so far, increasing the model's likelihood to talk about new topics.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("presence_penalty") val presencePenalty: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("presence_penalty")
+    val presencePenalty: Double? = null,
     /**
-     * This tool searches the web for relevant results to use in a response. Learn more about the web search tool.
+     * This tool searches the web for relevant results to use in a response. Learn more about the
+     * web search tool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("web_search_options") val webSearchOptions: CreateChatCompletionRequestVariant1WebSearchOptions? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("web_search_options")
+    val webSearchOptions: CreateChatCompletionRequestVariant1WebSearchOptions? = null,
     /**
-     * An object specifying the format that the model must output. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the \[Structured Outputs guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid JSON. Using `json_schema` is preferred for models that support it.
+     * An object specifying the format that the model must output. Setting to `{ "type":
+     * "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model
+     * will match your supplied JSON schema. Learn more in the \[Structured Outputs
+     * guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON
+     * mode, which ensures the message the model generates is valid JSON. Using `json_schema` is
+     * preferred for models that support it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: ResponseFormat? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
+    val responseFormat: ResponseFormat? = null,
     /**
-     * Parameters for audio output. Required when audio output is requested with `modalities: "audio"]`. \[Learn more.
+     * Parameters for audio output. Required when audio output is requested with `modalities:
+     * "audio"]`. \[Learn more.
      */
     val audio: CreateChatCompletionRequestVariant1Audio? = null,
     /**
-     * Whether or not to store the output of this chat completion request for use in our model distillation or evals products. Supports text and image inputs. Note: image inputs over 8MB will be dropped.
+     * Whether or not to store the output of this chat completion request for use in our model
+     * distillation or evals products. Supports text and image inputs. Note: image inputs over 8MB
+     * will be dropped.
      */
     val store: Boolean? = null,
     val moderation: ModerationParam? = null,
     /**
-     * If set to true, the model response data will be streamed to the client as it is generated using server-sent events. See the Streaming section below for more information, along with the streaming responses guide for more information on how to handle the streaming events.
+     * If set to true, the model response data will be streamed to the client as it is generated
+     * using server-sent events. See the Streaming section below for more information, along with
+     * the streaming responses guide for more information on how to handle the streaming events.
      */
     val stream: Boolean? = null,
     /**
-     * Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
+     * Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the
+     * API will stop generating further tokens. The returned text will not contain the stop
+     * sequence.
      */
     val stop: StopConfiguration? = null,
     /**
-     * Modify the likelihood of specified tokens appearing in the completion. Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive…
+     * Modify the likelihood of specified tokens appearing in the completion. Accepts a JSON object
+     * that maps tokens (specified by their token ID in the tokenizer) to an associated bias value
+     * from -100 to 100. Mathematically, the bias is added to the logits generated by the model
+     * prior to sampling. The exact effect will vary per model, but values between -1 and 1 should
+     * decrease or increase likelihood of selection; values like -100 or 100 should result in a ban
+     * or exclusive…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("logit_bias") val logitBias: Map<String, Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("logit_bias")
+    val logitBias: Map<String, Long>? = null,
     /**
-     * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.
+     * Whether to return log probabilities of the output tokens or not. If true, returns the log
+     * probabilities of each output token returned in the `content` of `message`.
      */
     val logprobs: Boolean? = null,
     /**
-     * The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API. This value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o-series models.
+     * The maximum number of tokens that can be generated in the chat completion. This value can be
+     * used to control costs for text generated via API. This value is now deprecated in favor of
+     * `max_completion_tokens`, and is not compatible with o-series models.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("max_tokens") val maxTokens: Long? = null,
     /**
-     * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs.
+     * How many chat completion choices to generate for each input message. Note that you will be
+     * charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to
+     * minimize costs.
      */
     val n: Long? = null,
     /**
-     * Configuration for a Predicted Output, which can greatly improve response times when large parts of the model response are known ahead of time. This is most common when you are regenerating a file with only minor changes to most of the content.
+     * Configuration for a Predicted Output, which can greatly improve response times when large
+     * parts of the model response are known ahead of time. This is most common when you are
+     * regenerating a file with only minor changes to most of the content.
      */
     val prediction: PredictionContent? = null,
     /**
-     * This feature is in Beta. If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result. Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
+     * This feature is in Beta. If specified, our system will make a best effort to sample
+     * deterministically, such that repeated requests with the same `seed` and parameters should
+     * return the same result. Determinism is not guaranteed, and you should refer to the
+     * `system_fingerprint` response parameter to monitor changes in the backend.
      */
     val seed: Long? = null,
-    /**
-     * Options for streaming response. Only set this when you set `stream: true`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_options") val streamOptions: ChatCompletionStreamOptions? = null,
+    /** Options for streaming response. Only set this when you set `stream: true`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_options")
+    val streamOptions: ChatCompletionStreamOptions? = null,
     /**
      * A list of tools the model may call. You can provide either custom tools or function tools.
      */
     val tools: List<ToolsItem>? = null,
     /**
-     * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool. `none` is the default when no tools are present. `auto` is the default…
+     * Controls which (if any) tool is called by the model. `none` means the model will not call any
+     * tool and instead generates a message. `auto` means the model can pick between generating a
+     * message or calling one or more tools. `required` means the model must call one or more tools.
+     * Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}`
+     * forces the model to call that tool. `none` is the default when no tools are present. `auto`
+     * is the default…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: ChatCompletionToolChoiceOption? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
+    val toolChoice: ChatCompletionToolChoiceOption? = null,
+    /** Whether to enable parallel function calling during tool use. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
+    val parallelToolCalls: ParallelToolCalls? = null,
     /**
-     * Whether to enable parallel function calling during tool use.
+     * Deprecated in favor of `tool_choice`. Controls which (if any) function is called by the
+     * model. `none` means the model will not call a function and instead generates a message.
+     * `auto` means the model can pick between generating a message or calling a function.
+     * Specifying a particular function via `{"name": "my_function"}` forces the model to call that
+     * function. `none` is the default when no functions are present. `auto` is the default if
+     * functions are present.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: ParallelToolCalls? = null,
-    /**
-     * Deprecated in favor of `tool_choice`. Controls which (if any) function is called by the model. `none` means the model will not call a function and instead generates a message. `auto` means the model can pick between generating a message or calling a function. Specifying a particular function via `{"name": "my_function"}` forces the model to call that function. `none` is the default when no functions are present. `auto` is the default if functions are present.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_call") @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(ChatCompletionFunctionCallOption::class)) val functionCall: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("function_call")
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(ChatCompletionFunctionCallOption::class)
+    )
+    val functionCall: Any? = null,
     /**
      * Deprecated in favor of `tools`. A list of functions the model may generate JSON inputs for.
      */
-    val functions: List<ChatCompletionFunctions>? = null
+    val functions: List<ChatCompletionFunctions>? = null,
 )
 
-/**
- * Log probability information for the choice.
- */
+/** Log probability information for the choice. */
 data class CreateChatCompletionResponseChoicesItemLogprobs(
-    /**
-     * A list of message content tokens with log probability information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: List<ChatCompletionTokenLogprob>?,
-    /**
-     * A list of message refusal tokens with log probability information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("refusal", required = true) val refusal: List<ChatCompletionTokenLogprob>?
+    /** A list of message content tokens with log probability information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true)
+    val content: List<ChatCompletionTokenLogprob>?,
+    /** A list of message refusal tokens with log probability information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("refusal", required = true)
+    val refusal: List<ChatCompletionTokenLogprob>?,
 )
 
-/**
- * Required object value serialized in the `choices[]` wire field.
- */
+/** Required object value serialized in the `choices[]` wire field. */
 data class CreateChatCompletionResponseChoicesItem(
     /**
-     * The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence, `length` if the maximum number of tokens specified in the request was reached, `content_filter` if content was omitted due to a flag from our content filters, `tool_calls` if the model called a tool, or `function_call` (deprecated) if the model called a function. Read the Model Spec for more.
+     * The reason the model stopped generating tokens. This will be `stop` if the model hit a
+     * natural stop point or a provided stop sequence, `length` if the maximum number of tokens
+     * specified in the request was reached, `content_filter` if content was omitted due to a flag
+     * from our content filters, `tool_calls` if the model called a tool, or `function_call`
+     * (deprecated) if the model called a function. Read the Model Spec for more.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason") val finishReason: CreateChatCompletionResponseChoicesItemFinishReasonEnum,
-    /**
-     * The index of the choice in the list of choices.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason")
+    val finishReason: CreateChatCompletionResponseChoicesItemFinishReasonEnum,
+    /** The index of the choice in the list of choices. */
     val index: Long,
-    /**
-     * A chat completion message generated by the model.
-     */
+    /** A chat completion message generated by the model. */
     val message: ChatCompletionResponseMessage,
-    /**
-     * Log probability information for the choice.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("logprobs", required = true) val logprobs: CreateChatCompletionResponseChoicesItemLogprobs?
+    /** Log probability information for the choice. */
+    @com.fasterxml.jackson.annotation.JsonProperty("logprobs", required = true)
+    val logprobs: CreateChatCompletionResponseChoicesItemLogprobs?,
 )
 
-/**
- * Represents a chat completion response returned by model, based on the provided input.
- */
+/** Represents a chat completion response returned by model, based on the provided input. */
 data class CreateChatCompletionResponse(
-    /**
-     * A unique identifier for the chat completion.
-     */
+    /** A unique identifier for the chat completion. */
     val id: String,
-    /**
-     * A list of chat completion choices. Can be more than one if `n` is greater than 1.
-     */
+    /** A list of chat completion choices. Can be more than one if `n` is greater than 1. */
     val choices: List<CreateChatCompletionResponseChoicesItem>,
-    /**
-     * The Unix timestamp (in seconds) of when the chat completion was created.
-     */
+    /** The Unix timestamp (in seconds) of when the chat completion was created. */
     val created: Long,
-    /**
-     * The model used for the chat completion.
-     */
+    /** The model used for the chat completion. */
     val model: String,
+    /** The object type, which is always `chat.completion`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: CreateChatCompletionResponseObjectEnum,
     /**
-     * The object type, which is always `chat.completion`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CreateChatCompletionResponseObjectEnum,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
+    /** Optional API value serialized in the `service_tier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
+    val serviceTier: ServiceTier? = null,
     /**
-     * Optional API value serialized in the `service_tier` wire field.
+     * This fingerprint represents the backend configuration that the model runs with. Can be used
+     * in conjunction with the `seed` request parameter to understand when backend changes have been
+     * made that might impact determinism.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTier? = null,
-    /**
-     * This fingerprint represents the backend configuration that the model runs with. Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("system_fingerprint") val systemFingerprint: String? = null,
-    /**
-     * Usage statistics for the completion request.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("system_fingerprint")
+    val systemFingerprint: String? = null,
+    /** Usage statistics for the completion request. */
     val usage: CompletionUsage? = null,
-    /**
-     * Optional API value serialized in the `moderation` wire field.
-     */
-    val moderation: ChatCompletionModeration? = null
+    /** Optional API value serialized in the `moderation` wire field. */
+    val moderation: ChatCompletionModeration? = null,
 )
 
-/**
- * Log probability information for the choice.
- */
+/** Log probability information for the choice. */
 data class CreateChatCompletionStreamResponseChoicesItemLogprobs(
-    /**
-     * A list of message content tokens with log probability information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: List<ChatCompletionTokenLogprob>?,
-    /**
-     * A list of message refusal tokens with log probability information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("refusal", required = true) val refusal: List<ChatCompletionTokenLogprob>?
+    /** A list of message content tokens with log probability information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true)
+    val content: List<ChatCompletionTokenLogprob>?,
+    /** A list of message refusal tokens with log probability information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("refusal", required = true)
+    val refusal: List<ChatCompletionTokenLogprob>?,
 )
 
-/**
- * Required object value serialized in the `choices[]` wire field.
- */
+/** Required object value serialized in the `choices[]` wire field. */
 data class CreateChatCompletionStreamResponseChoicesItem(
     /**
-     * A chat completion delta generated by streamed model responses. Streamed audio can arrive in partial updates with an ID, base64 data, or transcript text. The final audio update contains only its expiry timestamp.
+     * A chat completion delta generated by streamed model responses. Streamed audio can arrive in
+     * partial updates with an ID, base64 data, or transcript text. The final audio update contains
+     * only its expiry timestamp.
      */
     val delta: ChatCompletionStreamResponseDelta,
-    /**
-     * The index of the choice in the list of choices.
-     */
+    /** The index of the choice in the list of choices. */
     val index: Long,
-    /**
-     * Log probability information for the choice.
-     */
+    /** Log probability information for the choice. */
     val logprobs: CreateChatCompletionStreamResponseChoicesItemLogprobs? = null,
     /**
-     * The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence, `length` if the maximum number of tokens specified in the request was reached, `content_filter` if content was omitted due to a flag from our content filters, `tool_calls` if the model called a tool, or `function_call` (deprecated) if the model called a function. Omitted from the final audio update containing only `delta.audio.expires_at`.
+     * The reason the model stopped generating tokens. This will be `stop` if the model hit a
+     * natural stop point or a provided stop sequence, `length` if the maximum number of tokens
+     * specified in the request was reached, `content_filter` if content was omitted due to a flag
+     * from our content filters, `tool_calls` if the model called a tool, or `function_call`
+     * (deprecated) if the model called a function. Omitted from the final audio update containing
+     * only `delta.audio.expires_at`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason") val finishReason: CreateChatCompletionStreamResponseChoicesItemFinishReasonEnum? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason")
+    val finishReason: CreateChatCompletionStreamResponseChoicesItemFinishReasonEnum? = null,
 )
 
 /**
- * Represents a streamed chunk of a chat completion response returned by the model, based on the provided input. Learn more.
+ * Represents a streamed chunk of a chat completion response returned by the model, based on the
+ * provided input. Learn more.
  */
 data class CreateChatCompletionStreamResponse(
-    /**
-     * A unique identifier for the chat completion. Each chunk has the same ID.
-     */
+    /** A unique identifier for the chat completion. Each chunk has the same ID. */
     val id: String,
     /**
-     * A list of chat completion choices. Can contain more than one elements if `n` is greater than 1. Can also be empty for the last chunk if you set `stream_options: {"include_usage": true}`.
+     * A list of chat completion choices. Can contain more than one elements if `n` is greater
+     * than 1. Can also be empty for the last chunk if you set `stream_options: {"include_usage":
+     * true}`.
      */
     val choices: List<CreateChatCompletionStreamResponseChoicesItem>,
     /**
-     * The Unix timestamp (in seconds) of when the chat completion was created. Each chunk has the same timestamp.
+     * The Unix timestamp (in seconds) of when the chat completion was created. Each chunk has the
+     * same timestamp.
      */
     val created: Long,
-    /**
-     * The model to generate the completion.
-     */
+    /** The model to generate the completion. */
     val model: String,
+    /** The object type, which is always `chat.completion.chunk`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: CreateChatCompletionStreamResponseObjectEnum,
     /**
-     * The object type, which is always `chat.completion.chunk`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CreateChatCompletionStreamResponseObjectEnum,
-    /**
-     * An obfuscation string added to normalize the size of streamed chunks as a mitigation to certain side-channel attacks. The field is included by default and omitted when `stream_options.include_obfuscation` is `false`.
+     * An obfuscation string added to normalize the size of streamed chunks as a mitigation to
+     * certain side-channel attacks. The field is included by default and omitted when
+     * `stream_options.include_obfuscation` is `false`.
      */
     val obfuscation: String? = null,
+    /** Optional API value serialized in the `service_tier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
+    val serviceTier: ServiceTier? = null,
     /**
-     * Optional API value serialized in the `service_tier` wire field.
+     * This fingerprint represents the backend configuration that the model runs with. Can be used
+     * in conjunction with the `seed` request parameter to understand when backend changes have been
+     * made that might impact determinism.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTier? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("system_fingerprint")
+    val systemFingerprint: String? = null,
     /**
-     * This fingerprint represents the backend configuration that the model runs with. Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("system_fingerprint") val systemFingerprint: String? = null,
-    /**
-     * An optional field that will only be present when you set `stream_options: {"include_usage": true}` in your request. When present, it contains a null value **except for the last chunk** which contains the token usage statistics for the entire request. **NOTE:** If the stream is interrupted or cancelled, you may not receive the final usage chunk which contains the total token usage for the request.
+     * An optional field that will only be present when you set `stream_options: {"include_usage":
+     * true}` in your request. When present, it contains a null value **except for the last chunk**
+     * which contains the token usage statistics for the entire request. **NOTE:** If the stream is
+     * interrupted or cancelled, you may not receive the final usage chunk which contains the total
+     * token usage for the request.
      */
     val usage: CompletionUsage? = null,
-    /**
-     * Optional API value serialized in the `moderation` wire field.
-     */
-    val moderation: ChatCompletionModeration? = null
+    /** Optional API value serialized in the `moderation` wire field. */
+    val moderation: ChatCompletionModeration? = null,
 )

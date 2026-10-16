@@ -3,89 +3,68 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveDecisionsDelegationParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionsDelegationParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionsDelegationParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionsDelegationParamTypeEnum,
-    /**
-     * Required object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsInputParam
+    /** Required object value serialized in the `decisions` wire field. */
+    val decisions: LiveDecisionsSettingsInputParam,
 ) : Delegation
 
-/**
- * Typed representation of the `LiveDecisionsDelegationParam2` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionsDelegationParam2` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionsDelegationParam2(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionsDelegationParam2TypeEnum,
-    /**
-     * Required object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsInputParam2
+    /** Required object value serialized in the `decisions` wire field. */
+    val decisions: LiveDecisionsSettingsInputParam2,
 ) : LiveSessionCreateParamsDelegation, LiveSessionResourceParamDelegation
 
-/**
- * Typed representation of the `LiveDecisionsDelegationUpdateParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionsDelegationUpdateParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionsDelegationUpdateParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionsDelegationUpdateParamTypeEnum,
-    /**
-     * Optional object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsUpdateParam? = null
+    /** Optional object value serialized in the `decisions` wire field. */
+    val decisions: LiveDecisionsSettingsUpdateParam? = null,
 ) : LiveSessionUpdateParamsDelegation
 
-/**
- * Typed representation of the `LiveDecisionsSettingsInputParam` API schema.
- */
+/** Typed representation of the `LiveDecisionsSettingsInputParam` API schema. */
 data class LiveDecisionsSettingsInputParam(
-    /**
-     * Native Decision API questions evaluated together, in order.
-     */
+    /** Native Decision API questions evaluated together, in order. */
     val questions: List<LiveDecisionQuestion>,
-    /**
-     * Required `string` value serialized in the `model` wire field.
-     */
-    val model: String
+    /** Required `string` value serialized in the `model` wire field. */
+    val model: String,
 )
 
-/**
- * Typed representation of the `LiveDecisionsSettingsInputParam2` API schema.
- */
+/** Typed representation of the `LiveDecisionsSettingsInputParam2` API schema. */
 data class LiveDecisionsSettingsInputParam2(
-    /**
-     * Native Decision API questions evaluated together, in order.
-     */
+    /** Native Decision API questions evaluated together, in order. */
     val questions: List<QuestionParam>,
-    /**
-     * Required `string` value serialized in the `model` wire field.
-     */
-    val model: String
+    /** Required `string` value serialized in the `model` wire field. */
+    val model: String,
 )
 
-/**
- * Typed representation of the `LiveDecisionsSettingsUpdateParam` API schema.
- */
+/** Typed representation of the `LiveDecisionsSettingsUpdateParam` API schema. */
 data class LiveDecisionsSettingsUpdateParam(
-    /**
-     * Optional `string` value serialized in the `model` wire field.
-     */
+    /** Optional `string` value serialized in the `model` wire field. */
     val model: String? = null,
-    /**
-     * Native Decision API questions evaluated together, in order.
-     */
-    val questions: List<QuestionParam>? = null
+    /** Native Decision API questions evaluated together, in order. */
+    val questions: List<QuestionParam>? = null,
 )

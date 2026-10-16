@@ -4,162 +4,182 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Specify which of the MCP server's tools require approval. Can be `always`, `never`, or a filter object associated with tools that require approval.
+ * Specify which of the MCP server's tools require approval. Can be `always`, `never`, or a filter
+ * object associated with tools that require approval.
  */
 data class MCPToolRequireApprovalVariant0(
-    /**
-     * A filter object to specify which tools are allowed.
-     */
+    /** A filter object to specify which tools are allowed. */
     val always: MCPToolFilter? = null,
-    /**
-     * A filter object to specify which tools are allowed.
-     */
-    val never: MCPToolFilter? = null
+    /** A filter object to specify which tools are allowed. */
+    val never: MCPToolFilter? = null,
 )
 
 /**
- * Give the model access to additional tools via remote Model Context Protocol (MCP) servers. Learn more about MCP.
+ * Give the model access to additional tools via remote Model Context Protocol (MCP) servers. Learn
+ * more about MCP.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MCPTool(
-    /**
-     * The type of the MCP tool. Always `mcp`.
-     */
+    /** The type of the MCP tool. Always `mcp`. */
     val type: MCPToolTypeEnum,
-    /**
-     * A label for this MCP server, used to identify it in tool calls.
-     */
+    /** A label for this MCP server, used to identify it in tool calls. */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
     /**
-     * The URL for the MCP server. One of `server_url`, `connector_id`, or `tunnel_id` must be provided.
+     * The URL for the MCP server. One of `server_url`, `connector_id`, or `tunnel_id` must be
+     * provided.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String? = null,
     /**
-     * Identifier for service connectors, like those available in ChatGPT. One of `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here. This field is deprecated for models released after September 1, 2026. Use `server_url` to connect to a remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel. Currently supported `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail: `connector_gmail` - Google…
+     * Identifier for service connectors, like those available in ChatGPT. One of `server_url`,
+     * `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here.
+     * This field is deprecated for models released after September 1, 2026. Use `server_url` to
+     * connect to a remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel.
+     * Currently supported `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail:
+     * `connector_gmail` - Google…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("connector_id") val connectorId: MCPToolConnectorIdEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("connector_id")
+    val connectorId: MCPToolConnectorIdEnum? = null,
     /**
-     * The Secure MCP Tunnel ID to use instead of a direct server URL. One of `server_url`, `connector_id`, or `tunnel_id` must be provided.
+     * The Secure MCP Tunnel ID to use instead of a direct server URL. One of `server_url`,
+     * `connector_id`, or `tunnel_id` must be provided.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("tunnel_id") val tunnelId: String? = null,
     /**
-     * An OAuth access token that can be used with a remote MCP server, either with a custom MCP server URL or a service connector. Your application must handle the OAuth authorization flow and provide the token here.
+     * An OAuth access token that can be used with a remote MCP server, either with a custom MCP
+     * server URL or a service connector. Your application must handle the OAuth authorization flow
+     * and provide the token here.
      */
     val authorization: String? = null,
-    /**
-     * Optional description of the MCP server, used to provide more context.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_description") val serverDescription: String? = null,
+    /** Optional description of the MCP server, used to provide more context. */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_description")
+    val serverDescription: String? = null,
     /**
      * Optional HTTP headers to send to the MCP server. Use for authentication or other purposes.
      */
     val headers: Map<String, String>? = null,
-    /**
-     * List of allowed tool names or a filter object.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools") @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(MCPToolFilter::class)) val allowedTools: Any? = null,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null,
-    /**
-     * Specify which of the MCP server's tools require approval.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("require_approval") val requireApproval: Any? = null,
-    /**
-     * Whether this MCP tool is deferred and discovered via tool search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null
-) : Tool, ToolSearchOutputTool, RealtimeSessionCreateRequestGAToolsItem, RealtimeResponseCreateParamsToolsItem, RealtimeSessionCreateResponseGAToolsItem
+    /** List of allowed tool names or a filter object. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(MCPToolFilter::class)
+    )
+    val allowedTools: Any? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+    /** Specify which of the MCP server's tools require approval. */
+    @com.fasterxml.jackson.annotation.JsonProperty("require_approval")
+    val requireApproval: Any? = null,
+    /** Whether this MCP tool is deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+) :
+    Tool,
+    ToolSearchOutputTool,
+    RealtimeSessionCreateRequestGAToolsItem,
+    RealtimeResponseCreateParamsToolsItem,
+    RealtimeSessionCreateResponseGAToolsItem
 
-/**
- * An invocation of a tool on an MCP server.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An invocation of a tool on an MCP server. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MCPToolCall(
-    /**
-     * The type of the item. Always `mcp_call`.
-     */
+    /** The type of the item. Always `mcp_call`. */
     val type: MCPToolCallTypeEnum,
-    /**
-     * The unique ID of the tool call.
-     */
+    /** The unique ID of the tool call. */
     val id: String,
-    /**
-     * The label of the MCP server running the tool.
-     */
+    /** The label of the MCP server running the tool. */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /**
-     * The name of the tool that was run.
-     */
+    /** The name of the tool that was run. */
     val name: String,
-    /**
-     * A JSON string of the arguments passed to the tool.
-     */
+    /** A JSON string of the arguments passed to the tool. */
     val arguments: String,
-    /**
-     * Optional `string` value serialized in the `output` wire field.
-     */
+    /** Optional `string` value serialized in the `output` wire field. */
     val output: String? = null,
-    /**
-     * The error from the tool call, if any.
-     */
+    /** The error from the tool call, if any. */
     val error: MCPToolCallError? = null,
     /**
-     * The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
+     * The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or
+     * `failed`.
      */
     val status: MCPToolCallStatus? = null,
-    /**
-     * Optional `string` value serialized in the `approval_request_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id") val approvalRequestId: String? = null
+    /** Optional `string` value serialized in the `approval_request_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id")
+    val approvalRequestId: String? = null,
 ) : ConversationItem, Item, ItemResource, OutputItem, ItemField
 
-/**
- * Typed representation of the `MCPToolCallError` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMCPToolCallError::class)
+/** Typed representation of the `MCPToolCallError` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownMCPToolCallError::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPProtocolError::class, name = "mcp_protocol_error"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPToolExecutionError::class, name = "mcp_tool_execution_error"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HTTPError::class, name = "http_error")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MCPProtocolError::class,
+        name = "mcp_protocol_error",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MCPToolExecutionError::class,
+        name = "mcp_tool_execution_error",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = HTTPError::class,
+        name = "http_error",
+    ),
 )
 sealed interface MCPToolCallError
 
 /** A [MCPToolCallError] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownMCPToolCallError @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownMCPToolCallError
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : MCPToolCallError {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `MCPToolExecutionError` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `MCPToolExecutionError` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MCPToolExecutionError(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MCPToolExecutionErrorTypeEnum,
-    /**
-     * Required API value serialized in the `content` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: Any?
+    /** Required API value serialized in the `content` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: Any?,
 ) : MCPToolCallError
 
-/**
- * A filter object to specify which tools are allowed.
- */
+/** A filter object to specify which tools are allowed. */
 data class MCPToolFilter(
+    /** List of allowed tool names. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_names")
+    val toolNames: List<String>? = null,
     /**
-     * List of allowed tool names.
+     * Indicates whether or not a tool modifies data or is read-only. If an MCP server is annotated
+     * with `readOnlyHint`, it will match this filter.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_names") val toolNames: List<String>? = null,
-    /**
-     * Indicates whether or not a tool modifies data or is read-only. If an MCP server is annotated with `readOnlyHint`, it will match this filter.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("read_only") val readOnly: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("read_only") val readOnly: Boolean? = null,
 )

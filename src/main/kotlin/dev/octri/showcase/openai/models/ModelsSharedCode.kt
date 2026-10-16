@@ -3,101 +3,123 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * The image output from the code interpreter.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The image output from the code interpreter. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CodeInterpreterOutputImage(
-    /**
-     * The type of the output. Always `image`.
-     */
+    /** The type of the output. Always `image`. */
     val type: CodeInterpreterOutputImageTypeEnum,
-    /**
-     * The URL of the image output from the code interpreter.
-     */
-    val url: String
+    /** The URL of the image output from the code interpreter. */
+    val url: String,
 ) : CodeInterpreterToolCallOutputsItem
 
-/**
- * The logs output from the code interpreter.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The logs output from the code interpreter. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CodeInterpreterOutputLogs(
-    /**
-     * The type of the output. Always `logs`.
-     */
+    /** The type of the output. Always `logs`. */
     val type: CodeInterpreterOutputLogsTypeEnum,
-    /**
-     * The logs output from the code interpreter.
-     */
-    val logs: String
+    /** The logs output from the code interpreter. */
+    val logs: String,
 ) : CodeInterpreterToolCallOutputsItem
 
-/**
- * A tool that runs Python code to help generate a response to a prompt.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool that runs Python code to help generate a response to a prompt. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CodeInterpreterTool(
-    /**
-     * The type of the code interpreter tool. Always `code_interpreter`.
-     */
+    /** The type of the code interpreter tool. Always `code_interpreter`. */
     val type: CodeInterpreterToolTypeEnum,
     /**
-     * The code interpreter container. Can be a container ID or an object that specifies uploaded file IDs to make available to your code, along with an optional `memory_limit` setting.
+     * The code interpreter container. Can be a container ID or an object that specifies uploaded
+     * file IDs to make available to your code, along with an optional `memory_limit` setting.
      */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(AutoCodeInterpreterToolParam::class)) val container: Any,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(AutoCodeInterpreterToolParam::class)
+    )
+    val container: Any,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * A tool call to run code.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool call to run code. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CodeInterpreterToolCall(
-    /**
-     * The type of the code interpreter tool call. Always `code_interpreter_call`.
-     */
+    /** The type of the code interpreter tool call. Always `code_interpreter_call`. */
     val type: CodeInterpreterToolCallTypeEnum,
-    /**
-     * The unique ID of the code interpreter tool call.
-     */
+    /** The unique ID of the code interpreter tool call. */
     val id: String,
     /**
-     * The status of the code interpreter tool call. Valid values are `in_progress`, `completed`, `incomplete`, `interpreting`, and `failed`.
+     * The status of the code interpreter tool call. Valid values are `in_progress`, `completed`,
+     * `incomplete`, `interpreting`, and `failed`.
      */
     val status: CodeInterpreterToolCallStatusEnum,
-    /**
-     * The ID of the container used to run the code.
-     */
+    /** The ID of the container used to run the code. */
     @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
+    /** Required `string` value serialized in the `code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
     /**
-     * The outputs generated by the code interpreter, such as logs or images. Can be null if no outputs are available.
+     * The outputs generated by the code interpreter, such as logs or images. Can be null if no
+     * outputs are available.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("outputs", required = true) val outputs: List<CodeInterpreterToolCallOutputsItem>?
+    @com.fasterxml.jackson.annotation.JsonProperty("outputs", required = true)
+    val outputs: List<CodeInterpreterToolCallOutputsItem>?,
 ) : ConversationItem, Item, ItemResource, OutputItem, ItemField
 
-/**
- * Required API value serialized in the `outputs[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCodeInterpreterToolCallOutputsItem::class)
+/** Required API value serialized in the `outputs[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCodeInterpreterToolCallOutputsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CodeInterpreterOutputLogs::class, name = "logs"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CodeInterpreterOutputImage::class, name = "image")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CodeInterpreterOutputLogs::class,
+        name = "logs",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CodeInterpreterOutputImage::class,
+        name = "image",
+    ),
 )
 sealed interface CodeInterpreterToolCallOutputsItem
 
-/** A [CodeInterpreterToolCallOutputsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCodeInterpreterToolCallOutputsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CodeInterpreterToolCallOutputsItem] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCodeInterpreterToolCallOutputsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CodeInterpreterToolCallOutputsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

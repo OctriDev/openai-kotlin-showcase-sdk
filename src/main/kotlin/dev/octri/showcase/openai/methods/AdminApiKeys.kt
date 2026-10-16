@@ -17,33 +17,66 @@ import dev.octri.showcase.openai.Validation
 
 object AdminApiKeys {
 
-data class DeleteAdminApiKeysResponse(
-    val id: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteAdminApiKeysResponseObjectEnum,
-    val deleted: Boolean
-)
-
+    data class DeleteAdminApiKeysResponse(
+        val id: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: DeleteAdminApiKeysResponseObjectEnum,
+        val deleted: Boolean,
+    )
 
     /**
-     * Lists organization API keys, including keys associated with projects. Use `after` to continue from a key ID and `order` to control creation-time sorting. The response includes pagination metadata to help you determine whether more keys are available.
+     * Lists organization API keys, including keys associated with projects. Use `after` to continue
+     * from a key ID and `order` to control creation-time sorting. The response includes pagination
+     * metadata to help you determine whether more keys are available.
      *
      * List organization API keys
      */
-    fun listAdminApiKeys(clientConfig: ClientConfig, after: SdkClient.SdkOptional<String?>? = null, order: ListAdminApiKeysParameterEnum? = null, limit: Long? = null, options: RequestOptions? = null): ApiKeyList {
-        return SdkClient.request<ApiKeyList>(SdkClient.RequestSpec("GET", "/organization/admin_api_keys", config = clientConfig, query = mapOf("after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true), "limit" to SdkClient.queryValue(limit, "form", true)), operationId = "listAdminApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java))).data
+    fun listAdminApiKeys(
+        clientConfig: ClientConfig,
+        after: SdkClient.SdkOptional<String?>? = null,
+        order: ListAdminApiKeysParameterEnum? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+    ): ApiKeyList {
+        return SdkClient.request<ApiKeyList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/admin_api_keys",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                        ),
+                    operationId = "listAdminApiKeys",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists organization API keys, including keys associated with projects. Use `after` to continue from a key ID and `order` to control creation-time sorting. The response includes pagination metadata to help you determine whether more keys are available.
+     * Lists organization API keys, including keys associated with projects. Use `after` to continue
+     * from a key ID and `order` to control creation-time sorting. The response includes pagination
+     * metadata to help you determine whether more keys are available.
      *
      * List organization API keys
      */
-    fun listAdminApiKeysPaginated(clientConfig: ClientConfig, after: SdkClient.SdkOptional<String?>? = null, order: ListAdminApiKeysParameterEnum? = null, limit: Long? = null, options: RequestOptions? = null, yieldFn: (AdminApiKey) -> Boolean) {
+    fun listAdminApiKeysPaginated(
+        clientConfig: ClientConfig,
+        after: SdkClient.SdkOptional<String?>? = null,
+        order: ListAdminApiKeysParameterEnum? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AdminApiKey) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listAdminApiKeys(clientConfig, cursor, order, limit, options)
@@ -64,7 +97,14 @@ data class DeleteAdminApiKeysResponse(
         val hasMore: Boolean,
     )
 
-    fun listAdminApiKeysPages(clientConfig: ClientConfig, after: SdkClient.SdkOptional<String?>? = null, order: ListAdminApiKeysParameterEnum? = null, limit: Long? = null, options: RequestOptions? = null, yieldPage: (ListAdminApiKeysPage) -> Boolean) {
+    fun listAdminApiKeysPages(
+        clientConfig: ClientConfig,
+        after: SdkClient.SdkOptional<String?>? = null,
+        order: ListAdminApiKeysParameterEnum? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAdminApiKeysPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listAdminApiKeys(clientConfig, cursor, order, limit, options)
@@ -78,59 +118,110 @@ data class DeleteAdminApiKeysResponse(
         }
     }
 
-
-
     /**
-     * Creates an organization admin API key. Provide a `name` and, optionally, `expires_in_seconds` to set the key's lifetime. The response includes the key value, which is returned only once when the key is created.
+     * Creates an organization admin API key. Provide a `name` and, optionally, `expires_in_seconds`
+     * to set the key's lifetime. The response includes the key value, which is returned only once
+     * when the key is created.
      *
      * Create an organization admin API key
      *
-     * @param expiresInSeconds The number of seconds until the API key expires. Omit
-     *   this field for a key that does not expire.
+     * @param expiresInSeconds The number of seconds until the API key expires. Omit this field for
+     *   a key that does not expire.
      */
-    fun createAdminApiKeys(clientConfig: ClientConfig, name: String, expiresInSeconds: Long? = null, options: RequestOptions? = null): AdminApiKeyCreateResponse {
+    fun createAdminApiKeys(
+        clientConfig: ClientConfig,
+        name: String,
+        expiresInSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): AdminApiKeyCreateResponse {
         if (expiresInSeconds != null) {
-            Validation.validateRange("expires_in_seconds", expiresInSeconds, Validation.RangeOpts(min = 1.0, max = 31536000.0))
-}
+            Validation.validateRange(
+                "expires_in_seconds",
+                expiresInSeconds,
+                Validation.RangeOpts(min = 1.0, max = 31536000.0),
+            )
+        }
 
-        return SdkClient.request<AdminApiKeyCreateResponse>(SdkClient.RequestSpec("POST", "/organization/admin_api_keys", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "expires_in_seconds" to
-    (SdkClient.omitIfNull(expiresInSeconds))), operationId = "createAdminApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<AdminApiKeyCreateResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/admin_api_keys",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "expires_in_seconds" to (SdkClient.omitIfNull(expiresInSeconds)),
+                        ),
+                    operationId = "createAdminApiKeys",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves details for an organization API key. Use `key_id` to identify the key whose metadata you need. The response includes the redacted key value, creation and expiration timestamps, last-use time, and owner details.
+     * Retrieves details for an organization API key. Use `key_id` to identify the key whose
+     * metadata you need. The response includes the redacted key value, creation and expiration
+     * timestamps, last-use time, and owner details.
      *
      * Retrieve a single organization API key
      */
-    fun retrieveAdminApiKeys(clientConfig: ClientConfig, keyId: String, options: RequestOptions? = null): AdminApiKey {
-        return SdkClient.request<AdminApiKey>(SdkClient.RequestSpec("GET", "/organization/admin_api_keys/${SdkClient.encodePathSegment(keyId)}", config = clientConfig, operationId = "retrieveAdminApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveAdminApiKeys(
+        clientConfig: ClientConfig,
+        keyId: String,
+        options: RequestOptions? = null,
+    ): AdminApiKey {
+        return SdkClient.request<AdminApiKey>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/admin_api_keys/${SdkClient.encodePathSegment(keyId)}",
+                    config = clientConfig,
+                    operationId = "retrieveAdminApiKeys",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes an organization admin API key. Use `key_id` to identify the key to remove. The response confirms deletion with the key identifier and a `deleted` flag.
+     * Deletes an organization admin API key. Use `key_id` to identify the key to remove. The
+     * response confirms deletion with the key identifier and a `deleted` flag.
      *
      * Delete an organization admin API key
      */
-    fun deleteAdminApiKeys(clientConfig: ClientConfig, keyId: String, options: RequestOptions? = null): DeleteAdminApiKeysResponse {
-        return SdkClient.request<DeleteAdminApiKeysResponse>(SdkClient.RequestSpec("DELETE", "/organization/admin_api_keys/${SdkClient.encodePathSegment(keyId)}", config = clientConfig, operationId = "deleteAdminApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun deleteAdminApiKeys(
+        clientConfig: ClientConfig,
+        keyId: String,
+        options: RequestOptions? = null,
+    ): DeleteAdminApiKeysResponse {
+        return SdkClient.request<DeleteAdminApiKeysResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/admin_api_keys/${SdkClient.encodePathSegment(keyId)}",
+                    config = clientConfig,
+                    operationId = "deleteAdminApiKeys",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

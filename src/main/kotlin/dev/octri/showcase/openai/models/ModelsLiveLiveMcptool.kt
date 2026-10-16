@@ -3,32 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveMCPToolChoiceParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveMCPToolChoiceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveMCPToolChoiceParam(
-    /**
-     * The tool to call. Always `mcp`.
-     */
+    /** The tool to call. Always `mcp`. */
     val type: LiveMCPToolChoiceParamTypeEnum,
-    /**
-     * The label of the MCP server to call.
-     */
+    /** The label of the MCP server to call. */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
-    val name: String? = null
+    /** Optional `string` value serialized in the `name` wire field. */
+    val name: String? = null,
 ) : LiveAllowedToolsChoiceParamToolsItem
 
-/**
- * Typed representation of the `LiveMCPToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveMCPToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveMCPToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveMCPToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem

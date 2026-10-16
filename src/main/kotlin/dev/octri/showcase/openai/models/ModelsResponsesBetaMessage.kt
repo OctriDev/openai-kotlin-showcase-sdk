@@ -3,64 +3,102 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A message to or from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A message to or from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaMessage(
-    /**
-     * The type of the message. Always set to `message`.
-     */
+    /** The type of the message. Always set to `message`. */
     val type: BetaMessageTypeEnum,
-    /**
-     * The unique ID of the message.
-     */
+    /** The unique ID of the message. */
     val id: String,
     /**
-     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items
+     * are returned via API.
      */
     val status: BetaMessageStatus,
     /**
-     * The role of the message. One of `unknown`, `user`, `assistant`, `system`, `critic`, `discriminator`, `developer`, or `tool`.
+     * The role of the message. One of `unknown`, `user`, `assistant`, `system`, `critic`,
+     * `discriminator`, `developer`, or `tool`.
      */
     val role: BetaMessageRole,
-    /**
-     * The content of the message
-     */
+    /** The content of the message */
     val content: List<BetaMessageContentItem>,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * Optional API value serialized in the `phase` wire field.
-     */
-    val phase: BetaMessagePhase2? = null
+    /** Optional API value serialized in the `phase` wire field. */
+    val phase: BetaMessagePhase2? = null,
 ) : BetaItemField
 
-/**
- * A content part that makes up an input or output item.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaMessageContentItem::class)
+/** A content part that makes up an input or output item. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaMessageContentItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputTextContent::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaOutputTextContent::class, name = "output_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaTextContent::class, name = "text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaSummaryTextContent::class, name = "summary_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaReasoningTextContent::class, name = "reasoning_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaRefusalContent::class, name = "refusal"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputImageContent::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComputerScreenshotContent::class, name = "computer_screenshot"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputFileContent::class, name = "input_file"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaEncryptedContent::class, name = "encrypted_content")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputTextContent::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaOutputTextContent::class,
+        name = "output_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaTextContent::class,
+        name = "text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaSummaryTextContent::class,
+        name = "summary_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaReasoningTextContent::class,
+        name = "reasoning_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaRefusalContent::class,
+        name = "refusal",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputImageContent::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComputerScreenshotContent::class,
+        name = "computer_screenshot",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputFileContent::class,
+        name = "input_file",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaEncryptedContent::class,
+        name = "encrypted_content",
+    ),
 )
 sealed interface BetaMessageContentItem
 
 /** A [BetaMessageContentItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaMessageContentItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaMessageContentItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaMessageContentItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

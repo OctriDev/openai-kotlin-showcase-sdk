@@ -3,66 +3,43 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A page of Agents API resources, with IDs for retrieving additional pages.
- */
+/** A page of Agents API resources, with IDs for retrieving additional pages. */
 data class SessionArtifactListResource(
+    /** The object type, which is always `list`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SessionArtifactListResourceObjectEnum,
+    /** The resources returned in this page, in the requested sort order. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<SessionArtifactResource>,
+    /** The ID of the first resource in `data`, or `null` if the page is empty. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
+    val firstId: String?,
     /**
-     * The object type, which is always `list`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SessionArtifactListResourceObjectEnum,
-    /**
-     * The resources returned in this page, in the requested sort order.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SessionArtifactResource>,
-    /**
-     * The ID of the first resource in `data`, or `null` if the page is empty.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
-    /**
-     * The ID of the last resource in `data`, or `null` if the page is empty. Pass this as `after` with the same order and filters.
+     * The ID of the last resource in `data`, or `null` if the page is empty. Pass this as `after`
+     * with the same order and filters.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /**
-     * Whether there are more resources to retrieve after this page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+    /** Whether there are more resources to retrieve after this page. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
 )
 
-/**
- * An immutable file published by a completed hosted session turn.
- */
+/** An immutable file published by a completed hosted session turn. */
 data class SessionArtifactResource(
-    /**
-     * The immutable artifact ID.
-     */
+    /** The immutable artifact ID. */
     val id: String,
-    /**
-     * The object type. Always `agent.session.artifact`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SessionArtifactResourceObjectEnum,
-    /**
-     * The ID of the session that owns the artifact.
-     */
+    /** The object type. Always `agent.session.artifact`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SessionArtifactResourceObjectEnum,
+    /** The ID of the session that owns the artifact. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /**
-     * The ID of the environment that produced the artifact.
-     */
+    /** The ID of the environment that produced the artifact. */
     @com.fasterxml.jackson.annotation.JsonProperty("environment_id") val environmentId: String,
-    /**
-     * The ID of the completed turn that published the artifact.
-     */
+    /** The ID of the completed turn that published the artifact. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The original absolute file path in the execution environment.
-     */
+    /** The original absolute file path in the execution environment. */
     val path: String,
-    /**
-     * The immutable artifact size in bytes.
-     */
+    /** The immutable artifact size in bytes. */
     @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long,
-    /**
-     * The Unix timestamp, in seconds, when the artifact was published.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** The Unix timestamp, in seconds, when the artifact was published. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )

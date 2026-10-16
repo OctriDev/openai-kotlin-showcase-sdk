@@ -3,15 +3,26 @@
 
 package dev.octri.showcase.openai
 
-
 class ModerationsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Classifies text and image inputs for potentially harmful content. Supply `input` as a string, an array of strings, or supported multimodal input; `model` defaults to `omni-moderation-latest`. Use the returned results to review moderation flags, categories, and category scores.
+     * Classifies text and image inputs for potentially harmful content. Supply `input` as a string,
+     * an array of strings, or supported multimodal input; `model` defaults to
+     * `omni-moderation-latest`. Use the returned results to review moderation flags, categories,
+     * and category scores.
      *
-     * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation guide.
+     * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation
+     * guide.
      */
-    fun create(input: Any, model: String? = null, options: RequestOptions? = null): CreateModerationResponse {
-        return dev.octri.showcase.openai.methods.Moderations.createModeration(clientConfig, input, model, options)
+    fun create(
+        input: Any,
+        model: String? = null,
+        options: RequestOptions? = null,
+    ): CreateModerationResponse {
+        return dev.octri.showcase.openai.methods.Moderations.createModeration(
+            clientConfig,
+            input,
+            model,
+            options,
+        )
     }
-
 }

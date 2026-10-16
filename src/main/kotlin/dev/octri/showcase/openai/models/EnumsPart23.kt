@@ -3,9 +3,7 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * The type of the file citation. Always `file_citation`.
- */
+/** The type of the file citation. Always `file_citation`. */
 enum class FileCitationBodyTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FILE_CITATION("file_citation");
 
@@ -14,38 +12,41 @@ enum class FileCitationBodyTypeEnum(@com.fasterxml.jackson.annotation.JsonValue 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The citation type. Always `file_citation`.
- */
-class FileCitationParamTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FileCitationParamTypeEnum && value == other.value
+/** The citation type. Always `file_citation`. */
+class FileCitationParamTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FileCitationParamTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val FILE_CITATION = FileCitationParamTypeEnum("file_citation")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FileCitationParamTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FileCitationParamTypeEnum(value)
     }
 }
 
-/**
- * Typed representation of the `FileDetailEnum` API schema.
- */
-class FileDetailEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `FileDetailEnum` API schema. */
+class FileDetailEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is FileDetailEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -54,38 +55,43 @@ class FileDetailEnum private constructor(
         @JvmField val LOW = FileDetailEnum("low")
         @JvmField val HIGH = FileDetailEnum("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FileDetailEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FileDetailEnum(value)
     }
 }
 
-/**
- * Anchor timestamp after which the expiration policy applies. Supported anchors: `created_at`.
- */
-class FileExpirationAfterAnchorEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FileExpirationAfterAnchorEnum && value == other.value
+/** Anchor timestamp after which the expiration policy applies. Supported anchors: `created_at`. */
+class FileExpirationAfterAnchorEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FileExpirationAfterAnchorEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val CREATED_AT = FileExpirationAfterAnchorEnum("created_at")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FileExpirationAfterAnchorEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FileExpirationAfterAnchorEnum(value)
     }
 }
 
-/**
- * Typed representation of the `FileInputDetail` API schema.
- */
-class FileInputDetail private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `FileInputDetail` API schema. */
+class FileInputDetail
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is FileInputDetail && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -94,14 +100,15 @@ class FileInputDetail private constructor(
         @JvmField val LOW = FileInputDetail("low")
         @JvmField val HIGH = FileInputDetail("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FileInputDetail(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FileInputDetail(value)
     }
 }
 
-/**
- * The type of the file path. Always `file_path`.
- */
+/** The type of the file path. Always `file_path`. */
 enum class FilePathTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FILE_PATH("file_path");
 
@@ -110,19 +117,19 @@ enum class FilePathTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val valu
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The ranker to use for the file search. If not specified will use the `auto` ranker.
- */
-class FileSearchRanker private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** The ranker to use for the file search. If not specified will use the `auto` ranker. */
+class FileSearchRanker
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is FileSearchRanker && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -130,14 +137,15 @@ class FileSearchRanker private constructor(
         @JvmField val AUTO = FileSearchRanker("auto")
         @JvmField val DEFAULT_2024_08_21 = FileSearchRanker("default_2024_08_21")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FileSearchRanker(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FileSearchRanker(value)
     }
 }
 
-/**
- * The type of the file search tool. Always `file_search`.
- */
+/** The type of the file search tool. Always `file_search`. */
 enum class FileSearchToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FILE_SEARCH("file_search");
 
@@ -146,19 +154,23 @@ enum class FileSearchToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue va
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * The status of the file search tool call. One of `in_progress`, `searching`, `incomplete` or `failed`,
+ * The status of the file search tool call. One of `in_progress`, `searching`, `incomplete` or
+ * `failed`,
  */
-class FileSearchToolCallStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FileSearchToolCallStatusEnum && value == other.value
+class FileSearchToolCallStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FileSearchToolCallStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -169,15 +181,18 @@ class FileSearchToolCallStatusEnum private constructor(
         @JvmField val INCOMPLETE = FileSearchToolCallStatusEnum("incomplete")
         @JvmField val FAILED = FileSearchToolCallStatusEnum("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FileSearchToolCallStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FileSearchToolCallStatusEnum(value)
     }
 }
 
-/**
- * The type of the file search tool call. Always `file_search_call`.
- */
-enum class FileSearchToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the file search tool call. Always `file_search_call`. */
+enum class FileSearchToolCallTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FILE_SEARCH_CALL("file_search_call");
 
     override fun toString() = value
@@ -185,19 +200,21 @@ enum class FileSearchToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValu
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Controls whether the assistant message is trained against (0 or 1)
- */
-class FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Long,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum && value == other.value
+/** Controls whether the assistant message is trained against (0 or 1) */
+class FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: Long) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value.toString()
 
     companion object {
@@ -205,95 +222,113 @@ class FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum private co
         @JvmField val V0 = FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum(0)
         @JvmField val V1 = FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum(1)
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: Long) = FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: Long) =
+            FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `batch_size` wire field.
- */
-class FineTuneDPOHyperparametersBatchSizeVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneDPOHyperparametersBatchSizeVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `batch_size` wire field. */
+class FineTuneDPOHyperparametersBatchSizeVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneDPOHyperparametersBatchSizeVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneDPOHyperparametersBatchSizeVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneDPOHyperparametersBatchSizeVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuneDPOHyperparametersBatchSizeVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `beta` wire field.
- */
-class FineTuneDPOHyperparametersBetaVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneDPOHyperparametersBetaVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `beta` wire field. */
+class FineTuneDPOHyperparametersBetaVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneDPOHyperparametersBetaVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneDPOHyperparametersBetaVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneDPOHyperparametersBetaVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuneDPOHyperparametersBetaVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `learning_rate_multiplier` wire field.
- */
-class FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `learning_rate_multiplier` wire field. */
+class FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `n_epochs` wire field.
- */
-class FineTuneDPOHyperparametersNEpochsVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneDPOHyperparametersNEpochsVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `n_epochs` wire field. */
+class FineTuneDPOHyperparametersNEpochsVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneDPOHyperparametersNEpochsVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneDPOHyperparametersNEpochsVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneDPOHyperparametersNEpochsVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuneDPOHyperparametersNEpochsVariant0Enum(value)
     }
 }
 
-/**
- * The type of method. Is either `supervised`, `dpo`, or `reinforcement`.
- */
-class FineTuneMethodTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneMethodTypeEnum && value == other.value
+/** The type of method. Is either `supervised`, `dpo`, or `reinforcement`. */
+class FineTuneMethodTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneMethodTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -302,133 +337,165 @@ class FineTuneMethodTypeEnum private constructor(
         @JvmField val DPO = FineTuneMethodTypeEnum("dpo")
         @JvmField val REINFORCEMENT = FineTuneMethodTypeEnum("reinforcement")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneMethodTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuneMethodTypeEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `batch_size` wire field.
- */
-class FineTuneReinforcementHyperparametersBatchSizeVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersBatchSizeVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `batch_size` wire field. */
+class FineTuneReinforcementHyperparametersBatchSizeVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersBatchSizeVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneReinforcementHyperparametersBatchSizeVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersBatchSizeVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersBatchSizeVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `compute_multiplier` wire field.
- */
-class FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `compute_multiplier` wire field. */
+class FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val AUTO = FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum("auto")
+        @JvmField
+        val AUTO = FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `eval_interval` wire field.
- */
-class FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `eval_interval` wire field. */
+class FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `eval_samples` wire field.
- */
-class FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `eval_samples` wire field. */
+class FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `learning_rate_multiplier` wire field.
- */
-class FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `learning_rate_multiplier` wire field. */
+class FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val AUTO = FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum("auto")
+        @JvmField
+        val AUTO = FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `n_epochs` wire field.
- */
-class FineTuneReinforcementHyperparametersNEpochsVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersNEpochsVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `n_epochs` wire field. */
+class FineTuneReinforcementHyperparametersNEpochsVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersNEpochsVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneReinforcementHyperparametersNEpochsVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersNEpochsVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersNEpochsVariant0Enum(value)
     }
 }
 
-/**
- * Level of reasoning effort.
- */
-class FineTuneReinforcementHyperparametersReasoningEffortEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneReinforcementHyperparametersReasoningEffortEnum && value == other.value
+/** Level of reasoning effort. */
+class FineTuneReinforcementHyperparametersReasoningEffortEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneReinforcementHyperparametersReasoningEffortEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -438,111 +505,137 @@ class FineTuneReinforcementHyperparametersReasoningEffortEnum private constructo
         @JvmField val MEDIUM = FineTuneReinforcementHyperparametersReasoningEffortEnum("medium")
         @JvmField val HIGH = FineTuneReinforcementHyperparametersReasoningEffortEnum("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneReinforcementHyperparametersReasoningEffortEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneReinforcementHyperparametersReasoningEffortEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `batch_size` wire field.
- */
-class FineTuneSupervisedHyperparametersBatchSizeVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneSupervisedHyperparametersBatchSizeVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `batch_size` wire field. */
+class FineTuneSupervisedHyperparametersBatchSizeVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneSupervisedHyperparametersBatchSizeVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneSupervisedHyperparametersBatchSizeVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneSupervisedHyperparametersBatchSizeVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuneSupervisedHyperparametersBatchSizeVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `learning_rate_multiplier` wire field.
- */
-class FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `learning_rate_multiplier` wire field. */
+class FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val AUTO = FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum("auto")
+        @JvmField
+        val AUTO = FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `n_epochs` wire field.
- */
-class FineTuneSupervisedHyperparametersNEpochsVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuneSupervisedHyperparametersNEpochsVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `n_epochs` wire field. */
+class FineTuneSupervisedHyperparametersNEpochsVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuneSupervisedHyperparametersNEpochsVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuneSupervisedHyperparametersNEpochsVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuneSupervisedHyperparametersNEpochsVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuneSupervisedHyperparametersNEpochsVariant0Enum(value)
     }
 }
 
-/**
- * The object type, which is always "checkpoint.permission".
- */
-class FineTuningCheckpointPermissionObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuningCheckpointPermissionObjectEnum && value == other.value
+/** The object type, which is always "checkpoint.permission". */
+class FineTuningCheckpointPermissionObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuningCheckpointPermissionObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CHECKPOINT_PERMISSION = FineTuningCheckpointPermissionObjectEnum("checkpoint.permission")
+        @JvmField
+        val CHECKPOINT_PERMISSION =
+            FineTuningCheckpointPermissionObjectEnum("checkpoint.permission")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuningCheckpointPermissionObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuningCheckpointPermissionObjectEnum(value)
     }
 }
 
-/**
- * The type of the integration being enabled for the fine-tuning job
- */
-class FineTuningIntegrationTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuningIntegrationTypeEnum && value == other.value
+/** The type of the integration being enabled for the fine-tuning job */
+class FineTuningIntegrationTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuningIntegrationTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val WANDB = FineTuningIntegrationTypeEnum("wandb")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuningIntegrationTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuningIntegrationTypeEnum(value)
     }
 }
 
-class FineTuningJobMethodTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuningJobMethodTypeEnum && value == other.value
+class FineTuningJobMethodTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuningJobMethodTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -550,45 +643,56 @@ class FineTuningJobMethodTypeEnum private constructor(
         @JvmField val DPO = FineTuningJobMethodTypeEnum("dpo")
         @JvmField val REINFORCEMENT = FineTuningJobMethodTypeEnum("reinforcement")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuningJobMethodTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuningJobMethodTypeEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `batch_size` wire field.
- */
-class FineTuningJobHyperparametersBatchSizeVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuningJobHyperparametersBatchSizeVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `batch_size` wire field. */
+class FineTuningJobHyperparametersBatchSizeVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuningJobHyperparametersBatchSizeVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuningJobHyperparametersBatchSizeVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuningJobHyperparametersBatchSizeVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuningJobHyperparametersBatchSizeVariant0Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `learning_rate_multiplier` wire field.
- */
-class FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum && value == other.value
+/** Optional enumerated value serialized in the `learning_rate_multiplier` wire field. */
+class FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum(value)
     }
 }

@@ -3,618 +3,537 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * An annotation that applies to a span of output text.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownAnnotationModel::class)
+/** An annotation that applies to a span of output text. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownAnnotationModel::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FileCitationBody::class, name = "file_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UrlCitationBody::class, name = "url_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerFileCitationBody::class, name = "container_file_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FilePath::class, name = "file_path")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FileCitationBody::class,
+        name = "file_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = UrlCitationBody::class,
+        name = "url_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerFileCitationBody::class,
+        name = "container_file_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FilePath::class, name = "file_path"),
 )
 sealed interface AnnotationModel
 
 /** A [AnnotationModel] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownAnnotationModel @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownAnnotationModel
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : AnnotationModel {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `ApproximateLocation` API schema.
- */
+/** Typed representation of the `ApproximateLocation` API schema. */
 data class ApproximateLocation(
-    /**
-     * The type of location approximation. Always `approximate`.
-     */
+    /** The type of location approximation. Always `approximate`. */
     val type: ApproximateLocationTypeEnum,
-    /**
-     * Optional `string` value serialized in the `country` wire field.
-     */
+    /** Optional `string` value serialized in the `country` wire field. */
     val country: String? = null,
-    /**
-     * Optional `string` value serialized in the `region` wire field.
-     */
+    /** Optional `string` value serialized in the `region` wire field. */
     val region: String? = null,
-    /**
-     * Optional `string` value serialized in the `city` wire field.
-     */
+    /** Optional `string` value serialized in the `city` wire field. */
     val city: String? = null,
-    /**
-     * Optional `string` value serialized in the `timezone` wire field.
-     */
-    val timezone: String? = null
+    /** Optional `string` value serialized in the `timezone` wire field. */
+    val timezone: String? = null,
 )
 
-/**
- * Required object value serialized in the `assignment_sources[]` wire field.
- */
+/** Required object value serialized in the `assignment_sources[]` wire field. */
 data class AssignedRoleDetailsAssignmentSourcesItem(
-    /**
-     * Required `string` value serialized in the `principal_id` wire field.
-     */
+    /** Required `string` value serialized in the `principal_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("principal_id") val principalId: String,
-    /**
-     * Required `string` value serialized in the `principal_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("principal_type") val principalType: String
+    /** Required `string` value serialized in the `principal_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("principal_type") val principalType: String,
 )
 
-/**
- * Detailed information about a role assignment entry returned when listing assignments.
- */
+/** Detailed information about a role assignment entry returned when listing assignments. */
 data class AssignedRoleDetails(
-    /**
-     * Identifier for the role.
-     */
+    /** Identifier for the role. */
     val id: String,
-    /**
-     * Name of the role.
-     */
+    /** Name of the role. */
     val name: String,
-    /**
-     * Permissions associated with the role.
-     */
+    /** Permissions associated with the role. */
     val permissions: List<String>,
-    /**
-     * Resource type the role applies to.
-     */
+    /** Resource type the role applies to. */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String,
-    /**
-     * Whether the role is predefined by OpenAI.
-     */
+    /** Whether the role is predefined by OpenAI. */
     @com.fasterxml.jackson.annotation.JsonProperty("predefined_role") val predefinedRole: Boolean,
-    /**
-     * Description of the role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true) val description: String?,
-    /**
-     * When the role was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at", required = true) val createdAt: Long?,
-    /**
-     * When the role was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at", required = true) val updatedAt: Long?,
-    /**
-     * Identifier of the actor who created the role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * User details for the actor that created the role, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_obj", required = true) val createdByUserObj: Map<String, Any>?,
-    /**
-     * Arbitrary metadata stored on the role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true) val metadata: Map<String, Any>?,
-    /**
-     * Principals from which the role assignment is inherited, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("assignment_sources", required = true) val assignmentSources: List<AssignedRoleDetailsAssignmentSourcesItem>?
+    /** Description of the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true)
+    val description: String?,
+    /** When the role was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at", required = true)
+    val createdAt: Long?,
+    /** When the role was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at", required = true)
+    val updatedAt: Long?,
+    /** Identifier of the actor who created the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+    val createdBy: String?,
+    /** User details for the actor that created the role, when available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_obj", required = true)
+    val createdByUserObj: Map<String, Any>?,
+    /** Arbitrary metadata stored on the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true)
+    val metadata: Map<String, Any>?,
+    /** Principals from which the role assignment is inherited, when available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("assignment_sources", required = true)
+    val assignmentSources: List<AssignedRoleDetailsAssignmentSourcesItem>?,
 )
 
-/**
- * Typed representation of the `AwsExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `AwsExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class AwsExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: AwsExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `account_id` wire field.
-     */
+    /** Required `string` value serialized in the `account_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("account_id") val accountId: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
+    /** Required `string` value serialized in the `region` wire field. */
     val region: String,
-    /**
-     * Required `string` value serialized in the `bucket` wire field.
-     */
+    /** Required `string` value serialized in the `bucket` wire field. */
     val bucket: String,
-    /**
-     * Required `string` value serialized in the `role_arn` wire field.
-     */
+    /** Required `string` value serialized in the `role_arn` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("role_arn") val roleArn: String,
-    /**
-     * Required `string` value serialized in the `external_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String
+    /** Required `string` value serialized in the `external_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String,
 ) : Provider, ExternalStorageResponseProvider
 
-/**
- * Typed representation of the `AzureExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `AzureExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class AzureExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: AzureExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `tenant_id` wire field.
-     */
+    /** Required `string` value serialized in the `tenant_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("tenant_id") val tenantId: String,
-    /**
-     * Required `string` value serialized in the `subscription_id` wire field.
-     */
+    /** Required `string` value serialized in the `subscription_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("subscription_id") val subscriptionId: String,
-    /**
-     * Required `string` value serialized in the `resource_group` wire field.
-     */
+    /** Required `string` value serialized in the `resource_group` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_group") val resourceGroup: String,
-    /**
-     * Required `string` value serialized in the `account_name` wire field.
-     */
+    /** Required `string` value serialized in the `account_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("account_name") val accountName: String,
-    /**
-     * Required `string` value serialized in the `container` wire field.
-     */
+    /** Required `string` value serialized in the `container` wire field. */
     val container: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
-    val region: String
+    /** Required `string` value serialized in the `region` wire field. */
+    val region: String,
 ) : Provider, ExternalStorageResponseProvider
 
 /**
- * A filter used to compare a specified attribute key to a given value using a defined comparison operation.
+ * A filter used to compare a specified attribute key to a given value using a defined comparison
+ * operation.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComparisonFilter(
     /**
-     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`: equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less than - `lte`: less than or equal - `in`: in - `nin`: not in
+     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`:
+     * equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less
+     * than - `lte`: less than or equal - `in`: in - `nin`: not in
      */
     val type: ComparisonFilterTypeEnum,
-    /**
-     * The key to compare against the value.
-     */
+    /** The key to compare against the value. */
     val key: String,
     /**
      * The value to compare against the attribute key; supports string, number, or boolean types.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
 ) : Filters, CompoundFilterFiltersItem, VectorStoreSearchRequestFilters
 
-/**
- * Breakdown of tokens used in a completion.
- */
+/** Breakdown of tokens used in a completion. */
 data class CompletionUsageCompletionTokensDetails(
     /**
-     * When using Predicted Outputs, the number of tokens in the prediction that appeared in the completion.
+     * When using Predicted Outputs, the number of tokens in the prediction that appeared in the
+     * completion.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("accepted_prediction_tokens") val acceptedPredictionTokens: Long? = null,
-    /**
-     * Audio input tokens generated by the model.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("accepted_prediction_tokens")
+    val acceptedPredictionTokens: Long? = null,
+    /** Audio input tokens generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
-    /**
-     * Tokens generated by the model for reasoning.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_tokens") val reasoningTokens: Long? = null,
-    /**
-     * Text output tokens generated by the model.
-     */
+    /** Tokens generated by the model for reasoning. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_tokens")
+    val reasoningTokens: Long? = null,
+    /** Text output tokens generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
     /**
-     * When using Predicted Outputs, the number of tokens in the prediction that did not appear in the completion. However, like reasoning tokens, these tokens are still counted in the total completion tokens for purposes of billing, output, and context window limits.
+     * When using Predicted Outputs, the number of tokens in the prediction that did not appear in
+     * the completion. However, like reasoning tokens, these tokens are still counted in the total
+     * completion tokens for purposes of billing, output, and context window limits.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("rejected_prediction_tokens") val rejectedPredictionTokens: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("rejected_prediction_tokens")
+    val rejectedPredictionTokens: Long? = null,
 )
 
-/**
- * Breakdown of tokens used in the prompt.
- */
+/** Breakdown of tokens used in the prompt. */
 data class CompletionUsagePromptTokensDetails(
-    /**
-     * Audio input tokens present in the prompt.
-     */
+    /** Audio input tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
-    /**
-     * Cached tokens present in the prompt.
-     */
+    /** Cached tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long? = null,
-    /**
-     * Text input tokens present in the prompt.
-     */
+    /** Text input tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /**
-     * Image input tokens present in the prompt.
-     */
+    /** Image input tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long? = null,
-    /**
-     * The unadjusted number of prompt tokens written to cache.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_tokens") val cacheWriteTokens: Long? = null
+    /** The unadjusted number of prompt tokens written to cache. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_tokens")
+    val cacheWriteTokens: Long? = null,
 )
 
-/**
- * Usage statistics for the completion request.
- */
+/** Usage statistics for the completion request. */
 data class CompletionUsage(
-    /**
-     * Number of tokens in the generated completion.
-     */
+    /** Number of tokens in the generated completion. */
     @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens") val completionTokens: Long,
-    /**
-     * Number of tokens in the prompt.
-     */
+    /** Number of tokens in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens") val promptTokens: Long,
-    /**
-     * Total number of tokens used in the request (prompt + completion).
-     */
+    /** Total number of tokens used in the request (prompt + completion). */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /**
-     * Breakdown of tokens used in a completion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens_details") val completionTokensDetails: CompletionUsageCompletionTokensDetails? = null,
-    /**
-     * Breakdown of tokens used in the prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens_details") val promptTokensDetails: CompletionUsagePromptTokensDetails? = null
+    /** Breakdown of tokens used in a completion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens_details")
+    val completionTokensDetails: CompletionUsageCompletionTokensDetails? = null,
+    /** Breakdown of tokens used in the prompt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens_details")
+    val promptTokensDetails: CompletionUsagePromptTokensDetails? = null,
 )
 
-/**
- * An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.
- */
+/** An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`. */
 data class CoordParam(
-    /**
-     * The x-coordinate.
-     */
+    /** The x-coordinate. */
     val x: Long,
-    /**
-     * The y-coordinate.
-     */
-    val y: Long
+    /** The y-coordinate. */
+    val y: Long,
 )
 
-/**
- * Typed representation of the `CreateModelResponseProperties` API schema.
- */
+/** Typed representation of the `CreateModelResponseProperties` API schema. */
 data class CreateModelResponseProperties(
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
     /**
-     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at each token position, each with an associated log probability. In some cases, the number of returned tokens may be fewer than requested.
+     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at
+     * each token position, each with an associated log probability. In some cases, the number of
+     * returned tokens may be fewer than requested.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: Long? = null,
-    /**
-     * Optional API value serialized in the `temperature` wire field.
-     */
+    /** Optional API value serialized in the `temperature` wire field. */
     val temperature: Double? = null,
-    /**
-     * Optional API value serialized in the `top_p` wire field.
-     */
+    /** Optional API value serialized in the `top_p` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates by better bucketing similar requests and to help OpenAI detect and prevent abuse. Learn more.
+     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
+     * `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your
+     * end-users. Used to boost cache hit rates by better bucketing similar requests and to help
+     * OpenAI detect and prevent abuse. Learn more.
      */
     val user: String? = null,
+    /** Optional API value serialized in the `safety_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
+    /** Optional `string` value serialized in the `prompt_cache_key` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
+    val promptCacheKey: String? = null,
+    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
+    val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
     /**
-     * Optional API value serialized in the `safety_identifier` wire field.
+     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI
+     * automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to
+     * content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints.
+     * For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation,
+     * without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit
+     * breakpoint. The `ttl`…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
-    /**
-     * Optional `string` value serialized in the `prompt_cache_key` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
-    /**
-     * Optional API value serialized in the `prompt_cache_retention` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
-    /**
-     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl`…
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options") val promptCacheOptions: PromptCacheOptionsParam? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options")
+    val promptCacheOptions: PromptCacheOptionsParam? = null,
 )
 
-/**
- * Confirmation payload returned after unassigning a role.
- */
+/** Confirmation payload returned after unassigning a role. */
 data class DeletedRoleAssignmentResource(
     /**
      * Identifier for the deleted assignment, such as `group.role.deleted` or `user.role.deleted`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Whether the assignment was removed.
-     */
-    val deleted: Boolean
+    /** Whether the assignment was removed. */
+    val deleted: Boolean,
 )
 
-/**
- * A double click action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A double click action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DoubleClickAction(
     /**
-     * Specifies the event type. For a double click action, this property is always set to `double_click`.
+     * Specifies the event type. For a double click action, this property is always set to
+     * `double_click`.
      */
     val type: DoubleClickActionTypeEnum,
-    /**
-     * The x-coordinate where the double click occurred.
-     */
+    /** The x-coordinate where the double click occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the double click occurred.
-     */
+    /** The y-coordinate where the double click occurred. */
     val y: Long,
-    /**
-     * The keys being held while double-clicking.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?
+    /** The keys being held while double-clicking. */
+    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?,
 ) : ComputerAction
 
-/**
- * A drag action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A drag action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DragParam(
-    /**
-     * Specifies the event type. For a drag action, this property is always set to `drag`.
-     */
+    /** Specifies the event type. For a drag action, this property is always set to `drag`. */
     val type: DragParamTypeEnum,
     /**
-     * An array of coordinates representing the path of the drag action. Coordinates will appear as an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
+     * An array of coordinates representing the path of the drag action. Coordinates will appear as
+     * an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
      */
     val path: List<CoordParam>,
-    /**
-     * The keys being held while dragging the mouse.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while dragging the mouse. */
+    val keys: List<String>? = null,
 ) : ComputerAction
 
 /**
- * A message input to the model with a role indicating instruction following hierarchy. Instructions given with the `developer` or `system` role take precedence over instructions given with the `user` role. Messages with the `assistant` role are presumed to have been generated by the model in previous interactions.
+ * A message input to the model with a role indicating instruction following hierarchy. Instructions
+ * given with the `developer` or `system` role take precedence over instructions given with the
+ * `user` role. Messages with the `assistant` role are presumed to have been generated by the model
+ * in previous interactions.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class EasyInputMessage(
-    /**
-     * The role of the message input. One of `user`, `assistant`, `system`, or `developer`.
-     */
+    /** The role of the message input. One of `user`, `assistant`, `system`, or `developer`. */
     val role: EasyInputMessageRoleEnum,
     /**
-     * Text, image, or audio input to the model, used to generate a response. Can also contain previous assistant responses.
+     * Text, image, or audio input to the model, used to generate a response. Can also contain
+     * previous assistant responses.
      */
     val content: Any,
-    /**
-     * Optional API value serialized in the `phase` wire field.
-     */
+    /** Optional API value serialized in the `phase` wire field. */
     val phase: MessagePhase? = null,
-    /**
-     * The type of the message input. Always `message`.
-     */
-    val type: EasyInputMessageTypeEnum? = null
+    /** The type of the message input. Always `message`. */
+    val type: EasyInputMessageTypeEnum? = null,
 ) : InputItem, TemplateItem
 
-/**
- * Typed representation of the `EmptyModelParam` API schema.
- */
+/** Typed representation of the `EmptyModelParam` API schema. */
 class EmptyModelParam {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/**
- * Typed representation of the `Error3` API schema.
- */
+/** Typed representation of the `Error3` API schema. */
 data class Error3(
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
+    /** Required `string` value serialized in the `code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
+    /** Required `string` value serialized in the `message` wire field. */
     val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
+    /** Required `string` value serialized in the `param` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /**
-     * Required `string` value serialized in the `type` wire field.
-     */
+    /** Required `string` value serialized in the `type` wire field. */
     val type: String,
-    /**
-     * Optional object value serialized in the `misalignment` wire field.
-     */
-    val misalignment: MisalignmentErrorDetailsResource? = null
+    /** Optional object value serialized in the `misalignment` wire field. */
+    val misalignment: MisalignmentErrorDetailsResource? = null,
 )
 
-/**
- * Typed representation of the `Filters` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFilters::class)
+/** Typed representation of the `Filters` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFilters::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CompoundFilter::class, names = ["and", "or"])
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ComparisonFilter::class,
+        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CompoundFilter::class,
+        names = ["and", "or"],
+    ),
 )
 sealed interface Filters
 
 /** A [Filters] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFilters @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFilters
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : Filters {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `GcpExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `GcpExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GcpExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: GcpExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `bucket` wire field.
-     */
+    /** Required `string` value serialized in the `bucket` wire field. */
     val bucket: String,
-    /**
-     * Required `string` value serialized in the `workload_identity_project_number` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_project_number") val workloadIdentityProjectNumber: String,
-    /**
-     * Required `string` value serialized in the `workload_identity_pool_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_pool_id") val workloadIdentityPoolId: String,
-    /**
-     * Required `string` value serialized in the `workload_identity_provider_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_id") val workloadIdentityProviderId: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
+    /** Required `string` value serialized in the `workload_identity_project_number` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_project_number")
+    val workloadIdentityProjectNumber: String,
+    /** Required `string` value serialized in the `workload_identity_pool_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_pool_id")
+    val workloadIdentityPoolId: String,
+    /** Required `string` value serialized in the `workload_identity_provider_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_id")
+    val workloadIdentityProviderId: String,
+    /** Required `string` value serialized in the `region` wire field. */
     val region: String,
-    /**
-     * Required `string` value serialized in the `audience` wire field.
-     */
-    val audience: String
+    /** Required `string` value serialized in the `audience` wire field. */
+    val audience: String,
 ) : Provider, ExternalStorageResponseProvider
 
-/**
- * Typed representation of the `HTTPError` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `HTTPError` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class HTTPError(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: HTTPErrorTypeEnum,
-    /**
-     * Required `integer` value serialized in the `code` wire field.
-     */
+    /** Required `integer` value serialized in the `code` wire field. */
     val code: Long,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
-    val message: String
+    /** Required `string` value serialized in the `message` wire field. */
+    val message: String,
 ) : MCPToolCallError
 
-/**
- * Typed representation of the `HybridSearchOptions` API schema.
- */
+/** Typed representation of the `HybridSearchOptions` API schema. */
 data class HybridSearchOptions(
-    /**
-     * The weight of the embedding in the reciprocal ranking fusion.
-     */
+    /** The weight of the embedding in the reciprocal ranking fusion. */
     @com.fasterxml.jackson.annotation.JsonProperty("embedding_weight") val embeddingWeight: Double,
-    /**
-     * The weight of the text in the reciprocal ranking fusion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_weight") val textWeight: Double
+    /** The weight of the text in the reciprocal ranking fusion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_weight") val textWeight: Double,
 )
 
-/**
- * A collection of keypresses the model would like to perform.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A collection of keypresses the model would like to perform. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class KeyPressAction(
     /**
      * Specifies the event type. For a keypress action, this property is always set to `keypress`.
      */
     val type: KeyPressActionTypeEnum,
     /**
-     * The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.
+     * The combination of keys the model is requesting to be pressed. This is an array of strings,
+     * each representing a key.
      */
-    val keys: List<String>
+    val keys: List<String>,
 ) : ComputerAction
 
-/**
- * The log probability of a token.
- */
+/** The log probability of a token. */
 data class LogProb(
-    /**
-     * Required `string` value serialized in the `token` wire field.
-     */
+    /** Required `string` value serialized in the `token` wire field. */
     val token: String,
-    /**
-     * Required `number` value serialized in the `logprob` wire field.
-     */
+    /** Required `number` value serialized in the `logprob` wire field. */
     val logprob: Double,
-    /**
-     * Required array value serialized in the `bytes` wire field.
-     */
+    /** Required array value serialized in the `bytes` wire field. */
     val bytes: List<Long>,
-    /**
-     * Required array value serialized in the `top_logprobs` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: List<TopLogProb>
+    /** Required array value serialized in the `top_logprobs` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs")
+    val topLogprobs: List<TopLogProb>,
 )
 
-/**
- * Typed representation of the `MCPProtocolError` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `MCPProtocolError` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MCPProtocolError(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: MCPProtocolErrorTypeEnum,
-    /**
-     * Required `integer` value serialized in the `code` wire field.
-     */
+    /** Required `integer` value serialized in the `code` wire field. */
     val code: Long,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
-    val message: String
+    /** Required `string` value serialized in the `message` wire field. */
+    val message: String,
 ) : MCPToolCallError
 
 typealias Metadata = Map<String, String>
 
-/**
- * A mouse move action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A mouse move action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MoveParam(
-    /**
-     * Specifies the event type. For a move action, this property is always set to `move`.
-     */
+    /** Specifies the event type. For a move action, this property is always set to `move`. */
     val type: MoveParamTypeEnum,
-    /**
-     * The x-coordinate to move to.
-     */
+    /** The x-coordinate to move to. */
     val x: Long,
-    /**
-     * The y-coordinate to move to.
-     */
+    /** The y-coordinate to move to. */
     val y: Long,
-    /**
-     * The keys being held while moving the mouse.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while moving the mouse. */
+    val keys: List<String>? = null,
 ) : ComputerAction

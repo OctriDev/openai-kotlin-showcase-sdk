@@ -4,161 +4,132 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Optional mask for inpainting. Contains `image_url` (string, optional) and `file_id` (string, optional).
+ * Optional mask for inpainting. Contains `image_url` (string, optional) and `file_id` (string,
+ * optional).
  */
 data class ImageGenToolInputImageMask(
-    /**
-     * Base64-encoded mask image.
-     */
+    /** Base64-encoded mask image. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /**
-     * File ID for the mask image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null
+    /** File ID for the mask image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
 )
 
-/**
- * A tool that generates images using the GPT image models.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool that generates images using the GPT image models. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ImageGenTool(
-    /**
-     * The type of the image generation tool. Always `image_generation`.
-     */
+    /** The type of the image generation tool. Always `image_generation`. */
     val type: ImageGenToolTypeEnum,
-    /**
-     * Optional `string` value serialized in the `model` wire field.
-     */
+    /** Optional `string` value serialized in the `model` wire field. */
     val model: String? = null,
     /**
-     * The quality of the generated image. The GPT image models support `low`, `medium`, and `high`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, also support `xhigh` and `max`. Default: `auto`.
+     * The quality of the generated image. The GPT image models support `low`, `medium`, and `high`.
+     * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+     * also support `xhigh` and `max`. Default: `auto`.
      */
     val quality: ImageGenToolQualityEnum? = null,
     /**
-     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum supported…
+     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`,
+     * `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
+     * `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT`
+     * strings, for example `1536x864`. Width and height must both be divisible by 16 and the
+     * requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are
+     * experimental, and the maximum supported…
      */
     val size: String? = null,
     /**
      * The output format of the generated image. One of `png`, `webp`, or `jpeg`. Default: `png`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImageGenToolOutputFormatEnum? = null,
-    /**
-     * Compression level for the output image. Default: 100.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_compression") val outputCompression: Long? = null,
-    /**
-     * Moderation level for the generated image. Default: `auto`.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageGenToolOutputFormatEnum? = null,
+    /** Compression level for the output image. Default: 100. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_compression")
+    val outputCompression: Long? = null,
+    /** Moderation level for the generated image. Default: `auto`. */
     val moderation: ImageGenToolModerationEnum? = null,
     /**
-     * Set the background of the generated image. One of `transparent`, `opaque`, or `auto`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`. Default: `auto`.
+     * Set the background of the generated image. One of `transparent`, `opaque`, or `auto`.
+     * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+     * support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for
+     * supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is
+     * in preview. When using `transparent`, set the output format to `png` or `webp`. Default:
+     * `auto`.
      */
     val background: ImageGenToolBackgroundEnum? = null,
+    /** Optional API value serialized in the `input_fidelity` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity")
+    val inputFidelity: InputFidelity? = null,
     /**
-     * Optional API value serialized in the `input_fidelity` wire field.
+     * Optional mask for inpainting. Contains `image_url` (string, optional) and `file_id` (string,
+     * optional).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity") val inputFidelity: InputFidelity? = null,
-    /**
-     * Optional mask for inpainting. Contains `image_url` (string, optional) and `file_id` (string, optional).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_image_mask") val inputImageMask: ImageGenToolInputImageMask? = null,
-    /**
-     * Number of partial images to generate in streaming mode, from 0 (default value) to 3.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_images") val partialImages: Long? = null,
-    /**
-     * Whether to generate a new image or edit an existing image. Default: `auto`.
-     */
-    val action: ImageGenActionEnum? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("input_image_mask")
+    val inputImageMask: ImageGenToolInputImageMask? = null,
+    /** Number of partial images to generate in streaming mode, from 0 (default value) to 3. */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_images")
+    val partialImages: Long? = null,
+    /** Whether to generate a new image or edit an existing image. Default: `auto`. */
+    val action: ImageGenActionEnum? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * An image generation request made by the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An image generation request made by the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ImageGenToolCall(
-    /**
-     * The type of the image generation call. Always `image_generation_call`.
-     */
+    /** The type of the image generation call. Always `image_generation_call`. */
     val type: ImageGenToolCallTypeEnum,
-    /**
-     * The unique ID of the image generation call.
-     */
+    /** The unique ID of the image generation call. */
     val id: String,
-    /**
-     * The status of the image generation call.
-     */
+    /** The status of the image generation call. */
     val status: ImageGenToolCallStatusEnum,
-    /**
-     * Required `string` value serialized in the `result` wire field.
-     */
+    /** Required `string` value serialized in the `result` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("result", required = true) val result: String?,
-    /**
-     * Details of a moderation failure, when available.
-     */
+    /** Details of a moderation failure, when available. */
     val error: ImageGenToolCallError? = null,
-    /**
-     * The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`.
-     */
+    /** The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`. */
     val size: String? = null,
-    /**
-     * Optional API value serialized in the `quality` wire field.
-     */
+    /** Optional API value serialized in the `quality` wire field. */
     val quality: ImageGenToolCallQualityVariant0Enum? = null,
-    /**
-     * Optional API value serialized in the `action` wire field.
-     */
+    /** Optional API value serialized in the `action` wire field. */
     val action: ImageGenActionEnum? = null,
-    /**
-     * Optional API value serialized in the `background` wire field.
-     */
+    /** Optional API value serialized in the `background` wire field. */
     val background: ImageBackground? = null,
-    /**
-     * Optional API value serialized in the `output_format` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImageOutputFormat? = null,
-    /**
-     * Optional `string` value serialized in the `revised_prompt` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("revised_prompt") val revisedPrompt: String? = null
+    /** Optional API value serialized in the `output_format` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageOutputFormat? = null,
+    /** Optional `string` value serialized in the `revised_prompt` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("revised_prompt")
+    val revisedPrompt: String? = null,
 ) : ConversationItem, Item, ItemResource, OutputItem, ItemField
 
-/**
- * Typed representation of the `ImageGenToolCallError` API schema.
- */
+/** Typed representation of the `ImageGenToolCallError` API schema. */
 data class ImageGenToolCallError(
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
+    /** Required `string` value serialized in the `code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /**
-     * The error type.
-     */
+    /** The error type. */
     val type: String,
-    /**
-     * A description of the error.
-     */
+    /** A description of the error. */
     val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
+    /** Required `string` value serialized in the `param` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /**
-     * Public details for a `moderation_blocked` error, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("moderation_details") val moderationDetails: ImageGenToolCallModerationDetails? = null
+    /** Public details for a `moderation_blocked` error, when available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("moderation_details")
+    val moderationDetails: ImageGenToolCallModerationDetails? = null,
 )
 
-/**
- * Typed representation of the `ImageGenToolCallModerationDetails` API schema.
- */
+/** Typed representation of the `ImageGenToolCallModerationDetails` API schema. */
 data class ImageGenToolCallModerationDetails(
-    /**
-     * The stage where moderation blocked the image generation call.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("moderation_stage") val moderationStage: ImageGenToolCallModerationDetailsModerationStageEnum,
-    /**
-     * Public moderation categories. New category values may be added over time.
-     */
-    val categories: List<String>
+    /** The stage where moderation blocked the image generation call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("moderation_stage")
+    val moderationStage: ImageGenToolCallModerationDetailsModerationStageEnum,
+    /** Public moderation categories. New category values may be added over time. */
+    val categories: List<String>,
 )

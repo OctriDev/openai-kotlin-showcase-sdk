@@ -3,232 +3,206 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Parameters for creating an execution environment before its sessions.
- */
+/** Parameters for creating an execution environment before its sessions. */
 data class CreateAgentEnvironmentParams(
-    /**
-     * The required hosting type and its configuration.
-     */
+    /** The required hosting type and its configuration. */
     val environment: CreateEnvironmentParam,
-    /**
-     * The IDs of up to 10 vaults made available to an OpenAI-hosted environment.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vault_ids") val vaultIds: List<String>? = null
+    /** The IDs of up to 10 vaults made available to an OpenAI-hosted environment. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vault_ids") val vaultIds: List<String>? = null,
 )
 
-/**
- * Parameters for creating a reusable agent.
- */
+/** Parameters for creating a reusable agent. */
 data class CreateAgentParams(
-    /**
-     * The model to use for the agent. The requested model name is preserved.
-     */
+    /** The model to use for the agent. The requested model name is preserved. */
     val model: String,
     /**
-     * Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters. Omission or null defaults to an empty map.
+     * Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters. Omission
+     * or null defaults to an empty map.
      */
     val metadata: Map<String, String>? = null,
-    /**
-     * A human-readable name for the agent. Omission or null leaves the agent unnamed.
-     */
+    /** A human-readable name for the agent. Omission or null leaves the agent unnamed. */
     val name: String? = null,
-    /**
-     * Configuration for model reasoning. Omission uses the model's default effort.
-     */
+    /** Configuration for model reasoning. Omission uses the model's default effort. */
     val reasoning: ReasoningParam? = null,
-    /**
-     * Configuration for generated text. Defaults to the `text` format and medium verbosity.
-     */
+    /** Configuration for generated text. Defaults to the `text` format and medium verbosity. */
     val text: TextParam? = null,
+    /** The service tier used for model requests. Defaults to `auto`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
+    val serviceTier: ServiceTierParam? = null,
     /**
-     * The service tier used for model requests. Defaults to `auto`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTierParam? = null,
-    /**
-     * Additional instructions appended to the agent's default base instructions. Omit or set to null to add no custom instructions.
+     * Additional instructions appended to the agent's default base instructions. Omit or set to
+     * null to add no custom instructions.
      */
     val instructions: String? = null,
     /**
-     * Tools available to the agent. Defaults to an empty list. The tool list must fit within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
+     * Tools available to the agent. Defaults to an empty list. The tool list must fit within 3 MiB
+     * (3,145,728 bytes) of compact UTF-8 JSON.
      */
     val tools: List<PersistedAgentToolConfigParam>? = null,
     /**
-     * Configuration for creating and coordinating subagents. Subagent tools are disabled by default.
+     * Configuration for creating and coordinating subagents. Subagent tools are disabled by
+     * default.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("multi_agent") val multiAgent: MultiAgentConfigCurrentParam? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("multi_agent")
+    val multiAgent: MultiAgentConfigCurrentParam? = null,
 )
 
-/**
- * Parameters for creating a Managed Agents session.
- */
+/** Parameters for creating a Managed Agents session. */
 data class CreateAgentSessionParams(
-    /**
-     * An inline execution environment or a reference to an environment template.
-     */
+    /** An inline execution environment or a reference to an environment template. */
     val environment: EnvironmentParam,
+    /** Optional spending limit in USD cents. Omission or null creates an unlimited session. */
+    @com.fasterxml.jackson.annotation.JsonProperty("spend_control")
+    val spendControl: SessionSpendControlParam? = null,
     /**
-     * Optional spending limit in USD cents. Omission or null creates an unlimited session.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("spend_control") val spendControl: SessionSpendControlParam? = null,
-    /**
-     * Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters. Omission or null defaults to an empty map.
+     * Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters. Omission
+     * or null defaults to an empty map.
      */
     val metadata: Map<String, String>? = null,
     /**
-     * Agent configuration. With `agent_id`, supplied fields override the saved agent for this session. Without `agent_id`, `model` is required.
+     * Agent configuration. With `agent_id`, supplied fields override the saved agent for this
+     * session. Without `agent_id`, `model` is required.
      */
     val agent: SessionAgentConfigParam? = null,
-    /**
-     * The ID of a saved reusable agent. Omit `agent` to use its configuration unchanged.
-     */
+    /** The ID of a saved reusable agent. Omit `agent` to use its configuration unchanged. */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_id") val agentId: String? = null,
-    /**
-     * The IDs of vaults made available to the session.
-     */
+    /** The IDs of vaults made available to the session. */
     @com.fasterxml.jackson.annotation.JsonProperty("vault_ids") val vaultIds: List<String>? = null,
     /**
-     * Initial input to submit when the session is created. A string is shorthand for a single user message. Required when `environment.type` is `none`, or when `stream` is `true` for an environment that is not `self_hosted`; optional for self-hosted and non-streaming execution environments.
+     * Initial input to submit when the session is created. A string is shorthand for a single user
+     * message. Required when `environment.type` is `none`, or when `stream` is `true` for an
+     * environment that is not `self_hosted`; optional for self-hosted and non-streaming execution
+     * environments.
      */
     val input: CreateSessionInputParam? = null,
-    /**
-     * Whether to stream session events as server-sent events. Defaults to `false`.
-     */
-    val stream: Boolean? = null
+    /** Whether to stream session events as server-sent events. Defaults to `false`. */
+    val stream: Boolean? = null,
 )
 
-/**
- * Configuration for a new prewarmed OpenAI-hosted environment.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEnvironmentParam::class)
+/** Configuration for a new prewarmed OpenAI-hosted environment. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEnvironmentParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEnvironmentParamOpenaiHosted::class, name = "openai_hosted")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEnvironmentParamOpenaiHosted::class,
+        name = "openai_hosted",
+    )
 )
 sealed interface CreateEnvironmentParam
 
 /** A [CreateEnvironmentParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEnvironmentParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEnvironmentParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEnvironmentParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Provision an OpenAI-hosted environment from inline configuration or a template.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Provision an OpenAI-hosted environment from inline configuration or a template. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEnvironmentParamOpenaiHosted(
-    /**
-     * The type of the object. Always `openai_hosted`.
-     */
+    /** The type of the object. Always `openai_hosted`. */
     val type: CreateEnvironmentParamOpenaiHostedTypeEnum,
-    /**
-     * Packages to install in the environment. Defaults to empty package lists.
-     */
+    /** Packages to install in the environment. Defaults to empty package lists. */
     val packages: EnvironmentPackagesParam? = null,
+    /** Ordered, confidential setup commands. Command bodies are never returned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("setup_commands")
+    val setupCommands: List<SetupCommandParam>? = null,
     /**
-     * Ordered, confidential setup commands. Command bodies are never returned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("setup_commands") val setupCommands: List<SetupCommandParam>? = null,
-    /**
-     * Network access policy for the environment. If omitted, the API version determines whether network access is enabled or disabled.
+     * Network access policy for the environment. If omitted, the API version determines whether
+     * network access is enabled or disabled.
      */
     val network: NetworkPolicyParam? = null,
     /**
-     * Desktop provisioning. Omission or null inherits the template setting, or defaults to disabled.
+     * Desktop provisioning. Omission or null inherits the template setting, or defaults to
+     * disabled.
      */
     val desktop: DesktopParam? = null,
-    /**
-     * Environment variables made available to the agent.
-     */
+    /** Environment variables made available to the agent. */
     val env: Map<String, String>? = null,
-    /**
-     * Directories that contain capabilities exposed to the agent. Defaults to an empty list.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("capability_directories") val capabilityDirectories: List<String>? = null,
-    /**
-     * Skills referenced by ID or provided as inline ZIP archives. Defaults to an empty list.
-     */
+    /** Directories that contain capabilities exposed to the agent. Defaults to an empty list. */
+    @com.fasterxml.jackson.annotation.JsonProperty("capability_directories")
+    val capabilityDirectories: List<String>? = null,
+    /** Skills referenced by ID or provided as inline ZIP archives. Defaults to an empty list. */
     val skills: List<HostedSkillParam>? = null,
-    /**
-     * Plugins provided as inline ZIP archives. Defaults to an empty list.
-     */
+    /** Plugins provided as inline ZIP archives. Defaults to an empty list. */
     val plugins: List<HostedPluginParam>? = null,
-    /**
-     * Files available before the agent starts. Defaults to an empty list.
-     */
+    /** Files available before the agent starts. Defaults to an empty list. */
     val files: List<HostedEnvironmentFileParam>? = null,
     /**
-     * A reusable hosted template applied before inline configuration. Omitted fields inherit the template; network overrides cannot broaden its policy.
+     * A reusable hosted template applied before inline configuration. Omitted fields inherit the
+     * template; network overrides cannot broaden its policy.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("environment_template_id") val environmentTemplateId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("environment_template_id")
+    val environmentTemplateId: String? = null,
 ) : CreateEnvironmentParam
 
-/**
- * Parameters for creating a reusable, project-scoped OpenAI-hosted environment template.
- */
+/** Parameters for creating a reusable, project-scoped OpenAI-hosted environment template. */
 data class CreateEnvironmentTemplateParams(
-    /**
-     * Packages to install in the environment. Defaults to empty package lists.
-     */
+    /** Packages to install in the environment. Defaults to empty package lists. */
     val packages: EnvironmentPackagesParam? = null,
+    /** Ordered, confidential setup commands. Command bodies are never returned. */
+    @com.fasterxml.jackson.annotation.JsonProperty("setup_commands")
+    val setupCommands: List<SetupCommandParam>? = null,
     /**
-     * Ordered, confidential setup commands. Command bodies are never returned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("setup_commands") val setupCommands: List<SetupCommandParam>? = null,
-    /**
-     * Network access policy for the environment. If omitted, the API version determines whether network access is enabled or disabled.
+     * Network access policy for the environment. If omitted, the API version determines whether
+     * network access is enabled or disabled.
      */
     val network: NetworkPolicyParam? = null,
     /**
-     * Desktop provisioning. Omission or null inherits the template setting, or defaults to disabled.
+     * Desktop provisioning. Omission or null inherits the template setting, or defaults to
+     * disabled.
      */
     val desktop: DesktopParam? = null,
-    /**
-     * Environment variables made available to the agent.
-     */
+    /** Environment variables made available to the agent. */
     val env: Map<String, String>? = null,
-    /**
-     * Directories that contain capabilities exposed to the agent. Defaults to an empty list.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("capability_directories") val capabilityDirectories: List<String>? = null,
-    /**
-     * Skills referenced by ID or provided as inline ZIP archives. Defaults to an empty list.
-     */
+    /** Directories that contain capabilities exposed to the agent. Defaults to an empty list. */
+    @com.fasterxml.jackson.annotation.JsonProperty("capability_directories")
+    val capabilityDirectories: List<String>? = null,
+    /** Skills referenced by ID or provided as inline ZIP archives. Defaults to an empty list. */
     val skills: List<HostedSkillParam>? = null,
-    /**
-     * Plugins provided as inline ZIP archives. Defaults to an empty list.
-     */
+    /** Plugins provided as inline ZIP archives. Defaults to an empty list. */
     val plugins: List<HostedPluginParam>? = null,
-    /**
-     * Files available before the agent starts. Defaults to an empty list.
-     */
+    /** Files available before the agent starts. Defaults to an empty list. */
     val files: List<HostedEnvironmentFileParam>? = null,
-    /**
-     * An optional human-readable display name for the template.
-     */
-    val name: String? = null
+    /** An optional human-readable display name for the template. */
+    val name: String? = null,
 )
 
-/**
- * Input events submitted to an existing session.
- */
+/** Input events submitted to an existing session. */
 data class CreateSessionEventsParams(
-    /**
-     * The input events to submit to the session.
-     */
+    /** The input events to submit to the session. */
     val events: List<SessionInputParam>
 )
 
-/**
- * Initial input submitted when creating a session.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateSessionInputParam.Deserializer::class)
+/** Initial input submitted when creating a session. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = CreateSessionInputParam.Deserializer::class
+)
 sealed interface CreateSessionInputParam {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateSessionInputParam>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<CreateSessionInputParam>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
@@ -236,56 +210,77 @@ sealed interface CreateSessionInputParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringCreateSessionInputParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                node.isArray -> ListCreateSessionInputParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<List<InputMessageParam>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, CreateSessionInputParam::class.java, "no CreateSessionInputParam branch accepts this payload")
+                node.isTextual ->
+                    StringCreateSessionInputParam(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                node.isArray ->
+                    ListCreateSessionInputParam(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<
+                                    List<InputMessageParam>
+                                >() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        CreateSessionInputParam::class.java,
+                        "no CreateSessionInputParam branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringCreateSessionInputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CreateSessionInputParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringCreateSessionInputParam(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : CreateSessionInputParam
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ListCreateSessionInputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputMessageParam>) : CreateSessionInputParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ListCreateSessionInputParam(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputMessageParam>
+) : CreateSessionInputParam
 
-/**
- * A request to spawn a subagent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A request to spawn a subagent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateSubagentCallItemResource(
-    /**
-     * The item type. Always `create_subagent_call`.
-     */
+    /** The item type. Always `create_subagent_call`. */
     val type: CreateSubagentCallItemResourceTypeEnum,
-    /**
-     * The ID of the tool call item.
-     */
+    /** The ID of the tool call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the tool call.
-     */
+    /** The status of the tool call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The ID of the agent that requested the subagent.
-     */
+    /** The ID of the agent that requested the subagent. */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_id") val agentId: String,
-    /**
-     * The task given to the spawned agent.
-     */
+    /** The task given to the spawned agent. */
     val content: List<AgentContentResource>,
-    /**
-     * The model requested for the spawned agent.
-     */
+    /** The model requested for the spawned agent. */
     @com.fasterxml.jackson.annotation.JsonProperty("model", required = true) val model: String?,
-    /**
-     * The reasoning effort requested for the spawned agent.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort", required = true) val reasoningEffort: String?
+    /** The reasoning effort requested for the spawned agent. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort", required = true)
+    val reasoningEffort: String?,
 ) : SessionTurnItemResource, AgentOutputItemResource

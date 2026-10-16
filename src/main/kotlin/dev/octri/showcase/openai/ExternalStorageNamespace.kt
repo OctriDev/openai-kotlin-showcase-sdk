@@ -3,60 +3,131 @@
 
 package dev.octri.showcase.openai
 
-
 class ExternalStorageNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the organization's customer-managed external storage configurations. Use `project_id` to scope the results to a project, and `after` and `limit` to navigate the list. Set `order` to control the sort direction.
+     * Lists the organization's customer-managed external storage configurations. Use `project_id`
+     * to scope the results to a project, and `after` and `limit` to navigate the list. Set `order`
+     * to control the sort direction.
      *
      * List the organization's customer-managed external storage configurations.
      */
-    fun list(projectId: SdkClient.SdkOptional<String?>? = null, after: SdkClient.SdkOptional<String?>? = null, order: ExternalStorageOrder? = null, limit: Long? = null, options: RequestOptions? = null): ExternalStorageListResource {
-        return dev.octri.showcase.openai.methods.ExternalStorage.listExternalStorage(clientConfig, projectId, after, order, limit, options)
+    fun list(
+        projectId: SdkClient.SdkOptional<String?>? = null,
+        after: SdkClient.SdkOptional<String?>? = null,
+        order: ExternalStorageOrder? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+    ): ExternalStorageListResource {
+        return dev.octri.showcase.openai.methods.ExternalStorage.listExternalStorage(
+            clientConfig,
+            projectId,
+            after,
+            order,
+            limit,
+            options,
+        )
     }
 
     /**
-     * Lists the organization's customer-managed external storage configurations. Use `project_id` to scope the results to a project, and `after` and `limit` to navigate the list. Set `order` to control the sort direction.
+     * Lists the organization's customer-managed external storage configurations. Use `project_id`
+     * to scope the results to a project, and `after` and `limit` to navigate the list. Set `order`
+     * to control the sort direction.
      *
      * List the organization's customer-managed external storage configurations.
      */
-    fun listPaginated(projectId: SdkClient.SdkOptional<String?>? = null, after: SdkClient.SdkOptional<String?>? = null, order: ExternalStorageOrder? = null, limit: Long? = null, options: RequestOptions? = null, yieldFn: (ExternalStorageResponse) -> Boolean) {
-        dev.octri.showcase.openai.methods.ExternalStorage.listExternalStoragePaginated(clientConfig, projectId, after, order, limit, options, yieldFn)
+    fun listPaginated(
+        projectId: SdkClient.SdkOptional<String?>? = null,
+        after: SdkClient.SdkOptional<String?>? = null,
+        order: ExternalStorageOrder? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ExternalStorageResponse) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.ExternalStorage.listExternalStoragePaginated(
+            clientConfig,
+            projectId,
+            after,
+            order,
+            limit,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a customer-managed external storage configuration for a project. Supply `project_id` and a `provider` object containing the configuration fields required by the selected storage provider. The response includes the configuration's identifier, geography, and status.
+     * Creates a customer-managed external storage configuration for a project. Supply `project_id`
+     * and a `provider` object containing the configuration fields required by the selected storage
+     * provider. The response includes the configuration's identifier, geography, and status.
      *
      * Register one customer-managed external storage configuration.
      */
-    fun create(projectId: String, provider: CreateExternalStorageBodyProvider, options: RequestOptions? = null): ExternalStorageResponse {
-        return dev.octri.showcase.openai.methods.ExternalStorage.createExternalStorage(clientConfig, projectId, provider, options)
+    fun create(
+        projectId: String,
+        provider: CreateExternalStorageBodyProvider,
+        options: RequestOptions? = null,
+    ): ExternalStorageResponse {
+        return dev.octri.showcase.openai.methods.ExternalStorage.createExternalStorage(
+            clientConfig,
+            projectId,
+            provider,
+            options,
+        )
     }
 
     /**
-     * Retrieves one customer-managed external storage configuration. Use `external_storage_id` to identify the configuration you want to inspect.
+     * Retrieves one customer-managed external storage configuration. Use `external_storage_id` to
+     * identify the configuration you want to inspect.
      *
      * Get one customer-managed external storage configuration.
      */
-    fun retrieve(externalStorageId: String, options: RequestOptions? = null): ExternalStorageResponse {
-        return dev.octri.showcase.openai.methods.ExternalStorage.retrieveExternalStorage(clientConfig, externalStorageId, options)
+    fun retrieve(
+        externalStorageId: String,
+        options: RequestOptions? = null,
+    ): ExternalStorageResponse {
+        return dev.octri.showcase.openai.methods.ExternalStorage.retrieveExternalStorage(
+            clientConfig,
+            externalStorageId,
+            options,
+        )
     }
 
     /**
-     * Deletes a customer-managed external storage configuration. Use `external_storage_id` to identify the configuration to disconnect. Deleting a project's last configuration restores organization-default retention if customer-managed retention was active; cloud storage is unchanged.
+     * Deletes a customer-managed external storage configuration. Use `external_storage_id` to
+     * identify the configuration to disconnect. Deleting a project's last configuration restores
+     * organization-default retention if customer-managed retention was active; cloud storage is
+     * unchanged.
      *
-     * Disconnect a customer-managed external storage configuration. Removing the project's last configuration restores organization-default retention if customer-managed retention was active. Repeating a deletion also completes any interrupted retention update. Cloud storage is unchanged.
+     * Disconnect a customer-managed external storage configuration. Removing the project's last
+     * configuration restores organization-default retention if customer-managed retention was
+     * active. Repeating a deletion also completes any interrupted retention update. Cloud storage
+     * is unchanged.
      */
-    fun delete(externalStorageId: String, options: RequestOptions? = null): ExternalStorageDeletedResource {
-        return dev.octri.showcase.openai.methods.ExternalStorage.deleteExternalStorage(clientConfig, externalStorageId, options)
+    fun delete(
+        externalStorageId: String,
+        options: RequestOptions? = null,
+    ): ExternalStorageDeletedResource {
+        return dev.octri.showcase.openai.methods.ExternalStorage.deleteExternalStorage(
+            clientConfig,
+            externalStorageId,
+            options,
+        )
     }
 
     /**
-     * Validates a customer-managed external storage configuration. Use `external_storage_id` to select the configuration whose provider setup you want to validate. The response returns the configuration and its status.
+     * Validates a customer-managed external storage configuration. Use `external_storage_id` to
+     * select the configuration whose provider setup you want to validate. The response returns the
+     * configuration and its status.
      *
      * Validate one customer-managed external storage configuration.
      */
-    fun validate(externalStorageId: String, options: RequestOptions? = null): ExternalStorageResponse {
-        return dev.octri.showcase.openai.methods.ExternalStorage.validateExternalStorage(clientConfig, externalStorageId, options)
+    fun validate(
+        externalStorageId: String,
+        options: RequestOptions? = null,
+    ): ExternalStorageResponse {
+        return dev.octri.showcase.openai.methods.ExternalStorage.validateExternalStorage(
+            clientConfig,
+            externalStorageId,
+            options,
+        )
     }
-
 }

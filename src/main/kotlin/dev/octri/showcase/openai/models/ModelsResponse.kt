@@ -3,51 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ResponseCompactionCompactingEvent` API schema.
- */
+/** Typed representation of the `ResponseCompactionCompactingEvent` API schema. */
 data class ResponseCompactionCompactingEvent(
-    /**
-     * The type of the event, always `response.compaction.compacting`.
-     */
+    /** The type of the event, always `response.compaction.compacting`. */
     val type: ResponseCompactionCompactingStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
+    /** The sequence number of the event that was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the compaction output item.
-     */
+    /** The index of the compaction output item. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The ID of the compaction output item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String
+    /** The ID of the compaction output item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
 )
 
-/**
- * Emitted when an error occurs while processing a Responses WebSocket request.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when an error occurs while processing a Responses WebSocket request. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseWsError(
-    /**
-     * The type of the event. Always `error`.
-     */
+    /** The type of the event. Always `error`. */
     val type: ResponseWsErrorTypeEnum,
-    /**
-     * Details about the error.
-     */
+    /** Details about the error. */
     val error: ErrorPayload,
-    /**
-     * The HTTP status code associated with a WebSocket protocol error.
-     */
+    /** The HTTP status code associated with a WebSocket protocol error. */
     val status: Long? = null,
+    /** The sequence number of an error emitted by the response stream. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number")
+    val sequenceNumber: Long? = null,
     /**
-     * The sequence number of an error emitted by the response stream.
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long? = null,
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
 ) : ResponsesServerEvent

@@ -3,342 +3,240 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * An assistant message produced by the agent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An assistant message produced by the agent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class AssistantMessageItemResource(
-    /**
-     * The item type. Always `message`.
-     */
+    /** The item type. Always `message`. */
     val type: AssistantMessageItemResourceTypeEnum,
-    /**
-     * The ID of the message.
-     */
+    /** The ID of the message. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The role of the message author. Always `assistant`.
-     */
+    /** The role of the message author. Always `assistant`. */
     val role: AssistantMessageItemResourceRoleEnum,
-    /**
-     * The status of the message.
-     */
+    /** The status of the message. */
     val status: OutputItemStatusResource,
-    /**
-     * The content of the message.
-     */
+    /** The content of the message. */
     val content: List<OutputTextResource>,
-    /**
-     * The phase of the assistant message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("phase", required = true) val phase: MessagePhaseResource?
+    /** The phase of the assistant message. */
+    @com.fasterxml.jackson.annotation.JsonProperty("phase", required = true)
+    val phase: MessagePhaseResource?,
 ) : AgentOutputItemResource
 
-/**
- * A request to close a subagent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A request to close a subagent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CloseSubagentCallItemResource(
-    /**
-     * The item type. Always `close_subagent_call`.
-     */
+    /** The item type. Always `close_subagent_call`. */
     val type: CloseSubagentCallItemResourceTypeEnum,
-    /**
-     * The ID of the tool call item.
-     */
+    /** The ID of the tool call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the tool call.
-     */
+    /** The status of the tool call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The ID of the agent requesting the close.
-     */
+    /** The ID of the agent requesting the close. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_agent_id") val senderAgentId: String,
-    /**
-     * The ID of the agent to close.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id") val recipientAgentId: String
+    /** The ID of the agent to close. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id")
+    val recipientAgentId: String,
 ) : SessionTurnItemResource, AgentOutputItemResource
 
-/**
- * A command execution produced by the agent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A command execution produced by the agent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CommandExecutionItemResource(
-    /**
-     * The item type. Always `command_execution`.
-     */
+    /** The item type. Always `command_execution`. */
     val type: CommandExecutionItemResourceTypeEnum,
-    /**
-     * The ID of the command execution item.
-     */
+    /** The ID of the command execution item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The command that was executed.
-     */
+    /** The command that was executed. */
     val command: String,
-    /**
-     * The working directory used to execute the command.
-     */
+    /** The working directory used to execute the command. */
     @com.fasterxml.jackson.annotation.JsonProperty("cwd", required = true) val cwd: String?,
-    /**
-     * The status of the command execution.
-     */
+    /** The status of the command execution. */
     val status: FunctionCallStatusResource,
-    /**
-     * The command output, if available.
-     */
+    /** The command output, if available. */
     @com.fasterxml.jackson.annotation.JsonProperty("output", required = true) val output: String?,
-    /**
-     * The process exit code, if the command completed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exit_code", required = true) val exitCode: Long?,
-    /**
-     * The command duration in milliseconds.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("duration_ms", required = true) val durationMs: Long?
+    /** The process exit code, if the command completed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exit_code", required = true)
+    val exitCode: Long?,
+    /** The command duration in milliseconds. */
+    @com.fasterxml.jackson.annotation.JsonProperty("duration_ms", required = true)
+    val durationMs: Long?,
 ) : SessionTurnItemResource, AgentOutputItemResource
 
-/**
- * Encrypted content exchanged between agents.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Encrypted content exchanged between agents. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class EncryptedContentResource(
-    /**
-     * The content type. Always `encrypted_content`.
-     */
+    /** The content type. Always `encrypted_content`. */
     val type: EncryptedContentResourceTypeEnum,
-    /**
-     * The encrypted content payload.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String
+    /** The encrypted content payload. */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content")
+    val encryptedContent: String,
 ) : AgentContentResource
 
-/**
- * A request to interrupt a subagent's current turn. The subagent remains available.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A request to interrupt a subagent's current turn. The subagent remains available. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InterruptSubagentCallItemResource(
-    /**
-     * The item type. Always `interrupt_subagent_call`.
-     */
+    /** The item type. Always `interrupt_subagent_call`. */
     val type: InterruptSubagentCallItemResourceTypeEnum,
-    /**
-     * The ID of the tool call item.
-     */
+    /** The ID of the tool call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the tool call.
-     */
+    /** The status of the tool call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The ID of the agent requesting the interrupt.
-     */
+    /** The ID of the agent requesting the interrupt. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_agent_id") val senderAgentId: String,
-    /**
-     * The ID of the agent to interrupt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id") val recipientAgentId: String
+    /** The ID of the agent to interrupt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id")
+    val recipientAgentId: String,
 ) : SessionTurnItemResource, AgentOutputItemResource
 
-/**
- * Safe metadata for a first-class execution environment.
- */
+/** Safe metadata for a first-class execution environment. */
 data class PublicEnvironmentResource(
-    /**
-     * Whether the environment is hosted by OpenAI or by the application.
-     */
+    /** Whether the environment is hosted by OpenAI or by the application. */
     val type: EnvironmentTypeResource,
-    /**
-     * The ID of the environment.
-     */
+    /** The ID of the environment. */
     val id: String,
-    /**
-     * The object type. Always `agent.environment`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: PublicEnvironmentResourceObjectEnum,
-    /**
-     * The current environment connection status.
-     */
+    /** The object type. Always `agent.environment`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: PublicEnvironmentResourceObjectEnum,
+    /** The current environment connection status. */
     val status: EnvironmentStatusResource,
-    /**
-     * Files installed in the environment, without their contents.
-     */
+    /** Files installed in the environment, without their contents. */
     val files: List<HostedEnvironmentFileResource>,
-    /**
-     * Skills installed in the environment, without their archive contents.
-     */
+    /** Skills installed in the environment, without their archive contents. */
     val skills: List<HostedSkillResource>,
-    /**
-     * Plugins installed in the environment, without their archive contents.
-     */
-    val plugins: List<HostedPluginResource>
+    /** Plugins installed in the environment, without their archive contents. */
+    val plugins: List<HostedPluginResource>,
 )
 
-/**
- * A request to resume a subagent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A request to resume a subagent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResumeSubagentCallItemResource(
-    /**
-     * The item type. Always `resume_subagent_call`.
-     */
+    /** The item type. Always `resume_subagent_call`. */
     val type: ResumeSubagentCallItemResourceTypeEnum,
-    /**
-     * The ID of the tool call item.
-     */
+    /** The ID of the tool call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the tool call.
-     */
+    /** The status of the tool call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The ID of the agent requesting the resume.
-     */
+    /** The ID of the agent requesting the resume. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_agent_id") val senderAgentId: String,
-    /**
-     * The ID of the agent to resume.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id") val recipientAgentId: String
+    /** The ID of the agent to resume. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id")
+    val recipientAgentId: String,
 ) : SessionTurnItemResource, AgentOutputItemResource
 
-/**
- * A request to send input to another agent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A request to send input to another agent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SendSubagentInputCallItemResource(
-    /**
-     * The item type. Always `send_subagent_input_call`.
-     */
+    /** The item type. Always `send_subagent_input_call`. */
     val type: SendSubagentInputCallItemResourceTypeEnum,
-    /**
-     * The ID of the tool call item.
-     */
+    /** The ID of the tool call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the tool call.
-     */
+    /** The status of the tool call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The ID of the agent sending the input.
-     */
+    /** The ID of the agent sending the input. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_agent_id") val senderAgentId: String,
-    /**
-     * The ID of the agent receiving the input.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id") val recipientAgentId: String,
-    /**
-     * The input sent to the receiving agent.
-     */
-    val content: List<AgentContentResource>
+    /** The ID of the agent receiving the input. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id")
+    val recipientAgentId: String,
+    /** The input sent to the receiving agent. */
+    val content: List<AgentContentResource>,
 ) : SessionTurnItemResource, AgentOutputItemResource
 
-/**
- * A confidential setup command executed before the hosted agent starts.
- */
+/** A confidential setup command executed before the hosted agent starts. */
 data class SetupCommandParam(
-    /**
-     * The shell command to execute.
-     */
+    /** The shell command to execute. */
     val command: String,
-    /**
-     * The absolute working directory. Defaults to `/workspace`.
-     */
-    val cwd: String? = null
+    /** The absolute working directory. Defaults to `/workspace`. */
+    val cwd: String? = null,
 )
 
-/**
- * A reasoning summary content part.
- */
+/** A reasoning summary content part. */
 data class SummaryTextResource(
-    /**
-     * The content type. Always `summary_text`.
-     */
+    /** The content type. Always `summary_text`. */
     val type: SummaryTextResourceTypeEnum,
-    /**
-     * The reasoning summary text.
-     */
-    val text: String
+    /** The reasoning summary text. */
+    val text: String,
 )
 
-/**
- * Recorded token usage for a session or turn. Usage is best effort and may change.
- */
+/** Recorded token usage for a session or turn. Usage is best effort and may change. */
 data class TokenUsageResource(
-    /**
-     * The number of input tokens used by the agent.
-     */
+    /** The number of input tokens used by the agent. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /**
-     * A breakdown of the agent's input token usage.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details") val inputTokensDetails: InputTokensDetailsResource2,
-    /**
-     * The number of output tokens generated by the agent.
-     */
+    /** A breakdown of the agent's input token usage. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details")
+    val inputTokensDetails: InputTokensDetailsResource2,
+    /** The number of output tokens generated by the agent. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /**
-     * A breakdown of the agent's output token usage.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens_details") val outputTokensDetails: OutputTokensDetailsResource2,
-    /**
-     * The total number of input and output tokens used by the agent.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long
+    /** A breakdown of the agent's output token usage. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens_details")
+    val outputTokensDetails: OutputTokensDetailsResource2,
+    /** The total number of input and output tokens used by the agent. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
 )
 
-/**
- * A request to wait for one or more subagents.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A request to wait for one or more subagents. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WaitForSubagentsCallItemResource(
-    /**
-     * The item type. Always `wait_for_subagents_call`.
-     */
+    /** The item type. Always `wait_for_subagents_call`. */
     val type: WaitForSubagentsCallItemResourceTypeEnum,
-    /**
-     * The ID of the tool call item.
-     */
+    /** The ID of the tool call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the tool call.
-     */
+    /** The status of the tool call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The ID of the agent waiting for results.
-     */
+    /** The ID of the agent waiting for results. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_agent_id") val senderAgentId: String,
-    /**
-     * The IDs of the agents to wait for.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_ids") val recipientAgentIds: List<String>
+    /** The IDs of the agents to wait for. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_ids")
+    val recipientAgentIds: List<String>,
 ) : SessionTurnItemResource, AgentOutputItemResource

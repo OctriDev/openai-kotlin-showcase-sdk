@@ -3,56 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when there is a partial function-call arguments delta.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when there is a partial function-call arguments delta. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseFunctionCallArgumentsDeltaEvent(
-    /**
-     * The type of the event. Always `response.function_call_arguments.delta`.
-     */
+    /** The type of the event. Always `response.function_call_arguments.delta`. */
     val type: ResponseFunctionCallArgumentsDeltaEventTypeEnum,
-    /**
-     * The ID of the output item that the function-call arguments delta is added to.
-     */
+    /** The ID of the output item that the function-call arguments delta is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the function-call arguments delta is added to.
-     */
+    /** The index of the output item that the function-call arguments delta is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The function-call arguments delta that is added.
-     */
-    val delta: String
+    /** The function-call arguments delta that is added. */
+    val delta: String,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when function-call arguments are finalized.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when function-call arguments are finalized. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseFunctionCallArgumentsDoneEvent(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: ResponseFunctionCallArgumentsDoneEventTypeEnum,
-    /**
-     * The ID of the item.
-     */
+    /** The ID of the item. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item.
-     */
+    /** The index of the output item. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The function-call arguments.
-     */
-    val arguments: String
+    /** The function-call arguments. */
+    val arguments: String,
 ) : ResponseStreamEvent

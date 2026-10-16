@@ -3,9 +3,7 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
+/** Required enumerated value serialized in the `type` wire field. */
 enum class HTTPErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     HTTP_ERROR("http_error");
 
@@ -14,19 +12,19 @@ enum class HTTPErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val val
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Typed representation of the `ImageBackground` API schema.
- */
-class ImageBackground private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `ImageBackground` API schema. */
+class ImageBackground
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ImageBackground && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -35,19 +33,21 @@ class ImageBackground private constructor(
         @JvmField val OPAQUE = ImageBackground("opaque")
         @JvmField val AUTO = ImageBackground("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageBackground(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageBackground(value)
     }
 }
 
-/**
- * Typed representation of the `ImageDetail` API schema.
- */
-class ImageDetail private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `ImageDetail` API schema. */
+class ImageDetail
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ImageDetail && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -57,19 +57,21 @@ class ImageDetail private constructor(
         @JvmField val AUTO = ImageDetail("auto")
         @JvmField val ORIGINAL = ImageDetail("original")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageDetail(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageDetail(value)
     }
 }
 
-/**
- * Typed representation of the `ImageDetailParam` API schema.
- */
-class ImageDetailParam private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `ImageDetailParam` API schema. */
+class ImageDetailParam
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ImageDetailParam && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -79,19 +81,22 @@ class ImageDetailParam private constructor(
         @JvmField val AUTO = ImageDetailParam("auto")
         @JvmField val ORIGINAL = ImageDetailParam("original")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageDetailParam(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageDetailParam(value)
     }
 }
 
-/**
- * The background setting for the edited image.
- */
-class ImageEditCompletedEventBackgroundEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageEditCompletedEventBackgroundEnum && value == other.value
+/** The background setting for the edited image. */
+class ImageEditCompletedEventBackgroundEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageEditCompletedEventBackgroundEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -100,19 +105,22 @@ class ImageEditCompletedEventBackgroundEnum private constructor(
         @JvmField val OPAQUE = ImageEditCompletedEventBackgroundEnum("opaque")
         @JvmField val AUTO = ImageEditCompletedEventBackgroundEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageEditCompletedEventBackgroundEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageEditCompletedEventBackgroundEnum(value)
     }
 }
 
-/**
- * The output format for the edited image.
- */
-class ImageEditCompletedEventOutputFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageEditCompletedEventOutputFormatEnum && value == other.value
+/** The output format for the edited image. */
+class ImageEditCompletedEventOutputFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageEditCompletedEventOutputFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -121,19 +129,22 @@ class ImageEditCompletedEventOutputFormatEnum private constructor(
         @JvmField val WEBP = ImageEditCompletedEventOutputFormatEnum("webp")
         @JvmField val JPEG = ImageEditCompletedEventOutputFormatEnum("jpeg")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageEditCompletedEventOutputFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageEditCompletedEventOutputFormatEnum(value)
     }
 }
 
-/**
- * The quality setting for the edited image.
- */
-class ImageEditCompletedEventQualityEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageEditCompletedEventQualityEnum && value == other.value
+/** The quality setting for the edited image. */
+class ImageEditCompletedEventQualityEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageEditCompletedEventQualityEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -145,15 +156,18 @@ class ImageEditCompletedEventQualityEnum private constructor(
         @JvmField val MAX = ImageEditCompletedEventQualityEnum("max")
         @JvmField val AUTO = ImageEditCompletedEventQualityEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageEditCompletedEventQualityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageEditCompletedEventQualityEnum(value)
     }
 }
 
-/**
- * The type of the event. Always `image_edit.completed`.
- */
-enum class ImageEditCompletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the event. Always `image_edit.completed`. */
+enum class ImageEditCompletedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_EDIT_COMPLETED("image_edit.completed");
 
     override fun toString() = value
@@ -161,19 +175,20 @@ enum class ImageEditCompletedEventTypeEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The background setting for the requested edited image.
- */
-class ImageEditPartialImageEventBackgroundEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageEditPartialImageEventBackgroundEnum && value == other.value
+/** The background setting for the requested edited image. */
+class ImageEditPartialImageEventBackgroundEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageEditPartialImageEventBackgroundEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -182,19 +197,22 @@ class ImageEditPartialImageEventBackgroundEnum private constructor(
         @JvmField val OPAQUE = ImageEditPartialImageEventBackgroundEnum("opaque")
         @JvmField val AUTO = ImageEditPartialImageEventBackgroundEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageEditPartialImageEventBackgroundEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageEditPartialImageEventBackgroundEnum(value)
     }
 }
 
-/**
- * The output format for the requested edited image.
- */
-class ImageEditPartialImageEventOutputFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageEditPartialImageEventOutputFormatEnum && value == other.value
+/** The output format for the requested edited image. */
+class ImageEditPartialImageEventOutputFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageEditPartialImageEventOutputFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -203,19 +221,22 @@ class ImageEditPartialImageEventOutputFormatEnum private constructor(
         @JvmField val WEBP = ImageEditPartialImageEventOutputFormatEnum("webp")
         @JvmField val JPEG = ImageEditPartialImageEventOutputFormatEnum("jpeg")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageEditPartialImageEventOutputFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageEditPartialImageEventOutputFormatEnum(value)
     }
 }
 
-/**
- * The quality setting for the requested edited image.
- */
-class ImageEditPartialImageEventQualityEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageEditPartialImageEventQualityEnum && value == other.value
+/** The quality setting for the requested edited image. */
+class ImageEditPartialImageEventQualityEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageEditPartialImageEventQualityEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -227,15 +248,18 @@ class ImageEditPartialImageEventQualityEnum private constructor(
         @JvmField val MAX = ImageEditPartialImageEventQualityEnum("max")
         @JvmField val AUTO = ImageEditPartialImageEventQualityEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageEditPartialImageEventQualityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageEditPartialImageEventQualityEnum(value)
     }
 }
 
-/**
- * The type of the event. Always `image_edit.partial_image`.
- */
-enum class ImageEditPartialImageEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the event. Always `image_edit.partial_image`. */
+enum class ImageEditPartialImageEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_EDIT_PARTIAL_IMAGE("image_edit.partial_image");
 
     override fun toString() = value
@@ -243,19 +267,19 @@ enum class ImageEditPartialImageEventTypeEnum(@com.fasterxml.jackson.annotation.
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Typed representation of the `ImageGenActionEnum` API schema.
- */
-class ImageGenActionEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `ImageGenActionEnum` API schema. */
+class ImageGenActionEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ImageGenActionEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -264,19 +288,22 @@ class ImageGenActionEnum private constructor(
         @JvmField val EDIT = ImageGenActionEnum("edit")
         @JvmField val AUTO = ImageGenActionEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenActionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenActionEnum(value)
     }
 }
 
-/**
- * The background setting for the generated image.
- */
-class ImageGenCompletedEventBackgroundEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenCompletedEventBackgroundEnum && value == other.value
+/** The background setting for the generated image. */
+class ImageGenCompletedEventBackgroundEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenCompletedEventBackgroundEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -285,19 +312,22 @@ class ImageGenCompletedEventBackgroundEnum private constructor(
         @JvmField val OPAQUE = ImageGenCompletedEventBackgroundEnum("opaque")
         @JvmField val AUTO = ImageGenCompletedEventBackgroundEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenCompletedEventBackgroundEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenCompletedEventBackgroundEnum(value)
     }
 }
 
-/**
- * The output format for the generated image.
- */
-class ImageGenCompletedEventOutputFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenCompletedEventOutputFormatEnum && value == other.value
+/** The output format for the generated image. */
+class ImageGenCompletedEventOutputFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenCompletedEventOutputFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -306,19 +336,22 @@ class ImageGenCompletedEventOutputFormatEnum private constructor(
         @JvmField val WEBP = ImageGenCompletedEventOutputFormatEnum("webp")
         @JvmField val JPEG = ImageGenCompletedEventOutputFormatEnum("jpeg")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenCompletedEventOutputFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenCompletedEventOutputFormatEnum(value)
     }
 }
 
-/**
- * The quality setting for the generated image.
- */
-class ImageGenCompletedEventQualityEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenCompletedEventQualityEnum && value == other.value
+/** The quality setting for the generated image. */
+class ImageGenCompletedEventQualityEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenCompletedEventQualityEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -330,15 +363,18 @@ class ImageGenCompletedEventQualityEnum private constructor(
         @JvmField val MAX = ImageGenCompletedEventQualityEnum("max")
         @JvmField val AUTO = ImageGenCompletedEventQualityEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenCompletedEventQualityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenCompletedEventQualityEnum(value)
     }
 }
 
-/**
- * The type of the event. Always `image_generation.completed`.
- */
-enum class ImageGenCompletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the event. Always `image_generation.completed`. */
+enum class ImageGenCompletedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_GENERATION_COMPLETED("image_generation.completed");
 
     override fun toString() = value
@@ -346,19 +382,20 @@ enum class ImageGenCompletedEventTypeEnum(@com.fasterxml.jackson.annotation.Json
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The background setting for the requested image.
- */
-class ImageGenPartialImageEventBackgroundEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventBackgroundEnum && value == other.value
+/** The background setting for the requested image. */
+class ImageGenPartialImageEventBackgroundEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenPartialImageEventBackgroundEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -367,19 +404,22 @@ class ImageGenPartialImageEventBackgroundEnum private constructor(
         @JvmField val OPAQUE = ImageGenPartialImageEventBackgroundEnum("opaque")
         @JvmField val AUTO = ImageGenPartialImageEventBackgroundEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventBackgroundEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenPartialImageEventBackgroundEnum(value)
     }
 }
 
-/**
- * The output format for the requested image.
- */
-class ImageGenPartialImageEventOutputFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventOutputFormatEnum && value == other.value
+/** The output format for the requested image. */
+class ImageGenPartialImageEventOutputFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenPartialImageEventOutputFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -388,19 +428,22 @@ class ImageGenPartialImageEventOutputFormatEnum private constructor(
         @JvmField val WEBP = ImageGenPartialImageEventOutputFormatEnum("webp")
         @JvmField val JPEG = ImageGenPartialImageEventOutputFormatEnum("jpeg")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventOutputFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenPartialImageEventOutputFormatEnum(value)
     }
 }
 
-/**
- * The quality setting for the requested image.
- */
-class ImageGenPartialImageEventQualityEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenPartialImageEventQualityEnum && value == other.value
+/** The quality setting for the requested image. */
+class ImageGenPartialImageEventQualityEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenPartialImageEventQualityEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -412,15 +455,18 @@ class ImageGenPartialImageEventQualityEnum private constructor(
         @JvmField val MAX = ImageGenPartialImageEventQualityEnum("max")
         @JvmField val AUTO = ImageGenPartialImageEventQualityEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenPartialImageEventQualityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenPartialImageEventQualityEnum(value)
     }
 }
 
-/**
- * The type of the event. Always `image_generation.partial_image`.
- */
-enum class ImageGenPartialImageEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the event. Always `image_generation.partial_image`. */
+enum class ImageGenPartialImageEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_GENERATION_PARTIAL_IMAGE("image_generation.partial_image");
 
     override fun toString() = value
@@ -428,19 +474,26 @@ enum class ImageGenPartialImageEventTypeEnum(@com.fasterxml.jackson.annotation.J
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Set the background of the generated image. One of `transparent`, `opaque`, or `auto`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`. Default: `auto`.
+ * Set the background of the generated image. One of `transparent`, `opaque`, or `auto`.
+ * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+ * support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for
+ * supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in
+ * preview. When using `transparent`, set the output format to `png` or `webp`. Default: `auto`.
  */
-class ImageGenToolBackgroundEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenToolBackgroundEnum && value == other.value
+class ImageGenToolBackgroundEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenToolBackgroundEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -449,19 +502,22 @@ class ImageGenToolBackgroundEnum private constructor(
         @JvmField val OPAQUE = ImageGenToolBackgroundEnum("opaque")
         @JvmField val AUTO = ImageGenToolBackgroundEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenToolBackgroundEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenToolBackgroundEnum(value)
     }
 }
 
-/**
- * Moderation level for the generated image. Default: `auto`.
- */
-class ImageGenToolModerationEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenToolModerationEnum && value == other.value
+/** Moderation level for the generated image. Default: `auto`. */
+class ImageGenToolModerationEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenToolModerationEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -469,19 +525,22 @@ class ImageGenToolModerationEnum private constructor(
         @JvmField val AUTO = ImageGenToolModerationEnum("auto")
         @JvmField val LOW = ImageGenToolModerationEnum("low")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenToolModerationEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenToolModerationEnum(value)
     }
 }
 
-/**
- * The output format of the generated image. One of `png`, `webp`, or `jpeg`. Default: `png`.
- */
-class ImageGenToolOutputFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenToolOutputFormatEnum && value == other.value
+/** The output format of the generated image. One of `png`, `webp`, or `jpeg`. Default: `png`. */
+class ImageGenToolOutputFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenToolOutputFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -490,19 +549,26 @@ class ImageGenToolOutputFormatEnum private constructor(
         @JvmField val WEBP = ImageGenToolOutputFormatEnum("webp")
         @JvmField val JPEG = ImageGenToolOutputFormatEnum("jpeg")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenToolOutputFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenToolOutputFormatEnum(value)
     }
 }
 
 /**
- * The quality of the generated image. The GPT image models support `low`, `medium`, and `high`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, also support `xhigh` and `max`. Default: `auto`.
+ * The quality of the generated image. The GPT image models support `low`, `medium`, and `high`.
+ * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, also
+ * support `xhigh` and `max`. Default: `auto`.
  */
-class ImageGenToolQualityEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenToolQualityEnum && value == other.value
+class ImageGenToolQualityEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenToolQualityEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -514,14 +580,15 @@ class ImageGenToolQualityEnum private constructor(
         @JvmField val MAX = ImageGenToolQualityEnum("max")
         @JvmField val AUTO = ImageGenToolQualityEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenToolQualityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenToolQualityEnum(value)
     }
 }
 
-/**
- * The type of the image generation tool. Always `image_generation`.
- */
+/** The type of the image generation tool. Always `image_generation`. */
 enum class ImageGenToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     IMAGE_GENERATION("image_generation");
 
@@ -530,19 +597,23 @@ enum class ImageGenToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * The quality of the image generated by the image generation tool call. One of `low`, `medium`, `high`, `xhigh`, `max`, or `auto`.
+ * The quality of the image generated by the image generation tool call. One of `low`, `medium`,
+ * `high`, `xhigh`, `max`, or `auto`.
  */
-class ImageGenToolCallQualityVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenToolCallQualityVariant0Enum && value == other.value
+class ImageGenToolCallQualityVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenToolCallQualityVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -554,19 +625,22 @@ class ImageGenToolCallQualityVariant0Enum private constructor(
         @JvmField val MAX = ImageGenToolCallQualityVariant0Enum("max")
         @JvmField val AUTO = ImageGenToolCallQualityVariant0Enum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenToolCallQualityVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenToolCallQualityVariant0Enum(value)
     }
 }
 
-/**
- * The status of the image generation call.
- */
-class ImageGenToolCallStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ImageGenToolCallStatusEnum && value == other.value
+/** The status of the image generation call. */
+class ImageGenToolCallStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ImageGenToolCallStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -576,14 +650,15 @@ class ImageGenToolCallStatusEnum private constructor(
         @JvmField val GENERATING = ImageGenToolCallStatusEnum("generating")
         @JvmField val FAILED = ImageGenToolCallStatusEnum("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ImageGenToolCallStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ImageGenToolCallStatusEnum(value)
     }
 }
 
-/**
- * The type of the image generation call. Always `image_generation_call`.
- */
+/** The type of the image generation call. Always `image_generation_call`. */
 enum class ImageGenToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     IMAGE_GENERATION_CALL("image_generation_call");
 
@@ -592,7 +667,8 @@ enum class ImageGenToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

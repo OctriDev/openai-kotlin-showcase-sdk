@@ -21,13 +21,16 @@ typealias MCPToolConnectorIdEnum = dev.octri.showcase.openai.models.MCPToolConne
 
 typealias MCPToolExecutionError = dev.octri.showcase.openai.models.MCPToolExecutionError
 
-typealias MCPToolExecutionErrorTypeEnum = dev.octri.showcase.openai.models.MCPToolExecutionErrorTypeEnum
+typealias MCPToolExecutionErrorTypeEnum =
+    dev.octri.showcase.openai.models.MCPToolExecutionErrorTypeEnum
 
 typealias MCPToolFilter = dev.octri.showcase.openai.models.MCPToolFilter
 
-typealias MCPToolRequireApprovalVariant0 = dev.octri.showcase.openai.models.MCPToolRequireApprovalVariant0
+typealias MCPToolRequireApprovalVariant0 =
+    dev.octri.showcase.openai.models.MCPToolRequireApprovalVariant0
 
-typealias MCPToolRequireApprovalVariant1Enum = dev.octri.showcase.openai.models.MCPToolRequireApprovalVariant1Enum
+typealias MCPToolRequireApprovalVariant1Enum =
+    dev.octri.showcase.openai.models.MCPToolRequireApprovalVariant1Enum
 
 typealias MCPToolTypeEnum = dev.octri.showcase.openai.models.MCPToolTypeEnum
 
@@ -35,129 +38,181 @@ typealias McpTransportConfigParam = dev.octri.showcase.openai.models.McpTranspor
 
 typealias McpTransportConfigParamHttp = dev.octri.showcase.openai.models.McpTransportConfigParamHttp
 
-typealias McpTransportConfigParamHttpTypeEnum = dev.octri.showcase.openai.models.McpTransportConfigParamHttpTypeEnum
+typealias McpTransportConfigParamHttpTypeEnum =
+    dev.octri.showcase.openai.models.McpTransportConfigParamHttpTypeEnum
 
-typealias McpTransportConfigParamStdio = dev.octri.showcase.openai.models.McpTransportConfigParamStdio
+typealias McpTransportConfigParamStdio =
+    dev.octri.showcase.openai.models.McpTransportConfigParamStdio
 
-typealias McpTransportConfigParamStdioTypeEnum = dev.octri.showcase.openai.models.McpTransportConfigParamStdioTypeEnum
+typealias McpTransportConfigParamStdioTypeEnum =
+    dev.octri.showcase.openai.models.McpTransportConfigParamStdioTypeEnum
 
 typealias McpTransportResource = dev.octri.showcase.openai.models.McpTransportResource
 
 typealias McpTransportResourceHttp = dev.octri.showcase.openai.models.McpTransportResourceHttp
 
-typealias McpTransportResourceHttpTypeEnum = dev.octri.showcase.openai.models.McpTransportResourceHttpTypeEnum
+typealias McpTransportResourceHttpTypeEnum =
+    dev.octri.showcase.openai.models.McpTransportResourceHttpTypeEnum
 
 typealias McpTransportResourceStdio = dev.octri.showcase.openai.models.McpTransportResourceStdio
 
-typealias McpTransportResourceStdioTypeEnum = dev.octri.showcase.openai.models.McpTransportResourceStdioTypeEnum
+typealias McpTransportResourceStdioTypeEnum =
+    dev.octri.showcase.openai.models.McpTransportResourceStdioTypeEnum
 
 typealias Message = dev.octri.showcase.openai.models.Message
 
-typealias MessageContentImageFileObject = dev.octri.showcase.openai.models.MessageContentImageFileObject
+typealias MessageContentImageFileObject =
+    dev.octri.showcase.openai.models.MessageContentImageFileObject
 
-typealias MessageContentImageFileObjectImageFile = dev.octri.showcase.openai.models.MessageContentImageFileObjectImageFile
+typealias MessageContentImageFileObjectImageFile =
+    dev.octri.showcase.openai.models.MessageContentImageFileObjectImageFile
 
-typealias MessageContentImageFileObjectImageFileDetailEnum = dev.octri.showcase.openai.models.MessageContentImageFileObjectImageFileDetailEnum
+typealias MessageContentImageFileObjectImageFileDetailEnum =
+    dev.octri.showcase.openai.models.MessageContentImageFileObjectImageFileDetailEnum
 
-typealias MessageContentImageFileObjectTypeEnum = dev.octri.showcase.openai.models.MessageContentImageFileObjectTypeEnum
+typealias MessageContentImageFileObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentImageFileObjectTypeEnum
 
-typealias MessageContentImageUrlObject = dev.octri.showcase.openai.models.MessageContentImageUrlObject
+typealias MessageContentImageUrlObject =
+    dev.octri.showcase.openai.models.MessageContentImageUrlObject
 
-typealias MessageContentImageUrlObjectImageUrl = dev.octri.showcase.openai.models.MessageContentImageUrlObjectImageUrl
+typealias MessageContentImageUrlObjectImageUrl =
+    dev.octri.showcase.openai.models.MessageContentImageUrlObjectImageUrl
 
-typealias MessageContentImageUrlObjectImageUrlDetailEnum = dev.octri.showcase.openai.models.MessageContentImageUrlObjectImageUrlDetailEnum
+typealias MessageContentImageUrlObjectImageUrlDetailEnum =
+    dev.octri.showcase.openai.models.MessageContentImageUrlObjectImageUrlDetailEnum
 
-typealias MessageContentImageUrlObjectTypeEnum = dev.octri.showcase.openai.models.MessageContentImageUrlObjectTypeEnum
+typealias MessageContentImageUrlObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentImageUrlObjectTypeEnum
 
 typealias MessageContentItem = dev.octri.showcase.openai.models.MessageContentItem
 
 typealias MessageContentRefusalObject = dev.octri.showcase.openai.models.MessageContentRefusalObject
 
-typealias MessageContentRefusalObjectTypeEnum = dev.octri.showcase.openai.models.MessageContentRefusalObjectTypeEnum
+typealias MessageContentRefusalObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentRefusalObjectTypeEnum
 
 typealias MessageContentResource = dev.octri.showcase.openai.models.MessageContentResource
 
-typealias MessageContentResourceInputImage = dev.octri.showcase.openai.models.MessageContentResourceInputImage
+typealias MessageContentResourceInputImage =
+    dev.octri.showcase.openai.models.MessageContentResourceInputImage
 
-typealias MessageContentResourceInputImageTypeEnum = dev.octri.showcase.openai.models.MessageContentResourceInputImageTypeEnum
+typealias MessageContentResourceInputImageTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentResourceInputImageTypeEnum
 
-typealias MessageContentResourceInputText = dev.octri.showcase.openai.models.MessageContentResourceInputText
+typealias MessageContentResourceInputText =
+    dev.octri.showcase.openai.models.MessageContentResourceInputText
 
-typealias MessageContentResourceInputTextTypeEnum = dev.octri.showcase.openai.models.MessageContentResourceInputTextTypeEnum
+typealias MessageContentResourceInputTextTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentResourceInputTextTypeEnum
 
-typealias MessageContentResourceOutputText = dev.octri.showcase.openai.models.MessageContentResourceOutputText
+typealias MessageContentResourceOutputText =
+    dev.octri.showcase.openai.models.MessageContentResourceOutputText
 
-typealias MessageContentResourceOutputTextTypeEnum = dev.octri.showcase.openai.models.MessageContentResourceOutputTextTypeEnum
+typealias MessageContentResourceOutputTextTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentResourceOutputTextTypeEnum
 
-typealias MessageContentTextAnnotationsFileCitationObject = dev.octri.showcase.openai.models.MessageContentTextAnnotationsFileCitationObject
+typealias MessageContentTextAnnotationsFileCitationObject =
+    dev.octri.showcase.openai.models.MessageContentTextAnnotationsFileCitationObject
 
-typealias MessageContentTextAnnotationsFileCitationObjectFileCitation = dev.octri.showcase.openai.models.MessageContentTextAnnotationsFileCitationObjectFileCitation
+typealias MessageContentTextAnnotationsFileCitationObjectFileCitation =
+    dev.octri.showcase.openai.models.MessageContentTextAnnotationsFileCitationObjectFileCitation
 
-typealias MessageContentTextAnnotationsFileCitationObjectTypeEnum = dev.octri.showcase.openai.models.MessageContentTextAnnotationsFileCitationObjectTypeEnum
+typealias MessageContentTextAnnotationsFileCitationObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentTextAnnotationsFileCitationObjectTypeEnum
 
-typealias MessageContentTextAnnotationsFilePathObject = dev.octri.showcase.openai.models.MessageContentTextAnnotationsFilePathObject
+typealias MessageContentTextAnnotationsFilePathObject =
+    dev.octri.showcase.openai.models.MessageContentTextAnnotationsFilePathObject
 
-typealias MessageContentTextAnnotationsFilePathObjectFilePath = dev.octri.showcase.openai.models.MessageContentTextAnnotationsFilePathObjectFilePath
+typealias MessageContentTextAnnotationsFilePathObjectFilePath =
+    dev.octri.showcase.openai.models.MessageContentTextAnnotationsFilePathObjectFilePath
 
-typealias MessageContentTextAnnotationsFilePathObjectTypeEnum = dev.octri.showcase.openai.models.MessageContentTextAnnotationsFilePathObjectTypeEnum
+typealias MessageContentTextAnnotationsFilePathObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentTextAnnotationsFilePathObjectTypeEnum
 
 typealias MessageContentTextObject = dev.octri.showcase.openai.models.MessageContentTextObject
 
-typealias MessageContentTextObjectText = dev.octri.showcase.openai.models.MessageContentTextObjectText
+typealias MessageContentTextObjectText =
+    dev.octri.showcase.openai.models.MessageContentTextObjectText
 
-typealias MessageContentTextObjectTextAnnotationsItem = dev.octri.showcase.openai.models.MessageContentTextObjectTextAnnotationsItem
+typealias MessageContentTextObjectTextAnnotationsItem =
+    dev.octri.showcase.openai.models.MessageContentTextObjectTextAnnotationsItem
 
-typealias MessageContentTextObjectTypeEnum = dev.octri.showcase.openai.models.MessageContentTextObjectTypeEnum
+typealias MessageContentTextObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageContentTextObjectTypeEnum
 
-typealias MessageDeltaContentImageFileObject = dev.octri.showcase.openai.models.MessageDeltaContentImageFileObject
+typealias MessageDeltaContentImageFileObject =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageFileObject
 
-typealias MessageDeltaContentImageFileObjectImageFile = dev.octri.showcase.openai.models.MessageDeltaContentImageFileObjectImageFile
+typealias MessageDeltaContentImageFileObjectImageFile =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageFileObjectImageFile
 
-typealias MessageDeltaContentImageFileObjectImageFileDetailEnum = dev.octri.showcase.openai.models.MessageDeltaContentImageFileObjectImageFileDetailEnum
+typealias MessageDeltaContentImageFileObjectImageFileDetailEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageFileObjectImageFileDetailEnum
 
-typealias MessageDeltaContentImageFileObjectTypeEnum = dev.octri.showcase.openai.models.MessageDeltaContentImageFileObjectTypeEnum
+typealias MessageDeltaContentImageFileObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageFileObjectTypeEnum
 
-typealias MessageDeltaContentImageUrlObject = dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObject
+typealias MessageDeltaContentImageUrlObject =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObject
 
-typealias MessageDeltaContentImageUrlObjectImageUrl = dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObjectImageUrl
+typealias MessageDeltaContentImageUrlObjectImageUrl =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObjectImageUrl
 
-typealias MessageDeltaContentImageUrlObjectImageUrlDetailEnum = dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObjectImageUrlDetailEnum
+typealias MessageDeltaContentImageUrlObjectImageUrlDetailEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObjectImageUrlDetailEnum
 
-typealias MessageDeltaContentImageUrlObjectTypeEnum = dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObjectTypeEnum
+typealias MessageDeltaContentImageUrlObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentImageUrlObjectTypeEnum
 
-typealias MessageDeltaContentRefusalObject = dev.octri.showcase.openai.models.MessageDeltaContentRefusalObject
+typealias MessageDeltaContentRefusalObject =
+    dev.octri.showcase.openai.models.MessageDeltaContentRefusalObject
 
-typealias MessageDeltaContentRefusalObjectTypeEnum = dev.octri.showcase.openai.models.MessageDeltaContentRefusalObjectTypeEnum
+typealias MessageDeltaContentRefusalObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentRefusalObjectTypeEnum
 
-typealias MessageDeltaContentTextAnnotationsFileCitationObject = dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFileCitationObject
+typealias MessageDeltaContentTextAnnotationsFileCitationObject =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFileCitationObject
 
-typealias MessageDeltaContentTextAnnotationsFileCitationObjectFileCitation = dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFileCitationObjectFileCitation
+typealias MessageDeltaContentTextAnnotationsFileCitationObjectFileCitation =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFileCitationObjectFileCitation
 
-typealias MessageDeltaContentTextAnnotationsFileCitationObjectTypeEnum = dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFileCitationObjectTypeEnum
+typealias MessageDeltaContentTextAnnotationsFileCitationObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFileCitationObjectTypeEnum
 
-typealias MessageDeltaContentTextAnnotationsFilePathObject = dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFilePathObject
+typealias MessageDeltaContentTextAnnotationsFilePathObject =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFilePathObject
 
-typealias MessageDeltaContentTextAnnotationsFilePathObjectFilePath = dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFilePathObjectFilePath
+typealias MessageDeltaContentTextAnnotationsFilePathObjectFilePath =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFilePathObjectFilePath
 
-typealias MessageDeltaContentTextAnnotationsFilePathObjectTypeEnum = dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFilePathObjectTypeEnum
+typealias MessageDeltaContentTextAnnotationsFilePathObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextAnnotationsFilePathObjectTypeEnum
 
-typealias MessageDeltaContentTextObject = dev.octri.showcase.openai.models.MessageDeltaContentTextObject
+typealias MessageDeltaContentTextObject =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextObject
 
-typealias MessageDeltaContentTextObjectText = dev.octri.showcase.openai.models.MessageDeltaContentTextObjectText
+typealias MessageDeltaContentTextObjectText =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextObjectText
 
-typealias MessageDeltaContentTextObjectTextAnnotationsItem = dev.octri.showcase.openai.models.MessageDeltaContentTextObjectTextAnnotationsItem
+typealias MessageDeltaContentTextObjectTextAnnotationsItem =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextObjectTextAnnotationsItem
 
-typealias MessageDeltaContentTextObjectTypeEnum = dev.octri.showcase.openai.models.MessageDeltaContentTextObjectTypeEnum
+typealias MessageDeltaContentTextObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageDeltaContentTextObjectTypeEnum
 
 typealias MessageDeltaObject = dev.octri.showcase.openai.models.MessageDeltaObject
 
 typealias MessageDeltaObjectDelta = dev.octri.showcase.openai.models.MessageDeltaObjectDelta
 
-typealias MessageDeltaObjectDeltaContentItem = dev.octri.showcase.openai.models.MessageDeltaObjectDeltaContentItem
+typealias MessageDeltaObjectDeltaContentItem =
+    dev.octri.showcase.openai.models.MessageDeltaObjectDeltaContentItem
 
-typealias MessageDeltaObjectDeltaRoleEnum = dev.octri.showcase.openai.models.MessageDeltaObjectDeltaRoleEnum
+typealias MessageDeltaObjectDeltaRoleEnum =
+    dev.octri.showcase.openai.models.MessageDeltaObjectDeltaRoleEnum
 
-typealias MessageDeltaObjectObjectEnum = dev.octri.showcase.openai.models.MessageDeltaObjectObjectEnum
+typealias MessageDeltaObjectObjectEnum =
+    dev.octri.showcase.openai.models.MessageDeltaObjectObjectEnum
 
 typealias MessageItemResource = dev.octri.showcase.openai.models.MessageItemResource
 
@@ -165,15 +220,19 @@ typealias MessageItemResourceTypeEnum = dev.octri.showcase.openai.models.Message
 
 typealias MessageObject = dev.octri.showcase.openai.models.MessageObject
 
-typealias MessageObjectAttachmentsItem = dev.octri.showcase.openai.models.MessageObjectAttachmentsItem
+typealias MessageObjectAttachmentsItem =
+    dev.octri.showcase.openai.models.MessageObjectAttachmentsItem
 
-typealias MessageObjectAttachmentsItemToolsItem = dev.octri.showcase.openai.models.MessageObjectAttachmentsItemToolsItem
+typealias MessageObjectAttachmentsItemToolsItem =
+    dev.octri.showcase.openai.models.MessageObjectAttachmentsItemToolsItem
 
 typealias MessageObjectContentItem = dev.octri.showcase.openai.models.MessageObjectContentItem
 
-typealias MessageObjectIncompleteDetails = dev.octri.showcase.openai.models.MessageObjectIncompleteDetails
+typealias MessageObjectIncompleteDetails =
+    dev.octri.showcase.openai.models.MessageObjectIncompleteDetails
 
-typealias MessageObjectIncompleteDetailsReasonEnum = dev.octri.showcase.openai.models.MessageObjectIncompleteDetailsReasonEnum
+typealias MessageObjectIncompleteDetailsReasonEnum =
+    dev.octri.showcase.openai.models.MessageObjectIncompleteDetailsReasonEnum
 
 typealias MessageObjectObjectEnum = dev.octri.showcase.openai.models.MessageObjectObjectEnum
 
@@ -189,9 +248,11 @@ typealias MessagePhaseParam = dev.octri.showcase.openai.models.MessagePhaseParam
 
 typealias MessagePhaseResource = dev.octri.showcase.openai.models.MessagePhaseResource
 
-typealias MessageRequestContentTextObject = dev.octri.showcase.openai.models.MessageRequestContentTextObject
+typealias MessageRequestContentTextObject =
+    dev.octri.showcase.openai.models.MessageRequestContentTextObject
 
-typealias MessageRequestContentTextObjectTypeEnum = dev.octri.showcase.openai.models.MessageRequestContentTextObjectTypeEnum
+typealias MessageRequestContentTextObjectTypeEnum =
+    dev.octri.showcase.openai.models.MessageRequestContentTextObjectTypeEnum
 
 typealias MessageRole = dev.octri.showcase.openai.models.MessageRole
 
@@ -201,29 +262,35 @@ typealias MessageStreamEvent = dev.octri.showcase.openai.models.MessageStreamEve
 
 typealias MessageStreamEventVariant0 = dev.octri.showcase.openai.models.MessageStreamEventVariant0
 
-typealias MessageStreamEventVariant0EventEnum = dev.octri.showcase.openai.models.MessageStreamEventVariant0EventEnum
+typealias MessageStreamEventVariant0EventEnum =
+    dev.octri.showcase.openai.models.MessageStreamEventVariant0EventEnum
 
 typealias MessageStreamEventVariant1 = dev.octri.showcase.openai.models.MessageStreamEventVariant1
 
-typealias MessageStreamEventVariant1EventEnum = dev.octri.showcase.openai.models.MessageStreamEventVariant1EventEnum
+typealias MessageStreamEventVariant1EventEnum =
+    dev.octri.showcase.openai.models.MessageStreamEventVariant1EventEnum
 
 typealias MessageStreamEventVariant2 = dev.octri.showcase.openai.models.MessageStreamEventVariant2
 
-typealias MessageStreamEventVariant2EventEnum = dev.octri.showcase.openai.models.MessageStreamEventVariant2EventEnum
+typealias MessageStreamEventVariant2EventEnum =
+    dev.octri.showcase.openai.models.MessageStreamEventVariant2EventEnum
 
 typealias MessageStreamEventVariant3 = dev.octri.showcase.openai.models.MessageStreamEventVariant3
 
-typealias MessageStreamEventVariant3EventEnum = dev.octri.showcase.openai.models.MessageStreamEventVariant3EventEnum
+typealias MessageStreamEventVariant3EventEnum =
+    dev.octri.showcase.openai.models.MessageStreamEventVariant3EventEnum
 
 typealias MessageStreamEventVariant4 = dev.octri.showcase.openai.models.MessageStreamEventVariant4
 
-typealias MessageStreamEventVariant4EventEnum = dev.octri.showcase.openai.models.MessageStreamEventVariant4EventEnum
+typealias MessageStreamEventVariant4EventEnum =
+    dev.octri.showcase.openai.models.MessageStreamEventVariant4EventEnum
 
 typealias MessageTypeEnum = dev.octri.showcase.openai.models.MessageTypeEnum
 
 typealias Metadata = dev.octri.showcase.openai.models.Metadata
 
-typealias MisalignmentErrorDetailsResource = dev.octri.showcase.openai.models.MisalignmentErrorDetailsResource
+typealias MisalignmentErrorDetailsResource =
+    dev.octri.showcase.openai.models.MisalignmentErrorDetailsResource
 
 typealias MisalignmentErrorType = dev.octri.showcase.openai.models.MisalignmentErrorType
 
@@ -241,7 +308,8 @@ typealias ModelIdsLiveVariant1Enum = dev.octri.showcase.openai.models.ModelIdsLi
 
 typealias ModelIdsResponses = dev.octri.showcase.openai.models.ModelIdsResponses
 
-typealias ModelIdsResponsesVariant1Enum = dev.octri.showcase.openai.models.ModelIdsResponsesVariant1Enum
+typealias ModelIdsResponsesVariant1Enum =
+    dev.octri.showcase.openai.models.ModelIdsResponsesVariant1Enum
 
 typealias ModelIdsShared = dev.octri.showcase.openai.models.ModelIdsShared
 
@@ -249,7 +317,8 @@ typealias ModelObjectEnum = dev.octri.showcase.openai.models.ModelObjectEnum
 
 typealias ModelResponseProperties = dev.octri.showcase.openai.models.ModelResponseProperties
 
-typealias ModelResponsePropertiesPromptCacheRetentionVariant0Enum = dev.octri.showcase.openai.models.ModelResponsePropertiesPromptCacheRetentionVariant0Enum
+typealias ModelResponsePropertiesPromptCacheRetentionVariant0Enum =
+    dev.octri.showcase.openai.models.ModelResponsePropertiesPromptCacheRetentionVariant0Enum
 
 typealias Moderation = dev.octri.showcase.openai.models.Moderation
 
@@ -273,17 +342,22 @@ typealias ModerationPolicyParam = dev.octri.showcase.openai.models.ModerationPol
 
 typealias ModerationResultBody = dev.octri.showcase.openai.models.ModerationResultBody
 
-typealias ModerationResultBodyTypeEnum = dev.octri.showcase.openai.models.ModerationResultBodyTypeEnum
+typealias ModerationResultBodyTypeEnum =
+    dev.octri.showcase.openai.models.ModerationResultBodyTypeEnum
 
 typealias ModifyAssistantRequest = dev.octri.showcase.openai.models.ModifyAssistantRequest
 
-typealias ModifyAssistantRequestToolResources = dev.octri.showcase.openai.models.ModifyAssistantRequestToolResources
+typealias ModifyAssistantRequestToolResources =
+    dev.octri.showcase.openai.models.ModifyAssistantRequestToolResources
 
-typealias ModifyAssistantRequestToolResourcesCodeInterpreter = dev.octri.showcase.openai.models.ModifyAssistantRequestToolResourcesCodeInterpreter
+typealias ModifyAssistantRequestToolResourcesCodeInterpreter =
+    dev.octri.showcase.openai.models.ModifyAssistantRequestToolResourcesCodeInterpreter
 
-typealias ModifyAssistantRequestToolResourcesFileSearch = dev.octri.showcase.openai.models.ModifyAssistantRequestToolResourcesFileSearch
+typealias ModifyAssistantRequestToolResourcesFileSearch =
+    dev.octri.showcase.openai.models.ModifyAssistantRequestToolResourcesFileSearch
 
-typealias ModifyAssistantRequestToolsItem = dev.octri.showcase.openai.models.ModifyAssistantRequestToolsItem
+typealias ModifyAssistantRequestToolsItem =
+    dev.octri.showcase.openai.models.ModifyAssistantRequestToolsItem
 
 typealias ModifyCertificateRequest = dev.octri.showcase.openai.models.ModifyCertificateRequest
 
@@ -293,17 +367,21 @@ typealias ModifyRunRequest = dev.octri.showcase.openai.models.ModifyRunRequest
 
 typealias ModifyThreadRequest = dev.octri.showcase.openai.models.ModifyThreadRequest
 
-typealias ModifyThreadRequestToolResources = dev.octri.showcase.openai.models.ModifyThreadRequestToolResources
+typealias ModifyThreadRequestToolResources =
+    dev.octri.showcase.openai.models.ModifyThreadRequestToolResources
 
-typealias ModifyThreadRequestToolResourcesCodeInterpreter = dev.octri.showcase.openai.models.ModifyThreadRequestToolResourcesCodeInterpreter
+typealias ModifyThreadRequestToolResourcesCodeInterpreter =
+    dev.octri.showcase.openai.models.ModifyThreadRequestToolResourcesCodeInterpreter
 
-typealias ModifyThreadRequestToolResourcesFileSearch = dev.octri.showcase.openai.models.ModifyThreadRequestToolResourcesFileSearch
+typealias ModifyThreadRequestToolResourcesFileSearch =
+    dev.octri.showcase.openai.models.ModifyThreadRequestToolResourcesFileSearch
 
 typealias MoveParam = dev.octri.showcase.openai.models.MoveParam
 
 typealias MoveParamTypeEnum = dev.octri.showcase.openai.models.MoveParamTypeEnum
 
-typealias MultiAgentConfigCurrentParam = dev.octri.showcase.openai.models.MultiAgentConfigCurrentParam
+typealias MultiAgentConfigCurrentParam =
+    dev.octri.showcase.openai.models.MultiAgentConfigCurrentParam
 
 typealias MultiAgentConfigResource = dev.octri.showcase.openai.models.MultiAgentConfigResource
 
@@ -323,13 +401,17 @@ typealias NetworkPolicyResource = dev.octri.showcase.openai.models.NetworkPolicy
 
 typealias NoiseReductionType = dev.octri.showcase.openai.models.NoiseReductionType
 
-typealias OciExternalStorageProviderParams = dev.octri.showcase.openai.models.OciExternalStorageProviderParams
+typealias OciExternalStorageProviderParams =
+    dev.octri.showcase.openai.models.OciExternalStorageProviderParams
 
-typealias OciExternalStorageProviderParamsTypeEnum = dev.octri.showcase.openai.models.OciExternalStorageProviderParamsTypeEnum
+typealias OciExternalStorageProviderParamsTypeEnum =
+    dev.octri.showcase.openai.models.OciExternalStorageProviderParamsTypeEnum
 
-typealias OciExternalStorageProviderResponse = dev.octri.showcase.openai.models.OciExternalStorageProviderResponse
+typealias OciExternalStorageProviderResponse =
+    dev.octri.showcase.openai.models.OciExternalStorageProviderResponse
 
-typealias OciExternalStorageProviderResponseTypeEnum = dev.octri.showcase.openai.models.OciExternalStorageProviderResponseTypeEnum
+typealias OciExternalStorageProviderResponseTypeEnum =
+    dev.octri.showcase.openai.models.OciExternalStorageProviderResponseTypeEnum
 
 typealias OpenAIFile = dev.octri.showcase.openai.models.OpenAIFile
 
@@ -343,65 +425,93 @@ typealias OrderEnum = dev.octri.showcase.openai.models.OrderEnum
 
 typealias OrganizationCertificate = dev.octri.showcase.openai.models.OrganizationCertificate
 
-typealias OrganizationCertificateActivationResponse = dev.octri.showcase.openai.models.OrganizationCertificateActivationResponse
+typealias OrganizationCertificateActivationResponse =
+    dev.octri.showcase.openai.models.OrganizationCertificateActivationResponse
 
-typealias OrganizationCertificateActivationResponseObjectEnum = dev.octri.showcase.openai.models.OrganizationCertificateActivationResponseObjectEnum
+typealias OrganizationCertificateActivationResponseObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationCertificateActivationResponseObjectEnum
 
-typealias OrganizationCertificateCertificateDetails = dev.octri.showcase.openai.models.OrganizationCertificateCertificateDetails
+typealias OrganizationCertificateCertificateDetails =
+    dev.octri.showcase.openai.models.OrganizationCertificateCertificateDetails
 
-typealias OrganizationCertificateDeactivationResponse = dev.octri.showcase.openai.models.OrganizationCertificateDeactivationResponse
+typealias OrganizationCertificateDeactivationResponse =
+    dev.octri.showcase.openai.models.OrganizationCertificateDeactivationResponse
 
-typealias OrganizationCertificateDeactivationResponseObjectEnum = dev.octri.showcase.openai.models.OrganizationCertificateDeactivationResponseObjectEnum
+typealias OrganizationCertificateDeactivationResponseObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationCertificateDeactivationResponseObjectEnum
 
-typealias OrganizationCertificateObjectEnum = dev.octri.showcase.openai.models.OrganizationCertificateObjectEnum
+typealias OrganizationCertificateObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationCertificateObjectEnum
 
 typealias OrganizationDataRetention = dev.octri.showcase.openai.models.OrganizationDataRetention
 
-typealias OrganizationDataRetentionObjectEnum = dev.octri.showcase.openai.models.OrganizationDataRetentionObjectEnum
+typealias OrganizationDataRetentionObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationDataRetentionObjectEnum
 
-typealias OrganizationDataRetentionTypeEnum = dev.octri.showcase.openai.models.OrganizationDataRetentionTypeEnum
+typealias OrganizationDataRetentionTypeEnum =
+    dev.octri.showcase.openai.models.OrganizationDataRetentionTypeEnum
 
-typealias OrganizationProjectCertificate = dev.octri.showcase.openai.models.OrganizationProjectCertificate
+typealias OrganizationProjectCertificate =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificate
 
-typealias OrganizationProjectCertificateActivationResponse = dev.octri.showcase.openai.models.OrganizationProjectCertificateActivationResponse
+typealias OrganizationProjectCertificateActivationResponse =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificateActivationResponse
 
-typealias OrganizationProjectCertificateActivationResponseObjectEnum = dev.octri.showcase.openai.models.OrganizationProjectCertificateActivationResponseObjectEnum
+typealias OrganizationProjectCertificateActivationResponseObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificateActivationResponseObjectEnum
 
-typealias OrganizationProjectCertificateCertificateDetails = dev.octri.showcase.openai.models.OrganizationProjectCertificateCertificateDetails
+typealias OrganizationProjectCertificateCertificateDetails =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificateCertificateDetails
 
-typealias OrganizationProjectCertificateDeactivationResponse = dev.octri.showcase.openai.models.OrganizationProjectCertificateDeactivationResponse
+typealias OrganizationProjectCertificateDeactivationResponse =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificateDeactivationResponse
 
-typealias OrganizationProjectCertificateDeactivationResponseObjectEnum = dev.octri.showcase.openai.models.OrganizationProjectCertificateDeactivationResponseObjectEnum
+typealias OrganizationProjectCertificateDeactivationResponseObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificateDeactivationResponseObjectEnum
 
-typealias OrganizationProjectCertificateObjectEnum = dev.octri.showcase.openai.models.OrganizationProjectCertificateObjectEnum
+typealias OrganizationProjectCertificateObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationProjectCertificateObjectEnum
 
 typealias OrganizationSpendAlert = dev.octri.showcase.openai.models.OrganizationSpendAlert
 
-typealias OrganizationSpendAlertCurrencyEnum = dev.octri.showcase.openai.models.OrganizationSpendAlertCurrencyEnum
+typealias OrganizationSpendAlertCurrencyEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertCurrencyEnum
 
-typealias OrganizationSpendAlertDeletedResource = dev.octri.showcase.openai.models.OrganizationSpendAlertDeletedResource
+typealias OrganizationSpendAlertDeletedResource =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertDeletedResource
 
-typealias OrganizationSpendAlertDeletedResourceObjectEnum = dev.octri.showcase.openai.models.OrganizationSpendAlertDeletedResourceObjectEnum
+typealias OrganizationSpendAlertDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertDeletedResourceObjectEnum
 
-typealias OrganizationSpendAlertIntervalEnum = dev.octri.showcase.openai.models.OrganizationSpendAlertIntervalEnum
+typealias OrganizationSpendAlertIntervalEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertIntervalEnum
 
-typealias OrganizationSpendAlertListResource = dev.octri.showcase.openai.models.OrganizationSpendAlertListResource
+typealias OrganizationSpendAlertListResource =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertListResource
 
-typealias OrganizationSpendAlertListResourceObjectEnum = dev.octri.showcase.openai.models.OrganizationSpendAlertListResourceObjectEnum
+typealias OrganizationSpendAlertListResourceObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertListResourceObjectEnum
 
-typealias OrganizationSpendAlertObjectEnum = dev.octri.showcase.openai.models.OrganizationSpendAlertObjectEnum
+typealias OrganizationSpendAlertObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendAlertObjectEnum
 
-typealias OrganizationSpendLimitDeletedResource = dev.octri.showcase.openai.models.OrganizationSpendLimitDeletedResource
+typealias OrganizationSpendLimitDeletedResource =
+    dev.octri.showcase.openai.models.OrganizationSpendLimitDeletedResource
 
-typealias OrganizationSpendLimitDeletedResourceObjectEnum = dev.octri.showcase.openai.models.OrganizationSpendLimitDeletedResourceObjectEnum
+typealias OrganizationSpendLimitDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendLimitDeletedResourceObjectEnum
 
-typealias OrganizationSpendLimitResource = dev.octri.showcase.openai.models.OrganizationSpendLimitResource
+typealias OrganizationSpendLimitResource =
+    dev.octri.showcase.openai.models.OrganizationSpendLimitResource
 
-typealias OrganizationSpendLimitResourceObjectEnum = dev.octri.showcase.openai.models.OrganizationSpendLimitResourceObjectEnum
+typealias OrganizationSpendLimitResourceObjectEnum =
+    dev.octri.showcase.openai.models.OrganizationSpendLimitResourceObjectEnum
 
-typealias OtherChunkingStrategyResponseParam = dev.octri.showcase.openai.models.OtherChunkingStrategyResponseParam
+typealias OtherChunkingStrategyResponseParam =
+    dev.octri.showcase.openai.models.OtherChunkingStrategyResponseParam
 
-typealias OtherChunkingStrategyResponseParamTypeEnum = dev.octri.showcase.openai.models.OtherChunkingStrategyResponseParamTypeEnum
+typealias OtherChunkingStrategyResponseParamTypeEnum =
+    dev.octri.showcase.openai.models.OtherChunkingStrategyResponseParamTypeEnum
 
 typealias OutputAudio = dev.octri.showcase.openai.models.OutputAudio
 
@@ -433,6 +543,7 @@ typealias OutputTextResourceTypeEnum = dev.octri.showcase.openai.models.OutputTe
 
 typealias OutputTokensDetailsResource = dev.octri.showcase.openai.models.OutputTokensDetailsResource
 
-typealias OutputTokensDetailsResource2 = dev.octri.showcase.openai.models.OutputTokensDetailsResource2
+typealias OutputTokensDetailsResource2 =
+    dev.octri.showcase.openai.models.OutputTokensDetailsResource2
 
 typealias ParallelToolCalls = dev.octri.showcase.openai.models.ParallelToolCalls

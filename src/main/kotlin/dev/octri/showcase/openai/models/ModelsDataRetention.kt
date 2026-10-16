@@ -3,50 +3,34 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Represents the organization's data retention control setting.
- */
+/** Represents the organization's data retention control setting. */
 data class OrganizationDataRetention(
-    /**
-     * The object type, which is always `organization.data_retention`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationDataRetentionObjectEnum,
-    /**
-     * The configured organization data retention type.
-     */
-    val type: OrganizationDataRetentionTypeEnum
+    /** The object type, which is always `organization.data_retention`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: OrganizationDataRetentionObjectEnum,
+    /** The configured organization data retention type. */
+    val type: OrganizationDataRetentionTypeEnum,
 )
 
-/**
- * Represents a project's data retention control setting.
- */
+/** Represents a project's data retention control setting. */
 data class ProjectDataRetention(
-    /**
-     * The object type, which is always `project.data_retention`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectDataRetentionObjectEnum,
-    /**
-     * The configured project data retention type.
-     */
-    val type: ProjectDataRetentionTypeEnum
+    /** The object type, which is always `project.data_retention`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ProjectDataRetentionObjectEnum,
+    /** The configured project data retention type. */
+    val type: ProjectDataRetentionTypeEnum,
 )
 
-/**
- * Parameters for updating organization data retention controls.
- */
+/** Parameters for updating organization data retention controls. */
 data class UpdateOrganizationDataRetentionBody(
-    /**
-     * The desired organization data retention type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("retention_type") val retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum
+    /** The desired organization data retention type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("retention_type")
+    val retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum
 )
 
-/**
- * Parameters for updating project data retention controls.
- */
+/** Parameters for updating project data retention controls. */
 data class UpdateProjectDataRetentionBody(
-    /**
-     * The desired project data retention type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("retention_type") val retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum
+    /** The desired project data retention type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("retention_type")
+    val retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum
 )

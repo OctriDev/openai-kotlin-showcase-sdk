@@ -3,520 +3,566 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `CreateImageEditRequest` API schema.
- */
+/** Typed representation of the `CreateImageEditRequest` API schema. */
 data class CreateImageEditRequest(
     /**
-     * The image(s) to edit. Must be a supported image file or an array of images. For the GPT image models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`), each image should be a `png`, `webp`, or `jpg` file less than 50MB. You can provide up to 16 images. `chatgpt-image-latest` follows the same input constraints…
+     * The image(s) to edit. Must be a supported image file or an array of images. For the GPT image
+     * models (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
+     * `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`,
+     * `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`), each image should be a `png`,
+     * `webp`, or `jpg` file less than 50MB. You can provide up to 16 images. `chatgpt-image-latest`
+     * follows the same input constraints…
      */
     val image: List<ByteArray>,
     /**
-     * A text description of the desired image(s). The maximum length is 32000 characters for the GPT image models.
+     * A text description of the desired image(s). The maximum length is 32000 characters for the
+     * GPT image models.
      */
     val prompt: String,
     /**
-     * The GPT image model to use for image editing (`gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).
+     * The GPT image model to use for image editing (`gpt-image-1`, `gpt-image-1-mini`,
+     * `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+     * `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`,
+     * or `chatgpt-image-latest`).
      */
     val model: String,
     /**
-     * An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where `image` should be edited. If there are multiple images provided, the mask will be applied on the first image. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
+     * An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
+     * `image` should be edited. If there are multiple images provided, the mask will be applied on
+     * the first image. Must be a valid PNG file, less than 4MB, and have the same dimensions as
+     * `image`.
      */
     val mask: ByteArray? = null,
     /**
-     * Set the background of the generated image(s). This parameter is only supported for the GPT image models. Must be one of `transparent`, `opaque`, or `auto` (default value). When `auto` is used, the model will automatically determine the best background for the image. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for supported GPT Image models.…
+     * Set the background of the generated image(s). This parameter is only supported for the GPT
+     * image models. Must be one of `transparent`, `opaque`, or `auto` (default value). When `auto`
+     * is used, the model will automatically determine the best background for the image.
+     * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+     * support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for
+     * supported GPT Image models.…
      */
     val background: CreateImageEditRequestBackgroundVariant0Enum? = null,
-    /**
-     * The number of images to generate. Must be between 1 and 10.
-     */
+    /** The number of images to generate. Must be between 1 and 10. */
     val n: Long? = null,
     /**
-     * The size of the generated images. Defaults to `auto`. For `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum…
+     * The size of the generated images. Defaults to `auto`. For `gpt-image-2`,
+     * `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`,
+     * `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are
+     * supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be
+     * divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above
+     * `2560x1440` are experimental, and the maximum…
      */
     val size: String? = null,
     /**
-     * Legacy response format parameter for retired image models. Unsupported for GPT image models, which always return base64-encoded images.
+     * Legacy response format parameter for retired image models. Unsupported for GPT image models,
+     * which always return base64-encoded images.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: CreateImageEditRequestResponseFormatEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
+    val responseFormat: CreateImageEditRequestResponseFormatEnum? = null,
     /**
-     * The format in which the generated images are returned. This parameter is only supported for the GPT image models. Must be one of `png`, `jpeg`, or `webp`. The default value is `png`.
+     * The format in which the generated images are returned. This parameter is only supported for
+     * the GPT image models. Must be one of `png`, `jpeg`, or `webp`. The default value is `png`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: CreateImageEditRequestOutputFormatVariant0Enum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: CreateImageEditRequestOutputFormatVariant0Enum? = null,
     /**
-     * The compression level (0-100%) for the generated images. This parameter is only supported for the GPT image models with the `webp` or `jpeg` output formats, and defaults to 100.
+     * The compression level (0-100%) for the generated images. This parameter is only supported for
+     * the GPT image models with the `webp` or `jpeg` output formats, and defaults to 100.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_compression") val outputCompression: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_compression")
+    val outputCompression: Long? = null,
     /**
-     * A stable identifier for an end user in your organization, used for safety monitoring and abuse detection. Hash a username or email address to avoid sending identifying information. A non-empty value takes precedence over the deprecated `user` parameter. If omitted, null, or empty, the API uses `user` when available. Learn more.
+     * A stable identifier for an end user in your organization, used for safety monitoring and
+     * abuse detection. Hash a username or email address to avoid sending identifying information. A
+     * non-empty value takes precedence over the deprecated `user` parameter. If omitted, null, or
+     * empty, the API uses `user` when available. Learn more.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
     /**
-     * Deprecated: use `safety_identifier` instead. This parameter remains accepted for backward compatibility and is used when `safety_identifier` is omitted, null, or empty. Learn more.
+     * Deprecated: use `safety_identifier` instead. This parameter remains accepted for backward
+     * compatibility and is used when `safety_identifier` is omitted, null, or empty. Learn more.
      */
     val user: String? = null,
+    /** Optional API value serialized in the `input_fidelity` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity")
+    val inputFidelity: InputFidelity? = null,
     /**
-     * Optional API value serialized in the `input_fidelity` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity") val inputFidelity: InputFidelity? = null,
-    /**
-     * Edit the image in streaming mode. Defaults to `false`. See the Image generation guide for more information.
+     * Edit the image in streaming mode. Defaults to `false`. See the Image generation guide for
+     * more information.
      */
     val stream: Boolean? = null,
+    /** Optional API value serialized in the `partial_images` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_images")
+    val partialImages: PartialImages? = null,
     /**
-     * Optional API value serialized in the `partial_images` wire field.
+     * The quality of the image that will be generated for GPT image models. The GPT image models
+     * support `low`, `medium`, and `high`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`,
+     * including their `2026-09-08` snapshots, also support `xhigh` and `max`. Defaults to `auto`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_images") val partialImages: PartialImages? = null,
-    /**
-     * The quality of the image that will be generated for GPT image models. The GPT image models support `low`, `medium`, and `high`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, also support `xhigh` and `max`. Defaults to `auto`.
-     */
-    val quality: CreateImageEditRequestQualityVariant0Enum? = null
+    val quality: CreateImageEditRequestQualityVariant0Enum? = null,
 )
 
-/**
- * Typed representation of the `CreateImageRequest` API schema.
- */
+/** Typed representation of the `CreateImageRequest` API schema. */
 data class CreateImageRequest(
-    /**
-     * A text description of the desired image(s). The maximum length is 32000 characters.
-     */
+    /** A text description of the desired image(s). The maximum length is 32000 characters. */
     val prompt: String,
     /**
-     * The GPT image model to use for image generation. Specify a model explicitly. Supported models include `gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
+     * The GPT image model to use for image generation. Specify a model explicitly. Supported models
+     * include `gpt-image-1`, `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
+     * `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`,
+     * `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
      */
     val model: String,
-    /**
-     * The number of images to generate. Must be between 1 and 10.
-     */
+    /** The number of images to generate. Must be between 1 and 10. */
     val n: Long? = null,
     /**
-     * The quality of the image that will be generated. - `auto` (default value) will automatically select the best quality for the given model. - `high`, `medium` and `low` are supported for the GPT image models. - `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, also support `xhigh` and `max`.
+     * The quality of the image that will be generated. - `auto` (default value) will automatically
+     * select the best quality for the given model. - `high`, `medium` and `low` are supported for
+     * the GPT image models. - `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their
+     * `2026-09-08` snapshots, also support `xhigh` and `max`.
      */
     val quality: CreateImageRequestQualityVariant0Enum? = null,
     /**
-     * Legacy response format parameter for retired image models. Unsupported for GPT image models, which always return base64-encoded images.
+     * Legacy response format parameter for retired image models. Unsupported for GPT image models,
+     * which always return base64-encoded images.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: CreateImageRequestResponseFormatEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
+    val responseFormat: CreateImageRequestResponseFormatEnum? = null,
     /**
-     * The format in which the generated images are returned. This parameter is only supported for the GPT image models. Must be one of `png`, `jpeg`, or `webp`.
+     * The format in which the generated images are returned. This parameter is only supported for
+     * the GPT image models. Must be one of `png`, `jpeg`, or `webp`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: CreateImageRequestOutputFormatVariant0Enum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: CreateImageRequestOutputFormatVariant0Enum? = null,
     /**
-     * The compression level (0-100%) for the generated images. This parameter is only supported for the GPT image models with the `webp` or `jpeg` output formats, and defaults to 100.
+     * The compression level (0-100%) for the generated images. This parameter is only supported for
+     * the GPT image models with the `webp` or `jpeg` output formats, and defaults to 100.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_compression") val outputCompression: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_compression")
+    val outputCompression: Long? = null,
     /**
-     * Generate the image in streaming mode. Defaults to `false`. See the Image generation guide for more information. This parameter is only supported for the GPT image models.
+     * Generate the image in streaming mode. Defaults to `false`. See the Image generation guide for
+     * more information. This parameter is only supported for the GPT image models.
      */
     val stream: Boolean? = null,
+    /** Optional API value serialized in the `partial_images` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_images")
+    val partialImages: PartialImages? = null,
     /**
-     * Optional API value serialized in the `partial_images` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_images") val partialImages: PartialImages? = null,
-    /**
-     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum supported…
+     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`,
+     * `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
+     * `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT`
+     * strings, for example `1536x864`. Width and height must both be divisible by 16 and the
+     * requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are
+     * experimental, and the maximum supported…
      */
     val size: String? = null,
     /**
-     * Control the content-moderation level for images generated by the GPT image models. Must be either `low` for less restrictive filtering or `auto` (default value).
+     * Control the content-moderation level for images generated by the GPT image models. Must be
+     * either `low` for less restrictive filtering or `auto` (default value).
      */
     val moderation: CreateImageRequestModerationVariant0Enum? = null,
     /**
-     * Set the background of the generated image(s). This parameter is only supported for the GPT image models. Must be one of `transparent`, `opaque`, or `auto` (default value). When `auto` is used, the model will automatically determine the best background for the image. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for supported GPT Image models.…
+     * Set the background of the generated image(s). This parameter is only supported for the GPT
+     * image models. Must be one of `transparent`, `opaque`, or `auto` (default value). When `auto`
+     * is used, the model will automatically determine the best background for the image.
+     * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+     * support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for
+     * supported GPT Image models.…
      */
     val background: CreateImageRequestBackgroundVariant0Enum? = null,
     /**
-     * Legacy style parameter for retired image models. Unsupported for GPT image models; describe the desired style in the prompt instead.
+     * Legacy style parameter for retired image models. Unsupported for GPT image models; describe
+     * the desired style in the prompt instead.
      */
     val style: CreateImageRequestStyleEnum? = null,
     /**
-     * A stable identifier for an end user in your organization, used for safety monitoring and abuse detection. Hash a username or email address to avoid sending identifying information. A non-empty value takes precedence over the deprecated `user` parameter. If omitted, null, or empty, the API uses `user` when available. Learn more.
+     * A stable identifier for an end user in your organization, used for safety monitoring and
+     * abuse detection. Hash a username or email address to avoid sending identifying information. A
+     * non-empty value takes precedence over the deprecated `user` parameter. If omitted, null, or
+     * empty, the API uses `user` when available. Learn more.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
     /**
-     * Deprecated: use `safety_identifier` instead. This parameter remains accepted for backward compatibility and is used when `safety_identifier` is omitted, null, or empty. Learn more.
+     * Deprecated: use `safety_identifier` instead. This parameter remains accepted for backward
+     * compatibility and is used when `safety_identifier` is omitted, null, or empty. Learn more.
      */
-    val user: String? = null
+    val user: String? = null,
 )
 
-/**
- * Legacy request for the retired image variations endpoint.
- */
+/** Legacy request for the retired image variations endpoint. */
 data class CreateImageVariationRequest(
     /**
-     * The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square.
+     * The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
+     * and square.
      */
     val image: ByteArray,
     /**
-     * The legacy model used by the retired image variations endpoint. This endpoint no longer accepts requests.
+     * The legacy model used by the retired image variations endpoint. This endpoint no longer
+     * accepts requests.
      */
     val model: String? = null,
-    /**
-     * The number of images to generate. Must be between 1 and 10.
-     */
+    /** The number of images to generate. Must be between 1 and 10. */
     val n: Long? = null,
     /**
-     * The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
+     * The format in which the generated images are returned. Must be one of `url` or `b64_json`.
+     * URLs are only valid for 60 minutes after the image has been generated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: CreateImageVariationRequestResponseFormatEnum? = null,
-    /**
-     * The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
+    val responseFormat: CreateImageVariationRequestResponseFormatEnum? = null,
+    /** The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. */
     val size: CreateImageVariationRequestSizeEnum? = null,
     /**
-     * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more.
+     * A unique identifier representing your end-user, which can help OpenAI to monitor and detect
+     * abuse. Learn more.
      */
-    val user: String? = null
+    val user: String? = null,
 )
 
 /**
- * JSON request body for image edits. Use `images` (array of `ImageRefParam`) instead of multipart `image` uploads. You can reference images via external URLs, data URLs, or uploaded file IDs. JSON edits support GPT image models.
+ * JSON request body for image edits. Use `images` (array of `ImageRefParam`) instead of multipart
+ * `image` uploads. You can reference images via external URLs, data URLs, or uploaded file IDs.
+ * JSON edits support GPT image models.
  */
 data class EditImageBodyJsonParam(
-    /**
-     * Input image references to edit. For GPT image models, you can provide up to 16 images.
-     */
+    /** Input image references to edit. For GPT image models, you can provide up to 16 images. */
     val images: List<ImageRefParam>,
-    /**
-     * A text description of the desired image edit.
-     */
+    /** A text description of the desired image edit. */
     val prompt: String,
     /**
-     * The GPT image model to use for image editing, including `gpt-image-2`, its dated snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.
+     * The GPT image model to use for image editing, including `gpt-image-2`, its dated snapshot
+     * `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`,
+     * `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`. Defaults to
+     * `gpt-image-2.5-sunburst`.
      */
     val model: String? = null,
     /**
-     * Reference an input image by either URL or uploaded file ID. Provide exactly one of `image_url` or `file_id`.
+     * Reference an input image by either URL or uploaded file ID. Provide exactly one of
+     * `image_url` or `file_id`.
      */
     val mask: ImageRefParam? = null,
-    /**
-     * The number of edited images to generate.
-     */
+    /** The number of edited images to generate. */
     val n: Long? = null,
     /**
-     * Output quality for GPT image models. The GPT image models support `low`, `medium`, and `high`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, also support `xhigh` and `max`. Defaults to `auto`.
+     * Output quality for GPT image models. The GPT image models support `low`, `medium`, and
+     * `high`. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08`
+     * snapshots, also support `xhigh` and `max`. Defaults to `auto`.
      */
     val quality: EditImageBodyJsonParamQualityVariant0Enum? = null,
     /**
-     * Control how much effort the model will exert to match the style and features, especially facial features, of input images. Supports `high` and `low` on `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+     * Control how much effort the model will exert to match the style and features, especially
+     * facial features, of input images. Supports `high` and `low` on `gpt-image-1` and
+     * `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit this
+     * parameter. Defaults to `low` on supported models.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity") val inputFidelity: EditImageBodyJsonParamInputFidelityVariant0Enum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity")
+    val inputFidelity: EditImageBodyJsonParamInputFidelityVariant0Enum? = null,
     /**
-     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum supported…
+     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`,
+     * `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
+     * `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT`
+     * strings, for example `1536x864`. Width and height must both be divisible by 16 and the
+     * requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are
+     * experimental, and the maximum supported…
      */
     val size: String? = null,
     /**
-     * A stable identifier for an end user in your organization, used for safety monitoring and abuse detection. Hash a username or email address to avoid sending identifying information. A non-empty value takes precedence over the deprecated `user` parameter. If omitted, null, or empty, the API uses `user` when available. Learn more.
+     * A stable identifier for an end user in your organization, used for safety monitoring and
+     * abuse detection. Hash a username or email address to avoid sending identifying information. A
+     * non-empty value takes precedence over the deprecated `user` parameter. If omitted, null, or
+     * empty, the API uses `user` when available. Learn more.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
     /**
-     * Deprecated: use `safety_identifier` instead. This parameter remains accepted for backward compatibility and is used when `safety_identifier` is omitted, null, or empty. Learn more.
+     * Deprecated: use `safety_identifier` instead. This parameter remains accepted for backward
+     * compatibility and is used when `safety_identifier` is omitted, null, or empty. Learn more.
      */
     val user: String? = null,
-    /**
-     * Output image format. Supported for GPT image models.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: EditImageBodyJsonParamOutputFormatVariant0Enum? = null,
-    /**
-     * Compression level for `jpeg` or `webp` output.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_compression") val outputCompression: Long? = null,
-    /**
-     * Moderation level for GPT image models.
-     */
+    /** Output image format. Supported for GPT image models. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: EditImageBodyJsonParamOutputFormatVariant0Enum? = null,
+    /** Compression level for `jpeg` or `webp` output. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_compression")
+    val outputCompression: Long? = null,
+    /** Moderation level for GPT image models. */
     val moderation: EditImageBodyJsonParamModerationVariant0Enum? = null,
     /**
-     * Set the background of the generated image output. `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When using `transparent`, set the output format to `png` or `webp`.
+     * Set the background of the generated image output. `gpt-image-2.5-sunburst` and
+     * `gpt-image-2.5-flare`, including their `2026-09-08` snapshots, support `opaque` and
+     * `transparent` backgrounds. Transparent backgrounds are available for supported GPT Image
+     * models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is in preview. When
+     * using `transparent`, set the output format to `png` or `webp`.
      */
     val background: EditImageBodyJsonParamBackgroundVariant0Enum? = null,
-    /**
-     * Stream partial image results as events.
-     */
+    /** Stream partial image results as events. */
     val stream: Boolean? = null,
-    /**
-     * Optional API value serialized in the `partial_images` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_images") val partialImages: PartialImages? = null
+    /** Optional API value serialized in the `partial_images` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_images")
+    val partialImages: PartialImages? = null,
 )
 
-/**
- * Represents the content or the URL of an image generated by the OpenAI API.
- */
+/** Represents the content or the URL of an image generated by the OpenAI API. */
 data class Image(
     /**
-     * The base64-encoded JSON of the generated image. Returned by default for GPT image models, or when `response_format` is set to `b64_json` for models that support that parameter.
+     * The base64-encoded JSON of the generated image. Returned by default for GPT image models, or
+     * when `response_format` is set to `b64_json` for models that support that parameter.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("b64_json") val b64Json: String? = null,
     /**
-     * The URL of the generated image when `response_format` is set to `url` for models that support that parameter. Unsupported for GPT image models.
+     * The URL of the generated image when `response_format` is set to `url` for models that support
+     * that parameter. Unsupported for GPT image models.
      */
     val url: String? = null,
     /**
-     * The revised prompt used to generate the image, for models that support prompt revision. Not returned by GPT image models.
+     * The revised prompt used to generate the image, for models that support prompt revision. Not
+     * returned by GPT image models.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("revised_prompt") val revisedPrompt: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("revised_prompt")
+    val revisedPrompt: String? = null,
 )
 
-/**
- * Emitted when image editing has completed and the final image is available.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when image editing has completed and the final image is available. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ImageEditCompletedEvent(
-    /**
-     * The type of the event. Always `image_edit.completed`.
-     */
+    /** The type of the event. Always `image_edit.completed`. */
     val type: ImageEditCompletedEventTypeEnum,
-    /**
-     * Base64-encoded final edited image data, suitable for rendering as an image.
-     */
+    /** Base64-encoded final edited image data, suitable for rendering as an image. */
     @com.fasterxml.jackson.annotation.JsonProperty("b64_json") val b64Json: String,
-    /**
-     * The Unix timestamp when the event was created.
-     */
+    /** The Unix timestamp when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`.
-     */
+    /** The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`. */
     val size: String,
-    /**
-     * The quality setting for the edited image.
-     */
+    /** The quality setting for the edited image. */
     val quality: ImageEditCompletedEventQualityEnum,
-    /**
-     * The background setting for the edited image.
-     */
+    /** The background setting for the edited image. */
     val background: ImageEditCompletedEventBackgroundEnum,
-    /**
-     * The output format for the edited image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImageEditCompletedEventOutputFormatEnum,
-    /**
-     * For the GPT image models only, the token usage information for the image generation.
-     */
+    /** The output format for the edited image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageEditCompletedEventOutputFormatEnum,
+    /** For the GPT image models only, the token usage information for the image generation. */
     val usage: ImagesUsage,
     /**
-     * The effective safety identifier used for safety monitoring and abuse detection. This is the non-empty `safety_identifier` from the request, or the deprecated `user` value when `safety_identifier` is omitted, null, or empty.
+     * The effective safety identifier used for safety monitoring and abuse detection. This is the
+     * non-empty `safety_identifier` from the request, or the deprecated `user` value when
+     * `safety_identifier` is omitted, null, or empty.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
 ) : ImageEditStreamEvent
 
-/**
- * Emitted when a partial image is available during image editing streaming.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a partial image is available during image editing streaming. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ImageEditPartialImageEvent(
-    /**
-     * The type of the event. Always `image_edit.partial_image`.
-     */
+    /** The type of the event. Always `image_edit.partial_image`. */
     val type: ImageEditPartialImageEventTypeEnum,
-    /**
-     * Base64-encoded partial image data, suitable for rendering as an image.
-     */
+    /** Base64-encoded partial image data, suitable for rendering as an image. */
     @com.fasterxml.jackson.annotation.JsonProperty("b64_json") val b64Json: String,
-    /**
-     * The Unix timestamp when the event was created.
-     */
+    /** The Unix timestamp when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`.
-     */
+    /** The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`. */
     val size: String,
-    /**
-     * The quality setting for the requested edited image.
-     */
+    /** The quality setting for the requested edited image. */
     val quality: ImageEditPartialImageEventQualityEnum,
-    /**
-     * The background setting for the requested edited image.
-     */
+    /** The background setting for the requested edited image. */
     val background: ImageEditPartialImageEventBackgroundEnum,
-    /**
-     * The output format for the requested edited image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImageEditPartialImageEventOutputFormatEnum,
-    /**
-     * 0-based index for the partial image (streaming).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_image_index") val partialImageIndex: Long
+    /** The output format for the requested edited image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageEditPartialImageEventOutputFormatEnum,
+    /** 0-based index for the partial image (streaming). */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_image_index")
+    val partialImageIndex: Long,
 ) : ImageEditStreamEvent
 
-/**
- * Typed representation of the `ImageEditStreamEvent` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownImageEditStreamEvent::class)
+/** Typed representation of the `ImageEditStreamEvent` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownImageEditStreamEvent::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ImageEditPartialImageEvent::class, name = "image_edit.partial_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ImageEditCompletedEvent::class, name = "image_edit.completed")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ImageEditPartialImageEvent::class,
+        name = "image_edit.partial_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ImageEditCompletedEvent::class,
+        name = "image_edit.completed",
+    ),
 )
 sealed interface ImageEditStreamEvent
 
 /** A [ImageEditStreamEvent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownImageEditStreamEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownImageEditStreamEvent
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ImageEditStreamEvent {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Emitted when image generation has completed and the final image is available.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when image generation has completed and the final image is available. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ImageGenCompletedEvent(
-    /**
-     * The type of the event. Always `image_generation.completed`.
-     */
+    /** The type of the event. Always `image_generation.completed`. */
     val type: ImageGenCompletedEventTypeEnum,
-    /**
-     * Base64-encoded image data, suitable for rendering as an image.
-     */
+    /** Base64-encoded image data, suitable for rendering as an image. */
     @com.fasterxml.jackson.annotation.JsonProperty("b64_json") val b64Json: String,
-    /**
-     * The Unix timestamp when the event was created.
-     */
+    /** The Unix timestamp when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`.
-     */
+    /** The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`. */
     val size: String,
-    /**
-     * The quality setting for the generated image.
-     */
+    /** The quality setting for the generated image. */
     val quality: ImageGenCompletedEventQualityEnum,
-    /**
-     * The background setting for the generated image.
-     */
+    /** The background setting for the generated image. */
     val background: ImageGenCompletedEventBackgroundEnum,
-    /**
-     * The output format for the generated image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImageGenCompletedEventOutputFormatEnum,
-    /**
-     * For the GPT image models only, the token usage information for the image generation.
-     */
+    /** The output format for the generated image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageGenCompletedEventOutputFormatEnum,
+    /** For the GPT image models only, the token usage information for the image generation. */
     val usage: ImagesUsage,
     /**
-     * The effective safety identifier used for safety monitoring and abuse detection. This is the non-empty `safety_identifier` from the request, or the deprecated `user` value when `safety_identifier` is omitted, null, or empty.
+     * The effective safety identifier used for safety monitoring and abuse detection. This is the
+     * non-empty `safety_identifier` from the request, or the deprecated `user` value when
+     * `safety_identifier` is omitted, null, or empty.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
 ) : ImageGenStreamEvent
 
-/**
- * The input tokens detailed information for the image generation.
- */
+/** The input tokens detailed information for the image generation. */
 data class ImageGenInputUsageDetails(
-    /**
-     * The number of text tokens in the input prompt.
-     */
+    /** The number of text tokens in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long,
-    /**
-     * The number of image tokens in the input prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long
-)
-
-/**
- * The output token details for the image generation.
- */
-data class ImageGenOutputTokensDetails(
-    /**
-     * The number of image output tokens generated by the model.
-     */
+    /** The number of image tokens in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long,
-    /**
-     * The number of text output tokens generated by the model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long
 )
 
-/**
- * Emitted when a partial image is available during image generation streaming.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The output token details for the image generation. */
+data class ImageGenOutputTokensDetails(
+    /** The number of image output tokens generated by the model. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long,
+    /** The number of text output tokens generated by the model. */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long,
+)
+
+/** Emitted when a partial image is available during image generation streaming. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ImageGenPartialImageEvent(
-    /**
-     * The type of the event. Always `image_generation.partial_image`.
-     */
+    /** The type of the event. Always `image_generation.partial_image`. */
     val type: ImageGenPartialImageEventTypeEnum,
-    /**
-     * Base64-encoded partial image data, suitable for rendering as an image.
-     */
+    /** Base64-encoded partial image data, suitable for rendering as an image. */
     @com.fasterxml.jackson.annotation.JsonProperty("b64_json") val b64Json: String,
-    /**
-     * The Unix timestamp when the event was created.
-     */
+    /** The Unix timestamp when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`.
-     */
+    /** The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`. */
     val size: String,
-    /**
-     * The quality setting for the requested image.
-     */
+    /** The quality setting for the requested image. */
     val quality: ImageGenPartialImageEventQualityEnum,
-    /**
-     * The background setting for the requested image.
-     */
+    /** The background setting for the requested image. */
     val background: ImageGenPartialImageEventBackgroundEnum,
-    /**
-     * The output format for the requested image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImageGenPartialImageEventOutputFormatEnum,
-    /**
-     * 0-based index for the partial image (streaming).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("partial_image_index") val partialImageIndex: Long
+    /** The output format for the requested image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageGenPartialImageEventOutputFormatEnum,
+    /** 0-based index for the partial image (streaming). */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_image_index")
+    val partialImageIndex: Long,
 ) : ImageGenStreamEvent
 
-/**
- * Typed representation of the `ImageGenStreamEvent` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownImageGenStreamEvent::class)
+/** Typed representation of the `ImageGenStreamEvent` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownImageGenStreamEvent::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ImageGenPartialImageEvent::class, name = "image_generation.partial_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ImageGenCompletedEvent::class, name = "image_generation.completed")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ImageGenPartialImageEvent::class,
+        name = "image_generation.partial_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ImageGenCompletedEvent::class,
+        name = "image_generation.completed",
+    ),
 )
 sealed interface ImageGenStreamEvent
 
 /** A [ImageGenStreamEvent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownImageGenStreamEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownImageGenStreamEvent
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ImageGenStreamEvent {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * For `gpt-image-1` only, the token usage information for the image generation.
- */
+/** For `gpt-image-1` only, the token usage information for the image generation. */
 data class ImageGenUsage(
-    /**
-     * The number of tokens (images and text) in the input prompt.
-     */
+    /** The number of tokens (images and text) in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /**
-     * The total number of tokens (images and text) used for the image generation.
-     */
+    /** The total number of tokens (images and text) used for the image generation. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /**
-     * The number of output tokens generated by the model.
-     */
+    /** The number of output tokens generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /**
-     * The input tokens detailed information for the image generation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details") val inputTokensDetails: ImageGenInputUsageDetails,
-    /**
-     * The output token details for the image generation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens_details") val outputTokensDetails: ImageGenOutputTokensDetails? = null
+    /** The input tokens detailed information for the image generation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details")
+    val inputTokensDetails: ImageGenInputUsageDetails,
+    /** The output token details for the image generation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens_details")
+    val outputTokensDetails: ImageGenOutputTokensDetails? = null,
 )
 
 /**
- * Reference an input image by either URL or uploaded file ID. Provide exactly one of `image_url` or `file_id`.
+ * Reference an input image by either URL or uploaded file ID. Provide exactly one of `image_url` or
+ * `file_id`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ImageRefParam.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ImageRefParam.Deserializer::class
+)
 sealed interface ImageRefParam {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ImageRefParam>() {
@@ -527,93 +573,78 @@ sealed interface ImageRefParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                else -> ValueImageRefParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                else ->
+                    ValueImageRefParam(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueImageRefParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : ImageRefParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueImageRefParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    ImageRefParam
 
-/**
- * The response from the image generation endpoint.
- */
+/** The response from the image generation endpoint. */
 data class ImagesResponse(
-    /**
-     * The Unix timestamp (in seconds) of when the image was created.
-     */
+    /** The Unix timestamp (in seconds) of when the image was created. */
     val created: Long,
     /**
-     * The effective safety identifier used for safety monitoring and abuse detection. This is the non-empty `safety_identifier` from the request, or the deprecated `user` value when `safety_identifier` is omitted, null, or empty.
+     * The effective safety identifier used for safety monitoring and abuse detection. This is the
+     * non-empty `safety_identifier` from the request, or the deprecated `user` value when
+     * `safety_identifier` is omitted, null, or empty.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
-    /**
-     * The list of generated images.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
+    /** The list of generated images. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Image>? = null,
-    /**
-     * The background parameter used for the image generation. Either `transparent` or `opaque`.
-     */
+    /** The background parameter used for the image generation. Either `transparent` or `opaque`. */
     val background: ImagesResponseBackgroundEnum? = null,
-    /**
-     * The output format of the image generation. Either `png`, `webp`, or `jpeg`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_format") val outputFormat: ImagesResponseOutputFormatEnum? = null,
-    /**
-     * The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`.
-     */
+    /** The output format of the image generation. Either `png`, `webp`, or `jpeg`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImagesResponseOutputFormatEnum? = null,
+    /** The image dimensions as a `WIDTHxHEIGHT` string, for example `1536x864`. */
     val size: String? = null,
-    /**
-     * The quality of the image generated. One of `low`, `medium`, `high`, `xhigh`, or `max`.
-     */
+    /** The quality of the image generated. One of `low`, `medium`, `high`, `xhigh`, or `max`. */
     val quality: ImagesResponseQualityEnum? = null,
-    /**
-     * For `gpt-image-1` only, the token usage information for the image generation.
-     */
-    val usage: ImageGenUsage? = null
+    /** For `gpt-image-1` only, the token usage information for the image generation. */
+    val usage: ImageGenUsage? = null,
 )
 
-/**
- * The input tokens detailed information for the image generation.
- */
+/** The input tokens detailed information for the image generation. */
 data class ImagesUsageInputTokensDetails(
-    /**
-     * The number of text tokens in the input prompt.
-     */
+    /** The number of text tokens in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long,
-    /**
-     * The number of image tokens in the input prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long
+    /** The number of image tokens in the input prompt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long,
 )
 
-/**
- * For the GPT image models only, the token usage information for the image generation.
- */
+/** For the GPT image models only, the token usage information for the image generation. */
 data class ImagesUsage(
-    /**
-     * The total number of tokens (images and text) used for the image generation.
-     */
+    /** The total number of tokens (images and text) used for the image generation. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /**
-     * The number of tokens (images and text) in the input prompt.
-     */
+    /** The number of tokens (images and text) in the input prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /**
-     * The number of image tokens in the output image.
-     */
+    /** The number of image tokens in the output image. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /**
-     * The input tokens detailed information for the image generation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details") val inputTokensDetails: ImagesUsageInputTokensDetails
+    /** The input tokens detailed information for the image generation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details")
+    val inputTokensDetails: ImagesUsageInputTokensDetails,
 )
 
-/**
- * Typed representation of the `PartialImages` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = PartialImages.Deserializer::class)
+/** Typed representation of the `PartialImages` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = PartialImages.Deserializer::class
+)
 sealed interface PartialImages {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<PartialImages>() {
@@ -624,8 +655,20 @@ sealed interface PartialImages {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isIntegralNumber -> LongPartialImages(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Long>() {}))
-                else -> ValuePartialImages(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isIntegralNumber ->
+                    LongPartialImages(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Long>() {},
+                        )
+                    )
+                else ->
+                    ValuePartialImages(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }

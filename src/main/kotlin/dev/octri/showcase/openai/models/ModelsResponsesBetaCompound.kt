@@ -3,36 +3,56 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Combine multiple filters using `and` or `or`.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Combine multiple filters using `and` or `or`. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaCompoundFilter(
-    /**
-     * Type of operation: `and` or `or`.
-     */
+    /** Type of operation: `and` or `or`. */
     val type: BetaCompoundFilterTypeEnum,
-    /**
-     * Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`.
-     */
-    val filters: List<BetaCompoundFilterFiltersItem>
+    /** Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`. */
+    val filters: List<BetaCompoundFilterFiltersItem>,
 ) : BetaFilters, BetaCompoundFilterFiltersItem
 
-/**
- * Required API value serialized in the `filters[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaCompoundFilterFiltersItem::class)
+/** Required API value serialized in the `filters[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaCompoundFilterFiltersItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCompoundFilter::class, names = ["and", "or"])
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComparisonFilter::class,
+        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCompoundFilter::class,
+        names = ["and", "or"],
+    ),
 )
 sealed interface BetaCompoundFilterFiltersItem
 
-/** A [BetaCompoundFilterFiltersItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaCompoundFilterFiltersItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaCompoundFilterFiltersItem] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaCompoundFilterFiltersItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaCompoundFilterFiltersItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

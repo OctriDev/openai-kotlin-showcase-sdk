@@ -4,9 +4,9 @@
 package dev.octri.showcase.openai.methods
 
 import dev.octri.showcase.openai.AssistantObject
+import dev.octri.showcase.openai.AssistantStreamEvent
 import dev.octri.showcase.openai.AssistantsApiResponseFormatOption
 import dev.octri.showcase.openai.AssistantsApiToolChoiceOption
-import dev.octri.showcase.openai.AssistantStreamEvent
 import dev.octri.showcase.openai.ClientConfig
 import dev.octri.showcase.openai.CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0
 import dev.octri.showcase.openai.CreateAssistantRequestToolsItem
@@ -26,11 +26,11 @@ import dev.octri.showcase.openai.ListAssistantsParameterEnum
 import dev.octri.showcase.openai.ListAssistantsResponse
 import dev.octri.showcase.openai.ListMessagesParameterEnum
 import dev.octri.showcase.openai.ListMessagesResponse
-import dev.octri.showcase.openai.ListRunsParameterEnum
-import dev.octri.showcase.openai.ListRunsResponse
 import dev.octri.showcase.openai.ListRunStepsParameterEnum
 import dev.octri.showcase.openai.ListRunStepsParameterItemEnum
 import dev.octri.showcase.openai.ListRunStepsResponse
+import dev.octri.showcase.openai.ListRunsParameterEnum
+import dev.octri.showcase.openai.ListRunsResponse
 import dev.octri.showcase.openai.MessageObject
 import dev.octri.showcase.openai.Metadata
 import dev.octri.showcase.openai.ModifyAssistantRequestToolsItem
@@ -44,213 +44,222 @@ import dev.octri.showcase.openai.ThreadObject
 import dev.octri.showcase.openai.TruncationObject
 
 object Assistants {
-/**
- * Optional object value serialized in the `code_interpreter` wire field.
- */
-data class CreateAssistantRequestToolResourcesCodeInterpreter(
-    /**
-     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files associated with the tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
-)
+    /** Optional object value serialized in the `code_interpreter` wire field. */
+    data class CreateAssistantRequestToolResourcesCodeInterpreter(
+        /**
+         * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum
+         * of 20 files associated with the tool.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
+    )
 
-/**
- * Required object value serialized in the `vector_stores[]` wire field.
- */
-data class CreateAssistantRequestToolResourcesFileSearchVectorStoresItem(
-    /**
-     * A list of file IDs to add to the vector store. For vector stores created before Nov 2025, there can be a maximum of 10,000 files in a vector store. For vector stores created starting in Nov 2025, the limit is 100,000,000 files.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0? = null,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
-     */
-    val metadata: Metadata? = null
-)
+    /** Required object value serialized in the `vector_stores[]` wire field. */
+    data class CreateAssistantRequestToolResourcesFileSearchVectorStoresItem(
+        /**
+         * A list of file IDs to add to the vector store. For vector stores created before Nov 2025,
+         * there can be a maximum of 10,000 files in a vector store. For vector stores created
+         * starting in Nov 2025, the limit is 100,000,000 files.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_ids")
+        val fileIds: List<String>? = null,
+        /**
+         * The chunking strategy used to chunk the file(s). If not set, will use the `auto`
+         * strategy.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
+        val chunkingStrategy:
+            CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0? =
+            null,
+        /**
+         * Set of 16 key-value pairs that can be attached to an object. This can be useful for
+         * storing additional information about the object in a structured format, and querying for
+         * objects via API or the dashboard. Keys are strings with a maximum length of 64
+         * characters. Values are strings with a maximum length of 512 characters.
+         */
+        val metadata: Metadata? = null,
+    )
 
-/**
- * Optional object value serialized in the `file_search` wire field.
- */
-data class CreateAssistantRequestToolResourcesFileSearch(
-    /**
-     * The vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null,
-    /**
-     * A helper to create a vector store with file_ids and attach it to this assistant. There can be a maximum of 1 vector store attached to the assistant.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_stores") val vectorStores: List<CreateAssistantRequestToolResourcesFileSearchVectorStoresItem>? = null
-)
+    /** Optional object value serialized in the `file_search` wire field. */
+    data class CreateAssistantRequestToolResourcesFileSearch(
+        /**
+         * The vector store attached to this assistant. There can be a maximum of 1 vector store
+         * attached to the assistant.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+        val vectorStoreIds: List<String>? = null,
+        /**
+         * A helper to create a vector store with file_ids and attach it to this assistant. There
+         * can be a maximum of 1 vector store attached to the assistant.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("vector_stores")
+        val vectorStores: List<CreateAssistantRequestToolResourcesFileSearchVectorStoresItem>? =
+            null,
+    )
 
-/**
- * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
- */
-data class CreateAssistantRequestToolResources(
     /**
-     * Optional object value serialized in the `code_interpreter` wire field.
+     * A set of resources that are used by the assistant's tools. The resources are specific to the
+     * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the
+     * `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: CreateAssistantRequestToolResourcesCodeInterpreter? = null,
-    /**
-     * Optional object value serialized in the `file_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: CreateAssistantRequestToolResourcesFileSearch? = null
-)
+    data class CreateAssistantRequestToolResources(
+        /** Optional object value serialized in the `code_interpreter` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
+        val codeInterpreter: CreateAssistantRequestToolResourcesCodeInterpreter? = null,
+        /** Optional object value serialized in the `file_search` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+        val fileSearch: CreateAssistantRequestToolResourcesFileSearch? = null,
+    )
 
-/**
- * Optional object value serialized in the `code_interpreter` wire field.
- */
-data class ModifyAssistantRequestToolResourcesCodeInterpreter(
-    /**
-     * Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files associated with the tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
-)
+    /** Optional object value serialized in the `code_interpreter` wire field. */
+    data class ModifyAssistantRequestToolResourcesCodeInterpreter(
+        /**
+         * Overrides the list of file IDs made available to the `code_interpreter` tool. There can
+         * be a maximum of 20 files associated with the tool.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
+    )
 
-/**
- * Optional object value serialized in the `file_search` wire field.
- */
-data class ModifyAssistantRequestToolResourcesFileSearch(
-    /**
-     * Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null
-)
+    /** Optional object value serialized in the `file_search` wire field. */
+    data class ModifyAssistantRequestToolResourcesFileSearch(
+        /**
+         * Overrides the vector store attached to this assistant. There can be a maximum of 1 vector
+         * store attached to the assistant.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+        val vectorStoreIds: List<String>? = null
+    )
 
-/**
- * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
- */
-data class ModifyAssistantRequestToolResources(
     /**
-     * Optional object value serialized in the `code_interpreter` wire field.
+     * A set of resources that are used by the assistant's tools. The resources are specific to the
+     * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the
+     * `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: ModifyAssistantRequestToolResourcesCodeInterpreter? = null,
-    /**
-     * Optional object value serialized in the `file_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: ModifyAssistantRequestToolResourcesFileSearch? = null
-)
+    data class ModifyAssistantRequestToolResources(
+        /** Optional object value serialized in the `code_interpreter` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
+        val codeInterpreter: ModifyAssistantRequestToolResourcesCodeInterpreter? = null,
+        /** Optional object value serialized in the `file_search` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+        val fileSearch: ModifyAssistantRequestToolResourcesFileSearch? = null,
+    )
 
-/**
- * Optional object value serialized in the `code_interpreter` wire field.
- */
-data class CreateThreadRequestToolResourcesCodeInterpreter(
-    /**
-     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files associated with the tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
-)
+    /** Optional object value serialized in the `code_interpreter` wire field. */
+    data class CreateThreadRequestToolResourcesCodeInterpreter(
+        /**
+         * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum
+         * of 20 files associated with the tool.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
+    )
 
-/**
- * Required object value serialized in the `vector_stores[]` wire field.
- */
-data class CreateThreadRequestToolResourcesFileSearchVectorStoresItem(
-    /**
-     * A list of file IDs to add to the vector store. For vector stores created before Nov 2025, there can be a maximum of 10,000 files in a vector store. For vector stores created starting in Nov 2025, the limit is 100,000,000 files.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179? = null,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
-     */
-    val metadata: Metadata? = null
-)
+    /** Required object value serialized in the `vector_stores[]` wire field. */
+    data class CreateThreadRequestToolResourcesFileSearchVectorStoresItem(
+        /**
+         * A list of file IDs to add to the vector store. For vector stores created before Nov 2025,
+         * there can be a maximum of 10,000 files in a vector store. For vector stores created
+         * starting in Nov 2025, the limit is 100,000,000 files.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_ids")
+        val fileIds: List<String>? = null,
+        /**
+         * The chunking strategy used to chunk the file(s). If not set, will use the `auto`
+         * strategy.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
+        val chunkingStrategy:
+            CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179? =
+            null,
+        /**
+         * Set of 16 key-value pairs that can be attached to an object. This can be useful for
+         * storing additional information about the object in a structured format, and querying for
+         * objects via API or the dashboard. Keys are strings with a maximum length of 64
+         * characters. Values are strings with a maximum length of 512 characters.
+         */
+        val metadata: Metadata? = null,
+    )
 
-/**
- * Optional object value serialized in the `file_search` wire field.
- */
-data class CreateThreadRequestToolResourcesFileSearch(
-    /**
-     * The vector store attached to this thread. There can be a maximum of 1 vector store attached to the thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null,
-    /**
-     * A helper to create a vector store with file_ids and attach it to this thread. There can be a maximum of 1 vector store attached to the thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_stores") val vectorStores: List<CreateThreadRequestToolResourcesFileSearchVectorStoresItem>? = null
-)
+    /** Optional object value serialized in the `file_search` wire field. */
+    data class CreateThreadRequestToolResourcesFileSearch(
+        /**
+         * The vector store attached to this thread. There can be a maximum of 1 vector store
+         * attached to the thread.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+        val vectorStoreIds: List<String>? = null,
+        /**
+         * A helper to create a vector store with file_ids and attach it to this thread. There can
+         * be a maximum of 1 vector store attached to the thread.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("vector_stores")
+        val vectorStores: List<CreateThreadRequestToolResourcesFileSearchVectorStoresItem>? = null,
+    )
 
-/**
- * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
- */
-data class CreateThreadRequestToolResources(
     /**
-     * Optional object value serialized in the `code_interpreter` wire field.
+     * A set of resources that are made available to the assistant's tools in this thread. The
+     * resources are specific to the type of tool. For example, the `code_interpreter` tool requires
+     * a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: CreateThreadRequestToolResourcesCodeInterpreter? = null,
-    /**
-     * Optional object value serialized in the `file_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: CreateThreadRequestToolResourcesFileSearch? = null
-)
+    data class CreateThreadRequestToolResources(
+        /** Optional object value serialized in the `code_interpreter` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
+        val codeInterpreter: CreateThreadRequestToolResourcesCodeInterpreter? = null,
+        /** Optional object value serialized in the `file_search` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+        val fileSearch: CreateThreadRequestToolResourcesFileSearch? = null,
+    )
 
-/**
- * Optional object value serialized in the `code_interpreter` wire field.
- */
-data class ModifyThreadRequestToolResourcesCodeInterpreter(
-    /**
-     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files associated with the tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
-)
+    /** Optional object value serialized in the `code_interpreter` wire field. */
+    data class ModifyThreadRequestToolResourcesCodeInterpreter(
+        /**
+         * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum
+         * of 20 files associated with the tool.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
+    )
 
-/**
- * Optional object value serialized in the `file_search` wire field.
- */
-data class ModifyThreadRequestToolResourcesFileSearch(
-    /**
-     * The vector store attached to this thread. There can be a maximum of 1 vector store attached to the thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null
-)
+    /** Optional object value serialized in the `file_search` wire field. */
+    data class ModifyThreadRequestToolResourcesFileSearch(
+        /**
+         * The vector store attached to this thread. There can be a maximum of 1 vector store
+         * attached to the thread.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+        val vectorStoreIds: List<String>? = null
+    )
 
-/**
- * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
- */
-data class ModifyThreadRequestToolResources(
     /**
-     * Optional object value serialized in the `code_interpreter` wire field.
+     * A set of resources that are made available to the assistant's tools in this thread. The
+     * resources are specific to the type of tool. For example, the `code_interpreter` tool requires
+     * a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: ModifyThreadRequestToolResourcesCodeInterpreter? = null,
-    /**
-     * Optional object value serialized in the `file_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: ModifyThreadRequestToolResourcesFileSearch? = null
-)
+    data class ModifyThreadRequestToolResources(
+        /** Optional object value serialized in the `code_interpreter` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
+        val codeInterpreter: ModifyThreadRequestToolResourcesCodeInterpreter? = null,
+        /** Optional object value serialized in the `file_search` wire field. */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+        val fileSearch: ModifyThreadRequestToolResourcesFileSearch? = null,
+    )
 
-/**
- * Required object value serialized in the `attachments[]` wire field.
- */
-data class CreateMessageRequestAttachmentsItem(
-    /**
-     * The ID of the file to attach to the message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /**
-     * The tools to add this file to.
-     */
-    val tools: List<CreateMessageRequestAttachmentsItemToolsItem>? = null
-)
+    /** Required object value serialized in the `attachments[]` wire field. */
+    data class CreateMessageRequestAttachmentsItem(
+        /** The ID of the file to attach to the message. */
+        @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
+        /** The tools to add this file to. */
+        val tools: List<CreateMessageRequestAttachmentsItemToolsItem>? = null,
+    )
 
-/**
- * Required object value serialized in the `tool_outputs[]` wire field.
- */
-data class SubmitToolOutputsRunRequestToolOutputsItem(
-    /**
-     * The ID of the tool call in the `required_action` object within the run object the output is being submitted for.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_call_id") val toolCallId: String? = null,
-    /**
-     * The output of the tool call to be submitted to continue the run.
-     */
-    val output: String? = null
-)
+    /** Required object value serialized in the `tool_outputs[]` wire field. */
+    data class SubmitToolOutputsRunRequestToolOutputsItem(
+        /**
+         * The ID of the tool call in the `required_action` object within the run object the output
+         * is being submitted for.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("tool_call_id")
+        val toolCallId: String? = null,
+        /** The output of the tool call to be submitted to continue the run. */
+        val output: String? = null,
+    )
 
     data class ListAssistantsPage(
         val data: ListAssistantsResponse,
@@ -270,7 +279,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val metadata: SdkClient.SdkOptional<Metadata?>? = null,
         val temperature: SdkClient.SdkOptional<Double?>? = null,
         val topP: SdkClient.SdkOptional<Double?>? = null,
-        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null
+        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null,
     )
 
     /** Parameters for [modifyAssistant]. */
@@ -286,7 +295,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val metadata: SdkClient.SdkOptional<Metadata?>? = null,
         val temperature: SdkClient.SdkOptional<Double?>? = null,
         val topP: SdkClient.SdkOptional<Double?>? = null,
-        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null
+        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null,
     )
 
     /** Parameters for [createThreadAndRun]. */
@@ -306,7 +315,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val truncationStrategy: TruncationObject? = null,
         val toolChoice: AssistantsApiToolChoiceOption? = null,
         val parallelToolCalls: ParallelToolCalls? = null,
-        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null
+        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null,
     )
 
     data class CreateThreadAndRunStreamRequest(
@@ -325,7 +334,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val truncationStrategy: TruncationObject? = null,
         val toolChoice: AssistantsApiToolChoiceOption? = null,
         val parallelToolCalls: ParallelToolCalls? = null,
-        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null
+        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null,
     )
 
     /** Parameters for [listMessages]. */
@@ -335,7 +344,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val order: ListMessagesParameterEnum? = null,
         val after: String? = null,
         val before: String? = null,
-        val runId: String? = null
+        val runId: String? = null,
     )
 
     data class ListRunsPage(
@@ -364,7 +373,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val truncationStrategy: TruncationObject? = null,
         val toolChoice: AssistantsApiToolChoiceOption? = null,
         val parallelToolCalls: ParallelToolCalls? = null,
-        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null
+        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null,
     )
 
     data class CreateRunStreamRequest(
@@ -386,7 +395,7 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val truncationStrategy: TruncationObject? = null,
         val toolChoice: AssistantsApiToolChoiceOption? = null,
         val parallelToolCalls: ParallelToolCalls? = null,
-        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null
+        val responseFormat: SdkClient.SdkOptional<AssistantsApiResponseFormatOption?>? = null,
     )
 
     /** Parameters for [listRunSteps]. */
@@ -397,16 +406,24 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         val order: ListRunStepsParameterEnum? = null,
         val after: String? = null,
         val before: String? = null,
-        val include: List<ListRunStepsParameterItemEnum>? = null
+        val include: List<ListRunStepsParameterItemEnum>? = null,
     )
 
     /**
-     * Lists assistant configurations available to the authenticated user. Use `after` or `before` to navigate the list, and `limit` and `order` to control page size and sorting. This operation is closing down and will be removed on a date not specified here.
+     * Lists assistant configurations available to the authenticated user. Use `after` or `before`
+     * to navigate the list, and `limit` and `order` to control page size and sorting. This
+     * operation is closing down and will be removed on a date not specified here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listAssistants(clientConfig: ClientConfig, limit: Long? = null, order: ListAssistantsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAssistantsResponse =
+    fun listAssistants(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListAssistantsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListAssistantsResponse =
         dev.octri.showcase.openai.methods.AssistantsListAssistantsOperation.listAssistants(
             clientConfig,
             limit,
@@ -417,12 +434,22 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Iterates through all pages: Lists assistant configurations available to the authenticated user. Use `after` or `before` to navigate the list, and `limit` and `order` to control page size and sorting. This operation is closing down and will be removed on a date not specified here.
+     * Iterates through all pages: Lists assistant configurations available to the authenticated
+     * user. Use `after` or `before` to navigate the list, and `limit` and `order` to control page
+     * size and sorting. This operation is closing down and will be removed on a date not specified
+     * here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listAssistantsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListAssistantsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (AssistantObject) -> Boolean) =
+    fun listAssistantsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListAssistantsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AssistantObject) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AssistantsListAssistantsOperation.listAssistantsPaginated(
             clientConfig,
             limit,
@@ -434,12 +461,21 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Lists assistant configurations available to the authenticated user. Use `after` or `before` to navigate the list, and `limit` and `order` to control page size and sorting. This operation is closing down and will be removed on a date not specified here.
+     * Lists assistant configurations available to the authenticated user. Use `after` or `before`
+     * to navigate the list, and `limit` and `order` to control page size and sorting. This
+     * operation is closing down and will be removed on a date not specified here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listAssistantsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListAssistantsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListAssistantsPage) -> Boolean) =
+    fun listAssistantsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListAssistantsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAssistantsPage) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AssistantsListAssistantsOperation.listAssistantsPages(
             clientConfig,
             limit,
@@ -451,12 +487,18 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates an assistant configuration with a model and optional instructions, tools, and response settings. Supply `model` and add only the configuration fields you need; numeric sampling settings and text lengths have schema limits. This operation is closing down and will be removed on a date not specified here.
+     * Creates an assistant configuration with a model and optional instructions, tools, and
+     * response settings. Supply `model` and add only the configuration fields you need; numeric
+     * sampling settings and text lengths have schema limits. This operation is closing down and
+     * will be removed on a date not specified here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun createAssistant(clientConfig: ClientConfig, request: CreateAssistantParams, options: RequestOptions? = null): AssistantObject =
+    fun createAssistant(
+        clientConfig: ClientConfig,
+        request: CreateAssistantParams,
+        options: RequestOptions? = null,
+    ): AssistantObject =
         dev.octri.showcase.openai.methods.AssistantsCreateAssistantOperation.createAssistant(
             clientConfig,
             request,
@@ -464,12 +506,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Retrieves an assistant configuration by its identifier. Use `assistant_id` to select the assistant whose model, instructions, tools, and other settings you need to inspect. This operation is closing down and will be removed on a date not specified here.
+     * Retrieves an assistant configuration by its identifier. Use `assistant_id` to select the
+     * assistant whose model, instructions, tools, and other settings you need to inspect. This
+     * operation is closing down and will be removed on a date not specified here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun getAssistant(clientConfig: ClientConfig, assistantId: String, options: RequestOptions? = null): AssistantObject =
+    fun getAssistant(
+        clientConfig: ClientConfig,
+        assistantId: String,
+        options: RequestOptions? = null,
+    ): AssistantObject =
         dev.octri.showcase.openai.methods.AssistantsGetAssistantOperation.getAssistant(
             clientConfig,
             assistantId,
@@ -477,12 +524,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Updates an assistant's model, instructions, tools, or other configuration. Supply only the fields you want to change; fields not included in the request are not specified for update. This operation is closing down and will be removed on a date not specified here.
+     * Updates an assistant's model, instructions, tools, or other configuration. Supply only the
+     * fields you want to change; fields not included in the request are not specified for update.
+     * This operation is closing down and will be removed on a date not specified here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun modifyAssistant(clientConfig: ClientConfig, request: ModifyAssistantParams, options: RequestOptions? = null): AssistantObject =
+    fun modifyAssistant(
+        clientConfig: ClientConfig,
+        request: ModifyAssistantParams,
+        options: RequestOptions? = null,
+    ): AssistantObject =
         dev.octri.showcase.openai.methods.AssistantsModifyAssistantOperation.modifyAssistant(
             clientConfig,
             request,
@@ -490,12 +542,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Deletes an assistant configuration identified by `assistant_id`. Use this operation when the assistant is no longer needed; the response confirms the deletion. This operation is closing down and will be removed on a date not specified here.
+     * Deletes an assistant configuration identified by `assistant_id`. Use this operation when the
+     * assistant is no longer needed; the response confirms the deletion. This operation is closing
+     * down and will be removed on a date not specified here.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun deleteAssistant(clientConfig: ClientConfig, assistantId: String, options: RequestOptions? = null): DeleteAssistantResponse =
+    fun deleteAssistant(
+        clientConfig: ClientConfig,
+        assistantId: String,
+        options: RequestOptions? = null,
+    ): DeleteAssistantResponse =
         dev.octri.showcase.openai.methods.AssistantsDeleteAssistantOperation.deleteAssistant(
             clientConfig,
             assistantId,
@@ -503,9 +560,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates a thread that can contain messages and resources for assistant tools. Provide `messages` to seed the thread, or `tool_resources` to make files or vector stores available to tools. You can also attach structured `metadata` to the thread.
+     * Creates a thread that can contain messages and resources for assistant tools. Provide
+     * `messages` to seed the thread, or `tool_resources` to make files or vector stores available
+     * to tools. You can also attach structured `metadata` to the thread.
      */
-    fun createThread(clientConfig: ClientConfig, messages: List<CreateMessageRequest>? = null, toolResources: SdkClient.SdkOptional<CreateThreadRequestToolResources?>? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): ThreadObject =
+    fun createThread(
+        clientConfig: ClientConfig,
+        messages: List<CreateMessageRequest>? = null,
+        toolResources: SdkClient.SdkOptional<CreateThreadRequestToolResources?>? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): ThreadObject =
         dev.octri.showcase.openai.methods.AssistantsCreateThreadOperation.createThread(
             clientConfig,
             messages,
@@ -515,9 +580,16 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates a thread and starts an assistant run in one request. Supply `assistant_id` and optionally configure the thread, model, tools, sampling, and token limits; `stream` returns run events as server-sent events. The run can remain queued or in progress, so check its status to track completion.
+     * Creates a thread and starts an assistant run in one request. Supply `assistant_id` and
+     * optionally configure the thread, model, tools, sampling, and token limits; `stream` returns
+     * run events as server-sent events. The run can remain queued or in progress, so check its
+     * status to track completion.
      */
-    fun createThreadAndRun(clientConfig: ClientConfig, request: CreateThreadAndRunParams, options: RequestOptions? = null): RunObject =
+    fun createThreadAndRun(
+        clientConfig: ClientConfig,
+        request: CreateThreadAndRunParams,
+        options: RequestOptions? = null,
+    ): RunObject =
         dev.octri.showcase.openai.methods.AssistantsCreateThreadAndRunOperation.createThreadAndRun(
             clientConfig,
             request,
@@ -525,19 +597,32 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates a thread and starts an assistant run in one request. Supply `assistant_id` and optionally configure the thread, model, tools, sampling, and token limits; `stream` returns run events as server-sent events. The run can remain queued or in progress, so check its status to track completion.
+     * Creates a thread and starts an assistant run in one request. Supply `assistant_id` and
+     * optionally configure the thread, model, tools, sampling, and token limits; `stream` returns
+     * run events as server-sent events. The run can remain queued or in progress, so check its
+     * status to track completion.
      */
-    fun createThreadAndRunStream(clientConfig: ClientConfig, request: CreateThreadAndRunStreamRequest, options: RequestOptions? = null): Sequence<AssistantStreamEvent> =
-        dev.octri.showcase.openai.methods.AssistantsCreateThreadAndRunStreamOperation.createThreadAndRunStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createThreadAndRunStream(
+        clientConfig: ClientConfig,
+        request: CreateThreadAndRunStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<AssistantStreamEvent> =
+        dev.octri.showcase.openai.methods.AssistantsCreateThreadAndRunStreamOperation
+            .createThreadAndRunStream(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Retrieves a thread and its associated details. Use the thread's identifier to fetch its creation timestamp, tool resources, and metadata.
+     * Retrieves a thread and its associated details. Use the thread's identifier to fetch its
+     * creation timestamp, tool resources, and metadata.
      */
-    fun getThread(clientConfig: ClientConfig, threadId: String, options: RequestOptions? = null): ThreadObject =
+    fun getThread(
+        clientConfig: ClientConfig,
+        threadId: String,
+        options: RequestOptions? = null,
+    ): ThreadObject =
         dev.octri.showcase.openai.methods.AssistantsGetThreadOperation.getThread(
             clientConfig,
             threadId,
@@ -545,9 +630,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Updates the configurable details of a thread. Supply `metadata` to attach structured key-value pairs, or `tool_resources` to provide resources for the assistant's tools. The thread identifier selects which thread to update.
+     * Updates the configurable details of a thread. Supply `metadata` to attach structured
+     * key-value pairs, or `tool_resources` to provide resources for the assistant's tools. The
+     * thread identifier selects which thread to update.
      */
-    fun modifyThread(clientConfig: ClientConfig, threadId: String, toolResources: SdkClient.SdkOptional<ModifyThreadRequestToolResources?>? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): ThreadObject =
+    fun modifyThread(
+        clientConfig: ClientConfig,
+        threadId: String,
+        toolResources: SdkClient.SdkOptional<ModifyThreadRequestToolResources?>? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): ThreadObject =
         dev.octri.showcase.openai.methods.AssistantsModifyThreadOperation.modifyThread(
             clientConfig,
             threadId,
@@ -557,9 +650,14 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Deletes a thread. Use the thread's identifier to select the thread to remove; the response confirms the deletion.
+     * Deletes a thread. Use the thread's identifier to select the thread to remove; the response
+     * confirms the deletion.
      */
-    fun deleteThread(clientConfig: ClientConfig, threadId: String, options: RequestOptions? = null): DeleteThreadResponse =
+    fun deleteThread(
+        clientConfig: ClientConfig,
+        threadId: String,
+        options: RequestOptions? = null,
+    ): DeleteThreadResponse =
         dev.octri.showcase.openai.methods.AssistantsDeleteThreadOperation.deleteThread(
             clientConfig,
             threadId,
@@ -567,9 +665,15 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Lists messages belonging to a thread. Use `run_id` to filter by the run that generated the messages and `order` to control their creation-time order. Use `after` or `before` cursors to navigate the results.
+     * Lists messages belonging to a thread. Use `run_id` to filter by the run that generated the
+     * messages and `order` to control their creation-time order. Use `after` or `before` cursors to
+     * navigate the results.
      */
-    fun listMessages(clientConfig: ClientConfig, request: ListMessagesRequest, options: RequestOptions? = null): ListMessagesResponse =
+    fun listMessages(
+        clientConfig: ClientConfig,
+        request: ListMessagesRequest,
+        options: RequestOptions? = null,
+    ): ListMessagesResponse =
         dev.octri.showcase.openai.methods.AssistantsListMessagesOperation.listMessages(
             clientConfig,
             request,
@@ -577,9 +681,19 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates a message in a thread. Provide the message `role` and `content`, and optionally include file attachments or metadata. Use this operation to add a user or assistant message to an existing conversation thread.
+     * Creates a message in a thread. Provide the message `role` and `content`, and optionally
+     * include file attachments or metadata. Use this operation to add a user or assistant message
+     * to an existing conversation thread.
      */
-    fun createMessage(clientConfig: ClientConfig, threadId: String, role: CreateMessageRequestRoleEnum, content: Any, attachments: SdkClient.SdkOptional<List<CreateMessageRequestAttachmentsItem>?>? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): MessageObject =
+    fun createMessage(
+        clientConfig: ClientConfig,
+        threadId: String,
+        role: CreateMessageRequestRoleEnum,
+        content: Any,
+        attachments: SdkClient.SdkOptional<List<CreateMessageRequestAttachmentsItem>?>? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): MessageObject =
         dev.octri.showcase.openai.methods.AssistantsCreateMessageOperation.createMessage(
             clientConfig,
             threadId,
@@ -591,9 +705,15 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Retrieves a message from a thread. Provide both identifiers to select the thread and the message whose role, content, status, and associated details you need.
+     * Retrieves a message from a thread. Provide both identifiers to select the thread and the
+     * message whose role, content, status, and associated details you need.
      */
-    fun getMessage(clientConfig: ClientConfig, threadId: String, messageId: String, options: RequestOptions? = null): MessageObject =
+    fun getMessage(
+        clientConfig: ClientConfig,
+        threadId: String,
+        messageId: String,
+        options: RequestOptions? = null,
+    ): MessageObject =
         dev.octri.showcase.openai.methods.AssistantsGetMessageOperation.getMessage(
             clientConfig,
             threadId,
@@ -602,9 +722,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Updates the metadata attached to a message in a thread. Provide the thread and message identifiers to select the message, then supply metadata key-value pairs to change. Use this operation when you need to update message metadata without changing its content.
+     * Updates the metadata attached to a message in a thread. Provide the thread and message
+     * identifiers to select the message, then supply metadata key-value pairs to change. Use this
+     * operation when you need to update message metadata without changing its content.
      */
-    fun modifyMessage(clientConfig: ClientConfig, threadId: String, messageId: String, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): MessageObject =
+    fun modifyMessage(
+        clientConfig: ClientConfig,
+        threadId: String,
+        messageId: String,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): MessageObject =
         dev.octri.showcase.openai.methods.AssistantsModifyMessageOperation.modifyMessage(
             clientConfig,
             threadId,
@@ -614,9 +742,15 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Deletes a message from a thread. Provide both identifiers to select the thread and the message to remove; the response confirms the deletion.
+     * Deletes a message from a thread. Provide both identifiers to select the thread and the
+     * message to remove; the response confirms the deletion.
      */
-    fun deleteMessage(clientConfig: ClientConfig, threadId: String, messageId: String, options: RequestOptions? = null): DeleteMessageResponse =
+    fun deleteMessage(
+        clientConfig: ClientConfig,
+        threadId: String,
+        messageId: String,
+        options: RequestOptions? = null,
+    ): DeleteMessageResponse =
         dev.octri.showcase.openai.methods.AssistantsDeleteMessageOperation.deleteMessage(
             clientConfig,
             threadId,
@@ -625,9 +759,19 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or `before` to navigate through the results. The returned run statuses show whether each run is queued, active, completed, or in another state.
+     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or
+     * `before` to navigate through the results. The returned run statuses show whether each run is
+     * queued, active, completed, or in another state.
      */
-    fun listRuns(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: ListRunsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListRunsResponse =
+    fun listRuns(
+        clientConfig: ClientConfig,
+        threadId: String,
+        limit: Long? = null,
+        order: ListRunsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListRunsResponse =
         dev.octri.showcase.openai.methods.AssistantsListRunsOperation.listRuns(
             clientConfig,
             threadId,
@@ -639,9 +783,20 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Iterates through all pages: Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or `before` to navigate through the results. The returned run statuses show whether each run is queued, active, completed, or in another state.
+     * Iterates through all pages: Lists runs belonging to a thread. Use `order` to sort runs by
+     * creation time and `after` or `before` to navigate through the results. The returned run
+     * statuses show whether each run is queued, active, completed, or in another state.
      */
-    fun listRunsPaginated(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: ListRunsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (RunObject) -> Boolean) =
+    fun listRunsPaginated(
+        clientConfig: ClientConfig,
+        threadId: String,
+        limit: Long? = null,
+        order: ListRunsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (RunObject) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AssistantsListRunsOperation.listRunsPaginated(
             clientConfig,
             threadId,
@@ -654,9 +809,20 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or `before` to navigate through the results. The returned run statuses show whether each run is queued, active, completed, or in another state.
+     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or
+     * `before` to navigate through the results. The returned run statuses show whether each run is
+     * queued, active, completed, or in another state.
      */
-    fun listRunsPages(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: ListRunsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListRunsPage) -> Boolean) =
+    fun listRunsPages(
+        clientConfig: ClientConfig,
+        threadId: String,
+        limit: Long? = null,
+        order: ListRunsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListRunsPage) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AssistantsListRunsOperation.listRunsPages(
             clientConfig,
             threadId,
@@ -669,9 +835,16 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates a run on a thread using the specified assistant. Supply `assistant_id` and optionally override the assistant’s model, instructions, tools, or generation settings for this run. If the run requires tool outputs, submit them with POST /threads/{thread_id}/runs/{run_id}/submit_tool_outputs.
+     * Creates a run on a thread using the specified assistant. Supply `assistant_id` and optionally
+     * override the assistant’s model, instructions, tools, or generation settings for this run. If
+     * the run requires tool outputs, submit them with POST
+     * /threads/{thread_id}/runs/{run_id}/submit_tool_outputs.
      */
-    fun createRun(clientConfig: ClientConfig, request: CreateRunParams, options: RequestOptions? = null): RunObject =
+    fun createRun(
+        clientConfig: ClientConfig,
+        request: CreateRunParams,
+        options: RequestOptions? = null,
+    ): RunObject =
         dev.octri.showcase.openai.methods.AssistantsCreateRunOperation.createRun(
             clientConfig,
             request,
@@ -679,9 +852,16 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Creates a run on a thread using the specified assistant. Supply `assistant_id` and optionally override the assistant’s model, instructions, tools, or generation settings for this run. If the run requires tool outputs, submit them with POST /threads/{thread_id}/runs/{run_id}/submit_tool_outputs.
+     * Creates a run on a thread using the specified assistant. Supply `assistant_id` and optionally
+     * override the assistant’s model, instructions, tools, or generation settings for this run. If
+     * the run requires tool outputs, submit them with POST
+     * /threads/{thread_id}/runs/{run_id}/submit_tool_outputs.
      */
-    fun createRunStream(clientConfig: ClientConfig, request: CreateRunStreamRequest, options: RequestOptions? = null): Sequence<AssistantStreamEvent> =
+    fun createRunStream(
+        clientConfig: ClientConfig,
+        request: CreateRunStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<AssistantStreamEvent> =
         dev.octri.showcase.openai.methods.AssistantsCreateRunStreamOperation.createRunStream(
             clientConfig,
             request,
@@ -689,9 +869,15 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Retrieves a run associated with a thread. Use the thread and run IDs to inspect the run’s current status, timestamps, and any required action or error.
+     * Retrieves a run associated with a thread. Use the thread and run IDs to inspect the run’s
+     * current status, timestamps, and any required action or error.
      */
-    fun getRun(clientConfig: ClientConfig, threadId: String, runId: String, options: RequestOptions? = null): RunObject =
+    fun getRun(
+        clientConfig: ClientConfig,
+        threadId: String,
+        runId: String,
+        options: RequestOptions? = null,
+    ): RunObject =
         dev.octri.showcase.openai.methods.AssistantsGetRunOperation.getRun(
             clientConfig,
             threadId,
@@ -700,9 +886,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Updates the metadata attached to a run. Send the key-value pairs you want associated with the run; the metadata object supports up to 16 pairs, with string values and keys of up to 64 characters.
+     * Updates the metadata attached to a run. Send the key-value pairs you want associated with the
+     * run; the metadata object supports up to 16 pairs, with string values and keys of up to 64
+     * characters.
      */
-    fun modifyRun(clientConfig: ClientConfig, threadId: String, runId: String, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): RunObject =
+    fun modifyRun(
+        clientConfig: ClientConfig,
+        threadId: String,
+        runId: String,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): RunObject =
         dev.octri.showcase.openai.methods.AssistantsModifyRunOperation.modifyRun(
             clientConfig,
             threadId,
@@ -712,9 +906,15 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Cancels a run that is in progress on a thread. Use this operation when you need to stop the run before it completes; the returned run object reports its current status.
+     * Cancels a run that is in progress on a thread. Use this operation when you need to stop the
+     * run before it completes; the returned run object reports its current status.
      */
-    fun cancelRun(clientConfig: ClientConfig, threadId: String, runId: String, options: RequestOptions? = null): RunObject =
+    fun cancelRun(
+        clientConfig: ClientConfig,
+        threadId: String,
+        runId: String,
+        options: RequestOptions? = null,
+    ): RunObject =
         dev.octri.showcase.openai.methods.AssistantsCancelRunOperation.cancelRun(
             clientConfig,
             threadId,
@@ -723,9 +923,14 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Lists the steps belonging to a run on a thread. Use cursor parameters to page through the steps, and set `order` to control their order by creation time.
+     * Lists the steps belonging to a run on a thread. Use cursor parameters to page through the
+     * steps, and set `order` to control their order by creation time.
      */
-    fun listRunSteps(clientConfig: ClientConfig, request: ListRunStepsRequest, options: RequestOptions? = null): ListRunStepsResponse =
+    fun listRunSteps(
+        clientConfig: ClientConfig,
+        request: ListRunStepsRequest,
+        options: RequestOptions? = null,
+    ): ListRunStepsResponse =
         dev.octri.showcase.openai.methods.AssistantsListRunStepsOperation.listRunSteps(
             clientConfig,
             request,
@@ -733,9 +938,17 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Retrieves a specific step from a run on a thread. Use `include[]` to request file search result content when the step contains file search tool calls.
+     * Retrieves a specific step from a run on a thread. Use `include[]` to request file search
+     * result content when the step contains file search tool calls.
      */
-    fun getRunStep(clientConfig: ClientConfig, threadId: String, runId: String, stepId: String, include: List<GetRunStepParameterItemEnum>? = null, options: RequestOptions? = null): RunStepObject =
+    fun getRunStep(
+        clientConfig: ClientConfig,
+        threadId: String,
+        runId: String,
+        stepId: String,
+        include: List<GetRunStepParameterItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): RunStepObject =
         dev.octri.showcase.openai.methods.AssistantsGetRunStepOperation.getRunStep(
             clientConfig,
             threadId,
@@ -746,28 +959,48 @@ data class SubmitToolOutputsRunRequestToolOutputsItem(
         )
 
     /**
-     * Submits tool outputs for a run that is waiting for tool results. Provide the outputs for all completed tool calls in one request so the run can continue. Set `stream` to receive run events as server-sent events.
+     * Submits tool outputs for a run that is waiting for tool results. Provide the outputs for all
+     * completed tool calls in one request so the run can continue. Set `stream` to receive run
+     * events as server-sent events.
      */
-    fun submitAssistantsToolOutputsToRun(clientConfig: ClientConfig, threadId: String, runId: String, toolOutputs: List<SubmitToolOutputsRunRequestToolOutputsItem>, stream: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): RunObject =
-        dev.octri.showcase.openai.methods.AssistantsSubmitAssistantsToolOutputsToRunOperation.submitAssistantsToolOutputsToRun(
-            clientConfig,
-            threadId,
-            runId,
-            toolOutputs,
-            stream,
-            options,
-        )
+    fun submitAssistantsToolOutputsToRun(
+        clientConfig: ClientConfig,
+        threadId: String,
+        runId: String,
+        toolOutputs: List<SubmitToolOutputsRunRequestToolOutputsItem>,
+        stream: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): RunObject =
+        dev.octri.showcase.openai.methods.AssistantsSubmitAssistantsToolOutputsToRunOperation
+            .submitAssistantsToolOutputsToRun(
+                clientConfig,
+                threadId,
+                runId,
+                toolOutputs,
+                stream,
+                options,
+            )
 
     /**
-     * Submits tool outputs for a run that is waiting for tool results. Provide the outputs for all completed tool calls in one request so the run can continue. Set `stream` to receive run events as server-sent events.
+     * Submits tool outputs for a run that is waiting for tool results. Provide the outputs for all
+     * completed tool calls in one request so the run can continue. Set `stream` to receive run
+     * events as server-sent events.
      */
-    fun submitAssistantsToolOutputsToRunStream(clientConfig: ClientConfig, threadId: String, runId: String, toolOutputs: List<SubmitToolOutputsRunRequestToolOutputsItem>, stream: Boolean?, options: RequestOptions? = null): Sequence<AssistantStreamEvent> =
-        dev.octri.showcase.openai.methods.AssistantsSubmitAssistantsToolOutputsToRunStreamOperation.submitAssistantsToolOutputsToRunStream(
-            clientConfig,
-            threadId,
-            runId,
-            toolOutputs,
-            stream,
-            options,
-        )
+    fun submitAssistantsToolOutputsToRunStream(
+        clientConfig: ClientConfig,
+        threadId: String,
+        runId: String,
+        toolOutputs: List<SubmitToolOutputsRunRequestToolOutputsItem>,
+        stream: Boolean?,
+        options: RequestOptions? = null,
+    ): Sequence<AssistantStreamEvent> =
+        dev.octri.showcase.openai.methods.AssistantsSubmitAssistantsToolOutputsToRunStreamOperation
+            .submitAssistantsToolOutputsToRunStream(
+                clientConfig,
+                threadId,
+                runId,
+                toolOutputs,
+                stream,
+                options,
+            )
 }

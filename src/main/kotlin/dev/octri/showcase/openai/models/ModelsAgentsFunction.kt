@@ -3,83 +3,64 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A function call produced by the agent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A function call produced by the agent. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionCallItemResource(
-    /**
-     * The item type. Always `function_call`.
-     */
+    /** The item type. Always `function_call`. */
     val type: FunctionCallItemResourceTypeEnum,
-    /**
-     * The ID of the function call item.
-     */
+    /** The ID of the function call item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The ID used to submit the function result.
-     */
+    /** The ID used to submit the function result. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The name of the function to call.
-     */
+    /** The name of the function to call. */
     val name: String,
-    /**
-     * The arguments to pass to the function.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true) val arguments: Any?,
-    /**
-     * The status of the function call.
-     */
-    val status: FunctionCallStatusResource
+    /** The arguments to pass to the function. */
+    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true)
+    val arguments: Any?,
+    /** The status of the function call. */
+    val status: FunctionCallStatusResource,
 ) : SessionTurnItemResource, AgentOutputItemResource
 
-/**
- * The result supplied for a function call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The result supplied for a function call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionCallOutputItemResource(
-    /**
-     * The ID of the function call output item.
-     */
+    /** The ID of the function call output item. */
     val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
+    /** The ID of the turn that contains this item. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The item type. Always `function_call_output`.
-     */
+    /** The item type. Always `function_call_output`. */
     val type: FunctionCallOutputItemResourceTypeEnum,
-    /**
-     * The ID of the function call that produced this output.
-     */
+    /** The ID of the function call that produced this output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The status of the function call.
-     */
+    /** The status of the function call. */
     val status: FunctionCallStatusResource,
-    /**
-     * The function result, if the call succeeded.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output", required = true) val output: FunctionCallOutputResource?,
-    /**
-     * The error message, if the call failed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: String?
+    /** The function result, if the call succeeded. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output", required = true)
+    val output: FunctionCallOutputResource?,
+    /** The error message, if the call failed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: String?,
 ) : SessionTurnItemResource
 
-/**
- * A function result represented as text or supported model-input content.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = FunctionCallOutputParam.Deserializer::class)
+/** A function result represented as text or supported model-input content. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = FunctionCallOutputParam.Deserializer::class
+)
 sealed interface FunctionCallOutputParam {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<FunctionCallOutputParam>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<FunctionCallOutputParam>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
@@ -87,28 +68,62 @@ sealed interface FunctionCallOutputParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringFunctionCallOutputParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                node.isArray -> ListFunctionCallOutputParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<List<InputContentParam>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, FunctionCallOutputParam::class.java, "no FunctionCallOutputParam branch accepts this payload")
+                node.isTextual ->
+                    StringFunctionCallOutputParam(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                node.isArray ->
+                    ListFunctionCallOutputParam(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<
+                                    List<InputContentParam>
+                                >() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        FunctionCallOutputParam::class.java,
+                        "no FunctionCallOutputParam branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringFunctionCallOutputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : FunctionCallOutputParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringFunctionCallOutputParam(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : FunctionCallOutputParam
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ListFunctionCallOutputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputContentParam>) : FunctionCallOutputParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ListFunctionCallOutputParam(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputContentParam>
+) : FunctionCallOutputParam
 
-/**
- * The text or model-input content supplied as a function result.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = FunctionCallOutputResource.Deserializer::class)
+/** The text or model-input content supplied as a function result. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = FunctionCallOutputResource.Deserializer::class
+)
 sealed interface FunctionCallOutputResource {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<FunctionCallOutputResource>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<FunctionCallOutputResource>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
@@ -116,17 +131,50 @@ sealed interface FunctionCallOutputResource {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringFunctionCallOutputResource(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                node.isArray -> ListFunctionCallOutputResource(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<List<InputContentResource>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, FunctionCallOutputResource::class.java, "no FunctionCallOutputResource branch accepts this payload")
+                node.isTextual ->
+                    StringFunctionCallOutputResource(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                node.isArray ->
+                    ListFunctionCallOutputResource(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<
+                                    List<InputContentResource>
+                                >() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        FunctionCallOutputResource::class.java,
+                        "no FunctionCallOutputResource branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringFunctionCallOutputResource(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : FunctionCallOutputResource
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringFunctionCallOutputResource(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : FunctionCallOutputResource
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ListFunctionCallOutputResource(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputContentResource>) : FunctionCallOutputResource
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ListFunctionCallOutputResource(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputContentResource>
+) : FunctionCallOutputResource

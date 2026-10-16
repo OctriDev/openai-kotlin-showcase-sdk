@@ -3,26 +3,16 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Sets the session-wide limit without changing recorded spend.
- */
+/** Sets the session-wide limit without changing recorded spend. */
 data class SessionSpendControlParam(
-    /**
-     * Positive USD cents, or null to remove the limit.
-     */
+    /** Positive USD cents, or null to remove the limit. */
     @com.fasterxml.jackson.annotation.JsonProperty("limit", required = true) val limit: Long?
 )
 
-/**
- * Session-wide spending control, present only when a limit is configured.
- */
+/** Session-wide spending control, present only when a limit is configured. */
 data class SessionSpendControlResource(
-    /**
-     * The configured positive limit in USD cents.
-     */
+    /** The configured positive limit in USD cents. */
     val limit: Long,
-    /**
-     * Best-effort recorded spend floored to whole USD cents, or null when unavailable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("consumed", required = true) val consumed: Long?
+    /** Best-effort recorded spend floored to whole USD cents, or null when unavailable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("consumed", required = true) val consumed: Long?,
 )

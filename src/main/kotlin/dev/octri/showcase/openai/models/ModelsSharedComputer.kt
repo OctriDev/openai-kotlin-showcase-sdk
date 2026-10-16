@@ -3,258 +3,238 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ComputerAction` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownComputerAction::class)
+/** Typed representation of the `ComputerAction` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownComputerAction::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ClickParam::class, name = "click"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DoubleClickAction::class, name = "double_click"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = DoubleClickAction::class,
+        name = "double_click",
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DragParam::class, name = "drag"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = KeyPressAction::class, name = "keypress"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = KeyPressAction::class,
+        name = "keypress",
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MoveParam::class, name = "move"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ScreenshotParam::class, name = "screenshot"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ScreenshotParam::class,
+        name = "screenshot",
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ScrollParam::class, name = "scroll"),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = TypeParam::class, name = "type"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WaitParam::class, name = "wait")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WaitParam::class, name = "wait"),
 )
 sealed interface ComputerAction
 
 /** A [ComputerAction] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownComputerAction @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownComputerAction
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ComputerAction {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 typealias ComputerActionList = List<ComputerAction>
 
-/**
- * The output of a computer tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The output of a computer tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerCallOutputItemParam(
-    /**
-     * The ID of the computer tool call that produced the output.
-     */
+    /** The ID of the computer tool call that produced the output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The type of the computer tool call output. Always `computer_call_output`.
-     */
+    /** The type of the computer tool call output. Always `computer_call_output`. */
     val type: ComputerCallOutputItemParamTypeEnum,
-    /**
-     * A computer screenshot image used with the computer use tool.
-     */
+    /** A computer screenshot image used with the computer use tool. */
     val output: ComputerScreenshotImage,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * The safety checks reported by the API that have been acknowledged by the developer.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks") val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
-    val status: FunctionCallItemStatus? = null
+    /** The safety checks reported by the API that have been acknowledged by the developer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks")
+    val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
+    /** Optional API value serialized in the `status` wire field. */
+    val status: FunctionCallItemStatus? = null,
 ) : Item
 
-/**
- * A pending safety check for the computer call.
- */
+/** A pending safety check for the computer call. */
 data class ComputerCallSafetyCheckParam(
-    /**
-     * The ID of the pending safety check.
-     */
+    /** The ID of the pending safety check. */
     val id: String,
-    /**
-     * Optional `string` value serialized in the `code` wire field.
-     */
+    /** Optional `string` value serialized in the `code` wire field. */
     val code: String? = null,
-    /**
-     * Optional `string` value serialized in the `message` wire field.
-     */
-    val message: String? = null
+    /** Optional `string` value serialized in the `message` wire field. */
+    val message: String? = null,
 )
 
-/**
- * A screenshot of a computer.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A screenshot of a computer. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerScreenshotContent(
     /**
-     * Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
+     * Specifies the event type. For a computer screenshot, this property is always set to
+     * `computer_screenshot`.
      */
     val type: ComputerScreenshotContentTypeEnum,
-    /**
-     * Required API value serialized in the `image_url` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_url", required = true) val imageUrl: String?,
-    /**
-     * Required `string` value serialized in the `file_id` wire field.
-     */
+    /** Required API value serialized in the `image_url` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url", required = true)
+    val imageUrl: String?,
+    /** Required `string` value serialized in the `file_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id", required = true) val fileId: String?,
     /**
-     * The detail level of the screenshot image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+     * The detail level of the screenshot image to be sent to the model. One of `high`, `low`,
+     * `auto`, or `original`. Defaults to `auto`.
      */
     val detail: ImageDetail,
     /**
-     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the
+     * request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null,
 ) : MessageContentItem
 
-/**
- * A computer screenshot image used with the computer use tool.
- */
+/** A computer screenshot image used with the computer use tool. */
 data class ComputerScreenshotImage(
     /**
-     * Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
+     * Specifies the event type. For a computer screenshot, this property is always set to
+     * `computer_screenshot`.
      */
     val type: ComputerScreenshotImageTypeEnum,
-    /**
-     * The URL of the screenshot image.
-     */
+    /** The URL of the screenshot image. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /**
-     * The identifier of an uploaded file that contains the screenshot.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null
+    /** The identifier of an uploaded file that contains the screenshot. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
 )
 
-/**
- * A tool that controls a virtual computer. Learn more about the computer tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool that controls a virtual computer. Learn more about the computer tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerTool(
-    /**
-     * The type of the computer tool. Always `computer`.
-     */
+    /** The type of the computer tool. Always `computer`. */
     val type: ComputerToolTypeEnum
 ) : Tool, ToolSearchOutputTool
 
-/**
- * A tool call to a computer use tool. See the computer use guide for more information.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool call to a computer use tool. See the computer use guide for more information. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerToolCall(
-    /**
-     * The type of the computer call. Always `computer_call`.
-     */
+    /** The type of the computer call. Always `computer_call`. */
     val type: ComputerToolCallTypeEnum,
-    /**
-     * The unique ID of the computer call.
-     */
+    /** The unique ID of the computer call. */
     val id: String,
-    /**
-     * An identifier used when responding to the tool call with output.
-     */
+    /** An identifier used when responding to the tool call with output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /** The pending safety checks for the computer call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("pending_safety_checks")
+    val pendingSafetyChecks: List<ComputerCallSafetyCheckParam>,
     /**
-     * The pending safety checks for the computer call.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pending_safety_checks") val pendingSafetyChecks: List<ComputerCallSafetyCheckParam>,
-    /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when
+     * items are returned via API.
      */
     val status: ComputerToolCallStatusEnum,
-    /**
-     * Optional API value serialized in the `action` wire field.
-     */
+    /** Optional API value serialized in the `action` wire field. */
     val action: ComputerAction? = null,
     /**
-     * Flattened batched actions for `computer_use`. Each action includes an `type` discriminator and action-specific fields.
+     * Flattened batched actions for `computer_use`. Each action includes an `type` discriminator
+     * and action-specific fields.
      */
-    val actions: ComputerActionList? = null
+    val actions: ComputerActionList? = null,
 ) : ConversationItem, Item, ItemResource, OutputItem, ItemField
 
-/**
- * The output of a computer tool call.
- */
+/** The output of a computer tool call. */
 data class ComputerToolCallOutput(
-    /**
-     * The type of the computer tool call output. Always `computer_call_output`.
-     */
+    /** The type of the computer tool call output. Always `computer_call_output`. */
     val type: ComputerToolCallOutputTypeEnum,
-    /**
-     * The ID of the computer tool call that produced the output.
-     */
+    /** The ID of the computer tool call that produced the output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * A computer screenshot image used with the computer use tool.
-     */
+    /** A computer screenshot image used with the computer use tool. */
     val output: ComputerScreenshotImage,
-    /**
-     * The ID of the computer tool call output.
-     */
+    /** The ID of the computer tool call output. */
     val id: String? = null,
+    /** The safety checks reported by the API that have been acknowledged by the developer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks")
+    val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
     /**
-     * The safety checks reported by the API that have been acknowledged by the developer.
+     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when input items are returned via API.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks") val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
-    /**
-     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
-     */
-    val status: ComputerToolCallOutputStatusEnum? = null
+    val status: ComputerToolCallOutputStatusEnum? = null,
 )
 
-/**
- * Typed representation of the `ComputerToolCallOutputResource` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `ComputerToolCallOutputResource` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerToolCallOutputResource(
-    /**
-     * The type of the computer tool call output. Always `computer_call_output`.
-     */
+    /** The type of the computer tool call output. Always `computer_call_output`. */
     val type: ComputerToolCallOutputTypeEnum,
-    /**
-     * The ID of the computer tool call output.
-     */
+    /** The ID of the computer tool call output. */
     val id: String,
-    /**
-     * The ID of the computer tool call that produced the output.
-     */
+    /** The ID of the computer tool call that produced the output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * A computer screenshot image used with the computer use tool.
-     */
+    /** A computer screenshot image used with the computer use tool. */
     val output: ComputerScreenshotImage,
     /**
-     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
+     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when input items are returned via API.
      */
     val status: ComputerCallOutputStatus,
-    /**
-     * The safety checks reported by the API that have been acknowledged by the developer.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks") val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The safety checks reported by the API that have been acknowledged by the developer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks")
+    val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : ConversationItem, ItemResource, OutputItem, ItemField
 
-/**
- * A tool that controls a virtual computer. Learn more about the computer tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool that controls a virtual computer. Learn more about the computer tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerUsePreviewTool(
-    /**
-     * The type of the computer use tool. Always `computer_use_preview`.
-     */
+    /** The type of the computer use tool. Always `computer_use_preview`. */
     val type: ComputerUsePreviewToolTypeEnum,
-    /**
-     * The type of computer environment to control.
-     */
+    /** The type of computer environment to control. */
     val environment: ComputerEnvironment,
-    /**
-     * The width of the computer display.
-     */
+    /** The width of the computer display. */
     @com.fasterxml.jackson.annotation.JsonProperty("display_width") val displayWidth: Long,
-    /**
-     * The height of the computer display.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("display_height") val displayHeight: Long
+    /** The height of the computer display. */
+    @com.fasterxml.jackson.annotation.JsonProperty("display_height") val displayHeight: Long,
 ) : Tool, ToolSearchOutputTool

@@ -3,54 +3,143 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * An item representing a message, tool call, tool output, reasoning, or other response element.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownItemField::class)
+/** An item representing a message, tool call, tool output, reasoning, or other response element. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownItemField::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Message::class, name = "message"),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Program::class, name = "program"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ProgramOutput::class, name = "program_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionToolCall::class, name = "function_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ToolSearchCall::class, name = "tool_search_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ToolSearchOutput::class, name = "tool_search_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AdditionalTools::class, name = "additional_tools"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionToolCallOutput::class, name = "function_call_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FileSearchToolCall::class, name = "file_search_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WebSearchToolCall::class, name = "web_search_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ImageGenToolCall::class, name = "image_generation_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComputerToolCall::class, name = "computer_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComputerToolCallOutputResource::class, name = "computer_call_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ReasoningItem::class, name = "reasoning"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CompactionBody::class, name = "compaction"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CodeInterpreterToolCall::class, name = "code_interpreter_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LocalShellToolCall::class, name = "local_shell_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LocalShellToolCallOutput::class, name = "local_shell_call_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionShellCall::class, name = "shell_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionShellCallOutput::class, name = "shell_call_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchToolCall::class, name = "apply_patch_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchToolCallOutput::class, name = "apply_patch_call_output"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPListTools::class, name = "mcp_list_tools"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPApprovalRequest::class, name = "mcp_approval_request"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPApprovalResponseResource::class, name = "mcp_approval_response"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPToolCall::class, name = "mcp_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolCall::class, name = "custom_tool_call"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolCallOutput::class, name = "custom_tool_call_output")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ProgramOutput::class,
+        name = "program_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionToolCall::class,
+        name = "function_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ToolSearchCall::class,
+        name = "tool_search_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ToolSearchOutput::class,
+        name = "tool_search_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AdditionalTools::class,
+        name = "additional_tools",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionToolCallOutput::class,
+        name = "function_call_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FileSearchToolCall::class,
+        name = "file_search_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = WebSearchToolCall::class,
+        name = "web_search_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ImageGenToolCall::class,
+        name = "image_generation_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ComputerToolCall::class,
+        name = "computer_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ComputerToolCallOutputResource::class,
+        name = "computer_call_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ReasoningItem::class,
+        name = "reasoning",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CompactionBody::class,
+        name = "compaction",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CodeInterpreterToolCall::class,
+        name = "code_interpreter_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LocalShellToolCall::class,
+        name = "local_shell_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LocalShellToolCallOutput::class,
+        name = "local_shell_call_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionShellCall::class,
+        name = "shell_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionShellCallOutput::class,
+        name = "shell_call_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchToolCall::class,
+        name = "apply_patch_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchToolCallOutput::class,
+        name = "apply_patch_call_output",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MCPListTools::class,
+        name = "mcp_list_tools",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MCPApprovalRequest::class,
+        name = "mcp_approval_request",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MCPApprovalResponseResource::class,
+        name = "mcp_approval_response",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MCPToolCall::class,
+        name = "mcp_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolCall::class,
+        name = "custom_tool_call",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolCallOutput::class,
+        name = "custom_tool_call_output",
+    ),
 )
 sealed interface ItemField
 
 /** A [ItemField] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownItemField @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownItemField
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ItemField {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Content item used to generate a response.
- */
+/** Content item used to generate a response. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ItemResource.Deserializer::class)
 sealed interface ItemResource {
     /** Chooses the branch this payload is shaped like. */
@@ -61,39 +150,72 @@ sealed interface ItemResource {
         ): ItemResource {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out ItemResource>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                "file_search_call" -> FileSearchToolCall::class.java
-                "computer_call" -> ComputerToolCall::class.java
-                "computer_call_output" -> ComputerToolCallOutputResource::class.java
-                "web_search_call" -> WebSearchToolCall::class.java
-                "function_call" -> FunctionToolCallResource::class.java
-                "function_call_output" -> FunctionToolCallOutputResource::class.java
-                "tool_search_call" -> ToolSearchCall::class.java
-                "tool_search_output" -> ToolSearchOutput::class.java
-                "additional_tools" -> AdditionalTools::class.java
-                "configuration_update" -> ResponseConfigurationUpdate::class.java
-                "reasoning" -> ReasoningItem::class.java
-                "program" -> Program::class.java
-                "program_output" -> ProgramOutput::class.java
-                "compaction" -> CompactionBody::class.java
-                "image_generation_call" -> ImageGenToolCall::class.java
-                "code_interpreter_call" -> CodeInterpreterToolCall::class.java
-                "local_shell_call" -> LocalShellToolCall::class.java
-                "local_shell_call_output" -> LocalShellToolCallOutput::class.java
-                "shell_call" -> FunctionShellCall::class.java
-                "shell_call_output" -> FunctionShellCallOutput::class.java
-                "apply_patch_call" -> ApplyPatchToolCall::class.java
-                "apply_patch_call_output" -> ApplyPatchToolCallOutput::class.java
-                "mcp_list_tools" -> MCPListTools::class.java
-                "mcp_approval_request" -> MCPApprovalRequest::class.java
-                "mcp_approval_response" -> MCPApprovalResponseResource::class.java
-                "mcp_call" -> MCPToolCall::class.java
-                "custom_tool_call" -> CustomToolCallResource::class.java
-                "custom_tool_call_output" -> CustomToolCallOutputResource::class.java
-                else -> null
-            }
+            val taggedType: Class<out ItemResource>? =
+                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                    "file_search_call" -> FileSearchToolCall::class.java
+                    "computer_call" -> ComputerToolCall::class.java
+                    "computer_call_output" -> ComputerToolCallOutputResource::class.java
+                    "web_search_call" -> WebSearchToolCall::class.java
+                    "function_call" -> FunctionToolCallResource::class.java
+                    "function_call_output" -> FunctionToolCallOutputResource::class.java
+                    "tool_search_call" -> ToolSearchCall::class.java
+                    "tool_search_output" -> ToolSearchOutput::class.java
+                    "additional_tools" -> AdditionalTools::class.java
+                    "configuration_update" -> ResponseConfigurationUpdate::class.java
+                    "reasoning" -> ReasoningItem::class.java
+                    "program" -> Program::class.java
+                    "program_output" -> ProgramOutput::class.java
+                    "compaction" -> CompactionBody::class.java
+                    "image_generation_call" -> ImageGenToolCall::class.java
+                    "code_interpreter_call" -> CodeInterpreterToolCall::class.java
+                    "local_shell_call" -> LocalShellToolCall::class.java
+                    "local_shell_call_output" -> LocalShellToolCallOutput::class.java
+                    "shell_call" -> FunctionShellCall::class.java
+                    "shell_call_output" -> FunctionShellCallOutput::class.java
+                    "apply_patch_call" -> ApplyPatchToolCall::class.java
+                    "apply_patch_call_output" -> ApplyPatchToolCallOutput::class.java
+                    "mcp_list_tools" -> MCPListTools::class.java
+                    "mcp_approval_request" -> MCPApprovalRequest::class.java
+                    "mcp_approval_response" -> MCPApprovalResponseResource::class.java
+                    "mcp_call" -> MCPToolCall::class.java
+                    "custom_tool_call" -> CustomToolCallResource::class.java
+                    "custom_tool_call_output" -> CustomToolCallOutputResource::class.java
+                    else -> null
+                }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out ItemResource>> = listOf(InputMessageResource::class.java, OutputMessage::class.java, FileSearchToolCall::class.java, ComputerToolCall::class.java, ComputerToolCallOutputResource::class.java, WebSearchToolCall::class.java, FunctionToolCallResource::class.java, FunctionToolCallOutputResource::class.java, ToolSearchCall::class.java, ToolSearchOutput::class.java, AdditionalTools::class.java, ResponseConfigurationUpdate::class.java, ReasoningItem::class.java, Program::class.java, ProgramOutput::class.java, CompactionBody::class.java, ImageGenToolCall::class.java, CodeInterpreterToolCall::class.java, LocalShellToolCall::class.java, LocalShellToolCallOutput::class.java, FunctionShellCall::class.java, FunctionShellCallOutput::class.java, ApplyPatchToolCall::class.java, ApplyPatchToolCallOutput::class.java, MCPListTools::class.java, MCPApprovalRequest::class.java, MCPApprovalResponseResource::class.java, MCPToolCall::class.java, CustomToolCallResource::class.java, CustomToolCallOutputResource::class.java)
+            val objectTypes: List<Class<out ItemResource>> =
+                listOf(
+                    InputMessageResource::class.java,
+                    OutputMessage::class.java,
+                    FileSearchToolCall::class.java,
+                    ComputerToolCall::class.java,
+                    ComputerToolCallOutputResource::class.java,
+                    WebSearchToolCall::class.java,
+                    FunctionToolCallResource::class.java,
+                    FunctionToolCallOutputResource::class.java,
+                    ToolSearchCall::class.java,
+                    ToolSearchOutput::class.java,
+                    AdditionalTools::class.java,
+                    ResponseConfigurationUpdate::class.java,
+                    ReasoningItem::class.java,
+                    Program::class.java,
+                    ProgramOutput::class.java,
+                    CompactionBody::class.java,
+                    ImageGenToolCall::class.java,
+                    CodeInterpreterToolCall::class.java,
+                    LocalShellToolCall::class.java,
+                    LocalShellToolCallOutput::class.java,
+                    FunctionShellCall::class.java,
+                    FunctionShellCallOutput::class.java,
+                    ApplyPatchToolCall::class.java,
+                    ApplyPatchToolCallOutput::class.java,
+                    MCPListTools::class.java,
+                    MCPApprovalRequest::class.java,
+                    MCPApprovalResponseResource::class.java,
+                    MCPToolCall::class.java,
+                    CustomToolCallResource::class.java,
+                    CustomToolCallOutputResource::class.java,
+                )
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -109,10 +231,20 @@ sealed interface ItemResource {
 }
 
 /** A [ItemResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownItemResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownItemResource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ItemResource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

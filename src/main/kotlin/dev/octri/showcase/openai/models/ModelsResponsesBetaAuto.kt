@@ -4,42 +4,59 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
+ * Configuration for a code interpreter container. Optionally specify the IDs of the files to run
+ * the code on.
  */
 data class BetaAutoCodeInterpreterToolParam(
-    /**
-     * Always `auto`.
-     */
+    /** Always `auto`. */
     val type: BetaAutoCodeInterpreterToolParamTypeEnum,
-    /**
-     * An optional list of uploaded files to make available to your code.
-     */
+    /** An optional list of uploaded files to make available to your code. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * Optional API value serialized in the `memory_limit` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: BetaContainerMemoryLimit? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: BetaAutoCodeInterpreterToolParamNetworkPolicy? = null
+    /** Optional API value serialized in the `memory_limit` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
+    val memoryLimit: BetaContainerMemoryLimit? = null,
+    /** Network access policy for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
+    val networkPolicy: BetaAutoCodeInterpreterToolParamNetworkPolicy? = null,
 )
 
-/**
- * Network access policy for the container.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy::class)
+/** Network access policy for the container. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerNetworkPolicyDisabledParam::class, name = "disabled"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerNetworkPolicyAllowlistParam::class, name = "allowlist")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerNetworkPolicyDisabledParam::class,
+        name = "disabled",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerNetworkPolicyAllowlistParam::class,
+        name = "allowlist",
+    ),
 )
 sealed interface BetaAutoCodeInterpreterToolParamNetworkPolicy
 
-/** A [BetaAutoCodeInterpreterToolParamNetworkPolicy] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaAutoCodeInterpreterToolParamNetworkPolicy] whose `type` names no branch this SDK knows,
+ * kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaAutoCodeInterpreterToolParamNetworkPolicy {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

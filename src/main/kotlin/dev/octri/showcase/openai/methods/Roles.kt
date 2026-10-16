@@ -17,41 +17,75 @@ import dev.octri.showcase.openai.Validation
 
 object Roles {
 
-
     /**
-     * Lists roles configured for the organization. Use `limit` to control the number of roles returned and `order` to choose the sort direction. Continue through the results with the `after` cursor from the previous response's `next` field.
+     * Lists roles configured for the organization. Use `limit` to control the number of roles
+     * returned and `order` to choose the sort direction. Continue through the results with the
+     * `after` cursor from the previous response's `next` field.
      *
      * Lists the roles configured for the organization.
      *
      * @param limit A limit on the number of roles to return. Defaults to 1000.
-     * @param after Cursor for pagination. Provide the value from the previous
-     *   response's `next` field to continue listing roles.
+     * @param after Cursor for pagination. Provide the value from the previous response's `next`
+     *   field to continue listing roles.
      * @param order Sort order for the returned roles.
      */
-    fun listRoles(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, order: ListRolesParameterEnum? = null, options: RequestOptions? = null): PublicRoleListResource {
+    fun listRoles(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListRolesParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): PublicRoleListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 1000.0))
-}
+        }
 
-        return SdkClient.request<PublicRoleListResource>(SdkClient.RequestSpec("GET", "/organization/roles", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listRoles", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+        return SdkClient.request<PublicRoleListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/roles",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                        ),
+                    operationId = "listRoles",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists roles configured for the organization. Use `limit` to control the number of roles returned and `order` to choose the sort direction. Continue through the results with the `after` cursor from the previous response's `next` field.
+     * Lists roles configured for the organization. Use `limit` to control the number of roles
+     * returned and `order` to choose the sort direction. Continue through the results with the
+     * `after` cursor from the previous response's `next` field.
      *
      * Lists the roles configured for the organization.
      *
      * @param limit A limit on the number of roles to return. Defaults to 1000.
-     * @param after Cursor for pagination. Provide the value from the previous
-     *   response's `next` field to continue listing roles.
+     * @param after Cursor for pagination. Provide the value from the previous response's `next`
+     *   field to continue listing roles.
      * @param order Sort order for the returned roles.
      */
-    fun listRolesPaginated(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, order: ListRolesParameterEnum? = null, options: RequestOptions? = null, yieldFn: (Role) -> Boolean) {
+    fun listRolesPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListRolesParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Role) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listRoles(clientConfig, limit, cursor, order, options)
@@ -72,7 +106,14 @@ object Roles {
         val hasMore: Boolean,
     )
 
-    fun listRolesPages(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, order: ListRolesParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListRolesPage) -> Boolean) {
+    fun listRolesPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListRolesParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListRolesPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listRoles(clientConfig, limit, cursor, order, options)
@@ -86,10 +127,10 @@ object Roles {
         }
     }
 
-
-
     /**
-     * Creates a custom role for the organization. Provide `role_name` and `permissions`; you can also include an optional `description`. The response includes the new role's identifier, permissions, and resource type.
+     * Creates a custom role for the organization. Provide `role_name` and `permissions`; you can
+     * also include an optional `description`. The response includes the new role's identifier,
+     * permissions, and resource type.
      *
      * Creates a custom role for the organization.
      *
@@ -97,36 +138,75 @@ object Roles {
      * @param permissions Permissions to grant to the role.
      * @param description Optional description of the role.
      */
-    fun createRole(clientConfig: ClientConfig, roleName: String, permissions: List<String>, description: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
-        return SdkClient.request<Role>(SdkClient.RequestSpec("POST", "/organization/roles", config = clientConfig, body = SdkClient.bodyMap("role_name" to (roleName), "permissions" to (permissions), "description" to
-    (description ?: SdkClient.SdkOptional.Omitted)), operationId = "createRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun createRole(
+        clientConfig: ClientConfig,
+        roleName: String,
+        permissions: List<String>,
+        description: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Role {
+        return SdkClient.request<Role>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/roles",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "role_name" to (roleName),
+                            "permissions" to (permissions),
+                            "description" to (description ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a role configured for the organization. Use `role_id` to identify the role and review its name, permissions, and resource type.
+     * Retrieves a role configured for the organization. Use `role_id` to identify the role and
+     * review its name, permissions, and resource type.
      *
      * Retrieves an organization role.
      *
      * @param roleId The ID of the role to retrieve.
      */
-    fun retrieveRole(clientConfig: ClientConfig, roleId: String, options: RequestOptions? = null): Role {
-        return SdkClient.request<Role>(SdkClient.RequestSpec("GET", "/organization/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "retrieveRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveRole(
+        clientConfig: ClientConfig,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): Role {
+        return SdkClient.request<Role>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    operationId = "retrieveRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates an existing organization role. Use `role_id` to identify the role and provide any of `permissions`, `description`, or `role_name` to change those values. The response contains the updated role details.
+     * Updates an existing organization role. Use `role_id` to identify the role and provide any of
+     * `permissions`, `description`, or `role_name` to change those values. The response contains
+     * the updated role details.
      *
      * Updates an existing organization role.
      *
@@ -135,71 +215,144 @@ object Roles {
      * @param description New description for the role.
      * @param roleName New name for the role.
      */
-    fun updateRole(clientConfig: ClientConfig, roleId: String, permissions: SdkClient.SdkOptional<List<String>?>? = null, description: SdkClient.SdkOptional<String?>? = null, roleName: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
-        return SdkClient.request<Role>(SdkClient.RequestSpec("POST", "/organization/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, body = SdkClient.bodyMap("permissions" to
-    (permissions ?: SdkClient.SdkOptional.Omitted), "description" to
-    (description ?: SdkClient.SdkOptional.Omitted), "role_name" to (roleName ?: SdkClient.SdkOptional.Omitted)), operationId = "updateRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun updateRole(
+        clientConfig: ClientConfig,
+        roleId: String,
+        permissions: SdkClient.SdkOptional<List<String>?>? = null,
+        description: SdkClient.SdkOptional<String?>? = null,
+        roleName: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Role {
+        return SdkClient.request<Role>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "permissions" to (permissions ?: SdkClient.SdkOptional.Omitted),
+                            "description" to (description ?: SdkClient.SdkOptional.Omitted),
+                            "role_name" to (roleName ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes a custom role from the organization. Use `role_id` to identify the role to remove. The response confirms whether the role was deleted and includes its identifier.
+     * Deletes a custom role from the organization. Use `role_id` to identify the role to remove.
+     * The response confirms whether the role was deleted and includes its identifier.
      *
      * Deletes a custom role from the organization.
      *
      * @param roleId The ID of the role to delete.
      */
-    fun deleteRole(clientConfig: ClientConfig, roleId: String, options: RequestOptions? = null): RoleDeletedResource {
-        return SdkClient.request<RoleDeletedResource>(SdkClient.RequestSpec("DELETE", "/organization/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "deleteRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteRole(
+        clientConfig: ClientConfig,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): RoleDeletedResource {
+        return SdkClient.request<RoleDeletedResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    operationId = "deleteRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page size, `after` to continue from a cursor, and `order` to choose the sort direction.
+     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page
+     * size, `after` to continue from a cursor, and `order` to choose the sort direction.
      *
      * Lists the roles configured for a project.
      *
      * @param projectId The ID of the project to inspect.
      * @param limit A limit on the number of roles to return. Defaults to 1000.
-     * @param after Cursor for pagination. Provide the value from the previous
-     *   response's `next` field to continue listing roles.
+     * @param after Cursor for pagination. Provide the value from the previous response's `next`
+     *   field to continue listing roles.
      * @param order Sort order for the returned roles.
      */
-    fun listRolesProjectRoles(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, order: ListRolesProjectRolesParameterEnum? = null, options: RequestOptions? = null): PublicRoleListResource {
+    fun listRolesProjectRoles(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListRolesProjectRolesParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): PublicRoleListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 1000.0))
-}
+        }
 
-        return SdkClient.request<PublicRoleListResource>(SdkClient.RequestSpec("GET", "/projects/${SdkClient.encodePathSegment(projectId)}/roles", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listRolesProjectRoles", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+        return SdkClient.request<PublicRoleListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/roles",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                        ),
+                    operationId = "listRolesProjectRoles",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page size, `after` to continue from a cursor, and `order` to choose the sort direction.
+     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page
+     * size, `after` to continue from a cursor, and `order` to choose the sort direction.
      *
      * Lists the roles configured for a project.
      *
      * @param projectId The ID of the project to inspect.
      * @param limit A limit on the number of roles to return. Defaults to 1000.
-     * @param after Cursor for pagination. Provide the value from the previous
-     *   response's `next` field to continue listing roles.
+     * @param after Cursor for pagination. Provide the value from the previous response's `next`
+     *   field to continue listing roles.
      * @param order Sort order for the returned roles.
      */
-    fun listRolesProjectRolesPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, order: ListRolesProjectRolesParameterEnum? = null, options: RequestOptions? = null, yieldFn: (Role) -> Boolean) {
+    fun listRolesProjectRolesPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListRolesProjectRolesParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Role) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listRolesProjectRoles(clientConfig, projectId, limit, cursor, order, options)
@@ -220,7 +373,15 @@ object Roles {
         val hasMore: Boolean,
     )
 
-    fun listRolesProjectRolesPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, order: ListRolesProjectRolesParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListRolesProjectRolesPage) -> Boolean) {
+    fun listRolesProjectRolesPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListRolesProjectRolesParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListRolesProjectRolesPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listRolesProjectRoles(clientConfig, projectId, limit, cursor, order, options)
@@ -234,10 +395,9 @@ object Roles {
         }
     }
 
-
-
     /**
-     * Creates a custom role for a project with a unique name and a set of permissions. Supply `role_name` and `permissions`; you can also provide a description for the role.
+     * Creates a custom role for a project with a unique name and a set of permissions. Supply
+     * `role_name` and `permissions`; you can also provide a description for the role.
      *
      * Creates a custom role for a project.
      *
@@ -246,37 +406,78 @@ object Roles {
      * @param permissions Permissions to grant to the role.
      * @param description Optional description of the role.
      */
-    fun createRolesProjectRole(clientConfig: ClientConfig, projectId: String, roleName: String, permissions: List<String>, description: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
-        return SdkClient.request<Role>(SdkClient.RequestSpec("POST", "/projects/${SdkClient.encodePathSegment(projectId)}/roles", config = clientConfig, body = SdkClient.bodyMap("role_name" to (roleName), "permissions" to (permissions), "description" to
-    (description ?: SdkClient.SdkOptional.Omitted)), operationId = "createRolesProjectRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun createRolesProjectRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        roleName: String,
+        permissions: List<String>,
+        description: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Role {
+        return SdkClient.request<Role>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/roles",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "role_name" to (roleName),
+                            "permissions" to (permissions),
+                            "description" to (description ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createRolesProjectRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a project role by its identifier. Use `project_id` and `role_id` to identify the project and role whose details you need.
+     * Retrieves a project role by its identifier. Use `project_id` and `role_id` to identify the
+     * project and role whose details you need.
      *
      * Retrieves a project role.
      *
      * @param projectId The ID of the project.
      * @param roleId The ID of the role to retrieve.
      */
-    fun retrieveRolesProjectRole(clientConfig: ClientConfig, projectId: String, roleId: String, options: RequestOptions? = null): Role {
-        return SdkClient.request<Role>(SdkClient.RequestSpec("GET", "/projects/${SdkClient.encodePathSegment(projectId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "retrieveRolesProjectRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveRolesProjectRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): Role {
+        return SdkClient.request<Role>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    operationId = "retrieveRolesProjectRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates an existing project role's name, permissions, or description. Provide the fields you want to change; each body field can be omitted or set to null when it does not need an update.
+     * Updates an existing project role's name, permissions, or description. Provide the fields you
+     * want to change; each body field can be omitted or set to null when it does not need an
+     * update.
      *
      * Updates an existing project role.
      *
@@ -286,34 +487,73 @@ object Roles {
      * @param description New description for the role.
      * @param roleName New name for the role.
      */
-    fun updateRolesProjectRole(clientConfig: ClientConfig, projectId: String, roleId: String, permissions: SdkClient.SdkOptional<List<String>?>? = null, description: SdkClient.SdkOptional<String?>? = null, roleName: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
-        return SdkClient.request<Role>(SdkClient.RequestSpec("POST", "/projects/${SdkClient.encodePathSegment(projectId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, body = SdkClient.bodyMap("permissions" to
-    (permissions ?: SdkClient.SdkOptional.Omitted), "description" to
-    (description ?: SdkClient.SdkOptional.Omitted), "role_name" to (roleName ?: SdkClient.SdkOptional.Omitted)), operationId = "updateRolesProjectRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun updateRolesProjectRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        roleId: String,
+        permissions: SdkClient.SdkOptional<List<String>?>? = null,
+        description: SdkClient.SdkOptional<String?>? = null,
+        roleName: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Role {
+        return SdkClient.request<Role>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "permissions" to (permissions ?: SdkClient.SdkOptional.Omitted),
+                            "description" to (description ?: SdkClient.SdkOptional.Omitted),
+                            "role_name" to (roleName ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateRolesProjectRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes a custom role from a project. Use `project_id` and `role_id` to identify the project role to remove. A 200 response confirms deletion and identifies the deleted role.
+     * Deletes a custom role from a project. Use `project_id` and `role_id` to identify the project
+     * role to remove. A 200 response confirms deletion and identifies the deleted role.
      *
      * Deletes a custom role from a project.
      *
      * @param projectId The ID of the project to update.
      * @param roleId The ID of the role to delete.
      */
-    fun deleteRolesProjectRole(clientConfig: ClientConfig, projectId: String, roleId: String, options: RequestOptions? = null): RoleDeletedResource {
-        return SdkClient.request<RoleDeletedResource>(SdkClient.RequestSpec("DELETE", "/projects/${SdkClient.encodePathSegment(projectId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "deleteRolesProjectRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteRolesProjectRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): RoleDeletedResource {
+        return SdkClient.request<RoleDeletedResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    operationId = "deleteRolesProjectRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

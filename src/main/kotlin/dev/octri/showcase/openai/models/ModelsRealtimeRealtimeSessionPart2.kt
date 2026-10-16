@@ -3,237 +3,275 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A Realtime session configuration object.
- */
+/** A Realtime session configuration object. */
 data class RealtimeSessionCreateResponse(
-    /**
-     * Unique identifier for the session that looks like `sess_1234567890abcdef`.
-     */
+    /** Unique identifier for the session that looks like `sess_1234567890abcdef`. */
     val id: String? = null,
-    /**
-     * The object type. Always `realtime.session`.
-     */
+    /** The object type. Always `realtime.session`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Expiration timestamp for the session, in seconds since epoch.
-     */
+    /** Expiration timestamp for the session, in seconds since epoch. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
     /**
-     * Additional fields to include in server outputs. - `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
+     * Additional fields to include in server outputs. - `item.input_audio_transcription.logprobs`:
+     * Include logprobs for input audio transcription.
      */
     val include: List<RealtimeSessionCreateResponseIncludeItemEnum>? = null,
-    /**
-     * The Realtime model used for this session.
-     */
+    /** The Realtime model used for this session. */
     val model: String? = null,
     /**
      * The set of modalities the model can respond with. To disable audio, set this to \["text"\].
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<RealtimeSessionCreateResponseOutputModalitiesItemEnum>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities")
+    val outputModalities: List<RealtimeSessionCreateResponseOutputModalitiesItemEnum>? = null,
     /**
-     * The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. "be extremely succinct", "act friendly", "here are examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the model, but they provide…
+     * The default system instructions (i.e. system message) prepended to model calls. This field
+     * allows the client to guide the model on desired responses. The model can be instructed on
+     * response content and format, (e.g. "be extremely succinct", "act friendly", "here are
+     * examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into
+     * your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the
+     * model, but they provide…
      */
     val instructions: String? = null,
-    /**
-     * Configuration for input and output audio for the session.
-     */
+    /** Configuration for input and output audio for the session. */
     val audio: RealtimeSessionCreateResponseAudio? = null,
     /**
-     * Configuration options for tracing. Set to null to disable tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto` will create a trace for the session with default values for the workflow name, group id, and metadata.
+     * Configuration options for tracing. Set to null to disable tracing. Once tracing is enabled
+     * for a session, the configuration cannot be modified. `auto` will create a trace for the
+     * session with default values for the workflow name, group id, and metadata.
      */
     val tracing: Any? = null,
     /**
-     * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.
+     * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the
+     * model will detect the start and end of speech based on audio volume and respond at the end of
+     * user speech.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeSessionCreateResponseTurnDetection? = null,
-    /**
-     * Tools (functions) available to the model.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
+    val turnDetection: RealtimeSessionCreateResponseTurnDetection? = null,
+    /** Tools (functions) available to the model. */
     val tools: List<RealtimeFunctionTool>? = null,
     /**
      * How the model chooses tools. Options are `auto`, `none`, `required`, or specify a function.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: String? = null,
     /**
-     * Maximum number of output tokens for a single assistant response, inclusive of tool calls. Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum available tokens for a given model. Defaults to `inf`.
+     * Maximum number of output tokens for a single assistant response, inclusive of tool calls.
+     * Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum
+     * available tokens for a given model. Defaults to `inf`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
+    val maxOutputTokens: Any? = null,
 )
 
 /**
- * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
+ * reduction filters audio added to the input audio buffer before it is sent to VAD and the model.
+ * Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and
+ * model performance by improving perception of the input audio.
  */
 data class RealtimeSessionCreateResponseGAAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
+     * `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType? = null
 )
 
-/**
- * Optional object value serialized in the `input` wire field.
- */
+/** Optional object value serialized in the `input` wire field. */
 data class RealtimeSessionCreateResponseGAAudioInput(
-    /**
-     * The format of the input audio.
-     */
+    /** The format of the input audio. */
     val format: RealtimeAudioFormats? = null,
     /**
-     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn off once on. Input audio transcription is not native to the model, since the model consumes audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint and should be treated as guidance of input audio content rather than precisely what the model heard. The client can optionally set the language and prompt for transcription, these offer additional…
+     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn
+     * off once on. Input audio transcription is not native to the model, since the model consumes
+     * audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint
+     * and should be treated as guidance of input audio content rather than precisely what the model
+     * heard. The client can optionally set the language and prompt for transcription, these offer
+     * additional…
      */
     val transcription: AudioTranscriptionResponse? = null,
     /**
-     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
+     * reduction filters audio added to the input audio buffer before it is sent to VAD and the
+     * model. Filtering the audio can improve VAD and turn detection accuracy (reducing false
+     * positives) and model performance by improving perception of the input audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeSessionCreateResponseGAAudioInputNoiseReduction? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
+    val noiseReduction: RealtimeSessionCreateResponseGAAudioInputNoiseReduction? = null,
     /**
-     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
+     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null`
+     * to turn off, in which case the client must manually trigger model response. Server VAD means
+     * that the model will detect the start and end of speech based on audio volume and respond at
+     * the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in
+     * conjunction with VAD) to semantically estimate whether the user has finished speaking, then
+     * dynamically sets a…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTurnDetection? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
+    val turnDetection: RealtimeTurnDetection? = null,
 )
 
-/**
- * Optional object value serialized in the `output` wire field.
- */
+/** Optional object value serialized in the `output` wire field. */
 data class RealtimeSessionCreateResponseGAAudioOutput(
-    /**
-     * The format of the output audio.
-     */
+    /** The format of the output audio. */
     val format: RealtimeAudioFormats? = null,
     /**
-     * The voice the model uses to respond. Voice cannot be changed during the session once the model has responded with audio at least once. Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. We recommend `marin` and `cedar` for best quality.
+     * The voice the model uses to respond. Voice cannot be changed during the session once the
+     * model has responded with audio at least once. Current voice options are `alloy`, `ash`,
+     * `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. We recommend
+     * `marin` and `cedar` for best quality.
      */
     val voice: VoiceIdsShared? = null,
     /**
-     * The speed of the model's spoken response as a multiple of the original speed. 1.0 is the default speed. 0.25 is the minimum speed. 1.5 is the maximum speed. This value can only be changed in between model turns, not while a response is in progress. This parameter is a post-processing adjustment to the audio after it is generated, it's also possible to prompt the model to speak faster or slower.
+     * The speed of the model's spoken response as a multiple of the original speed. 1.0 is the
+     * default speed. 0.25 is the minimum speed. 1.5 is the maximum speed. This value can only be
+     * changed in between model turns, not while a response is in progress. This parameter is a
+     * post-processing adjustment to the audio after it is generated, it's also possible to prompt
+     * the model to speak faster or slower.
      */
-    val speed: Double? = null
+    val speed: Double? = null,
 )
 
-/**
- * Configuration for input and output audio.
- */
+/** Configuration for input and output audio. */
 data class RealtimeSessionCreateResponseGAAudio(
-    /**
-     * Optional object value serialized in the `input` wire field.
-     */
+    /** Optional object value serialized in the `input` wire field. */
     val input: RealtimeSessionCreateResponseGAAudioInput? = null,
-    /**
-     * Optional object value serialized in the `output` wire field.
-     */
-    val output: RealtimeSessionCreateResponseGAAudioOutput? = null
+    /** Optional object value serialized in the `output` wire field. */
+    val output: RealtimeSessionCreateResponseGAAudioOutput? = null,
 )
 
-/**
- * Granular configuration for tracing.
- */
+/** Granular configuration for tracing. */
 data class RealtimeSessionCreateResponseGATracingVariant1(
     /**
-     * The name of the workflow to attach to this trace. This is used to name the trace in the Traces Dashboard.
+     * The name of the workflow to attach to this trace. This is used to name the trace in the
+     * Traces Dashboard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name") val workflowName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name")
+    val workflowName: String? = null,
     /**
-     * The group id to attach to this trace to enable filtering and grouping in the Traces Dashboard.
+     * The group id to attach to this trace to enable filtering and grouping in the Traces
+     * Dashboard.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("group_id") val groupId: String? = null,
     /**
      * The arbitrary metadata to attach to this trace to enable filtering in the Traces Dashboard.
      */
-    val metadata: Map<String, Any>? = null
+    val metadata: Map<String, Any>? = null,
 )
 
-/**
- * A Realtime session configuration object.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A Realtime session configuration object. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RealtimeSessionCreateResponseGA(
-    /**
-     * The type of session to create. Always `realtime` for the Realtime API.
-     */
+    /** The type of session to create. Always `realtime` for the Realtime API. */
     val type: RealtimeSessionCreateResponseGATypeEnum,
-    /**
-     * Unique identifier for the session that looks like `sess_1234567890abcdef`.
-     */
+    /** Unique identifier for the session that looks like `sess_1234567890abcdef`. */
     val id: String,
-    /**
-     * The object type. Always `realtime.session`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RealtimeSessionCreateResponseGAObjectEnum,
-    /**
-     * Expiration timestamp for the session, in seconds since epoch.
-     */
+    /** The object type. Always `realtime.session`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: RealtimeSessionCreateResponseGAObjectEnum,
+    /** Expiration timestamp for the session, in seconds since epoch. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
     /**
-     * The set of modalities the model can respond with. It defaults to `["audio"]`, indicating that the model will respond with audio plus a transcript. `["text"]` can be used to make the model respond with text only. It is not possible to request both `text` and `audio` at the same time.
+     * The set of modalities the model can respond with. It defaults to `["audio"]`, indicating that
+     * the model will respond with audio plus a transcript. `["text"]` can be used to make the model
+     * respond with text only. It is not possible to request both `text` and `audio` at the same
+     * time.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<RealtimeSessionCreateResponseGAOutputModalitiesItemEnum>? = null,
-    /**
-     * The Realtime model used for this session.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities")
+    val outputModalities: List<RealtimeSessionCreateResponseGAOutputModalitiesItemEnum>? = null,
+    /** The Realtime model used for this session. */
     val model: String? = null,
     /**
-     * The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. "be extremely succinct", "act friendly", "here are examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the model, but they provide…
+     * The default system instructions (i.e. system message) prepended to model calls. This field
+     * allows the client to guide the model on desired responses. The model can be instructed on
+     * response content and format, (e.g. "be extremely succinct", "act friendly", "here are
+     * examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into
+     * your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the
+     * model, but they provide…
      */
     val instructions: String? = null,
-    /**
-     * Configuration for input and output audio.
-     */
+    /** Configuration for input and output audio. */
     val audio: RealtimeSessionCreateResponseGAAudio? = null,
     /**
-     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
+     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`:
+     * Include logprobs for input audio transcription.
      */
     val include: List<RealtimeSessionCreateResponseGAIncludeItemEnum>? = null,
     /**
-     * Realtime API can write session traces to the Traces Dashboard. Set to null to disable tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto` will create a trace for the session with default values for the workflow name, group id, and metadata.
+     * Realtime API can write session traces to the Traces Dashboard. Set to null to disable
+     * tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto`
+     * will create a trace for the session with default values for the workflow name, group id, and
+     * metadata.
      */
     val tracing: Any? = null,
-    /**
-     * Tools available to the model.
-     */
+    /** Tools available to the model. */
     val tools: List<RealtimeSessionCreateResponseGAToolsItem>? = null,
     /**
-     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP tool.
+     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP
+     * tool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: RealtimeSessionCreateResponseGAToolChoice? = null,
-    /**
-     * Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
+    val toolChoice: RealtimeSessionCreateResponseGAToolChoice? = null,
+    /** Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`. */
     val reasoning: RealtimeReasoning? = null,
     /**
-     * Maximum number of output tokens for a single assistant response, inclusive of tool calls. Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum available tokens for a given model. Defaults to `inf`.
+     * Maximum number of output tokens for a single assistant response, inclusive of tool calls.
+     * Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum
+     * available tokens for a given model. Defaults to `inf`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
+    val maxOutputTokens: Any? = null,
     /**
-     * When the number of tokens in a conversation exceeds the model's input token limit, the conversation be truncated, meaning messages (starting from the oldest) will not be included in the model's context. A 32k context model with 4,096 max output tokens can only include 28,224 tokens in the context before truncation occurs. Clients can configure truncation behavior to truncate with a lower max token limit, which is an effective way to control token usage and cost. Truncation…
+     * When the number of tokens in a conversation exceeds the model's input token limit, the
+     * conversation be truncated, meaning messages (starting from the oldest) will not be included
+     * in the model's context. A 32k context model with 4,096 max output tokens can only include
+     * 28,224 tokens in the context before truncation occurs. Clients can configure truncation
+     * behavior to truncate with a lower max token limit, which is an effective way to control token
+     * usage and cost. Truncation…
      */
     val truncation: RealtimeTruncation? = null,
-    /**
-     * Reference to a prompt template and its variables. Learn more.
-     */
-    val prompt: Prompt? = null
-) : RealtimeCreateClientSecretResponseSession, RealtimeServerEventSessionCreatedSession, RealtimeServerEventSessionUpdatedSession
+    /** Reference to a prompt template and its variables. Learn more. */
+    val prompt: Prompt? = null,
+) :
+    RealtimeCreateClientSecretResponseSession,
+    RealtimeServerEventSessionCreatedSession,
+    RealtimeServerEventSessionUpdatedSession
 
 /**
- * How the model chooses tools. Provide one of the string modes or force a specific function/MCP tool.
+ * How the model chooses tools. Provide one of the string modes or force a specific function/MCP
+ * tool.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = RealtimeSessionCreateResponseGAToolChoice.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = RealtimeSessionCreateResponseGAToolChoice.Deserializer::class
+)
 sealed interface RealtimeSessionCreateResponseGAToolChoice {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<RealtimeSessionCreateResponseGAToolChoice>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<
+            RealtimeSessionCreateResponseGAToolChoice
+        >() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): RealtimeSessionCreateResponseGAToolChoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out RealtimeSessionCreateResponseGAToolChoice>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                "function" -> ToolChoiceFunction::class.java
-                "mcp" -> ToolChoiceMCP::class.java
-                else -> null
-            }
+            val taggedType: Class<out RealtimeSessionCreateResponseGAToolChoice>? =
+                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                    "function" -> ToolChoiceFunction::class.java
+                    "mcp" -> ToolChoiceMCP::class.java
+                    else -> null
+                }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out RealtimeSessionCreateResponseGAToolChoice>> = listOf(ToolChoiceOptions::class.java, ToolChoiceFunction::class.java, ToolChoiceMCP::class.java)
+            val objectTypes: List<Class<out RealtimeSessionCreateResponseGAToolChoice>> =
+                listOf(
+                    ToolChoiceOptions::class.java,
+                    ToolChoiceFunction::class.java,
+                    ToolChoiceMCP::class.java,
+                )
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -248,21 +286,39 @@ sealed interface RealtimeSessionCreateResponseGAToolChoice {
     }
 }
 
-/** A [RealtimeSessionCreateResponseGAToolChoice] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownRealtimeSessionCreateResponseGAToolChoice @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [RealtimeSessionCreateResponseGAToolChoice] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownRealtimeSessionCreateResponseGAToolChoice
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : RealtimeSessionCreateResponseGAToolChoice {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Required API value serialized in the `tools[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+/** Required API value serialized in the `tools[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeFunctionTool::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPTool::class, name = "mcp")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RealtimeFunctionTool::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPTool::class, name = "mcp"),
 )
 sealed interface RealtimeSessionCreateResponseGAToolsItem

@@ -4,85 +4,135 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration for the client secret expiration. Expiration refers to the time after which a client secret will no longer be valid for creating sessions. The session itself may continue after that time once started. A secret can be used to create multiple sessions until it expires.
+ * Configuration for the client secret expiration. Expiration refers to the time after which a
+ * client secret will no longer be valid for creating sessions. The session itself may continue
+ * after that time once started. A secret can be used to create multiple sessions until it expires.
  */
 data class RealtimeCreateClientSecretRequestExpiresAfter(
     /**
-     * The anchor point for the client secret expiration, meaning that `seconds` will be added to the `created_at` time of the client secret to produce an expiration timestamp. Only `created_at` is currently supported.
+     * The anchor point for the client secret expiration, meaning that `seconds` will be added to
+     * the `created_at` time of the client secret to produce an expiration timestamp. Only
+     * `created_at` is currently supported.
      */
     val anchor: RealtimeCreateClientSecretRequestExpiresAfterAnchorEnum? = null,
     /**
-     * The number of seconds from the anchor point to the expiration. Select a value between `10` and `7200` (2 hours). This default to 600 seconds (10 minutes) if not specified.
+     * The number of seconds from the anchor point to the expiration. Select a value between `10`
+     * and `7200` (2 hours). This default to 600 seconds (10 minutes) if not specified.
      */
-    val seconds: Long? = null
+    val seconds: Long? = null,
 )
 
 /**
- * Create a session and client secret for the Realtime API. The request can specify either a realtime or a transcription session configuration. Learn more about the Realtime API.
+ * Create a session and client secret for the Realtime API. The request can specify either a
+ * realtime or a transcription session configuration. Learn more about the Realtime API.
  */
 data class RealtimeCreateClientSecretRequest(
     /**
-     * Configuration for the client secret expiration. Expiration refers to the time after which a client secret will no longer be valid for creating sessions. The session itself may continue after that time once started. A secret can be used to create multiple sessions until it expires.
+     * Configuration for the client secret expiration. Expiration refers to the time after which a
+     * client secret will no longer be valid for creating sessions. The session itself may continue
+     * after that time once started. A secret can be used to create multiple sessions until it
+     * expires.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: RealtimeCreateClientSecretRequestExpiresAfter? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
+    val expiresAfter: RealtimeCreateClientSecretRequestExpiresAfter? = null,
     /**
-     * Session configuration to use for the client secret. Choose either a realtime session or a transcription session.
+     * Session configuration to use for the client secret. Choose either a realtime session or a
+     * transcription session.
      */
-    val session: RealtimeCreateClientSecretRequestSession? = null
+    val session: RealtimeCreateClientSecretRequestSession? = null,
 )
 
 /**
- * Session configuration to use for the client secret. Choose either a realtime session or a transcription session.
+ * Session configuration to use for the client secret. Choose either a realtime session or a
+ * transcription session.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeCreateClientSecretRequestSession::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownRealtimeCreateClientSecretRequestSession::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeSessionCreateRequestGA::class, name = "realtime"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranscriptionSessionCreateRequestGA::class, name = "transcription")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RealtimeSessionCreateRequestGA::class,
+        name = "realtime",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RealtimeTranscriptionSessionCreateRequestGA::class,
+        name = "transcription",
+    ),
 )
 sealed interface RealtimeCreateClientSecretRequestSession
 
-/** A [RealtimeCreateClientSecretRequestSession] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownRealtimeCreateClientSecretRequestSession @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [RealtimeCreateClientSecretRequestSession] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownRealtimeCreateClientSecretRequestSession
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : RealtimeCreateClientSecretRequestSession {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Response from creating a session and client secret for the Realtime API.
- */
+/** Response from creating a session and client secret for the Realtime API. */
 data class RealtimeCreateClientSecretResponse(
-    /**
-     * The generated client secret value.
-     */
+    /** The generated client secret value. */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /**
-     * Expiration timestamp for the client secret, in seconds since epoch.
-     */
+    /** Expiration timestamp for the client secret, in seconds since epoch. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
-    /**
-     * The session configuration for either a realtime or transcription session.
-     */
-    val session: RealtimeCreateClientSecretResponseSession
+    /** The session configuration for either a realtime or transcription session. */
+    val session: RealtimeCreateClientSecretResponseSession,
 )
 
-/**
- * The session configuration for either a realtime or transcription session.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeCreateClientSecretResponseSession::class)
+/** The session configuration for either a realtime or transcription session. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownRealtimeCreateClientSecretResponseSession::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeSessionCreateResponseGA::class, name = "realtime"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranscriptionSessionCreateResponseGA::class, name = "transcription")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RealtimeSessionCreateResponseGA::class,
+        name = "realtime",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RealtimeTranscriptionSessionCreateResponseGA::class,
+        name = "transcription",
+    ),
 )
 sealed interface RealtimeCreateClientSecretResponseSession
 
-/** A [RealtimeCreateClientSecretResponseSession] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownRealtimeCreateClientSecretResponseSession @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [RealtimeCreateClientSecretResponseSession] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownRealtimeCreateClientSecretResponseSession
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : RealtimeCreateClientSecretResponseSession {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

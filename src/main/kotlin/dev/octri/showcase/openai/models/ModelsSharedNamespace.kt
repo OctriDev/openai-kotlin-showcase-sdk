@@ -3,44 +3,60 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Groups function/custom tools under a shared namespace.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Groups function/custom tools under a shared namespace. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class NamespaceToolParam(
-    /**
-     * The type of the tool. Always `namespace`.
-     */
+    /** The type of the tool. Always `namespace`. */
     val type: NamespaceToolParamTypeEnum,
-    /**
-     * The namespace name used in tool calls (for example, `crm`).
-     */
+    /** The namespace name used in tool calls (for example, `crm`). */
     val name: String,
-    /**
-     * A description of the namespace shown to the model.
-     */
+    /** A description of the namespace shown to the model. */
     val description: String,
-    /**
-     * The function/custom tools available inside this namespace.
-     */
-    val tools: List<NamespaceToolParamToolsItem>
+    /** The function/custom tools available inside this namespace. */
+    val tools: List<NamespaceToolParamToolsItem>,
 ) : Tool
 
-/**
- * A function or custom tool that belongs to a namespace.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownNamespaceToolParamToolsItem::class)
+/** A function or custom tool that belongs to a namespace. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownNamespaceToolParamToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionToolParam::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolParam::class, name = "custom")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionToolParam::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolParam::class,
+        name = "custom",
+    ),
 )
 sealed interface NamespaceToolParamToolsItem
 
-/** A [NamespaceToolParamToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownNamespaceToolParamToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [NamespaceToolParamToolsItem] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownNamespaceToolParamToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : NamespaceToolParamToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

@@ -3,9 +3,11 @@
 
 package dev.octri.showcase.openai
 
-typealias StringFunctionCallOutputParam = dev.octri.showcase.openai.models.StringFunctionCallOutputParam
+typealias StringFunctionCallOutputParam =
+    dev.octri.showcase.openai.models.StringFunctionCallOutputParam
 
-typealias StringFunctionCallOutputResource = dev.octri.showcase.openai.models.StringFunctionCallOutputResource
+typealias StringFunctionCallOutputResource =
+    dev.octri.showcase.openai.models.StringFunctionCallOutputResource
 
 typealias StringInputParam = dev.octri.showcase.openai.models.StringInputParam
 
@@ -27,7 +29,8 @@ typealias StringServiceTierResponses = dev.octri.showcase.openai.models.StringSe
 
 typealias StringStopConfiguration = dev.octri.showcase.openai.models.StringStopConfiguration
 
-typealias StringTranscriptionChunkingStrategy = dev.octri.showcase.openai.models.StringTranscriptionChunkingStrategy
+typealias StringTranscriptionChunkingStrategy =
+    dev.octri.showcase.openai.models.StringTranscriptionChunkingStrategy
 
 typealias StringVerbosity = dev.octri.showcase.openai.models.StringVerbosity
 
@@ -39,7 +42,8 @@ typealias SubagentStatusResource = dev.octri.showcase.openai.models.SubagentStat
 
 typealias SubmitToolOutputsRunRequest = dev.octri.showcase.openai.models.SubmitToolOutputsRunRequest
 
-typealias SubmitToolOutputsRunRequestToolOutputsItem = dev.octri.showcase.openai.models.SubmitToolOutputsRunRequestToolOutputsItem
+typealias SubmitToolOutputsRunRequestToolOutputsItem =
+    dev.octri.showcase.openai.models.SubmitToolOutputsRunRequestToolOutputsItem
 
 typealias SummaryTextContent = dev.octri.showcase.openai.models.SummaryTextContent
 
@@ -51,7 +55,8 @@ typealias SummaryTextResourceTypeEnum = dev.octri.showcase.openai.models.Summary
 
 typealias SynthIDProvenanceResult = dev.octri.showcase.openai.models.SynthIDProvenanceResult
 
-typealias SynthIDProvenanceResultTypeEnum = dev.octri.showcase.openai.models.SynthIDProvenanceResultTypeEnum
+typealias SynthIDProvenanceResultTypeEnum =
+    dev.octri.showcase.openai.models.SynthIDProvenanceResultTypeEnum
 
 typealias TargetUri = dev.octri.showcase.openai.models.TargetUri
 
@@ -85,7 +90,8 @@ typealias TextFormatParam = dev.octri.showcase.openai.models.TextFormatParam
 
 typealias TextFormatParamJsonSchema = dev.octri.showcase.openai.models.TextFormatParamJsonSchema
 
-typealias TextFormatParamJsonSchemaTypeEnum = dev.octri.showcase.openai.models.TextFormatParamJsonSchemaTypeEnum
+typealias TextFormatParamJsonSchemaTypeEnum =
+    dev.octri.showcase.openai.models.TextFormatParamJsonSchemaTypeEnum
 
 typealias TextFormatParamText = dev.octri.showcase.openai.models.TextFormatParamText
 
@@ -93,33 +99,41 @@ typealias TextFormatParamTextTypeEnum = dev.octri.showcase.openai.models.TextFor
 
 typealias TextFormatResource = dev.octri.showcase.openai.models.TextFormatResource
 
-typealias TextFormatResourceJsonSchema = dev.octri.showcase.openai.models.TextFormatResourceJsonSchema
+typealias TextFormatResourceJsonSchema =
+    dev.octri.showcase.openai.models.TextFormatResourceJsonSchema
 
-typealias TextFormatResourceJsonSchemaTypeEnum = dev.octri.showcase.openai.models.TextFormatResourceJsonSchemaTypeEnum
+typealias TextFormatResourceJsonSchemaTypeEnum =
+    dev.octri.showcase.openai.models.TextFormatResourceJsonSchemaTypeEnum
 
 typealias TextFormatResourceText = dev.octri.showcase.openai.models.TextFormatResourceText
 
-typealias TextFormatResourceTextTypeEnum = dev.octri.showcase.openai.models.TextFormatResourceTextTypeEnum
+typealias TextFormatResourceTextTypeEnum =
+    dev.octri.showcase.openai.models.TextFormatResourceTextTypeEnum
 
 typealias TextParam = dev.octri.showcase.openai.models.TextParam
 
 typealias TextResource = dev.octri.showcase.openai.models.TextResource
 
-typealias TextResponseFormatConfiguration = dev.octri.showcase.openai.models.TextResponseFormatConfiguration
+typealias TextResponseFormatConfiguration =
+    dev.octri.showcase.openai.models.TextResponseFormatConfiguration
 
-typealias TextResponseFormatJsonSchema = dev.octri.showcase.openai.models.TextResponseFormatJsonSchema
+typealias TextResponseFormatJsonSchema =
+    dev.octri.showcase.openai.models.TextResponseFormatJsonSchema
 
-typealias TextResponseFormatJsonSchemaTypeEnum = dev.octri.showcase.openai.models.TextResponseFormatJsonSchemaTypeEnum
+typealias TextResponseFormatJsonSchemaTypeEnum =
+    dev.octri.showcase.openai.models.TextResponseFormatJsonSchemaTypeEnum
 
 typealias ThreadItem = dev.octri.showcase.openai.models.ThreadItem
 
 typealias ThreadItemListResource = dev.octri.showcase.openai.models.ThreadItemListResource
 
-typealias ThreadItemListResourceObjectEnum = dev.octri.showcase.openai.models.ThreadItemListResourceObjectEnum
+typealias ThreadItemListResourceObjectEnum =
+    dev.octri.showcase.openai.models.ThreadItemListResourceObjectEnum
 
 typealias ThreadListResource = dev.octri.showcase.openai.models.ThreadListResource
 
-typealias ThreadListResourceObjectEnum = dev.octri.showcase.openai.models.ThreadListResourceObjectEnum
+typealias ThreadListResourceObjectEnum =
+    dev.octri.showcase.openai.models.ThreadListResourceObjectEnum
 
 typealias ThreadObject = dev.octri.showcase.openai.models.ThreadObject
 
@@ -127,9 +141,11 @@ typealias ThreadObjectObjectEnum = dev.octri.showcase.openai.models.ThreadObject
 
 typealias ThreadObjectToolResources = dev.octri.showcase.openai.models.ThreadObjectToolResources
 
-typealias ThreadObjectToolResourcesCodeInterpreter = dev.octri.showcase.openai.models.ThreadObjectToolResourcesCodeInterpreter
+typealias ThreadObjectToolResourcesCodeInterpreter =
+    dev.octri.showcase.openai.models.ThreadObjectToolResourcesCodeInterpreter
 
-typealias ThreadObjectToolResourcesFileSearch = dev.octri.showcase.openai.models.ThreadObjectToolResourcesFileSearch
+typealias ThreadObjectToolResourcesFileSearch =
+    dev.octri.showcase.openai.models.ThreadObjectToolResourcesFileSearch
 
 typealias ThreadResource = dev.octri.showcase.openai.models.ThreadResource
 
@@ -141,7 +157,8 @@ typealias ThreadStreamEvent = dev.octri.showcase.openai.models.ThreadStreamEvent
 
 typealias ThreadStreamEventVariant0 = dev.octri.showcase.openai.models.ThreadStreamEventVariant0
 
-typealias ThreadStreamEventVariant0EventEnum = dev.octri.showcase.openai.models.ThreadStreamEventVariant0EventEnum
+typealias ThreadStreamEventVariant0EventEnum =
+    dev.octri.showcase.openai.models.ThreadStreamEventVariant0EventEnum
 
 typealias ToggleCertificatesRequest = dev.octri.showcase.openai.models.ToggleCertificatesRequest
 
@@ -149,7 +166,8 @@ typealias TokenCountsBody = dev.octri.showcase.openai.models.TokenCountsBody
 
 typealias TokenCountsResource = dev.octri.showcase.openai.models.TokenCountsResource
 
-typealias TokenCountsResourceObjectEnum = dev.octri.showcase.openai.models.TokenCountsResourceObjectEnum
+typealias TokenCountsResourceObjectEnum =
+    dev.octri.showcase.openai.models.TokenCountsResourceObjectEnum
 
 typealias TokenUsageResource = dev.octri.showcase.openai.models.TokenUsageResource
 
@@ -193,7 +211,8 @@ typealias ToolSearchCall = dev.octri.showcase.openai.models.ToolSearchCall
 
 typealias ToolSearchCallItemParam = dev.octri.showcase.openai.models.ToolSearchCallItemParam
 
-typealias ToolSearchCallItemParamTypeEnum = dev.octri.showcase.openai.models.ToolSearchCallItemParamTypeEnum
+typealias ToolSearchCallItemParamTypeEnum =
+    dev.octri.showcase.openai.models.ToolSearchCallItemParamTypeEnum
 
 typealias ToolSearchCallTypeEnum = dev.octri.showcase.openai.models.ToolSearchCallTypeEnum
 
@@ -201,19 +220,25 @@ typealias ToolSearchExecutionType = dev.octri.showcase.openai.models.ToolSearchE
 
 typealias ToolSearchOutput = dev.octri.showcase.openai.models.ToolSearchOutput
 
-typealias ToolSearchOutputFunctionToolParam = dev.octri.showcase.openai.models.ToolSearchOutputFunctionToolParam
+typealias ToolSearchOutputFunctionToolParam =
+    dev.octri.showcase.openai.models.ToolSearchOutputFunctionToolParam
 
-typealias ToolSearchOutputFunctionToolParamTypeEnum = dev.octri.showcase.openai.models.ToolSearchOutputFunctionToolParamTypeEnum
+typealias ToolSearchOutputFunctionToolParamTypeEnum =
+    dev.octri.showcase.openai.models.ToolSearchOutputFunctionToolParamTypeEnum
 
 typealias ToolSearchOutputItemParam = dev.octri.showcase.openai.models.ToolSearchOutputItemParam
 
-typealias ToolSearchOutputItemParamTypeEnum = dev.octri.showcase.openai.models.ToolSearchOutputItemParamTypeEnum
+typealias ToolSearchOutputItemParamTypeEnum =
+    dev.octri.showcase.openai.models.ToolSearchOutputItemParamTypeEnum
 
-typealias ToolSearchOutputNamespaceToolParam = dev.octri.showcase.openai.models.ToolSearchOutputNamespaceToolParam
+typealias ToolSearchOutputNamespaceToolParam =
+    dev.octri.showcase.openai.models.ToolSearchOutputNamespaceToolParam
 
-typealias ToolSearchOutputNamespaceToolParamToolsItem = dev.octri.showcase.openai.models.ToolSearchOutputNamespaceToolParamToolsItem
+typealias ToolSearchOutputNamespaceToolParamToolsItem =
+    dev.octri.showcase.openai.models.ToolSearchOutputNamespaceToolParamToolsItem
 
-typealias ToolSearchOutputNamespaceToolParamTypeEnum = dev.octri.showcase.openai.models.ToolSearchOutputNamespaceToolParamTypeEnum
+typealias ToolSearchOutputNamespaceToolParamTypeEnum =
+    dev.octri.showcase.openai.models.ToolSearchOutputNamespaceToolParamTypeEnum
 
 typealias ToolSearchOutputTool = dev.octri.showcase.openai.models.ToolSearchOutputTool
 
@@ -227,13 +252,17 @@ typealias ToolsItem = dev.octri.showcase.openai.models.ToolsItem
 
 typealias TopLogProb = dev.octri.showcase.openai.models.TopLogProb
 
-typealias TranscriptionChunkingStrategy = dev.octri.showcase.openai.models.TranscriptionChunkingStrategy
+typealias TranscriptionChunkingStrategy =
+    dev.octri.showcase.openai.models.TranscriptionChunkingStrategy
 
-typealias TranscriptionChunkingStrategyVariant0Enum = dev.octri.showcase.openai.models.TranscriptionChunkingStrategyVariant0Enum
+typealias TranscriptionChunkingStrategyVariant0Enum =
+    dev.octri.showcase.openai.models.TranscriptionChunkingStrategyVariant0Enum
 
-typealias TranscriptionDiarizedSegment = dev.octri.showcase.openai.models.TranscriptionDiarizedSegment
+typealias TranscriptionDiarizedSegment =
+    dev.octri.showcase.openai.models.TranscriptionDiarizedSegment
 
-typealias TranscriptionDiarizedSegmentTypeEnum = dev.octri.showcase.openai.models.TranscriptionDiarizedSegmentTypeEnum
+typealias TranscriptionDiarizedSegmentTypeEnum =
+    dev.octri.showcase.openai.models.TranscriptionDiarizedSegmentTypeEnum
 
 typealias TranscriptionInclude = dev.octri.showcase.openai.models.TranscriptionInclude
 
@@ -245,29 +274,37 @@ typealias TranscriptionWord = dev.octri.showcase.openai.models.TranscriptionWord
 
 typealias TranscriptTextDeltaEvent = dev.octri.showcase.openai.models.TranscriptTextDeltaEvent
 
-typealias TranscriptTextDeltaEventLogprobsItem = dev.octri.showcase.openai.models.TranscriptTextDeltaEventLogprobsItem
+typealias TranscriptTextDeltaEventLogprobsItem =
+    dev.octri.showcase.openai.models.TranscriptTextDeltaEventLogprobsItem
 
-typealias TranscriptTextDeltaEventTypeEnum = dev.octri.showcase.openai.models.TranscriptTextDeltaEventTypeEnum
+typealias TranscriptTextDeltaEventTypeEnum =
+    dev.octri.showcase.openai.models.TranscriptTextDeltaEventTypeEnum
 
 typealias TranscriptTextDoneEvent = dev.octri.showcase.openai.models.TranscriptTextDoneEvent
 
-typealias TranscriptTextDoneEventLogprobsItem = dev.octri.showcase.openai.models.TranscriptTextDoneEventLogprobsItem
+typealias TranscriptTextDoneEventLogprobsItem =
+    dev.octri.showcase.openai.models.TranscriptTextDoneEventLogprobsItem
 
-typealias TranscriptTextDoneEventTypeEnum = dev.octri.showcase.openai.models.TranscriptTextDoneEventTypeEnum
+typealias TranscriptTextDoneEventTypeEnum =
+    dev.octri.showcase.openai.models.TranscriptTextDoneEventTypeEnum
 
 typealias TranscriptTextSegmentEvent = dev.octri.showcase.openai.models.TranscriptTextSegmentEvent
 
-typealias TranscriptTextSegmentEventTypeEnum = dev.octri.showcase.openai.models.TranscriptTextSegmentEventTypeEnum
+typealias TranscriptTextSegmentEventTypeEnum =
+    dev.octri.showcase.openai.models.TranscriptTextSegmentEventTypeEnum
 
 typealias TranscriptTextUsageDuration = dev.octri.showcase.openai.models.TranscriptTextUsageDuration
 
-typealias TranscriptTextUsageDurationTypeEnum = dev.octri.showcase.openai.models.TranscriptTextUsageDurationTypeEnum
+typealias TranscriptTextUsageDurationTypeEnum =
+    dev.octri.showcase.openai.models.TranscriptTextUsageDurationTypeEnum
 
 typealias TranscriptTextUsageTokens = dev.octri.showcase.openai.models.TranscriptTextUsageTokens
 
-typealias TranscriptTextUsageTokensInputTokenDetails = dev.octri.showcase.openai.models.TranscriptTextUsageTokensInputTokenDetails
+typealias TranscriptTextUsageTokensInputTokenDetails =
+    dev.octri.showcase.openai.models.TranscriptTextUsageTokensInputTokenDetails
 
-typealias TranscriptTextUsageTokensTypeEnum = dev.octri.showcase.openai.models.TranscriptTextUsageTokensTypeEnum
+typealias TranscriptTextUsageTokensTypeEnum =
+    dev.octri.showcase.openai.models.TranscriptTextUsageTokensTypeEnum
 
 typealias Triggers = dev.octri.showcase.openai.models.Triggers
 
@@ -289,7 +326,8 @@ typealias TypeParamTypeEnum = dev.octri.showcase.openai.models.TypeParamTypeEnum
 
 typealias UnknownAgentContentResource = dev.octri.showcase.openai.models.UnknownAgentContentResource
 
-typealias UnknownAgentOutputItemResource = dev.octri.showcase.openai.models.UnknownAgentOutputItemResource
+typealias UnknownAgentOutputItemResource =
+    dev.octri.showcase.openai.models.UnknownAgentOutputItemResource
 
 typealias UnknownAgentToolConfigParam = dev.octri.showcase.openai.models.UnknownAgentToolConfigParam
 
@@ -299,57 +337,79 @@ typealias UnknownAnnotationModel = dev.octri.showcase.openai.models.UnknownAnnot
 
 typealias UnknownAnswerResource = dev.octri.showcase.openai.models.UnknownAnswerResource
 
-typealias UnknownApplyPatchOperationParam = dev.octri.showcase.openai.models.UnknownApplyPatchOperationParam
+typealias UnknownApplyPatchOperationParam =
+    dev.octri.showcase.openai.models.UnknownApplyPatchOperationParam
 
-typealias UnknownApplyPatchToolCallOperation = dev.octri.showcase.openai.models.UnknownApplyPatchToolCallOperation
+typealias UnknownApplyPatchToolCallOperation =
+    dev.octri.showcase.openai.models.UnknownApplyPatchToolCallOperation
 
-typealias UnknownAssistantObjectToolsItem = dev.octri.showcase.openai.models.UnknownAssistantObjectToolsItem
+typealias UnknownAssistantObjectToolsItem =
+    dev.octri.showcase.openai.models.UnknownAssistantObjectToolsItem
 
-typealias UnknownAssistantsApiResponseFormatOption = dev.octri.showcase.openai.models.UnknownAssistantsApiResponseFormatOption
+typealias UnknownAssistantsApiResponseFormatOption =
+    dev.octri.showcase.openai.models.UnknownAssistantsApiResponseFormatOption
 
 typealias UnknownAssistantStreamEvent = dev.octri.showcase.openai.models.UnknownAssistantStreamEvent
 
-typealias UnknownAutoCodeInterpreterToolParamNetworkPolicy = dev.octri.showcase.openai.models.UnknownAutoCodeInterpreterToolParamNetworkPolicy
+typealias UnknownAutoCodeInterpreterToolParamNetworkPolicy =
+    dev.octri.showcase.openai.models.UnknownAutoCodeInterpreterToolParamNetworkPolicy
 
-typealias UnknownBetaAgentMessageContentItem = dev.octri.showcase.openai.models.UnknownBetaAgentMessageContentItem
+typealias UnknownBetaAgentMessageContentItem =
+    dev.octri.showcase.openai.models.UnknownBetaAgentMessageContentItem
 
-typealias UnknownBetaAgentMessageItemParamContentItem = dev.octri.showcase.openai.models.UnknownBetaAgentMessageItemParamContentItem
+typealias UnknownBetaAgentMessageItemParamContentItem =
+    dev.octri.showcase.openai.models.UnknownBetaAgentMessageItemParamContentItem
 
 typealias UnknownBetaAnnotation = dev.octri.showcase.openai.models.UnknownBetaAnnotation
 
-typealias UnknownBetaApplyPatchOperationParam = dev.octri.showcase.openai.models.UnknownBetaApplyPatchOperationParam
+typealias UnknownBetaApplyPatchOperationParam =
+    dev.octri.showcase.openai.models.UnknownBetaApplyPatchOperationParam
 
-typealias UnknownBetaApplyPatchToolCallOperation = dev.octri.showcase.openai.models.UnknownBetaApplyPatchToolCallOperation
+typealias UnknownBetaApplyPatchToolCallOperation =
+    dev.octri.showcase.openai.models.UnknownBetaApplyPatchToolCallOperation
 
-typealias UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy = dev.octri.showcase.openai.models.UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy
+typealias UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy =
+    dev.octri.showcase.openai.models.UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy
 
-typealias UnknownBetaCodeInterpreterToolCallOutputsItem = dev.octri.showcase.openai.models.UnknownBetaCodeInterpreterToolCallOutputsItem
+typealias UnknownBetaCodeInterpreterToolCallOutputsItem =
+    dev.octri.showcase.openai.models.UnknownBetaCodeInterpreterToolCallOutputsItem
 
-typealias UnknownBetaCompoundFilterFiltersItem = dev.octri.showcase.openai.models.UnknownBetaCompoundFilterFiltersItem
+typealias UnknownBetaCompoundFilterFiltersItem =
+    dev.octri.showcase.openai.models.UnknownBetaCompoundFilterFiltersItem
 
 typealias UnknownBetaComputerAction = dev.octri.showcase.openai.models.UnknownBetaComputerAction
 
-typealias UnknownBetaContainerAutoParamNetworkPolicy = dev.octri.showcase.openai.models.UnknownBetaContainerAutoParamNetworkPolicy
+typealias UnknownBetaContainerAutoParamNetworkPolicy =
+    dev.octri.showcase.openai.models.UnknownBetaContainerAutoParamNetworkPolicy
 
-typealias UnknownBetaContainerAutoParamSkillsItem = dev.octri.showcase.openai.models.UnknownBetaContainerAutoParamSkillsItem
+typealias UnknownBetaContainerAutoParamSkillsItem =
+    dev.octri.showcase.openai.models.UnknownBetaContainerAutoParamSkillsItem
 
-typealias UnknownBetaCustomToolParamFormat = dev.octri.showcase.openai.models.UnknownBetaCustomToolParamFormat
+typealias UnknownBetaCustomToolParamFormat =
+    dev.octri.showcase.openai.models.UnknownBetaCustomToolParamFormat
 
 typealias UnknownBetaFilters = dev.octri.showcase.openai.models.UnknownBetaFilters
 
-typealias UnknownBetaFunctionAndCustomToolCallOutput = dev.octri.showcase.openai.models.UnknownBetaFunctionAndCustomToolCallOutput
+typealias UnknownBetaFunctionAndCustomToolCallOutput =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionAndCustomToolCallOutput
 
-typealias UnknownBetaFunctionCallOutputItemParamOutputItem = dev.octri.showcase.openai.models.UnknownBetaFunctionCallOutputItemParamOutputItem
+typealias UnknownBetaFunctionCallOutputItemParamOutputItem =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionCallOutputItemParamOutputItem
 
-typealias UnknownBetaFunctionShellCallEnvironment = dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallEnvironment
+typealias UnknownBetaFunctionShellCallEnvironment =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallEnvironment
 
-typealias UnknownBetaFunctionShellCallItemParamEnvironment = dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallItemParamEnvironment
+typealias UnknownBetaFunctionShellCallItemParamEnvironment =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallItemParamEnvironment
 
-typealias UnknownBetaFunctionShellCallOutputContentOutcome = dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallOutputContentOutcome
+typealias UnknownBetaFunctionShellCallOutputContentOutcome =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallOutputContentOutcome
 
-typealias UnknownBetaFunctionShellCallOutputOutcomeParam = dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallOutputOutcomeParam
+typealias UnknownBetaFunctionShellCallOutputOutcomeParam =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionShellCallOutputOutcomeParam
 
-typealias UnknownBetaFunctionShellToolParamEnvironment = dev.octri.showcase.openai.models.UnknownBetaFunctionShellToolParamEnvironment
+typealias UnknownBetaFunctionShellToolParamEnvironment =
+    dev.octri.showcase.openai.models.UnknownBetaFunctionShellToolParamEnvironment
 
 typealias UnknownBetaInputContent = dev.octri.showcase.openai.models.UnknownBetaInputContent
 
@@ -361,78 +421,108 @@ typealias UnknownBetaItemResource = dev.octri.showcase.openai.models.UnknownBeta
 
 typealias UnknownBetaMCPToolCallError = dev.octri.showcase.openai.models.UnknownBetaMCPToolCallError
 
-typealias UnknownBetaMessageContentItem = dev.octri.showcase.openai.models.UnknownBetaMessageContentItem
+typealias UnknownBetaMessageContentItem =
+    dev.octri.showcase.openai.models.UnknownBetaMessageContentItem
 
 typealias UnknownBetaModerationInput = dev.octri.showcase.openai.models.UnknownBetaModerationInput
 
 typealias UnknownBetaModerationOutput = dev.octri.showcase.openai.models.UnknownBetaModerationOutput
 
-typealias UnknownBetaNamespaceToolParamToolsItem = dev.octri.showcase.openai.models.UnknownBetaNamespaceToolParamToolsItem
+typealias UnknownBetaNamespaceToolParamToolsItem =
+    dev.octri.showcase.openai.models.UnknownBetaNamespaceToolParamToolsItem
 
 typealias UnknownBetaOutputContent = dev.octri.showcase.openai.models.UnknownBetaOutputContent
 
 typealias UnknownBetaOutputItem = dev.octri.showcase.openai.models.UnknownBetaOutputItem
 
-typealias UnknownBetaOutputMessageContent = dev.octri.showcase.openai.models.UnknownBetaOutputMessageContent
+typealias UnknownBetaOutputMessageContent =
+    dev.octri.showcase.openai.models.UnknownBetaOutputMessageContent
 
-typealias UnknownBetaOutputTextContentParamAnnotationsItem = dev.octri.showcase.openai.models.UnknownBetaOutputTextContentParamAnnotationsItem
+typealias UnknownBetaOutputTextContentParamAnnotationsItem =
+    dev.octri.showcase.openai.models.UnknownBetaOutputTextContentParamAnnotationsItem
 
-typealias UnknownBetaPromptCacheDiagnostics = dev.octri.showcase.openai.models.UnknownBetaPromptCacheDiagnostics
+typealias UnknownBetaPromptCacheDiagnostics =
+    dev.octri.showcase.openai.models.UnknownBetaPromptCacheDiagnostics
 
-typealias UnknownBetaResponsesClientEvent = dev.octri.showcase.openai.models.UnknownBetaResponsesClientEvent
+typealias UnknownBetaResponsesClientEvent =
+    dev.octri.showcase.openai.models.UnknownBetaResponsesClientEvent
 
-typealias UnknownBetaResponsesServerEvent = dev.octri.showcase.openai.models.UnknownBetaResponsesServerEvent
+typealias UnknownBetaResponsesServerEvent =
+    dev.octri.showcase.openai.models.UnknownBetaResponsesServerEvent
 
-typealias UnknownBetaResponseSteerInputItem = dev.octri.showcase.openai.models.UnknownBetaResponseSteerInputItem
+typealias UnknownBetaResponseSteerInputItem =
+    dev.octri.showcase.openai.models.UnknownBetaResponseSteerInputItem
 
-typealias UnknownBetaResponseSteerRequiredInput = dev.octri.showcase.openai.models.UnknownBetaResponseSteerRequiredInput
+typealias UnknownBetaResponseSteerRequiredInput =
+    dev.octri.showcase.openai.models.UnknownBetaResponseSteerRequiredInput
 
-typealias UnknownBetaResponseStreamEvent = dev.octri.showcase.openai.models.UnknownBetaResponseStreamEvent
+typealias UnknownBetaResponseStreamEvent =
+    dev.octri.showcase.openai.models.UnknownBetaResponseStreamEvent
 
-typealias UnknownBetaTextResponseFormatConfiguration = dev.octri.showcase.openai.models.UnknownBetaTextResponseFormatConfiguration
+typealias UnknownBetaTextResponseFormatConfiguration =
+    dev.octri.showcase.openai.models.UnknownBetaTextResponseFormatConfiguration
 
 typealias UnknownBetaTool = dev.octri.showcase.openai.models.UnknownBetaTool
 
 typealias UnknownBetaToolCallCaller = dev.octri.showcase.openai.models.UnknownBetaToolCallCaller
 
-typealias UnknownBetaToolCallCallerParam = dev.octri.showcase.openai.models.UnknownBetaToolCallCallerParam
+typealias UnknownBetaToolCallCallerParam =
+    dev.octri.showcase.openai.models.UnknownBetaToolCallCallerParam
 
 typealias UnknownBetaToolChoiceParam = dev.octri.showcase.openai.models.UnknownBetaToolChoiceParam
 
-typealias UnknownBetaToolSearchOutputNamespaceToolParamToolsItem = dev.octri.showcase.openai.models.UnknownBetaToolSearchOutputNamespaceToolParamToolsItem
+typealias UnknownBetaToolSearchOutputNamespaceToolParamToolsItem =
+    dev.octri.showcase.openai.models.UnknownBetaToolSearchOutputNamespaceToolParamToolsItem
 
-typealias UnknownBetaToolSearchOutputTool = dev.octri.showcase.openai.models.UnknownBetaToolSearchOutputTool
+typealias UnknownBetaToolSearchOutputTool =
+    dev.octri.showcase.openai.models.UnknownBetaToolSearchOutputTool
 
-typealias UnknownBetaUserMessageItemParamContentItem = dev.octri.showcase.openai.models.UnknownBetaUserMessageItemParamContentItem
+typealias UnknownBetaUserMessageItemParamContentItem =
+    dev.octri.showcase.openai.models.UnknownBetaUserMessageItemParamContentItem
 
-typealias UnknownBetaWebSearchToolCallAction = dev.octri.showcase.openai.models.UnknownBetaWebSearchToolCallAction
+typealias UnknownBetaWebSearchToolCallAction =
+    dev.octri.showcase.openai.models.UnknownBetaWebSearchToolCallAction
 
-typealias UnknownBrowserAuthenticationHistoryRequestKindResource = dev.octri.showcase.openai.models.UnknownBrowserAuthenticationHistoryRequestKindResource
+typealias UnknownBrowserAuthenticationHistoryRequestKindResource =
+    dev.octri.showcase.openai.models.UnknownBrowserAuthenticationHistoryRequestKindResource
 
-typealias UnknownChatCompletionMessageToolCallsItem = dev.octri.showcase.openai.models.UnknownChatCompletionMessageToolCallsItem
+typealias UnknownChatCompletionMessageToolCallsItem =
+    dev.octri.showcase.openai.models.UnknownChatCompletionMessageToolCallsItem
 
-typealias UnknownChatCompletionModerationInput = dev.octri.showcase.openai.models.UnknownChatCompletionModerationInput
+typealias UnknownChatCompletionModerationInput =
+    dev.octri.showcase.openai.models.UnknownChatCompletionModerationInput
 
-typealias UnknownChatCompletionModerationOutput = dev.octri.showcase.openai.models.UnknownChatCompletionModerationOutput
+typealias UnknownChatCompletionModerationOutput =
+    dev.octri.showcase.openai.models.UnknownChatCompletionModerationOutput
 
-typealias UnknownChatCompletionRequestAssistantMessageContentPart = dev.octri.showcase.openai.models.UnknownChatCompletionRequestAssistantMessageContentPart
+typealias UnknownChatCompletionRequestAssistantMessageContentPart =
+    dev.octri.showcase.openai.models.UnknownChatCompletionRequestAssistantMessageContentPart
 
-typealias UnknownChatCompletionRequestMessage = dev.octri.showcase.openai.models.UnknownChatCompletionRequestMessage
+typealias UnknownChatCompletionRequestMessage =
+    dev.octri.showcase.openai.models.UnknownChatCompletionRequestMessage
 
-typealias UnknownChatCompletionRequestUserMessageContentPart = dev.octri.showcase.openai.models.UnknownChatCompletionRequestUserMessageContentPart
+typealias UnknownChatCompletionRequestUserMessageContentPart =
+    dev.octri.showcase.openai.models.UnknownChatCompletionRequestUserMessageContentPart
 
-typealias UnknownChatCompletionToolChoiceOption = dev.octri.showcase.openai.models.UnknownChatCompletionToolChoiceOption
+typealias UnknownChatCompletionToolChoiceOption =
+    dev.octri.showcase.openai.models.UnknownChatCompletionToolChoiceOption
 
-typealias UnknownChunkingStrategyRequestParam = dev.octri.showcase.openai.models.UnknownChunkingStrategyRequestParam
+typealias UnknownChunkingStrategyRequestParam =
+    dev.octri.showcase.openai.models.UnknownChunkingStrategyRequestParam
 
-typealias UnknownCodeInterpreterToolCallOutputsItem = dev.octri.showcase.openai.models.UnknownCodeInterpreterToolCallOutputsItem
+typealias UnknownCodeInterpreterToolCallOutputsItem =
+    dev.octri.showcase.openai.models.UnknownCodeInterpreterToolCallOutputsItem
 
-typealias UnknownCompoundFilterFiltersItem = dev.octri.showcase.openai.models.UnknownCompoundFilterFiltersItem
+typealias UnknownCompoundFilterFiltersItem =
+    dev.octri.showcase.openai.models.UnknownCompoundFilterFiltersItem
 
 typealias UnknownComputerAction = dev.octri.showcase.openai.models.UnknownComputerAction
 
-typealias UnknownComputerUseApprovalRequestKindResource = dev.octri.showcase.openai.models.UnknownComputerUseApprovalRequestKindResource
+typealias UnknownComputerUseApprovalRequestKindResource =
+    dev.octri.showcase.openai.models.UnknownComputerUseApprovalRequestKindResource
 
-typealias UnknownComputerUseApprovalResponseKindResource = dev.octri.showcase.openai.models.UnknownComputerUseApprovalResponseKindResource
+typealias UnknownComputerUseApprovalResponseKindResource =
+    dev.octri.showcase.openai.models.UnknownComputerUseApprovalResponseKindResource
 
-typealias UnknownComputerUseApprovalResponseParam = dev.octri.showcase.openai.models.UnknownComputerUseApprovalResponseParam
+typealias UnknownComputerUseApprovalResponseParam =
+    dev.octri.showcase.openai.models.UnknownComputerUseApprovalResponseParam

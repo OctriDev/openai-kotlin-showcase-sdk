@@ -3,180 +3,174 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ContainerListResource` API schema.
- */
+/** Typed representation of the `ContainerListResource` API schema. */
 data class ContainerListResource(
-    /**
-     * The type of object returned, must be 'list'.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ContainerListResourceObjectEnum,
-    /**
-     * A list of containers.
-     */
+    /** The type of object returned, must be 'list'. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ContainerListResourceObjectEnum,
+    /** A list of containers. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContainerResource>,
-    /**
-     * The ID of the first container in the list.
-     */
+    /** The ID of the first container in the list. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /**
-     * The ID of the last container in the list.
-     */
+    /** The ID of the last container in the list. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /**
-     * Whether there are more containers available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+    /** Whether there are more containers available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
 )
 
 /**
- * The container will expire after this time period. The anchor is the reference point for the expiration. The minutes is the number of minutes after the anchor before the container expires.
+ * The container will expire after this time period. The anchor is the reference point for the
+ * expiration. The minutes is the number of minutes after the anchor before the container expires.
  */
 data class ContainerResourceExpiresAfter(
-    /**
-     * The reference point for the expiration.
-     */
+    /** The reference point for the expiration. */
     val anchor: ContainerResourceExpiresAfterAnchorEnum? = null,
-    /**
-     * The number of minutes after the anchor before the container expires.
-     */
-    val minutes: Long? = null
+    /** The number of minutes after the anchor before the container expires. */
+    val minutes: Long? = null,
 )
 
-/**
- * Network access policy for the container.
- */
+/** Network access policy for the container. */
 data class ContainerResourceNetworkPolicy(
-    /**
-     * The network policy mode.
-     */
+    /** The network policy mode. */
     val type: ContainerResourceNetworkPolicyTypeEnum,
-    /**
-     * Allowed outbound domains when `type` is `allowlist`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>? = null
+    /** Allowed outbound domains when `type` is `allowlist`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
+    val allowedDomains: List<String>? = null,
 )
 
-/**
- * Typed representation of the `ContainerResource` API schema.
- */
+/** Typed representation of the `ContainerResource` API schema. */
 data class ContainerResource(
-    /**
-     * Unique identifier for the container.
-     */
+    /** Unique identifier for the container. */
     val id: String,
-    /**
-     * The type of this object.
-     */
+    /** The type of this object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Name of the container.
-     */
+    /** Name of the container. */
     val name: String,
-    /**
-     * Unix timestamp (in seconds) when the container was created.
-     */
+    /** Unix timestamp (in seconds) when the container was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Status of the container (e.g., active, deleted).
-     */
+    /** Status of the container (e.g., active, deleted). */
     val status: String,
-    /**
-     * Unix timestamp (in seconds) when the container was last active.
-     */
+    /** Unix timestamp (in seconds) when the container was last active. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_active_at") val lastActiveAt: Long? = null,
     /**
-     * The container will expire after this time period. The anchor is the reference point for the expiration. The minutes is the number of minutes after the anchor before the container expires.
+     * The container will expire after this time period. The anchor is the reference point for the
+     * expiration. The minutes is the number of minutes after the anchor before the container
+     * expires.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: ContainerResourceExpiresAfter? = null,
-    /**
-     * The memory limit configured for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: ContainerResourceMemoryLimitEnum? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: ContainerResourceNetworkPolicy? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
+    val expiresAfter: ContainerResourceExpiresAfter? = null,
+    /** The memory limit configured for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
+    val memoryLimit: ContainerResourceMemoryLimitEnum? = null,
+    /** Network access policy for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
+    val networkPolicy: ContainerResourceNetworkPolicy? = null,
 )
 
-/**
- * Container expiration time in seconds relative to the 'anchor' time.
- */
+/** Container expiration time in seconds relative to the 'anchor' time. */
 data class CreateContainerBodyExpiresAfter(
-    /**
-     * Time anchor for the expiration time. Currently only 'last_active_at' is supported.
-     */
+    /** Time anchor for the expiration time. Currently only 'last_active_at' is supported. */
     val anchor: CreateContainerBodyExpiresAfterAnchorEnum,
-    /**
-     * Required `integer` value serialized in the `minutes` wire field.
-     */
-    val minutes: Long
+    /** Required `integer` value serialized in the `minutes` wire field. */
+    val minutes: Long,
 )
 
-/**
- * Typed representation of the `CreateContainerBody` API schema.
- */
+/** Typed representation of the `CreateContainerBody` API schema. */
 data class CreateContainerBody(
-    /**
-     * Name of the container to create.
-     */
+    /** Name of the container to create. */
     val name: String,
-    /**
-     * IDs of files to copy to the container.
-     */
+    /** IDs of files to copy to the container. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * Container expiration time in seconds relative to the 'anchor' time.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: CreateContainerBodyExpiresAfter? = null,
-    /**
-     * An optional list of skills referenced by id or inline data.
-     */
+    /** Container expiration time in seconds relative to the 'anchor' time. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
+    val expiresAfter: CreateContainerBodyExpiresAfter? = null,
+    /** An optional list of skills referenced by id or inline data. */
     val skills: List<CreateContainerBodySkillsItem>? = null,
-    /**
-     * Optional memory limit for the container. Defaults to "1g".
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: CreateContainerBodyMemoryLimitEnum? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: CreateContainerBodyNetworkPolicy? = null
+    /** Optional memory limit for the container. Defaults to "1g". */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
+    val memoryLimit: CreateContainerBodyMemoryLimitEnum? = null,
+    /** Network access policy for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
+    val networkPolicy: CreateContainerBodyNetworkPolicy? = null,
 )
 
-/**
- * Network access policy for the container.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateContainerBodyNetworkPolicy::class)
+/** Network access policy for the container. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateContainerBodyNetworkPolicy::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerNetworkPolicyDisabledParam::class, name = "disabled"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerNetworkPolicyAllowlistParam::class, name = "allowlist")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerNetworkPolicyDisabledParam::class,
+        name = "disabled",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerNetworkPolicyAllowlistParam::class,
+        name = "allowlist",
+    ),
 )
 sealed interface CreateContainerBodyNetworkPolicy
 
-/** A [CreateContainerBodyNetworkPolicy] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateContainerBodyNetworkPolicy @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateContainerBodyNetworkPolicy] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateContainerBodyNetworkPolicy
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateContainerBodyNetworkPolicy {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Required API value serialized in the `skills[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateContainerBodySkillsItem::class)
+/** Required API value serialized in the `skills[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateContainerBodySkillsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SkillReferenceParam::class, name = "skill_reference"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InlineSkillParam::class, name = "inline")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = SkillReferenceParam::class,
+        name = "skill_reference",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InlineSkillParam::class,
+        name = "inline",
+    ),
 )
 sealed interface CreateContainerBodySkillsItem
 
-/** A [CreateContainerBodySkillsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateContainerBodySkillsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateContainerBodySkillsItem] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateContainerBodySkillsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateContainerBodySkillsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

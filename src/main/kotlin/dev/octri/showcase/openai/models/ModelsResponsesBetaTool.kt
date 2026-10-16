@@ -3,149 +3,249 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A tool that can be used to generate a response.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaTool::class)
+/** A tool that can be used to generate a response. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaTool::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionTool::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFileSearchTool::class, name = "file_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComputerTool::class, name = "computer"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComputerUsePreviewTool::class, name = "computer_use_preview"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaWebSearchTool::class, names = ["web_search", "web_search_2025_08_26"]),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionTool::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFileSearchTool::class,
+        name = "file_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComputerTool::class,
+        name = "computer",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComputerUsePreviewTool::class,
+        name = "computer_use_preview",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaWebSearchTool::class,
+        names = ["web_search", "web_search_2025_08_26"],
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaMCPTool::class, name = "mcp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCodeInterpreterTool::class, name = "code_interpreter"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaProgrammaticToolCallingParam::class, name = "programmatic_tool_calling"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaImageGenTool::class, name = "image_generation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaLocalShellToolParam::class, name = "local_shell"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionShellToolParam::class, name = "shell"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCustomToolParam::class, name = "custom"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaNamespaceToolParam::class, name = "namespace"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaToolSearchToolParam::class, name = "tool_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaWebSearchPreviewTool::class, names = ["web_search_preview", "web_search_preview_2025_03_11"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaApplyPatchToolParam::class, name = "apply_patch")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCodeInterpreterTool::class,
+        name = "code_interpreter",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaProgrammaticToolCallingParam::class,
+        name = "programmatic_tool_calling",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaImageGenTool::class,
+        name = "image_generation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaLocalShellToolParam::class,
+        name = "local_shell",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionShellToolParam::class,
+        name = "shell",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCustomToolParam::class,
+        name = "custom",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaNamespaceToolParam::class,
+        name = "namespace",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaToolSearchToolParam::class,
+        name = "tool_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaWebSearchPreviewTool::class,
+        names = ["web_search_preview", "web_search_preview_2025_03_11"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaApplyPatchToolParam::class,
+        name = "apply_patch",
+    ),
 )
 sealed interface BetaTool
 
 /** A [BetaTool] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaTool @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaTool
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaTool {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The execution context that produced this tool call.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaToolCallCaller::class)
+/** The execution context that produced this tool call. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaToolCallCaller::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaDirectToolCallCaller::class, name = "direct"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaProgramToolCallCaller::class, name = "program")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaDirectToolCallCaller::class,
+        name = "direct",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaProgramToolCallCaller::class,
+        name = "program",
+    ),
 )
 sealed interface BetaToolCallCaller
 
 /** A [BetaToolCallCaller] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaToolCallCaller @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaToolCallCaller
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaToolCallCaller {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The execution context that produced this tool call.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaToolCallCallerParam::class)
+/** The execution context that produced this tool call. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaToolCallCallerParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaDirectToolCallCallerParam::class, name = "direct"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaProgramToolCallCallerParam::class, name = "program")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaDirectToolCallCallerParam::class,
+        name = "direct",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaProgramToolCallCallerParam::class,
+        name = "program",
+    ),
 )
 sealed interface BetaToolCallCallerParam
 
 /** A [BetaToolCallCallerParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaToolCallCallerParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaToolCallCallerParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaToolCallCallerParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Constrains the tools available to the model to a pre-defined set.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Constrains the tools available to the model to a pre-defined set. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolChoiceAllowed(
-    /**
-     * Allowed tool configuration type. Always `allowed_tools`.
-     */
+    /** Allowed tool configuration type. Always `allowed_tools`. */
     val type: BetaToolChoiceAllowedTypeEnum,
     /**
-     * Constrains the tools available to the model to a pre-defined set. `auto` allows the model to pick from among the allowed tools and generate a message. `required` requires the model to call one or more of the allowed tools.
+     * Constrains the tools available to the model to a pre-defined set. `auto` allows the model to
+     * pick from among the allowed tools and generate a message. `required` requires the model to
+     * call one or more of the allowed tools.
      */
     val mode: BetaToolChoiceAllowedModeEnum,
     /**
-     * A list of tool definitions that the model should be allowed to call. For the Responses API, the list of tool definitions might look like: ```json [ { "type": "function", "name": "get_weather" }, { "type": "mcp", "server_label": "deepwiki" }, { "type": "image_generation" } ] ```
+     * A list of tool definitions that the model should be allowed to call. For the Responses API,
+     * the list of tool definitions might look like: ```json [ { "type": "function", "name":
+     * "get_weather" }, { "type": "mcp", "server_label": "deepwiki" }, { "type": "image_generation"
+     * } ] ```
      */
-    val tools: List<Map<String, Any>>
+    val tools: List<Map<String, Any>>,
 ) : BetaToolChoiceParam
 
-/**
- * Use this option to force the model to call a specific custom tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Use this option to force the model to call a specific custom tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolChoiceCustom(
-    /**
-     * For custom tool calling, the type is always `custom`.
-     */
+    /** For custom tool calling, the type is always `custom`. */
     val type: BetaToolChoiceCustomTypeEnum,
-    /**
-     * The name of the custom tool to call.
-     */
-    val name: String
+    /** The name of the custom tool to call. */
+    val name: String,
 ) : BetaToolChoiceParam
 
-/**
- * Use this option to force the model to call a specific function.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Use this option to force the model to call a specific function. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolChoiceFunction(
-    /**
-     * For function calling, the type is always `function`.
-     */
+    /** For function calling, the type is always `function`. */
     val type: BetaToolChoiceFunctionTypeEnum,
-    /**
-     * The name of the function to call.
-     */
-    val name: String
+    /** The name of the function to call. */
+    val name: String,
 ) : BetaToolChoiceParam
 
-/**
- * Use this option to force the model to call a specific tool on a remote MCP server.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Use this option to force the model to call a specific tool on a remote MCP server. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolChoiceMCP(
-    /**
-     * For MCP tools, the type is always `mcp`.
-     */
+    /** For MCP tools, the type is always `mcp`. */
     val type: BetaToolChoiceMCPTypeEnum,
-    /**
-     * The label of the MCP server to use.
-     */
+    /** The label of the MCP server to use. */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
-    val name: String? = null
+    /** Optional `string` value serialized in the `name` wire field. */
+    val name: String? = null,
 ) : BetaToolChoiceParam
 
 /**
- * How the model should select which tool (or tools) to use when generating a response. See the `tools` parameter to see how to specify which tools the model can call.
+ * How the model should select which tool (or tools) to use when generating a response. See the
+ * `tools` parameter to see how to specify which tools the model can call.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaToolChoiceParam.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = BetaToolChoiceParam.Deserializer::class
+)
 sealed interface BetaToolChoiceParam {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<BetaToolChoiceParam>() {
@@ -155,19 +255,39 @@ sealed interface BetaToolChoiceParam {
         ): BetaToolChoiceParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out BetaToolChoiceParam>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                "allowed_tools" -> BetaToolChoiceAllowed::class.java
-                "file_search", "web_search_preview", "computer", "computer_use_preview", "computer_use", "web_search_preview_2025_03_11", "image_generation", "code_interpreter" -> BetaToolChoiceTypes::class.java
-                "function" -> BetaToolChoiceFunction::class.java
-                "mcp" -> BetaToolChoiceMCP::class.java
-                "custom" -> BetaToolChoiceCustom::class.java
-                "programmatic_tool_calling" -> BetaSpecificProgrammaticToolCallingParam::class.java
-                "apply_patch" -> BetaSpecificApplyPatchParam::class.java
-                "shell" -> BetaSpecificFunctionShellParam::class.java
-                else -> null
-            }
+            val taggedType: Class<out BetaToolChoiceParam>? =
+                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                    "allowed_tools" -> BetaToolChoiceAllowed::class.java
+                    "file_search",
+                    "web_search_preview",
+                    "computer",
+                    "computer_use_preview",
+                    "computer_use",
+                    "web_search_preview_2025_03_11",
+                    "image_generation",
+                    "code_interpreter" -> BetaToolChoiceTypes::class.java
+                    "function" -> BetaToolChoiceFunction::class.java
+                    "mcp" -> BetaToolChoiceMCP::class.java
+                    "custom" -> BetaToolChoiceCustom::class.java
+                    "programmatic_tool_calling" ->
+                        BetaSpecificProgrammaticToolCallingParam::class.java
+                    "apply_patch" -> BetaSpecificApplyPatchParam::class.java
+                    "shell" -> BetaSpecificFunctionShellParam::class.java
+                    else -> null
+                }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out BetaToolChoiceParam>> = listOf(BetaToolChoiceOptions::class.java, BetaToolChoiceAllowed::class.java, BetaToolChoiceTypes::class.java, BetaToolChoiceFunction::class.java, BetaToolChoiceMCP::class.java, BetaToolChoiceCustom::class.java, BetaSpecificProgrammaticToolCallingParam::class.java, BetaSpecificApplyPatchParam::class.java, BetaSpecificFunctionShellParam::class.java)
+            val objectTypes: List<Class<out BetaToolChoiceParam>> =
+                listOf(
+                    BetaToolChoiceOptions::class.java,
+                    BetaToolChoiceAllowed::class.java,
+                    BetaToolChoiceTypes::class.java,
+                    BetaToolChoiceFunction::class.java,
+                    BetaToolChoiceMCP::class.java,
+                    BetaToolChoiceCustom::class.java,
+                    BetaSpecificProgrammaticToolCallingParam::class.java,
+                    BetaSpecificApplyPatchParam::class.java,
+                    BetaSpecificFunctionShellParam::class.java,
+                )
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -183,310 +303,345 @@ sealed interface BetaToolChoiceParam {
 }
 
 /** A [BetaToolChoiceParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaToolChoiceParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaToolChoiceParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaToolChoiceParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Indicates that the model should use a built-in tool to generate a response. Learn more about built-in tools.
+ * Indicates that the model should use a built-in tool to generate a response. Learn more about
+ * built-in tools.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolChoiceTypes(
     /**
-     * The type of hosted tool the model should to use. Learn more about built-in tools. Allowed values are: - `file_search` - `web_search_preview` - `computer` - `computer_use_preview` - `computer_use` - `code_interpreter` - `image_generation`
+     * The type of hosted tool the model should to use. Learn more about built-in tools. Allowed
+     * values are: - `file_search` - `web_search_preview` - `computer` - `computer_use_preview` -
+     * `computer_use` - `code_interpreter` - `image_generation`
      */
     val type: BetaToolChoiceTypesTypeEnum
 ) : BetaToolChoiceParam
 
-/**
- * Typed representation of the `BetaToolSearchCall` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchCall` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchCall(
-    /**
-     * The type of the item. Always `tool_search_call`.
-     */
+    /** The type of the item. Always `tool_search_call`. */
     val type: BetaToolSearchCallTypeEnum,
-    /**
-     * The unique ID of the tool search call item.
-     */
+    /** The unique ID of the tool search call item. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `call_id` wire field.
-     */
+    /** Required `string` value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id", required = true) val callId: String?,
-    /**
-     * Whether tool search was executed by the server or by the client.
-     */
+    /** Whether tool search was executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType,
-    /**
-     * Arguments used for the tool search call.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true) val arguments: Any?,
-    /**
-     * The status of the tool search call item that was recorded.
-     */
+    /** Arguments used for the tool search call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true)
+    val arguments: Any?,
+    /** The status of the tool search call item that was recorded. */
     val status: BetaFunctionCallStatus,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * Typed representation of the `BetaToolSearchCallItemParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchCallItemParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchCallItemParam(
-    /**
-     * The item type. Always `tool_search_call`.
-     */
+    /** The item type. Always `tool_search_call`. */
     val type: BetaToolSearchCallItemParamTypeEnum,
-    /**
-     * The arguments supplied to the tool search call.
-     */
+    /** The arguments supplied to the tool search call. */
     val arguments: BetaEmptyModelParam,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `call_id` wire field.
-     */
+    /** Optional API value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /**
-     * Whether tool search was executed by the server or by the client.
-     */
+    /** Whether tool search was executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
-    val status: BetaFunctionCallItemStatus? = null
+    /** Optional API value serialized in the `status` wire field. */
+    val status: BetaFunctionCallItemStatus? = null,
 ) : BetaItem
 
-/**
- * Typed representation of the `BetaToolSearchOutput` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchOutput` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchOutput(
-    /**
-     * The type of the item. Always `tool_search_output`.
-     */
+    /** The type of the item. Always `tool_search_output`. */
     val type: BetaToolSearchOutputTypeEnum,
-    /**
-     * The unique ID of the tool search output item.
-     */
+    /** The unique ID of the tool search output item. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `call_id` wire field.
-     */
+    /** Required `string` value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id", required = true) val callId: String?,
-    /**
-     * Whether tool search was executed by the server or by the client.
-     */
+    /** Whether tool search was executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType,
-    /**
-     * The loaded tool definitions returned by tool search.
-     */
+    /** The loaded tool definitions returned by tool search. */
     val tools: List<BetaTool>,
-    /**
-     * The status of the tool search output item that was recorded.
-     */
+    /** The status of the tool search output item that was recorded. */
     val status: BetaFunctionCallOutputStatusEnum,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * Typed representation of the `BetaToolSearchOutputFunctionToolParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchOutputFunctionToolParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchOutputFunctionToolParam(
-    /**
-     * The name of the loaded function tool.
-     */
+    /** The name of the loaded function tool. */
     val name: String,
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: BetaToolSearchOutputFunctionToolParamTypeEnum,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional API value serialized in the `parameters` wire field.
-     */
+    /** Optional API value serialized in the `parameters` wire field. */
     val parameters: BetaEmptyModelParam? = null,
-    /**
-     * Optional `boolean` value serialized in the `strict` wire field.
-     */
+    /** Optional `boolean` value serialized in the `strict` wire field. */
     val strict: Boolean? = null,
     /**
-     * Whether the tool response can be returned asynchronously versus immediately returned on next response creation.
+     * Whether the tool response can be returned asynchronously versus immediately returned on next
+     * response creation.
      */
     val async: Boolean? = null,
     /**
-     * A JSON Schema describing the JSON value encoded in string outputs for this function tool. This does not describe content-array outputs.
+     * A JSON Schema describing the JSON value encoded in string outputs for this function tool.
+     * This does not describe content-array outputs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema") val outputSchema: Map<String, Any>? = null,
-    /**
-     * Whether this function should be deferred and discovered via tool search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<BetaCallableToolAllowedCaller>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
+    val outputSchema: Map<String, Any>? = null,
+    /** Whether this function should be deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<BetaCallableToolAllowedCaller>? = null,
 ) : BetaToolSearchOutputNamespaceToolParamToolsItem
 
-/**
- * Typed representation of the `BetaToolSearchOutputItemParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchOutputItemParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchOutputItemParam(
-    /**
-     * The item type. Always `tool_search_output`.
-     */
+    /** The item type. Always `tool_search_output`. */
     val type: BetaToolSearchOutputItemParamTypeEnum,
-    /**
-     * The loaded tool definitions returned by the tool search output.
-     */
+    /** The loaded tool definitions returned by the tool search output. */
     val tools: List<BetaToolSearchOutputTool>,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `call_id` wire field.
-     */
+    /** Optional API value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /**
-     * Whether tool search was executed by the server or by the client.
-     */
+    /** Whether tool search was executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
-    val status: BetaFunctionCallItemStatus? = null
+    /** Optional API value serialized in the `status` wire field. */
+    val status: BetaFunctionCallItemStatus? = null,
 ) : BetaItem
 
-/**
- * Groups function/custom tools under a shared namespace.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Groups function/custom tools under a shared namespace. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchOutputNamespaceToolParam(
-    /**
-     * The type of the tool. Always `namespace`.
-     */
+    /** The type of the tool. Always `namespace`. */
     val type: BetaToolSearchOutputNamespaceToolParamTypeEnum,
-    /**
-     * The namespace name used in tool calls (for example, `crm`).
-     */
+    /** The namespace name used in tool calls (for example, `crm`). */
     val name: String,
-    /**
-     * A description of the namespace shown to the model.
-     */
+    /** A description of the namespace shown to the model. */
     val description: String,
-    /**
-     * The function/custom tools loaded inside this namespace.
-     */
-    val tools: List<BetaToolSearchOutputNamespaceToolParamToolsItem>
+    /** The function/custom tools loaded inside this namespace. */
+    val tools: List<BetaToolSearchOutputNamespaceToolParamToolsItem>,
 ) : BetaToolSearchOutputTool
 
-/**
- * A function or custom tool loaded into a namespace by tool search.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaToolSearchOutputNamespaceToolParamToolsItem::class)
+/** A function or custom tool loaded into a namespace by tool search. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaToolSearchOutputNamespaceToolParamToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaToolSearchOutputFunctionToolParam::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCustomToolParam::class, name = "custom")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaToolSearchOutputFunctionToolParam::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCustomToolParam::class,
+        name = "custom",
+    ),
 )
 sealed interface BetaToolSearchOutputNamespaceToolParamToolsItem
 
-/** A [BetaToolSearchOutputNamespaceToolParamToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaToolSearchOutputNamespaceToolParamToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaToolSearchOutputNamespaceToolParamToolsItem] whose `type` names no branch this SDK knows,
+ * kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaToolSearchOutputNamespaceToolParamToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaToolSearchOutputNamespaceToolParamToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A tool definition returned by a tool search output.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaToolSearchOutputTool::class)
+/** A tool definition returned by a tool search output. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaToolSearchOutputTool::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionTool::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFileSearchTool::class, name = "file_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComputerTool::class, name = "computer"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComputerUsePreviewTool::class, name = "computer_use_preview"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaWebSearchTool::class, names = ["web_search", "web_search_2025_08_26"]),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionTool::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFileSearchTool::class,
+        name = "file_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComputerTool::class,
+        name = "computer",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComputerUsePreviewTool::class,
+        name = "computer_use_preview",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaWebSearchTool::class,
+        names = ["web_search", "web_search_2025_08_26"],
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaMCPTool::class, name = "mcp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCodeInterpreterTool::class, name = "code_interpreter"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaProgrammaticToolCallingParam::class, name = "programmatic_tool_calling"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaImageGenTool::class, name = "image_generation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaLocalShellToolParam::class, name = "local_shell"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionShellToolParam::class, name = "shell"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCustomToolParam::class, name = "custom"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaToolSearchOutputNamespaceToolParam::class, name = "namespace"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaToolSearchToolParam::class, name = "tool_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaWebSearchPreviewTool::class, names = ["web_search_preview", "web_search_preview_2025_03_11"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaApplyPatchToolParam::class, name = "apply_patch")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCodeInterpreterTool::class,
+        name = "code_interpreter",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaProgrammaticToolCallingParam::class,
+        name = "programmatic_tool_calling",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaImageGenTool::class,
+        name = "image_generation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaLocalShellToolParam::class,
+        name = "local_shell",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionShellToolParam::class,
+        name = "shell",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCustomToolParam::class,
+        name = "custom",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaToolSearchOutputNamespaceToolParam::class,
+        name = "namespace",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaToolSearchToolParam::class,
+        name = "tool_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaWebSearchPreviewTool::class,
+        names = ["web_search_preview", "web_search_preview_2025_03_11"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaApplyPatchToolParam::class,
+        name = "apply_patch",
+    ),
 )
 sealed interface BetaToolSearchOutputTool
 
 /** A [BetaToolSearchOutputTool] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaToolSearchOutputTool @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaToolSearchOutputTool
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaToolSearchOutputTool {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Hosted or BYOT tool search configuration for deferred tools.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Hosted or BYOT tool search configuration for deferred tools. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchToolParam(
-    /**
-     * The type of the tool. Always `tool_search`.
-     */
+    /** The type of the tool. Always `tool_search`. */
     val type: BetaToolSearchToolParamTypeEnum,
-    /**
-     * Whether tool search is executed by the server or by the client.
-     */
+    /** Whether tool search is executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional API value serialized in the `parameters` wire field.
-     */
-    val parameters: BetaEmptyModelParam? = null
+    /** Optional API value serialized in the `parameters` wire field. */
+    val parameters: BetaEmptyModelParam? = null,
 ) : BetaTool, BetaToolSearchOutputTool

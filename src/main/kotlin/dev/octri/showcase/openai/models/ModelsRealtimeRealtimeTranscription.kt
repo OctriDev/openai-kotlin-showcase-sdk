@@ -4,7 +4,9 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.
+ * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the
+ * model will detect the start and end of speech based on audio volume and respond at the end of
+ * user speech.
  */
 data class RealtimeTranscriptionSessionCreateRequestTurnDetection(
     /**
@@ -12,249 +14,278 @@ data class RealtimeTranscriptionSessionCreateRequestTurnDetection(
      */
     val type: RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum? = null,
     /**
-     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will require louder audio to activate the model, and thus might perform better in noisy environments.
+     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will
+     * require louder audio to activate the model, and thus might perform better in noisy
+     * environments.
      */
     val threshold: Double? = null,
     /**
-     * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to 300ms.
+     * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to
+     * 300ms.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms") val prefixPaddingMs: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms")
+    val prefixPaddingMs: Long? = null,
     /**
-     * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
+     * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter
+     * values the model will respond more quickly, but may jump in on short pauses from the user.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms") val silenceDurationMs: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms")
+    val silenceDurationMs: Long? = null,
 )
 
-/**
- * Realtime transcription session object configuration.
- */
+/** Realtime transcription session object configuration. */
 data class RealtimeTranscriptionSessionCreateRequest(
     /**
-     * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.
+     * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the
+     * model will detect the start and end of speech based on audio volume and respond at the end of
+     * user speech.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTranscriptionSessionCreateRequestTurnDetection? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
+    val turnDetection: RealtimeTranscriptionSessionCreateRequestTurnDetection? = null,
     /**
-     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
+     * reduction filters audio added to the input audio buffer before it is sent to VAD and the
+     * model. Filtering the audio can improve VAD and turn detection accuracy (reducing false
+     * positives) and model performance by improving perception of the input audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_noise_reduction") val inputAudioNoiseReduction: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_noise_reduction")
+    val inputAudioNoiseReduction: Any? = null,
     /**
-     * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate, single channel (mono), and little-endian byte order.
+     * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`,
+     * input audio must be 16-bit PCM at a 24kHz sample rate, single channel (mono), and
+     * little-endian byte order.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_format") val inputAudioFormat: RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_format")
+    val inputAudioFormat: RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum? = null,
     /**
-     * Configuration for input audio transcription. The client can optionally set the language and prompt for transcription, these offer additional guidance to the transcription service.
+     * Configuration for input audio transcription. The client can optionally set the language and
+     * prompt for transcription, these offer additional guidance to the transcription service.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_transcription") val inputAudioTranscription: AudioTranscription? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_transcription")
+    val inputAudioTranscription: AudioTranscription? = null,
     /**
-     * The set of items to include in the transcription. Current available items are: `item.input_audio_transcription.logprobs`
+     * The set of items to include in the transcription. Current available items are:
+     * `item.input_audio_transcription.logprobs`
      */
-    val include: List<RealtimeTranscriptionSessionCreateRequestIncludeItemEnum>? = null
+    val include: List<RealtimeTranscriptionSessionCreateRequestIncludeItemEnum>? = null,
 )
 
-/**
- * Optional object value serialized in the `input` wire field.
- */
+/** Optional object value serialized in the `input` wire field. */
 data class RealtimeTranscriptionSessionCreateRequestGAAudioInput(
-    /**
-     * Optional API value serialized in the `format` wire field.
-     */
+    /** Optional API value serialized in the `format` wire field. */
     val format: RealtimeAudioFormats? = null,
     /**
-     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn off once on. Input audio transcription is not native to the model, since the model consumes audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint and should be treated as guidance of input audio content rather than precisely what the model heard. The client can optionally set the language and prompt for transcription, these offer additional…
+     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn
+     * off once on. Input audio transcription is not native to the model, since the model consumes
+     * audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint
+     * and should be treated as guidance of input audio content rather than precisely what the model
+     * heard. The client can optionally set the language and prompt for transcription, these offer
+     * additional…
      */
     val transcription: AudioTranscription? = null,
     /**
-     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
+     * reduction filters audio added to the input audio buffer before it is sent to VAD and the
+     * model. Filtering the audio can improve VAD and turn detection accuracy (reducing false
+     * positives) and model performance by improving perception of the input audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
+    val noiseReduction: Any? = null,
     /**
-     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
+     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null`
+     * to turn off, in which case the client must manually trigger model response. Server VAD means
+     * that the model will detect the start and end of speech based on audio volume and respond at
+     * the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in
+     * conjunction with VAD) to semantically estimate whether the user has finished speaking, then
+     * dynamically sets a…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTurnDetection? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
+    val turnDetection: RealtimeTurnDetection? = null,
 )
 
-/**
- * Configuration for input and output audio.
- */
+/** Configuration for input and output audio. */
 data class RealtimeTranscriptionSessionCreateRequestGAAudio(
-    /**
-     * Optional object value serialized in the `input` wire field.
-     */
+    /** Optional object value serialized in the `input` wire field. */
     val input: RealtimeTranscriptionSessionCreateRequestGAAudioInput? = null
 )
 
-/**
- * Realtime transcription session object configuration.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Realtime transcription session object configuration. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RealtimeTranscriptionSessionCreateRequestGA(
-    /**
-     * The type of session to create. Always `transcription` for transcription sessions.
-     */
+    /** The type of session to create. Always `transcription` for transcription sessions. */
     val type: RealtimeTranscriptionSessionCreateRequestGATypeEnum,
-    /**
-     * Configuration for input and output audio.
-     */
+    /** Configuration for input and output audio. */
     val audio: RealtimeTranscriptionSessionCreateRequestGAAudio? = null,
     /**
-     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
+     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`:
+     * Include logprobs for input audio transcription.
      */
-    val include: List<RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum>? = null
+    val include: List<RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum>? = null,
 ) : RealtimeClientEventSessionUpdateSession, RealtimeCreateClientSecretRequestSession
 
 /**
- * Ephemeral key returned by the API. Only present when the session is created on the server via REST API.
+ * Ephemeral key returned by the API. Only present when the session is created on the server via
+ * REST API.
  */
 data class RealtimeTranscriptionSessionCreateResponseClientSecret(
     /**
-     * Ephemeral key usable in client environments to authenticate connections to the Realtime API. Use this in client-side environments rather than a standard API token, which should only be used server-side.
+     * Ephemeral key usable in client environments to authenticate connections to the Realtime API.
+     * Use this in client-side environments rather than a standard API token, which should only be
+     * used server-side.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /**
-     * Timestamp for when the token expires. Currently, all tokens expire after one minute.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long
+    /** Timestamp for when the token expires. Currently, all tokens expire after one minute. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
 )
 
 /**
- * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.
+ * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the
+ * model will detect the start and end of speech based on audio volume and respond at the end of
+ * user speech.
  */
 data class RealtimeTranscriptionSessionCreateResponseTurnDetection(
-    /**
-     * Type of turn detection, only `server_vad` is currently supported.
-     */
+    /** Type of turn detection, only `server_vad` is currently supported. */
     val type: String? = null,
     /**
-     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will require louder audio to activate the model, and thus might perform better in noisy environments.
+     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will
+     * require louder audio to activate the model, and thus might perform better in noisy
+     * environments.
      */
     val threshold: Double? = null,
     /**
-     * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to 300ms.
+     * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to
+     * 300ms.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms") val prefixPaddingMs: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms")
+    val prefixPaddingMs: Long? = null,
     /**
-     * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
+     * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter
+     * values the model will respond more quickly, but may jump in on short pauses from the user.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms") val silenceDurationMs: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms")
+    val silenceDurationMs: Long? = null,
 )
 
 /**
- * A new Realtime transcription session configuration. When a session is created on the server via REST API, the session object also contains an ephemeral key. Default TTL for keys is 10 minutes. This property is not present when a session is updated via the WebSocket API.
+ * A new Realtime transcription session configuration. When a session is created on the server via
+ * REST API, the session object also contains an ephemeral key. Default TTL for keys is 10 minutes.
+ * This property is not present when a session is updated via the WebSocket API.
  */
 data class RealtimeTranscriptionSessionCreateResponse(
     /**
-     * Ephemeral key returned by the API. Only present when the session is created on the server via REST API.
+     * Ephemeral key returned by the API. Only present when the session is created on the server via
+     * REST API.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_secret") val clientSecret: RealtimeTranscriptionSessionCreateResponseClientSecret,
+    @com.fasterxml.jackson.annotation.JsonProperty("client_secret")
+    val clientSecret: RealtimeTranscriptionSessionCreateResponseClientSecret,
     /**
      * The set of modalities the model can respond with. To disable audio, set this to \["text"\].
      */
     val modalities: List<RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum>? = null,
+    /** The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_format")
+    val inputAudioFormat: String? = null,
+    /** Configuration of the transcription model. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_transcription")
+    val inputAudioTranscription: AudioTranscriptionResponse? = null,
     /**
-     * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
+     * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the
+     * model will detect the start and end of speech based on audio volume and respond at the end of
+     * user speech.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_format") val inputAudioFormat: String? = null,
-    /**
-     * Configuration of the transcription model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_transcription") val inputAudioTranscription: AudioTranscriptionResponse? = null,
-    /**
-     * Configuration for turn detection. Can be set to `null` to turn off. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTranscriptionSessionCreateResponseTurnDetection? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
+    val turnDetection: RealtimeTranscriptionSessionCreateResponseTurnDetection? = null,
 )
 
-/**
- * Configuration for input audio noise reduction.
- */
+/** Configuration for input audio noise reduction. */
 data class RealtimeTranscriptionSessionCreateResponseGAAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
+     * `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType? = null
 )
 
 /**
- * Configuration for turn detection. For `gpt-realtime-whisper`, this must be `null`; VAD is not supported.
+ * Configuration for turn detection. For `gpt-realtime-whisper`, this must be `null`; VAD is not
+ * supported.
  */
 data class RealtimeTranscriptionSessionCreateResponseGAAudioInputTurnDetection(
-    /**
-     * Type of turn detection, only `server_vad` is currently supported.
-     */
+    /** Type of turn detection, only `server_vad` is currently supported. */
     val type: String? = null,
     /**
-     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will require louder audio to activate the model, and thus might perform better in noisy environments.
+     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will
+     * require louder audio to activate the model, and thus might perform better in noisy
+     * environments.
      */
     val threshold: Double? = null,
     /**
-     * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to 300ms.
+     * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to
+     * 300ms.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms") val prefixPaddingMs: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms")
+    val prefixPaddingMs: Long? = null,
     /**
-     * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
+     * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter
+     * values the model will respond more quickly, but may jump in on short pauses from the user.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms") val silenceDurationMs: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms")
+    val silenceDurationMs: Long? = null,
 )
 
-/**
- * Optional object value serialized in the `input` wire field.
- */
+/** Optional object value serialized in the `input` wire field. */
 data class RealtimeTranscriptionSessionCreateResponseGAAudioInput(
-    /**
-     * Optional API value serialized in the `format` wire field.
-     */
+    /** Optional API value serialized in the `format` wire field. */
     val format: RealtimeAudioFormats? = null,
-    /**
-     * Configuration of the transcription model.
-     */
+    /** Configuration of the transcription model. */
     val transcription: AudioTranscriptionResponse? = null,
+    /** Configuration for input audio noise reduction. */
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
+    val noiseReduction: RealtimeTranscriptionSessionCreateResponseGAAudioInputNoiseReduction? =
+        null,
     /**
-     * Configuration for input audio noise reduction.
+     * Configuration for turn detection. For `gpt-realtime-whisper`, this must be `null`; VAD is not
+     * supported.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeTranscriptionSessionCreateResponseGAAudioInputNoiseReduction? = null,
-    /**
-     * Configuration for turn detection. For `gpt-realtime-whisper`, this must be `null`; VAD is not supported.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTranscriptionSessionCreateResponseGAAudioInputTurnDetection? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
+    val turnDetection: RealtimeTranscriptionSessionCreateResponseGAAudioInputTurnDetection? = null,
 )
 
-/**
- * Configuration for input audio for the session.
- */
+/** Configuration for input audio for the session. */
 data class RealtimeTranscriptionSessionCreateResponseGAAudio(
-    /**
-     * Optional object value serialized in the `input` wire field.
-     */
+    /** Optional object value serialized in the `input` wire field. */
     val input: RealtimeTranscriptionSessionCreateResponseGAAudioInput? = null
 )
 
-/**
- * A Realtime transcription session configuration object.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A Realtime transcription session configuration object. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RealtimeTranscriptionSessionCreateResponseGA(
-    /**
-     * The type of session. Always `transcription` for transcription sessions.
-     */
+    /** The type of session. Always `transcription` for transcription sessions. */
     val type: RealtimeTranscriptionSessionCreateResponseGATypeEnum,
-    /**
-     * Unique identifier for the session that looks like `sess_1234567890abcdef`.
-     */
+    /** Unique identifier for the session that looks like `sess_1234567890abcdef`. */
     val id: String,
-    /**
-     * The object type. Always `realtime.transcription_session`.
-     */
+    /** The object type. Always `realtime.transcription_session`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Expiration timestamp for the session, in seconds since epoch.
-     */
+    /** Expiration timestamp for the session, in seconds since epoch. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
     /**
-     * Additional fields to include in server outputs. - `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
+     * Additional fields to include in server outputs. - `item.input_audio_transcription.logprobs`:
+     * Include logprobs for input audio transcription.
      */
     val include: List<RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum>? = null,
-    /**
-     * Configuration for input audio for the session.
-     */
-    val audio: RealtimeTranscriptionSessionCreateResponseGAAudio? = null
-) : RealtimeCreateClientSecretResponseSession, RealtimeServerEventSessionCreatedSession, RealtimeServerEventSessionUpdatedSession
+    /** Configuration for input audio for the session. */
+    val audio: RealtimeTranscriptionSessionCreateResponseGAAudio? = null,
+) :
+    RealtimeCreateClientSecretResponseSession,
+    RealtimeServerEventSessionCreatedSession,
+    RealtimeServerEventSessionUpdatedSession

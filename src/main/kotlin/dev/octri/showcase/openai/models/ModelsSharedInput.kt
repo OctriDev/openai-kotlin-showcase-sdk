@@ -3,182 +3,183 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required object value serialized in the `input_audio` wire field.
- */
+/** Required object value serialized in the `input_audio` wire field. */
 data class InputAudioInputAudio(
-    /**
-     * Base64-encoded audio data.
-     */
+    /** Base64-encoded audio data. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
-    /**
-     * The format of the audio data. Currently supported formats are `mp3` and `wav`.
-     */
-    val format: InputAudioInputAudioFormatEnum
+    /** The format of the audio data. Currently supported formats are `mp3` and `wav`. */
+    val format: InputAudioInputAudioFormatEnum,
 )
 
-/**
- * An audio input to the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An audio input to the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputAudio(
-    /**
-     * The type of the input item. Always `input_audio`.
-     */
+    /** The type of the input item. Always `input_audio`. */
     val type: InputAudioTypeEnum,
-    /**
-     * Required object value serialized in the `input_audio` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio") val inputAudio: InputAudioInputAudio
+    /** Required object value serialized in the `input_audio` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio")
+    val inputAudio: InputAudioInputAudio,
 ) : EvalItemContentItem
 
-/**
- * Typed representation of the `InputContent` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownInputContent::class)
+/** Typed representation of the `InputContent` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownInputContent::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputTextContent::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputImageContent::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputFileContent::class, name = "input_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputTextContent::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputImageContent::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputFileContent::class,
+        name = "input_file",
+    ),
 )
 sealed interface InputContent : Content
 
 /** A [InputContent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownInputContent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownInputContent
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : InputContent {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A file input to the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A file input to the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputFileContent(
-    /**
-     * The type of the input item. Always `input_file`.
-     */
+    /** The type of the input item. Always `input_file`. */
     val type: InputFileContentTypeEnum,
-    /**
-     * Optional `string` value serialized in the `file_id` wire field.
-     */
+    /** Optional `string` value serialized in the `file_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /**
-     * The name of the file to be sent to the model.
-     */
+    /** The name of the file to be sent to the model. */
     val filename: String? = null,
-    /**
-     * The content of the file to be sent to the model.
-     */
+    /** The content of the file to be sent to the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_data") val fileData: String? = null,
     /**
-     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the
+     * request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null,
-    /**
-     * The URL of the file to be sent to the model.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null,
+    /** The URL of the file to be sent to the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_url") val fileUrl: String? = null,
     /**
-     * The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
+     * The detail level of the file to be sent to the model. Use `auto` to let the system select the
+     * detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may
+     * increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file
+     * at higher quality. Defaults to `auto`.
      */
-    val detail: FileInputDetail? = null
+    val detail: FileInputDetail? = null,
 ) : FunctionAndCustomToolCallOutput, InputContent, MessageContentItem
 
-/**
- * A file input to the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A file input to the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputFileContentParam(
-    /**
-     * The type of the input item. Always `input_file`.
-     */
+    /** The type of the input item. Always `input_file`. */
     val type: InputFileContentParamTypeEnum,
-    /**
-     * Optional `string` value serialized in the `file_id` wire field.
-     */
+    /** Optional `string` value serialized in the `file_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /**
-     * Optional `string` value serialized in the `filename` wire field.
-     */
+    /** Optional `string` value serialized in the `filename` wire field. */
     val filename: String? = null,
-    /**
-     * Optional API value serialized in the `file_data` wire field.
-     */
+    /** Optional API value serialized in the `file_data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_data") val fileData: String? = null,
-    /**
-     * Optional API value serialized in the `file_url` wire field.
-     */
+    /** Optional API value serialized in the `file_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_url") val fileUrl: String? = null,
     /**
-     * The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
+     * The detail level of the file to be sent to the model. Use `auto` to let the system select the
+     * detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may
+     * increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file
+     * at higher quality. Defaults to `auto`.
      */
     val detail: FileDetailEnum? = null,
-    /**
-     * Optional API value serialized in the `prompt_cache_breakpoint` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointParam? = null
+    /** Optional API value serialized in the `prompt_cache_breakpoint` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointParam? = null,
 ) : FunctionCallOutputItemParamOutputItem, UserMessageItemParamContentItem
 
-/**
- * An image input to the model. Learn about image inputs.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An image input to the model. Learn about image inputs. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputImageContent(
-    /**
-     * The type of the input item. Always `input_image`.
-     */
+    /** The type of the input item. Always `input_image`. */
     val type: InputImageContentTypeEnum,
     /**
-     * The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+     * The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or
+     * `original`. Defaults to `auto`.
      */
     val detail: ImageDetail,
-    /**
-     * Optional API value serialized in the `image_url` wire field.
-     */
+    /** Optional API value serialized in the `image_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /**
-     * Optional `string` value serialized in the `file_id` wire field.
-     */
+    /** Optional `string` value serialized in the `file_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
     /**
-     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the
+     * request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null,
 ) : FunctionAndCustomToolCallOutput, InputContent, MessageContentItem
 
-/**
- * An image input to the model. Learn about image inputs
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An image input to the model. Learn about image inputs */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputImageContentParamAutoParam(
-    /**
-     * The type of the input item. Always `input_image`.
-     */
+    /** The type of the input item. Always `input_image`. */
     val type: InputImageContentParamAutoParamTypeEnum,
-    /**
-     * Optional API value serialized in the `image_url` wire field.
-     */
+    /** Optional API value serialized in the `image_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /**
-     * Optional `string` value serialized in the `file_id` wire field.
-     */
+    /** Optional `string` value serialized in the `file_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /**
-     * Optional API value serialized in the `detail` wire field.
-     */
+    /** Optional API value serialized in the `detail` wire field. */
     val detail: DetailEnum? = null,
-    /**
-     * Optional API value serialized in the `prompt_cache_breakpoint` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointParam? = null
+    /** Optional API value serialized in the `prompt_cache_breakpoint` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointParam? = null,
 ) : FunctionCallOutputItemParamOutputItem, UserMessageItemParamContentItem
 
-/**
- * Typed representation of the `InputItem` API schema.
- */
+/** Typed representation of the `InputItem` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = InputItem.Deserializer::class)
 sealed interface InputItem {
     /** Chooses the branch this payload is shaped like. */
@@ -189,7 +190,15 @@ sealed interface InputItem {
         ): InputItem {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out InputItem>> = listOf(EasyInputMessage::class.java, CompactionTriggerItemParam::class.java, ItemReferenceParam::class.java, ProgramItemParam::class.java, ProgramOutputItemParam::class.java, Item::class.java)
+            val objectTypes: List<Class<out InputItem>> =
+                listOf(
+                    EasyInputMessage::class.java,
+                    CompactionTriggerItemParam::class.java,
+                    ItemReferenceParam::class.java,
+                    ProgramItemParam::class.java,
+                    ProgramOutputItemParam::class.java,
+                    Item::class.java,
+                )
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -198,72 +207,77 @@ sealed interface InputItem {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, InputItem::class.java, "no InputItem branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        InputItem::class.java,
+                        "no InputItem branch accepts this payload",
+                    )
             }
         }
     }
 }
 
 /**
- * A message input to the model with a role indicating instruction following hierarchy. Instructions given with the `developer` or `system` role take precedence over instructions given with the `user` role.
+ * A message input to the model with a role indicating instruction following hierarchy. Instructions
+ * given with the `developer` or `system` role take precedence over instructions given with the
+ * `user` role.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputMessage(
-    /**
-     * The role of the message input. One of `user`, `system`, or `developer`.
-     */
+    /** The role of the message input. One of `user`, `system`, or `developer`. */
     val role: InputMessageRoleEnum,
-    /**
-     * A list of one or many input items to the model, containing different content types.
-     */
+    /** A list of one or many input items to the model, containing different content types. */
     val content: InputMessageContentList,
-    /**
-     * The type of the message input. Always set to `message`.
-     */
+    /** The type of the message input. Always set to `message`. */
     val type: InputMessageTypeEnum? = null,
     /**
-     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items
+     * are returned via API.
      */
-    val status: InputMessageStatusEnum? = null
+    val status: InputMessageStatusEnum? = null,
 ) : Item
 
 typealias InputMessageContentList = List<InputContent>
 
-/**
- * A text input to the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A text input to the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputTextContent(
-    /**
-     * The type of the input item. Always `input_text`.
-     */
+    /** The type of the input item. Always `input_text`. */
     val type: InputTextContentTypeEnum,
-    /**
-     * The text input to the model.
-     */
+    /** The text input to the model. */
     val text: String,
     /**
-     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the
+     * request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null,
 ) : EvalItemContentItem, FunctionAndCustomToolCallOutput, InputContent, MessageContentItem
 
-/**
- * A text input to the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A text input to the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputTextContentParam(
-    /**
-     * The type of the input item. Always `input_text`.
-     */
+    /** The type of the input item. Always `input_text`. */
     val type: InputTextContentParamTypeEnum,
-    /**
-     * The text input to the model.
-     */
+    /** The text input to the model. */
     val text: String,
-    /**
-     * Optional API value serialized in the `prompt_cache_breakpoint` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: PromptCacheBreakpointParam? = null
+    /** Optional API value serialized in the `prompt_cache_breakpoint` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointParam? = null,
 ) : FunctionCallOutputItemParamOutputItem, UserMessageItemParamContentItem

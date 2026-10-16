@@ -3,176 +3,255 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Optional object value serialized in the `sampling_params` wire field.
- */
+/** Optional object value serialized in the `sampling_params` wire field. */
 data class CreateEvalCompletionsRunDataSourceSamplingParams(
-    /**
-     * Optional API value serialized in the `reasoning_effort` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
-    /**
-     * A higher temperature increases randomness in the outputs.
-     */
+    /** Optional API value serialized in the `reasoning_effort` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
+    val reasoningEffort: ReasoningEffort? = null,
+    /** A higher temperature increases randomness in the outputs. */
     val temperature: Double? = null,
-    /**
-     * The maximum number of tokens in the generated output.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long? = null,
-    /**
-     * An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
-     */
+    /** The maximum number of tokens in the generated output. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens")
+    val maxCompletionTokens: Long? = null,
+    /** An alternative to temperature for nucleus sampling; 1.0 includes all tokens. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /**
-     * A seed value to initialize the randomness, during sampling.
-     */
+    /** A seed value to initialize the randomness, during sampling. */
     val seed: Long? = null,
     /**
-     * An object specifying the format that the model must output. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the \[Structured Outputs guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid JSON. Using `json_schema` is preferred for models that support it.
+     * An object specifying the format that the model must output. Setting to `{ "type":
+     * "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model
+     * will match your supplied JSON schema. Learn more in the \[Structured Outputs
+     * guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON
+     * mode, which ensures the message the model generates is valid JSON. Using `json_schema` is
+     * preferred for models that support it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
+    val responseFormat: CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat? = null,
     /**
-     * A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for. A max of 128 functions are supported.
+     * A list of tools the model may call. Currently, only functions are supported as a tool. Use
+     * this to provide a list of functions the model may generate JSON inputs for. A max of 128
+     * functions are supported.
      */
-    val tools: List<ChatCompletionTool>? = null
+    val tools: List<ChatCompletionTool>? = null,
 )
 
-/**
- * A CompletionsRunDataSource object describing a model sampling configuration.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A CompletionsRunDataSource object describing a model sampling configuration. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalCompletionsRunDataSource(
-    /**
-     * The type of run data source. Always `completions`.
-     */
+    /** The type of run data source. Always `completions`. */
     val type: CreateEvalCompletionsRunDataSourceTypeEnum,
-    /**
-     * Determines what populates the `item` namespace in this run's data source.
-     */
+    /** Determines what populates the `item` namespace in this run's data source. */
     val source: CreateEvalCompletionsRunDataSourceSource,
     /**
-     * Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+     * Used when sampling from a model. Dictates the structure of the messages passed into the
+     * model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a
+     * template with variable references to the `item` namespace.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_messages") val inputMessages: CreateEvalCompletionsRunDataSourceInputMessages? = null,
-    /**
-     * Optional object value serialized in the `sampling_params` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: CreateEvalCompletionsRunDataSourceSamplingParams? = null,
-    /**
-     * The name of the model to use for generating completions (e.g. "o3-mini").
-     */
-    val model: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("input_messages")
+    val inputMessages: CreateEvalCompletionsRunDataSourceInputMessages? = null,
+    /** Optional object value serialized in the `sampling_params` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params")
+    val samplingParams: CreateEvalCompletionsRunDataSourceSamplingParams? = null,
+    /** The name of the model to use for generating completions (e.g. "o3-mini"). */
+    val model: String? = null,
 ) : CreateEvalRunRequestDataSource, EvalRunDataSource
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalCompletionsRunDataSourceInputMessagesVariant0(
-    /**
-     * The type of input messages. Always `template`.
-     */
+    /** The type of input messages. Always `template`. */
     val type: CreateEvalCompletionsRunDataSourceInputMessagesVariant0TypeEnum,
     /**
-     * A list of chat messages forming the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+     * A list of chat messages forming the prompt or context. May include variable references to the
+     * `item` namespace, ie {{item.name}}.
      */
-    val template: List<TemplateItem>
+    val template: List<TemplateItem>,
 ) : CreateEvalCompletionsRunDataSourceInputMessages
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalCompletionsRunDataSourceInputMessagesVariant1(
-    /**
-     * The type of input messages. Always `item_reference`.
-     */
+    /** The type of input messages. Always `item_reference`. */
     val type: CreateEvalCompletionsRunDataSourceInputMessagesVariant1TypeEnum,
-    /**
-     * A reference to a variable in the `item` namespace. Ie, "item.input_trajectory"
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_reference") val itemReference: String
+    /** A reference to a variable in the `item` namespace. Ie, "item.input_trajectory" */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_reference") val itemReference: String,
 ) : CreateEvalCompletionsRunDataSourceInputMessages
 
 /**
- * Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+ * Used when sampling from a model. Dictates the structure of the messages passed into the model.
+ * Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template
+ * with variable references to the `item` namespace.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalCompletionsRunDataSourceInputMessagesVariant0::class, name = "template"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalCompletionsRunDataSourceInputMessagesVariant1::class, name = "item_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalCompletionsRunDataSourceInputMessagesVariant0::class,
+        name = "template",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalCompletionsRunDataSourceInputMessagesVariant1::class,
+        name = "item_reference",
+    ),
 )
 sealed interface CreateEvalCompletionsRunDataSourceInputMessages
 
 /**
- * An object specifying the format that the model must output. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the \[Structured Outputs guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid JSON. Using `json_schema` is preferred for models that support it.
+ * An object specifying the format that the model must output. Setting to `{ "type": "json_schema",
+ * "json_schema": {...} }` enables Structured Outputs which ensures the model will match your
+ * supplied JSON schema. Learn more in the \[Structured Outputs guide\](developers.openai.com).
+ * Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the
+ * model generates is valid JSON. Using `json_schema` is preferred for models that support it.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseFormatText::class, name = "text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseFormatJsonSchema::class, name = "json_schema"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseFormatJsonObject::class, name = "json_object")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ResponseFormatText::class,
+        name = "text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ResponseFormatJsonSchema::class,
+        name = "json_schema",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ResponseFormatJsonObject::class,
+        name = "json_object",
+    ),
 )
 sealed interface CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
 
-/** A [CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat] whose `type` names no branch
+ * this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Determines what populates the `item` namespace in this run's data source.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalCompletionsRunDataSourceSource::class)
+/** Determines what populates the `item` namespace in this run's data source. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalCompletionsRunDataSourceSource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalJsonlFileContentSource::class, name = "file_content"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalJsonlFileIdSource::class, name = "file_id"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalStoredCompletionsSource::class, name = "stored_completions")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalJsonlFileContentSource::class,
+        name = "file_content",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalJsonlFileIdSource::class,
+        name = "file_id",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalStoredCompletionsSource::class,
+        name = "stored_completions",
+    ),
 )
 sealed interface CreateEvalCompletionsRunDataSourceSource
 
-/** A [CreateEvalCompletionsRunDataSourceSource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalCompletionsRunDataSourceSource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalCompletionsRunDataSourceSource] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalCompletionsRunDataSourceSource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalCompletionsRunDataSourceSource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * A CustomDataSourceConfig object that defines the schema for the data source used for the evaluation runs. This schema is used to define the shape of the data that will be: - Used to define your testing criteria and - What data is required when creating a run
+ * A CustomDataSourceConfig object that defines the schema for the data source used for the
+ * evaluation runs. This schema is used to define the shape of the data that will be: - Used to
+ * define your testing criteria and - What data is required when creating a run
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalCustomDataSourceConfig(
-    /**
-     * The type of data source. Always `custom`.
-     */
+    /** The type of data source. Always `custom`. */
     val type: CreateEvalCustomDataSourceConfigTypeEnum,
-    /**
-     * The json schema for each row in the data source.
-     */
+    /** The json schema for each row in the data source. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_schema") val itemSchema: Map<String, Any>,
     /**
-     * Whether the eval should expect you to populate the sample namespace (ie, by generating responses off of your data source)
+     * Whether the eval should expect you to populate the sample namespace (ie, by generating
+     * responses off of your data source)
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_sample_schema") val includeSampleSchema: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("include_sample_schema")
+    val includeSampleSchema: Boolean? = null,
 ) : CreateEvalRequestDataSourceConfig
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalItemVariant0(
-    /**
-     * The role of the message (e.g. "system", "assistant", "user").
-     */
+    /** The role of the message (e.g. "system", "assistant", "user"). */
     val role: String,
-    /**
-     * The content of the message.
-     */
-    val content: String
+    /** The content of the message. */
+    val content: String,
 ) : CreateEvalItem
 
 /**
- * A chat message that makes up the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+ * A chat message that makes up the prompt or context. May include variable references to the `item`
+ * namespace, ie {{item.name}}.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateEvalItem.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = CreateEvalItem.Deserializer::class
+)
 sealed interface CreateEvalItem {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateEvalItem>() {
@@ -182,10 +261,11 @@ sealed interface CreateEvalItem {
         ): CreateEvalItem {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType: Class<out CreateEvalItem>? = when {
-                node.has("type") -> EvalItem::class.java
-                else -> null
-            }
+            val ownedType: Class<out CreateEvalItem>? =
+                when {
+                    node.has("type") -> EvalItem::class.java
+                    else -> null
+                }
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -193,7 +273,8 @@ sealed interface CreateEvalItem {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out CreateEvalItem>> = listOf(CreateEvalItemVariant0::class.java, EvalItem::class.java)
+            val objectTypes: List<Class<out CreateEvalItem>> =
+                listOf(CreateEvalItemVariant0::class.java, EvalItem::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -202,331 +283,480 @@ sealed interface CreateEvalItem {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, CreateEvalItem::class.java, "no CreateEvalItem branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        CreateEvalItem::class.java,
+                        "no CreateEvalItem branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-/**
- * A JsonlRunDataSource object with that specifies a JSONL file that matches the eval
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A JsonlRunDataSource object with that specifies a JSONL file that matches the eval */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalJsonlRunDataSource(
-    /**
-     * The type of data source. Always `jsonl`.
-     */
+    /** The type of data source. Always `jsonl`. */
     val type: CreateEvalJsonlRunDataSourceTypeEnum,
-    /**
-     * Determines what populates the `item` namespace in the data source.
-     */
-    val source: CreateEvalJsonlRunDataSourceSource
+    /** Determines what populates the `item` namespace in the data source. */
+    val source: CreateEvalJsonlRunDataSourceSource,
 ) : CreateEvalRunRequestDataSource, EvalRunDataSource
 
-/**
- * Determines what populates the `item` namespace in the data source.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalJsonlRunDataSourceSource::class)
+/** Determines what populates the `item` namespace in the data source. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalJsonlRunDataSourceSource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalJsonlFileContentSource::class, name = "file_content"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalJsonlFileIdSource::class, name = "file_id")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalJsonlFileContentSource::class,
+        name = "file_content",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalJsonlFileIdSource::class,
+        name = "file_id",
+    ),
 )
 sealed interface CreateEvalJsonlRunDataSourceSource
 
-/** A [CreateEvalJsonlRunDataSourceSource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalJsonlRunDataSourceSource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalJsonlRunDataSourceSource] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalJsonlRunDataSourceSource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalJsonlRunDataSourceSource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A LabelModelGrader object which uses a model to assign labels to each item in the evaluation. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalLabelModelGrader(
-    /**
-     * The object type, which is always `label_model`.
-     */
+    /** The object type, which is always `label_model`. */
     val type: CreateEvalLabelModelGraderTypeEnum,
-    /**
-     * The name of the grader.
-     */
+    /** The name of the grader. */
     val name: String,
-    /**
-     * The model to use for the evaluation. Must support structured outputs.
-     */
+    /** The model to use for the evaluation. Must support structured outputs. */
     val model: String,
     /**
-     * A list of chat messages forming the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+     * A list of chat messages forming the prompt or context. May include variable references to the
+     * `item` namespace, ie {{item.name}}.
      */
     val input: List<CreateEvalItem>,
-    /**
-     * The labels to classify to each item in the evaluation.
-     */
+    /** The labels to classify to each item in the evaluation. */
     val labels: List<String>,
-    /**
-     * The labels that indicate a passing result. Must be a subset of labels.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("passing_labels") val passingLabels: List<String>
+    /** The labels that indicate a passing result. Must be a subset of labels. */
+    @com.fasterxml.jackson.annotation.JsonProperty("passing_labels")
+    val passingLabels: List<String>,
 ) : CreateEvalRequestTestingCriteriaItem
 
 /**
- * A data source config which specifies the metadata property of your logs query. This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc.
+ * A data source config which specifies the metadata property of your logs query. This is usually
+ * metadata like `usecase=chatbot` or `prompt-version=v2`, etc.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalLogsDataSourceConfig(
-    /**
-     * The type of data source. Always `logs`.
-     */
+    /** The type of data source. Always `logs`. */
     val type: CreateEvalLogsDataSourceConfigTypeEnum,
-    /**
-     * Metadata filters for the logs data source.
-     */
-    val metadata: Map<String, Any>? = null
+    /** Metadata filters for the logs data source. */
+    val metadata: Map<String, Any>? = null,
 ) : CreateEvalRequestDataSourceConfig
 
-/**
- * Typed representation of the `CreateEvalRequest` API schema.
- */
+/** Typed representation of the `CreateEvalRequest` API schema. */
 data class CreateEvalRequest(
     /**
-     * The configuration for the data source used for the evaluation runs. Dictates the schema of the data used in the evaluation.
+     * The configuration for the data source used for the evaluation runs. Dictates the schema of
+     * the data used in the evaluation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_source_config") val dataSourceConfig: CreateEvalRequestDataSourceConfig,
+    @com.fasterxml.jackson.annotation.JsonProperty("data_source_config")
+    val dataSourceConfig: CreateEvalRequestDataSourceConfig,
     /**
-     * A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
+     * A list of graders for all eval runs in this group. Graders can reference variables in the
+     * data source using double curly braces notation, like `{{item.variable_name}}`. To reference
+     * the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("testing_criteria") val testingCriteria: List<CreateEvalRequestTestingCriteriaItem>,
-    /**
-     * The name of the evaluation.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("testing_criteria")
+    val testingCriteria: List<CreateEvalRequestTestingCriteriaItem>,
+    /** The name of the evaluation. */
     val name: String? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
-    val metadata: Metadata? = null
+    val metadata: Metadata? = null,
 )
 
 /**
- * The configuration for the data source used for the evaluation runs. Dictates the schema of the data used in the evaluation.
+ * The configuration for the data source used for the evaluation runs. Dictates the schema of the
+ * data used in the evaluation.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalRequestDataSourceConfig::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalRequestDataSourceConfig::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalCustomDataSourceConfig::class, name = "custom"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalLogsDataSourceConfig::class, name = "logs"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalStoredCompletionsDataSourceConfig::class, name = "stored_completions")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalCustomDataSourceConfig::class,
+        name = "custom",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalLogsDataSourceConfig::class,
+        name = "logs",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalStoredCompletionsDataSourceConfig::class,
+        name = "stored_completions",
+    ),
 )
 sealed interface CreateEvalRequestDataSourceConfig
 
-/** A [CreateEvalRequestDataSourceConfig] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalRequestDataSourceConfig @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalRequestDataSourceConfig] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalRequestDataSourceConfig
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalRequestDataSourceConfig {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Required API value serialized in the `testing_criteria[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalRequestTestingCriteriaItem::class)
+/** Required API value serialized in the `testing_criteria[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalRequestTestingCriteriaItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalLabelModelGrader::class, name = "label_model"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderStringCheck::class, name = "string_check"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderTextSimilarity::class, name = "text_similarity"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderPython::class, name = "python"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderScoreModel::class, name = "score_model")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalLabelModelGrader::class,
+        name = "label_model",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderStringCheck::class,
+        name = "string_check",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderTextSimilarity::class,
+        name = "text_similarity",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderPython::class,
+        name = "python",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderScoreModel::class,
+        name = "score_model",
+    ),
 )
 sealed interface CreateEvalRequestTestingCriteriaItem
 
-/** A [CreateEvalRequestTestingCriteriaItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalRequestTestingCriteriaItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalRequestTestingCriteriaItem] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalRequestTestingCriteriaItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalRequestTestingCriteriaItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+ * Configuration options for a text response from the model. Can be plain text or structured JSON
+ * data. Learn more: - Text inputs and outputs - Structured Outputs
  */
 data class CreateEvalResponsesRunDataSourceSamplingParamsText(
     /**
-     * An object specifying the format that the model must output. Configuring `{ "type": "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type": "text" }` with no additional options. **Not recommended for gpt-4o and newer models:** Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid…
+     * An object specifying the format that the model must output. Configuring `{ "type":
+     * "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied
+     * JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type":
+     * "text" }` with no additional options. **Not recommended for gpt-4o and newer models:**
+     * Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message
+     * the model generates is valid…
      */
     val format: TextResponseFormatConfiguration? = null
 )
 
-/**
- * Optional object value serialized in the `sampling_params` wire field.
- */
+/** Optional object value serialized in the `sampling_params` wire field. */
 data class CreateEvalResponsesRunDataSourceSamplingParams(
-    /**
-     * Optional API value serialized in the `reasoning_effort` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
-    /**
-     * A higher temperature increases randomness in the outputs.
-     */
+    /** Optional API value serialized in the `reasoning_effort` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
+    val reasoningEffort: ReasoningEffort? = null,
+    /** A higher temperature increases randomness in the outputs. */
     val temperature: Double? = null,
-    /**
-     * The maximum number of tokens in the generated output.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long? = null,
-    /**
-     * An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
-     */
+    /** The maximum number of tokens in the generated output. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens")
+    val maxCompletionTokens: Long? = null,
+    /** An alternative to temperature for nucleus sampling; 1.0 includes all tokens. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /**
-     * A seed value to initialize the randomness, during sampling.
-     */
+    /** A seed value to initialize the randomness, during sampling. */
     val seed: Long? = null,
     /**
-     * An array of tools the model may call while generating a response. You can specify which tool to use by setting the `tool_choice` parameter. The two categories of tools you can provide the model are: - **Built-in tools**: Tools that are provided by OpenAI that extend the model's capabilities, like web search or file search. Learn more about built-in tools. - **Function calls (custom tools)**: Functions that are defined by you, enabling the model to call your own code. Learn…
+     * An array of tools the model may call while generating a response. You can specify which tool
+     * to use by setting the `tool_choice` parameter. The two categories of tools you can provide
+     * the model are: - **Built-in tools**: Tools that are provided by OpenAI that extend the
+     * model's capabilities, like web search or file search. Learn more about built-in tools. -
+     * **Function calls (custom tools)**: Functions that are defined by you, enabling the model to
+     * call your own code. Learn…
      */
     val tools: List<Tool>? = null,
     /**
-     * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+     * Configuration options for a text response from the model. Can be plain text or structured
+     * JSON data. Learn more: - Text inputs and outputs - Structured Outputs
      */
-    val text: CreateEvalResponsesRunDataSourceSamplingParamsText? = null
+    val text: CreateEvalResponsesRunDataSourceSamplingParamsText? = null,
 )
 
-/**
- * A ResponsesRunDataSource object describing a model sampling configuration.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A ResponsesRunDataSource object describing a model sampling configuration. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalResponsesRunDataSource(
-    /**
-     * The type of run data source. Always `responses`.
-     */
+    /** The type of run data source. Always `responses`. */
     val type: CreateEvalResponsesRunDataSourceTypeEnum,
-    /**
-     * Determines what populates the `item` namespace in this run's data source.
-     */
+    /** Determines what populates the `item` namespace in this run's data source. */
     val source: CreateEvalResponsesRunDataSourceSource,
     /**
-     * Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+     * Used when sampling from a model. Dictates the structure of the messages passed into the
+     * model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a
+     * template with variable references to the `item` namespace.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_messages") val inputMessages: CreateEvalResponsesRunDataSourceInputMessages? = null,
-    /**
-     * Optional object value serialized in the `sampling_params` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: CreateEvalResponsesRunDataSourceSamplingParams? = null,
-    /**
-     * The name of the model to use for generating completions (e.g. "o3-mini").
-     */
-    val model: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("input_messages")
+    val inputMessages: CreateEvalResponsesRunDataSourceInputMessages? = null,
+    /** Optional object value serialized in the `sampling_params` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params")
+    val samplingParams: CreateEvalResponsesRunDataSourceSamplingParams? = null,
+    /** The name of the model to use for generating completions (e.g. "o3-mini"). */
+    val model: String? = null,
 ) : CreateEvalRunRequestDataSource, EvalRunDataSource
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalResponsesRunDataSourceInputMessagesVariant0(
-    /**
-     * The type of input messages. Always `template`.
-     */
+    /** The type of input messages. Always `template`. */
     val type: CreateEvalResponsesRunDataSourceInputMessagesVariant0TypeEnum,
     /**
-     * A list of chat messages forming the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+     * A list of chat messages forming the prompt or context. May include variable references to the
+     * `item` namespace, ie {{item.name}}.
      */
-    val template: List<TemplateItem2>
+    val template: List<TemplateItem2>,
 ) : CreateEvalResponsesRunDataSourceInputMessages
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalResponsesRunDataSourceInputMessagesVariant1(
-    /**
-     * The type of input messages. Always `item_reference`.
-     */
+    /** The type of input messages. Always `item_reference`. */
     val type: CreateEvalResponsesRunDataSourceInputMessagesVariant1TypeEnum,
-    /**
-     * A reference to a variable in the `item` namespace. Ie, "item.name"
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_reference") val itemReference: String
+    /** A reference to a variable in the `item` namespace. Ie, "item.name" */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_reference") val itemReference: String,
 ) : CreateEvalResponsesRunDataSourceInputMessages
 
 /**
- * Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+ * Used when sampling from a model. Dictates the structure of the messages passed into the model.
+ * Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template
+ * with variable references to the `item` namespace.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalResponsesRunDataSourceInputMessagesVariant0::class, name = "template"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalResponsesRunDataSourceInputMessagesVariant1::class, name = "item_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalResponsesRunDataSourceInputMessagesVariant0::class,
+        name = "template",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalResponsesRunDataSourceInputMessagesVariant1::class,
+        name = "item_reference",
+    ),
 )
 sealed interface CreateEvalResponsesRunDataSourceInputMessages
 
-/**
- * Determines what populates the `item` namespace in this run's data source.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalResponsesRunDataSourceSource::class)
+/** Determines what populates the `item` namespace in this run's data source. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalResponsesRunDataSourceSource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalJsonlFileContentSource::class, name = "file_content"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalJsonlFileIdSource::class, name = "file_id"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalResponsesSource::class, name = "responses")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalJsonlFileContentSource::class,
+        name = "file_content",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalJsonlFileIdSource::class,
+        name = "file_id",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalResponsesSource::class,
+        name = "responses",
+    ),
 )
 sealed interface CreateEvalResponsesRunDataSourceSource
 
-/** A [CreateEvalResponsesRunDataSourceSource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalResponsesRunDataSourceSource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalResponsesRunDataSourceSource] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalResponsesRunDataSourceSource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalResponsesRunDataSourceSource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `CreateEvalRunRequest` API schema.
- */
+/** Typed representation of the `CreateEvalRunRequest` API schema. */
 data class CreateEvalRunRequest(
-    /**
-     * Details about the run's data source.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_source") val dataSource: CreateEvalRunRequestDataSource,
-    /**
-     * The name of the run.
-     */
+    /** Details about the run's data source. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_source")
+    val dataSource: CreateEvalRunRequestDataSource,
+    /** The name of the run. */
     val name: String? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
-    val metadata: Metadata? = null
+    val metadata: Metadata? = null,
 )
 
-/**
- * Details about the run's data source.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateEvalRunRequestDataSource::class)
+/** Details about the run's data source. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownCreateEvalRunRequestDataSource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalJsonlRunDataSource::class, name = "jsonl"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalCompletionsRunDataSource::class, name = "completions"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateEvalResponsesRunDataSource::class, name = "responses")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalJsonlRunDataSource::class,
+        name = "jsonl",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalCompletionsRunDataSource::class,
+        name = "completions",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateEvalResponsesRunDataSource::class,
+        name = "responses",
+    ),
 )
 sealed interface CreateEvalRunRequestDataSource
 
-/** A [CreateEvalRunRequestDataSource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownCreateEvalRunRequestDataSource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [CreateEvalRunRequestDataSource] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownCreateEvalRunRequestDataSource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : CreateEvalRunRequestDataSource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Deprecated in favor of LogsDataSourceConfig.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Deprecated in favor of LogsDataSourceConfig. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateEvalStoredCompletionsDataSourceConfig(
-    /**
-     * The type of data source. Always `stored_completions`.
-     */
+    /** The type of data source. Always `stored_completions`. */
     val type: CreateEvalStoredCompletionsDataSourceConfigTypeEnum,
-    /**
-     * Metadata filters for the stored completions data source.
-     */
-    val metadata: Map<String, Any>? = null
+    /** Metadata filters for the stored completions data source. */
+    val metadata: Map<String, Any>? = null,
 ) : CreateEvalRequestDataSourceConfig

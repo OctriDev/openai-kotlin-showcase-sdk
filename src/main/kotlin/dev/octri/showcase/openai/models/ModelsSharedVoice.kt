@@ -3,18 +3,21 @@
 
 package dev.octri.showcase.openai.models
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class VoiceIdsOrCustomVoiceVariant1(
-    /**
-     * The custom voice ID, e.g. `voice_1234`.
-     */
+    /** The custom voice ID, e.g. `voice_1234`. */
     val id: String
 ) : VoiceIdsOrCustomVoice
 
-/**
- * A built-in voice name or a custom voice reference.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = VoiceIdsOrCustomVoice.Deserializer::class)
+/** A built-in voice name or a custom voice reference. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = VoiceIdsOrCustomVoice.Deserializer::class
+)
 sealed interface VoiceIdsOrCustomVoice {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<VoiceIdsOrCustomVoice>() {
@@ -24,10 +27,11 @@ sealed interface VoiceIdsOrCustomVoice {
         ): VoiceIdsOrCustomVoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType: Class<out VoiceIdsOrCustomVoice>? = when {
-                node.has("id") -> VoiceIdsOrCustomVoiceVariant1::class.java
-                else -> null
-            }
+            val ownedType: Class<out VoiceIdsOrCustomVoice>? =
+                when {
+                    node.has("id") -> VoiceIdsOrCustomVoiceVariant1::class.java
+                    else -> null
+                }
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -35,7 +39,8 @@ sealed interface VoiceIdsOrCustomVoice {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out VoiceIdsOrCustomVoice>> = listOf(VoiceIdsShared::class.java, VoiceIdsOrCustomVoiceVariant1::class.java)
+            val objectTypes: List<Class<out VoiceIdsOrCustomVoice>> =
+                listOf(VoiceIdsShared::class.java, VoiceIdsOrCustomVoiceVariant1::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -44,12 +49,26 @@ sealed interface VoiceIdsOrCustomVoice {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, VoiceIdsOrCustomVoice::class.java, "no VoiceIdsOrCustomVoice branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        VoiceIdsOrCustomVoice::class.java,
+                        "no VoiceIdsOrCustomVoice branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class VoiceIdsShared @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : VoiceIdsOrCustomVoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class VoiceIdsShared
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    VoiceIdsOrCustomVoice

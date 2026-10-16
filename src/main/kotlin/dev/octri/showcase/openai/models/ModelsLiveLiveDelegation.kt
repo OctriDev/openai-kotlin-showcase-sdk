@@ -4,74 +4,64 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Returned when the Live model delegates work to your application, Responses, or Decisions. Contains delegation metadata and the position on the session timeline where the work was delegated.
+ * Returned when the Live model delegates work to your application, Responses, or Decisions.
+ * Contains delegation metadata and the position on the session timeline where the work was
+ * delegated.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDelegationCreated(
-    /**
-     * The unique ID of the Live server event.
-     */
+    /** The unique ID of the Live server event. */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /**
-     * The event type, always `session.delegation.created`.
-     */
+    /** The event type, always `session.delegation.created`. */
     val type: LiveDelegationCreatedTypeEnum,
     /**
-     * The position on the Live session timeline where the delegation was created, in milliseconds from the beginning of the session.
+     * The position on the Live session timeline where the delegation was created, in milliseconds
+     * from the beginning of the session.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("offset_ms") val offsetMs: Long,
     /**
-     * The delegated work identifier and destination. This object contains metadata, not the task text.
+     * The delegated work identifier and destination. This object contains metadata, not the task
+     * text.
      */
     val delegation: LiveDelegationItem,
-    /**
-     * The event_id of the client command associated with this server event, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
+    /** The event_id of the client command associated with this server event, when supplied. */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id")
+    val clientEventId: String? = null,
 ) : LiveSidebandServerEvent, LiveServerEvent2
 
-/**
- * Metadata for work delegated by the Live model to your application, Responses, or Decisions.
- */
+/** Metadata for work delegated by the Live model to your application, Responses, or Decisions. */
 data class LiveDelegationItem(
     /**
-     * The unique ID of the delegation. Use this as delegation_id when replying to client-owned work or correlating backend events.
+     * The unique ID of the delegation. Use this as delegation_id when replying to client-owned work
+     * or correlating backend events.
      */
     val id: String,
-    /**
-     * The object type, always `delegation`.
-     */
+    /** The object type, always `delegation`. */
     val type: LiveDelegationItemTypeEnum,
-    /**
-     * Where the Live model delegated the work: `client`, `responses`, or `decisions`.
-     */
+    /** Where the Live model delegated the work: `client`, `responses`, or `decisions`. */
     val target: LiveDelegationItemTargetVariant0Enum,
     /**
-     * The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations.
+     * The ID of the Responses API response associated with a Responses delegation. Omitted for
+     * client delegations.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String? = null,
 )
 
-/**
- * Reasoning options for Responses requests made on behalf of the Live session.
- */
+/** Reasoning options for Responses requests made on behalf of the Live session. */
 data class LiveDelegationReasoningInputParam(
-    /**
-     * Optional API value serialized in the `effort` wire field.
-     */
+    /** Optional API value serialized in the `effort` wire field. */
     val effort: LiveReasoningEffort? = null,
-    /**
-     * Optional API value serialized in the `summary` wire field.
-     */
-    val summary: LiveReasoningSummary? = null
+    /** Optional API value serialized in the `summary` wire field. */
+    val summary: LiveReasoningSummary? = null,
 )
 
-/**
- * Text generation options for the Live session’s Responses backend.
- */
+/** Text generation options for the Live session’s Responses backend. */
 data class LiveDelegationTextInputParam(
-    /**
-     * Optional API value serialized in the `verbosity` wire field.
-     */
+    /** Optional API value serialized in the `verbosity` wire field. */
     val verbosity: LiveTextVerbosity? = null
 )

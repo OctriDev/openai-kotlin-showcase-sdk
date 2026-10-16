@@ -8,18 +8,18 @@ package dev.octri.showcase.openai.models
  */
 data class PredictionContent(
     /**
-     * The type of the predicted content you want to provide. This type is currently always `content`.
+     * The type of the predicted content you want to provide. This type is currently always
+     * `content`.
      */
     val type: PredictionContentTypeEnum,
     /**
-     * The content that should be matched when generating a model response. If generated tokens would match this content, the entire model response can be returned much more quickly.
+     * The content that should be matched when generating a model response. If generated tokens
+     * would match this content, the entire model response can be returned much more quickly.
      */
-    val content: Any
+    val content: Any,
 )
 
-/**
- * Typed representation of the `ServiceTier` API schema.
- */
+/** Typed representation of the `ServiceTier` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ServiceTier.Deserializer::class)
 sealed interface ServiceTier {
     /** Chooses the branch this payload is shaped like. */
@@ -31,34 +31,77 @@ sealed interface ServiceTier {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringServiceTier(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> ValueServiceTier(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringServiceTier(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    ValueServiceTier(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringServiceTier(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ServiceTier
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringServiceTier(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    ServiceTier
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueServiceTier(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : ServiceTier
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueServiceTier(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    ServiceTier
 
-/**
- * Typed representation of the `ToolsItem` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownToolsItem::class)
+/** Typed representation of the `ToolsItem` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ChatCompletionTool::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolChatCompletions::class, name = "custom")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ChatCompletionTool::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolChatCompletions::class,
+        name = "custom",
+    ),
 )
 sealed interface ToolsItem
 
 /** A [ToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

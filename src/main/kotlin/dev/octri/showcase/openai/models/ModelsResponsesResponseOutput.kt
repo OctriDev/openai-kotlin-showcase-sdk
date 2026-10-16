@@ -3,83 +3,67 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when a new output item is added.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a new output item is added. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseOutputItemAddedEvent(
-    /**
-     * The type of the event. Always `response.output_item.added`.
-     */
+    /** The type of the event. Always `response.output_item.added`. */
     val type: ResponseOutputItemAddedEventTypeEnum,
-    /**
-     * The index of the output item that was added.
-     */
+    /** The index of the output item that was added. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The output item that was added. For reasoning items, `encrypted_content` may be incomplete while the item is in progress. Use the reasoning item from the corresponding `response.output_item.done` event when passing it as input to a subsequent request.
+     * The output item that was added. For reasoning items, `encrypted_content` may be incomplete
+     * while the item is in progress. Use the reasoning item from the corresponding
+     * `response.output_item.done` event when passing it as input to a subsequent request.
      */
-    val item: OutputItem
+    val item: OutputItem,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when an output item is marked done.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when an output item is marked done. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseOutputItemDoneEvent(
-    /**
-     * The type of the event. Always `response.output_item.done`.
-     */
+    /** The type of the event. Always `response.output_item.done`. */
     val type: ResponseOutputItemDoneEventTypeEnum,
-    /**
-     * The index of the output item that was marked done.
-     */
+    /** The index of the output item that was marked done. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The output item that was marked done.
-     */
-    val item: OutputItem
+    /** The output item that was marked done. */
+    val item: OutputItem,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when an annotation is added to output text content.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when an annotation is added to output text content. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseOutputTextAnnotationAddedEvent(
-    /**
-     * The type of the event. Always 'response.output_text.annotation.added'.
-     */
+    /** The type of the event. Always 'response.output_text.annotation.added'. */
     val type: ResponseOutputTextAnnotationAddedEventTypeEnum,
-    /**
-     * The unique identifier of the item to which the annotation is being added.
-     */
+    /** The unique identifier of the item to which the annotation is being added. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item in the response's output array.
-     */
+    /** The index of the output item in the response's output array. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part within the output item.
-     */
+    /** The index of the content part within the output item. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The index of the annotation within the content part.
-     */
+    /** The index of the annotation within the content part. */
     @com.fasterxml.jackson.annotation.JsonProperty("annotation_index") val annotationIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The annotation object being added. (See annotation schema for details.)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annotation", required = true) val `annotation`: AnnotationModel?
+    /** The annotation object being added. (See annotation schema for details.) */
+    @com.fasterxml.jackson.annotation.JsonProperty("annotation", required = true)
+    val `annotation`: AnnotationModel?,
 ) : ResponseStreamEvent

@@ -4,23 +4,48 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` or `decisions` to delegate to the corresponding API.
+ * Who handles tasks delegated by the Live model. Omitted or null selects your application; use
+ * `responses` or `decisions` to delegate to the corresponding API.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownDelegation::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownDelegation::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveClientDelegationParam::class, name = "client"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponsesDelegationParam::class, name = "responses"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionsDelegationParam::class, name = "decisions")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveClientDelegationParam::class,
+        name = "client",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveResponsesDelegationParam::class,
+        name = "responses",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionsDelegationParam::class,
+        name = "decisions",
+    ),
 )
 sealed interface Delegation
 
 /** A [Delegation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownDelegation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownDelegation
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : Delegation {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 typealias Input = List<LiveInitialItem>
@@ -28,7 +53,8 @@ typealias Input = List<LiveInitialItem>
 typealias Instructions = String
 
 /**
- * The Live model. Required in the session configuration for every transport; do not pass it as a URL query parameter.
+ * The Live model. Required in the session configuration for every transport; do not pass it as a
+ * URL query parameter.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ModelIdsLive.Deserializer::class)
 sealed interface ModelIdsLive {
@@ -41,26 +67,38 @@ sealed interface ModelIdsLive {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringModelIdsLive(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ModelIdsLive::class.java, "no ModelIdsLive branch accepts this payload")
+                node.isTextual ->
+                    StringModelIdsLive(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ModelIdsLive::class.java,
+                        "no ModelIdsLive branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringModelIdsLive(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ModelIdsLive
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringModelIdsLive(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    ModelIdsLive
 
 typealias PropertiesStore = Boolean
 
-/**
- * The newly created Live session. Use its ID for session controls and sideband connections.
- */
+/** The newly created Live session. Use its ID for session controls and sideband connections. */
 data class Session(
-    /**
-     * Opaque session identifier. Preserve the returned value unchanged, including its prefix.
-     */
+    /** Opaque session identifier. Preserve the returned value unchanged, including its prefix. */
     val id: String
 )
 

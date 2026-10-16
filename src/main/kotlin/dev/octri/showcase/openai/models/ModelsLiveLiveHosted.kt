@@ -3,117 +3,185 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveHostedShellContainerAutoParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveHostedShellContainerAutoParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveHostedShellContainerAutoParam(
-    /**
-     * Automatically creates a container for this request
-     */
+    /** Automatically creates a container for this request */
     val type: LiveHostedShellContainerAutoParamTypeEnum,
-    /**
-     * An optional list of uploaded files to make available to your code.
-     */
+    /** An optional list of uploaded files to make available to your code. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * Optional API value serialized in the `memory_limit` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: LiveContainerMemoryLimit? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: LiveHostedShellContainerAutoParamNetworkPolicy? = null,
-    /**
-     * An optional list of skills referenced by id or inline data.
-     */
-    val skills: List<LiveHostedShellContainerAutoParamSkillsItem>? = null
+    /** Optional API value serialized in the `memory_limit` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
+    val memoryLimit: LiveContainerMemoryLimit? = null,
+    /** Network access policy for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
+    val networkPolicy: LiveHostedShellContainerAutoParamNetworkPolicy? = null,
+    /** An optional list of skills referenced by id or inline data. */
+    val skills: List<LiveHostedShellContainerAutoParamSkillsItem>? = null,
 ) : LiveHostedShellToolInputParamEnvironment
 
-/**
- * Network access policy for the container.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveHostedShellContainerAutoParamNetworkPolicy::class)
+/** Network access policy for the container. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveHostedShellContainerAutoParamNetworkPolicy::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveContainerNetworkPolicyDisabledParam::class, name = "disabled"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveHostedShellNetworkPolicyAllowlistParam::class, name = "allowlist")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveContainerNetworkPolicyDisabledParam::class,
+        name = "disabled",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveHostedShellNetworkPolicyAllowlistParam::class,
+        name = "allowlist",
+    ),
 )
 sealed interface LiveHostedShellContainerAutoParamNetworkPolicy
 
-/** A [LiveHostedShellContainerAutoParamNetworkPolicy] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveHostedShellContainerAutoParamNetworkPolicy @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveHostedShellContainerAutoParamNetworkPolicy] whose `type` names no branch this SDK knows,
+ * kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveHostedShellContainerAutoParamNetworkPolicy
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveHostedShellContainerAutoParamNetworkPolicy {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Required API value serialized in the `skills[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveHostedShellContainerAutoParamSkillsItem::class)
+/** Required API value serialized in the `skills[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveHostedShellContainerAutoParamSkillsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSkillReferenceParam::class, name = "skill_reference"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInlineSkillParam::class, name = "inline")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSkillReferenceParam::class,
+        name = "skill_reference",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveInlineSkillParam::class,
+        name = "inline",
+    ),
 )
 sealed interface LiveHostedShellContainerAutoParamSkillsItem
 
-/** A [LiveHostedShellContainerAutoParamSkillsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveHostedShellContainerAutoParamSkillsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveHostedShellContainerAutoParamSkillsItem] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveHostedShellContainerAutoParamSkillsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveHostedShellContainerAutoParamSkillsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `LiveHostedShellNetworkPolicyAllowlistParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveHostedShellNetworkPolicyAllowlistParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveHostedShellNetworkPolicyAllowlistParam(
-    /**
-     * Allow outbound network access only to specified domains. Always `allowlist`.
-     */
+    /** Allow outbound network access only to specified domains. Always `allowlist`. */
     val type: LiveHostedShellNetworkPolicyAllowlistParamTypeEnum,
-    /**
-     * A list of allowed domains when type is `allowlist`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>
+    /** A list of allowed domains when type is `allowlist`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
+    val allowedDomains: List<String>,
 ) : LiveHostedShellContainerAutoParamNetworkPolicy
 
 /**
- * A Responses shell tool. Use a hosted container or return local shell results with response.item.create. Domain secrets are not supported.
+ * A Responses shell tool. Use a hosted container or return local shell results with
+ * response.item.create. Domain secrets are not supported.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveHostedShellToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveHostedShellToolInputParamTypeEnum,
-    /**
-     * Optional API value serialized in the `environment` wire field.
-     */
-    val environment: LiveHostedShellToolInputParamEnvironment? = null
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+    /** Optional API value serialized in the `environment` wire field. */
+    val environment: LiveHostedShellToolInputParamEnvironment? = null,
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Optional API value serialized in the `environment` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveHostedShellToolInputParamEnvironment::class)
+/** Optional API value serialized in the `environment` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveHostedShellToolInputParamEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveHostedShellContainerAutoParam::class, name = "container_auto"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveContainerReferenceParam::class, name = "container_reference"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveLocalEnvironmentParam::class, name = "local")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveHostedShellContainerAutoParam::class,
+        name = "container_auto",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveContainerReferenceParam::class,
+        name = "container_reference",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveLocalEnvironmentParam::class,
+        name = "local",
+    ),
 )
 sealed interface LiveHostedShellToolInputParamEnvironment
 
-/** A [LiveHostedShellToolInputParamEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveHostedShellToolInputParamEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveHostedShellToolInputParamEnvironment] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveHostedShellToolInputParamEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveHostedShellToolInputParamEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

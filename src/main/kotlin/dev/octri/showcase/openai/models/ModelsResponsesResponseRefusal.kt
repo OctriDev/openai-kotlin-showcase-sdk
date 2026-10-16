@@ -3,64 +3,46 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when there is a partial refusal text.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when there is a partial refusal text. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseRefusalDeltaEvent(
-    /**
-     * The type of the event. Always `response.refusal.delta`.
-     */
+    /** The type of the event. Always `response.refusal.delta`. */
     val type: ResponseRefusalDeltaEventTypeEnum,
-    /**
-     * The ID of the output item that the refusal text is added to.
-     */
+    /** The ID of the output item that the refusal text is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the refusal text is added to.
-     */
+    /** The index of the output item that the refusal text is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part that the refusal text is added to.
-     */
+    /** The index of the content part that the refusal text is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The refusal text that is added.
-     */
+    /** The refusal text that is added. */
     val delta: String,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when refusal text is finalized.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when refusal text is finalized. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseRefusalDoneEvent(
-    /**
-     * The type of the event. Always `response.refusal.done`.
-     */
+    /** The type of the event. Always `response.refusal.done`. */
     val type: ResponseRefusalDoneEventTypeEnum,
-    /**
-     * The ID of the output item that the refusal text is finalized.
-     */
+    /** The ID of the output item that the refusal text is finalized. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the refusal text is finalized.
-     */
+    /** The index of the output item that the refusal text is finalized. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part that the refusal text is finalized.
-     */
+    /** The index of the content part that the refusal text is finalized. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The refusal text that is finalized.
-     */
+    /** The refusal text that is finalized. */
     val refusal: String,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
 ) : ResponseStreamEvent

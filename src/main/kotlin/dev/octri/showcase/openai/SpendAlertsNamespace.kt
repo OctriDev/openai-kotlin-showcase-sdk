@@ -3,114 +3,273 @@
 
 package dev.octri.showcase.openai
 
-
 class SpendAlertsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set the page size, `order` to choose the sort direction, and `after` or `before` to move through the results.
+     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set
+     * the page size, `order` to choose the sort direction, and `after` or `before` to move through
+     * the results.
      *
      * Lists project spend alerts.
      */
-    fun list(projectId: String, limit: Long? = null, order: ListProjectSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ProjectSpendAlertListResource {
-        return dev.octri.showcase.openai.methods.SpendAlerts.listProjectSpendAlerts(clientConfig, projectId, limit, order, after, before, options)
+    fun list(
+        projectId: String,
+        limit: Long? = null,
+        order: ListProjectSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlertListResource {
+        return dev.octri.showcase.openai.methods.SpendAlerts.listProjectSpendAlerts(
+            clientConfig,
+            projectId,
+            limit,
+            order,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set the page size, `order` to choose the sort direction, and `after` or `before` to move through the results.
+     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set
+     * the page size, `order` to choose the sort direction, and `after` or `before` to move through
+     * the results.
      *
      * Lists project spend alerts.
      */
-    fun listPaginated(projectId: String, limit: Long? = null, order: ListProjectSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (ProjectSpendAlert) -> Boolean) {
-        dev.octri.showcase.openai.methods.SpendAlerts.listProjectSpendAlertsPaginated(clientConfig, projectId, limit, order, after, before, options, yieldFn)
+    fun listPaginated(
+        projectId: String,
+        limit: Long? = null,
+        order: ListProjectSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectSpendAlert) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.SpendAlerts.listProjectSpendAlertsPaginated(
+            clientConfig,
+            projectId,
+            limit,
+            order,
+            after,
+            before,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a spend alert for a project to notify recipients when spending reaches a threshold. Provide the threshold in cents, the currency and evaluation interval, and email notification settings.
+     * Creates a spend alert for a project to notify recipients when spending reaches a threshold.
+     * Provide the threshold in cents, the currency and evaluation interval, and email notification
+     * settings.
      *
      * Creates a project spend alert.
      */
-    fun create(projectId: String, thresholdAmount: Long, currency: CreateSpendAlertBodyCurrencyEnum, interval: CreateSpendAlertBodyIntervalEnum, notificationChannel: SpendAlertNotificationChannel, options: RequestOptions? = null): ProjectSpendAlert {
-        return dev.octri.showcase.openai.methods.SpendAlerts.createProjectSpendAlert(clientConfig, projectId, thresholdAmount, currency, interval, notificationChannel, options)
+    fun create(
+        projectId: String,
+        thresholdAmount: Long,
+        currency: CreateSpendAlertBodyCurrencyEnum,
+        interval: CreateSpendAlertBodyIntervalEnum,
+        notificationChannel: SpendAlertNotificationChannel,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlert {
+        return dev.octri.showcase.openai.methods.SpendAlerts.createProjectSpendAlert(
+            clientConfig,
+            projectId,
+            thresholdAmount,
+            currency,
+            interval,
+            notificationChannel,
+            options,
+        )
     }
 
     /**
-     * Retrieves a spend alert configured for a project. Use the project and alert identifiers to inspect its threshold, currency, evaluation interval, and notification channel.
+     * Retrieves a spend alert configured for a project. Use the project and alert identifiers to
+     * inspect its threshold, currency, evaluation interval, and notification channel.
      *
      * Retrieves a project spend alert.
      */
-    fun retrieve(projectId: String, alertId: String, options: RequestOptions? = null): ProjectSpendAlert {
-        return dev.octri.showcase.openai.methods.SpendAlerts.retrieveProjectSpendAlert(clientConfig, projectId, alertId, options)
+    fun retrieve(
+        projectId: String,
+        alertId: String,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlert {
+        return dev.octri.showcase.openai.methods.SpendAlerts.retrieveProjectSpendAlert(
+            clientConfig,
+            projectId,
+            alertId,
+            options,
+        )
     }
 
     /**
-     * Updates a spend alert configured for a project. Provide the alert's threshold, currency, evaluation interval, and notification channel in the request body.
+     * Updates a spend alert configured for a project. Provide the alert's threshold, currency,
+     * evaluation interval, and notification channel in the request body.
      *
      * Updates a project spend alert.
      */
-    fun update(request: dev.octri.showcase.openai.methods.SpendAlerts.UpdateProjectSpendAlertRequest, options: RequestOptions? = null): ProjectSpendAlert {
-        return dev.octri.showcase.openai.methods.SpendAlerts.updateProjectSpendAlert(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.openai.methods.SpendAlerts.UpdateProjectSpendAlertRequest,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlert {
+        return dev.octri.showcase.openai.methods.SpendAlerts.updateProjectSpendAlert(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes a spend alert from a project. Use the project and alert identifiers to select the alert to remove, then check the deletion confirmation in the response.
+     * Deletes a spend alert from a project. Use the project and alert identifiers to select the
+     * alert to remove, then check the deletion confirmation in the response.
      *
      * Deletes a project spend alert.
      */
-    fun delete(projectId: String, alertId: String, options: RequestOptions? = null): ProjectSpendAlertDeletedResource {
-        return dev.octri.showcase.openai.methods.SpendAlerts.deleteProjectSpendAlert(clientConfig, projectId, alertId, options)
+    fun delete(
+        projectId: String,
+        alertId: String,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlertDeletedResource {
+        return dev.octri.showcase.openai.methods.SpendAlerts.deleteProjectSpendAlert(
+            clientConfig,
+            projectId,
+            alertId,
+            options,
+        )
     }
 
     /**
-     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the result page, and use `after` or `before` to navigate from a spend alert in a previous response. The response includes cursor IDs and a `has_more` flag for pagination.
+     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the
+     * result page, and use `after` or `before` to navigate from a spend alert in a previous
+     * response. The response includes cursor IDs and a `has_more` flag for pagination.
      *
      * Lists organization spend alerts.
      */
-    fun listOrganization(limit: Long? = null, order: ListOrganizationSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): OrganizationSpendAlertListResource {
-        return dev.octri.showcase.openai.methods.SpendAlerts.listOrganizationSpendAlerts(clientConfig, limit, order, after, before, options)
+    fun listOrganization(
+        limit: Long? = null,
+        order: ListOrganizationSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlertListResource {
+        return dev.octri.showcase.openai.methods.SpendAlerts.listOrganizationSpendAlerts(
+            clientConfig,
+            limit,
+            order,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the result page, and use `after` or `before` to navigate from a spend alert in a previous response. The response includes cursor IDs and a `has_more` flag for pagination.
+     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the
+     * result page, and use `after` or `before` to navigate from a spend alert in a previous
+     * response. The response includes cursor IDs and a `has_more` flag for pagination.
      *
      * Lists organization spend alerts.
      */
-    fun listOrganizationPaginated(limit: Long? = null, order: ListOrganizationSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (OrganizationSpendAlert) -> Boolean) {
-        dev.octri.showcase.openai.methods.SpendAlerts.listOrganizationSpendAlertsPaginated(clientConfig, limit, order, after, before, options, yieldFn)
+    fun listOrganizationPaginated(
+        limit: Long? = null,
+        order: ListOrganizationSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (OrganizationSpendAlert) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.SpendAlerts.listOrganizationSpendAlertsPaginated(
+            clientConfig,
+            limit,
+            order,
+            after,
+            before,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a spend alert at the organization level. Set `threshold_amount` in cents and configure the monthly evaluation interval and email notification recipients. The response includes the created alert and its identifier.
+     * Creates a spend alert at the organization level. Set `threshold_amount` in cents and
+     * configure the monthly evaluation interval and email notification recipients. The response
+     * includes the created alert and its identifier.
      *
      * Creates an organization spend alert.
      */
-    fun createOrganization(thresholdAmount: Long, currency: CreateSpendAlertBodyCurrencyEnum, interval: CreateSpendAlertBodyIntervalEnum, notificationChannel: SpendAlertNotificationChannel, options: RequestOptions? = null): OrganizationSpendAlert {
-        return dev.octri.showcase.openai.methods.SpendAlerts.createOrganizationSpendAlert(clientConfig, thresholdAmount, currency, interval, notificationChannel, options)
+    fun createOrganization(
+        thresholdAmount: Long,
+        currency: CreateSpendAlertBodyCurrencyEnum,
+        interval: CreateSpendAlertBodyIntervalEnum,
+        notificationChannel: SpendAlertNotificationChannel,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlert {
+        return dev.octri.showcase.openai.methods.SpendAlerts.createOrganizationSpendAlert(
+            clientConfig,
+            thresholdAmount,
+            currency,
+            interval,
+            notificationChannel,
+            options,
+        )
     }
 
     /**
-     * Retrieves a spend alert configured at the organization level. Use `alert_id` to identify the alert whose threshold and notification settings you want to view.
+     * Retrieves a spend alert configured at the organization level. Use `alert_id` to identify the
+     * alert whose threshold and notification settings you want to view.
      *
      * Retrieves an organization spend alert.
      */
-    fun retrieveOrganization(alertId: String, options: RequestOptions? = null): OrganizationSpendAlert {
-        return dev.octri.showcase.openai.methods.SpendAlerts.retrieveOrganizationSpendAlert(clientConfig, alertId, options)
+    fun retrieveOrganization(
+        alertId: String,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlert {
+        return dev.octri.showcase.openai.methods.SpendAlerts.retrieveOrganizationSpendAlert(
+            clientConfig,
+            alertId,
+            options,
+        )
     }
 
     /**
-     * Updates a spend alert configured at the organization level. Provide the threshold, currency, evaluation interval, and email notification settings for the alert. The response contains the updated alert configuration.
+     * Updates a spend alert configured at the organization level. Provide the threshold, currency,
+     * evaluation interval, and email notification settings for the alert. The response contains the
+     * updated alert configuration.
      *
      * Updates an organization spend alert.
      */
-    fun updateOrganization(alertId: String, thresholdAmount: Long, currency: CreateSpendAlertBodyCurrencyEnum, interval: CreateSpendAlertBodyIntervalEnum, notificationChannel: SpendAlertNotificationChannel, options: RequestOptions? = null): OrganizationSpendAlert {
-        return dev.octri.showcase.openai.methods.SpendAlerts.updateOrganizationSpendAlert(clientConfig, alertId, thresholdAmount, currency, interval, notificationChannel, options)
+    fun updateOrganization(
+        alertId: String,
+        thresholdAmount: Long,
+        currency: CreateSpendAlertBodyCurrencyEnum,
+        interval: CreateSpendAlertBodyIntervalEnum,
+        notificationChannel: SpendAlertNotificationChannel,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlert {
+        return dev.octri.showcase.openai.methods.SpendAlerts.updateOrganizationSpendAlert(
+            clientConfig,
+            alertId,
+            thresholdAmount,
+            currency,
+            interval,
+            notificationChannel,
+            options,
+        )
     }
 
     /**
-     * Deletes a spend alert configured at the organization level. Use `alert_id` to identify the alert to remove; the response confirms whether it was deleted.
+     * Deletes a spend alert configured at the organization level. Use `alert_id` to identify the
+     * alert to remove; the response confirms whether it was deleted.
      *
      * Deletes an organization spend alert.
      */
-    fun deleteOrganization(alertId: String, options: RequestOptions? = null): OrganizationSpendAlertDeletedResource {
-        return dev.octri.showcase.openai.methods.SpendAlerts.deleteOrganizationSpendAlert(clientConfig, alertId, options)
+    fun deleteOrganization(
+        alertId: String,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlertDeletedResource {
+        return dev.octri.showcase.openai.methods.SpendAlerts.deleteOrganizationSpendAlert(
+            clientConfig,
+            alertId,
+            options,
+        )
     }
-
 }

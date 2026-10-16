@@ -3,9 +3,7 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Multi-modal input and output contents.
- */
+/** Multi-modal input and output contents. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaContent.Deserializer::class)
 sealed interface BetaContent {
     /** Chooses the branch this payload is shaped like. */
@@ -16,7 +14,8 @@ sealed interface BetaContent {
         ): BetaContent {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out BetaContent>> = listOf(BetaInputContent::class.java, BetaOutputContent::class.java)
+            val objectTypes: List<Class<out BetaContent>> =
+                listOf(BetaInputContent::class.java, BetaOutputContent::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -25,85 +24,56 @@ sealed interface BetaContent {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, BetaContent::class.java, "no BetaContent branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        BetaContent::class.java,
+                        "no BetaContent branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-/**
- * An error payload that was emitted for a streaming error event.
- */
+/** An error payload that was emitted for a streaming error event. */
 data class BetaErrorPayload(
-    /**
-     * The error type that was emitted.
-     */
+    /** The error type that was emitted. */
     val type: String,
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
+    /** Required `string` value serialized in the `code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /**
-     * The human-readable error message that was emitted.
-     */
+    /** The human-readable error message that was emitted. */
     val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
+    /** Required `string` value serialized in the `param` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /**
-     * The response headers that were emitted with the error, if any.
-     */
+    /** The response headers that were emitted with the error, if any. */
     val headers: Map<String, String>? = null,
-    /**
-     * Optional object value serialized in the `misalignment` wire field.
-     */
-    val misalignment: BetaMisalignmentErrorDetailsResource? = null
+    /** Optional object value serialized in the `misalignment` wire field. */
+    val misalignment: BetaMisalignmentErrorDetailsResource? = null,
 )
 
-/**
- * Required object value serialized in the `input_audio` wire field.
- */
+/** Required object value serialized in the `input_audio` wire field. */
 data class BetaInputAudioInputAudio(
-    /**
-     * Base64-encoded audio data.
-     */
+    /** Base64-encoded audio data. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
-    /**
-     * The format of the audio data. Currently supported formats are `mp3` and `wav`.
-     */
-    val format: BetaInputAudioInputAudioFormatEnum
+    /** The format of the audio data. Currently supported formats are `mp3` and `wav`. */
+    val format: BetaInputAudioInputAudioFormatEnum,
 )
 
-/**
- * An audio input to the model.
- */
+/** An audio input to the model. */
 data class BetaInputAudio(
-    /**
-     * The type of the input item. Always `input_audio`.
-     */
+    /** The type of the input item. Always `input_audio`. */
     val type: BetaInputAudioTypeEnum,
-    /**
-     * Required object value serialized in the `input_audio` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio") val inputAudio: BetaInputAudioInputAudio
+    /** Required object value serialized in the `input_audio` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio")
+    val inputAudio: BetaInputAudioInputAudio,
 )
 
-/**
- * An audio output from the model.
- */
+/** An audio output from the model. */
 data class BetaOutputAudio(
-    /**
-     * The type of the output audio. Always `output_audio`.
-     */
+    /** The type of the output audio. Always `output_audio`. */
     val type: BetaOutputAudioTypeEnum,
-    /**
-     * Base64-encoded audio data from the model.
-     */
+    /** Base64-encoded audio data from the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
-    /**
-     * The transcript of the audio data from the model.
-     */
-    val transcript: String
+    /** The transcript of the audio data from the model. */
+    val transcript: String,
 )

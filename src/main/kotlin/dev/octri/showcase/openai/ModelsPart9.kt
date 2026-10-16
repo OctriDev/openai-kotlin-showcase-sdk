@@ -7,25 +7,33 @@ typealias EnvironmentResource = dev.octri.showcase.openai.models.EnvironmentReso
 
 typealias EnvironmentResourceNone = dev.octri.showcase.openai.models.EnvironmentResourceNone
 
-typealias EnvironmentResourceNoneTypeEnum = dev.octri.showcase.openai.models.EnvironmentResourceNoneTypeEnum
+typealias EnvironmentResourceNoneTypeEnum =
+    dev.octri.showcase.openai.models.EnvironmentResourceNoneTypeEnum
 
-typealias EnvironmentResourceOpenaiHosted = dev.octri.showcase.openai.models.EnvironmentResourceOpenaiHosted
+typealias EnvironmentResourceOpenaiHosted =
+    dev.octri.showcase.openai.models.EnvironmentResourceOpenaiHosted
 
-typealias EnvironmentResourceOpenaiHostedTypeEnum = dev.octri.showcase.openai.models.EnvironmentResourceOpenaiHostedTypeEnum
+typealias EnvironmentResourceOpenaiHostedTypeEnum =
+    dev.octri.showcase.openai.models.EnvironmentResourceOpenaiHostedTypeEnum
 
-typealias EnvironmentResourceSelfHosted = dev.octri.showcase.openai.models.EnvironmentResourceSelfHosted
+typealias EnvironmentResourceSelfHosted =
+    dev.octri.showcase.openai.models.EnvironmentResourceSelfHosted
 
-typealias EnvironmentResourceSelfHostedTypeEnum = dev.octri.showcase.openai.models.EnvironmentResourceSelfHostedTypeEnum
+typealias EnvironmentResourceSelfHostedTypeEnum =
+    dev.octri.showcase.openai.models.EnvironmentResourceSelfHostedTypeEnum
 
 typealias EnvironmentStatusResource = dev.octri.showcase.openai.models.EnvironmentStatusResource
 
-typealias EnvironmentTemplateListResource = dev.octri.showcase.openai.models.EnvironmentTemplateListResource
+typealias EnvironmentTemplateListResource =
+    dev.octri.showcase.openai.models.EnvironmentTemplateListResource
 
-typealias EnvironmentTemplateListResourceObjectEnum = dev.octri.showcase.openai.models.EnvironmentTemplateListResourceObjectEnum
+typealias EnvironmentTemplateListResourceObjectEnum =
+    dev.octri.showcase.openai.models.EnvironmentTemplateListResourceObjectEnum
 
 typealias EnvironmentTemplateResource = dev.octri.showcase.openai.models.EnvironmentTemplateResource
 
-typealias EnvironmentTemplateResourceObjectEnum = dev.octri.showcase.openai.models.EnvironmentTemplateResourceObjectEnum
+typealias EnvironmentTemplateResourceObjectEnum =
+    dev.octri.showcase.openai.models.EnvironmentTemplateResourceObjectEnum
 
 typealias EnvironmentTypeParam = dev.octri.showcase.openai.models.EnvironmentTypeParam
 
@@ -53,7 +61,8 @@ typealias EvalApiError = dev.octri.showcase.openai.models.EvalApiError
 
 typealias EvalCustomDataSourceConfig = dev.octri.showcase.openai.models.EvalCustomDataSourceConfig
 
-typealias EvalCustomDataSourceConfigTypeEnum = dev.octri.showcase.openai.models.EvalCustomDataSourceConfigTypeEnum
+typealias EvalCustomDataSourceConfigTypeEnum =
+    dev.octri.showcase.openai.models.EvalCustomDataSourceConfigTypeEnum
 
 typealias EvalDataSourceConfig = dev.octri.showcase.openai.models.EvalDataSourceConfig
 
@@ -77,7 +86,8 @@ typealias EvalItemContentItem = dev.octri.showcase.openai.models.EvalItemContent
 
 typealias EvalItemContentOutputText = dev.octri.showcase.openai.models.EvalItemContentOutputText
 
-typealias EvalItemContentOutputTextTypeEnum = dev.octri.showcase.openai.models.EvalItemContentOutputTextTypeEnum
+typealias EvalItemContentOutputTextTypeEnum =
+    dev.octri.showcase.openai.models.EvalItemContentOutputTextTypeEnum
 
 typealias EvalItemContentText = dev.octri.showcase.openai.models.EvalItemContentText
 
@@ -91,13 +101,16 @@ typealias EvalItemTypeEnum = dev.octri.showcase.openai.models.EvalItemTypeEnum
 
 typealias EvalJsonlFileContentSource = dev.octri.showcase.openai.models.EvalJsonlFileContentSource
 
-typealias EvalJsonlFileContentSourceContentItem = dev.octri.showcase.openai.models.EvalJsonlFileContentSourceContentItem
+typealias EvalJsonlFileContentSourceContentItem =
+    dev.octri.showcase.openai.models.EvalJsonlFileContentSourceContentItem
 
-typealias EvalJsonlFileContentSourceTypeEnum = dev.octri.showcase.openai.models.EvalJsonlFileContentSourceTypeEnum
+typealias EvalJsonlFileContentSourceTypeEnum =
+    dev.octri.showcase.openai.models.EvalJsonlFileContentSourceTypeEnum
 
 typealias EvalJsonlFileIdSource = dev.octri.showcase.openai.models.EvalJsonlFileIdSource
 
-typealias EvalJsonlFileIdSourceTypeEnum = dev.octri.showcase.openai.models.EvalJsonlFileIdSourceTypeEnum
+typealias EvalJsonlFileIdSourceTypeEnum =
+    dev.octri.showcase.openai.models.EvalJsonlFileIdSourceTypeEnum
 
 typealias EvalList = dev.octri.showcase.openai.models.EvalList
 
@@ -105,7 +118,8 @@ typealias EvalListObjectEnum = dev.octri.showcase.openai.models.EvalListObjectEn
 
 typealias EvalLogsDataSourceConfig = dev.octri.showcase.openai.models.EvalLogsDataSourceConfig
 
-typealias EvalLogsDataSourceConfigTypeEnum = dev.octri.showcase.openai.models.EvalLogsDataSourceConfigTypeEnum
+typealias EvalLogsDataSourceConfigTypeEnum =
+    dev.octri.showcase.openai.models.EvalLogsDataSourceConfigTypeEnum
 
 typealias EvalObjectEnum = dev.octri.showcase.openai.models.EvalObjectEnum
 
@@ -127,7 +141,8 @@ typealias EvalRunOutputItem = dev.octri.showcase.openai.models.EvalRunOutputItem
 
 typealias EvalRunOutputItemList = dev.octri.showcase.openai.models.EvalRunOutputItemList
 
-typealias EvalRunOutputItemListObjectEnum = dev.octri.showcase.openai.models.EvalRunOutputItemListObjectEnum
+typealias EvalRunOutputItemListObjectEnum =
+    dev.octri.showcase.openai.models.EvalRunOutputItemListObjectEnum
 
 typealias EvalRunOutputItemObjectEnum = dev.octri.showcase.openai.models.EvalRunOutputItemObjectEnum
 
@@ -135,25 +150,32 @@ typealias EvalRunOutputItemResult = dev.octri.showcase.openai.models.EvalRunOutp
 
 typealias EvalRunOutputItemSample = dev.octri.showcase.openai.models.EvalRunOutputItemSample
 
-typealias EvalRunOutputItemSampleInputItem = dev.octri.showcase.openai.models.EvalRunOutputItemSampleInputItem
+typealias EvalRunOutputItemSampleInputItem =
+    dev.octri.showcase.openai.models.EvalRunOutputItemSampleInputItem
 
-typealias EvalRunOutputItemSampleOutputItem = dev.octri.showcase.openai.models.EvalRunOutputItemSampleOutputItem
+typealias EvalRunOutputItemSampleOutputItem =
+    dev.octri.showcase.openai.models.EvalRunOutputItemSampleOutputItem
 
-typealias EvalRunOutputItemSampleUsage = dev.octri.showcase.openai.models.EvalRunOutputItemSampleUsage
+typealias EvalRunOutputItemSampleUsage =
+    dev.octri.showcase.openai.models.EvalRunOutputItemSampleUsage
 
 typealias EvalRunPerModelUsageItem = dev.octri.showcase.openai.models.EvalRunPerModelUsageItem
 
-typealias EvalRunPerTestingCriteriaResultsItem = dev.octri.showcase.openai.models.EvalRunPerTestingCriteriaResultsItem
+typealias EvalRunPerTestingCriteriaResultsItem =
+    dev.octri.showcase.openai.models.EvalRunPerTestingCriteriaResultsItem
 
 typealias EvalRunResultCounts = dev.octri.showcase.openai.models.EvalRunResultCounts
 
-typealias EvalStoredCompletionsDataSourceConfig = dev.octri.showcase.openai.models.EvalStoredCompletionsDataSourceConfig
+typealias EvalStoredCompletionsDataSourceConfig =
+    dev.octri.showcase.openai.models.EvalStoredCompletionsDataSourceConfig
 
-typealias EvalStoredCompletionsDataSourceConfigTypeEnum = dev.octri.showcase.openai.models.EvalStoredCompletionsDataSourceConfigTypeEnum
+typealias EvalStoredCompletionsDataSourceConfigTypeEnum =
+    dev.octri.showcase.openai.models.EvalStoredCompletionsDataSourceConfigTypeEnum
 
 typealias EvalStoredCompletionsSource = dev.octri.showcase.openai.models.EvalStoredCompletionsSource
 
-typealias EvalStoredCompletionsSourceTypeEnum = dev.octri.showcase.openai.models.EvalStoredCompletionsSourceTypeEnum
+typealias EvalStoredCompletionsSourceTypeEnum =
+    dev.octri.showcase.openai.models.EvalStoredCompletionsSourceTypeEnum
 
 typealias EvalTestingCriteriaItem = dev.octri.showcase.openai.models.EvalTestingCriteriaItem
 
@@ -161,21 +183,26 @@ typealias ExpiresAfterParam = dev.octri.showcase.openai.models.ExpiresAfterParam
 
 typealias ExpiresAfterParamAnchorEnum = dev.octri.showcase.openai.models.ExpiresAfterParamAnchorEnum
 
-typealias ExternalStorageDeletedResource = dev.octri.showcase.openai.models.ExternalStorageDeletedResource
+typealias ExternalStorageDeletedResource =
+    dev.octri.showcase.openai.models.ExternalStorageDeletedResource
 
-typealias ExternalStorageDeletedResourceObjectEnum = dev.octri.showcase.openai.models.ExternalStorageDeletedResourceObjectEnum
+typealias ExternalStorageDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.ExternalStorageDeletedResourceObjectEnum
 
 typealias ExternalStorageListResource = dev.octri.showcase.openai.models.ExternalStorageListResource
 
-typealias ExternalStorageListResourceObjectEnum = dev.octri.showcase.openai.models.ExternalStorageListResourceObjectEnum
+typealias ExternalStorageListResourceObjectEnum =
+    dev.octri.showcase.openai.models.ExternalStorageListResourceObjectEnum
 
 typealias ExternalStorageOrder = dev.octri.showcase.openai.models.ExternalStorageOrder
 
 typealias ExternalStorageResponse = dev.octri.showcase.openai.models.ExternalStorageResponse
 
-typealias ExternalStorageResponseObjectEnum = dev.octri.showcase.openai.models.ExternalStorageResponseObjectEnum
+typealias ExternalStorageResponseObjectEnum =
+    dev.octri.showcase.openai.models.ExternalStorageResponseObjectEnum
 
-typealias ExternalStorageResponseProvider = dev.octri.showcase.openai.models.ExternalStorageResponseProvider
+typealias ExternalStorageResponseProvider =
+    dev.octri.showcase.openai.models.ExternalStorageResponseProvider
 
 typealias ExternalStorageStatus = dev.octri.showcase.openai.models.ExternalStorageStatus
 
@@ -183,7 +210,8 @@ typealias FileAnnotation = dev.octri.showcase.openai.models.FileAnnotation
 
 typealias FileAnnotationSource = dev.octri.showcase.openai.models.FileAnnotationSource
 
-typealias FileAnnotationSourceTypeEnum = dev.octri.showcase.openai.models.FileAnnotationSourceTypeEnum
+typealias FileAnnotationSourceTypeEnum =
+    dev.octri.showcase.openai.models.FileAnnotationSourceTypeEnum
 
 typealias FileAnnotationTypeEnum = dev.octri.showcase.openai.models.FileAnnotationTypeEnum
 
@@ -199,7 +227,8 @@ typealias FileDetailEnum = dev.octri.showcase.openai.models.FileDetailEnum
 
 typealias FileExpirationAfter = dev.octri.showcase.openai.models.FileExpirationAfter
 
-typealias FileExpirationAfterAnchorEnum = dev.octri.showcase.openai.models.FileExpirationAfterAnchorEnum
+typealias FileExpirationAfterAnchorEnum =
+    dev.octri.showcase.openai.models.FileExpirationAfterAnchorEnum
 
 typealias FileInputDetail = dev.octri.showcase.openai.models.FileInputDetail
 
@@ -215,9 +244,11 @@ typealias FileSearchTool = dev.octri.showcase.openai.models.FileSearchTool
 
 typealias FileSearchToolCall = dev.octri.showcase.openai.models.FileSearchToolCall
 
-typealias FileSearchToolCallResultsItem = dev.octri.showcase.openai.models.FileSearchToolCallResultsItem
+typealias FileSearchToolCallResultsItem =
+    dev.octri.showcase.openai.models.FileSearchToolCallResultsItem
 
-typealias FileSearchToolCallStatusEnum = dev.octri.showcase.openai.models.FileSearchToolCallStatusEnum
+typealias FileSearchToolCallStatusEnum =
+    dev.octri.showcase.openai.models.FileSearchToolCallStatusEnum
 
 typealias FileSearchToolCallTypeEnum = dev.octri.showcase.openai.models.FileSearchToolCallTypeEnum
 
@@ -227,19 +258,25 @@ typealias FileUploadParam = dev.octri.showcase.openai.models.FileUploadParam
 
 typealias Filters = dev.octri.showcase.openai.models.Filters
 
-typealias FineTuneChatCompletionRequestAssistantMessage = dev.octri.showcase.openai.models.FineTuneChatCompletionRequestAssistantMessage
+typealias FineTuneChatCompletionRequestAssistantMessage =
+    dev.octri.showcase.openai.models.FineTuneChatCompletionRequestAssistantMessage
 
-typealias FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum = dev.octri.showcase.openai.models.FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum
+typealias FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum =
+    dev.octri.showcase.openai.models.FineTuneChatCompletionRequestAssistantMessageVariant0WeightEnum
 
 typealias FineTuneDPOHyperparameters = dev.octri.showcase.openai.models.FineTuneDPOHyperparameters
 
-typealias FineTuneDPOHyperparametersBatchSizeVariant0Enum = dev.octri.showcase.openai.models.FineTuneDPOHyperparametersBatchSizeVariant0Enum
+typealias FineTuneDPOHyperparametersBatchSizeVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneDPOHyperparametersBatchSizeVariant0Enum
 
-typealias FineTuneDPOHyperparametersBetaVariant0Enum = dev.octri.showcase.openai.models.FineTuneDPOHyperparametersBetaVariant0Enum
+typealias FineTuneDPOHyperparametersBetaVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneDPOHyperparametersBetaVariant0Enum
 
-typealias FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum = dev.octri.showcase.openai.models.FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum
+typealias FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneDPOHyperparametersLearningRateMultiplierVariant0Enum
 
-typealias FineTuneDPOHyperparametersNEpochsVariant0Enum = dev.octri.showcase.openai.models.FineTuneDPOHyperparametersNEpochsVariant0Enum
+typealias FineTuneDPOHyperparametersNEpochsVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneDPOHyperparametersNEpochsVariant0Enum
 
 typealias FineTuneDPOMethod = dev.octri.showcase.openai.models.FineTuneDPOMethod
 
@@ -247,43 +284,59 @@ typealias FineTuneMethod = dev.octri.showcase.openai.models.FineTuneMethod
 
 typealias FineTuneMethodTypeEnum = dev.octri.showcase.openai.models.FineTuneMethodTypeEnum
 
-typealias FineTuneReinforcementHyperparameters = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparameters
+typealias FineTuneReinforcementHyperparameters =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparameters
 
-typealias FineTuneReinforcementHyperparametersBatchSizeVariant0Enum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersBatchSizeVariant0Enum
+typealias FineTuneReinforcementHyperparametersBatchSizeVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersBatchSizeVariant0Enum
 
-typealias FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum
+typealias FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersComputeMultiplierVariant0Enum
 
-typealias FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum
+typealias FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersEvalIntervalVariant0Enum
 
-typealias FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum
+typealias FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersEvalSamplesVariant0Enum
 
-typealias FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum
+typealias FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersLearningRateMultiplierVariant0Enum
 
-typealias FineTuneReinforcementHyperparametersNEpochsVariant0Enum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersNEpochsVariant0Enum
+typealias FineTuneReinforcementHyperparametersNEpochsVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersNEpochsVariant0Enum
 
-typealias FineTuneReinforcementHyperparametersReasoningEffortEnum = dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersReasoningEffortEnum
+typealias FineTuneReinforcementHyperparametersReasoningEffortEnum =
+    dev.octri.showcase.openai.models.FineTuneReinforcementHyperparametersReasoningEffortEnum
 
 typealias FineTuneReinforcementMethod = dev.octri.showcase.openai.models.FineTuneReinforcementMethod
 
-typealias FineTuneReinforcementMethodGrader = dev.octri.showcase.openai.models.FineTuneReinforcementMethodGrader
+typealias FineTuneReinforcementMethodGrader =
+    dev.octri.showcase.openai.models.FineTuneReinforcementMethodGrader
 
-typealias FineTuneSupervisedHyperparameters = dev.octri.showcase.openai.models.FineTuneSupervisedHyperparameters
+typealias FineTuneSupervisedHyperparameters =
+    dev.octri.showcase.openai.models.FineTuneSupervisedHyperparameters
 
-typealias FineTuneSupervisedHyperparametersBatchSizeVariant0Enum = dev.octri.showcase.openai.models.FineTuneSupervisedHyperparametersBatchSizeVariant0Enum
+typealias FineTuneSupervisedHyperparametersBatchSizeVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneSupervisedHyperparametersBatchSizeVariant0Enum
 
-typealias FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum = dev.octri.showcase.openai.models.FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum
+typealias FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneSupervisedHyperparametersLearningRateMultiplierVariant0Enum
 
-typealias FineTuneSupervisedHyperparametersNEpochsVariant0Enum = dev.octri.showcase.openai.models.FineTuneSupervisedHyperparametersNEpochsVariant0Enum
+typealias FineTuneSupervisedHyperparametersNEpochsVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuneSupervisedHyperparametersNEpochsVariant0Enum
 
 typealias FineTuneSupervisedMethod = dev.octri.showcase.openai.models.FineTuneSupervisedMethod
 
-typealias FineTuningCheckpointPermission = dev.octri.showcase.openai.models.FineTuningCheckpointPermission
+typealias FineTuningCheckpointPermission =
+    dev.octri.showcase.openai.models.FineTuningCheckpointPermission
 
-typealias FineTuningCheckpointPermissionObjectEnum = dev.octri.showcase.openai.models.FineTuningCheckpointPermissionObjectEnum
+typealias FineTuningCheckpointPermissionObjectEnum =
+    dev.octri.showcase.openai.models.FineTuningCheckpointPermissionObjectEnum
 
 typealias FineTuningIntegration = dev.octri.showcase.openai.models.FineTuningIntegration
 
-typealias FineTuningIntegrationTypeEnum = dev.octri.showcase.openai.models.FineTuningIntegrationTypeEnum
+typealias FineTuningIntegrationTypeEnum =
+    dev.octri.showcase.openai.models.FineTuningIntegrationTypeEnum
 
 typealias FineTuningIntegrationWandb = dev.octri.showcase.openai.models.FineTuningIntegrationWandb
 
@@ -291,9 +344,11 @@ typealias FineTuningJob = dev.octri.showcase.openai.models.FineTuningJob
 
 typealias FineTuningJobCheckpoint = dev.octri.showcase.openai.models.FineTuningJobCheckpoint
 
-typealias FineTuningJobCheckpointMetrics = dev.octri.showcase.openai.models.FineTuningJobCheckpointMetrics
+typealias FineTuningJobCheckpointMetrics =
+    dev.octri.showcase.openai.models.FineTuningJobCheckpointMetrics
 
-typealias FineTuningJobCheckpointObjectEnum = dev.octri.showcase.openai.models.FineTuningJobCheckpointObjectEnum
+typealias FineTuningJobCheckpointObjectEnum =
+    dev.octri.showcase.openai.models.FineTuningJobCheckpointObjectEnum
 
 typealias FineTuningJobErrorVariant0 = dev.octri.showcase.openai.models.FineTuningJobErrorVariant0
 
@@ -301,17 +356,22 @@ typealias FineTuningJobEvent = dev.octri.showcase.openai.models.FineTuningJobEve
 
 typealias FineTuningJobEventLevelEnum = dev.octri.showcase.openai.models.FineTuningJobEventLevelEnum
 
-typealias FineTuningJobEventObjectEnum = dev.octri.showcase.openai.models.FineTuningJobEventObjectEnum
+typealias FineTuningJobEventObjectEnum =
+    dev.octri.showcase.openai.models.FineTuningJobEventObjectEnum
 
 typealias FineTuningJobEventTypeEnum = dev.octri.showcase.openai.models.FineTuningJobEventTypeEnum
 
-typealias FineTuningJobHyperparameters = dev.octri.showcase.openai.models.FineTuningJobHyperparameters
+typealias FineTuningJobHyperparameters =
+    dev.octri.showcase.openai.models.FineTuningJobHyperparameters
 
-typealias FineTuningJobHyperparametersBatchSizeVariant0Enum = dev.octri.showcase.openai.models.FineTuningJobHyperparametersBatchSizeVariant0Enum
+typealias FineTuningJobHyperparametersBatchSizeVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuningJobHyperparametersBatchSizeVariant0Enum
 
-typealias FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum = dev.octri.showcase.openai.models.FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum
+typealias FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum
 
-typealias FineTuningJobHyperparametersNEpochsVariant0Enum = dev.octri.showcase.openai.models.FineTuningJobHyperparametersNEpochsVariant0Enum
+typealias FineTuningJobHyperparametersNEpochsVariant0Enum =
+    dev.octri.showcase.openai.models.FineTuningJobHyperparametersNEpochsVariant0Enum
 
 typealias FineTuningJobMethodTypeEnum = dev.octri.showcase.openai.models.FineTuningJobMethodTypeEnum
 
@@ -319,29 +379,36 @@ typealias FineTuningJobObjectEnum = dev.octri.showcase.openai.models.FineTuningJ
 
 typealias FineTuningJobStatusEnum = dev.octri.showcase.openai.models.FineTuningJobStatusEnum
 
-typealias FunctionAndCustomToolCallOutput = dev.octri.showcase.openai.models.FunctionAndCustomToolCallOutput
+typealias FunctionAndCustomToolCallOutput =
+    dev.octri.showcase.openai.models.FunctionAndCustomToolCallOutput
 
 typealias FunctionCallItemResource = dev.octri.showcase.openai.models.FunctionCallItemResource
 
-typealias FunctionCallItemResourceTypeEnum = dev.octri.showcase.openai.models.FunctionCallItemResourceTypeEnum
+typealias FunctionCallItemResourceTypeEnum =
+    dev.octri.showcase.openai.models.FunctionCallItemResourceTypeEnum
 
 typealias FunctionCallItemStatus = dev.octri.showcase.openai.models.FunctionCallItemStatus
 
 typealias FunctionCallOutputItemParam = dev.octri.showcase.openai.models.FunctionCallOutputItemParam
 
-typealias FunctionCallOutputItemParamOutputItem = dev.octri.showcase.openai.models.FunctionCallOutputItemParamOutputItem
+typealias FunctionCallOutputItemParamOutputItem =
+    dev.octri.showcase.openai.models.FunctionCallOutputItemParamOutputItem
 
-typealias FunctionCallOutputItemParamTypeEnum = dev.octri.showcase.openai.models.FunctionCallOutputItemParamTypeEnum
+typealias FunctionCallOutputItemParamTypeEnum =
+    dev.octri.showcase.openai.models.FunctionCallOutputItemParamTypeEnum
 
-typealias FunctionCallOutputItemResource = dev.octri.showcase.openai.models.FunctionCallOutputItemResource
+typealias FunctionCallOutputItemResource =
+    dev.octri.showcase.openai.models.FunctionCallOutputItemResource
 
-typealias FunctionCallOutputItemResourceTypeEnum = dev.octri.showcase.openai.models.FunctionCallOutputItemResourceTypeEnum
+typealias FunctionCallOutputItemResourceTypeEnum =
+    dev.octri.showcase.openai.models.FunctionCallOutputItemResourceTypeEnum
 
 typealias FunctionCallOutputParam = dev.octri.showcase.openai.models.FunctionCallOutputParam
 
 typealias FunctionCallOutputResource = dev.octri.showcase.openai.models.FunctionCallOutputResource
 
-typealias FunctionCallOutputStatusEnum = dev.octri.showcase.openai.models.FunctionCallOutputStatusEnum
+typealias FunctionCallOutputStatusEnum =
+    dev.octri.showcase.openai.models.FunctionCallOutputStatusEnum
 
 typealias FunctionCallStatus = dev.octri.showcase.openai.models.FunctionCallStatus
 
@@ -359,49 +426,68 @@ typealias FunctionShellActionParam = dev.octri.showcase.openai.models.FunctionSh
 
 typealias FunctionShellCall = dev.octri.showcase.openai.models.FunctionShellCall
 
-typealias FunctionShellCallEnvironment = dev.octri.showcase.openai.models.FunctionShellCallEnvironment
+typealias FunctionShellCallEnvironment =
+    dev.octri.showcase.openai.models.FunctionShellCallEnvironment
 
 typealias FunctionShellCallItemParam = dev.octri.showcase.openai.models.FunctionShellCallItemParam
 
-typealias FunctionShellCallItemParamEnvironment = dev.octri.showcase.openai.models.FunctionShellCallItemParamEnvironment
+typealias FunctionShellCallItemParamEnvironment =
+    dev.octri.showcase.openai.models.FunctionShellCallItemParamEnvironment
 
-typealias FunctionShellCallItemParamTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallItemParamTypeEnum
+typealias FunctionShellCallItemParamTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallItemParamTypeEnum
 
 typealias FunctionShellCallItemStatus = dev.octri.showcase.openai.models.FunctionShellCallItemStatus
 
 typealias FunctionShellCallOutput = dev.octri.showcase.openai.models.FunctionShellCallOutput
 
-typealias FunctionShellCallOutputContent = dev.octri.showcase.openai.models.FunctionShellCallOutputContent
+typealias FunctionShellCallOutputContent =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputContent
 
-typealias FunctionShellCallOutputContentOutcome = dev.octri.showcase.openai.models.FunctionShellCallOutputContentOutcome
+typealias FunctionShellCallOutputContentOutcome =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputContentOutcome
 
-typealias FunctionShellCallOutputContentParam = dev.octri.showcase.openai.models.FunctionShellCallOutputContentParam
+typealias FunctionShellCallOutputContentParam =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputContentParam
 
-typealias FunctionShellCallOutputExitOutcome = dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcome
+typealias FunctionShellCallOutputExitOutcome =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcome
 
-typealias FunctionShellCallOutputExitOutcomeParam = dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcomeParam
+typealias FunctionShellCallOutputExitOutcomeParam =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcomeParam
 
-typealias FunctionShellCallOutputExitOutcomeParamTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcomeParamTypeEnum
+typealias FunctionShellCallOutputExitOutcomeParamTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcomeParamTypeEnum
 
-typealias FunctionShellCallOutputExitOutcomeTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcomeTypeEnum
+typealias FunctionShellCallOutputExitOutcomeTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputExitOutcomeTypeEnum
 
-typealias FunctionShellCallOutputItemParam = dev.octri.showcase.openai.models.FunctionShellCallOutputItemParam
+typealias FunctionShellCallOutputItemParam =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputItemParam
 
-typealias FunctionShellCallOutputItemParamTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputItemParamTypeEnum
+typealias FunctionShellCallOutputItemParamTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputItemParamTypeEnum
 
-typealias FunctionShellCallOutputOutcomeParam = dev.octri.showcase.openai.models.FunctionShellCallOutputOutcomeParam
+typealias FunctionShellCallOutputOutcomeParam =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputOutcomeParam
 
-typealias FunctionShellCallOutputStatusEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputStatusEnum
+typealias FunctionShellCallOutputStatusEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputStatusEnum
 
-typealias FunctionShellCallOutputTimeoutOutcome = dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcome
+typealias FunctionShellCallOutputTimeoutOutcome =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcome
 
-typealias FunctionShellCallOutputTimeoutOutcomeParam = dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcomeParam
+typealias FunctionShellCallOutputTimeoutOutcomeParam =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcomeParam
 
-typealias FunctionShellCallOutputTimeoutOutcomeParamTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcomeParamTypeEnum
+typealias FunctionShellCallOutputTimeoutOutcomeParamTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcomeParamTypeEnum
 
-typealias FunctionShellCallOutputTimeoutOutcomeTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcomeTypeEnum
+typealias FunctionShellCallOutputTimeoutOutcomeTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputTimeoutOutcomeTypeEnum
 
-typealias FunctionShellCallOutputTypeEnum = dev.octri.showcase.openai.models.FunctionShellCallOutputTypeEnum
+typealias FunctionShellCallOutputTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellCallOutputTypeEnum
 
 typealias FunctionShellCallStatus = dev.octri.showcase.openai.models.FunctionShellCallStatus
 
@@ -409,9 +495,11 @@ typealias FunctionShellCallTypeEnum = dev.octri.showcase.openai.models.FunctionS
 
 typealias FunctionShellToolParam = dev.octri.showcase.openai.models.FunctionShellToolParam
 
-typealias FunctionShellToolParamEnvironment = dev.octri.showcase.openai.models.FunctionShellToolParamEnvironment
+typealias FunctionShellToolParamEnvironment =
+    dev.octri.showcase.openai.models.FunctionShellToolParamEnvironment
 
-typealias FunctionShellToolParamTypeEnum = dev.octri.showcase.openai.models.FunctionShellToolParamTypeEnum
+typealias FunctionShellToolParamTypeEnum =
+    dev.octri.showcase.openai.models.FunctionShellToolParamTypeEnum
 
 typealias FunctionTool = dev.octri.showcase.openai.models.FunctionTool
 
@@ -419,11 +507,14 @@ typealias FunctionToolCall = dev.octri.showcase.openai.models.FunctionToolCall
 
 typealias FunctionToolCallOutput = dev.octri.showcase.openai.models.FunctionToolCallOutput
 
-typealias FunctionToolCallOutputResource = dev.octri.showcase.openai.models.FunctionToolCallOutputResource
+typealias FunctionToolCallOutputResource =
+    dev.octri.showcase.openai.models.FunctionToolCallOutputResource
 
-typealias FunctionToolCallOutputStatusEnum = dev.octri.showcase.openai.models.FunctionToolCallOutputStatusEnum
+typealias FunctionToolCallOutputStatusEnum =
+    dev.octri.showcase.openai.models.FunctionToolCallOutputStatusEnum
 
-typealias FunctionToolCallOutputTypeEnum = dev.octri.showcase.openai.models.FunctionToolCallOutputTypeEnum
+typealias FunctionToolCallOutputTypeEnum =
+    dev.octri.showcase.openai.models.FunctionToolCallOutputTypeEnum
 
 typealias FunctionToolCallResource = dev.octri.showcase.openai.models.FunctionToolCallResource
 

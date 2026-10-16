@@ -3,57 +3,70 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ExternalStorageResponse` API schema.
- */
+/** Typed representation of the `ExternalStorageResponse` API schema. */
 data class ExternalStorageResponse(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ExternalStorageResponseObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ExternalStorageResponseObjectEnum,
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `project_id` wire field.
-     */
+    /** Required `string` value serialized in the `project_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String,
-    /**
-     * Required API value serialized in the `provider` wire field.
-     */
+    /** Required API value serialized in the `provider` wire field. */
     val provider: ExternalStorageResponseProvider,
-    /**
-     * Required `string` value serialized in the `geography` wire field.
-     */
+    /** Required `string` value serialized in the `geography` wire field. */
     val geography: String,
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: ExternalStorageStatus,
-    /**
-     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
 
-/**
- * Required API value serialized in the `provider` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownExternalStorageResponseProvider::class)
+/** Required API value serialized in the `provider` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownExternalStorageResponseProvider::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AwsExternalStorageProviderResponse::class, name = "aws"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AzureExternalStorageProviderResponse::class, name = "azure"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GcpExternalStorageProviderResponse::class, name = "gcp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OciExternalStorageProviderResponse::class, name = "oci")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AwsExternalStorageProviderResponse::class,
+        name = "aws",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AzureExternalStorageProviderResponse::class,
+        name = "azure",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GcpExternalStorageProviderResponse::class,
+        name = "gcp",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = OciExternalStorageProviderResponse::class,
+        name = "oci",
+    ),
 )
 sealed interface ExternalStorageResponseProvider
 
-/** A [ExternalStorageResponseProvider] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownExternalStorageResponseProvider @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [ExternalStorageResponseProvider] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownExternalStorageResponseProvider
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ExternalStorageResponseProvider {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

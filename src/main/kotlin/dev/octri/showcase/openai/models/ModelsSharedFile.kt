@@ -3,31 +3,27 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A citation to a file.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A citation to a file. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FileCitationBody(
-    /**
-     * The type of the file citation. Always `file_citation`.
-     */
+    /** The type of the file citation. Always `file_citation`. */
     val type: FileCitationBodyTypeEnum,
-    /**
-     * The ID of the file.
-     */
+    /** The ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The index in the output text at which to insert the file citation.
-     */
+    /** The index in the output text at which to insert the file citation. */
     val index: Long,
-    /**
-     * The filename of the file cited.
-     */
-    val filename: String
+    /** The filename of the file cited. */
+    val filename: String,
 ) : AnnotationModel
 
 /**
- * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days and all other files are persisted until they are manually deleted.
+ * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days and
+ * all other files are persisted until they are manually deleted.
  */
 data class FileExpirationAfter(
     /**
@@ -35,106 +31,94 @@ data class FileExpirationAfter(
      */
     val anchor: FileExpirationAfterAnchorEnum,
     /**
-     * The number of seconds after the anchor time that the file will expire. Must be between 3600 (1 hour) and 2592000 (30 days).
+     * The number of seconds after the anchor time that the file will expire. Must be between 3600
+     * (1 hour) and 2592000 (30 days).
      */
-    val seconds: Long
+    val seconds: Long,
 )
 
-/**
- * A path to a file.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A path to a file. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FilePath(
-    /**
-     * The type of the file path. Always `file_path`.
-     */
+    /** The type of the file path. Always `file_path`. */
     val type: FilePathTypeEnum,
-    /**
-     * The ID of the file.
-     */
+    /** The ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The index of the file in the list of files.
-     */
-    val index: Long
+    /** The index of the file in the list of files. */
+    val index: Long,
 ) : AnnotationModel
 
 /**
- * A tool that searches for relevant content from uploaded files. Learn more about the file search tool.
+ * A tool that searches for relevant content from uploaded files. Learn more about the file search
+ * tool.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FileSearchTool(
-    /**
-     * The type of the file search tool. Always `file_search`.
-     */
+    /** The type of the file search tool. Always `file_search`. */
     val type: FileSearchToolTypeEnum,
-    /**
-     * The IDs of the vector stores to search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>,
+    /** The IDs of the vector stores to search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+    val vectorStoreIds: List<String>,
     /**
      * The maximum number of results to return. This number should be between 1 and 50 inclusive.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results") val maxNumResults: Long? = null,
-    /**
-     * Ranking options for search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options") val rankingOptions: RankingOptions? = null,
-    /**
-     * Optional API value serialized in the `filters` wire field.
-     */
-    val filters: Filters? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results")
+    val maxNumResults: Long? = null,
+    /** Ranking options for search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options")
+    val rankingOptions: RankingOptions? = null,
+    /** Optional API value serialized in the `filters` wire field. */
+    val filters: Filters? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * Required object value serialized in the `results[]` wire field.
- */
+/** Required object value serialized in the `results[]` wire field. */
 data class FileSearchToolCallResultsItem(
-    /**
-     * The unique ID of the file.
-     */
+    /** The unique ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /**
-     * The text that was retrieved from the file.
-     */
+    /** The text that was retrieved from the file. */
     val text: String? = null,
-    /**
-     * The name of the file.
-     */
+    /** The name of the file. */
     val filename: String? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters, booleans, or numbers.
      */
     val attributes: VectorStoreFileAttributes? = null,
-    /**
-     * The relevance score of the file - a value between 0 and 1.
-     */
-    val score: Float? = null
+    /** The relevance score of the file - a value between 0 and 1. */
+    val score: Float? = null,
 )
 
-/**
- * The results of a file search tool call. See the file search guide for more information.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The results of a file search tool call. See the file search guide for more information. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FileSearchToolCall(
-    /**
-     * The unique ID of the file search tool call.
-     */
+    /** The unique ID of the file search tool call. */
     val id: String,
-    /**
-     * The type of the file search tool call. Always `file_search_call`.
-     */
+    /** The type of the file search tool call. Always `file_search_call`. */
     val type: FileSearchToolCallTypeEnum,
     /**
-     * The status of the file search tool call. One of `in_progress`, `searching`, `incomplete` or `failed`,
+     * The status of the file search tool call. One of `in_progress`, `searching`, `incomplete` or
+     * `failed`,
      */
     val status: FileSearchToolCallStatusEnum,
-    /**
-     * The queries used to search for files.
-     */
+    /** The queries used to search for files. */
     val queries: List<String>,
-    /**
-     * The results of the file search tool call.
-     */
-    val results: List<FileSearchToolCallResultsItem>? = null
+    /** The results of the file search tool call. */
+    val results: List<FileSearchToolCallResultsItem>? = null,
 ) : ConversationItem, Item, ItemResource, OutputItem, ItemField

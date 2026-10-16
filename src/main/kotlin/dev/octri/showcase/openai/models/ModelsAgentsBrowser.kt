@@ -3,128 +3,110 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A control in a registered browser-login form.
- */
+/** A control in a registered browser-login form. */
 data class BrowserAuthenticationFieldResource(
-    /**
-     * The field ID to submit as field_id in a fields entry.
-     */
+    /** The field ID to submit as field_id in a fields entry. */
     val id: String,
-    /**
-     * The label to display beside the control.
-     */
+    /** The label to display beside the control. */
     val label: String,
-    /**
-     * The rendering type, such as email, password, or text.
-     */
+    /** The rendering type, such as email, password, or text. */
     val type: String,
-    /**
-     * Whether this control requires a nonempty value.
-     */
-    val required: Boolean
+    /** Whether this control requires a nonempty value. */
+    val required: Boolean,
 )
 
-/**
- * One user-entered value, including non-password fields such as an email address.
- */
+/** One user-entered value, including non-password fields such as an email address. */
 data class BrowserAuthenticationFieldValueParam(
-    /**
-     * The field ID from the required action.
-     */
+    /** The field ID from the required action. */
     @com.fasterxml.jackson.annotation.JsonProperty("field_id") val fieldId: String,
-    /**
-     * The value to enter into the registered control.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String
+    /** The value to enter into the registered control. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
 )
 
-/**
- * Typed representation of the `BrowserAuthenticationHistoryRequestKindResource` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBrowserAuthenticationHistoryRequestKindResource::class)
+/** Typed representation of the `BrowserAuthenticationHistoryRequestKindResource` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBrowserAuthenticationHistoryRequestKindResource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication::class, name = "browser_authentication")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication::class,
+        name = "browser_authentication",
+    )
 )
 sealed interface BrowserAuthenticationHistoryRequestKindResource
 
-/** A [BrowserAuthenticationHistoryRequestKindResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBrowserAuthenticationHistoryRequestKindResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BrowserAuthenticationHistoryRequestKindResource] whose `type` names no branch this SDK knows,
+ * kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBrowserAuthenticationHistoryRequestKindResource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BrowserAuthenticationHistoryRequestKindResource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A registered form awaiting the application's response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A registered form awaiting the application's response. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication(
-    /**
-     * The type of the object. Always `browser_authentication`.
-     */
+    /** The type of the object. Always `browser_authentication`. */
     val type: BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentXb74a1c2233,
-    /**
-     * Why the agent needs the user to sign in.
-     */
+    /** Why the agent needs the user to sign in. */
     @com.fasterxml.jackson.annotation.JsonProperty("reason", required = true) val reason: String?,
-    /**
-     * The registered form or frame origin where values will be entered.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("credential_origin", required = true) val credentialOrigin: String?,
-    /**
-     * Controls to render. All submitted values are sensitive.
-     */
+    /** The registered form or frame origin where values will be entered. */
+    @com.fasterxml.jackson.annotation.JsonProperty("credential_origin", required = true)
+    val credentialOrigin: String?,
+    /** Controls to render. All submitted values are sensitive. */
     val fields: List<BrowserAuthenticationFieldResource>,
-    /**
-     * Sign-in methods. Empty for a plain form.
-     */
-    val options: List<BrowserAuthenticationOptionResource>
+    /** Sign-in methods. Empty for a plain form. */
+    val options: List<BrowserAuthenticationOptionResource>,
 ) : BrowserAuthenticationHistoryRequestKindResource
 
-/**
- * A sign-in method and the fields that belong to it.
- */
+/** A sign-in method and the fields that belong to it. */
 data class BrowserAuthenticationOptionResource(
-    /**
-     * The option ID to submit as selected_option.
-     */
+    /** The option ID to submit as selected_option. */
     val id: String,
-    /**
-     * The method label to display.
-     */
+    /** The method label to display. */
     val label: String,
-    /**
-     * IDs from the registered fields that this method accepts.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("field_ids") val fieldIds: List<String>
+    /** IDs from the registered fields that this method accepts. */
+    @com.fasterxml.jackson.annotation.JsonProperty("field_ids") val fieldIds: List<String>,
 )
 
-/**
- * A credential-free history record of the emitted login request.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A credential-free history record of the emitted login request. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BrowserAuthenticationRequestItemResource(
-    /**
-     * Required `string` value serialized in the `turn_id` wire field.
-     */
+    /** Required `string` value serialized in the `turn_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * Required `string` value serialized in the `request_id` wire field.
-     */
+    /** Required `string` value serialized in the `request_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String,
-    /**
-     * Required API value serialized in the `request` wire field.
-     */
+    /** Required API value serialized in the `request` wire field. */
     val request: BrowserAuthenticationHistoryRequestKindResource,
-    /**
-     * The stable history item ID.
-     */
+    /** The stable history item ID. */
     val id: String,
-    /**
-     * The item type. Always computer_use_approval_request.
-     */
-    val type: BrowserAuthenticationRequestItemResourceTypeEnum
+    /** The item type. Always computer_use_approval_request. */
+    val type: BrowserAuthenticationRequestItemResourceTypeEnum,
 ) : SessionTurnItemResource, AgentOutputItemResource

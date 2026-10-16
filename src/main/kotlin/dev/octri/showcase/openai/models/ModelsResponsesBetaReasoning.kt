@@ -3,36 +3,28 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Configuration options for reasoning models.
- */
+/** Configuration options for reasoning models. */
 data class BetaReasoning(
     /**
-     * Controls the reasoning execution mode for the request. When returned on a response, this is the effective execution mode.
+     * Controls the reasoning execution mode for the request. When returned on a response, this is
+     * the effective execution mode.
      */
     val mode: BetaReasoningModeEnum? = null,
-    /**
-     * Optional API value serialized in the `effort` wire field.
-     */
+    /** Optional API value serialized in the `effort` wire field. */
     val effort: BetaReasoningEffort? = null,
-    /**
-     * Optional API value serialized in the `summary` wire field.
-     */
+    /** Optional API value serialized in the `summary` wire field. */
     val summary: BetaReasoningSummaryVariant0Enum? = null,
-    /**
-     * Optional API value serialized in the `context` wire field.
-     */
+    /** Optional API value serialized in the `context` wire field. */
     val context: BetaReasoningContextVariant0Enum? = null,
-    /**
-     * Optional API value serialized in the `generate_summary` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("generate_summary") val generateSummary: BetaReasoningGenerateSummaryVariant0Enum? = null
+    /** Optional API value serialized in the `generate_summary` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("generate_summary")
+    val generateSummary: BetaReasoningGenerateSummaryVariant0Enum? = null,
 )
 
-/**
- * Typed representation of the `BetaReasoningEffort` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaReasoningEffort.Deserializer::class)
+/** Typed representation of the `BetaReasoningEffort` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = BetaReasoningEffort.Deserializer::class
+)
 sealed interface BetaReasoningEffort {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<BetaReasoningEffort>() {
@@ -43,67 +35,89 @@ sealed interface BetaReasoningEffort {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringBetaReasoningEffort(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> ValueBetaReasoningEffort(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringBetaReasoningEffort(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    ValueBetaReasoningEffort(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringBetaReasoningEffort(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : BetaReasoningEffort
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringBetaReasoningEffort(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : BetaReasoningEffort
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueBetaReasoningEffort(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : BetaReasoningEffort
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueBetaReasoningEffort(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
+) : BetaReasoningEffort
 
 /**
- * A description of the chain of thought used by a reasoning model while generating a response. Be sure to include these items in your `input` to the Responses API for subsequent turns of a conversation if you are manually managing context.
+ * A description of the chain of thought used by a reasoning model while generating a response. Be
+ * sure to include these items in your `input` to the Responses API for subsequent turns of a
+ * conversation if you are manually managing context.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaReasoningItem(
-    /**
-     * The type of the object. Always `reasoning`.
-     */
+    /** The type of the object. Always `reasoning`. */
     val type: BetaReasoningItemTypeEnum,
-    /**
-     * The unique identifier of the reasoning content.
-     */
+    /** The unique identifier of the reasoning content. */
     val id: String,
-    /**
-     * Reasoning summary content.
-     */
+    /** Reasoning summary content. */
     val summary: List<BetaSummaryTextContent>,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * Optional `string` value serialized in the `encrypted_content` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String? = null,
-    /**
-     * Reasoning text content.
-     */
+    /** Optional `string` value serialized in the `encrypted_content` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content")
+    val encryptedContent: String? = null,
+    /** Reasoning text content. */
     val content: List<BetaReasoningTextContent>? = null,
     /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when
+     * items are returned via API.
      */
-    val status: BetaReasoningItemStatusEnum? = null
+    val status: BetaReasoningItemStatusEnum? = null,
 ) : BetaItem, BetaItemResource, BetaItemField, BetaOutputItem
 
 typealias BetaReasoningModeEnum = String
 
-/**
- * Reasoning text from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Reasoning text from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaReasoningTextContent(
-    /**
-     * The type of the reasoning text. Always `reasoning_text`.
-     */
+    /** The type of the reasoning text. Always `reasoning_text`. */
     val type: BetaReasoningTextContentTypeEnum,
-    /**
-     * The reasoning text from the model.
-     */
-    val text: String
+    /** The reasoning text from the model. */
+    val text: String,
 ) : BetaOutputContent, BetaAgentMessageContentItem, BetaMessageContentItem

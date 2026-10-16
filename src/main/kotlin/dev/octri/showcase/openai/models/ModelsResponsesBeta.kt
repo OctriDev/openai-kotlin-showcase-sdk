@@ -3,484 +3,464 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * An annotation that applies to a span of output text.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaAnnotation::class)
+/** An annotation that applies to a span of output text. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaAnnotation::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFileCitationBody::class, name = "file_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaUrlCitationBody::class, name = "url_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerFileCitationBody::class, name = "container_file_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFilePath::class, name = "file_path")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFileCitationBody::class,
+        name = "file_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaUrlCitationBody::class,
+        name = "url_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerFileCitationBody::class,
+        name = "container_file_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFilePath::class,
+        name = "file_path",
+    ),
 )
 sealed interface BetaAnnotation
 
 /** A [BetaAnnotation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaAnnotation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaAnnotation
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaAnnotation {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `BetaApproximateLocation` API schema.
- */
+/** Typed representation of the `BetaApproximateLocation` API schema. */
 data class BetaApproximateLocation(
-    /**
-     * The type of location approximation. Always `approximate`.
-     */
+    /** The type of location approximation. Always `approximate`. */
     val type: BetaApproximateLocationTypeEnum,
-    /**
-     * Optional `string` value serialized in the `country` wire field.
-     */
+    /** Optional `string` value serialized in the `country` wire field. */
     val country: String? = null,
-    /**
-     * Optional `string` value serialized in the `region` wire field.
-     */
+    /** Optional `string` value serialized in the `region` wire field. */
     val region: String? = null,
-    /**
-     * Optional `string` value serialized in the `city` wire field.
-     */
+    /** Optional `string` value serialized in the `city` wire field. */
     val city: String? = null,
-    /**
-     * Optional `string` value serialized in the `timezone` wire field.
-     */
-    val timezone: String? = null
+    /** Optional `string` value serialized in the `timezone` wire field. */
+    val timezone: String? = null,
 )
 
 /**
- * A filter used to compare a specified attribute key to a given value using a defined comparison operation.
+ * A filter used to compare a specified attribute key to a given value using a defined comparison
+ * operation.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaComparisonFilter(
     /**
-     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`: equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less than - `lte`: less than or equal - `in`: in - `nin`: not in
+     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`:
+     * equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less
+     * than - `lte`: less than or equal - `in`: in - `nin`: not in
      */
     val type: BetaComparisonFilterTypeEnum,
-    /**
-     * The key to compare against the value.
-     */
+    /** The key to compare against the value. */
     val key: String,
     /**
      * The value to compare against the attribute key; supports string, number, or boolean types.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
 ) : BetaFilters, BetaCompoundFilterFiltersItem
 
-/**
- * Typed representation of the `BetaContextManagementParam` API schema.
- */
+/** Typed representation of the `BetaContextManagementParam` API schema. */
 data class BetaContextManagementParam(
-    /**
-     * The context management entry type. Currently only 'compaction' is supported.
-     */
+    /** The context management entry type. Currently only 'compaction' is supported. */
     val type: String,
-    /**
-     * Optional API value serialized in the `compact_threshold` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("compact_threshold") val compactThreshold: Long? = null
+    /** Optional API value serialized in the `compact_threshold` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("compact_threshold")
+    val compactThreshold: Long? = null,
 )
 
-/**
- * An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.
- */
+/** An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`. */
 data class BetaCoordParam(
-    /**
-     * The x-coordinate.
-     */
+    /** The x-coordinate. */
     val x: Long,
-    /**
-     * The y-coordinate.
-     */
-    val y: Long
+    /** The y-coordinate. */
+    val y: Long,
 )
 
-/**
- * A double click action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A double click action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaDoubleClickAction(
     /**
-     * Specifies the event type. For a double click action, this property is always set to `double_click`.
+     * Specifies the event type. For a double click action, this property is always set to
+     * `double_click`.
      */
     val type: BetaDoubleClickActionTypeEnum,
-    /**
-     * The x-coordinate where the double click occurred.
-     */
+    /** The x-coordinate where the double click occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the double click occurred.
-     */
+    /** The y-coordinate where the double click occurred. */
     val y: Long,
-    /**
-     * The keys being held while double-clicking.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?
+    /** The keys being held while double-clicking. */
+    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?,
 ) : BetaComputerAction
 
-/**
- * A drag action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A drag action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaDragParam(
-    /**
-     * Specifies the event type. For a drag action, this property is always set to `drag`.
-     */
+    /** Specifies the event type. For a drag action, this property is always set to `drag`. */
     val type: BetaDragParamTypeEnum,
     /**
-     * An array of coordinates representing the path of the drag action. Coordinates will appear as an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
+     * An array of coordinates representing the path of the drag action. Coordinates will appear as
+     * an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
      */
     val path: List<BetaCoordParam>,
-    /**
-     * The keys being held while dragging the mouse.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while dragging the mouse. */
+    val keys: List<String>? = null,
 ) : BetaComputerAction
 
 /**
- * A message input to the model with a role indicating instruction following hierarchy. Instructions given with the `developer` or `system` role take precedence over instructions given with the `user` role. Messages with the `assistant` role are presumed to have been generated by the model in previous interactions.
+ * A message input to the model with a role indicating instruction following hierarchy. Instructions
+ * given with the `developer` or `system` role take precedence over instructions given with the
+ * `user` role. Messages with the `assistant` role are presumed to have been generated by the model
+ * in previous interactions.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaEasyInputMessage(
-    /**
-     * The role of the message input. One of `user`, `assistant`, `system`, or `developer`.
-     */
+    /** The role of the message input. One of `user`, `assistant`, `system`, or `developer`. */
     val role: BetaEasyInputMessageRoleEnum,
     /**
-     * Text, image, or audio input to the model, used to generate a response. Can also contain previous assistant responses.
+     * Text, image, or audio input to the model, used to generate a response. Can also contain
+     * previous assistant responses.
      */
     val content: Any,
-    /**
-     * Optional API value serialized in the `phase` wire field.
-     */
+    /** Optional API value serialized in the `phase` wire field. */
     val phase: BetaMessagePhase? = null,
-    /**
-     * The type of the message input. Always `message`.
-     */
-    val type: BetaEasyInputMessageTypeEnum? = null
+    /** The type of the message input. Always `message`. */
+    val type: BetaEasyInputMessageTypeEnum? = null,
 ) : BetaInputItem
 
-/**
- * Typed representation of the `BetaEmptyModelParam` API schema.
- */
+/** Typed representation of the `BetaEmptyModelParam` API schema. */
 class BetaEmptyModelParam {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/**
- * Typed representation of the `BetaFilters` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFilters::class)
+/** Typed representation of the `BetaFilters` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFilters::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCompoundFilter::class, names = ["and", "or"])
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaComparisonFilter::class,
+        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaCompoundFilter::class,
+        names = ["and", "or"],
+    ),
 )
 sealed interface BetaFilters
 
 /** A [BetaFilters] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFilters @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFilters
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFilters {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `BetaHTTPError` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaHTTPError` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaHTTPError(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: BetaHTTPErrorTypeEnum,
-    /**
-     * Required `integer` value serialized in the `code` wire field.
-     */
+    /** Required `integer` value serialized in the `code` wire field. */
     val code: Long,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
-    val message: String
+    /** Required `string` value serialized in the `message` wire field. */
+    val message: String,
 ) : BetaMCPToolCallError
 
-/**
- * Typed representation of the `BetaHybridSearchOptions` API schema.
- */
+/** Typed representation of the `BetaHybridSearchOptions` API schema. */
 data class BetaHybridSearchOptions(
-    /**
-     * The weight of the embedding in the reciprocal ranking fusion.
-     */
+    /** The weight of the embedding in the reciprocal ranking fusion. */
     @com.fasterxml.jackson.annotation.JsonProperty("embedding_weight") val embeddingWeight: Double,
-    /**
-     * The weight of the text in the reciprocal ranking fusion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_weight") val textWeight: Double
+    /** The weight of the text in the reciprocal ranking fusion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_weight") val textWeight: Double,
 )
 
-/**
- * A collection of keypresses the model would like to perform.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A collection of keypresses the model would like to perform. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaKeyPressAction(
     /**
      * Specifies the event type. For a keypress action, this property is always set to `keypress`.
      */
     val type: BetaKeyPressActionTypeEnum,
     /**
-     * The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.
+     * The combination of keys the model is requesting to be pressed. This is an array of strings,
+     * each representing a key.
      */
-    val keys: List<String>
+    val keys: List<String>,
 ) : BetaComputerAction
 
-/**
- * The log probability of a token.
- */
+/** The log probability of a token. */
 data class BetaLogProb(
-    /**
-     * Required `string` value serialized in the `token` wire field.
-     */
+    /** Required `string` value serialized in the `token` wire field. */
     val token: String,
-    /**
-     * Required `number` value serialized in the `logprob` wire field.
-     */
+    /** Required `number` value serialized in the `logprob` wire field. */
     val logprob: Double,
-    /**
-     * Required array value serialized in the `bytes` wire field.
-     */
+    /** Required array value serialized in the `bytes` wire field. */
     val bytes: List<Long>,
-    /**
-     * Required array value serialized in the `top_logprobs` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: List<BetaTopLogProb>
+    /** Required array value serialized in the `top_logprobs` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs")
+    val topLogprobs: List<BetaTopLogProb>,
 )
 
-/**
- * Typed representation of the `BetaMCPProtocolError` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaMCPProtocolError` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaMCPProtocolError(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: BetaMCPProtocolErrorTypeEnum,
-    /**
-     * Required `integer` value serialized in the `code` wire field.
-     */
+    /** Required `integer` value serialized in the `code` wire field. */
     val code: Long,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
-    val message: String
+    /** Required `string` value serialized in the `message` wire field. */
+    val message: String,
 ) : BetaMCPToolCallError
 
 typealias BetaMetadata = Map<String, String>
 
-/**
- * A mouse move action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A mouse move action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaMoveParam(
-    /**
-     * Specifies the event type. For a move action, this property is always set to `move`.
-     */
+    /** Specifies the event type. For a move action, this property is always set to `move`. */
     val type: BetaMoveParamTypeEnum,
-    /**
-     * The x-coordinate to move to.
-     */
+    /** The x-coordinate to move to. */
     val x: Long,
-    /**
-     * The y-coordinate to move to.
-     */
+    /** The y-coordinate to move to. */
     val y: Long,
-    /**
-     * The keys being held while moving the mouse.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while moving the mouse. */
+    val keys: List<String>? = null,
 ) : BetaComputerAction
 
 typealias BetaPersonalityEnum = String
 
-/**
- * Typed representation of the `BetaProgrammaticToolCallingParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaProgrammaticToolCallingParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaProgrammaticToolCallingParam(
-    /**
-     * The type of the tool. Always `programmatic_tool_calling`.
-     */
+    /** The type of the tool. Always `programmatic_tool_calling`. */
     val type: BetaProgrammaticToolCallingParamTypeEnum
 ) : BetaTool, BetaToolSearchOutputTool
 
-/**
- * Typed representation of the `BetaRankingOptions` API schema.
- */
+/** Typed representation of the `BetaRankingOptions` API schema. */
 data class BetaRankingOptions(
-    /**
-     * The ranker to use for the file search.
-     */
+    /** The ranker to use for the file search. */
     val ranker: BetaRankerVersionType? = null,
     /**
-     * The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results.
+     * The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will
+     * attempt to return only the most relevant results, but may return fewer results.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold") val scoreThreshold: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold")
+    val scoreThreshold: Double? = null,
     /**
-     * Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled.
+     * Weights that control how reciprocal rank fusion balances semantic embedding matches versus
+     * sparse keyword matches when hybrid search is enabled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("hybrid_search") val hybridSearch: BetaHybridSearchOptions? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("hybrid_search")
+    val hybridSearch: BetaHybridSearchOptions? = null,
 )
 
-/**
- * A refusal from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A refusal from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaRefusalContent(
-    /**
-     * The type of the refusal. Always `refusal`.
-     */
+    /** The type of the refusal. Always `refusal`. */
     val type: BetaRefusalContentTypeEnum,
-    /**
-     * The refusal explanation from the model.
-     */
-    val refusal: String
+    /** The refusal explanation from the model. */
+    val refusal: String,
 ) : BetaOutputMessageContent, BetaOutputContent, BetaAgentMessageContentItem, BetaMessageContentItem
 
-/**
- * A screenshot action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A screenshot action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaScreenshotParam(
     /**
-     * Specifies the event type. For a screenshot action, this property is always set to `screenshot`.
+     * Specifies the event type. For a screenshot action, this property is always set to
+     * `screenshot`.
      */
     val type: BetaScreenshotParamTypeEnum
 ) : BetaComputerAction
 
-/**
- * A scroll action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A scroll action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaScrollParam(
-    /**
-     * Specifies the event type. For a scroll action, this property is always set to `scroll`.
-     */
+    /** Specifies the event type. For a scroll action, this property is always set to `scroll`. */
     val type: BetaScrollParamTypeEnum,
-    /**
-     * The x-coordinate where the scroll occurred.
-     */
+    /** The x-coordinate where the scroll occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the scroll occurred.
-     */
+    /** The y-coordinate where the scroll occurred. */
     val y: Long,
-    /**
-     * The horizontal scroll distance.
-     */
+    /** The horizontal scroll distance. */
     @com.fasterxml.jackson.annotation.JsonProperty("scroll_x") val scrollX: Long,
-    /**
-     * The vertical scroll distance.
-     */
+    /** The vertical scroll distance. */
     @com.fasterxml.jackson.annotation.JsonProperty("scroll_y") val scrollY: Long,
-    /**
-     * The keys being held while scrolling.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while scrolling. */
+    val keys: List<String>? = null,
 ) : BetaComputerAction
 
-/**
- * A delta of stdout/stderr emitted while a shell call was running.
- */
+/** A delta of stdout/stderr emitted while a shell call was running. */
 data class BetaShellCallOutputDelta(
-    /**
-     * The stdout delta that was emitted.
-     */
+    /** The stdout delta that was emitted. */
     val stdout: String? = null,
-    /**
-     * The stderr delta that was emitted.
-     */
-    val stderr: String? = null
+    /** The stderr delta that was emitted. */
+    val stderr: String? = null,
 )
 
-/**
- * Typed representation of the `BetaSkillReferenceParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaSkillReferenceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaSkillReferenceParam(
-    /**
-     * References a skill created with the /v1/skills endpoint.
-     */
+    /** References a skill created with the /v1/skills endpoint. */
     val type: BetaSkillReferenceParamTypeEnum,
-    /**
-     * The ID of the referenced skill.
-     */
+    /** The ID of the referenced skill. */
     @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
-    /**
-     * Optional skill version. Use a positive integer or 'latest'. Omit for default.
-     */
-    val version: String? = null
+    /** Optional skill version. Use a positive integer or 'latest'. Omit for default. */
+    val version: String? = null,
 ) : BetaContainerAutoParamSkillsItem
 
-/**
- * A summary text from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A summary text from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaSummaryTextContent(
-    /**
-     * The type of the object. Always `summary_text`.
-     */
+    /** The type of the object. Always `summary_text`. */
     val type: BetaSummaryTextContentTypeEnum,
-    /**
-     * A summary of the reasoning output from the model so far.
-     */
-    val text: String
+    /** A summary of the reasoning output from the model so far. */
+    val text: String,
 ) : BetaAgentMessageContentItem, BetaMessageContentItem
 
 typealias BetaToolsArray = List<BetaTool>
 
-/**
- * The top log probability of a token.
- */
+/** The top log probability of a token. */
 data class BetaTopLogProb(
-    /**
-     * Required `string` value serialized in the `token` wire field.
-     */
+    /** Required `string` value serialized in the `token` wire field. */
     val token: String,
-    /**
-     * Required `number` value serialized in the `logprob` wire field.
-     */
+    /** Required `number` value serialized in the `logprob` wire field. */
     val logprob: Double,
-    /**
-     * Required array value serialized in the `bytes` wire field.
-     */
-    val bytes: List<Long>
+    /** Required array value serialized in the `bytes` wire field. */
+    val bytes: List<Long>,
 )
 
-/**
- * An action to type in text.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An action to type in text. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaTypeParam(
-    /**
-     * Specifies the event type. For a type action, this property is always set to `type`.
-     */
+    /** Specifies the event type. For a type action, this property is always set to `type`. */
     val type: BetaTypeParamTypeEnum,
-    /**
-     * The text to type.
-     */
-    val text: String
+    /** The text to type. */
+    val text: String,
 ) : BetaComputerAction
 
 typealias BetaVectorStoreFileAttributes = Map<String, Any>
 
-/**
- * Typed representation of the `BetaVerbosity` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaVerbosity.Deserializer::class)
+/** Typed representation of the `BetaVerbosity` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = BetaVerbosity.Deserializer::class
+)
 sealed interface BetaVerbosity {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<BetaVerbosity>() {
@@ -491,26 +471,51 @@ sealed interface BetaVerbosity {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringBetaVerbosity(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> ValueBetaVerbosity(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringBetaVerbosity(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    ValueBetaVerbosity(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringBetaVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : BetaVerbosity
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringBetaVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    BetaVerbosity
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueBetaVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : BetaVerbosity
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueBetaVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    BetaVerbosity
 
-/**
- * A wait action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A wait action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaWaitParam(
-    /**
-     * Specifies the event type. For a wait action, this property is always set to `wait`.
-     */
+    /** Specifies the event type. For a wait action, this property is always set to `wait`. */
     val type: BetaWaitParamTypeEnum
 ) : BetaComputerAction

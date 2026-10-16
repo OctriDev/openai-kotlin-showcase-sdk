@@ -3,621 +3,675 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `FunctionAndCustomToolCallOutput` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionAndCustomToolCallOutput::class)
+/** Typed representation of the `FunctionAndCustomToolCallOutput` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionAndCustomToolCallOutput::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputTextContent::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputImageContent::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputFileContent::class, name = "input_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputTextContent::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputImageContent::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputFileContent::class,
+        name = "input_file",
+    ),
 )
 sealed interface FunctionAndCustomToolCallOutput
 
-/** A [FunctionAndCustomToolCallOutput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionAndCustomToolCallOutput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionAndCustomToolCallOutput] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionAndCustomToolCallOutput
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionAndCustomToolCallOutput {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The output of a function tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The output of a function tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionCallOutputItemParam(
-    /**
-     * The type of the function tool call output. Always `function_call_output`.
-     */
+    /** The type of the function tool call output. Always `function_call_output`. */
     val type: FunctionCallOutputItemParamTypeEnum,
-    /**
-     * Text, image, or file output of the function tool call.
-     */
+    /** Text, image, or file output of the function tool call. */
     val output: Any,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `call_id` wire field.
-     */
+    /** Optional API value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /**
-     * Optional API value serialized in the `name` wire field.
-     */
+    /** Optional API value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional API value serialized in the `namespace` wire field.
-     */
+    /** Optional API value serialized in the `namespace` wire field. */
     val namespace: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCallerParam? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
-    val status: FunctionCallItemStatus? = null
+    /** Optional API value serialized in the `status` wire field. */
+    val status: FunctionCallItemStatus? = null,
 ) : Item, ResponseSteerInputItem
 
-/**
- * A piece of message content, such as text, an image, or a file.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionCallOutputItemParamOutputItem::class)
+/** A piece of message content, such as text, an image, or a file. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionCallOutputItemParamOutputItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputTextContentParam::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputImageContentParamAutoParam::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputFileContentParam::class, name = "input_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputTextContentParam::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputImageContentParamAutoParam::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = InputFileContentParam::class,
+        name = "input_file",
+    ),
 )
 sealed interface FunctionCallOutputItemParamOutputItem
 
-/** A [FunctionCallOutputItemParamOutputItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionCallOutputItemParamOutputItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionCallOutputItemParamOutputItem] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionCallOutputItemParamOutputItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionCallOutputItemParamOutputItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `FunctionObject` API schema.
- */
+/** Typed representation of the `FunctionObject` API schema. */
 data class FunctionObject(
     /**
-     * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+     * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
+     * dashes, with a maximum length of 64.
      */
     val name: String,
     /**
-     * A description of what the function does, used by the model to choose when and how to call the function.
+     * A description of what the function does, used by the model to choose when and how to call the
+     * function.
      */
     val description: String? = null,
     /**
-     * The parameters the functions accepts, described as a JSON Schema object. See the guide for examples, and the JSON Schema reference for documentation about the format. Omitting `parameters` defines a function with an empty parameter list.
+     * The parameters the functions accepts, described as a JSON Schema object. See the guide for
+     * examples, and the JSON Schema reference for documentation about the format. Omitting
+     * `parameters` defines a function with an empty parameter list.
      */
     val parameters: FunctionParameters? = null,
-    /**
-     * Optional `boolean` value serialized in the `strict` wire field.
-     */
-    val strict: Boolean? = null
+    /** Optional `boolean` value serialized in the `strict` wire field. */
+    val strict: Boolean? = null,
 )
 
 typealias FunctionParameters = Map<String, Any>
 
-/**
- * Execute a shell command.
- */
+/** Execute a shell command. */
 data class FunctionShellAction(
-    /**
-     * Required array value serialized in the `commands` wire field.
-     */
+    /** Required array value serialized in the `commands` wire field. */
     val commands: List<String>,
-    /**
-     * Required `integer` value serialized in the `timeout_ms` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms", required = true) val timeoutMs: Long?,
-    /**
-     * Required `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true) val maxOutputLength: Long?
+    /** Required `integer` value serialized in the `timeout_ms` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms", required = true)
+    val timeoutMs: Long?,
+    /** Required `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true)
+    val maxOutputLength: Long?,
 )
 
-/**
- * Commands and limits describing how to run the shell tool call.
- */
+/** Commands and limits describing how to run the shell tool call. */
 data class FunctionShellActionParam(
-    /**
-     * Ordered shell commands for the execution environment to run.
-     */
+    /** Ordered shell commands for the execution environment to run. */
     val commands: List<String>,
-    /**
-     * Optional `integer` value serialized in the `timeout_ms` wire field.
-     */
+    /** Optional `integer` value serialized in the `timeout_ms` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms") val timeoutMs: Long? = null,
-    /**
-     * Optional `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length") val maxOutputLength: Long? = null
+    /** Optional `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length")
+    val maxOutputLength: Long? = null,
 )
 
-/**
- * A tool call that executes one or more shell commands in a managed environment.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool call that executes one or more shell commands in a managed environment. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCall(
-    /**
-     * The type of the item. Always `shell_call`.
-     */
+    /** The type of the item. Always `shell_call`. */
     val type: FunctionShellCallTypeEnum,
-    /**
-     * The unique ID of the shell tool call. Populated when this item is returned via API.
-     */
+    /** The unique ID of the shell tool call. Populated when this item is returned via API. */
     val id: String,
-    /**
-     * The unique ID of the shell tool call generated by the model.
-     */
+    /** The unique ID of the shell tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The shell commands and limits that describe how to run the tool call.
-     */
+    /** The shell commands and limits that describe how to run the tool call. */
     val action: FunctionShellAction,
-    /**
-     * The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
-     */
+    /** The status of the shell call. One of `in_progress`, `completed`, or `incomplete`. */
     val status: FunctionShellCallStatus,
-    /**
-     * Required API value serialized in the `environment` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("environment", required = true) val environment: FunctionShellCallEnvironment?,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Required API value serialized in the `environment` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("environment", required = true)
+    val environment: FunctionShellCallEnvironment?,
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCaller? = null,
-    /**
-     * The ID of the entity that created this tool call.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The ID of the entity that created this tool call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : ConversationItem, ItemResource, OutputItem, ItemField
 
-/**
- * Required API value serialized in the `environment` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionShellCallEnvironment::class)
+/** Required API value serialized in the `environment` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionShellCallEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LocalEnvironmentResource::class, name = "local"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerReferenceResource::class, name = "container_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LocalEnvironmentResource::class,
+        name = "local",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerReferenceResource::class,
+        name = "container_reference",
+    ),
 )
 sealed interface FunctionShellCallEnvironment
 
-/** A [FunctionShellCallEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionShellCallEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionShellCallEnvironment] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionShellCallEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionShellCallEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A tool representing a request to execute one or more shell commands.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool representing a request to execute one or more shell commands. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallItemParam(
-    /**
-     * The unique ID of the shell tool call generated by the model.
-     */
+    /** The unique ID of the shell tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The type of the item. Always `shell_call`.
-     */
+    /** The type of the item. Always `shell_call`. */
     val type: FunctionShellCallItemParamTypeEnum,
-    /**
-     * The shell commands and limits that describe how to run the tool call.
-     */
+    /** The shell commands and limits that describe how to run the tool call. */
     val action: FunctionShellActionParam,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCallerParam? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
+    /** Optional API value serialized in the `status` wire field. */
     val status: FunctionShellCallItemStatus? = null,
-    /**
-     * The environment to execute the shell commands in.
-     */
-    val environment: FunctionShellCallItemParamEnvironment? = null
+    /** The environment to execute the shell commands in. */
+    val environment: FunctionShellCallItemParamEnvironment? = null,
 ) : Item
 
-/**
- * The environment to execute the shell commands in.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionShellCallItemParamEnvironment::class)
+/** The environment to execute the shell commands in. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionShellCallItemParamEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LocalEnvironmentParam::class, name = "local"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerReferenceParam::class, name = "container_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LocalEnvironmentParam::class,
+        name = "local",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerReferenceParam::class,
+        name = "container_reference",
+    ),
 )
 sealed interface FunctionShellCallItemParamEnvironment
 
-/** A [FunctionShellCallItemParamEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionShellCallItemParamEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionShellCallItemParamEnvironment] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionShellCallItemParamEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionShellCallItemParamEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The output of a shell tool call that was emitted.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The output of a shell tool call that was emitted. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallOutput(
-    /**
-     * The type of the shell call output. Always `shell_call_output`.
-     */
+    /** The type of the shell call output. Always `shell_call_output`. */
     val type: FunctionShellCallOutputTypeEnum,
-    /**
-     * The unique ID of the shell call output. Populated when this item is returned via API.
-     */
+    /** The unique ID of the shell call output. Populated when this item is returned via API. */
     val id: String,
-    /**
-     * The unique ID of the shell tool call generated by the model.
-     */
+    /** The unique ID of the shell tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
-     */
+    /** The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`. */
     val status: FunctionShellCallOutputStatusEnum,
-    /**
-     * An array of shell call output contents
-     */
+    /** An array of shell call output contents */
     val output: List<FunctionShellCallOutputContent>,
-    /**
-     * Required `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true) val maxOutputLength: Long?,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Required `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true)
+    val maxOutputLength: Long?,
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCaller? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : ConversationItem, ItemResource, OutputItem, ItemField
 
-/**
- * The content of a shell tool call output that was emitted.
- */
+/** The content of a shell tool call output that was emitted. */
 data class FunctionShellCallOutputContent(
-    /**
-     * The standard output that was captured.
-     */
+    /** The standard output that was captured. */
     val stdout: String,
-    /**
-     * The standard error output that was captured.
-     */
+    /** The standard error output that was captured. */
     val stderr: String,
     /**
-     * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk.
+     * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call
+     * output chunk.
      */
     val outcome: FunctionShellCallOutputContentOutcome,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 )
 
 /**
- * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk.
+ * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call
+ * output chunk.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionShellCallOutputContentOutcome::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionShellCallOutputContentOutcome::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionShellCallOutputTimeoutOutcome::class, name = "timeout"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionShellCallOutputExitOutcome::class, name = "exit")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionShellCallOutputTimeoutOutcome::class,
+        name = "timeout",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionShellCallOutputExitOutcome::class,
+        name = "exit",
+    ),
 )
 sealed interface FunctionShellCallOutputContentOutcome
 
-/** A [FunctionShellCallOutputContentOutcome] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionShellCallOutputContentOutcome @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionShellCallOutputContentOutcome] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionShellCallOutputContentOutcome
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionShellCallOutputContentOutcome {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Captured stdout and stderr for a portion of a shell tool call output.
- */
+/** Captured stdout and stderr for a portion of a shell tool call output. */
 data class FunctionShellCallOutputContentParam(
-    /**
-     * Captured stdout output for the shell call.
-     */
+    /** Captured stdout output for the shell call. */
     val stdout: String,
-    /**
-     * Captured stderr output for the shell call.
-     */
+    /** Captured stderr output for the shell call. */
     val stderr: String,
-    /**
-     * The exit or timeout outcome associated with this shell call.
-     */
-    val outcome: FunctionShellCallOutputOutcomeParam
+    /** The exit or timeout outcome associated with this shell call. */
+    val outcome: FunctionShellCallOutputOutcomeParam,
 )
 
-/**
- * Indicates that the shell commands finished and returned an exit code.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell commands finished and returned an exit code. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallOutputExitOutcome(
-    /**
-     * The outcome type. Always `exit`.
-     */
+    /** The outcome type. Always `exit`. */
     val type: FunctionShellCallOutputExitOutcomeTypeEnum,
-    /**
-     * Exit code from the shell process.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long
+    /** Exit code from the shell process. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long,
 ) : FunctionShellCallOutputContentOutcome
 
-/**
- * Indicates that the shell commands finished and returned an exit code.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell commands finished and returned an exit code. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallOutputExitOutcomeParam(
-    /**
-     * The outcome type. Always `exit`.
-     */
+    /** The outcome type. Always `exit`. */
     val type: FunctionShellCallOutputExitOutcomeParamTypeEnum,
-    /**
-     * The exit code returned by the shell process.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long
+    /** The exit code returned by the shell process. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long,
 ) : FunctionShellCallOutputOutcomeParam
 
-/**
- * The streamed output items emitted by a shell tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The streamed output items emitted by a shell tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallOutputItemParam(
-    /**
-     * The unique ID of the shell tool call generated by the model.
-     */
+    /** The unique ID of the shell tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The type of the item. Always `shell_call_output`.
-     */
+    /** The type of the item. Always `shell_call_output`. */
     val type: FunctionShellCallOutputItemParamTypeEnum,
-    /**
-     * Captured chunks of stdout and stderr output, along with their associated outcomes.
-     */
+    /** Captured chunks of stdout and stderr output, along with their associated outcomes. */
     val output: List<FunctionShellCallOutputContentParam>,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCallerParam? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
+    /** Optional API value serialized in the `status` wire field. */
     val status: FunctionShellCallItemStatus? = null,
-    /**
-     * Optional `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length") val maxOutputLength: Long? = null
+    /** Optional `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length")
+    val maxOutputLength: Long? = null,
 ) : Item
 
-/**
- * The exit or timeout outcome associated with this shell call.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionShellCallOutputOutcomeParam::class)
+/** The exit or timeout outcome associated with this shell call. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionShellCallOutputOutcomeParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionShellCallOutputTimeoutOutcomeParam::class, name = "timeout"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionShellCallOutputExitOutcomeParam::class, name = "exit")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionShellCallOutputTimeoutOutcomeParam::class,
+        name = "timeout",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionShellCallOutputExitOutcomeParam::class,
+        name = "exit",
+    ),
 )
 sealed interface FunctionShellCallOutputOutcomeParam
 
-/** A [FunctionShellCallOutputOutcomeParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionShellCallOutputOutcomeParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionShellCallOutputOutcomeParam] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionShellCallOutputOutcomeParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionShellCallOutputOutcomeParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Indicates that the shell call exceeded its configured time limit.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell call exceeded its configured time limit. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallOutputTimeoutOutcome(
-    /**
-     * The outcome type. Always `timeout`.
-     */
+    /** The outcome type. Always `timeout`. */
     val type: FunctionShellCallOutputTimeoutOutcomeTypeEnum
 ) : FunctionShellCallOutputContentOutcome
 
-/**
- * Indicates that the shell call exceeded its configured time limit.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell call exceeded its configured time limit. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellCallOutputTimeoutOutcomeParam(
-    /**
-     * The outcome type. Always `timeout`.
-     */
+    /** The outcome type. Always `timeout`. */
     val type: FunctionShellCallOutputTimeoutOutcomeParamTypeEnum
 ) : FunctionShellCallOutputOutcomeParam
 
-/**
- * A tool that allows the model to execute shell commands.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool that allows the model to execute shell commands. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionShellToolParam(
-    /**
-     * The type of the shell tool. Always `shell`.
-     */
+    /** The type of the shell tool. Always `shell`. */
     val type: FunctionShellToolParamTypeEnum,
-    /**
-     * Optional API value serialized in the `environment` wire field.
-     */
+    /** Optional API value serialized in the `environment` wire field. */
     val environment: FunctionShellToolParamEnvironment? = null,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * Optional API value serialized in the `environment` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFunctionShellToolParamEnvironment::class)
+/** Optional API value serialized in the `environment` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFunctionShellToolParamEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerAutoParam::class, name = "container_auto"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LocalEnvironmentParam::class, name = "local"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerReferenceParam::class, name = "container_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerAutoParam::class,
+        name = "container_auto",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LocalEnvironmentParam::class,
+        name = "local",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerReferenceParam::class,
+        name = "container_reference",
+    ),
 )
 sealed interface FunctionShellToolParamEnvironment
 
-/** A [FunctionShellToolParamEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFunctionShellToolParamEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FunctionShellToolParamEnvironment] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFunctionShellToolParamEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FunctionShellToolParamEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Defines a function in your own code the model can choose to call. Learn more about function calling.
+ * Defines a function in your own code the model can choose to call. Learn more about function
+ * calling.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionTool(
-    /**
-     * The type of the function tool. Always `function`.
-     */
+    /** The type of the function tool. Always `function`. */
     val type: FunctionToolTypeEnum,
-    /**
-     * The name of the function to call.
-     */
+    /** The name of the function to call. */
     val name: String,
-    /**
-     * A JSON schema object describing the parameters of the function.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parameters", required = true) val parameters: Map<String, Any>?,
-    /**
-     * Required `boolean` value serialized in the `strict` wire field.
-     */
+    /** A JSON schema object describing the parameters of the function. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parameters", required = true)
+    val parameters: Map<String, Any>?,
+    /** Required `boolean` value serialized in the `strict` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("strict", required = true) val strict: Boolean?,
-    /**
-     * Optional `boolean` value serialized in the `async` wire field.
-     */
+    /** Optional `boolean` value serialized in the `async` wire field. */
     val async: Boolean? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
     /**
      * A JSON schema object describing the JSON value encoded in string outputs for this function.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema") val outputSchema: Map<String, Any>? = null,
-    /**
-     * Whether this function is deferred and loaded via tool search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
+    val outputSchema: Map<String, Any>? = null,
+    /** Whether this function is deferred and loaded via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
 ) : Tool, ToolSearchOutputTool
 
-/**
- * A tool call to run a function. See the function calling guide for more information.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool call to run a function. See the function calling guide for more information. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionToolCall(
-    /**
-     * The type of the function tool call. Always `function_call`.
-     */
+    /** The type of the function tool call. Always `function_call`. */
     val type: FunctionToolCallTypeEnum,
-    /**
-     * The unique ID of the function tool call generated by the model.
-     */
+    /** The unique ID of the function tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The name of the function to run.
-     */
+    /** The name of the function to run. */
     val name: String,
-    /**
-     * A JSON string of the arguments to pass to the function.
-     */
+    /** A JSON string of the arguments to pass to the function. */
     val arguments: String,
-    /**
-     * The unique ID of the function tool call.
-     */
+    /** The unique ID of the function tool call. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCaller? = null,
-    /**
-     * The namespace of the function to run.
-     */
+    /** The namespace of the function to run. */
     val namespace: String? = null,
     /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when
+     * items are returned via API.
      */
     val status: FunctionToolCallStatusEnum? = null,
-    /**
-     * Whether the function tool call runs asynchronously.
-     */
-    val async: Boolean? = null
+    /** Whether the function tool call runs asynchronously. */
+    val async: Boolean? = null,
 ) : Item, OutputItem, ItemField
 
-/**
- * The output of a function tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The output of a function tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionToolCallOutput(
-    /**
-     * The type of the function tool call output. Always `function_call_output`.
-     */
+    /** The type of the function tool call output. Always `function_call_output`. */
     val type: FunctionToolCallOutputTypeEnum,
     /**
-     * The output from the function call generated by your code. Can be a string or an list of output content.
+     * The output from the function call generated by your code. Can be a string or an list of
+     * output content.
      */
     val output: Any,
     /**
      * The unique ID of the function tool call output. Populated when this item is returned via API.
      */
     val id: String? = null,
-    /**
-     * The unique ID of the function tool call generated by the model.
-     */
+    /** The unique ID of the function tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /**
-     * The name of the tool that produced the output.
-     */
+    /** The name of the tool that produced the output. */
     val name: String? = null,
-    /**
-     * The namespace of the tool that produced the output.
-     */
+    /** The namespace of the tool that produced the output. */
     val namespace: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCallerParam? = null,
     /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when
+     * items are returned via API.
      */
-    val status: FunctionToolCallOutputStatusEnum? = null
+    val status: FunctionToolCallOutputStatusEnum? = null,
 ) : ItemField
