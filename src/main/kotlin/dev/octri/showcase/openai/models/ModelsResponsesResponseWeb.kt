@@ -3,71 +3,56 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when a web search call is completed.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a web search call is completed. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseWebSearchCallCompletedEvent(
-    /**
-     * The type of the event. Always `response.web_search_call.completed`.
-     */
+    /** The type of the event. Always `response.web_search_call.completed`. */
     val type: ResponseWebSearchCallCompletedEventTypeEnum,
-    /**
-     * The index of the output item that the web search call is associated with.
-     */
+    /** The index of the output item that the web search call is associated with. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * Unique ID for the output item associated with the web search call.
-     */
+    /** Unique ID for the output item associated with the web search call. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The sequence number of the web search call being processed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
+    /** The sequence number of the web search call being processed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when a web search call is initiated.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a web search call is initiated. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseWebSearchCallInProgressEvent(
-    /**
-     * The type of the event. Always `response.web_search_call.in_progress`.
-     */
+    /** The type of the event. Always `response.web_search_call.in_progress`. */
     val type: ResponseWebSearchCallInProgressEventTypeEnum,
-    /**
-     * The index of the output item that the web search call is associated with.
-     */
+    /** The index of the output item that the web search call is associated with. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * Unique ID for the output item associated with the web search call.
-     */
+    /** Unique ID for the output item associated with the web search call. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The sequence number of the web search call being processed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
+    /** The sequence number of the web search call being processed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when a web search call is executing.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a web search call is executing. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseWebSearchCallSearchingEvent(
-    /**
-     * The type of the event. Always `response.web_search_call.searching`.
-     */
+    /** The type of the event. Always `response.web_search_call.searching`. */
     val type: ResponseWebSearchCallSearchingEventTypeEnum,
-    /**
-     * The index of the output item that the web search call is associated with.
-     */
+    /** The index of the output item that the web search call is associated with. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * Unique ID for the output item associated with the web search call.
-     */
+    /** Unique ID for the output item associated with the web search call. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The sequence number of the web search call being processed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
+    /** The sequence number of the web search call being processed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
 ) : ResponseStreamEvent

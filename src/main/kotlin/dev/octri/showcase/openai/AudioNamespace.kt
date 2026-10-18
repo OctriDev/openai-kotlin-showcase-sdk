@@ -3,96 +3,207 @@
 
 package dev.octri.showcase.openai
 
-
 class AudioNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`, `input`, and `voice`, then choose an output format or streaming mode as needed. The response contains audio data or streamed audio events.
+     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`,
+     * `input`, and `voice`, then choose an output format or streaming mode as needed. The response
+     * contains audio data or streamed audio events.
      *
-     * Generates audio from the input text. Returns the audio file content, or a stream of audio events.
+     * Generates audio from the input text. Returns the audio file content, or a stream of audio
+     * events.
      */
-    fun createSpeech(request: dev.octri.showcase.openai.methods.Audio.CreateSpeechParams, options: RequestOptions? = null): ByteArray {
+    fun createSpeech(
+        request: dev.octri.showcase.openai.methods.Audio.CreateSpeechParams,
+        options: RequestOptions? = null,
+    ): ByteArray {
         return dev.octri.showcase.openai.methods.Audio.createSpeech(clientConfig, request, options)
     }
 
     /**
-     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`, `input`, and `voice`, then choose an output format or streaming mode as needed. The response contains audio data or streamed audio events.
+     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`,
+     * `input`, and `voice`, then choose an output format or streaming mode as needed. The response
+     * contains audio data or streamed audio events.
      *
-     * Generates audio from the input text. Returns the audio file content, or a stream of audio events.
+     * Generates audio from the input text. Returns the audio file content, or a stream of audio
+     * events.
      */
-    fun createSpeechStream(request: dev.octri.showcase.openai.methods.Audio.CreateSpeechStreamRequest, options: RequestOptions? = null): Sequence<CreateSpeechResponseStreamEvent> {
-        return dev.octri.showcase.openai.methods.Audio.createSpeechStream(clientConfig, request, options)
+    fun createSpeechStream(
+        request: dev.octri.showcase.openai.methods.Audio.CreateSpeechStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateSpeechResponseStreamEvent> {
+        return dev.octri.showcase.openai.methods.Audio.createSpeechStream(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Transcribes an audio file and returns the transcript in a selected format or as a stream of transcript events. Provide the audio `file` and `model`, then use options such as `language`, `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data and include enough file metadata for the audio format to be identified.
+     * Transcribes an audio file and returns the transcript in a selected format or as a stream of
+     * transcript events. Provide the audio `file` and `model`, then use options such as `language`,
+     * `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data
+     * and include enough file metadata for the audio format to be identified.
      *
-     * Transcribes audio into the input language. Returns a transcription object in `json`, `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a stream of transcript events. Supported formats depend on the model.
+     * Transcribes audio into the input language. Returns a transcription object in `json`,
+     * `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a
+     * stream of transcript events. Supported formats depend on the model.
      */
-    fun createTranscription(request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionParams, options: RequestOptions? = null): CreateTranscriptionResponse {
-        return dev.octri.showcase.openai.methods.Audio.createTranscription(clientConfig, request, options)
+    fun createTranscription(
+        request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionParams,
+        options: RequestOptions? = null,
+    ): CreateTranscriptionResponse {
+        return dev.octri.showcase.openai.methods.Audio.createTranscription(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Transcribes an audio file and returns the transcript in a selected format or as a stream of transcript events. Provide the audio `file` and `model`, then use options such as `language`, `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data and include enough file metadata for the audio format to be identified.
+     * Transcribes an audio file and returns the transcript in a selected format or as a stream of
+     * transcript events. Provide the audio `file` and `model`, then use options such as `language`,
+     * `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data
+     * and include enough file metadata for the audio format to be identified.
      *
-     * Transcribes audio into the input language. Returns a transcription object in `json`, `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a stream of transcript events. Supported formats depend on the model.
+     * Transcribes audio into the input language. Returns a transcription object in `json`,
+     * `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a
+     * stream of transcript events. Supported formats depend on the model.
      */
-    fun createTranscriptionStream(request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionStreamRequest, options: RequestOptions? = null): Sequence<CreateTranscriptionResponseStreamEvent> {
-        return dev.octri.showcase.openai.methods.Audio.createTranscriptionStream(clientConfig, request, options)
+    fun createTranscriptionStream(
+        request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateTranscriptionResponseStreamEvent> {
+        return dev.octri.showcase.openai.methods.Audio.createTranscriptionStream(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Translates an audio file into English and returns the result in a selected format. Provide the `file` and `model`, then optionally use `prompt` to guide the translation style. Send the file as multipart form data with metadata that lets the service identify its audio format.
+     * Translates an audio file into English and returns the result in a selected format. Provide
+     * the `file` and `model`, then optionally use `prompt` to guide the translation style. Send the
+     * file as multipart form data with metadata that lets the service identify its audio format.
      *
      * Translates audio into English.
      */
-    fun createTranslation(file: SdkClient.UploadFile, model: String, prompt: String? = null, responseFormat: CreateTranslationRequestResponseFormatEnum? = null, temperature: Double? = null, options: RequestOptions? = null): CreateTranslationResponse {
-        return dev.octri.showcase.openai.methods.Audio.createTranslation(clientConfig, file, model, prompt, responseFormat, temperature, options)
+    fun createTranslation(
+        file: SdkClient.UploadFile,
+        model: String,
+        prompt: String? = null,
+        responseFormat: CreateTranslationRequestResponseFormatEnum? = null,
+        temperature: Double? = null,
+        options: RequestOptions? = null,
+    ): CreateTranslationResponse {
+        return dev.octri.showcase.openai.methods.Audio.createTranslation(
+            clientConfig,
+            file,
+            model,
+            prompt,
+            responseFormat,
+            temperature,
+            options,
+        )
     }
 
     /**
-     * Creates a voice consent recording by uploading its audio file with a label and language tag. Provide `name`, `recording`, and `language`, and send the recording as multipart form data in a supported audio format. The response includes the new recording's identifier and creation timestamp.
+     * Creates a voice consent recording by uploading its audio file with a label and language tag.
+     * Provide `name`, `recording`, and `language`, and send the recording as multipart form data in
+     * a supported audio format. The response includes the new recording's identifier and creation
+     * timestamp.
      *
      * Upload a voice consent recording.
      */
-    fun createVoiceConsent(name: String, recording: SdkClient.UploadFile, language: String, options: RequestOptions? = null): VoiceConsentResource {
-        return dev.octri.showcase.openai.methods.Audio.createVoiceConsent(clientConfig, name, recording, language, options)
+    fun createVoiceConsent(
+        name: String,
+        recording: SdkClient.UploadFile,
+        language: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentResource {
+        return dev.octri.showcase.openai.methods.Audio.createVoiceConsent(
+            clientConfig,
+            name,
+            recording,
+            language,
+            options,
+        )
     }
 
     /**
-     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after` cursor to continue from a previous page and `limit` to control the number of records returned. The response includes pagination cursors and indicates whether more records are available.
+     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after`
+     * cursor to continue from a previous page and `limit` to control the number of records
+     * returned. The response includes pagination cursors and indicates whether more records are
+     * available.
      *
      * Returns a list of voice consent recordings.
      */
-    fun listVoiceConsents(after: String? = null, limit: Long? = null, options: RequestOptions? = null): VoiceConsentListResource {
-        return dev.octri.showcase.openai.methods.Audio.listVoiceConsents(clientConfig, after, limit, options)
+    fun listVoiceConsents(
+        after: String? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+    ): VoiceConsentListResource {
+        return dev.octri.showcase.openai.methods.Audio.listVoiceConsents(
+            clientConfig,
+            after,
+            limit,
+            options,
+        )
     }
 
     /**
-     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after` cursor to continue from a previous page and `limit` to control the number of records returned. The response includes pagination cursors and indicates whether more records are available.
+     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after`
+     * cursor to continue from a previous page and `limit` to control the number of records
+     * returned. The response includes pagination cursors and indicates whether more records are
+     * available.
      *
      * Returns a list of voice consent recordings.
      */
-    fun listVoiceConsentsPaginated(after: String? = null, limit: Long? = null, options: RequestOptions? = null, yieldFn: (VoiceConsentResource) -> Boolean) {
-        dev.octri.showcase.openai.methods.Audio.listVoiceConsentsPaginated(clientConfig, after, limit, options, yieldFn)
+    fun listVoiceConsentsPaginated(
+        after: String? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+        yieldFn: (VoiceConsentResource) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Audio.listVoiceConsentsPaginated(
+            clientConfig,
+            after,
+            limit,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Retrieves a voice consent recording by its identifier. Use `consent_id` to select the recording whose metadata you need.
+     * Retrieves a voice consent recording by its identifier. Use `consent_id` to select the
+     * recording whose metadata you need.
      *
      * Retrieves a voice consent recording.
      */
     fun getVoiceConsent(consentId: String, options: RequestOptions? = null): VoiceConsentResource {
-        return dev.octri.showcase.openai.methods.Audio.getVoiceConsent(clientConfig, consentId, options)
+        return dev.octri.showcase.openai.methods.Audio.getVoiceConsent(
+            clientConfig,
+            consentId,
+            options,
+        )
     }
 
     /**
-     * Updates the metadata for a voice consent recording. Supply the required `name` field to change its label; this operation does not update the recording itself.
+     * Updates the metadata for a voice consent recording. Supply the required `name` field to
+     * change its label; this operation does not update the recording itself.
      *
      * Updates a voice consent recording (metadata only).
      */
-    fun updateVoiceConsent(consentId: String, name: String, options: RequestOptions? = null): VoiceConsentResource {
-        return dev.octri.showcase.openai.methods.Audio.updateVoiceConsent(clientConfig, consentId, name, options)
+    fun updateVoiceConsent(
+        consentId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentResource {
+        return dev.octri.showcase.openai.methods.Audio.updateVoiceConsent(
+            clientConfig,
+            consentId,
+            name,
+            options,
+        )
     }
 
     /**
@@ -100,17 +211,30 @@ class AudioNamespace(private val clientConfig: ClientConfig) {
      *
      * Deletes a voice consent recording.
      */
-    fun deleteVoiceConsent(consentId: String, options: RequestOptions? = null): VoiceConsentDeletedResource {
-        return dev.octri.showcase.openai.methods.Audio.deleteVoiceConsent(clientConfig, consentId, options)
+    fun deleteVoiceConsent(
+        consentId: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentDeletedResource {
+        return dev.octri.showcase.openai.methods.Audio.deleteVoiceConsent(
+            clientConfig,
+            consentId,
+            options,
+        )
     }
 
     /**
-     * Creates a custom voice for audio output from an audio sample and a previously uploaded consent recording. Send `name`, `audio_sample`, and `consent` as multipart form data; `type` defaults to `audio_sample` when omitted. Custom voices are limited to eligible customers.
+     * Creates a custom voice for audio output from an audio sample and a previously uploaded
+     * consent recording. Send `name`, `audio_sample`, and `consent` as multipart form data; `type`
+     * defaults to `audio_sample` when omitted. Custom voices are limited to eligible customers.
      *
-     * Create a custom voice you can use for audio output (for example, in Text-to-Speech and the Realtime API). This requires an audio sample and a previously uploaded consent recording. Send `name`, `audio_sample`, and the `consent` recording ID as multipart form data. The optional `type` defaults to `audio_sample`. Returns the saved voice's metadata. See the custom voices guide for requirements and best practices. Custom voices are limited to eligible customers.
+     * Create a custom voice you can use for audio output (for example, in Text-to-Speech and the
+     * Realtime API). This requires an audio sample and a previously uploaded consent recording.
+     * Send `name`, `audio_sample`, and the `consent` recording ID as multipart form data. The
+     * optional `type` defaults to `audio_sample`. Returns the saved voice's metadata. See the
+     * custom voices guide for requirements and best practices. Custom voices are limited to
+     * eligible customers.
      */
     fun createVoice(body: CreateVoiceRequest, options: RequestOptions? = null): VoiceResource {
         return dev.octri.showcase.openai.methods.Audio.createVoice(clientConfig, body, options)
     }
-
 }

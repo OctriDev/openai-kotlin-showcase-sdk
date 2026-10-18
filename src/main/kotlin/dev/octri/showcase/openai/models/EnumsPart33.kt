@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * The type of the item. Always `mcp_approval_request`.
- */
-enum class MCPApprovalRequestTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the item. Always `mcp_approval_request`. */
+enum class MCPApprovalRequestTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MCP_APPROVAL_REQUEST("mcp_approval_request");
 
     override fun toString() = value
@@ -14,15 +14,16 @@ enum class MCPApprovalRequestTypeEnum(@com.fasterxml.jackson.annotation.JsonValu
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the item. Always `mcp_approval_response`.
- */
-enum class MCPApprovalResponseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the item. Always `mcp_approval_response`. */
+enum class MCPApprovalResponseTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MCP_APPROVAL_RESPONSE("mcp_approval_response");
 
     override fun toString() = value
@@ -30,15 +31,16 @@ enum class MCPApprovalResponseTypeEnum(@com.fasterxml.jackson.annotation.JsonVal
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the item. Always `mcp_approval_response`.
- */
-enum class MCPApprovalResponseResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the item. Always `mcp_approval_response`. */
+enum class MCPApprovalResponseResourceTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MCP_APPROVAL_RESPONSE("mcp_approval_response");
 
     override fun toString() = value
@@ -46,15 +48,16 @@ enum class MCPApprovalResponseResourceTypeEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The item type. Always `mcp_call`.
- */
-enum class McpCallItemResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The item type. Always `mcp_call`. */
+enum class McpCallItemResourceTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MCP_CALL("mcp_call");
 
     override fun toString() = value
@@ -62,19 +65,20 @@ enum class McpCallItemResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonVal
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Where outbound MCP HTTP connections originate.
- */
-class McpConnectionOriginParam private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpConnectionOriginParam && value == other.value
+/** Where outbound MCP HTTP connections originate. */
+class McpConnectionOriginParam
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpConnectionOriginParam && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -82,19 +86,22 @@ class McpConnectionOriginParam private constructor(
         @JvmField val SERVICE = McpConnectionOriginParam("service")
         @JvmField val ENVIRONMENT = McpConnectionOriginParam("environment")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpConnectionOriginParam(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpConnectionOriginParam(value)
     }
 }
 
-/**
- * Where outbound MCP HTTP connections originate.
- */
-class McpConnectionOriginResource private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is McpConnectionOriginResource && value == other.value
+/** Where outbound MCP HTTP connections originate. */
+class McpConnectionOriginResource
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is McpConnectionOriginResource && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -102,14 +109,15 @@ class McpConnectionOriginResource private constructor(
         @JvmField val SERVICE = McpConnectionOriginResource("service")
         @JvmField val ENVIRONMENT = McpConnectionOriginResource("environment")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = McpConnectionOriginResource(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = McpConnectionOriginResource(value)
     }
 }
 
-/**
- * The type of the item. Always `mcp_list_tools`.
- */
+/** The type of the item. Always `mcp_list_tools`. */
 enum class MCPListToolsTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     MCP_LIST_TOOLS("mcp_list_tools");
 
@@ -118,15 +126,16 @@ enum class MCPListToolsTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `client_secret_basic`.
- */
-enum class McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `client_secret_basic`. */
+enum class McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     CLIENT_SECRET_BASIC("client_secret_basic");
 
     override fun toString() = value
@@ -134,15 +143,16 @@ enum class McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum(@com.faste
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `client_secret_post`.
- */
-enum class McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `client_secret_post`. */
+enum class McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     CLIENT_SECRET_POST("client_secret_post");
 
     override fun toString() = value
@@ -150,15 +160,16 @@ enum class McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum(@com.faster
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `none`.
- */
-enum class McpOauthTokenEndpointAuthResourceNoneTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `none`. */
+enum class McpOauthTokenEndpointAuthResourceNoneTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     NONE("none");
 
     override fun toString() = value
@@ -166,14 +177,13 @@ enum class McpOauthTokenEndpointAuthResourceNoneTypeEnum(@com.fasterxml.jackson.
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
+/** Required enumerated value serialized in the `type` wire field. */
 enum class MCPProtocolErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     MCP_PROTOCOL_ERROR("mcp_protocol_error");
 
@@ -182,19 +192,26 @@ enum class MCPProtocolErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Identifier for service connectors, like those available in ChatGPT. One of `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here. This field is deprecated for models released after September 1, 2026. Use `server_url` to connect to a remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel. Currently supported `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail: `connector_gmail` - Google…
+ * Identifier for service connectors, like those available in ChatGPT. One of `server_url`,
+ * `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here. This
+ * field is deprecated for models released after September 1, 2026. Use `server_url` to connect to a
+ * remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel. Currently supported
+ * `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail: `connector_gmail` - Google…
  */
-class MCPToolConnectorIdEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MCPToolConnectorIdEnum && value == other.value
+class MCPToolConnectorIdEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MCPToolConnectorIdEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -204,18 +221,20 @@ class MCPToolConnectorIdEnum private constructor(
         @JvmField val CONNECTOR_GOOGLECALENDAR = MCPToolConnectorIdEnum("connector_googlecalendar")
         @JvmField val CONNECTOR_GOOGLEDRIVE = MCPToolConnectorIdEnum("connector_googledrive")
         @JvmField val CONNECTOR_MICROSOFTTEAMS = MCPToolConnectorIdEnum("connector_microsoftteams")
-        @JvmField val CONNECTOR_OUTLOOKCALENDAR = MCPToolConnectorIdEnum("connector_outlookcalendar")
+        @JvmField
+        val CONNECTOR_OUTLOOKCALENDAR = MCPToolConnectorIdEnum("connector_outlookcalendar")
         @JvmField val CONNECTOR_OUTLOOKEMAIL = MCPToolConnectorIdEnum("connector_outlookemail")
         @JvmField val CONNECTOR_SHAREPOINT = MCPToolConnectorIdEnum("connector_sharepoint")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MCPToolConnectorIdEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MCPToolConnectorIdEnum(value)
     }
 }
 
-/**
- * The type of the MCP tool. Always `mcp`.
- */
+/** The type of the MCP tool. Always `mcp`. */
 enum class MCPToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     MCP("mcp");
 
@@ -224,14 +243,13 @@ enum class MCPToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the item. Always `mcp_call`.
- */
+/** The type of the item. Always `mcp_call`. */
 enum class MCPToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     MCP_CALL("mcp_call");
 
@@ -240,19 +258,19 @@ enum class MCPToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val v
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Typed representation of the `MCPToolCallStatus` API schema.
- */
-class MCPToolCallStatus private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** Typed representation of the `MCPToolCallStatus` API schema. */
+class MCPToolCallStatus
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is MCPToolCallStatus && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -263,15 +281,18 @@ class MCPToolCallStatus private constructor(
         @JvmField val CALLING = MCPToolCallStatus("calling")
         @JvmField val FAILED = MCPToolCallStatus("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MCPToolCallStatus(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MCPToolCallStatus(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
-enum class MCPToolExecutionErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Required enumerated value serialized in the `type` wire field. */
+enum class MCPToolExecutionErrorTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MCP_TOOL_EXECUTION_ERROR("mcp_tool_execution_error");
 
     override fun toString() = value
@@ -279,19 +300,23 @@ enum class MCPToolExecutionErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonV
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Specify a single approval policy for all tools. One of `always` or `never`. When set to `always`, all tools will require approval. When set to `never`, all tools will not require approval.
+ * Specify a single approval policy for all tools. One of `always` or `never`. When set to `always`,
+ * all tools will require approval. When set to `never`, all tools will not require approval.
  */
-class MCPToolRequireApprovalVariant1Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MCPToolRequireApprovalVariant1Enum && value == other.value
+class MCPToolRequireApprovalVariant1Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MCPToolRequireApprovalVariant1Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -299,15 +324,18 @@ class MCPToolRequireApprovalVariant1Enum private constructor(
         @JvmField val ALWAYS = MCPToolRequireApprovalVariant1Enum("always")
         @JvmField val NEVER = MCPToolRequireApprovalVariant1Enum("never")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MCPToolRequireApprovalVariant1Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MCPToolRequireApprovalVariant1Enum(value)
     }
 }
 
-/**
- * The type of the object. Always `http`.
- */
-enum class McpTransportConfigParamHttpTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `http`. */
+enum class McpTransportConfigParamHttpTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     HTTP("http");
 
     override fun toString() = value
@@ -315,15 +343,16 @@ enum class McpTransportConfigParamHttpTypeEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `stdio`.
- */
-enum class McpTransportConfigParamStdioTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `stdio`. */
+enum class McpTransportConfigParamStdioTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     STDIO("stdio");
 
     override fun toString() = value
@@ -331,15 +360,16 @@ enum class McpTransportConfigParamStdioTypeEnum(@com.fasterxml.jackson.annotatio
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `http`.
- */
-enum class McpTransportResourceHttpTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `http`. */
+enum class McpTransportResourceHttpTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     HTTP("http");
 
     override fun toString() = value
@@ -347,15 +377,16 @@ enum class McpTransportResourceHttpTypeEnum(@com.fasterxml.jackson.annotation.Js
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `stdio`.
- */
-enum class McpTransportResourceStdioTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `stdio`. */
+enum class McpTransportResourceStdioTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     STDIO("stdio");
 
     override fun toString() = value
@@ -363,14 +394,13 @@ enum class McpTransportResourceStdioTypeEnum(@com.fasterxml.jackson.annotation.J
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the message. Always set to `message`.
- */
+/** The type of the message. Always set to `message`. */
 enum class MessageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     MESSAGE("message");
 
@@ -379,19 +409,23 @@ enum class MessageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Specifies the detail level of the image if specified by the user. `low` uses fewer tokens, you can opt in to high resolution using `high`.
+ * Specifies the detail level of the image if specified by the user. `low` uses fewer tokens, you
+ * can opt in to high resolution using `high`.
  */
-class MessageContentImageFileObjectImageFileDetailEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MessageContentImageFileObjectImageFileDetailEnum && value == other.value
+class MessageContentImageFileObjectImageFileDetailEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MessageContentImageFileObjectImageFileDetailEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -400,15 +434,18 @@ class MessageContentImageFileObjectImageFileDetailEnum private constructor(
         @JvmField val LOW = MessageContentImageFileObjectImageFileDetailEnum("low")
         @JvmField val HIGH = MessageContentImageFileObjectImageFileDetailEnum("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MessageContentImageFileObjectImageFileDetailEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MessageContentImageFileObjectImageFileDetailEnum(value)
     }
 }
 
-/**
- * Always `image_file`.
- */
-enum class MessageContentImageFileObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `image_file`. */
+enum class MessageContentImageFileObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_FILE("image_file");
 
     override fun toString() = value
@@ -416,19 +453,23 @@ enum class MessageContentImageFileObjectTypeEnum(@com.fasterxml.jackson.annotati
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Specifies the detail level of the image. `low` uses fewer tokens, you can opt in to high resolution using `high`. Default value is `auto`
+ * Specifies the detail level of the image. `low` uses fewer tokens, you can opt in to high
+ * resolution using `high`. Default value is `auto`
  */
-class MessageContentImageUrlObjectImageUrlDetailEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MessageContentImageUrlObjectImageUrlDetailEnum && value == other.value
+class MessageContentImageUrlObjectImageUrlDetailEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MessageContentImageUrlObjectImageUrlDetailEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -437,15 +478,18 @@ class MessageContentImageUrlObjectImageUrlDetailEnum private constructor(
         @JvmField val LOW = MessageContentImageUrlObjectImageUrlDetailEnum("low")
         @JvmField val HIGH = MessageContentImageUrlObjectImageUrlDetailEnum("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MessageContentImageUrlObjectImageUrlDetailEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MessageContentImageUrlObjectImageUrlDetailEnum(value)
     }
 }
 
-/**
- * The type of the content part.
- */
-enum class MessageContentImageUrlObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the content part. */
+enum class MessageContentImageUrlObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_URL("image_url");
 
     override fun toString() = value
@@ -453,15 +497,16 @@ enum class MessageContentImageUrlObjectTypeEnum(@com.fasterxml.jackson.annotatio
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `refusal`.
- */
-enum class MessageContentRefusalObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `refusal`. */
+enum class MessageContentRefusalObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     REFUSAL("refusal");
 
     override fun toString() = value
@@ -469,15 +514,16 @@ enum class MessageContentRefusalObjectTypeEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `input_image`.
- */
-enum class MessageContentResourceInputImageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `input_image`. */
+enum class MessageContentResourceInputImageTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INPUT_IMAGE("input_image");
 
     override fun toString() = value
@@ -485,15 +531,16 @@ enum class MessageContentResourceInputImageTypeEnum(@com.fasterxml.jackson.annot
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `input_text`.
- */
-enum class MessageContentResourceInputTextTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `input_text`. */
+enum class MessageContentResourceInputTextTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INPUT_TEXT("input_text");
 
     override fun toString() = value
@@ -501,15 +548,16 @@ enum class MessageContentResourceInputTextTypeEnum(@com.fasterxml.jackson.annota
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the object. Always `output_text`.
- */
-enum class MessageContentResourceOutputTextTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of the object. Always `output_text`. */
+enum class MessageContentResourceOutputTextTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     OUTPUT_TEXT("output_text");
 
     override fun toString() = value
@@ -517,15 +565,16 @@ enum class MessageContentResourceOutputTextTypeEnum(@com.fasterxml.jackson.annot
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `file_citation`.
- */
-enum class MessageContentTextAnnotationsFileCitationObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `file_citation`. */
+enum class MessageContentTextAnnotationsFileCitationObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FILE_CITATION("file_citation");
 
     override fun toString() = value
@@ -533,15 +582,16 @@ enum class MessageContentTextAnnotationsFileCitationObjectTypeEnum(@com.fasterxm
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `file_path`.
- */
-enum class MessageContentTextAnnotationsFilePathObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `file_path`. */
+enum class MessageContentTextAnnotationsFilePathObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FILE_PATH("file_path");
 
     override fun toString() = value
@@ -549,15 +599,16 @@ enum class MessageContentTextAnnotationsFilePathObjectTypeEnum(@com.fasterxml.ja
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `text`.
- */
-enum class MessageContentTextObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `text`. */
+enum class MessageContentTextObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     TEXT("text");
 
     override fun toString() = value
@@ -565,19 +616,23 @@ enum class MessageContentTextObjectTypeEnum(@com.fasterxml.jackson.annotation.Js
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Specifies the detail level of the image if specified by the user. `low` uses fewer tokens, you can opt in to high resolution using `high`.
+ * Specifies the detail level of the image if specified by the user. `low` uses fewer tokens, you
+ * can opt in to high resolution using `high`.
  */
-class MessageDeltaContentImageFileObjectImageFileDetailEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MessageDeltaContentImageFileObjectImageFileDetailEnum && value == other.value
+class MessageDeltaContentImageFileObjectImageFileDetailEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MessageDeltaContentImageFileObjectImageFileDetailEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -586,15 +641,18 @@ class MessageDeltaContentImageFileObjectImageFileDetailEnum private constructor(
         @JvmField val LOW = MessageDeltaContentImageFileObjectImageFileDetailEnum("low")
         @JvmField val HIGH = MessageDeltaContentImageFileObjectImageFileDetailEnum("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MessageDeltaContentImageFileObjectImageFileDetailEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MessageDeltaContentImageFileObjectImageFileDetailEnum(value)
     }
 }
 
-/**
- * Always `image_file`.
- */
-enum class MessageDeltaContentImageFileObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `image_file`. */
+enum class MessageDeltaContentImageFileObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE_FILE("image_file");
 
     override fun toString() = value
@@ -602,7 +660,8 @@ enum class MessageDeltaContentImageFileObjectTypeEnum(@com.fasterxml.jackson.ann
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

@@ -28,7 +28,6 @@ import dev.octri.showcase.openai.VoiceResource
 
 object Audio {
 
-
     /** Parameters for [createSpeech]. */
     data class CreateSpeechParams(
         val model: String,
@@ -37,58 +36,91 @@ object Audio {
         val instructions: String? = null,
         val responseFormat: CreateSpeechRequestResponseFormatEnum? = null,
         val speed: Double? = null,
-        val streamFormat: CreateSpeechRequestStreamFormatEnum? = null
+        val streamFormat: CreateSpeechRequestStreamFormatEnum? = null,
     )
 
     /**
-     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`, `input`, and `voice`, then choose an output format or streaming mode as needed. The response contains audio data or streamed audio events.
+     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`,
+     * `input`, and `voice`, then choose an output format or streaming mode as needed. The response
+     * contains audio data or streamed audio events.
      *
-     * Generates audio from the input text. Returns the audio file content, or a stream of audio events.
+     * Generates audio from the input text. Returns the audio file content, or a stream of audio
+     * events.
      *
-     * @param model One of the available TTS models: `tts-1`, `tts-1-hd`,
-     *   `gpt-4o-mini-tts`, or `gpt-4o-mini-tts-2025-12-15`.
-     * @param input The text to generate audio for. The maximum length is 4096
-     *   characters.
-     * @param voice The voice to use when generating the audio. Supported built-in
-     *   voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`,
-     *   `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a
-     *   custom voice object with an `id`, for example `{ "id": "voice_1234" }`.
-     *   Previews of the voices are available in the Text to speech guide. Custom
-     *   voices must be created from audio samples.
-     * @param instructions Control the voice of your generated audio with additional
-     *   instructions. Does not work with `tts-1` or `tts-1-hd`.
-     * @param responseFormat The format to audio in. Supported formats are `mp3`,
-     *   `opus`, `aac`, `flac`, `wav`, and `pcm`.
-     * @param speed The speed of the generated audio. Select a value from `0.25` to
-     *   `4.0`. `1.0` is the default.
-     * @param streamFormat The format to stream the audio in. Supported formats are
-     *   `sse` and `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
+     * @param model One of the available TTS models: `tts-1`, `tts-1-hd`, `gpt-4o-mini-tts`, or
+     *   `gpt-4o-mini-tts-2025-12-15`.
+     * @param input The text to generate audio for. The maximum length is 4096 characters.
+     * @param voice The voice to use when generating the audio. Supported built-in voices are
+     *   `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`,
+     *   `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for
+     *   example `{ "id": "voice_1234" }`. Previews of the voices are available in the Text to
+     *   speech guide. Custom voices must be created from audio samples.
+     * @param instructions Control the voice of your generated audio with additional instructions.
+     *   Does not work with `tts-1` or `tts-1-hd`.
+     * @param responseFormat The format to audio in. Supported formats are `mp3`, `opus`, `aac`,
+     *   `flac`, `wav`, and `pcm`.
+     * @param speed The speed of the generated audio. Select a value from `0.25` to `4.0`. `1.0` is
+     *   the default.
+     * @param streamFormat The format to stream the audio in. Supported formats are `sse` and
+     *   `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
      */
-    fun createSpeech(clientConfig: ClientConfig, request: CreateSpeechParams, options: RequestOptions? = null): ByteArray {
+    fun createSpeech(
+        clientConfig: ClientConfig,
+        request: CreateSpeechParams,
+        options: RequestOptions? = null,
+    ): ByteArray {
         validateCreateSpeechRequest(request)
 
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("POST", "/audio/speech", config = clientConfig, body = SdkClient.bodyMap("model" to (request.model), "input" to (request.input), "voice" to (request.voice), "instructions" to
-    (SdkClient.omitIfNull(request.instructions)), "response_format" to
-    (SdkClient.omitIfNull(request.responseFormat)), "speed" to (SdkClient.omitIfNull(request.speed)), "stream_format" to
-    (SdkClient.omitIfNull(request.streamFormat))), operationId = "createSpeech", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
+        return SdkClient.request<ByteArray>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audio/speech",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (request.model),
+                            "input" to (request.input),
+                            "voice" to (request.voice),
+                            "instructions" to (SdkClient.omitIfNull(request.instructions)),
+                            "response_format" to (SdkClient.omitIfNull(request.responseFormat)),
+                            "speed" to (SdkClient.omitIfNull(request.speed)),
+                            "stream_format" to (SdkClient.omitIfNull(request.streamFormat)),
+                        ),
+                    operationId = "createSpeech",
+                    decoder = SdkClient.ResponseDecoder.BYTES,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "401" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                            "503" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateCreateSpeechRequest(request: CreateSpeechParams) {
         Validation.validateLength("input", request.input, Validation.LengthOpts(max = 4096))
 
         if (request.instructions != null) {
-            Validation.validateLength("instructions", request.instructions, Validation.LengthOpts(max = 4096))
-}
+            Validation.validateLength(
+                "instructions",
+                request.instructions,
+                Validation.LengthOpts(max = 4096),
+            )
+        }
 
         if (request.speed != null) {
-            Validation.validateRange("speed", request.speed, Validation.RangeOpts(min = 0.25, max = 4.0))
-}
+            Validation.validateRange(
+                "speed",
+                request.speed,
+                Validation.RangeOpts(min = 0.25, max = 4.0),
+            )
+        }
     }
-
-
-
-
 
     data class CreateSpeechStreamRequest(
         val model: String,
@@ -97,64 +129,86 @@ object Audio {
         val instructions: String? = null,
         val responseFormat: CreateSpeechRequestResponseFormatEnum? = null,
         val speed: Double? = null,
-        val streamFormat: CreateSpeechRequestStreamFormatEnum? = null
+        val streamFormat: CreateSpeechRequestStreamFormatEnum? = null,
     )
 
     /**
-     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`, `input`, and `voice`, then choose an output format or streaming mode as needed. The response contains audio data or streamed audio events.
+     * Generates audio from text using a selected text-to-speech model and voice. Provide `model`,
+     * `input`, and `voice`, then choose an output format or streaming mode as needed. The response
+     * contains audio data or streamed audio events.
      *
-     * Generates audio from the input text. Returns the audio file content, or a stream of audio events.
+     * Generates audio from the input text. Returns the audio file content, or a stream of audio
+     * events.
      *
-     * @param model One of the available TTS models: `tts-1`, `tts-1-hd`,
-     *   `gpt-4o-mini-tts`, or `gpt-4o-mini-tts-2025-12-15`.
-     * @param input The text to generate audio for. The maximum length is 4096
-     *   characters.
-     * @param voice The voice to use when generating the audio. Supported built-in
-     *   voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`,
-     *   `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a
-     *   custom voice object with an `id`, for example `{ "id": "voice_1234" }`.
-     *   Previews of the voices are available in the Text to speech guide. Custom
-     *   voices must be created from audio samples.
-     * @param instructions Control the voice of your generated audio with additional
-     *   instructions. Does not work with `tts-1` or `tts-1-hd`.
-     * @param responseFormat The format to audio in. Supported formats are `mp3`,
-     *   `opus`, `aac`, `flac`, `wav`, and `pcm`.
-     * @param speed The speed of the generated audio. Select a value from `0.25` to
-     *   `4.0`. `1.0` is the default.
-     * @param streamFormat The format to stream the audio in. Supported formats are
-     *   `sse` and `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
+     * @param model One of the available TTS models: `tts-1`, `tts-1-hd`, `gpt-4o-mini-tts`, or
+     *   `gpt-4o-mini-tts-2025-12-15`.
+     * @param input The text to generate audio for. The maximum length is 4096 characters.
+     * @param voice The voice to use when generating the audio. Supported built-in voices are
+     *   `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`,
+     *   `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for
+     *   example `{ "id": "voice_1234" }`. Previews of the voices are available in the Text to
+     *   speech guide. Custom voices must be created from audio samples.
+     * @param instructions Control the voice of your generated audio with additional instructions.
+     *   Does not work with `tts-1` or `tts-1-hd`.
+     * @param responseFormat The format to audio in. Supported formats are `mp3`, `opus`, `aac`,
+     *   `flac`, `wav`, and `pcm`.
+     * @param speed The speed of the generated audio. Select a value from `0.25` to `4.0`. `1.0` is
+     *   the default.
+     * @param streamFormat The format to stream the audio in. Supported formats are `sse` and
+     *   `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
      */
-    fun createSpeechStream(clientConfig: ClientConfig, request: CreateSpeechStreamRequest, options: RequestOptions? = null): Sequence<CreateSpeechResponseStreamEvent> {
+    fun createSpeechStream(
+        clientConfig: ClientConfig,
+        request: CreateSpeechStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateSpeechResponseStreamEvent> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "POST",
-                "/audio/speech",
-                config = clientConfig,
-                body = SdkClient.bodyMap("model" to (request.model), "input" to (request.input), "voice" to (request.voice), "instructions" to
-    (SdkClient.omitIfNull(request.instructions)), "response_format" to
-    (SdkClient.omitIfNull(request.responseFormat)), "speed" to (SdkClient.omitIfNull(request.speed)), "stream_format" to
-    (SdkClient.omitIfNull(request.streamFormat))),
-                contentType = "application/json",
-                operationId = "createSpeechStream",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                options = options,
-                errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "POST",
+                        "/audio/speech",
+                        config = clientConfig,
+                        body =
+                            SdkClient.bodyMap(
+                                "model" to (request.model),
+                                "input" to (request.input),
+                                "voice" to (request.voice),
+                                "instructions" to (SdkClient.omitIfNull(request.instructions)),
+                                "response_format" to (SdkClient.omitIfNull(request.responseFormat)),
+                                "speed" to (SdkClient.omitIfNull(request.speed)),
+                                "stream_format" to (SdkClient.omitIfNull(request.streamFormat)),
+                            ),
+                        contentType = "application/json",
+                        operationId = "createSpeechStream",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        options = options,
+                        errors =
+                            mapOf(
+                                "400" to ErrorResponse::class.java,
+                                "401" to ErrorResponse::class.java,
+                                "429" to ErrorResponse::class.java,
+                                "500" to ErrorResponse::class.java,
+                                "503" to ErrorResponse::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, CreateSpeechResponseStreamEvent::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(
+                            _ev.data,
+                            CreateSpeechResponseStreamEvent::class.java,
+                        )
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
-
-
 
     /** Parameters for [createTranscription]. */
     data class CreateTranscriptionParams(
@@ -167,105 +221,139 @@ object Audio {
         val responseFormat: AudioResponseFormat? = null,
         val temperature: Double? = null,
         val include: List<TranscriptionInclude>? = null,
-        val timestampGranularities: List<CreateTranscriptionRequestTimestampGranularitiesItemEnum>? = null,
+        val timestampGranularities:
+            List<CreateTranscriptionRequestTimestampGranularitiesItemEnum>? =
+            null,
         val stream: SdkClient.SdkOptional<Boolean?>? = null,
-        val chunkingStrategy: SdkClient.SdkOptional<CreateTranscriptionRequestChunkingStrategy?>? = null,
+        val chunkingStrategy: SdkClient.SdkOptional<CreateTranscriptionRequestChunkingStrategy?>? =
+            null,
         val knownSpeakerNames: List<String>? = null,
-        val knownSpeakerReferences: List<String>? = null
+        val knownSpeakerReferences: List<String>? = null,
     )
 
     /**
-     * Transcribes an audio file and returns the transcript in a selected format or as a stream of transcript events. Provide the audio `file` and `model`, then use options such as `language`, `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data and include enough file metadata for the audio format to be identified.
+     * Transcribes an audio file and returns the transcript in a selected format or as a stream of
+     * transcript events. Provide the audio `file` and `model`, then use options such as `language`,
+     * `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data
+     * and include enough file metadata for the audio format to be identified.
      *
-     * Transcribes audio into the input language. Returns a transcription object in `json`, `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a stream of transcript events. Supported formats depend on the model.
+     * Transcribes audio into the input language. Returns a transcription object in `json`,
+     * `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a
+     * stream of transcript events. Supported formats depend on the model.
      *
-     * @param file The audio file object (not file name) to transcribe, in one of
-     *   these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request
-     *   must include enough format metadata for the file to be identified. We
-     *   recommend an extension-bearing filename and an appropriate content type.
-     * @param model ID of the model to use. The options are `gpt-transcribe`,
-     *   `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`,
-     *   `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is powered by our open
-     *   source Whisper V2 model), and `gpt-4o-transcribe-diarize`.
-     * @param language The language of the input audio. Supplying the input language
-     *   in ISO-639-1 (e.g. `en`) format will improve accuracy and latency.
-     * @param languages Possible languages of the input audio, in ISO-639-1 format.
-     *   Supported by `gpt-transcribe`.
-     * @param keywords Words or phrases to guide transcription of the input audio.
-     *   Supported by `gpt-transcribe`.
-     * @param prompt An optional text to guide the model's style or continue a
-     *   previous audio segment. The prompt should match the audio language. This field
-     *   is not supported when using `gpt-4o-transcribe-diarize`.
-     * @param responseFormat The format of the output, in one of these options:
-     *   `json`, `text`, `srt`, `verbose_json`, `vtt`, or `diarized_json`. For
-     *   `gpt-4o-transcribe` and `gpt-4o-mini-transcribe`, the only supported format is
-     *   `json`. For `gpt-4o-transcribe-diarize`, the supported formats are `json`,
-     *   `text`, and `diarized_json`, with `diarized_json` required to receive speaker
-     *   annotations.
-     * @param temperature The sampling temperature, between 0 and 1. Higher values
-     *   like 0.8 will make the output more random, while lower values like 0.2 will
-     *   make it more focused and deterministic. If set to 0, the model will use log
-     *   probability to automatically increase the temperature until certain thresholds
-     *   are hit.
-     * @param include Additional information to include in the transcription
-     *   response. `logprobs` will return the log probabilities of the tokens in the
-     *   response to understand the model's confidence in the transcription. `logprobs`
-     *   only works with response_format set to `json` and only with the models
-     *   `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and
+     * @param file The audio file object (not file name) to transcribe, in one of these formats:
+     *   flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format
+     *   metadata for the file to be identified. We recommend an extension-bearing filename and an
+     *   appropriate content type.
+     * @param model ID of the model to use. The options are `gpt-transcribe`, `gpt-4o-transcribe`,
+     *   `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is
+     *   powered by our open source Whisper V2 model), and `gpt-4o-transcribe-diarize`.
+     * @param language The language of the input audio. Supplying the input language in ISO-639-1
+     *   (e.g. `en`) format will improve accuracy and latency.
+     * @param languages Possible languages of the input audio, in ISO-639-1 format. Supported by
+     *   `gpt-transcribe`.
+     * @param keywords Words or phrases to guide transcription of the input audio. Supported by
+     *   `gpt-transcribe`.
+     * @param prompt An optional text to guide the model's style or continue a previous audio
+     *   segment. The prompt should match the audio language. This field is not supported when using
+     *   `gpt-4o-transcribe-diarize`.
+     * @param responseFormat The format of the output, in one of these options: `json`, `text`,
+     *   `srt`, `verbose_json`, `vtt`, or `diarized_json`. For `gpt-4o-transcribe` and
+     *   `gpt-4o-mini-transcribe`, the only supported format is `json`. For
+     *   `gpt-4o-transcribe-diarize`, the supported formats are `json`, `text`, and `diarized_json`,
+     *   with `diarized_json` required to receive speaker annotations.
+     * @param temperature The sampling temperature, between 0 and 1. Higher values like 0.8 will
+     *   make the output more random, while lower values like 0.2 will make it more focused and
+     *   deterministic. If set to 0, the model will use log probability to automatically increase
+     *   the temperature until certain thresholds are hit.
+     * @param include Additional information to include in the transcription response. `logprobs`
+     *   will return the log probabilities of the tokens in the response to understand the model's
+     *   confidence in the transcription. `logprobs` only works with response_format set to `json`
+     *   and only with the models `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and
      *   `gpt-4o-mini-transcribe-2025-12-15`. This field is not supported when using
      *   `gpt-4o-transcribe-diarize`.
-     * @param timestampGranularities The timestamp granularities to populate for this
-     *   transcription. `response_format` must be set `verbose_json` to use timestamp
-     *   granularities. Either or both of these options are supported: `word`, or
-     *   `segment`. Note: There is no additional latency for segment timestamps, but
-     *   generating word timestamps incurs additional latency. This option is not
-     *   available for `gpt-4o-transcribe-diarize`.
+     * @param timestampGranularities The timestamp granularities to populate for this transcription.
+     *   `response_format` must be set `verbose_json` to use timestamp granularities. Either or both
+     *   of these options are supported: `word`, or `segment`. Note: There is no additional latency
+     *   for segment timestamps, but generating word timestamps incurs additional latency. This
+     *   option is not available for `gpt-4o-transcribe-diarize`.
      * @param stream Optional `boolean` value serialized in the `stream` wire field.
-     * @param chunkingStrategy Controls how the audio is cut into chunks. When set to
-     *   `"auto"`, the server first normalizes loudness and then uses voice activity
-     *   detection (VAD) to choose boundaries. `server_vad` object can be provided to
-     *   tweak VAD detection parameters manually. If unset, the audio is transcribed as
-     *   a single block. Required when using `gpt-4o-transcribe-diarize` for inputs
-     *   longer than 30 seconds.
-     * @param knownSpeakerNames Optional list of speaker names that correspond to the
-     *   audio samples provided in `known_speaker_references[]`. Each entry should be a
-     *   short identifier (for example `customer` or `agent`). Up to 4 speakers are
-     *   supported.
-     * @param knownSpeakerReferences Optional list of audio samples (as data URLs)
-     *   that contain known speaker references matching `known_speaker_names[]`. Each
-     *   sample must be between 2 and 10 seconds, and can use any of the same input
-     *   audio formats supported by `file`.
+     * @param chunkingStrategy Controls how the audio is cut into chunks. When set to `"auto"`, the
+     *   server first normalizes loudness and then uses voice activity detection (VAD) to choose
+     *   boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually.
+     *   If unset, the audio is transcribed as a single block. Required when using
+     *   `gpt-4o-transcribe-diarize` for inputs longer than 30 seconds.
+     * @param knownSpeakerNames Optional list of speaker names that correspond to the audio samples
+     *   provided in `known_speaker_references[]`. Each entry should be a short identifier (for
+     *   example `customer` or `agent`). Up to 4 speakers are supported.
+     * @param knownSpeakerReferences Optional list of audio samples (as data URLs) that contain
+     *   known speaker references matching `known_speaker_names[]`. Each sample must be between 2
+     *   and 10 seconds, and can use any of the same input audio formats supported by `file`.
      */
-    fun createTranscription(clientConfig: ClientConfig, request: CreateTranscriptionParams, options: RequestOptions? = null): CreateTranscriptionResponse {
+    fun createTranscription(
+        clientConfig: ClientConfig,
+        request: CreateTranscriptionParams,
+        options: RequestOptions? = null,
+    ): CreateTranscriptionResponse {
         validateCreateTranscriptionRequest(request)
 
-        return SdkClient.request<CreateTranscriptionResponse>(SdkClient.RequestSpec("POST", "/audio/transcriptions", config = clientConfig, body = buildCreateTranscriptionBody(request), contentType = "multipart/form-data", operationId = "createTranscription", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "413" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "502" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
+        return SdkClient.request<CreateTranscriptionResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audio/transcriptions",
+                    config = clientConfig,
+                    body = buildCreateTranscriptionBody(request),
+                    contentType = "multipart/form-data",
+                    operationId = "createTranscription",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "401" to ErrorResponse::class.java,
+                            "413" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                            "502" to ErrorResponse::class.java,
+                            "503" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateCreateTranscriptionRequest(request: CreateTranscriptionParams) {
         if (request.languages != null) {
             Validation.validateItems("languages", request.languages, Validation.LengthOpts(min = 1))
-}
-
-        if (request.knownSpeakerNames != null) {
-            Validation.validateItems("known_speaker_names", request.knownSpeakerNames, Validation.LengthOpts(max = 4))
-}
-
-        if (request.knownSpeakerReferences != null) {
-            Validation.validateItems("known_speaker_references", request.knownSpeakerReferences, Validation.LengthOpts(max = 4))
-}
-    }
-
-
-
-    private fun buildCreateTranscriptionBody(request: CreateTranscriptionParams): Map<String, Any?> =
-        buildMap {
-            putAll(buildCreateTranscriptionBodyPart1(request))
-            putAll(buildCreateTranscriptionBodyPart2(request))
         }
 
-    private fun buildCreateTranscriptionBodyPart1(request: CreateTranscriptionParams): Map<String, Any?> =
+        if (request.knownSpeakerNames != null) {
+            Validation.validateItems(
+                "known_speaker_names",
+                request.knownSpeakerNames,
+                Validation.LengthOpts(max = 4),
+            )
+        }
+
+        if (request.knownSpeakerReferences != null) {
+            Validation.validateItems(
+                "known_speaker_references",
+                request.knownSpeakerReferences,
+                Validation.LengthOpts(max = 4),
+            )
+        }
+    }
+
+    private fun buildCreateTranscriptionBody(
+        request: CreateTranscriptionParams
+    ): Map<String, Any?> = buildMap {
+        putAll(buildCreateTranscriptionBodyPart1(request))
+        putAll(buildCreateTranscriptionBodyPart2(request))
+    }
+
+    private fun buildCreateTranscriptionBodyPart1(
+        request: CreateTranscriptionParams
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "file" to (request.file),
             "model" to (request.model),
@@ -273,27 +361,24 @@ object Audio {
             "languages" to (SdkClient.omitIfNull(request.languages)),
             "keywords" to (SdkClient.omitIfNull(request.keywords)),
             "prompt" to (SdkClient.omitIfNull(request.prompt)),
-            "response_format" to
-    (SdkClient.omitIfNull(request.responseFormat)),
+            "response_format" to (SdkClient.omitIfNull(request.responseFormat)),
             "temperature" to (SdkClient.omitIfNull(request.temperature)),
             "include" to (SdkClient.omitIfNull(request.include)),
-            "timestamp_granularities" to
-    (SdkClient.omitIfNull(request.timestampGranularities)),
-            "stream" to
-    (request.stream ?: SdkClient.SdkOptional.Omitted),
+            "timestamp_granularities" to (SdkClient.omitIfNull(request.timestampGranularities)),
+            "stream" to (request.stream ?: SdkClient.SdkOptional.Omitted),
             "chunking_strategy" to
-    (request.chunkingStrategy?.getOrNull()?.let { SdkClient.SdkOptional.Present(SdkClient.multipartJson(it, "application/json")) } ?: SdkClient.SdkOptional.Omitted),
+                (request.chunkingStrategy?.getOrNull()?.let {
+                    SdkClient.SdkOptional.Present(SdkClient.multipartJson(it, "application/json"))
+                } ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildCreateTranscriptionBodyPart2(request: CreateTranscriptionParams): Map<String, Any?> =
+    private fun buildCreateTranscriptionBodyPart2(
+        request: CreateTranscriptionParams
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "known_speaker_names" to
-    (SdkClient.omitIfNull(request.knownSpeakerNames)),
-            "known_speaker_references" to
-    (SdkClient.omitIfNull(request.knownSpeakerReferences)),
+            "known_speaker_names" to (SdkClient.omitIfNull(request.knownSpeakerNames)),
+            "known_speaker_references" to (SdkClient.omitIfNull(request.knownSpeakerReferences)),
         )
-
-
 
     data class CreateTranscriptionStreamRequest(
         val file: SdkClient.UploadFile,
@@ -306,109 +391,130 @@ object Audio {
         val responseFormat: AudioResponseFormat? = null,
         val temperature: Double? = null,
         val include: List<TranscriptionInclude>? = null,
-        val timestampGranularities: List<CreateTranscriptionRequestTimestampGranularitiesItemEnum>? = null,
-        val chunkingStrategy: SdkClient.SdkOptional<CreateTranscriptionRequestChunkingStrategy?>? = null,
+        val timestampGranularities:
+            List<CreateTranscriptionRequestTimestampGranularitiesItemEnum>? =
+            null,
+        val chunkingStrategy: SdkClient.SdkOptional<CreateTranscriptionRequestChunkingStrategy?>? =
+            null,
         val knownSpeakerNames: List<String>? = null,
-        val knownSpeakerReferences: List<String>? = null
+        val knownSpeakerReferences: List<String>? = null,
     )
 
     /**
-     * Transcribes an audio file and returns the transcript in a selected format or as a stream of transcript events. Provide the audio `file` and `model`, then use options such as `language`, `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data and include enough file metadata for the audio format to be identified.
+     * Transcribes an audio file and returns the transcript in a selected format or as a stream of
+     * transcript events. Provide the audio `file` and `model`, then use options such as `language`,
+     * `prompt`, or `timestamp_granularities` to guide or shape the output. Use multipart form data
+     * and include enough file metadata for the audio format to be identified.
      *
-     * Transcribes audio into the input language. Returns a transcription object in `json`, `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a stream of transcript events. Supported formats depend on the model.
+     * Transcribes audio into the input language. Returns a transcription object in `json`,
+     * `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a
+     * stream of transcript events. Supported formats depend on the model.
      *
-     * @param file The audio file object (not file name) to transcribe, in one of
-     *   these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request
-     *   must include enough format metadata for the file to be identified. We
-     *   recommend an extension-bearing filename and an appropriate content type.
-     * @param model ID of the model to use. The options are `gpt-transcribe`,
-     *   `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`,
-     *   `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is powered by our open
-     *   source Whisper V2 model), and `gpt-4o-transcribe-diarize`.
+     * @param file The audio file object (not file name) to transcribe, in one of these formats:
+     *   flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format
+     *   metadata for the file to be identified. We recommend an extension-bearing filename and an
+     *   appropriate content type.
+     * @param model ID of the model to use. The options are `gpt-transcribe`, `gpt-4o-transcribe`,
+     *   `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `whisper-1` (which is
+     *   powered by our open source Whisper V2 model), and `gpt-4o-transcribe-diarize`.
      * @param stream Optional `boolean` value serialized in the `stream` wire field.
-     * @param language The language of the input audio. Supplying the input language
-     *   in ISO-639-1 (e.g. `en`) format will improve accuracy and latency.
-     * @param languages Possible languages of the input audio, in ISO-639-1 format.
-     *   Supported by `gpt-transcribe`.
-     * @param keywords Words or phrases to guide transcription of the input audio.
-     *   Supported by `gpt-transcribe`.
-     * @param prompt An optional text to guide the model's style or continue a
-     *   previous audio segment. The prompt should match the audio language. This field
-     *   is not supported when using `gpt-4o-transcribe-diarize`.
-     * @param responseFormat The format of the output, in one of these options:
-     *   `json`, `text`, `srt`, `verbose_json`, `vtt`, or `diarized_json`. For
-     *   `gpt-4o-transcribe` and `gpt-4o-mini-transcribe`, the only supported format is
-     *   `json`. For `gpt-4o-transcribe-diarize`, the supported formats are `json`,
-     *   `text`, and `diarized_json`, with `diarized_json` required to receive speaker
-     *   annotations.
-     * @param temperature The sampling temperature, between 0 and 1. Higher values
-     *   like 0.8 will make the output more random, while lower values like 0.2 will
-     *   make it more focused and deterministic. If set to 0, the model will use log
-     *   probability to automatically increase the temperature until certain thresholds
-     *   are hit.
-     * @param include Additional information to include in the transcription
-     *   response. `logprobs` will return the log probabilities of the tokens in the
-     *   response to understand the model's confidence in the transcription. `logprobs`
-     *   only works with response_format set to `json` and only with the models
-     *   `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and
+     * @param language The language of the input audio. Supplying the input language in ISO-639-1
+     *   (e.g. `en`) format will improve accuracy and latency.
+     * @param languages Possible languages of the input audio, in ISO-639-1 format. Supported by
+     *   `gpt-transcribe`.
+     * @param keywords Words or phrases to guide transcription of the input audio. Supported by
+     *   `gpt-transcribe`.
+     * @param prompt An optional text to guide the model's style or continue a previous audio
+     *   segment. The prompt should match the audio language. This field is not supported when using
+     *   `gpt-4o-transcribe-diarize`.
+     * @param responseFormat The format of the output, in one of these options: `json`, `text`,
+     *   `srt`, `verbose_json`, `vtt`, or `diarized_json`. For `gpt-4o-transcribe` and
+     *   `gpt-4o-mini-transcribe`, the only supported format is `json`. For
+     *   `gpt-4o-transcribe-diarize`, the supported formats are `json`, `text`, and `diarized_json`,
+     *   with `diarized_json` required to receive speaker annotations.
+     * @param temperature The sampling temperature, between 0 and 1. Higher values like 0.8 will
+     *   make the output more random, while lower values like 0.2 will make it more focused and
+     *   deterministic. If set to 0, the model will use log probability to automatically increase
+     *   the temperature until certain thresholds are hit.
+     * @param include Additional information to include in the transcription response. `logprobs`
+     *   will return the log probabilities of the tokens in the response to understand the model's
+     *   confidence in the transcription. `logprobs` only works with response_format set to `json`
+     *   and only with the models `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and
      *   `gpt-4o-mini-transcribe-2025-12-15`. This field is not supported when using
      *   `gpt-4o-transcribe-diarize`.
-     * @param timestampGranularities The timestamp granularities to populate for this
-     *   transcription. `response_format` must be set `verbose_json` to use timestamp
-     *   granularities. Either or both of these options are supported: `word`, or
-     *   `segment`. Note: There is no additional latency for segment timestamps, but
-     *   generating word timestamps incurs additional latency. This option is not
-     *   available for `gpt-4o-transcribe-diarize`.
-     * @param chunkingStrategy Controls how the audio is cut into chunks. When set to
-     *   `"auto"`, the server first normalizes loudness and then uses voice activity
-     *   detection (VAD) to choose boundaries. `server_vad` object can be provided to
-     *   tweak VAD detection parameters manually. If unset, the audio is transcribed as
-     *   a single block. Required when using `gpt-4o-transcribe-diarize` for inputs
-     *   longer than 30 seconds.
-     * @param knownSpeakerNames Optional list of speaker names that correspond to the
-     *   audio samples provided in `known_speaker_references[]`. Each entry should be a
-     *   short identifier (for example `customer` or `agent`). Up to 4 speakers are
-     *   supported.
-     * @param knownSpeakerReferences Optional list of audio samples (as data URLs)
-     *   that contain known speaker references matching `known_speaker_names[]`. Each
-     *   sample must be between 2 and 10 seconds, and can use any of the same input
-     *   audio formats supported by `file`.
+     * @param timestampGranularities The timestamp granularities to populate for this transcription.
+     *   `response_format` must be set `verbose_json` to use timestamp granularities. Either or both
+     *   of these options are supported: `word`, or `segment`. Note: There is no additional latency
+     *   for segment timestamps, but generating word timestamps incurs additional latency. This
+     *   option is not available for `gpt-4o-transcribe-diarize`.
+     * @param chunkingStrategy Controls how the audio is cut into chunks. When set to `"auto"`, the
+     *   server first normalizes loudness and then uses voice activity detection (VAD) to choose
+     *   boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually.
+     *   If unset, the audio is transcribed as a single block. Required when using
+     *   `gpt-4o-transcribe-diarize` for inputs longer than 30 seconds.
+     * @param knownSpeakerNames Optional list of speaker names that correspond to the audio samples
+     *   provided in `known_speaker_references[]`. Each entry should be a short identifier (for
+     *   example `customer` or `agent`). Up to 4 speakers are supported.
+     * @param knownSpeakerReferences Optional list of audio samples (as data URLs) that contain
+     *   known speaker references matching `known_speaker_names[]`. Each sample must be between 2
+     *   and 10 seconds, and can use any of the same input audio formats supported by `file`.
      */
-    fun createTranscriptionStream(clientConfig: ClientConfig, request: CreateTranscriptionStreamRequest, options: RequestOptions? = null): Sequence<CreateTranscriptionResponseStreamEvent> {
+    fun createTranscriptionStream(
+        clientConfig: ClientConfig,
+        request: CreateTranscriptionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<CreateTranscriptionResponseStreamEvent> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "POST",
-                "/audio/transcriptions",
-                config = clientConfig,
-                body = buildCreateTranscriptionStreamBody(request),
-                contentType = "multipart/form-data",
-                operationId = "createTranscriptionStream",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                options = options,
-                errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "413" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "502" to ErrorResponse::class.java, "503" to ErrorResponse::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "POST",
+                        "/audio/transcriptions",
+                        config = clientConfig,
+                        body = buildCreateTranscriptionStreamBody(request),
+                        contentType = "multipart/form-data",
+                        operationId = "createTranscriptionStream",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        options = options,
+                        errors =
+                            mapOf(
+                                "400" to ErrorResponse::class.java,
+                                "401" to ErrorResponse::class.java,
+                                "413" to ErrorResponse::class.java,
+                                "429" to ErrorResponse::class.java,
+                                "500" to ErrorResponse::class.java,
+                                "502" to ErrorResponse::class.java,
+                                "503" to ErrorResponse::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, CreateTranscriptionResponseStreamEvent::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(
+                            _ev.data,
+                            CreateTranscriptionResponseStreamEvent::class.java,
+                        )
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
 
+    private fun buildCreateTranscriptionStreamBody(
+        request: CreateTranscriptionStreamRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildCreateTranscriptionStreamBodyPart1(request))
+        putAll(buildCreateTranscriptionStreamBodyPart2(request))
+    }
 
-    private fun buildCreateTranscriptionStreamBody(request: CreateTranscriptionStreamRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildCreateTranscriptionStreamBodyPart1(request))
-            putAll(buildCreateTranscriptionStreamBodyPart2(request))
-        }
-
-    private fun buildCreateTranscriptionStreamBodyPart1(request: CreateTranscriptionStreamRequest): Map<String, Any?> =
+    private fun buildCreateTranscriptionStreamBodyPart1(
+        request: CreateTranscriptionStreamRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "file" to (request.file),
             "model" to (request.model),
@@ -417,112 +523,199 @@ object Audio {
             "languages" to (SdkClient.omitIfNull(request.languages)),
             "keywords" to (SdkClient.omitIfNull(request.keywords)),
             "prompt" to (SdkClient.omitIfNull(request.prompt)),
-            "response_format" to
-    (SdkClient.omitIfNull(request.responseFormat)),
+            "response_format" to (SdkClient.omitIfNull(request.responseFormat)),
             "temperature" to (SdkClient.omitIfNull(request.temperature)),
             "include" to (SdkClient.omitIfNull(request.include)),
-            "timestamp_granularities" to
-    (SdkClient.omitIfNull(request.timestampGranularities)),
+            "timestamp_granularities" to (SdkClient.omitIfNull(request.timestampGranularities)),
             "chunking_strategy" to
-    (request.chunkingStrategy?.getOrNull()?.let { SdkClient.SdkOptional.Present(SdkClient.multipartJson(it, "application/json")) } ?: SdkClient.SdkOptional.Omitted),
+                (request.chunkingStrategy?.getOrNull()?.let {
+                    SdkClient.SdkOptional.Present(SdkClient.multipartJson(it, "application/json"))
+                } ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildCreateTranscriptionStreamBodyPart2(request: CreateTranscriptionStreamRequest): Map<String, Any?> =
+    private fun buildCreateTranscriptionStreamBodyPart2(
+        request: CreateTranscriptionStreamRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "known_speaker_names" to
-    (SdkClient.omitIfNull(request.knownSpeakerNames)),
-            "known_speaker_references" to
-    (SdkClient.omitIfNull(request.knownSpeakerReferences)),
+            "known_speaker_names" to (SdkClient.omitIfNull(request.knownSpeakerNames)),
+            "known_speaker_references" to (SdkClient.omitIfNull(request.knownSpeakerReferences)),
         )
-
 
     /**
-     * Translates an audio file into English and returns the result in a selected format. Provide the `file` and `model`, then optionally use `prompt` to guide the translation style. Send the file as multipart form data with metadata that lets the service identify its audio format.
+     * Translates an audio file into English and returns the result in a selected format. Provide
+     * the `file` and `model`, then optionally use `prompt` to guide the translation style. Send the
+     * file as multipart form data with metadata that lets the service identify its audio format.
      *
      * Translates audio into English.
      *
-     * @param file The audio file object (not file name) translate, in one of these
-     *   formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must
-     *   include enough format metadata for the file to be identified. We recommend an
-     *   extension-bearing filename and an appropriate content type.
-     * @param model ID of the model to use. Only `whisper-1` (which is powered by our
-     *   open source Whisper V2 model) is currently available.
-     * @param prompt An optional text to guide the model's style or continue a
-     *   previous audio segment. The prompt should be in English.
-     * @param responseFormat The format of the output, in one of these options:
-     *   `json`, `text`, `srt`, `verbose_json`, or `vtt`.
-     * @param temperature The sampling temperature, between 0 and 1. Higher values
-     *   like 0.8 will make the output more random, while lower values like 0.2 will
-     *   make it more focused and deterministic. If set to 0, the model will use log
-     *   probability to automatically increase the temperature until certain thresholds
-     *   are hit.
+     * @param file The audio file object (not file name) translate, in one of these formats: flac,
+     *   mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format
+     *   metadata for the file to be identified. We recommend an extension-bearing filename and an
+     *   appropriate content type.
+     * @param model ID of the model to use. Only `whisper-1` (which is powered by our open source
+     *   Whisper V2 model) is currently available.
+     * @param prompt An optional text to guide the model's style or continue a previous audio
+     *   segment. The prompt should be in English.
+     * @param responseFormat The format of the output, in one of these options: `json`, `text`,
+     *   `srt`, `verbose_json`, or `vtt`.
+     * @param temperature The sampling temperature, between 0 and 1. Higher values like 0.8 will
+     *   make the output more random, while lower values like 0.2 will make it more focused and
+     *   deterministic. If set to 0, the model will use log probability to automatically increase
+     *   the temperature until certain thresholds are hit.
      */
-    fun createTranslation(clientConfig: ClientConfig, file: SdkClient.UploadFile, model: String, prompt: String? = null, responseFormat: CreateTranslationRequestResponseFormatEnum? = null, temperature: Double? = null, options: RequestOptions? = null): CreateTranslationResponse {
-        return SdkClient.request<CreateTranslationResponse>(SdkClient.RequestSpec("POST", "/audio/translations", config = clientConfig, body = SdkClient.bodyMap("file" to (file), "model" to (model), "prompt" to (SdkClient.omitIfNull(prompt)), "response_format" to (SdkClient.omitIfNull(responseFormat)), "temperature" to (SdkClient.omitIfNull(temperature))), contentType = "multipart/form-data", operationId = "createTranslation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "413" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "502" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
+    fun createTranslation(
+        clientConfig: ClientConfig,
+        file: SdkClient.UploadFile,
+        model: String,
+        prompt: String? = null,
+        responseFormat: CreateTranslationRequestResponseFormatEnum? = null,
+        temperature: Double? = null,
+        options: RequestOptions? = null,
+    ): CreateTranslationResponse {
+        return SdkClient.request<CreateTranslationResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audio/translations",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "file" to (file),
+                            "model" to (model),
+                            "prompt" to (SdkClient.omitIfNull(prompt)),
+                            "response_format" to (SdkClient.omitIfNull(responseFormat)),
+                            "temperature" to (SdkClient.omitIfNull(temperature)),
+                        ),
+                    contentType = "multipart/form-data",
+                    operationId = "createTranslation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "401" to ErrorResponse::class.java,
+                            "413" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                            "502" to ErrorResponse::class.java,
+                            "503" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a voice consent recording by uploading its audio file with a label and language tag. Provide `name`, `recording`, and `language`, and send the recording as multipart form data in a supported audio format. The response includes the new recording's identifier and creation timestamp.
+     * Creates a voice consent recording by uploading its audio file with a label and language tag.
+     * Provide `name`, `recording`, and `language`, and send the recording as multipart form data in
+     * a supported audio format. The response includes the new recording's identifier and creation
+     * timestamp.
      *
      * Upload a voice consent recording.
      *
      * @param name The label to use for this consent recording.
-     * @param recording The consent audio recording file. Maximum size is 10 MiB.
-     *   Supported MIME types: `audio/mpeg`, `audio/wav`, `audio/x-wav`, `audio/ogg`,
-     *   `audio/aac`, `audio/flac`, `audio/webm`, `audio/mp4`.
-     * @param language The BCP 47 language tag for the consent phrase (for example,
-     *   `en-US`).
+     * @param recording The consent audio recording file. Maximum size is 10 MiB. Supported MIME
+     *   types: `audio/mpeg`, `audio/wav`, `audio/x-wav`, `audio/ogg`, `audio/aac`, `audio/flac`,
+     *   `audio/webm`, `audio/mp4`.
+     * @param language The BCP 47 language tag for the consent phrase (for example, `en-US`).
      */
-    fun createVoiceConsent(clientConfig: ClientConfig, name: String, recording: SdkClient.UploadFile, language: String, options: RequestOptions? = null): VoiceConsentResource {
-        return SdkClient.request<VoiceConsentResource>(SdkClient.RequestSpec("POST", "/audio/voice_consents", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "recording" to (recording), "language" to (language)), contentType = "multipart/form-data", operationId = "createVoiceConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun createVoiceConsent(
+        clientConfig: ClientConfig,
+        name: String,
+        recording: SdkClient.UploadFile,
+        language: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentResource {
+        return SdkClient.request<VoiceConsentResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audio/voice_consents",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "recording" to (recording),
+                            "language" to (language),
+                        ),
+                    contentType = "multipart/form-data",
+                    operationId = "createVoiceConsent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after` cursor to continue from a previous page and `limit` to control the number of records returned. The response includes pagination cursors and indicates whether more records are available.
+     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after`
+     * cursor to continue from a previous page and `limit` to control the number of records
+     * returned. The response includes pagination cursors and indicates whether more records are
+     * available.
      *
      * Returns a list of voice consent recordings.
      *
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
      */
-    fun listVoiceConsents(clientConfig: ClientConfig, after: String? = null, limit: Long? = null, options: RequestOptions? = null): VoiceConsentListResource {
-        return SdkClient.request<VoiceConsentListResource>(SdkClient.RequestSpec("GET", "/audio/voice_consents", config = clientConfig, query = mapOf("after" to SdkClient.queryValue(after, "form", true), "limit" to SdkClient.queryValue(limit, "form", true)), operationId = "listVoiceConsents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun listVoiceConsents(
+        clientConfig: ClientConfig,
+        after: String? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+    ): VoiceConsentListResource {
+        return SdkClient.request<VoiceConsentListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/audio/voice_consents",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                        ),
+                    operationId = "listVoiceConsents",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after` cursor to continue from a previous page and `limit` to control the number of records returned. The response includes pagination cursors and indicates whether more records are available.
+     * Lists voice consent recordings used to authorize creation of custom voices. Use the `after`
+     * cursor to continue from a previous page and `limit` to control the number of records
+     * returned. The response includes pagination cursors and indicates whether more records are
+     * available.
      *
      * Returns a list of voice consent recordings.
      *
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
      */
-    fun listVoiceConsentsPaginated(clientConfig: ClientConfig, after: String? = null, limit: Long? = null, options: RequestOptions? = null, yieldFn: (VoiceConsentResource) -> Boolean) {
+    fun listVoiceConsentsPaginated(
+        clientConfig: ClientConfig,
+        after: String? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+        yieldFn: (VoiceConsentResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listVoiceConsents(clientConfig, cursor, limit, options)
@@ -543,7 +736,13 @@ object Audio {
         val hasMore: Boolean,
     )
 
-    fun listVoiceConsentsPages(clientConfig: ClientConfig, after: String? = null, limit: Long? = null, options: RequestOptions? = null, yieldPage: (ListVoiceConsentsPage) -> Boolean) {
+    fun listVoiceConsentsPages(
+        clientConfig: ClientConfig,
+        after: String? = null,
+        limit: Long? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListVoiceConsentsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listVoiceConsents(clientConfig, cursor, limit, options)
@@ -557,42 +756,70 @@ object Audio {
         }
     }
 
-
-
     /**
-     * Retrieves a voice consent recording by its identifier. Use `consent_id` to select the recording whose metadata you need.
+     * Retrieves a voice consent recording by its identifier. Use `consent_id` to select the
+     * recording whose metadata you need.
      *
      * Retrieves a voice consent recording.
      *
      * @param consentId The ID of the consent recording to retrieve.
      */
-    fun getVoiceConsent(clientConfig: ClientConfig, consentId: String, options: RequestOptions? = null): VoiceConsentResource {
-        return SdkClient.request<VoiceConsentResource>(SdkClient.RequestSpec("GET", "/audio/voice_consents/${SdkClient.encodePathSegment(consentId)}", config = clientConfig, operationId = "getVoiceConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun getVoiceConsent(
+        clientConfig: ClientConfig,
+        consentId: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentResource {
+        return SdkClient.request<VoiceConsentResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/audio/voice_consents/${SdkClient.encodePathSegment(consentId)}",
+                    config = clientConfig,
+                    operationId = "getVoiceConsent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the metadata for a voice consent recording. Supply the required `name` field to change its label; this operation does not update the recording itself.
+     * Updates the metadata for a voice consent recording. Supply the required `name` field to
+     * change its label; this operation does not update the recording itself.
      *
      * Updates a voice consent recording (metadata only).
      *
      * @param consentId The ID of the consent recording to update.
      * @param name The updated label for this consent recording.
      */
-    fun updateVoiceConsent(clientConfig: ClientConfig, consentId: String, name: String, options: RequestOptions? = null): VoiceConsentResource {
-        return SdkClient.request<VoiceConsentResource>(SdkClient.RequestSpec("POST", "/audio/voice_consents/${SdkClient.encodePathSegment(consentId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "updateVoiceConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun updateVoiceConsent(
+        clientConfig: ClientConfig,
+        consentId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentResource {
+        return SdkClient.request<VoiceConsentResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audio/voice_consents/${SdkClient.encodePathSegment(consentId)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("name" to (name)),
+                    operationId = "updateVoiceConsent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Deletes a voice consent recording. Use `consent_id` to identify the recording to remove.
@@ -601,29 +828,64 @@ object Audio {
      *
      * @param consentId The ID of the consent recording to delete.
      */
-    fun deleteVoiceConsent(clientConfig: ClientConfig, consentId: String, options: RequestOptions? = null): VoiceConsentDeletedResource {
-        return SdkClient.request<VoiceConsentDeletedResource>(SdkClient.RequestSpec("DELETE", "/audio/voice_consents/${SdkClient.encodePathSegment(consentId)}", config = clientConfig, operationId = "deleteVoiceConsent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun deleteVoiceConsent(
+        clientConfig: ClientConfig,
+        consentId: String,
+        options: RequestOptions? = null,
+    ): VoiceConsentDeletedResource {
+        return SdkClient.request<VoiceConsentDeletedResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/audio/voice_consents/${SdkClient.encodePathSegment(consentId)}",
+                    config = clientConfig,
+                    operationId = "deleteVoiceConsent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Creates a custom voice for audio output from an audio sample and a previously uploaded consent recording. Send `name`, `audio_sample`, and `consent` as multipart form data; `type` defaults to `audio_sample` when omitted. Custom voices are limited to eligible customers.
+     * Creates a custom voice for audio output from an audio sample and a previously uploaded
+     * consent recording. Send `name`, `audio_sample`, and `consent` as multipart form data; `type`
+     * defaults to `audio_sample` when omitted. Custom voices are limited to eligible customers.
      *
-     * Create a custom voice you can use for audio output (for example, in Text-to-Speech and the Realtime API). This requires an audio sample and a previously uploaded consent recording. Send `name`, `audio_sample`, and the `consent` recording ID as multipart form data. The optional `type` defaults to `audio_sample`. Returns the saved voice's metadata. See the custom voices guide for requirements and best practices. Custom voices are limited to eligible customers.
+     * Create a custom voice you can use for audio output (for example, in Text-to-Speech and the
+     * Realtime API). This requires an audio sample and a previously uploaded consent recording.
+     * Send `name`, `audio_sample`, and the `consent` recording ID as multipart form data. The
+     * optional `type` defaults to `audio_sample`. Returns the saved voice's metadata. See the
+     * custom voices guide for requirements and best practices. Custom voices are limited to
+     * eligible customers.
      */
-    fun createVoice(clientConfig: ClientConfig, body: CreateVoiceRequest, options: RequestOptions? = null): VoiceResource {
-        return SdkClient.request<VoiceResource>(SdkClient.RequestSpec("POST", "/audio/voices", config = clientConfig, body = body, contentType = "multipart/form-data", operationId = "createVoice", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+    fun createVoice(
+        clientConfig: ClientConfig,
+        body: CreateVoiceRequest,
+        options: RequestOptions? = null,
+    ): VoiceResource {
+        return SdkClient.request<VoiceResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audio/voices",
+                    config = clientConfig,
+                    body = body,
+                    contentType = "multipart/form-data",
+                    operationId = "createVoice",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

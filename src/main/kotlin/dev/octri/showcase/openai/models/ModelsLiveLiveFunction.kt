@@ -3,44 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveFunctionToolChoiceParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveFunctionToolChoiceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveFunctionToolChoiceParam(
-    /**
-     * The tool to call. Always `function`.
-     */
+    /** The tool to call. Always `function`. */
     val type: LiveFunctionToolChoiceParamTypeEnum,
-    /**
-     * The name of the function tool to call.
-     */
-    val name: String
+    /** The name of the function tool to call. */
+    val name: String,
 ) : LiveAllowedToolsChoiceParamToolsItem
 
-/**
- * A function tool available to the Responses backend when the Live model delegates a task.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A function tool available to the Responses backend when the Live model delegates a task. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveFunctionToolInputParam(
-    /**
-     * The tool type. Always `function`.
-     */
+    /** The tool type. Always `function`. */
     val type: LiveFunctionToolInputParamTypeEnum,
-    /**
-     * The name the delegated Responses model uses when calling this function.
-     */
+    /** The name the delegated Responses model uses when calling this function. */
     val name: String,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * A JSON Schema object describing the arguments accepted by the function.
-     */
+    /** A JSON Schema object describing the arguments accepted by the function. */
     val parameters: Map<String, Any>? = null,
-    /**
-     * Optional `boolean` value serialized in the `strict` wire field.
-     */
-    val strict: Boolean? = null
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+    /** Optional `boolean` value serialized in the `strict` wire field. */
+    val strict: Boolean? = null,
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem

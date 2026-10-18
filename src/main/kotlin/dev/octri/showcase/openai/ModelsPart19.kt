@@ -15,73 +15,90 @@ typealias RunStepStreamEvent = dev.octri.showcase.openai.models.RunStepStreamEve
 
 typealias RunStepStreamEventVariant0 = dev.octri.showcase.openai.models.RunStepStreamEventVariant0
 
-typealias RunStepStreamEventVariant0EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant0EventEnum
+typealias RunStepStreamEventVariant0EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant0EventEnum
 
 typealias RunStepStreamEventVariant1 = dev.octri.showcase.openai.models.RunStepStreamEventVariant1
 
-typealias RunStepStreamEventVariant1EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant1EventEnum
+typealias RunStepStreamEventVariant1EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant1EventEnum
 
 typealias RunStepStreamEventVariant2 = dev.octri.showcase.openai.models.RunStepStreamEventVariant2
 
-typealias RunStepStreamEventVariant2EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant2EventEnum
+typealias RunStepStreamEventVariant2EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant2EventEnum
 
 typealias RunStepStreamEventVariant3 = dev.octri.showcase.openai.models.RunStepStreamEventVariant3
 
-typealias RunStepStreamEventVariant3EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant3EventEnum
+typealias RunStepStreamEventVariant3EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant3EventEnum
 
 typealias RunStepStreamEventVariant4 = dev.octri.showcase.openai.models.RunStepStreamEventVariant4
 
-typealias RunStepStreamEventVariant4EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant4EventEnum
+typealias RunStepStreamEventVariant4EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant4EventEnum
 
 typealias RunStepStreamEventVariant5 = dev.octri.showcase.openai.models.RunStepStreamEventVariant5
 
-typealias RunStepStreamEventVariant5EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant5EventEnum
+typealias RunStepStreamEventVariant5EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant5EventEnum
 
 typealias RunStepStreamEventVariant6 = dev.octri.showcase.openai.models.RunStepStreamEventVariant6
 
-typealias RunStepStreamEventVariant6EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant6EventEnum
+typealias RunStepStreamEventVariant6EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant6EventEnum
 
 typealias RunStreamEvent = dev.octri.showcase.openai.models.RunStreamEvent
 
 typealias RunStreamEventVariant0 = dev.octri.showcase.openai.models.RunStreamEventVariant0
 
-typealias RunStreamEventVariant0EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant0EventEnum
+typealias RunStreamEventVariant0EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant0EventEnum
 
 typealias RunStreamEventVariant1 = dev.octri.showcase.openai.models.RunStreamEventVariant1
 
-typealias RunStreamEventVariant1EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant1EventEnum
+typealias RunStreamEventVariant1EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant1EventEnum
 
 typealias RunStreamEventVariant2 = dev.octri.showcase.openai.models.RunStreamEventVariant2
 
-typealias RunStreamEventVariant2EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant2EventEnum
+typealias RunStreamEventVariant2EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant2EventEnum
 
 typealias RunStreamEventVariant3 = dev.octri.showcase.openai.models.RunStreamEventVariant3
 
-typealias RunStreamEventVariant3EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant3EventEnum
+typealias RunStreamEventVariant3EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant3EventEnum
 
 typealias RunStreamEventVariant4 = dev.octri.showcase.openai.models.RunStreamEventVariant4
 
-typealias RunStreamEventVariant4EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant4EventEnum
+typealias RunStreamEventVariant4EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant4EventEnum
 
 typealias RunStreamEventVariant5 = dev.octri.showcase.openai.models.RunStreamEventVariant5
 
-typealias RunStreamEventVariant5EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant5EventEnum
+typealias RunStreamEventVariant5EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant5EventEnum
 
 typealias RunStreamEventVariant6 = dev.octri.showcase.openai.models.RunStreamEventVariant6
 
-typealias RunStreamEventVariant6EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant6EventEnum
+typealias RunStreamEventVariant6EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant6EventEnum
 
 typealias RunStreamEventVariant7 = dev.octri.showcase.openai.models.RunStreamEventVariant7
 
-typealias RunStreamEventVariant7EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant7EventEnum
+typealias RunStreamEventVariant7EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant7EventEnum
 
 typealias RunStreamEventVariant8 = dev.octri.showcase.openai.models.RunStreamEventVariant8
 
-typealias RunStreamEventVariant8EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant8EventEnum
+typealias RunStreamEventVariant8EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant8EventEnum
 
 typealias RunStreamEventVariant9 = dev.octri.showcase.openai.models.RunStreamEventVariant9
 
-typealias RunStreamEventVariant9EventEnum = dev.octri.showcase.openai.models.RunStreamEventVariant9EventEnum
+typealias RunStreamEventVariant9EventEnum =
+    dev.octri.showcase.openai.models.RunStreamEventVariant9EventEnum
 
 typealias RunToolCallObject = dev.octri.showcase.openai.models.RunToolCallObject
 
@@ -93,7 +110,8 @@ typealias SafetyAlertErrorType = dev.octri.showcase.openai.models.SafetyAlertErr
 
 typealias SafetyAlertResource = dev.octri.showcase.openai.models.SafetyAlertResource
 
-typealias SafetyAlertResourceObjectEnum = dev.octri.showcase.openai.models.SafetyAlertResourceObjectEnum
+typealias SafetyAlertResourceObjectEnum =
+    dev.octri.showcase.openai.models.SafetyAlertResourceObjectEnum
 
 typealias SafetyCaseNotice = dev.octri.showcase.openai.models.SafetyCaseNotice
 
@@ -101,7 +119,8 @@ typealias SafetyCaseNoticeType = dev.octri.showcase.openai.models.SafetyCaseNoti
 
 typealias SafetyCaseResource = dev.octri.showcase.openai.models.SafetyCaseResource
 
-typealias SafetyCaseResourceObjectEnum = dev.octri.showcase.openai.models.SafetyCaseResourceObjectEnum
+typealias SafetyCaseResourceObjectEnum =
+    dev.octri.showcase.openai.models.SafetyCaseResourceObjectEnum
 
 typealias ScoreLevelParam = dev.octri.showcase.openai.models.ScoreLevelParam
 
@@ -119,13 +138,16 @@ typealias SearchContentType = dev.octri.showcase.openai.models.SearchContentType
 
 typealias SearchContextSize = dev.octri.showcase.openai.models.SearchContextSize
 
-typealias SendSubagentInputCallItemResource = dev.octri.showcase.openai.models.SendSubagentInputCallItemResource
+typealias SendSubagentInputCallItemResource =
+    dev.octri.showcase.openai.models.SendSubagentInputCallItemResource
 
-typealias SendSubagentInputCallItemResourceTypeEnum = dev.octri.showcase.openai.models.SendSubagentInputCallItemResourceTypeEnum
+typealias SendSubagentInputCallItemResourceTypeEnum =
+    dev.octri.showcase.openai.models.SendSubagentInputCallItemResourceTypeEnum
 
 typealias ServiceAccountApiKeyBody = dev.octri.showcase.openai.models.ServiceAccountApiKeyBody
 
-typealias ServiceAccountApiKeyBodyObjectEnum = dev.octri.showcase.openai.models.ServiceAccountApiKeyBodyObjectEnum
+typealias ServiceAccountApiKeyBodyObjectEnum =
+    dev.octri.showcase.openai.models.ServiceAccountApiKeyBodyObjectEnum
 
 typealias ServiceTier = dev.octri.showcase.openai.models.ServiceTier
 
@@ -137,7 +159,8 @@ typealias ServiceTierResource = dev.octri.showcase.openai.models.ServiceTierReso
 
 typealias ServiceTierResponses = dev.octri.showcase.openai.models.ServiceTierResponses
 
-typealias ServiceTierResponsesVariant0Enum = dev.octri.showcase.openai.models.ServiceTierResponsesVariant0Enum
+typealias ServiceTierResponsesVariant0Enum =
+    dev.octri.showcase.openai.models.ServiceTierResponsesVariant0Enum
 
 typealias ServiceTierVariant0Enum = dev.octri.showcase.openai.models.ServiceTierVariant0Enum
 
@@ -149,151 +172,221 @@ typealias SessionAgentResource = dev.octri.showcase.openai.models.SessionAgentRe
 
 typealias SessionArtifactListResource = dev.octri.showcase.openai.models.SessionArtifactListResource
 
-typealias SessionArtifactListResourceObjectEnum = dev.octri.showcase.openai.models.SessionArtifactListResourceObjectEnum
+typealias SessionArtifactListResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionArtifactListResourceObjectEnum
 
 typealias SessionArtifactResource = dev.octri.showcase.openai.models.SessionArtifactResource
 
-typealias SessionArtifactResourceObjectEnum = dev.octri.showcase.openai.models.SessionArtifactResourceObjectEnum
+typealias SessionArtifactResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionArtifactResourceObjectEnum
 
-typealias SessionEnvironmentErrorResource = dev.octri.showcase.openai.models.SessionEnvironmentErrorResource
+typealias SessionEnvironmentErrorResource =
+    dev.octri.showcase.openai.models.SessionEnvironmentErrorResource
 
-typealias SessionEnvironmentStateResource = dev.octri.showcase.openai.models.SessionEnvironmentStateResource
+typealias SessionEnvironmentStateResource =
+    dev.octri.showcase.openai.models.SessionEnvironmentStateResource
 
-typealias SessionEnvironmentStatusResource = dev.octri.showcase.openai.models.SessionEnvironmentStatusResource
+typealias SessionEnvironmentStatusResource =
+    dev.octri.showcase.openai.models.SessionEnvironmentStatusResource
 
 typealias SessionErrorResource = dev.octri.showcase.openai.models.SessionErrorResource
 
 typealias SessionEvent = dev.octri.showcase.openai.models.SessionEvent
 
-typealias SessionEventAgentOutputCommandExecutionOutputDelta = dev.octri.showcase.openai.models.SessionEventAgentOutputCommandExecutionOutputDelta
+typealias SessionEventAgentOutputCommandExecutionOutputDelta =
+    dev.octri.showcase.openai.models.SessionEventAgentOutputCommandExecutionOutputDelta
 
-typealias SessionEventAgentOutputCommandExecutionOutputDeltaTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentOutputCommandExecutionOutputDeltaTypeEnum
+typealias SessionEventAgentOutputCommandExecutionOutputDeltaTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentOutputCommandExecutionOutputDeltaTypeEnum
 
-typealias SessionEventAgentSessionCreated = dev.octri.showcase.openai.models.SessionEventAgentSessionCreated
+typealias SessionEventAgentSessionCreated =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionCreated
 
-typealias SessionEventAgentSessionCreatedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionCreatedTypeEnum
+typealias SessionEventAgentSessionCreatedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionCreatedTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentConnected = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentConnected
+typealias SessionEventAgentSessionEnvironmentConnected =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentConnected
 
-typealias SessionEventAgentSessionEnvironmentConnectedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentConnectedTypeEnum
+typealias SessionEventAgentSessionEnvironmentConnectedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentConnectedTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentDisconnected = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentDisconnected
+typealias SessionEventAgentSessionEnvironmentDisconnected =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentDisconnected
 
-typealias SessionEventAgentSessionEnvironmentDisconnectedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentDisconnectedTypeEnum
+typealias SessionEventAgentSessionEnvironmentDisconnectedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentDisconnectedTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentExpired = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentExpired
+typealias SessionEventAgentSessionEnvironmentExpired =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentExpired
 
-typealias SessionEventAgentSessionEnvironmentExpiredTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentExpiredTypeEnum
+typealias SessionEventAgentSessionEnvironmentExpiredTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentExpiredTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentFailed = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentFailed
+typealias SessionEventAgentSessionEnvironmentFailed =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentFailed
 
-typealias SessionEventAgentSessionEnvironmentFailedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentFailedTypeEnum
+typealias SessionEventAgentSessionEnvironmentFailedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentFailedTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentPending = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentPending
+typealias SessionEventAgentSessionEnvironmentPending =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentPending
 
-typealias SessionEventAgentSessionEnvironmentPendingTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentPendingTypeEnum
+typealias SessionEventAgentSessionEnvironmentPendingTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentPendingTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentReady = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentReady
+typealias SessionEventAgentSessionEnvironmentReady =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentReady
 
-typealias SessionEventAgentSessionEnvironmentReadyTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentReadyTypeEnum
+typealias SessionEventAgentSessionEnvironmentReadyTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentReadyTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentReset = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentReset
+typealias SessionEventAgentSessionEnvironmentReset =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentReset
 
-typealias SessionEventAgentSessionEnvironmentResetTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentResetTypeEnum
+typealias SessionEventAgentSessionEnvironmentResetTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentResetTypeEnum
 
-typealias SessionEventAgentSessionEnvironmentSuspended = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentSuspended
+typealias SessionEventAgentSessionEnvironmentSuspended =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentSuspended
 
-typealias SessionEventAgentSessionEnvironmentSuspendedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentSuspendedTypeEnum
+typealias SessionEventAgentSessionEnvironmentSuspendedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionEnvironmentSuspendedTypeEnum
 
-typealias SessionEventAgentSessionFailed = dev.octri.showcase.openai.models.SessionEventAgentSessionFailed
+typealias SessionEventAgentSessionFailed =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionFailed
 
-typealias SessionEventAgentSessionFailedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionFailedTypeEnum
+typealias SessionEventAgentSessionFailedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionFailedTypeEnum
 
-typealias SessionEventAgentSessionIdle = dev.octri.showcase.openai.models.SessionEventAgentSessionIdle
+typealias SessionEventAgentSessionIdle =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionIdle
 
-typealias SessionEventAgentSessionIdleTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionIdleTypeEnum
+typealias SessionEventAgentSessionIdleTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionIdleTypeEnum
 
-typealias SessionEventAgentSessionInProgress = dev.octri.showcase.openai.models.SessionEventAgentSessionInProgress
+typealias SessionEventAgentSessionInProgress =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionInProgress
 
-typealias SessionEventAgentSessionInProgressTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionInProgressTypeEnum
+typealias SessionEventAgentSessionInProgressTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionInProgressTypeEnum
 
-typealias SessionEventAgentSessionRequiresAction = dev.octri.showcase.openai.models.SessionEventAgentSessionRequiresAction
+typealias SessionEventAgentSessionRequiresAction =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionRequiresAction
 
-typealias SessionEventAgentSessionRequiresActionTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionRequiresActionTypeEnum
+typealias SessionEventAgentSessionRequiresActionTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionRequiresActionTypeEnum
 
-typealias SessionEventAgentSessionSubagentActive = dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentActive
+typealias SessionEventAgentSessionSubagentActive =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentActive
 
-typealias SessionEventAgentSessionSubagentActiveTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentActiveTypeEnum
+typealias SessionEventAgentSessionSubagentActiveTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentActiveTypeEnum
 
-typealias SessionEventAgentSessionSubagentClosed = dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentClosed
+typealias SessionEventAgentSessionSubagentClosed =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentClosed
 
-typealias SessionEventAgentSessionSubagentClosedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentClosedTypeEnum
+typealias SessionEventAgentSessionSubagentClosedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentClosedTypeEnum
 
-typealias SessionEventAgentSessionSubagentCreated = dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentCreated
+typealias SessionEventAgentSessionSubagentCreated =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentCreated
 
-typealias SessionEventAgentSessionSubagentCreatedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentCreatedTypeEnum
+typealias SessionEventAgentSessionSubagentCreatedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionSubagentCreatedTypeEnum
 
-typealias SessionEventAgentSessionTurnCancelled = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCancelled
+typealias SessionEventAgentSessionTurnCancelled =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCancelled
 
-typealias SessionEventAgentSessionTurnCancelledTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCancelledTypeEnum
+typealias SessionEventAgentSessionTurnCancelledTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCancelledTypeEnum
 
-typealias SessionEventAgentSessionTurnCompleted = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCompleted
+typealias SessionEventAgentSessionTurnCompleted =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCompleted
 
-typealias SessionEventAgentSessionTurnCompletedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCompletedTypeEnum
+typealias SessionEventAgentSessionTurnCompletedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCompletedTypeEnum
 
-typealias SessionEventAgentSessionTurnContentPartAdded = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartAdded
+typealias SessionEventAgentSessionTurnContentPartAdded =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartAdded
 
-typealias SessionEventAgentSessionTurnContentPartAddedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartAddedTypeEnum
+typealias SessionEventAgentSessionTurnContentPartAddedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartAddedTypeEnum
 
-typealias SessionEventAgentSessionTurnContentPartDone = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartDone
+typealias SessionEventAgentSessionTurnContentPartDone =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartDone
 
-typealias SessionEventAgentSessionTurnContentPartDoneTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartDoneTypeEnum
+typealias SessionEventAgentSessionTurnContentPartDoneTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnContentPartDoneTypeEnum
 
-typealias SessionEventAgentSessionTurnCreated = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCreated
+typealias SessionEventAgentSessionTurnCreated =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCreated
 
-typealias SessionEventAgentSessionTurnCreatedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCreatedTypeEnum
+typealias SessionEventAgentSessionTurnCreatedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnCreatedTypeEnum
 
-typealias SessionEventAgentSessionTurnFailed = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnFailed
+typealias SessionEventAgentSessionTurnFailed =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnFailed
 
-typealias SessionEventAgentSessionTurnFailedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnFailedTypeEnum
+typealias SessionEventAgentSessionTurnFailedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnFailedTypeEnum
 
-typealias SessionEventAgentSessionTurnInProgress = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnInProgress
+typealias SessionEventAgentSessionTurnInProgress =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnInProgress
 
-typealias SessionEventAgentSessionTurnInProgressTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnInProgressTypeEnum
+typealias SessionEventAgentSessionTurnInProgressTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnInProgressTypeEnum
 
-typealias SessionEventAgentSessionTurnItemAdded = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemAdded
+typealias SessionEventAgentSessionTurnItemAdded =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemAdded
 
-typealias SessionEventAgentSessionTurnItemAddedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemAddedTypeEnum
+typealias SessionEventAgentSessionTurnItemAddedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemAddedTypeEnum
 
-typealias SessionEventAgentSessionTurnItemDone = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemDone
+typealias SessionEventAgentSessionTurnItemDone =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemDone
 
-typealias SessionEventAgentSessionTurnItemDoneTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemDoneTypeEnum
+typealias SessionEventAgentSessionTurnItemDoneTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnItemDoneTypeEnum
 
-typealias SessionEventAgentSessionTurnOutputTextDelta = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDelta
+typealias SessionEventAgentSessionTurnOutputTextDelta =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDelta
 
-typealias SessionEventAgentSessionTurnOutputTextDeltaTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDeltaTypeEnum
+typealias SessionEventAgentSessionTurnOutputTextDeltaTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDeltaTypeEnum
 
-typealias SessionEventAgentSessionTurnOutputTextDone = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDone
+typealias SessionEventAgentSessionTurnOutputTextDone =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDone
 
-typealias SessionEventAgentSessionTurnOutputTextDoneTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDoneTypeEnum
+typealias SessionEventAgentSessionTurnOutputTextDoneTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnOutputTextDoneTypeEnum
 
-typealias SessionEventAgentSessionTurnReasoningSummaryPartAdded = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartAdded
+typealias SessionEventAgentSessionTurnReasoningSummaryPartAdded =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartAdded
 
-typealias SessionEventAgentSessionTurnReasoningSummaryPartAddedTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartAddedTypeEnum
+typealias SessionEventAgentSessionTurnReasoningSummaryPartAddedTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartAddedTypeEnum
 
-typealias SessionEventAgentSessionTurnReasoningSummaryPartDone = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartDone
+typealias SessionEventAgentSessionTurnReasoningSummaryPartDone =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartDone
 
-typealias SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum
+typealias SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum
 
-typealias SessionEventAgentSessionTurnReasoningSummaryPartDoneTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartDoneTypeEnum
+typealias SessionEventAgentSessionTurnReasoningSummaryPartDoneTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryPartDoneTypeEnum
 
-typealias SessionEventAgentSessionTurnReasoningSummaryTextDelta = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDelta
+typealias SessionEventAgentSessionTurnReasoningSummaryTextDelta =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDelta
 
-typealias SessionEventAgentSessionTurnReasoningSummaryTextDeltaTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDeltaTypeEnum
+typealias SessionEventAgentSessionTurnReasoningSummaryTextDeltaTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDeltaTypeEnum
 
-typealias SessionEventAgentSessionTurnReasoningSummaryTextDone = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDone
+typealias SessionEventAgentSessionTurnReasoningSummaryTextDone =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDone
 
-typealias SessionEventAgentSessionTurnReasoningSummaryTextDoneTypeEnum = dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDoneTypeEnum
+typealias SessionEventAgentSessionTurnReasoningSummaryTextDoneTypeEnum =
+    dev.octri.showcase.openai.models.SessionEventAgentSessionTurnReasoningSummaryTextDoneTypeEnum
 
 typealias SessionEventError = dev.octri.showcase.openai.models.SessionEventError
 
@@ -301,45 +394,62 @@ typealias SessionEventErrorTypeEnum = dev.octri.showcase.openai.models.SessionEv
 
 typealias SessionInputParam = dev.octri.showcase.openai.models.SessionInputParam
 
-typealias SessionInputParamAgentSessionInputCancel = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputCancel
+typealias SessionInputParamAgentSessionInputCancel =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputCancel
 
-typealias SessionInputParamAgentSessionInputCancelTypeEnum = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputCancelTypeEnum
+typealias SessionInputParamAgentSessionInputCancelTypeEnum =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputCancelTypeEnum
 
-typealias SessionInputParamAgentSessionInputComputerUseApprovalRequestResult = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputComputerUseApprovalRequestResult
+typealias SessionInputParamAgentSessionInputComputerUseApprovalRequestResult =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputComputerUseApprovalRequestResult
 
-typealias SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938 = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938
+typealias SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938 =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938
 
-typealias SessionInputParamAgentSessionInputMessage = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputMessage
+typealias SessionInputParamAgentSessionInputMessage =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputMessage
 
-typealias SessionInputParamAgentSessionInputMessageTypeEnum = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputMessageTypeEnum
+typealias SessionInputParamAgentSessionInputMessageTypeEnum =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputMessageTypeEnum
 
-typealias SessionInputParamAgentSessionInputToolResult = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputToolResult
+typealias SessionInputParamAgentSessionInputToolResult =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputToolResult
 
-typealias SessionInputParamAgentSessionInputToolResultTypeEnum = dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputToolResultTypeEnum
+typealias SessionInputParamAgentSessionInputToolResultTypeEnum =
+    dev.octri.showcase.openai.models.SessionInputParamAgentSessionInputToolResultTypeEnum
 
 typealias SessionItemListResource = dev.octri.showcase.openai.models.SessionItemListResource
 
-typealias SessionItemListResourceObjectEnum = dev.octri.showcase.openai.models.SessionItemListResourceObjectEnum
+typealias SessionItemListResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionItemListResourceObjectEnum
 
 typealias SessionListResource = dev.octri.showcase.openai.models.SessionListResource
 
-typealias SessionListResourceObjectEnum = dev.octri.showcase.openai.models.SessionListResourceObjectEnum
+typealias SessionListResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionListResourceObjectEnum
 
 typealias SessionMessageRoleResource = dev.octri.showcase.openai.models.SessionMessageRoleResource
 
-typealias SessionRequiredActionResource = dev.octri.showcase.openai.models.SessionRequiredActionResource
+typealias SessionRequiredActionResource =
+    dev.octri.showcase.openai.models.SessionRequiredActionResource
 
-typealias SessionRequiredActionResourceComputerUseApprovalRequest = dev.octri.showcase.openai.models.SessionRequiredActionResourceComputerUseApprovalRequest
+typealias SessionRequiredActionResourceComputerUseApprovalRequest =
+    dev.octri.showcase.openai.models.SessionRequiredActionResourceComputerUseApprovalRequest
 
-typealias SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum = dev.octri.showcase.openai.models.SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum
+typealias SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum =
+    dev.octri.showcase.openai.models.SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum
 
-typealias SessionRequiredActionResourceEnvironmentConnection = dev.octri.showcase.openai.models.SessionRequiredActionResourceEnvironmentConnection
+typealias SessionRequiredActionResourceEnvironmentConnection =
+    dev.octri.showcase.openai.models.SessionRequiredActionResourceEnvironmentConnection
 
-typealias SessionRequiredActionResourceEnvironmentConnectionTypeEnum = dev.octri.showcase.openai.models.SessionRequiredActionResourceEnvironmentConnectionTypeEnum
+typealias SessionRequiredActionResourceEnvironmentConnectionTypeEnum =
+    dev.octri.showcase.openai.models.SessionRequiredActionResourceEnvironmentConnectionTypeEnum
 
-typealias SessionRequiredActionResourceFunctionCall = dev.octri.showcase.openai.models.SessionRequiredActionResourceFunctionCall
+typealias SessionRequiredActionResourceFunctionCall =
+    dev.octri.showcase.openai.models.SessionRequiredActionResourceFunctionCall
 
-typealias SessionRequiredActionResourceFunctionCallTypeEnum = dev.octri.showcase.openai.models.SessionRequiredActionResourceFunctionCallTypeEnum
+typealias SessionRequiredActionResourceFunctionCallTypeEnum =
+    dev.octri.showcase.openai.models.SessionRequiredActionResourceFunctionCallTypeEnum
 
 typealias SessionResource = dev.octri.showcase.openai.models.SessionResource
 
@@ -353,9 +463,11 @@ typealias SessionStatusResource = dev.octri.showcase.openai.models.SessionStatus
 
 typealias SessionTraceListResource = dev.octri.showcase.openai.models.SessionTraceListResource
 
-typealias SessionTraceListResourceObjectEnum = dev.octri.showcase.openai.models.SessionTraceListResourceObjectEnum
+typealias SessionTraceListResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionTraceListResourceObjectEnum
 
-typealias SessionTurnErrorCodeResource = dev.octri.showcase.openai.models.SessionTurnErrorCodeResource
+typealias SessionTurnErrorCodeResource =
+    dev.octri.showcase.openai.models.SessionTurnErrorCodeResource
 
 typealias SessionTurnErrorResource = dev.octri.showcase.openai.models.SessionTurnErrorResource
 
@@ -363,11 +475,13 @@ typealias SessionTurnItemResource = dev.octri.showcase.openai.models.SessionTurn
 
 typealias SessionTurnListResource = dev.octri.showcase.openai.models.SessionTurnListResource
 
-typealias SessionTurnListResourceObjectEnum = dev.octri.showcase.openai.models.SessionTurnListResourceObjectEnum
+typealias SessionTurnListResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionTurnListResourceObjectEnum
 
 typealias SessionTurnTraceResource = dev.octri.showcase.openai.models.SessionTurnTraceResource
 
-typealias SessionTurnTraceResourceObjectEnum = dev.octri.showcase.openai.models.SessionTurnTraceResourceObjectEnum
+typealias SessionTurnTraceResourceObjectEnum =
+    dev.octri.showcase.openai.models.SessionTurnTraceResourceObjectEnum
 
 typealias SetDefaultSkillVersionBody = dev.octri.showcase.openai.models.SetDefaultSkillVersionBody
 
@@ -389,37 +503,47 @@ typealias SkillResourceObjectEnum = dev.octri.showcase.openai.models.SkillResour
 
 typealias SkillVersionListResource = dev.octri.showcase.openai.models.SkillVersionListResource
 
-typealias SkillVersionListResourceObjectEnum = dev.octri.showcase.openai.models.SkillVersionListResourceObjectEnum
+typealias SkillVersionListResourceObjectEnum =
+    dev.octri.showcase.openai.models.SkillVersionListResourceObjectEnum
 
 typealias SkillVersionResource = dev.octri.showcase.openai.models.SkillVersionResource
 
-typealias SkillVersionResourceObjectEnum = dev.octri.showcase.openai.models.SkillVersionResourceObjectEnum
+typealias SkillVersionResourceObjectEnum =
+    dev.octri.showcase.openai.models.SkillVersionResourceObjectEnum
 
 typealias SpecificApplyPatchParam = dev.octri.showcase.openai.models.SpecificApplyPatchParam
 
-typealias SpecificApplyPatchParamTypeEnum = dev.octri.showcase.openai.models.SpecificApplyPatchParamTypeEnum
+typealias SpecificApplyPatchParamTypeEnum =
+    dev.octri.showcase.openai.models.SpecificApplyPatchParamTypeEnum
 
 typealias SpecificFunctionShellParam = dev.octri.showcase.openai.models.SpecificFunctionShellParam
 
-typealias SpecificFunctionShellParamTypeEnum = dev.octri.showcase.openai.models.SpecificFunctionShellParamTypeEnum
+typealias SpecificFunctionShellParamTypeEnum =
+    dev.octri.showcase.openai.models.SpecificFunctionShellParamTypeEnum
 
-typealias SpecificProgrammaticToolCallingParam = dev.octri.showcase.openai.models.SpecificProgrammaticToolCallingParam
+typealias SpecificProgrammaticToolCallingParam =
+    dev.octri.showcase.openai.models.SpecificProgrammaticToolCallingParam
 
-typealias SpecificProgrammaticToolCallingParamTypeEnum = dev.octri.showcase.openai.models.SpecificProgrammaticToolCallingParamTypeEnum
+typealias SpecificProgrammaticToolCallingParamTypeEnum =
+    dev.octri.showcase.openai.models.SpecificProgrammaticToolCallingParamTypeEnum
 
 typealias SpeechAudioDeltaEvent = dev.octri.showcase.openai.models.SpeechAudioDeltaEvent
 
-typealias SpeechAudioDeltaEventTypeEnum = dev.octri.showcase.openai.models.SpeechAudioDeltaEventTypeEnum
+typealias SpeechAudioDeltaEventTypeEnum =
+    dev.octri.showcase.openai.models.SpeechAudioDeltaEventTypeEnum
 
 typealias SpeechAudioDoneEvent = dev.octri.showcase.openai.models.SpeechAudioDoneEvent
 
-typealias SpeechAudioDoneEventTypeEnum = dev.octri.showcase.openai.models.SpeechAudioDoneEventTypeEnum
+typealias SpeechAudioDoneEventTypeEnum =
+    dev.octri.showcase.openai.models.SpeechAudioDoneEventTypeEnum
 
 typealias SpeechAudioDoneEventUsage = dev.octri.showcase.openai.models.SpeechAudioDoneEventUsage
 
-typealias SpendAlertNotificationChannel = dev.octri.showcase.openai.models.SpendAlertNotificationChannel
+typealias SpendAlertNotificationChannel =
+    dev.octri.showcase.openai.models.SpendAlertNotificationChannel
 
-typealias SpendAlertNotificationChannelTypeEnum = dev.octri.showcase.openai.models.SpendAlertNotificationChannelTypeEnum
+typealias SpendAlertNotificationChannelTypeEnum =
+    dev.octri.showcase.openai.models.SpendAlertNotificationChannelTypeEnum
 
 typealias SpendLimitCurrency = dev.octri.showcase.openai.models.SpendLimitCurrency
 
@@ -431,8 +555,11 @@ typealias SpendLimitInterval = dev.octri.showcase.openai.models.SpendLimitInterv
 
 typealias StaticChunkingStrategy = dev.octri.showcase.openai.models.StaticChunkingStrategy
 
-typealias StaticChunkingStrategyRequestParam = dev.octri.showcase.openai.models.StaticChunkingStrategyRequestParam
+typealias StaticChunkingStrategyRequestParam =
+    dev.octri.showcase.openai.models.StaticChunkingStrategyRequestParam
 
-typealias StaticChunkingStrategyRequestParamTypeEnum = dev.octri.showcase.openai.models.StaticChunkingStrategyRequestParamTypeEnum
+typealias StaticChunkingStrategyRequestParamTypeEnum =
+    dev.octri.showcase.openai.models.StaticChunkingStrategyRequestParamTypeEnum
 
-typealias StaticChunkingStrategyResponseParam = dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParam
+typealias StaticChunkingStrategyResponseParam =
+    dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParam

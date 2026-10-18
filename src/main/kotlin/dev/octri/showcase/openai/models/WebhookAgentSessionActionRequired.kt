@@ -3,25 +3,17 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Sent when an agent session requires an action. Retrieve the session for action details.
- */
+/** Sent when an agent session requires an action. Retrieve the session for action details. */
 data class WebhookAgentSessionActionRequired(
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * The object type. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookAgentSessionEnvelopeObjectEnum,
-    /**
-     * The Unix timestamp, in seconds, when the event was created.
-     */
+    /** The object type. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookAgentSessionEnvelopeObjectEnum,
+    /** The Unix timestamp, in seconds, when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The event type. Always `agent.session.action_required`.
-     */
+    /** The event type. Always `agent.session.action_required`. */
     val type: WebhookAgentSessionActionRequiredVariant1TypeEnum,
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentSessionActionRequiredPayloadResource
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: AgentSessionActionRequiredPayloadResource,
 )

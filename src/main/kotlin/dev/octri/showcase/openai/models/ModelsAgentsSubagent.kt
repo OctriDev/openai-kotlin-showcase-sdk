@@ -3,44 +3,35 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A subagent created within a session.
- */
+/** A subagent created within a session. */
 data class SubagentResource(
-    /**
-     * The ID of the subagent.
-     */
+    /** The ID of the subagent. */
     val id: String,
-    /**
-     * The object type. Always `agent.session.subagent`.
-     */
+    /** The object type. Always `agent.session.subagent`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SubagentObjectResource,
-    /**
-     * The ID of the session that owns the subagent.
-     */
+    /** The ID of the session that owns the subagent. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /**
-     * The runner-assigned nickname, or null when unavailable.
-     */
+    /** The runner-assigned nickname, or null when unavailable. */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
     /**
-     * Initial task content, or null when unavailable. Text may contain placeholders for images or audio when only a preview is available.
+     * Initial task content, or null when unavailable. Text may contain placeholders for images or
+     * audio when only a preview is available.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("instructions", required = true) val instructions: List<AgentContentResource>?,
-    /**
-     * The ID of the agent that created this subagent.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("instructions", required = true)
+    val instructions: List<AgentContentResource>?,
+    /** The ID of the agent that created this subagent. */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_agent_id") val parentAgentId: String,
-    /**
-     * The current status of the subagent.
-     */
+    /** The current status of the subagent. */
     val status: SubagentStatusResource,
     /**
-     * The Unix timestamp, in seconds, when the subagent was first opened. Resuming does not change it.
+     * The Unix timestamp, in seconds, when the subagent was first opened. Resuming does not change
+     * it.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("opened_at") val openedAt: Long,
     /**
-     * The Unix timestamp, in seconds, when the subagent was closed. Null while active, including after resume.
+     * The Unix timestamp, in seconds, when the subagent was closed. Null while active, including
+     * after resume.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("closed_at", required = true) val closedAt: Long?
+    @com.fasterxml.jackson.annotation.JsonProperty("closed_at", required = true)
+    val closedAt: Long?,
 )

@@ -3,24 +3,14 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveTransportCallError` API schema.
- */
+/** Typed representation of the `LiveTransportCallError` API schema. */
 data class LiveTransportCallError(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveTransportCallErrorTypeEnum,
-    /**
-     * The call setup failure code.
-     */
+    /** The call setup failure code. */
     val code: String,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
+    /** Required `string` value serialized in the `message` wire field. */
     val message: String,
-    /**
-     * The parameter related to the error, if any. Empty when no parameter applies.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null
+    /** The parameter related to the error, if any. Empty when no parameter applies. */
+    @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
 )

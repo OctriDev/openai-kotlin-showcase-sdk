@@ -3,29 +3,25 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A click action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A click action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ClickParam(
-    /**
-     * Specifies the event type. For a click action, this property is always `click`.
-     */
+    /** Specifies the event type. For a click action, this property is always `click`. */
     val type: ClickParamTypeEnum,
     /**
-     * Indicates which mouse button was pressed during the click. One of `left`, `right`, `wheel`, `back`, or `forward`.
+     * Indicates which mouse button was pressed during the click. One of `left`, `right`, `wheel`,
+     * `back`, or `forward`.
      */
     val button: ClickButtonType,
-    /**
-     * The x-coordinate where the click occurred.
-     */
+    /** The x-coordinate where the click occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the click occurred.
-     */
+    /** The y-coordinate where the click occurred. */
     val y: Long,
-    /**
-     * The keys being held while clicking.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while clicking. */
+    val keys: List<String>? = null,
 ) : ComputerAction

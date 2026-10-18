@@ -3,67 +3,86 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A content part in a session message.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMessageContentResource::class)
+/** A content part in a session message. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownMessageContentResource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageContentResourceInputText::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageContentResourceInputImage::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageContentResourceOutputText::class, name = "output_text")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageContentResourceInputText::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageContentResourceInputImage::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageContentResourceOutputText::class,
+        name = "output_text",
+    ),
 )
 sealed interface MessageContentResource
 
 /** A [MessageContentResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownMessageContentResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownMessageContentResource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : MessageContentResource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * An image supplied by the user.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An image supplied by the user. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageContentResourceInputImage(
-    /**
-     * The type of the object. Always `input_image`.
-     */
+    /** The type of the object. Always `input_image`. */
     val type: MessageContentResourceInputImageTypeEnum,
-    /**
-     * The URL of the image supplied by the user, which may be a base64-encoded data URL.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String
+    /** The URL of the image supplied by the user, which may be a base64-encoded data URL. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String,
 ) : MessageContentResource
 
-/**
- * Text supplied by the user.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Text supplied by the user. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageContentResourceInputText(
-    /**
-     * The type of the object. Always `input_text`.
-     */
+    /** The type of the object. Always `input_text`. */
     val type: MessageContentResourceInputTextTypeEnum,
-    /**
-     * The text supplied by the user.
-     */
-    val text: String
+    /** The text supplied by the user. */
+    val text: String,
 ) : MessageContentResource
 
-/**
- * Text produced by the assistant.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Text produced by the assistant. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageContentResourceOutputText(
-    /**
-     * The type of the object. Always `output_text`.
-     */
+    /** The type of the object. Always `output_text`. */
     val type: MessageContentResourceOutputTextTypeEnum,
-    /**
-     * The text produced by the assistant.
-     */
-    val text: String
+    /** The text produced by the assistant. */
+    val text: String,
 ) : MessageContentResource

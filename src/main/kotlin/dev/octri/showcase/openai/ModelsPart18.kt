@@ -3,139 +3,204 @@
 
 package dev.octri.showcase.openai
 
-typealias ResponseShellCallCommandDoneStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum
+typealias ResponseShellCallCommandDoneStreamingEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum
 
-typealias ResponseShellCallOutputContentDeltaStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEvent
+typealias ResponseShellCallOutputContentDeltaStreamingEvent =
+    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEvent
 
-typealias ResponseShellCallOutputContentDeltaStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEventTypeEnum
+typealias ResponseShellCallOutputContentDeltaStreamingEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEventTypeEnum
 
-typealias ResponseShellCallOutputContentDoneStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEvent
+typealias ResponseShellCallOutputContentDoneStreamingEvent =
+    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEvent
 
-typealias ResponseShellCallOutputContentDoneStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEventTypeEnum
+typealias ResponseShellCallOutputContentDoneStreamingEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEventTypeEnum
 
 typealias ResponsesServerEvent = dev.octri.showcase.openai.models.ResponsesServerEvent
 
-typealias ResponsesServerEventVariant0 = dev.octri.showcase.openai.models.ResponsesServerEventVariant0
+typealias ResponsesServerEventVariant0 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant0
 
-typealias ResponsesServerEventVariant1 = dev.octri.showcase.openai.models.ResponsesServerEventVariant1
+typealias ResponsesServerEventVariant1 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant1
 
-typealias ResponsesServerEventVariant10 = dev.octri.showcase.openai.models.ResponsesServerEventVariant10
+typealias ResponsesServerEventVariant10 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant10
 
-typealias ResponsesServerEventVariant11 = dev.octri.showcase.openai.models.ResponsesServerEventVariant11
+typealias ResponsesServerEventVariant11 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant11
 
-typealias ResponsesServerEventVariant12 = dev.octri.showcase.openai.models.ResponsesServerEventVariant12
+typealias ResponsesServerEventVariant12 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant12
 
-typealias ResponsesServerEventVariant13 = dev.octri.showcase.openai.models.ResponsesServerEventVariant13
+typealias ResponsesServerEventVariant13 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant13
 
-typealias ResponsesServerEventVariant14 = dev.octri.showcase.openai.models.ResponsesServerEventVariant14
+typealias ResponsesServerEventVariant14 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant14
 
-typealias ResponsesServerEventVariant15 = dev.octri.showcase.openai.models.ResponsesServerEventVariant15
+typealias ResponsesServerEventVariant15 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant15
 
-typealias ResponsesServerEventVariant16 = dev.octri.showcase.openai.models.ResponsesServerEventVariant16
+typealias ResponsesServerEventVariant16 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant16
 
-typealias ResponsesServerEventVariant17 = dev.octri.showcase.openai.models.ResponsesServerEventVariant17
+typealias ResponsesServerEventVariant17 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant17
 
-typealias ResponsesServerEventVariant18 = dev.octri.showcase.openai.models.ResponsesServerEventVariant18
+typealias ResponsesServerEventVariant18 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant18
 
-typealias ResponsesServerEventVariant19 = dev.octri.showcase.openai.models.ResponsesServerEventVariant19
+typealias ResponsesServerEventVariant19 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant19
 
-typealias ResponsesServerEventVariant2 = dev.octri.showcase.openai.models.ResponsesServerEventVariant2
+typealias ResponsesServerEventVariant2 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant2
 
-typealias ResponsesServerEventVariant20 = dev.octri.showcase.openai.models.ResponsesServerEventVariant20
+typealias ResponsesServerEventVariant20 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant20
 
-typealias ResponsesServerEventVariant21 = dev.octri.showcase.openai.models.ResponsesServerEventVariant21
+typealias ResponsesServerEventVariant21 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant21
 
-typealias ResponsesServerEventVariant22 = dev.octri.showcase.openai.models.ResponsesServerEventVariant22
+typealias ResponsesServerEventVariant22 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant22
 
-typealias ResponsesServerEventVariant23 = dev.octri.showcase.openai.models.ResponsesServerEventVariant23
+typealias ResponsesServerEventVariant23 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant23
 
-typealias ResponsesServerEventVariant24 = dev.octri.showcase.openai.models.ResponsesServerEventVariant24
+typealias ResponsesServerEventVariant24 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant24
 
-typealias ResponsesServerEventVariant25 = dev.octri.showcase.openai.models.ResponsesServerEventVariant25
+typealias ResponsesServerEventVariant25 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant25
 
-typealias ResponsesServerEventVariant26 = dev.octri.showcase.openai.models.ResponsesServerEventVariant26
+typealias ResponsesServerEventVariant26 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant26
 
-typealias ResponsesServerEventVariant27 = dev.octri.showcase.openai.models.ResponsesServerEventVariant27
+typealias ResponsesServerEventVariant27 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant27
 
-typealias ResponsesServerEventVariant28 = dev.octri.showcase.openai.models.ResponsesServerEventVariant28
+typealias ResponsesServerEventVariant28 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant28
 
-typealias ResponsesServerEventVariant29 = dev.octri.showcase.openai.models.ResponsesServerEventVariant29
+typealias ResponsesServerEventVariant29 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant29
 
-typealias ResponsesServerEventVariant3 = dev.octri.showcase.openai.models.ResponsesServerEventVariant3
+typealias ResponsesServerEventVariant3 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant3
 
-typealias ResponsesServerEventVariant30 = dev.octri.showcase.openai.models.ResponsesServerEventVariant30
+typealias ResponsesServerEventVariant30 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant30
 
-typealias ResponsesServerEventVariant31 = dev.octri.showcase.openai.models.ResponsesServerEventVariant31
+typealias ResponsesServerEventVariant31 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant31
 
-typealias ResponsesServerEventVariant32 = dev.octri.showcase.openai.models.ResponsesServerEventVariant32
+typealias ResponsesServerEventVariant32 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant32
 
-typealias ResponsesServerEventVariant33 = dev.octri.showcase.openai.models.ResponsesServerEventVariant33
+typealias ResponsesServerEventVariant33 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant33
 
-typealias ResponsesServerEventVariant34 = dev.octri.showcase.openai.models.ResponsesServerEventVariant34
+typealias ResponsesServerEventVariant34 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant34
 
-typealias ResponsesServerEventVariant35 = dev.octri.showcase.openai.models.ResponsesServerEventVariant35
+typealias ResponsesServerEventVariant35 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant35
 
-typealias ResponsesServerEventVariant36 = dev.octri.showcase.openai.models.ResponsesServerEventVariant36
+typealias ResponsesServerEventVariant36 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant36
 
-typealias ResponsesServerEventVariant37 = dev.octri.showcase.openai.models.ResponsesServerEventVariant37
+typealias ResponsesServerEventVariant37 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant37
 
-typealias ResponsesServerEventVariant38 = dev.octri.showcase.openai.models.ResponsesServerEventVariant38
+typealias ResponsesServerEventVariant38 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant38
 
-typealias ResponsesServerEventVariant39 = dev.octri.showcase.openai.models.ResponsesServerEventVariant39
+typealias ResponsesServerEventVariant39 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant39
 
-typealias ResponsesServerEventVariant4 = dev.octri.showcase.openai.models.ResponsesServerEventVariant4
+typealias ResponsesServerEventVariant4 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant4
 
-typealias ResponsesServerEventVariant40 = dev.octri.showcase.openai.models.ResponsesServerEventVariant40
+typealias ResponsesServerEventVariant40 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant40
 
-typealias ResponsesServerEventVariant41 = dev.octri.showcase.openai.models.ResponsesServerEventVariant41
+typealias ResponsesServerEventVariant41 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant41
 
-typealias ResponsesServerEventVariant42 = dev.octri.showcase.openai.models.ResponsesServerEventVariant42
+typealias ResponsesServerEventVariant42 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant42
 
-typealias ResponsesServerEventVariant43 = dev.octri.showcase.openai.models.ResponsesServerEventVariant43
+typealias ResponsesServerEventVariant43 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant43
 
-typealias ResponsesServerEventVariant44 = dev.octri.showcase.openai.models.ResponsesServerEventVariant44
+typealias ResponsesServerEventVariant44 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant44
 
-typealias ResponsesServerEventVariant45 = dev.octri.showcase.openai.models.ResponsesServerEventVariant45
+typealias ResponsesServerEventVariant45 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant45
 
-typealias ResponsesServerEventVariant46 = dev.octri.showcase.openai.models.ResponsesServerEventVariant46
+typealias ResponsesServerEventVariant46 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant46
 
-typealias ResponsesServerEventVariant47 = dev.octri.showcase.openai.models.ResponsesServerEventVariant47
+typealias ResponsesServerEventVariant47 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant47
 
-typealias ResponsesServerEventVariant48 = dev.octri.showcase.openai.models.ResponsesServerEventVariant48
+typealias ResponsesServerEventVariant48 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant48
 
-typealias ResponsesServerEventVariant49 = dev.octri.showcase.openai.models.ResponsesServerEventVariant49
+typealias ResponsesServerEventVariant49 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant49
 
-typealias ResponsesServerEventVariant5 = dev.octri.showcase.openai.models.ResponsesServerEventVariant5
+typealias ResponsesServerEventVariant5 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant5
 
-typealias ResponsesServerEventVariant50 = dev.octri.showcase.openai.models.ResponsesServerEventVariant50
+typealias ResponsesServerEventVariant50 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant50
 
-typealias ResponsesServerEventVariant51 = dev.octri.showcase.openai.models.ResponsesServerEventVariant51
+typealias ResponsesServerEventVariant51 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant51
 
-typealias ResponsesServerEventVariant52 = dev.octri.showcase.openai.models.ResponsesServerEventVariant52
+typealias ResponsesServerEventVariant52 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant52
 
-typealias ResponsesServerEventVariant53 = dev.octri.showcase.openai.models.ResponsesServerEventVariant53
+typealias ResponsesServerEventVariant53 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant53
 
-typealias ResponsesServerEventVariant54 = dev.octri.showcase.openai.models.ResponsesServerEventVariant54
+typealias ResponsesServerEventVariant54 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant54
 
-typealias ResponsesServerEventVariant55 = dev.octri.showcase.openai.models.ResponsesServerEventVariant55
+typealias ResponsesServerEventVariant55 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant55
 
-typealias ResponsesServerEventVariant56 = dev.octri.showcase.openai.models.ResponsesServerEventVariant56
+typealias ResponsesServerEventVariant56 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant56
 
-typealias ResponsesServerEventVariant57 = dev.octri.showcase.openai.models.ResponsesServerEventVariant57
+typealias ResponsesServerEventVariant57 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant57
 
-typealias ResponsesServerEventVariant6 = dev.octri.showcase.openai.models.ResponsesServerEventVariant6
+typealias ResponsesServerEventVariant6 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant6
 
-typealias ResponsesServerEventVariant7 = dev.octri.showcase.openai.models.ResponsesServerEventVariant7
+typealias ResponsesServerEventVariant7 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant7
 
-typealias ResponsesServerEventVariant8 = dev.octri.showcase.openai.models.ResponsesServerEventVariant8
+typealias ResponsesServerEventVariant8 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant8
 
-typealias ResponsesServerEventVariant9 = dev.octri.showcase.openai.models.ResponsesServerEventVariant9
+typealias ResponsesServerEventVariant9 =
+    dev.octri.showcase.openai.models.ResponsesServerEventVariant9
 
 typealias ResponseSteerAcceptedEvent = dev.octri.showcase.openai.models.ResponseSteerAcceptedEvent
 
-typealias ResponseSteerAcceptedEventSteer = dev.octri.showcase.openai.models.ResponseSteerAcceptedEventSteer
+typealias ResponseSteerAcceptedEventSteer =
+    dev.octri.showcase.openai.models.ResponseSteerAcceptedEventSteer
 
-typealias ResponseSteerAcceptedEventTypeEnum = dev.octri.showcase.openai.models.ResponseSteerAcceptedEventTypeEnum
+typealias ResponseSteerAcceptedEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerAcceptedEventTypeEnum
 
 typealias ResponseSteerErrorCode = dev.octri.showcase.openai.models.ResponseSteerErrorCode
 
@@ -145,13 +210,17 @@ typealias ResponseSteerEventTypeEnum = dev.octri.showcase.openai.models.Response
 
 typealias ResponseSteerFailedEvent = dev.octri.showcase.openai.models.ResponseSteerFailedEvent
 
-typealias ResponseSteerFailedEventError = dev.octri.showcase.openai.models.ResponseSteerFailedEventError
+typealias ResponseSteerFailedEventError =
+    dev.octri.showcase.openai.models.ResponseSteerFailedEventError
 
-typealias ResponseSteerFailedEventErrorTypeEnum = dev.octri.showcase.openai.models.ResponseSteerFailedEventErrorTypeEnum
+typealias ResponseSteerFailedEventErrorTypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerFailedEventErrorTypeEnum
 
-typealias ResponseSteerFailedEventSteer = dev.octri.showcase.openai.models.ResponseSteerFailedEventSteer
+typealias ResponseSteerFailedEventSteer =
+    dev.octri.showcase.openai.models.ResponseSteerFailedEventSteer
 
-typealias ResponseSteerFailedEventTypeEnum = dev.octri.showcase.openai.models.ResponseSteerFailedEventTypeEnum
+typealias ResponseSteerFailedEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerFailedEventTypeEnum
 
 typealias ResponseSteerInput = dev.octri.showcase.openai.models.ResponseSteerInput
 
@@ -161,105 +230,140 @@ typealias ResponseSteerInputItemList = dev.octri.showcase.openai.models.Response
 
 typealias ResponseSteerPendingEvent = dev.octri.showcase.openai.models.ResponseSteerPendingEvent
 
-typealias ResponseSteerPendingEventSteer = dev.octri.showcase.openai.models.ResponseSteerPendingEventSteer
+typealias ResponseSteerPendingEventSteer =
+    dev.octri.showcase.openai.models.ResponseSteerPendingEventSteer
 
-typealias ResponseSteerPendingEventTypeEnum = dev.octri.showcase.openai.models.ResponseSteerPendingEventTypeEnum
+typealias ResponseSteerPendingEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerPendingEventTypeEnum
 
 typealias ResponseSteerPendingReason = dev.octri.showcase.openai.models.ResponseSteerPendingReason
 
 typealias ResponseSteerRequiredInput = dev.octri.showcase.openai.models.ResponseSteerRequiredInput
 
-typealias ResponseSteerRequiredInputVariant0 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant0
+typealias ResponseSteerRequiredInputVariant0 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant0
 
-typealias ResponseSteerRequiredInputVariant0TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant0TypeEnum
+typealias ResponseSteerRequiredInputVariant0TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant0TypeEnum
 
-typealias ResponseSteerRequiredInputVariant1 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant1
+typealias ResponseSteerRequiredInputVariant1 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant1
 
-typealias ResponseSteerRequiredInputVariant1TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant1TypeEnum
+typealias ResponseSteerRequiredInputVariant1TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant1TypeEnum
 
-typealias ResponseSteerRequiredInputVariant2 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant2
+typealias ResponseSteerRequiredInputVariant2 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant2
 
-typealias ResponseSteerRequiredInputVariant2TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant2TypeEnum
+typealias ResponseSteerRequiredInputVariant2TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant2TypeEnum
 
-typealias ResponseSteerRequiredInputVariant3 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant3
+typealias ResponseSteerRequiredInputVariant3 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant3
 
-typealias ResponseSteerRequiredInputVariant3TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant3TypeEnum
+typealias ResponseSteerRequiredInputVariant3TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant3TypeEnum
 
-typealias ResponseSteerRequiredInputVariant4 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant4
+typealias ResponseSteerRequiredInputVariant4 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant4
 
-typealias ResponseSteerRequiredInputVariant4TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant4TypeEnum
+typealias ResponseSteerRequiredInputVariant4TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant4TypeEnum
 
-typealias ResponseSteerRequiredInputVariant5 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant5
+typealias ResponseSteerRequiredInputVariant5 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant5
 
-typealias ResponseSteerRequiredInputVariant5ExecutionEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant5ExecutionEnum
+typealias ResponseSteerRequiredInputVariant5ExecutionEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant5ExecutionEnum
 
-typealias ResponseSteerRequiredInputVariant5TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant5TypeEnum
+typealias ResponseSteerRequiredInputVariant5TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant5TypeEnum
 
-typealias ResponseSteerRequiredInputVariant6 = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant6
+typealias ResponseSteerRequiredInputVariant6 =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant6
 
-typealias ResponseSteerRequiredInputVariant6TypeEnum = dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant6TypeEnum
+typealias ResponseSteerRequiredInputVariant6TypeEnum =
+    dev.octri.showcase.openai.models.ResponseSteerRequiredInputVariant6TypeEnum
 
 typealias ResponseStreamEvent = dev.octri.showcase.openai.models.ResponseStreamEvent
 
 typealias ResponseStreamOptions = dev.octri.showcase.openai.models.ResponseStreamOptions
 
-typealias ResponsesWebSocketStreamEvent = dev.octri.showcase.openai.models.ResponsesWebSocketStreamEvent
+typealias ResponsesWebSocketStreamEvent =
+    dev.octri.showcase.openai.models.ResponsesWebSocketStreamEvent
 
 typealias ResponseTextDeltaEvent = dev.octri.showcase.openai.models.ResponseTextDeltaEvent
 
-typealias ResponseTextDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseTextDeltaEventTypeEnum
+typealias ResponseTextDeltaEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseTextDeltaEventTypeEnum
 
 typealias ResponseTextDoneEvent = dev.octri.showcase.openai.models.ResponseTextDoneEvent
 
-typealias ResponseTextDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseTextDoneEventTypeEnum
+typealias ResponseTextDoneEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseTextDoneEventTypeEnum
 
 typealias ResponseTextParam = dev.octri.showcase.openai.models.ResponseTextParam
 
 typealias ResponseUsage = dev.octri.showcase.openai.models.ResponseUsage
 
-typealias ResponseUsageInputTokensDetails = dev.octri.showcase.openai.models.ResponseUsageInputTokensDetails
+typealias ResponseUsageInputTokensDetails =
+    dev.octri.showcase.openai.models.ResponseUsageInputTokensDetails
 
-typealias ResponseUsageOutputTokensDetails = dev.octri.showcase.openai.models.ResponseUsageOutputTokensDetails
+typealias ResponseUsageOutputTokensDetails =
+    dev.octri.showcase.openai.models.ResponseUsageOutputTokensDetails
 
 typealias ResponseUsageResource = dev.octri.showcase.openai.models.ResponseUsageResource
 
-typealias ResponseVariant2IncompleteDetails = dev.octri.showcase.openai.models.ResponseVariant2IncompleteDetails
+typealias ResponseVariant2IncompleteDetails =
+    dev.octri.showcase.openai.models.ResponseVariant2IncompleteDetails
 
-typealias ResponseVariant2IncompleteDetailsReasonEnum = dev.octri.showcase.openai.models.ResponseVariant2IncompleteDetailsReasonEnum
+typealias ResponseVariant2IncompleteDetailsReasonEnum =
+    dev.octri.showcase.openai.models.ResponseVariant2IncompleteDetailsReasonEnum
 
 typealias ResponseVariant2ObjectEnum = dev.octri.showcase.openai.models.ResponseVariant2ObjectEnum
 
 typealias ResponseVariant2StatusEnum = dev.octri.showcase.openai.models.ResponseVariant2StatusEnum
 
-typealias ResponseVariant2TruncationVariant0Enum = dev.octri.showcase.openai.models.ResponseVariant2TruncationVariant0Enum
+typealias ResponseVariant2TruncationVariant0Enum =
+    dev.octri.showcase.openai.models.ResponseVariant2TruncationVariant0Enum
 
-typealias ResponseWebSearchCallCompletedEvent = dev.octri.showcase.openai.models.ResponseWebSearchCallCompletedEvent
+typealias ResponseWebSearchCallCompletedEvent =
+    dev.octri.showcase.openai.models.ResponseWebSearchCallCompletedEvent
 
-typealias ResponseWebSearchCallCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseWebSearchCallCompletedEventTypeEnum
+typealias ResponseWebSearchCallCompletedEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseWebSearchCallCompletedEventTypeEnum
 
-typealias ResponseWebSearchCallInProgressEvent = dev.octri.showcase.openai.models.ResponseWebSearchCallInProgressEvent
+typealias ResponseWebSearchCallInProgressEvent =
+    dev.octri.showcase.openai.models.ResponseWebSearchCallInProgressEvent
 
-typealias ResponseWebSearchCallInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseWebSearchCallInProgressEventTypeEnum
+typealias ResponseWebSearchCallInProgressEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseWebSearchCallInProgressEventTypeEnum
 
-typealias ResponseWebSearchCallSearchingEvent = dev.octri.showcase.openai.models.ResponseWebSearchCallSearchingEvent
+typealias ResponseWebSearchCallSearchingEvent =
+    dev.octri.showcase.openai.models.ResponseWebSearchCallSearchingEvent
 
-typealias ResponseWebSearchCallSearchingEventTypeEnum = dev.octri.showcase.openai.models.ResponseWebSearchCallSearchingEventTypeEnum
+typealias ResponseWebSearchCallSearchingEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseWebSearchCallSearchingEventTypeEnum
 
 typealias ResponseWsError = dev.octri.showcase.openai.models.ResponseWsError
 
 typealias ResponseWsErrorTypeEnum = dev.octri.showcase.openai.models.ResponseWsErrorTypeEnum
 
-typealias ResumeSubagentCallItemResource = dev.octri.showcase.openai.models.ResumeSubagentCallItemResource
+typealias ResumeSubagentCallItemResource =
+    dev.octri.showcase.openai.models.ResumeSubagentCallItemResource
 
-typealias ResumeSubagentCallItemResourceTypeEnum = dev.octri.showcase.openai.models.ResumeSubagentCallItemResourceTypeEnum
+typealias ResumeSubagentCallItemResourceTypeEnum =
+    dev.octri.showcase.openai.models.ResumeSubagentCallItemResourceTypeEnum
 
-typealias RetrieveProjectGroupParameterEnum = dev.octri.showcase.openai.models.RetrieveProjectGroupParameterEnum
+typealias RetrieveProjectGroupParameterEnum =
+    dev.octri.showcase.openai.models.RetrieveProjectGroupParameterEnum
 
 typealias Role = dev.octri.showcase.openai.models.Role
 
 typealias RoleDeletedResource = dev.octri.showcase.openai.models.RoleDeletedResource
 
-typealias RoleDeletedResourceObjectEnum = dev.octri.showcase.openai.models.RoleDeletedResourceObjectEnum
+typealias RoleDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.RoleDeletedResourceObjectEnum
 
 typealias RoleListResource = dev.octri.showcase.openai.models.RoleListResource
 
@@ -269,29 +373,41 @@ typealias RoleObjectEnum = dev.octri.showcase.openai.models.RoleObjectEnum
 
 typealias RotateMcpOauthRefreshParam = dev.octri.showcase.openai.models.RotateMcpOauthRefreshParam
 
-typealias RotateMcpOauthTokenEndpointAuthParam = dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParam
+typealias RotateMcpOauthTokenEndpointAuthParam =
+    dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParam
 
-typealias RotateMcpOauthTokenEndpointAuthParamClientSecretBasic = dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretBasic
+typealias RotateMcpOauthTokenEndpointAuthParamClientSecretBasic =
+    dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretBasic
 
-typealias RotateMcpOauthTokenEndpointAuthParamClientSecretBasicTypeEnum = dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretBasicTypeEnum
+typealias RotateMcpOauthTokenEndpointAuthParamClientSecretBasicTypeEnum =
+    dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretBasicTypeEnum
 
-typealias RotateMcpOauthTokenEndpointAuthParamClientSecretPost = dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretPost
+typealias RotateMcpOauthTokenEndpointAuthParamClientSecretPost =
+    dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretPost
 
-typealias RotateMcpOauthTokenEndpointAuthParamClientSecretPostTypeEnum = dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretPostTypeEnum
+typealias RotateMcpOauthTokenEndpointAuthParamClientSecretPostTypeEnum =
+    dev.octri.showcase.openai.models.RotateMcpOauthTokenEndpointAuthParamClientSecretPostTypeEnum
 
-typealias RotateVaultCredentialAuthParam = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParam
+typealias RotateVaultCredentialAuthParam =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParam
 
-typealias RotateVaultCredentialAuthParamEnvironmentVariable = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamEnvironmentVariable
+typealias RotateVaultCredentialAuthParamEnvironmentVariable =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamEnvironmentVariable
 
-typealias RotateVaultCredentialAuthParamEnvironmentVariableTypeEnum = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamEnvironmentVariableTypeEnum
+typealias RotateVaultCredentialAuthParamEnvironmentVariableTypeEnum =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamEnvironmentVariableTypeEnum
 
-typealias RotateVaultCredentialAuthParamMcpOauth = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamMcpOauth
+typealias RotateVaultCredentialAuthParamMcpOauth =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamMcpOauth
 
-typealias RotateVaultCredentialAuthParamMcpOauthTypeEnum = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamMcpOauthTypeEnum
+typealias RotateVaultCredentialAuthParamMcpOauthTypeEnum =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamMcpOauthTypeEnum
 
-typealias RotateVaultCredentialAuthParamStaticBearer = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamStaticBearer
+typealias RotateVaultCredentialAuthParamStaticBearer =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamStaticBearer
 
-typealias RotateVaultCredentialAuthParamStaticBearerTypeEnum = dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamStaticBearerTypeEnum
+typealias RotateVaultCredentialAuthParamStaticBearerTypeEnum =
+    dev.octri.showcase.openai.models.RotateVaultCredentialAuthParamStaticBearerTypeEnum
 
 typealias RotateVaultCredentialParams = dev.octri.showcase.openai.models.RotateVaultCredentialParams
 
@@ -305,15 +421,18 @@ typealias RunGraderResponse = dev.octri.showcase.openai.models.RunGraderResponse
 
 typealias RunGraderResponseMetadata = dev.octri.showcase.openai.models.RunGraderResponseMetadata
 
-typealias RunGraderResponseMetadataErrors = dev.octri.showcase.openai.models.RunGraderResponseMetadataErrors
+typealias RunGraderResponseMetadataErrors =
+    dev.octri.showcase.openai.models.RunGraderResponseMetadataErrors
 
-typealias RunGraderResponseMetadataTokenUsage = dev.octri.showcase.openai.models.RunGraderResponseMetadataTokenUsage
+typealias RunGraderResponseMetadataTokenUsage =
+    dev.octri.showcase.openai.models.RunGraderResponseMetadataTokenUsage
 
 typealias RunObject = dev.octri.showcase.openai.models.RunObject
 
 typealias RunObjectIncompleteDetails = dev.octri.showcase.openai.models.RunObjectIncompleteDetails
 
-typealias RunObjectIncompleteDetailsReasonEnum = dev.octri.showcase.openai.models.RunObjectIncompleteDetailsReasonEnum
+typealias RunObjectIncompleteDetailsReasonEnum =
+    dev.octri.showcase.openai.models.RunObjectIncompleteDetailsReasonEnum
 
 typealias RunObjectLastError = dev.octri.showcase.openai.models.RunObjectLastError
 
@@ -323,9 +442,11 @@ typealias RunObjectObjectEnum = dev.octri.showcase.openai.models.RunObjectObject
 
 typealias RunObjectRequiredAction = dev.octri.showcase.openai.models.RunObjectRequiredAction
 
-typealias RunObjectRequiredActionSubmitToolOutputs = dev.octri.showcase.openai.models.RunObjectRequiredActionSubmitToolOutputs
+typealias RunObjectRequiredActionSubmitToolOutputs =
+    dev.octri.showcase.openai.models.RunObjectRequiredActionSubmitToolOutputs
 
-typealias RunObjectRequiredActionTypeEnum = dev.octri.showcase.openai.models.RunObjectRequiredActionTypeEnum
+typealias RunObjectRequiredActionTypeEnum =
+    dev.octri.showcase.openai.models.RunObjectRequiredActionTypeEnum
 
 typealias RunObjectStatusEnum = dev.octri.showcase.openai.models.RunObjectStatusEnum
 
@@ -337,102 +458,150 @@ typealias RunStepDeltaObject = dev.octri.showcase.openai.models.RunStepDeltaObje
 
 typealias RunStepDeltaObjectDelta = dev.octri.showcase.openai.models.RunStepDeltaObjectDelta
 
-typealias RunStepDeltaObjectDeltaStepDetails = dev.octri.showcase.openai.models.RunStepDeltaObjectDeltaStepDetails
+typealias RunStepDeltaObjectDeltaStepDetails =
+    dev.octri.showcase.openai.models.RunStepDeltaObjectDeltaStepDetails
 
-typealias RunStepDeltaObjectObjectEnum = dev.octri.showcase.openai.models.RunStepDeltaObjectObjectEnum
+typealias RunStepDeltaObjectObjectEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaObjectObjectEnum
 
-typealias RunStepDeltaStepDetailsMessageCreationObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsMessageCreationObject
+typealias RunStepDeltaStepDetailsMessageCreationObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsMessageCreationObject
 
-typealias RunStepDeltaStepDetailsMessageCreationObjectMessageCreation = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsMessageCreationObjectMessageCreation
+typealias RunStepDeltaStepDetailsMessageCreationObjectMessageCreation =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsMessageCreationObjectMessageCreation
 
-typealias RunStepDeltaStepDetailsMessageCreationObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsMessageCreationObjectTypeEnum
+typealias RunStepDeltaStepDetailsMessageCreationObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsMessageCreationObjectTypeEnum
 
-typealias RunStepDeltaStepDetailsToolCallsCodeObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObject
+typealias RunStepDeltaStepDetailsToolCallsCodeObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObject
 
-typealias RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreter = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreter
+typealias RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreter =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreter
 
-typealias RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem
+typealias RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem
 
-typealias RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum
+typealias RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum
 
-typealias RunStepDeltaStepDetailsToolCallsCodeOutputImageObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputImageObject
+typealias RunStepDeltaStepDetailsToolCallsCodeOutputImageObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputImageObject
 
-typealias RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectImage = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectImage
+typealias RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectImage =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectImage
 
-typealias RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum
+typealias RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum
 
-typealias RunStepDeltaStepDetailsToolCallsCodeOutputLogsObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputLogsObject
+typealias RunStepDeltaStepDetailsToolCallsCodeOutputLogsObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputLogsObject
 
-typealias RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum
+typealias RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum
 
-typealias RunStepDeltaStepDetailsToolCallsFileSearchObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFileSearchObject
+typealias RunStepDeltaStepDetailsToolCallsFileSearchObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFileSearchObject
 
-typealias RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum
+typealias RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum
 
-typealias RunStepDeltaStepDetailsToolCallsFunctionObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObject
+typealias RunStepDeltaStepDetailsToolCallsFunctionObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObject
 
-typealias RunStepDeltaStepDetailsToolCallsFunctionObjectFunction = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObjectFunction
+typealias RunStepDeltaStepDetailsToolCallsFunctionObjectFunction =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObjectFunction
 
-typealias RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum
+typealias RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum
 
-typealias RunStepDeltaStepDetailsToolCallsObject = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsObject
+typealias RunStepDeltaStepDetailsToolCallsObject =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsObject
 
-typealias RunStepDeltaStepDetailsToolCallsObjectToolCallsItem = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsObjectToolCallsItem
+typealias RunStepDeltaStepDetailsToolCallsObjectToolCallsItem =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsObjectToolCallsItem
 
-typealias RunStepDeltaStepDetailsToolCallsObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsObjectTypeEnum
+typealias RunStepDeltaStepDetailsToolCallsObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDeltaStepDetailsToolCallsObjectTypeEnum
 
-typealias RunStepDetailsMessageCreationObject = dev.octri.showcase.openai.models.RunStepDetailsMessageCreationObject
+typealias RunStepDetailsMessageCreationObject =
+    dev.octri.showcase.openai.models.RunStepDetailsMessageCreationObject
 
-typealias RunStepDetailsMessageCreationObjectMessageCreation = dev.octri.showcase.openai.models.RunStepDetailsMessageCreationObjectMessageCreation
+typealias RunStepDetailsMessageCreationObjectMessageCreation =
+    dev.octri.showcase.openai.models.RunStepDetailsMessageCreationObjectMessageCreation
 
-typealias RunStepDetailsMessageCreationObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsMessageCreationObjectTypeEnum
+typealias RunStepDetailsMessageCreationObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsMessageCreationObjectTypeEnum
 
-typealias RunStepDetailsToolCallsCodeObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObject
+typealias RunStepDetailsToolCallsCodeObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObject
 
-typealias RunStepDetailsToolCallsCodeObjectCodeInterpreter = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObjectCodeInterpreter
+typealias RunStepDetailsToolCallsCodeObjectCodeInterpreter =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObjectCodeInterpreter
 
-typealias RunStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem
+typealias RunStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObjectCodeInterpreterOutputsItem
 
-typealias RunStepDetailsToolCallsCodeObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObjectTypeEnum
+typealias RunStepDetailsToolCallsCodeObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeObjectTypeEnum
 
-typealias RunStepDetailsToolCallsCodeOutputImageObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputImageObject
+typealias RunStepDetailsToolCallsCodeOutputImageObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputImageObject
 
-typealias RunStepDetailsToolCallsCodeOutputImageObjectImage = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputImageObjectImage
+typealias RunStepDetailsToolCallsCodeOutputImageObjectImage =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputImageObjectImage
 
-typealias RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum
+typealias RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum
 
-typealias RunStepDetailsToolCallsCodeOutputLogsObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputLogsObject
+typealias RunStepDetailsToolCallsCodeOutputLogsObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputLogsObject
 
-typealias RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum
+typealias RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum
 
-typealias RunStepDetailsToolCallsFileSearchObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchObject
+typealias RunStepDetailsToolCallsFileSearchObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchObject
 
-typealias RunStepDetailsToolCallsFileSearchObjectFileSearch = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchObjectFileSearch
+typealias RunStepDetailsToolCallsFileSearchObjectFileSearch =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchObjectFileSearch
 
-typealias RunStepDetailsToolCallsFileSearchObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchObjectTypeEnum
+typealias RunStepDetailsToolCallsFileSearchObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchObjectTypeEnum
 
-typealias RunStepDetailsToolCallsFileSearchRankingOptionsObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchRankingOptionsObject
+typealias RunStepDetailsToolCallsFileSearchRankingOptionsObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchRankingOptionsObject
 
-typealias RunStepDetailsToolCallsFileSearchResultObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchResultObject
+typealias RunStepDetailsToolCallsFileSearchResultObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchResultObject
 
-typealias RunStepDetailsToolCallsFileSearchResultObjectContentItem = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchResultObjectContentItem
+typealias RunStepDetailsToolCallsFileSearchResultObjectContentItem =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchResultObjectContentItem
 
-typealias RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum
+typealias RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum
 
-typealias RunStepDetailsToolCallsFunctionObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFunctionObject
+typealias RunStepDetailsToolCallsFunctionObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFunctionObject
 
-typealias RunStepDetailsToolCallsFunctionObjectFunction = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFunctionObjectFunction
+typealias RunStepDetailsToolCallsFunctionObjectFunction =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFunctionObjectFunction
 
-typealias RunStepDetailsToolCallsFunctionObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsFunctionObjectTypeEnum
+typealias RunStepDetailsToolCallsFunctionObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsFunctionObjectTypeEnum
 
-typealias RunStepDetailsToolCallsObject = dev.octri.showcase.openai.models.RunStepDetailsToolCallsObject
+typealias RunStepDetailsToolCallsObject =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsObject
 
-typealias RunStepDetailsToolCallsObjectToolCallsItem = dev.octri.showcase.openai.models.RunStepDetailsToolCallsObjectToolCallsItem
+typealias RunStepDetailsToolCallsObjectToolCallsItem =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsObjectToolCallsItem
 
-typealias RunStepDetailsToolCallsObjectTypeEnum = dev.octri.showcase.openai.models.RunStepDetailsToolCallsObjectTypeEnum
+typealias RunStepDetailsToolCallsObjectTypeEnum =
+    dev.octri.showcase.openai.models.RunStepDetailsToolCallsObjectTypeEnum
 
 typealias RunStepObject = dev.octri.showcase.openai.models.RunStepObject
 
 typealias RunStepObjectLastError = dev.octri.showcase.openai.models.RunStepObjectLastError
 
-typealias RunStepObjectLastErrorCodeEnum = dev.octri.showcase.openai.models.RunStepObjectLastErrorCodeEnum
+typealias RunStepObjectLastErrorCodeEnum =
+    dev.octri.showcase.openai.models.RunStepObjectLastErrorCodeEnum

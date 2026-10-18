@@ -3,427 +3,533 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `BetaContainerAutoParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaContainerAutoParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaContainerAutoParam(
-    /**
-     * Automatically creates a container for this request
-     */
+    /** Automatically creates a container for this request */
     val type: BetaContainerAutoParamTypeEnum,
-    /**
-     * An optional list of uploaded files to make available to your code.
-     */
+    /** An optional list of uploaded files to make available to your code. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * Optional API value serialized in the `memory_limit` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: BetaContainerMemoryLimit? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: BetaContainerAutoParamNetworkPolicy? = null,
-    /**
-     * An optional list of skills referenced by id or inline data.
-     */
-    val skills: List<BetaContainerAutoParamSkillsItem>? = null
+    /** Optional API value serialized in the `memory_limit` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
+    val memoryLimit: BetaContainerMemoryLimit? = null,
+    /** Network access policy for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
+    val networkPolicy: BetaContainerAutoParamNetworkPolicy? = null,
+    /** An optional list of skills referenced by id or inline data. */
+    val skills: List<BetaContainerAutoParamSkillsItem>? = null,
 ) : BetaFunctionShellToolParamEnvironment
 
-/**
- * Typed representation of the `BetaContainerReferenceParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaContainerReferenceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaContainerReferenceParam(
-    /**
-     * References a container created with the /v1/containers endpoint
-     */
+    /** References a container created with the /v1/containers endpoint */
     val type: BetaContainerReferenceParamTypeEnum,
-    /**
-     * The ID of the referenced container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String
+    /** The ID of the referenced container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
 ) : BetaFunctionShellToolParamEnvironment, BetaFunctionShellCallItemParamEnvironment
 
-/**
- * Represents a container created with /v1/containers.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Represents a container created with /v1/containers. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaContainerReferenceResource(
-    /**
-     * The environment type. Always `container_reference`.
-     */
+    /** The environment type. Always `container_reference`. */
     val type: BetaContainerReferenceResourceTypeEnum,
-    /**
-     * Required `string` value serialized in the `container_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String
+    /** Required `string` value serialized in the `container_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
 ) : BetaFunctionShellCallEnvironment
 
-/**
- * Typed representation of the `BetaFunctionAndCustomToolCallOutput` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionAndCustomToolCallOutput::class)
+/** Typed representation of the `BetaFunctionAndCustomToolCallOutput` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionAndCustomToolCallOutput::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputTextContent::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputImageContent::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputFileContent::class, name = "input_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputTextContent::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputImageContent::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputFileContent::class,
+        name = "input_file",
+    ),
 )
 sealed interface BetaFunctionAndCustomToolCallOutput
 
-/** A [BetaFunctionAndCustomToolCallOutput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionAndCustomToolCallOutput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionAndCustomToolCallOutput] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionAndCustomToolCallOutput
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionAndCustomToolCallOutput {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A piece of message content, such as text, an image, or a file.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionCallOutputItemParamOutputItem::class)
+/** A piece of message content, such as text, an image, or a file. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionCallOutputItemParamOutputItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputTextContentParam::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputImageContentParamAutoParam::class, name = "input_image"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputFileContentParam::class, name = "input_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputTextContentParam::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputImageContentParamAutoParam::class,
+        name = "input_image",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaInputFileContentParam::class,
+        name = "input_file",
+    ),
 )
 sealed interface BetaFunctionCallOutputItemParamOutputItem
 
-/** A [BetaFunctionCallOutputItemParamOutputItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionCallOutputItemParamOutputItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionCallOutputItemParamOutputItem] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionCallOutputItemParamOutputItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionCallOutputItemParamOutputItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Execute a shell command.
- */
+/** Execute a shell command. */
 data class BetaFunctionShellAction(
-    /**
-     * Required array value serialized in the `commands` wire field.
-     */
+    /** Required array value serialized in the `commands` wire field. */
     val commands: List<String>,
-    /**
-     * Required `integer` value serialized in the `timeout_ms` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms", required = true) val timeoutMs: Long?,
-    /**
-     * Required `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true) val maxOutputLength: Long?
+    /** Required `integer` value serialized in the `timeout_ms` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms", required = true)
+    val timeoutMs: Long?,
+    /** Required `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true)
+    val maxOutputLength: Long?,
 )
 
-/**
- * Commands and limits describing how to run the shell tool call.
- */
+/** Commands and limits describing how to run the shell tool call. */
 data class BetaFunctionShellActionParam(
-    /**
-     * Ordered shell commands for the execution environment to run.
-     */
+    /** Ordered shell commands for the execution environment to run. */
     val commands: List<String>,
-    /**
-     * Optional `integer` value serialized in the `timeout_ms` wire field.
-     */
+    /** Optional `integer` value serialized in the `timeout_ms` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms") val timeoutMs: Long? = null,
-    /**
-     * Optional `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length") val maxOutputLength: Long? = null
+    /** Optional `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length")
+    val maxOutputLength: Long? = null,
 )
 
-/**
- * Required API value serialized in the `environment` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionShellCallEnvironment::class)
+/** Required API value serialized in the `environment` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionShellCallEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaLocalEnvironmentResource::class, name = "local"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerReferenceResource::class, name = "container_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaLocalEnvironmentResource::class,
+        name = "local",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerReferenceResource::class,
+        name = "container_reference",
+    ),
 )
 sealed interface BetaFunctionShellCallEnvironment
 
-/** A [BetaFunctionShellCallEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionShellCallEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionShellCallEnvironment] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionShellCallEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionShellCallEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A tool representing a request to execute one or more shell commands.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool representing a request to execute one or more shell commands. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaFunctionShellCallItemParam(
-    /**
-     * The unique ID of the shell tool call generated by the model.
-     */
+    /** The unique ID of the shell tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The type of the item. Always `shell_call`.
-     */
+    /** The type of the item. Always `shell_call`. */
     val type: BetaFunctionShellCallItemParamTypeEnum,
-    /**
-     * The shell commands and limits that describe how to run the tool call.
-     */
+    /** The shell commands and limits that describe how to run the tool call. */
     val action: BetaFunctionShellActionParam,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: BetaToolCallCallerParam? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
+    /** Optional API value serialized in the `status` wire field. */
     val status: BetaFunctionShellCallItemStatus? = null,
-    /**
-     * The environment to execute the shell commands in.
-     */
-    val environment: BetaFunctionShellCallItemParamEnvironment? = null
+    /** The environment to execute the shell commands in. */
+    val environment: BetaFunctionShellCallItemParamEnvironment? = null,
 ) : BetaItem
 
-/**
- * The environment to execute the shell commands in.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionShellCallItemParamEnvironment::class)
+/** The environment to execute the shell commands in. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionShellCallItemParamEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaLocalEnvironmentParam::class, name = "local"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerReferenceParam::class, name = "container_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaLocalEnvironmentParam::class,
+        name = "local",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerReferenceParam::class,
+        name = "container_reference",
+    ),
 )
 sealed interface BetaFunctionShellCallItemParamEnvironment
 
-/** A [BetaFunctionShellCallItemParamEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionShellCallItemParamEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionShellCallItemParamEnvironment] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionShellCallItemParamEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionShellCallItemParamEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The content of a shell tool call output that was emitted.
- */
+/** The content of a shell tool call output that was emitted. */
 data class BetaFunctionShellCallOutputContent(
-    /**
-     * The standard output that was captured.
-     */
+    /** The standard output that was captured. */
     val stdout: String,
-    /**
-     * The standard error output that was captured.
-     */
+    /** The standard error output that was captured. */
     val stderr: String,
     /**
-     * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk.
+     * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call
+     * output chunk.
      */
     val outcome: BetaFunctionShellCallOutputContentOutcome,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 )
 
 /**
- * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk.
+ * Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call
+ * output chunk.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionShellCallOutputContentOutcome::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionShellCallOutputContentOutcome::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionShellCallOutputTimeoutOutcome::class, name = "timeout"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionShellCallOutputExitOutcome::class, name = "exit")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionShellCallOutputTimeoutOutcome::class,
+        name = "timeout",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionShellCallOutputExitOutcome::class,
+        name = "exit",
+    ),
 )
 sealed interface BetaFunctionShellCallOutputContentOutcome
 
-/** A [BetaFunctionShellCallOutputContentOutcome] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionShellCallOutputContentOutcome @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionShellCallOutputContentOutcome] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionShellCallOutputContentOutcome
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionShellCallOutputContentOutcome {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Captured stdout and stderr for a portion of a shell tool call output.
- */
+/** Captured stdout and stderr for a portion of a shell tool call output. */
 data class BetaFunctionShellCallOutputContentParam(
-    /**
-     * Captured stdout output for the shell call.
-     */
+    /** Captured stdout output for the shell call. */
     val stdout: String,
-    /**
-     * Captured stderr output for the shell call.
-     */
+    /** Captured stderr output for the shell call. */
     val stderr: String,
-    /**
-     * The exit or timeout outcome associated with this shell call.
-     */
-    val outcome: BetaFunctionShellCallOutputOutcomeParam
+    /** The exit or timeout outcome associated with this shell call. */
+    val outcome: BetaFunctionShellCallOutputOutcomeParam,
 )
 
-/**
- * Indicates that the shell commands finished and returned an exit code.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell commands finished and returned an exit code. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaFunctionShellCallOutputExitOutcome(
-    /**
-     * The outcome type. Always `exit`.
-     */
+    /** The outcome type. Always `exit`. */
     val type: BetaFunctionShellCallOutputExitOutcomeTypeEnum,
-    /**
-     * Exit code from the shell process.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long
+    /** Exit code from the shell process. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long,
 ) : BetaFunctionShellCallOutputContentOutcome
 
-/**
- * Indicates that the shell commands finished and returned an exit code.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell commands finished and returned an exit code. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaFunctionShellCallOutputExitOutcomeParam(
-    /**
-     * The outcome type. Always `exit`.
-     */
+    /** The outcome type. Always `exit`. */
     val type: BetaFunctionShellCallOutputExitOutcomeParamTypeEnum,
-    /**
-     * The exit code returned by the shell process.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long
+    /** The exit code returned by the shell process. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exit_code") val exitCode: Long,
 ) : BetaFunctionShellCallOutputOutcomeParam
 
-/**
- * The streamed output items emitted by a shell tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The streamed output items emitted by a shell tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaFunctionShellCallOutputItemParam(
-    /**
-     * The unique ID of the shell tool call generated by the model.
-     */
+    /** The unique ID of the shell tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The type of the item. Always `shell_call_output`.
-     */
+    /** The type of the item. Always `shell_call_output`. */
     val type: BetaFunctionShellCallOutputItemParamTypeEnum,
-    /**
-     * Captured chunks of stdout and stderr output, along with their associated outcomes.
-     */
+    /** Captured chunks of stdout and stderr output, along with their associated outcomes. */
     val output: List<BetaFunctionShellCallOutputContentParam>,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: BetaToolCallCallerParam? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
+    /** Optional API value serialized in the `status` wire field. */
     val status: BetaFunctionShellCallItemStatus? = null,
-    /**
-     * Optional `integer` value serialized in the `max_output_length` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length") val maxOutputLength: Long? = null
+    /** Optional `integer` value serialized in the `max_output_length` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length")
+    val maxOutputLength: Long? = null,
 ) : BetaItem
 
-/**
- * The exit or timeout outcome associated with this shell call.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionShellCallOutputOutcomeParam::class)
+/** The exit or timeout outcome associated with this shell call. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionShellCallOutputOutcomeParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionShellCallOutputTimeoutOutcomeParam::class, name = "timeout"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaFunctionShellCallOutputExitOutcomeParam::class, name = "exit")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionShellCallOutputTimeoutOutcomeParam::class,
+        name = "timeout",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaFunctionShellCallOutputExitOutcomeParam::class,
+        name = "exit",
+    ),
 )
 sealed interface BetaFunctionShellCallOutputOutcomeParam
 
-/** A [BetaFunctionShellCallOutputOutcomeParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionShellCallOutputOutcomeParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionShellCallOutputOutcomeParam] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionShellCallOutputOutcomeParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionShellCallOutputOutcomeParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Indicates that the shell call exceeded its configured time limit.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell call exceeded its configured time limit. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaFunctionShellCallOutputTimeoutOutcome(
-    /**
-     * The outcome type. Always `timeout`.
-     */
+    /** The outcome type. Always `timeout`. */
     val type: BetaFunctionShellCallOutputTimeoutOutcomeTypeEnum
 ) : BetaFunctionShellCallOutputContentOutcome
 
-/**
- * Indicates that the shell call exceeded its configured time limit.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Indicates that the shell call exceeded its configured time limit. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaFunctionShellCallOutputTimeoutOutcomeParam(
-    /**
-     * The outcome type. Always `timeout`.
-     */
+    /** The outcome type. Always `timeout`. */
     val type: BetaFunctionShellCallOutputTimeoutOutcomeParamTypeEnum
 ) : BetaFunctionShellCallOutputOutcomeParam
 
-/**
- * Optional API value serialized in the `environment` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaFunctionShellToolParamEnvironment::class)
+/** Optional API value serialized in the `environment` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownBetaFunctionShellToolParamEnvironment::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerAutoParam::class, name = "container_auto"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaLocalEnvironmentParam::class, name = "local"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerReferenceParam::class, name = "container_reference")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerAutoParam::class,
+        name = "container_auto",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaLocalEnvironmentParam::class,
+        name = "local",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = BetaContainerReferenceParam::class,
+        name = "container_reference",
+    ),
 )
 sealed interface BetaFunctionShellToolParamEnvironment
 
-/** A [BetaFunctionShellToolParamEnvironment] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaFunctionShellToolParamEnvironment @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [BetaFunctionShellToolParamEnvironment] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownBetaFunctionShellToolParamEnvironment
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : BetaFunctionShellToolParamEnvironment {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `BetaLocalEnvironmentParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaLocalEnvironmentParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaLocalEnvironmentParam(
-    /**
-     * Use a local computer environment.
-     */
+    /** Use a local computer environment. */
     val type: BetaLocalEnvironmentParamTypeEnum,
-    /**
-     * An optional list of skills.
-     */
-    val skills: List<BetaLocalSkillParam>? = null
+    /** An optional list of skills. */
+    val skills: List<BetaLocalSkillParam>? = null,
 ) : BetaFunctionShellToolParamEnvironment, BetaFunctionShellCallItemParamEnvironment
 
-/**
- * Represents the use of a local environment to perform shell actions.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Represents the use of a local environment to perform shell actions. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaLocalEnvironmentResource(
-    /**
-     * The environment type. Always `local`.
-     */
+    /** The environment type. Always `local`. */
     val type: BetaLocalEnvironmentResourceTypeEnum
 ) : BetaFunctionShellCallEnvironment

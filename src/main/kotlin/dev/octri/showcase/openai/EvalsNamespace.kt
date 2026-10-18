@@ -3,37 +3,88 @@
 
 package dev.octri.showcase.openai
 
-
 class EvalsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists evaluations for a project. Use `after` to continue from a previous result and set `order` and `order_by` to control how evaluations are sorted.
+     * Lists evaluations for a project. Use `after` to continue from a previous result and set
+     * `order` and `order_by` to control how evaluations are sorted.
      *
      * List evaluations for a project.
      */
-    fun list(after: String? = null, limit: Long? = null, order: ListEvalsParameterEnum? = null, orderBy: ListEvalsParameterEnumfa29acc2? = null, options: RequestOptions? = null): EvalList {
-        return dev.octri.showcase.openai.methods.Evals.listEvals(clientConfig, after, limit, order, orderBy, options)
+    fun list(
+        after: String? = null,
+        limit: Long? = null,
+        order: ListEvalsParameterEnum? = null,
+        orderBy: ListEvalsParameterEnumfa29acc2? = null,
+        options: RequestOptions? = null,
+    ): EvalList {
+        return dev.octri.showcase.openai.methods.Evals.listEvals(
+            clientConfig,
+            after,
+            limit,
+            order,
+            orderBy,
+            options,
+        )
     }
 
     /**
-     * Lists evaluations for a project. Use `after` to continue from a previous result and set `order` and `order_by` to control how evaluations are sorted.
+     * Lists evaluations for a project. Use `after` to continue from a previous result and set
+     * `order` and `order_by` to control how evaluations are sorted.
      *
      * List evaluations for a project.
      */
-    fun listPaginated(after: String? = null, limit: Long? = null, order: ListEvalsParameterEnum? = null, orderBy: ListEvalsParameterEnumfa29acc2? = null, options: RequestOptions? = null, yieldFn: (Eval) -> Boolean) {
-        dev.octri.showcase.openai.methods.Evals.listEvalsPaginated(clientConfig, after, limit, order, orderBy, options, yieldFn)
+    fun listPaginated(
+        after: String? = null,
+        limit: Long? = null,
+        order: ListEvalsParameterEnum? = null,
+        orderBy: ListEvalsParameterEnumfa29acc2? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Eval) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Evals.listEvalsPaginated(
+            clientConfig,
+            after,
+            limit,
+            order,
+            orderBy,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates an evaluation with a data source configuration and testing criteria for assessing model performance. Supply `data_source_config` to define the evaluation data and `testing_criteria` to specify the graders; `name` and `metadata` are optional. Run the evaluation against models and model configurations by creating an evaluation run.
+     * Creates an evaluation with a data source configuration and testing criteria for assessing
+     * model performance. Supply `data_source_config` to define the evaluation data and
+     * `testing_criteria` to specify the graders; `name` and `metadata` are optional. Run the
+     * evaluation against models and model configurations by creating an evaluation run.
      *
-     * Create the structure of an evaluation that can be used to test a model's performance. An evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources. For more information, see the Evals guide.
+     * Create the structure of an evaluation that can be used to test a model's performance. An
+     * evaluation is a set of testing criteria and the config for a data source, which dictates the
+     * schema of the data used in the evaluation. After creating an evaluation, you can run it on
+     * different models and model parameters. We support several types of graders and datasources.
+     * For more information, see the Evals guide.
      */
-    fun create(dataSourceConfig: CreateEvalRequestDataSourceConfig, testingCriteria: List<CreateEvalRequestTestingCriteriaItem>, name: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): Eval {
-        return dev.octri.showcase.openai.methods.Evals.createEval(clientConfig, dataSourceConfig, testingCriteria, name, metadata, options)
+    fun create(
+        dataSourceConfig: CreateEvalRequestDataSourceConfig,
+        testingCriteria: List<CreateEvalRequestTestingCriteriaItem>,
+        name: String? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): Eval {
+        return dev.octri.showcase.openai.methods.Evals.createEval(
+            clientConfig,
+            dataSourceConfig,
+            testingCriteria,
+            name,
+            metadata,
+            options,
+        )
     }
 
     /**
-     * Retrieves an evaluation by its identifier. Use this endpoint to inspect the evaluation's name, data source configuration, and testing criteria before creating a run or updating the evaluation.
+     * Retrieves an evaluation by its identifier. Use this endpoint to inspect the evaluation's
+     * name, data source configuration, and testing criteria before creating a run or updating the
+     * evaluation.
      *
      * Get an evaluation by ID.
      */
@@ -42,102 +93,227 @@ class EvalsNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Updates an evaluation's name or metadata. Supply either or both fields to change the corresponding evaluation properties; the request does not replace the data source configuration or testing criteria.
+     * Updates an evaluation's name or metadata. Supply either or both fields to change the
+     * corresponding evaluation properties; the request does not replace the data source
+     * configuration or testing criteria.
      *
      * Update certain properties of an evaluation.
      */
-    fun update(evalId: String, name: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): Eval {
-        return dev.octri.showcase.openai.methods.Evals.updateEval(clientConfig, evalId, name, metadata, options)
+    fun update(
+        evalId: String,
+        name: String? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): Eval {
+        return dev.octri.showcase.openai.methods.Evals.updateEval(
+            clientConfig,
+            evalId,
+            name,
+            metadata,
+            options,
+        )
     }
 
     /**
-     * Deletes an evaluation. Use this operation to remove an evaluation that you no longer need; deletion is unavailable while the evaluation has unfinished runs.
+     * Deletes an evaluation. Use this operation to remove an evaluation that you no longer need;
+     * deletion is unavailable while the evaluation has unfinished runs.
      *
      * Delete an evaluation.
      */
-    fun delete(evalId: String, options: RequestOptions? = null): dev.octri.showcase.openai.methods.Evals.DeleteEvalResponse {
+    fun delete(
+        evalId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.openai.methods.Evals.DeleteEvalResponse {
         return dev.octri.showcase.openai.methods.Evals.deleteEval(clientConfig, evalId, options)
     }
 
     /**
-     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status filtering. Use `after` to continue from a run in a previous response, and use `status` to limit results to runs in a particular state.
+     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status
+     * filtering. Use `after` to continue from a run in a previous response, and use `status` to
+     * limit results to runs in a particular state.
      *
      * Get a list of runs for an evaluation.
      */
-    fun getRuns(evalId: String, after: String? = null, limit: Long? = null, order: GetEvalRunsParameterEnum? = null, status: GetEvalRunsParameterEnum9a5a0254? = null, options: RequestOptions? = null): EvalRunList {
-        return dev.octri.showcase.openai.methods.Evals.getEvalRuns(clientConfig, evalId, after, limit, order, status, options)
+    fun getRuns(
+        evalId: String,
+        after: String? = null,
+        limit: Long? = null,
+        order: GetEvalRunsParameterEnum? = null,
+        status: GetEvalRunsParameterEnum9a5a0254? = null,
+        options: RequestOptions? = null,
+    ): EvalRunList {
+        return dev.octri.showcase.openai.methods.Evals.getEvalRuns(
+            clientConfig,
+            evalId,
+            after,
+            limit,
+            order,
+            status,
+            options,
+        )
     }
 
     /**
-     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status filtering. Use `after` to continue from a run in a previous response, and use `status` to limit results to runs in a particular state.
+     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status
+     * filtering. Use `after` to continue from a run in a previous response, and use `status` to
+     * limit results to runs in a particular state.
      *
      * Get a list of runs for an evaluation.
      */
-    fun getRunsPaginated(evalId: String, after: String? = null, limit: Long? = null, order: GetEvalRunsParameterEnum? = null, status: GetEvalRunsParameterEnum9a5a0254? = null, options: RequestOptions? = null, yieldFn: (EvalRun) -> Boolean) {
-        dev.octri.showcase.openai.methods.Evals.getEvalRunsPaginated(clientConfig, evalId, after, limit, order, status, options, yieldFn)
+    fun getRunsPaginated(
+        evalId: String,
+        after: String? = null,
+        limit: Long? = null,
+        order: GetEvalRunsParameterEnum? = null,
+        status: GetEvalRunsParameterEnum9a5a0254? = null,
+        options: RequestOptions? = null,
+        yieldFn: (EvalRun) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Evals.getEvalRunsPaginated(
+            clientConfig,
+            evalId,
+            after,
+            limit,
+            order,
+            status,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates and starts a run for an evaluation using a specified data source and model configuration. The run's data source is validated against the schema defined by the evaluation; provide `data_source` in one of the supported formats. Use the returned run identifier to monitor the evaluation run.
+     * Creates and starts a run for an evaluation using a specified data source and model
+     * configuration. The run's data source is validated against the schema defined by the
+     * evaluation; provide `data_source` in one of the supported formats. Use the returned run
+     * identifier to monitor the evaluation run.
      *
-     * Kicks off a new run for a given evaluation, specifying the data source, and what model configuration to use to test. The datasource will be validated against the schema specified in the config of the evaluation.
+     * Kicks off a new run for a given evaluation, specifying the data source, and what model
+     * configuration to use to test. The datasource will be validated against the schema specified
+     * in the config of the evaluation.
      */
-    fun createRun(evalId: String, dataSource: CreateEvalRunRequestDataSource, name: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): EvalRun {
-        return dev.octri.showcase.openai.methods.Evals.createEvalRun(clientConfig, evalId, dataSource, name, metadata, options)
+    fun createRun(
+        evalId: String,
+        dataSource: CreateEvalRunRequestDataSource,
+        name: String? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): EvalRun {
+        return dev.octri.showcase.openai.methods.Evals.createEvalRun(
+            clientConfig,
+            evalId,
+            dataSource,
+            name,
+            metadata,
+            options,
+        )
     }
 
     /**
-     * Retrieves a specific run for an evaluation. Use this endpoint to inspect the run's status, results, report URL, and usage details after creating or canceling a run.
+     * Retrieves a specific run for an evaluation. Use this endpoint to inspect the run's status,
+     * results, report URL, and usage details after creating or canceling a run.
      *
      * Get an evaluation run by ID.
      */
     fun getRun(evalId: String, runId: String, options: RequestOptions? = null): EvalRun {
-        return dev.octri.showcase.openai.methods.Evals.getEvalRun(clientConfig, evalId, runId, options)
+        return dev.octri.showcase.openai.methods.Evals.getEvalRun(
+            clientConfig,
+            evalId,
+            runId,
+            options,
+        )
     }
 
     /**
-     * Deletes a run from an evaluation. Use this endpoint to remove a finished run; a run cannot be deleted while it is still in progress.
+     * Deletes a run from an evaluation. Use this endpoint to remove a finished run; a run cannot be
+     * deleted while it is still in progress.
      *
      * Delete an eval run.
      */
-    fun deleteRun(evalId: String, runId: String, options: RequestOptions? = null): dev.octri.showcase.openai.methods.Evals.DeleteEvalRunResponse {
-        return dev.octri.showcase.openai.methods.Evals.deleteEvalRun(clientConfig, evalId, runId, options)
+    fun deleteRun(
+        evalId: String,
+        runId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.openai.methods.Evals.DeleteEvalRunResponse {
+        return dev.octri.showcase.openai.methods.Evals.deleteEvalRun(
+            clientConfig,
+            evalId,
+            runId,
+            options,
+        )
     }
 
     /**
-     * Cancels an ongoing evaluation run. Use this endpoint to stop a run that is still in progress; the response contains the canceled run object.
+     * Cancels an ongoing evaluation run. Use this endpoint to stop a run that is still in progress;
+     * the response contains the canceled run object.
      *
      * Cancel an ongoing evaluation run.
      */
     fun cancelRun(evalId: String, runId: String, options: RequestOptions? = null): EvalRun {
-        return dev.octri.showcase.openai.methods.Evals.cancelEvalRun(clientConfig, evalId, runId, options)
+        return dev.octri.showcase.openai.methods.Evals.cancelEvalRun(
+            clientConfig,
+            evalId,
+            runId,
+            options,
+        )
     }
 
     /**
-     * Lists output items for a specific evaluation run, with optional cursor pagination, status filtering, and timestamp ordering. Use `after` to continue from a previous response and `status` to view only passing or failing output items.
+     * Lists output items for a specific evaluation run, with optional cursor pagination, status
+     * filtering, and timestamp ordering. Use `after` to continue from a previous response and
+     * `status` to view only passing or failing output items.
      *
      * Get a list of output items for an evaluation run.
      */
-    fun getRunOutputItems(request: dev.octri.showcase.openai.methods.Evals.GetEvalRunOutputItemsRequest, options: RequestOptions? = null): EvalRunOutputItemList {
-        return dev.octri.showcase.openai.methods.Evals.getEvalRunOutputItems(clientConfig, request, options)
+    fun getRunOutputItems(
+        request: dev.octri.showcase.openai.methods.Evals.GetEvalRunOutputItemsRequest,
+        options: RequestOptions? = null,
+    ): EvalRunOutputItemList {
+        return dev.octri.showcase.openai.methods.Evals.getEvalRunOutputItems(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists output items for a specific evaluation run, with optional cursor pagination, status filtering, and timestamp ordering. Use `after` to continue from a previous response and `status` to view only passing or failing output items.
+     * Lists output items for a specific evaluation run, with optional cursor pagination, status
+     * filtering, and timestamp ordering. Use `after` to continue from a previous response and
+     * `status` to view only passing or failing output items.
      *
      * Get a list of output items for an evaluation run.
      */
-    fun getRunOutputItemsPaginated(request: dev.octri.showcase.openai.methods.Evals.GetEvalRunOutputItemsRequest, options: RequestOptions? = null, yieldFn: (EvalRunOutputItem) -> Boolean) {
-        dev.octri.showcase.openai.methods.Evals.getEvalRunOutputItemsPaginated(clientConfig, request, options, yieldFn)
+    fun getRunOutputItemsPaginated(
+        request: dev.octri.showcase.openai.methods.Evals.GetEvalRunOutputItemsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (EvalRunOutputItem) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Evals.getEvalRunOutputItemsPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Retrieves a specific output item from an evaluation run. Use `eval_id`, `run_id`, and `output_item_id` to identify the evaluation, run, and item whose grader results and sample you need.
+     * Retrieves a specific output item from an evaluation run. Use `eval_id`, `run_id`, and
+     * `output_item_id` to identify the evaluation, run, and item whose grader results and sample
+     * you need.
      *
      * Get an evaluation run output item by ID.
      */
-    fun getRunOutputItem(evalId: String, runId: String, outputItemId: String, options: RequestOptions? = null): EvalRunOutputItem {
-        return dev.octri.showcase.openai.methods.Evals.getEvalRunOutputItem(clientConfig, evalId, runId, outputItemId, options)
+    fun getRunOutputItem(
+        evalId: String,
+        runId: String,
+        outputItemId: String,
+        options: RequestOptions? = null,
+    ): EvalRunOutputItem {
+        return dev.octri.showcase.openai.methods.Evals.getEvalRunOutputItem(
+            clientConfig,
+            evalId,
+            runId,
+            outputItemId,
+            options,
+        )
     }
-
 }

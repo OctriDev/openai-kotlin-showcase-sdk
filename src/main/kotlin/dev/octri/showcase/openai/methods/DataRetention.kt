@@ -15,72 +15,132 @@ import dev.octri.showcase.openai.UpdateProjectDataRetentionBodyRetentionTypeEnum
 
 object DataRetention {
 
-
     /**
-     * Retrieves the organization's data retention controls. Use this endpoint to inspect the configured retention type, such as zero data retention or modified abuse monitoring.
+     * Retrieves the organization's data retention controls. Use this endpoint to inspect the
+     * configured retention type, such as zero data retention or modified abuse monitoring.
      *
      * Retrieves organization data retention controls.
      */
-    fun retrieveOrganizationDataRetention(clientConfig: ClientConfig, options: RequestOptions? = null): OrganizationDataRetention {
-        return SdkClient.request<OrganizationDataRetention>(SdkClient.RequestSpec("GET", "/organization/data_retention", config = clientConfig, operationId = "retrieveOrganizationDataRetention", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveOrganizationDataRetention(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): OrganizationDataRetention {
+        return SdkClient.request<OrganizationDataRetention>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/data_retention",
+                    config = clientConfig,
+                    operationId = "retrieveOrganizationDataRetention",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the organization's data retention controls. Set `retention_type` to one of the supported retention modes; the requested setting or transition must be valid for the organization.
+     * Updates the organization's data retention controls. Set `retention_type` to one of the
+     * supported retention modes; the requested setting or transition must be valid for the
+     * organization.
      *
      * Updates organization data retention controls.
      *
      * @param retentionType The desired organization data retention type.
      */
-    fun updateOrganizationDataRetention(clientConfig: ClientConfig, retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum, options: RequestOptions? = null): OrganizationDataRetention {
-        return SdkClient.request<OrganizationDataRetention>(SdkClient.RequestSpec("POST", "/organization/data_retention", config = clientConfig, body = SdkClient.bodyMap("retention_type" to (retentionType)), operationId = "updateOrganizationDataRetention", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun updateOrganizationDataRetention(
+        clientConfig: ClientConfig,
+        retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum,
+        options: RequestOptions? = null,
+    ): OrganizationDataRetention {
+        return SdkClient.request<OrganizationDataRetention>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/data_retention",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("retention_type" to (retentionType)),
+                    operationId = "updateOrganizationDataRetention",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves the data retention controls configured for a project. Use this operation to inspect the project's current retention type before changing its settings.
+     * Retrieves the data retention controls configured for a project. Use this operation to inspect
+     * the project's current retention type before changing its settings.
      *
      * Retrieves project data retention controls.
      *
      * @param projectId The ID of the project to inspect.
      */
-    fun retrieveProjectDataRetention(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectDataRetention {
-        return SdkClient.request<ProjectDataRetention>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/data_retention", config = clientConfig, operationId = "retrieveProjectDataRetention", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveProjectDataRetention(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectDataRetention {
+        return SdkClient.request<ProjectDataRetention>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/data_retention",
+                    config = clientConfig,
+                    operationId = "retrieveProjectDataRetention",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the data retention controls for a project. Set `retention_type` to one of the supported retention settings to configure the project.
+     * Updates the data retention controls for a project. Set `retention_type` to one of the
+     * supported retention settings to configure the project.
      *
      * Updates project data retention controls.
      *
      * @param projectId The ID of the project to update.
      * @param retentionType The desired project data retention type.
      */
-    fun updateProjectDataRetention(clientConfig: ClientConfig, projectId: String, retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum, options: RequestOptions? = null): ProjectDataRetention {
-        return SdkClient.request<ProjectDataRetention>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/data_retention", config = clientConfig, body = SdkClient.bodyMap("retention_type" to (retentionType)), operationId = "updateProjectDataRetention", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun updateProjectDataRetention(
+        clientConfig: ClientConfig,
+        projectId: String,
+        retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum,
+        options: RequestOptions? = null,
+    ): ProjectDataRetention {
+        return SdkClient.request<ProjectDataRetention>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/data_retention",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("retention_type" to (retentionType)),
+                    operationId = "updateProjectDataRetention",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

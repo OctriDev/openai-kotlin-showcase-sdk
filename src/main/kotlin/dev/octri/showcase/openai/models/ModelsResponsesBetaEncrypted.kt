@@ -3,32 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Opaque encrypted content that Responses API decrypts inside trusted model execution.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Opaque encrypted content that Responses API decrypts inside trusted model execution. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaEncryptedContent(
-    /**
-     * The type of the input item. Always `encrypted_content`.
-     */
+    /** The type of the input item. Always `encrypted_content`. */
     val type: BetaEncryptedContentTypeEnum,
-    /**
-     * Opaque encrypted content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String
+    /** Opaque encrypted content. */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content")
+    val encryptedContent: String,
 ) : BetaAgentMessageContentItem, BetaMessageContentItem
 
-/**
- * Opaque encrypted content that Responses API decrypts inside trusted model execution.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Opaque encrypted content that Responses API decrypts inside trusted model execution. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaEncryptedContentParam(
-    /**
-     * The type of the input item. Always `encrypted_content`.
-     */
+    /** The type of the input item. Always `encrypted_content`. */
     val type: BetaEncryptedContentParamTypeEnum,
-    /**
-     * Opaque encrypted content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String
+    /** Opaque encrypted content. */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content")
+    val encryptedContent: String,
 ) : BetaAgentMessageItemParamContentItem

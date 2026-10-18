@@ -3,9 +3,7 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Multi-modal input and output contents.
- */
+/** Multi-modal input and output contents. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = Content.Deserializer::class)
 sealed interface Content {
     /** Chooses the branch this payload is shaped like. */
@@ -16,7 +14,8 @@ sealed interface Content {
         ): Content {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out Content>> = listOf(InputContent::class.java, OutputContent::class.java)
+            val objectTypes: List<Class<out Content>> =
+                listOf(InputContent::class.java, OutputContent::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -25,8 +24,12 @@ sealed interface Content {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, Content::class.java, "no Content branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        Content::class.java,
+                        "no Content branch accepts this payload",
+                    )
             }
         }
     }

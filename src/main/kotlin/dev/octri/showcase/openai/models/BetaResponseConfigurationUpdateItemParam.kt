@@ -3,35 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Updates to reasoning configuration. Only effort is supported.
- */
+/** Updates to reasoning configuration. Only effort is supported. */
 data class BetaResponseConfigurationUpdateItemParamReasoning(
     /**
-     * The reasoning effort to use for subsequent responses until another configuration update replaces it.
+     * The reasoning effort to use for subsequent responses until another configuration update
+     * replaces it.
      */
     val effort: BetaReasoningEffort? = null
 )
 
 /**
- * An update to the conversation's response configuration. The configuration remains in effect for subsequent responses until it is replaced by another configuration update.
+ * An update to the conversation's response configuration. The configuration remains in effect for
+ * subsequent responses until it is replaced by another configuration update.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseConfigurationUpdateItemParam(
-    /**
-     * The item type. Always `configuration_update`.
-     */
+    /** The item type. Always `configuration_update`. */
     val type: BetaResponseConfigurationUpdateItemParamTypeEnum,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Updates to reasoning configuration. Only effort is supported.
-     */
-    val reasoning: BetaResponseConfigurationUpdateItemParamReasoning? = null
+    /** Updates to reasoning configuration. Only effort is supported. */
+    val reasoning: BetaResponseConfigurationUpdateItemParamReasoning? = null,
 ) : BetaItem

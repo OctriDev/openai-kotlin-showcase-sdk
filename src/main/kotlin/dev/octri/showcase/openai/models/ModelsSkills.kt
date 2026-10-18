@@ -3,196 +3,115 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Uploads a skill either as a directory (multipart `files[]`) or as a single zip file.
- */
+/** Uploads a skill either as a directory (multipart `files[]`) or as a single zip file. */
 data class CreateSkillBody(
-    /**
-     * Skill files to upload (directory upload) or a single zip file.
-     */
+    /** Skill files to upload (directory upload) or a single zip file. */
     val files: List<ByteArray>
 )
 
-/**
- * Uploads a new immutable version of a skill.
- */
+/** Uploads a new immutable version of a skill. */
 data class CreateSkillVersionBody(
-    /**
-     * Skill files to upload (directory upload) or a single zip file.
-     */
+    /** Skill files to upload (directory upload) or a single zip file. */
     val files: List<ByteArray>,
-    /**
-     * Whether to set this version as the default.
-     */
-    val default: Boolean? = null
+    /** Whether to set this version as the default. */
+    val default: Boolean? = null,
 )
 
-/**
- * Typed representation of the `DeletedSkillResource` API schema.
- */
+/** Typed representation of the `DeletedSkillResource` API schema. */
 data class DeletedSkillResource(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedSkillResourceObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedSkillResourceObjectEnum,
+    /** Required `boolean` value serialized in the `deleted` wire field. */
     val deleted: Boolean,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
-    val id: String
-)
-
-/**
- * Typed representation of the `DeletedSkillVersionResource` API schema.
- */
-data class DeletedSkillVersionResource(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedSkillVersionResourceObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
-    val deleted: Boolean,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * The deleted skill version.
-     */
-    val version: String
 )
 
-/**
- * Updates the default version pointer for a skill.
- */
+/** Typed representation of the `DeletedSkillVersionResource` API schema. */
+data class DeletedSkillVersionResource(
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedSkillVersionResourceObjectEnum,
+    /** Required `boolean` value serialized in the `deleted` wire field. */
+    val deleted: Boolean,
+    /** Required `string` value serialized in the `id` wire field. */
+    val id: String,
+    /** The deleted skill version. */
+    val version: String,
+)
+
+/** Updates the default version pointer for a skill. */
 data class SetDefaultSkillVersionBody(
-    /**
-     * The skill version number to set as default.
-     */
+    /** The skill version number to set as default. */
     @com.fasterxml.jackson.annotation.JsonProperty("default_version") val defaultVersion: String
 )
 
-/**
- * Typed representation of the `SkillListResource` API schema.
- */
+/** Typed representation of the `SkillListResource` API schema. */
 data class SkillListResource(
-    /**
-     * The type of object returned, must be `list`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SkillListResourceObjectEnum,
-    /**
-     * A list of items
-     */
+    /** The type of object returned, must be `list`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SkillListResourceObjectEnum,
+    /** A list of items */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SkillResource>,
-    /**
-     * Required `string` value serialized in the `first_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
-    /**
-     * Required `string` value serialized in the `last_id` wire field.
-     */
+    /** Required `string` value serialized in the `first_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
+    val firstId: String?,
+    /** Required `string` value serialized in the `last_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /**
-     * Whether there are more items available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+    /** Whether there are more items available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
 )
 
-/**
- * Typed representation of the `SkillResource` API schema.
- */
+/** Typed representation of the `SkillResource` API schema. */
 data class SkillResource(
-    /**
-     * Unique identifier for the skill.
-     */
+    /** Unique identifier for the skill. */
     val id: String,
-    /**
-     * The object type, which is `skill`.
-     */
+    /** The object type, which is `skill`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SkillResourceObjectEnum,
-    /**
-     * Name of the skill.
-     */
+    /** Name of the skill. */
     val name: String,
-    /**
-     * Description of the skill.
-     */
+    /** Description of the skill. */
     val description: String,
-    /**
-     * Unix timestamp (seconds) for when the skill was created.
-     */
+    /** Unix timestamp (seconds) for when the skill was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Default version for the skill.
-     */
+    /** Default version for the skill. */
     @com.fasterxml.jackson.annotation.JsonProperty("default_version") val defaultVersion: String,
-    /**
-     * Latest version for the skill.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("latest_version") val latestVersion: String
+    /** Latest version for the skill. */
+    @com.fasterxml.jackson.annotation.JsonProperty("latest_version") val latestVersion: String,
 )
 
-/**
- * Typed representation of the `SkillVersionListResource` API schema.
- */
+/** Typed representation of the `SkillVersionListResource` API schema. */
 data class SkillVersionListResource(
-    /**
-     * The type of object returned, must be `list`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SkillVersionListResourceObjectEnum,
-    /**
-     * A list of items
-     */
+    /** The type of object returned, must be `list`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SkillVersionListResourceObjectEnum,
+    /** A list of items */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SkillVersionResource>,
-    /**
-     * Required `string` value serialized in the `first_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
-    /**
-     * Required `string` value serialized in the `last_id` wire field.
-     */
+    /** Required `string` value serialized in the `first_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
+    val firstId: String?,
+    /** Required `string` value serialized in the `last_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /**
-     * Whether there are more items available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+    /** Whether there are more items available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
 )
 
-/**
- * Typed representation of the `SkillVersionResource` API schema.
- */
+/** Typed representation of the `SkillVersionResource` API schema. */
 data class SkillVersionResource(
-    /**
-     * The object type, which is `skill.version`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SkillVersionResourceObjectEnum,
-    /**
-     * Unique identifier for the skill version.
-     */
+    /** The object type, which is `skill.version`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SkillVersionResourceObjectEnum,
+    /** Unique identifier for the skill version. */
     val id: String,
-    /**
-     * Identifier of the skill for this version.
-     */
+    /** Identifier of the skill for this version. */
     @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
-    /**
-     * Version number for this skill.
-     */
+    /** Version number for this skill. */
     val version: String,
-    /**
-     * Unix timestamp (seconds) for when the version was created.
-     */
+    /** Unix timestamp (seconds) for when the version was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Name of the skill version.
-     */
+    /** Name of the skill version. */
     val name: String,
-    /**
-     * Description of the skill version.
-     */
-    val description: String
+    /** Description of the skill version. */
+    val description: String,
 )

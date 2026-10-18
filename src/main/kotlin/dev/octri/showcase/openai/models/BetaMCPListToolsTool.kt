@@ -3,24 +3,15 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A tool available on an MCP server.
- */
+/** A tool available on an MCP server. */
 data class BetaMCPListToolsTool(
-    /**
-     * The name of the tool.
-     */
+    /** The name of the tool. */
     val name: String,
-    /**
-     * The JSON schema describing the tool's input.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_schema") val inputSchema: Map<String, Any>,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** The JSON schema describing the tool's input. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_schema")
+    val inputSchema: Map<String, Any>,
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional object value serialized in the `annotations` wire field.
-     */
-    val annotations: Map<String, Any>? = null
+    /** Optional object value serialized in the `annotations` wire field. */
+    val annotations: Map<String, Any>? = null,
 )

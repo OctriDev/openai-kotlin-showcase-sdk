@@ -3,28 +3,17 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Sent when an agent environment is suspended and can resume from a snapshot.
- */
+/** Sent when an agent environment is suspended and can resume from a snapshot. */
 data class WebhookAgentEnvironmentSuspended(
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * The object type. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookAgentSessionEnvelopeObjectEnum,
-    /**
-     * The Unix timestamp, in seconds, when the event was created.
-     */
+    /** The object type. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookAgentSessionEnvelopeObjectEnum,
+    /** The Unix timestamp, in seconds, when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The event type. Always `agent.environment.suspended`.
-     */
+    /** The event type. Always `agent.environment.suspended`. */
     val type: WebhookAgentEnvironmentSuspendedVariant1TypeEnum,
-    /**
-     * Identifies the environment whose lifecycle changed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentEnvironmentEvent
+    /** Identifies the environment whose lifecycle changed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentEnvironmentEvent,
 )

@@ -3,35 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Forces the model to call the apply_patch tool when executing a tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Forces the model to call the apply_patch tool when executing a tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SpecificApplyPatchParam(
-    /**
-     * The tool to call. Always `apply_patch`.
-     */
+    /** The tool to call. Always `apply_patch`. */
     val type: SpecificApplyPatchParamTypeEnum
 ) : ToolChoiceParam
 
-/**
- * Forces the model to call the shell tool when a tool call is required.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Forces the model to call the shell tool when a tool call is required. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SpecificFunctionShellParam(
-    /**
-     * The tool to call. Always `shell`.
-     */
+    /** The tool to call. Always `shell`. */
     val type: SpecificFunctionShellParamTypeEnum
 ) : ToolChoiceParam
 
-/**
- * Typed representation of the `SpecificProgrammaticToolCallingParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `SpecificProgrammaticToolCallingParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SpecificProgrammaticToolCallingParam(
-    /**
-     * The tool to call. Always `programmatic_tool_calling`.
-     */
+    /** The tool to call. Always `programmatic_tool_calling`. */
     val type: SpecificProgrammaticToolCallingParamTypeEnum
 ) : ToolChoiceParam

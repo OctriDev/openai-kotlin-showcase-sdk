@@ -3,16 +3,16 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Fields to replace on an active vault.
- */
+/** Fields to replace on an active vault. */
 data class UpdateVaultParams(
     /**
-     * Replaces all metadata. Omit to leave unchanged, or pass {} to clear it. Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters.
+     * Replaces all metadata. Omit to leave unchanged, or pass {} to clear it. Up to 16 string
+     * key-value pairs, with keys up to 64 and values up to 512 characters.
      */
     val metadata: Map<String, String>? = null,
     /**
-     * A replacement name. Omit to leave unchanged, or pass null to clear it. The name is trimmed before storage. It must contain 1 to 256 UTF-8 bytes after trimming.
+     * A replacement name. Omit to leave unchanged, or pass null to clear it. The name is trimmed
+     * before storage. It must contain 1 to 256 UTF-8 bytes after trimming.
      */
-    val name: String? = null
+    val name: String? = null,
 )

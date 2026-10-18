@@ -3,92 +3,122 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Moderation results or errors for the request input and generated output.
- */
+/** Moderation results or errors for the request input and generated output. */
 data class ChatCompletionModeration(
-    /**
-     * Moderation for the request input.
-     */
+    /** Moderation for the request input. */
     val input: ChatCompletionModerationInput,
-    /**
-     * Moderation for the generated output.
-     */
-    val output: ChatCompletionModerationOutput
+    /** Moderation for the generated output. */
+    val output: ChatCompletionModerationOutput,
 )
 
-/**
- * An error produced while attempting moderation.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An error produced while attempting moderation. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ChatCompletionModerationError(
-    /**
-     * The object type, which is always `error`.
-     */
+    /** The object type, which is always `error`. */
     val type: ChatCompletionModerationErrorTypeEnum,
-    /**
-     * The error code.
-     */
+    /** The error code. */
     val code: String,
-    /**
-     * The error message.
-     */
-    val message: String
+    /** The error message. */
+    val message: String,
 ) : ChatCompletionModerationInput, ChatCompletionModerationOutput
 
-/**
- * Moderation for the request input.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownChatCompletionModerationInput::class)
+/** Moderation for the request input. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownChatCompletionModerationInput::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ChatCompletionModerationResults::class, name = "moderation_results"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ChatCompletionModerationError::class, name = "error")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ChatCompletionModerationResults::class,
+        name = "moderation_results",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ChatCompletionModerationError::class,
+        name = "error",
+    ),
 )
 sealed interface ChatCompletionModerationInput
 
-/** A [ChatCompletionModerationInput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownChatCompletionModerationInput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [ChatCompletionModerationInput] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownChatCompletionModerationInput
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ChatCompletionModerationInput {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Moderation for the generated output.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownChatCompletionModerationOutput::class)
+/** Moderation for the generated output. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownChatCompletionModerationOutput::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ChatCompletionModerationResults::class, name = "moderation_results"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ChatCompletionModerationError::class, name = "error")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ChatCompletionModerationResults::class,
+        name = "moderation_results",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ChatCompletionModerationError::class,
+        name = "error",
+    ),
 )
 sealed interface ChatCompletionModerationOutput
 
-/** A [ChatCompletionModerationOutput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownChatCompletionModerationOutput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [ChatCompletionModerationOutput] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownChatCompletionModerationOutput
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ChatCompletionModerationOutput {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Successful moderation results for the request input or generated output.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Successful moderation results for the request input or generated output. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ChatCompletionModerationResults(
-    /**
-     * The object type, which is always `moderation_results`.
-     */
+    /** The object type, which is always `moderation_results`. */
     val type: ChatCompletionModerationResultsTypeEnum,
-    /**
-     * The moderation model used to generate the results.
-     */
+    /** The moderation model used to generate the results. */
     val model: String,
-    /**
-     * A list of moderation results.
-     */
-    val results: List<ModerationResultBody>
+    /** A list of moderation results. */
+    val results: List<ModerationResultBody>,
 ) : ChatCompletionModerationInput, ChatCompletionModerationOutput

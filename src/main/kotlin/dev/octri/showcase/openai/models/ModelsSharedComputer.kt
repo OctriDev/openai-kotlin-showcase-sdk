@@ -3,302 +3,281 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A click action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A click action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ClickParam(
-    /**
-     * Specifies the event type. For a click action, this property is always `click`.
-     */
+    /** Specifies the event type. For a click action, this property is always `click`. */
     val type: ClickParamTypeEnum,
     /**
-     * Indicates which mouse button was pressed during the click. One of `left`, `right`, `wheel`, `back`, or `forward`.
+     * Indicates which mouse button was pressed during the click. One of `left`, `right`, `wheel`,
+     * `back`, or `forward`.
      */
     val button: ClickButtonType,
-    /**
-     * The x-coordinate where the click occurred.
-     */
+    /** The x-coordinate where the click occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the click occurred.
-     */
+    /** The y-coordinate where the click occurred. */
     val y: Long,
-    /**
-     * The keys being held while clicking.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while clicking. */
+    val keys: List<String>? = null,
 ) : ComputerAction
 
-/**
- * Typed representation of the `ComputerAction` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownComputerAction::class)
+/** Typed representation of the `ComputerAction` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownComputerAction::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ClickParam::class, name = "click"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DoubleClickAction::class, name = "double_click"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = DoubleClickAction::class,
+        name = "double_click",
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = DragParam::class, name = "drag"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = KeyPressAction::class, name = "keypress"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = KeyPressAction::class,
+        name = "keypress",
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MoveParam::class, name = "move"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ScreenshotParam::class, name = "screenshot"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ScreenshotParam::class,
+        name = "screenshot",
+    ),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ScrollParam::class, name = "scroll"),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = TypeParam::class, name = "type"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WaitParam::class, name = "wait")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = WaitParam::class, name = "wait"),
 )
 sealed interface ComputerAction
 
 /** A [ComputerAction] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownComputerAction @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownComputerAction
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ComputerAction {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 typealias ComputerActionList = List<ComputerAction>
 
-/**
- * The output of a computer tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The output of a computer tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ComputerCallOutputItemParam(
-    /**
-     * The ID of the computer tool call that produced the output.
-     */
+    /** The ID of the computer tool call that produced the output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The type of the computer tool call output. Always `computer_call_output`.
-     */
+    /** The type of the computer tool call output. Always `computer_call_output`. */
     val type: ComputerCallOutputItemParamTypeEnum,
-    /**
-     * A computer screenshot image used with the computer use tool.
-     */
+    /** A computer screenshot image used with the computer use tool. */
     val output: ComputerScreenshotImage,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * The safety checks reported by the API that have been acknowledged by the developer.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks") val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
-    /**
-     * Optional API value serialized in the `status` wire field.
-     */
-    val status: FunctionCallItemStatus? = null
+    /** The safety checks reported by the API that have been acknowledged by the developer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks")
+    val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
+    /** Optional API value serialized in the `status` wire field. */
+    val status: FunctionCallItemStatus? = null,
 ) : Item
 
-/**
- * A pending safety check for the computer call.
- */
+/** A pending safety check for the computer call. */
 data class ComputerCallSafetyCheckParam(
-    /**
-     * The ID of the pending safety check.
-     */
+    /** The ID of the pending safety check. */
     val id: String,
-    /**
-     * Optional `string` value serialized in the `code` wire field.
-     */
+    /** Optional `string` value serialized in the `code` wire field. */
     val code: String? = null,
-    /**
-     * Optional `string` value serialized in the `message` wire field.
-     */
-    val message: String? = null
+    /** Optional `string` value serialized in the `message` wire field. */
+    val message: String? = null,
 )
 
-/**
- * A computer screenshot image used with the computer use tool.
- */
+/** A computer screenshot image used with the computer use tool. */
 data class ComputerScreenshotImage(
     /**
-     * Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
+     * Specifies the event type. For a computer screenshot, this property is always set to
+     * `computer_screenshot`.
      */
     val type: ComputerScreenshotImageTypeEnum,
-    /**
-     * The URL of the screenshot image.
-     */
+    /** The URL of the screenshot image. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /**
-     * The identifier of an uploaded file that contains the screenshot.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null
+    /** The identifier of an uploaded file that contains the screenshot. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
 )
 
-/**
- * The output of a computer tool call.
- */
+/** The output of a computer tool call. */
 data class ComputerToolCallOutput(
-    /**
-     * The type of the computer tool call output. Always `computer_call_output`.
-     */
+    /** The type of the computer tool call output. Always `computer_call_output`. */
     val type: ComputerToolCallOutputTypeEnum,
-    /**
-     * The ID of the computer tool call that produced the output.
-     */
+    /** The ID of the computer tool call that produced the output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * A computer screenshot image used with the computer use tool.
-     */
+    /** A computer screenshot image used with the computer use tool. */
     val output: ComputerScreenshotImage,
-    /**
-     * The ID of the computer tool call output.
-     */
+    /** The ID of the computer tool call output. */
     val id: String? = null,
+    /** The safety checks reported by the API that have been acknowledged by the developer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks")
+    val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
     /**
-     * The safety checks reported by the API that have been acknowledged by the developer.
+     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when input items are returned via API.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks") val acknowledgedSafetyChecks: List<ComputerCallSafetyCheckParam>? = null,
-    /**
-     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
-     */
-    val status: ComputerToolCallOutputStatusEnum? = null
+    val status: ComputerToolCallOutputStatusEnum? = null,
 )
 
-/**
- * A double click action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A double click action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DoubleClickAction(
     /**
-     * Specifies the event type. For a double click action, this property is always set to `double_click`.
+     * Specifies the event type. For a double click action, this property is always set to
+     * `double_click`.
      */
     val type: DoubleClickActionTypeEnum,
-    /**
-     * The x-coordinate where the double click occurred.
-     */
+    /** The x-coordinate where the double click occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the double click occurred.
-     */
+    /** The y-coordinate where the double click occurred. */
     val y: Long,
-    /**
-     * The keys being held while double-clicking.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?
+    /** The keys being held while double-clicking. */
+    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?,
 ) : ComputerAction
 
-/**
- * A drag action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A drag action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DragParam(
-    /**
-     * Specifies the event type. For a drag action, this property is always set to `drag`.
-     */
+    /** Specifies the event type. For a drag action, this property is always set to `drag`. */
     val type: DragParamTypeEnum,
     /**
-     * An array of coordinates representing the path of the drag action. Coordinates will appear as an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
+     * An array of coordinates representing the path of the drag action. Coordinates will appear as
+     * an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
      */
     val path: List<CoordParam>,
-    /**
-     * The keys being held while dragging the mouse.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while dragging the mouse. */
+    val keys: List<String>? = null,
 ) : ComputerAction
 
-/**
- * A collection of keypresses the model would like to perform.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A collection of keypresses the model would like to perform. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class KeyPressAction(
     /**
      * Specifies the event type. For a keypress action, this property is always set to `keypress`.
      */
     val type: KeyPressActionTypeEnum,
     /**
-     * The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.
+     * The combination of keys the model is requesting to be pressed. This is an array of strings,
+     * each representing a key.
      */
-    val keys: List<String>
+    val keys: List<String>,
 ) : ComputerAction
 
-/**
- * A mouse move action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A mouse move action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MoveParam(
-    /**
-     * Specifies the event type. For a move action, this property is always set to `move`.
-     */
+    /** Specifies the event type. For a move action, this property is always set to `move`. */
     val type: MoveParamTypeEnum,
-    /**
-     * The x-coordinate to move to.
-     */
+    /** The x-coordinate to move to. */
     val x: Long,
-    /**
-     * The y-coordinate to move to.
-     */
+    /** The y-coordinate to move to. */
     val y: Long,
-    /**
-     * The keys being held while moving the mouse.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while moving the mouse. */
+    val keys: List<String>? = null,
 ) : ComputerAction
 
-/**
- * A screenshot action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A screenshot action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ScreenshotParam(
     /**
-     * Specifies the event type. For a screenshot action, this property is always set to `screenshot`.
+     * Specifies the event type. For a screenshot action, this property is always set to
+     * `screenshot`.
      */
     val type: ScreenshotParamTypeEnum
 ) : ComputerAction
 
-/**
- * A scroll action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A scroll action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ScrollParam(
-    /**
-     * Specifies the event type. For a scroll action, this property is always set to `scroll`.
-     */
+    /** Specifies the event type. For a scroll action, this property is always set to `scroll`. */
     val type: ScrollParamTypeEnum,
-    /**
-     * The x-coordinate where the scroll occurred.
-     */
+    /** The x-coordinate where the scroll occurred. */
     val x: Long,
-    /**
-     * The y-coordinate where the scroll occurred.
-     */
+    /** The y-coordinate where the scroll occurred. */
     val y: Long,
-    /**
-     * The horizontal scroll distance.
-     */
+    /** The horizontal scroll distance. */
     @com.fasterxml.jackson.annotation.JsonProperty("scroll_x") val scrollX: Long,
-    /**
-     * The vertical scroll distance.
-     */
+    /** The vertical scroll distance. */
     @com.fasterxml.jackson.annotation.JsonProperty("scroll_y") val scrollY: Long,
-    /**
-     * The keys being held while scrolling.
-     */
-    val keys: List<String>? = null
+    /** The keys being held while scrolling. */
+    val keys: List<String>? = null,
 ) : ComputerAction
 
-/**
- * An action to type in text.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An action to type in text. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TypeParam(
-    /**
-     * Specifies the event type. For a type action, this property is always set to `type`.
-     */
+    /** Specifies the event type. For a type action, this property is always set to `type`. */
     val type: TypeParamTypeEnum,
-    /**
-     * The text to type.
-     */
-    val text: String
+    /** The text to type. */
+    val text: String,
 ) : ComputerAction
 
-/**
- * A wait action.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A wait action. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class WaitParam(
-    /**
-     * Specifies the event type. For a wait action, this property is always set to `wait`.
-     */
+    /** Specifies the event type. For a wait action, this property is always set to `wait`. */
     val type: WaitParamTypeEnum
 ) : ComputerAction

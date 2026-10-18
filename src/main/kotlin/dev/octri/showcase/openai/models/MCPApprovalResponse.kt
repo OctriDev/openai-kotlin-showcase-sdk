@@ -3,29 +3,23 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A response to an MCP approval request.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A response to an MCP approval request. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MCPApprovalResponse(
-    /**
-     * The type of the item. Always `mcp_approval_response`.
-     */
+    /** The type of the item. Always `mcp_approval_response`. */
     val type: MCPApprovalResponseTypeEnum,
-    /**
-     * The ID of the approval request being answered.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id") val approvalRequestId: String,
-    /**
-     * Whether the request was approved.
-     */
+    /** The ID of the approval request being answered. */
+    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id")
+    val approvalRequestId: String,
+    /** Whether the request was approved. */
     val approve: Boolean,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional `string` value serialized in the `reason` wire field.
-     */
-    val reason: String? = null
+    /** Optional `string` value serialized in the `reason` wire field. */
+    val reason: String? = null,
 ) : Item

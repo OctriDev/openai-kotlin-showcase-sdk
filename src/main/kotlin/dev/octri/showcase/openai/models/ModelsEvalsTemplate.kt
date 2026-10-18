@@ -3,9 +3,7 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required API value serialized in the `template[]` wire field.
- */
+/** Required API value serialized in the `template[]` wire field. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = TemplateItem.Deserializer::class)
 sealed interface TemplateItem {
     /** Chooses the branch this payload is shaped like. */
@@ -16,10 +14,11 @@ sealed interface TemplateItem {
         ): TemplateItem {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType: Class<out TemplateItem>? = when {
-                node.has("phase") -> EasyInputMessage::class.java
-                else -> null
-            }
+            val ownedType: Class<out TemplateItem>? =
+                when {
+                    node.has("phase") -> EasyInputMessage::class.java
+                    else -> null
+                }
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -27,7 +26,8 @@ sealed interface TemplateItem {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out TemplateItem>> = listOf(EasyInputMessage::class.java, EvalItem::class.java)
+            val objectTypes: List<Class<out TemplateItem>> =
+                listOf(EasyInputMessage::class.java, EvalItem::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -36,29 +36,34 @@ sealed interface TemplateItem {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, TemplateItem::class.java, "no TemplateItem branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        TemplateItem::class.java,
+                        "no TemplateItem branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TemplateItem2Variant0(
-    /**
-     * The role of the message (e.g. "system", "assistant", "user").
-     */
+    /** The role of the message (e.g. "system", "assistant", "user"). */
     val role: String,
-    /**
-     * The content of the message.
-     */
-    val content: String
+    /** The content of the message. */
+    val content: String,
 ) : TemplateItem2
 
-/**
- * Required API value serialized in the `template[]` wire field.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = TemplateItem2.Deserializer::class)
+/** Required API value serialized in the `template[]` wire field. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = TemplateItem2.Deserializer::class
+)
 sealed interface TemplateItem2 {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<TemplateItem2>() {
@@ -68,10 +73,11 @@ sealed interface TemplateItem2 {
         ): TemplateItem2 {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType: Class<out TemplateItem2>? = when {
-                node.has("type") -> EvalItem::class.java
-                else -> null
-            }
+            val ownedType: Class<out TemplateItem2>? =
+                when {
+                    node.has("type") -> EvalItem::class.java
+                    else -> null
+                }
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -79,7 +85,8 @@ sealed interface TemplateItem2 {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out TemplateItem2>> = listOf(TemplateItem2Variant0::class.java, EvalItem::class.java)
+            val objectTypes: List<Class<out TemplateItem2>> =
+                listOf(TemplateItem2Variant0::class.java, EvalItem::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -88,8 +95,12 @@ sealed interface TemplateItem2 {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, TemplateItem2::class.java, "no TemplateItem2 branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        TemplateItem2::class.java,
+                        "no TemplateItem2 branch accepts this payload",
+                    )
             }
         }
     }

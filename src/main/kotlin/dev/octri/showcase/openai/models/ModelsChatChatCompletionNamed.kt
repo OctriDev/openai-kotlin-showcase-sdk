@@ -3,52 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required object value serialized in the `function` wire field.
- */
+/** Required object value serialized in the `function` wire field. */
 data class ChatCompletionNamedToolChoiceFunction(
-    /**
-     * The name of the function to call.
-     */
+    /** The name of the function to call. */
     val name: String
 )
 
-/**
- * Specifies a tool the model should use. Use to force the model to call a specific function.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Specifies a tool the model should use. Use to force the model to call a specific function. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ChatCompletionNamedToolChoice(
-    /**
-     * For function calling, the type is always `function`.
-     */
+    /** For function calling, the type is always `function`. */
     val type: ChatCompletionNamedToolChoiceTypeEnum,
-    /**
-     * Required object value serialized in the `function` wire field.
-     */
-    val function: ChatCompletionNamedToolChoiceFunction
+    /** Required object value serialized in the `function` wire field. */
+    val function: ChatCompletionNamedToolChoiceFunction,
 ) : ChatCompletionToolChoiceOption
 
-/**
- * Required object value serialized in the `custom` wire field.
- */
+/** Required object value serialized in the `custom` wire field. */
 data class ChatCompletionNamedToolChoiceCustomCustom(
-    /**
-     * The name of the custom tool to call.
-     */
+    /** The name of the custom tool to call. */
     val name: String
 )
 
-/**
- * Specifies a tool the model should use. Use to force the model to call a specific custom tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Specifies a tool the model should use. Use to force the model to call a specific custom tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ChatCompletionNamedToolChoiceCustom(
-    /**
-     * For custom tool calling, the type is always `custom`.
-     */
+    /** For custom tool calling, the type is always `custom`. */
     val type: ChatCompletionNamedToolChoiceCustomTypeEnum,
-    /**
-     * Required object value serialized in the `custom` wire field.
-     */
-    val custom: ChatCompletionNamedToolChoiceCustomCustom
+    /** Required object value serialized in the `custom` wire field. */
+    val custom: ChatCompletionNamedToolChoiceCustomCustom,
 ) : ChatCompletionToolChoiceOption

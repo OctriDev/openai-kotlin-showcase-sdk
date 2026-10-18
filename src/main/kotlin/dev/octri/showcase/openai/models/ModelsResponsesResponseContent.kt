@@ -3,64 +3,46 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when a new content part is added.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a new content part is added. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseContentPartAddedEvent(
-    /**
-     * The type of the event. Always `response.content_part.added`.
-     */
+    /** The type of the event. Always `response.content_part.added`. */
     val type: ResponseContentPartAddedEventTypeEnum,
-    /**
-     * The ID of the output item that the content part was added to.
-     */
+    /** The ID of the output item that the content part was added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the content part was added to.
-     */
+    /** The index of the output item that the content part was added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part that was added.
-     */
+    /** The index of the content part that was added. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The content part that was added.
-     */
+    /** The content part that was added. */
     val part: OutputContent,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
 ) : ResponseStreamEvent
 
-/**
- * Emitted when a content part is done.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a content part is done. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseContentPartDoneEvent(
-    /**
-     * The type of the event. Always `response.content_part.done`.
-     */
+    /** The type of the event. Always `response.content_part.done`. */
     val type: ResponseContentPartDoneEventTypeEnum,
-    /**
-     * The ID of the output item that the content part was added to.
-     */
+    /** The ID of the output item that the content part was added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the content part was added to.
-     */
+    /** The index of the output item that the content part was added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part that is done.
-     */
+    /** The index of the content part that is done. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The content part that is done.
-     */
-    val part: OutputContent
+    /** The content part that is done. */
+    val part: OutputContent,
 ) : ResponseStreamEvent

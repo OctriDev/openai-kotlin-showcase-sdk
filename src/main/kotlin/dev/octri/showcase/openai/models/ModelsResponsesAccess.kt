@@ -3,22 +3,21 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `AccessProgramsBody` API schema.
- */
+/** Typed representation of the `AccessProgramsBody` API schema. */
 data class AccessProgramsBody(
-    /**
-     * The effective Cyber access program used for this response.
-     */
+    /** The effective Cyber access program used for this response. */
     val cyber: CyberAccessProgramEnum
 )
 
-/**
- * Domain-specific access programs to use for this request.
- */
+/** Domain-specific access programs to use for this request. */
 data class AccessProgramsParam(
     /**
-     * The Cyber access program to use for this request. Supported values are `standard`, `daybreak_blue`, and `daybreak_red`. If omitted, the API resolves the program from the model's Cyber tier and your organization and project access, subject to model-specific eligibility restrictions. By default, models without a Cyber tier use Standard. Blue-tier models use Daybreak Blue when authorized; otherwise they fall back to Standard unless the model requires Daybreak access. Red-tier…
+     * The Cyber access program to use for this request. Supported values are `standard`,
+     * `daybreak_blue`, and `daybreak_red`. If omitted, the API resolves the program from the
+     * model's Cyber tier and your organization and project access, subject to model-specific
+     * eligibility restrictions. By default, models without a Cyber tier use Standard. Blue-tier
+     * models use Daybreak Blue when authorized; otherwise they fall back to Standard unless the
+     * model requires Daybreak access. Red-tier…
      */
     val cyber: CyberAccessProgramEnum? = null
 )

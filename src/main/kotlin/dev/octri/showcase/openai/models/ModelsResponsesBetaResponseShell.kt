@@ -3,169 +3,118 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A streaming event that indicated a shell command was added to a tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A streaming event that indicated a shell command was added to a tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseShellCallCommandAddedStreamingEvent(
-    /**
-     * The type of the event, always `response.shell_call_command.added`.
-     */
+    /** The type of the event, always `response.shell_call_command.added`. */
     val type: BetaResponseShellCallCommandAddedStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
+    /** The sequence number of the event that was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the output item that was updated.
-     */
+    /** The index of the output item that was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the shell command that was added.
-     */
+    /** The index of the shell command that was added. */
     @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
-    /**
-     * The shell command that was added.
-     */
+    /** The shell command that was added. */
     val command: String,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
-
-/**
- * A streaming event that indicated a shell command was incrementally updated.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseShellCallCommandDeltaStreamingEvent(
-    /**
-     * The type of the event, always `response.shell_call_command.delta`.
-     */
-    val type: BetaResponseShellCallCommandDeltaStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the output item that was updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the shell command that was updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
-    /**
-     * The shell command delta that was appended.
-     */
-    val delta: String,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
+    /** The agent that owns this multi-agent streaming event. */
     val agent: BetaAgentTag? = null,
-    /**
-     * An obfuscation string that was added to pad the event payload.
-     */
-    val obfuscation: String? = null
 ) : BetaResponseStreamEvent
 
-/**
- * A streaming event that indicated a shell command was completed.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A streaming event that indicated a shell command was incrementally updated. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseShellCallCommandDeltaStreamingEvent(
+    /** The type of the event, always `response.shell_call_command.delta`. */
+    val type: BetaResponseShellCallCommandDeltaStreamingEventTypeEnum,
+    /** The sequence number of the event that was emitted. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The index of the output item that was updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The index of the shell command that was updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
+    /** The shell command delta that was appended. */
+    val delta: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+    /** An obfuscation string that was added to pad the event payload. */
+    val obfuscation: String? = null,
+) : BetaResponseStreamEvent
+
+/** A streaming event that indicated a shell command was completed. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseShellCallCommandDoneStreamingEvent(
-    /**
-     * The type of the event, always `response.shell_call_command.done`.
-     */
+    /** The type of the event, always `response.shell_call_command.done`. */
     val type: BetaResponseShellCallCommandDoneStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
+    /** The sequence number of the event that was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the output item that was updated.
-     */
+    /** The index of the output item that was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the shell command that was completed.
-     */
+    /** The index of the shell command that was completed. */
     @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
-    /**
-     * The final shell command that was emitted.
-     */
+    /** The final shell command that was emitted. */
     val command: String,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * A streaming event that indicated shell call output was incrementally added.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A streaming event that indicated shell call output was incrementally added. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseShellCallOutputContentDeltaStreamingEvent(
-    /**
-     * The type of the event, always `response.shell_call_output_content.delta`.
-     */
+    /** The type of the event, always `response.shell_call_output_content.delta`. */
     val type: BetaResponseShellCallOutputContentDeltaStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
+    /** The sequence number of the event that was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The ID of the output item that was updated.
-     */
+    /** The ID of the output item that was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that was updated.
-     */
+    /** The index of the output item that was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the shell command that produced output.
-     */
+    /** The index of the shell command that produced output. */
     @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
-    /**
-     * The stdout/stderr delta that was emitted.
-     */
+    /** The stdout/stderr delta that was emitted. */
     val delta: BetaShellCallOutputDelta,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * A streaming event that indicated shell call output was completed.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A streaming event that indicated shell call output was completed. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseShellCallOutputContentDoneStreamingEvent(
-    /**
-     * The type of the event, always `response.shell_call_output_content.done`.
-     */
+    /** The type of the event, always `response.shell_call_output_content.done`. */
     val type: BetaResponseShellCallOutputContentDoneStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
+    /** The sequence number of the event that was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The ID of the output item that was updated.
-     */
+    /** The ID of the output item that was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that was updated.
-     */
+    /** The index of the output item that was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the shell command that produced output.
-     */
+    /** The index of the shell command that produced output. */
     @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
-    /**
-     * The output contents emitted for the shell command.
-     */
+    /** The output contents emitted for the shell command. */
     val output: List<BetaFunctionShellCallOutputContent>,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent

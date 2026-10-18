@@ -3,28 +3,28 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveContainerNetworkPolicyDisabledParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveContainerNetworkPolicyDisabledParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveContainerNetworkPolicyDisabledParam(
-    /**
-     * Disable outbound network access. Always `disabled`.
-     */
+    /** Disable outbound network access. Always `disabled`. */
     val type: LiveContainerNetworkPolicyDisabledParamTypeEnum
 ) : LiveHostedShellContainerAutoParamNetworkPolicy
 
-/**
- * Typed representation of the `LiveContainerReferenceParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveContainerReferenceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveContainerReferenceParam(
-    /**
-     * References a container created with the /v1/containers endpoint
-     */
+    /** References a container created with the /v1/containers endpoint */
     val type: LiveContainerReferenceParamTypeEnum,
-    /**
-     * The ID of the referenced container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String
+    /** The ID of the referenced container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
 ) : LiveHostedShellToolInputParamEnvironment

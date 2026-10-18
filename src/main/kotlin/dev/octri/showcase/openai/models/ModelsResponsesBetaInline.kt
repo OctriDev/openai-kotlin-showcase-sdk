@@ -3,43 +3,31 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `BetaInlineSkillParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaInlineSkillParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaInlineSkillParam(
-    /**
-     * Defines an inline skill for this request.
-     */
+    /** Defines an inline skill for this request. */
     val type: BetaInlineSkillParamTypeEnum,
-    /**
-     * The name of the skill.
-     */
+    /** The name of the skill. */
     val name: String,
-    /**
-     * The description of the skill.
-     */
+    /** The description of the skill. */
     val description: String,
-    /**
-     * Inline skill payload
-     */
-    val source: BetaInlineSkillSourceParam
+    /** Inline skill payload */
+    val source: BetaInlineSkillSourceParam,
 ) : BetaContainerAutoParamSkillsItem
 
-/**
- * Inline skill payload
- */
+/** Inline skill payload */
 data class BetaInlineSkillSourceParam(
-    /**
-     * The type of the inline skill source. Must be `base64`.
-     */
+    /** The type of the inline skill source. Must be `base64`. */
     val type: BetaInlineSkillSourceParamTypeEnum,
-    /**
-     * The media type of the inline skill payload. Must be `application/zip`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("media_type") val mediaType: BetaInlineSkillSourceParamMediaTypeEnum,
-    /**
-     * Base64-encoded skill zip bundle.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String
+    /** The media type of the inline skill payload. Must be `application/zip`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("media_type")
+    val mediaType: BetaInlineSkillSourceParamMediaTypeEnum,
+    /** Base64-encoded skill zip bundle. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
 )
