@@ -3,77 +3,86 @@
 
 package dev.octri.showcase.openai.models
 
-/** A SIP DTMF keypress received from the caller. Delivered only to sideband observers. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A SIP DTMF keypress received from the caller. Delivered only to sideband observers.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveTransportDTMFReceived(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: LiveTransportDTMFReceivedTypeEnum,
-    /** Required `string` value serialized in the `event_id` wire field. */
+    /**
+     * Required `string` value serialized in the `event_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** Required `string` value serialized in the `event` wire field. */
-    val event: String,
+    /**
+     * Required `string` value serialized in the `event` wire field.
+     */
+    val event: String
 ) : LiveServerEvent2
 
 /**
- * A SIP DTMF keypress successfully sent to the SIP trunk. Delivered only to sideband observers;
- * this is not a client command.
+ * A SIP DTMF keypress successfully sent to the SIP trunk. Delivered only to sideband observers; this is not a client command.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveTransportDTMFSend(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: LiveTransportDTMFSendTypeEnum,
-    /** Required `string` value serialized in the `event_id` wire field. */
+    /**
+     * Required `string` value serialized in the `event_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** Required `string` value serialized in the `event` wire field. */
+    /**
+     * Required `string` value serialized in the `event` wire field.
+     */
     val event: String,
-    /** The event_id of the client command, when supplied. */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id")
-    val clientEventId: String? = null,
+    /**
+     * The event_id of the client command, when supplied.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
 ) : LiveServerEvent2
 
-/** An asynchronous outbound SIP setup failure. Delivered only to sideband observers. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * An asynchronous outbound SIP setup failure. Delivered only to sideband observers.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveTransportFailed(
-    /** Required `string` value serialized in the `event_id` wire field. */
+    /**
+     * Required `string` value serialized in the `event_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The canonical Live session ID. */
+    /**
+     * The canonical Live session ID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: LiveTransportFailedTypeEnum,
-    /** Required object value serialized in the `error` wire field. */
-    val error: LiveTransportCallError,
+    /**
+     * Required object value serialized in the `error` wire field.
+     */
+    val error: LiveTransportCallError
 ) : LiveSidebandServerEvent, LiveServerEvent2
 
 /**
- * The outbound SIP provider leg is ringing or providing early media. Delivered only to sideband
- * observers.
+ * The outbound SIP provider leg is ringing or providing early media. Delivered only to sideband observers.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveTransportRinging(
-    /** Required `string` value serialized in the `event_id` wire field. */
+    /**
+     * Required `string` value serialized in the `event_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The canonical Live session ID. */
+    /**
+     * The canonical Live session ID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveTransportRingingTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: LiveTransportRingingTypeEnum
 ) : LiveSidebandServerEvent, LiveServerEvent2

@@ -3,24 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Required object value serialized in the `data` wire field. */
+/**
+ * Required object value serialized in the `data` wire field.
+ */
 data class WebhookSafetyDeactivationIssuedData(
-    /** The safety case ID to pass to `GET /v1/safety/cases/{id}`. */
+    /**
+     * The safety case ID to pass to `GET /v1/safety/cases/{id}`.
+     */
     val id: String
 )
 
-/** Sent when a deactivation is issued for a safety identifier in your organization. */
+/**
+ * Sent when a deactivation is issued for a safety identifier in your organization.
+ */
 data class WebhookSafetyDeactivationIssued(
-    /** The unique ID of the webhook event. */
+    /**
+     * The unique ID of the webhook event.
+     */
     val id: String,
-    /** Always `event`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookSafetyDeactivationIssuedObjectEnum,
-    /** The Unix timestamp in seconds when the event was created. */
+    /**
+     * Always `event`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookSafetyDeactivationIssuedObjectEnum,
+    /**
+     * The Unix timestamp in seconds when the event was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Always `safety.deactivation_issued`. */
+    /**
+     * Always `safety.deactivation_issued`.
+     */
     val type: WebhookSafetyDeactivationIssuedTypeEnum,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: WebhookSafetyDeactivationIssuedData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookSafetyDeactivationIssuedData
 )

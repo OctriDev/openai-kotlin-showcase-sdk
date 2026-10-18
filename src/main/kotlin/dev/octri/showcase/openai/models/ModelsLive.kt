@@ -4,48 +4,23 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Who handles tasks delegated by the Live model. Omitted or null selects your application; use
- * `responses` or `decisions` to delegate to the corresponding API.
+ * Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` or `decisions` to delegate to the corresponding API.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownDelegation::class,
-)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownDelegation::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveClientDelegationParam::class,
-        name = "client",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveResponsesDelegationParam::class,
-        name = "responses",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveDecisionsDelegationParam::class,
-        name = "decisions",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveClientDelegationParam::class, name = "client"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponsesDelegationParam::class, name = "responses"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionsDelegationParam::class, name = "decisions")
 )
 sealed interface Delegation
 
 /** A [Delegation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownDelegation
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownDelegation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : Delegation {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 typealias Input = List<LiveInitialItem>
@@ -53,61 +28,57 @@ typealias Input = List<LiveInitialItem>
 typealias Instructions = String
 
 /**
- * Delegate tasks to your application. The Live session emits delegation events that your backend
- * handles.
+ * Delegate tasks to your application. The Live session emits delegation events that your backend handles.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveClientDelegationParam(
-    /** The delegation owner. Always `client` for tasks handled by your application. */
+    /**
+     * The delegation owner. Always `client` for tasks handled by your application.
+     */
     val type: LiveClientDelegationParamTypeEnum
-) :
-    Delegation,
-    LiveSessionCreateParamsDelegation,
-    LiveSessionUpdateParamsDelegation,
-    LiveSessionResourceParamDelegation
+) : Delegation, LiveSessionCreateParamsDelegation, LiveSessionUpdateParamsDelegation, LiveSessionResourceParamDelegation
 
-/** Typed representation of the `LiveDecisionsDelegationParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `LiveDecisionsDelegationParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveDecisionsDelegationParam(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: LiveDecisionsDelegationParamTypeEnum,
-    /** Required object value serialized in the `decisions` wire field. */
-    val decisions: LiveDecisionsSettingsInputParam,
+    /**
+     * Required object value serialized in the `decisions` wire field.
+     */
+    val decisions: LiveDecisionsSettingsInputParam
 ) : Delegation
 
-/** Delegate tasks to a Responses model managed by the Live session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Delegate tasks to a Responses model managed by the Live session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveResponsesDelegationParam(
-    /** The delegation owner. Always `responses` for tasks handled by the Responses API. */
+    /**
+     * The delegation owner. Always `responses` for tasks handled by the Responses API.
+     */
     val type: LiveResponsesDelegationParamTypeEnum,
     /**
      * Backend model, prompt, and tools used when the Live session delegates a task to Responses.
      */
-    val responses: LiveResponsesDelegationSettingsInputParam,
+    val responses: LiveResponsesDelegationSettingsInputParam
 ) : Delegation, LiveSessionCreateParamsDelegation, LiveSessionResourceParamDelegation
 
 typealias ModelIdsLive = String
 
 typealias PropertiesStore = Boolean
 
-/** The newly created Live session. Use its ID for session controls and sideband connections. */
+/**
+ * The newly created Live session. Use its ID for session controls and sideband connections.
+ */
 data class Session(
-    /** Opaque session identifier. Preserve the returned value unchanged, including its prefix. */
+    /**
+     * Opaque session identifier. Preserve the returned value unchanged, including its prefix.
+     */
     val id: String
 )
 

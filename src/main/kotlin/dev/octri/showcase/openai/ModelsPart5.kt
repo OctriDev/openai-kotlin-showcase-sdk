@@ -3,253 +3,177 @@
 
 package dev.octri.showcase.openai
 
-typealias BetaResponsesServerEventVariant34 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant34
+typealias BetaResponsesServerEventVariant34 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant34
 
-typealias BetaResponsesServerEventVariant35 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant35
+typealias BetaResponsesServerEventVariant35 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant35
 
-typealias BetaResponsesServerEventVariant36 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant36
+typealias BetaResponsesServerEventVariant36 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant36
 
-typealias BetaResponsesServerEventVariant37 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant37
+typealias BetaResponsesServerEventVariant37 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant37
 
-typealias BetaResponsesServerEventVariant38 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant38
+typealias BetaResponsesServerEventVariant38 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant38
 
-typealias BetaResponsesServerEventVariant39 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant39
+typealias BetaResponsesServerEventVariant39 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant39
 
-typealias BetaResponsesServerEventVariant4 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant4
+typealias BetaResponsesServerEventVariant4 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant4
 
-typealias BetaResponsesServerEventVariant40 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant40
+typealias BetaResponsesServerEventVariant40 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant40
 
-typealias BetaResponsesServerEventVariant41 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant41
+typealias BetaResponsesServerEventVariant41 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant41
 
-typealias BetaResponsesServerEventVariant42 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant42
+typealias BetaResponsesServerEventVariant42 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant42
 
-typealias BetaResponsesServerEventVariant43 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant43
+typealias BetaResponsesServerEventVariant43 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant43
 
-typealias BetaResponsesServerEventVariant44 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant44
+typealias BetaResponsesServerEventVariant44 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant44
 
-typealias BetaResponsesServerEventVariant45 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant45
+typealias BetaResponsesServerEventVariant45 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant45
 
-typealias BetaResponsesServerEventVariant46 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant46
+typealias BetaResponsesServerEventVariant46 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant46
 
-typealias BetaResponsesServerEventVariant47 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant47
+typealias BetaResponsesServerEventVariant47 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant47
 
-typealias BetaResponsesServerEventVariant48 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant48
+typealias BetaResponsesServerEventVariant48 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant48
 
-typealias BetaResponsesServerEventVariant49 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant49
+typealias BetaResponsesServerEventVariant49 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant49
 
-typealias BetaResponsesServerEventVariant5 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant5
+typealias BetaResponsesServerEventVariant5 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant5
 
-typealias BetaResponsesServerEventVariant50 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant50
+typealias BetaResponsesServerEventVariant50 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant50
 
-typealias BetaResponsesServerEventVariant51 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant51
+typealias BetaResponsesServerEventVariant51 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant51
 
-typealias BetaResponsesServerEventVariant52 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant52
+typealias BetaResponsesServerEventVariant52 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant52
 
-typealias BetaResponsesServerEventVariant53 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant53
+typealias BetaResponsesServerEventVariant53 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant53
 
-typealias BetaResponsesServerEventVariant54 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant54
+typealias BetaResponsesServerEventVariant54 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant54
 
-typealias BetaResponsesServerEventVariant55 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant55
+typealias BetaResponsesServerEventVariant55 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant55
 
-typealias BetaResponsesServerEventVariant56 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant56
+typealias BetaResponsesServerEventVariant56 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant56
 
-typealias BetaResponsesServerEventVariant57 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant57
+typealias BetaResponsesServerEventVariant57 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant57
 
-typealias BetaResponsesServerEventVariant6 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant6
+typealias BetaResponsesServerEventVariant6 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant6
 
-typealias BetaResponsesServerEventVariant7 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant7
+typealias BetaResponsesServerEventVariant7 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant7
 
-typealias BetaResponsesServerEventVariant8 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant8
+typealias BetaResponsesServerEventVariant8 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant8
 
-typealias BetaResponsesServerEventVariant9 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant9
+typealias BetaResponsesServerEventVariant9 = dev.octri.showcase.openai.models.BetaResponsesServerEventVariant9
 
-typealias BetaResponseSteerAcceptedEvent =
-    dev.octri.showcase.openai.models.BetaResponseSteerAcceptedEvent
+typealias BetaResponseSteerAcceptedEvent = dev.octri.showcase.openai.models.BetaResponseSteerAcceptedEvent
 
-typealias BetaResponseSteerAcceptedEventSteer =
-    dev.octri.showcase.openai.models.BetaResponseSteerAcceptedEventSteer
+typealias BetaResponseSteerAcceptedEventSteer = dev.octri.showcase.openai.models.BetaResponseSteerAcceptedEventSteer
 
-typealias BetaResponseSteerAcceptedEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerAcceptedEventTypeEnum
+typealias BetaResponseSteerAcceptedEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerAcceptedEventTypeEnum
 
 typealias BetaResponseSteerErrorCode = dev.octri.showcase.openai.models.BetaResponseSteerErrorCode
 
 typealias BetaResponseSteerEvent = dev.octri.showcase.openai.models.BetaResponseSteerEvent
 
-typealias BetaResponseSteerEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerEventTypeEnum
+typealias BetaResponseSteerEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerEventTypeEnum
 
-typealias BetaResponseSteerFailedEvent =
-    dev.octri.showcase.openai.models.BetaResponseSteerFailedEvent
+typealias BetaResponseSteerFailedEvent = dev.octri.showcase.openai.models.BetaResponseSteerFailedEvent
 
-typealias BetaResponseSteerFailedEventError =
-    dev.octri.showcase.openai.models.BetaResponseSteerFailedEventError
+typealias BetaResponseSteerFailedEventError = dev.octri.showcase.openai.models.BetaResponseSteerFailedEventError
 
-typealias BetaResponseSteerFailedEventErrorTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerFailedEventErrorTypeEnum
+typealias BetaResponseSteerFailedEventErrorTypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerFailedEventErrorTypeEnum
 
-typealias BetaResponseSteerFailedEventSteer =
-    dev.octri.showcase.openai.models.BetaResponseSteerFailedEventSteer
+typealias BetaResponseSteerFailedEventSteer = dev.octri.showcase.openai.models.BetaResponseSteerFailedEventSteer
 
-typealias BetaResponseSteerFailedEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerFailedEventTypeEnum
+typealias BetaResponseSteerFailedEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerFailedEventTypeEnum
 
 typealias BetaResponseSteerInput = dev.octri.showcase.openai.models.BetaResponseSteerInput
 
 typealias BetaResponseSteerInputItem = dev.octri.showcase.openai.models.BetaResponseSteerInputItem
 
-typealias BetaResponseSteerInputItemList =
-    dev.octri.showcase.openai.models.BetaResponseSteerInputItemList
+typealias BetaResponseSteerInputItemList = dev.octri.showcase.openai.models.BetaResponseSteerInputItemList
 
-typealias BetaResponseSteerPendingEvent =
-    dev.octri.showcase.openai.models.BetaResponseSteerPendingEvent
+typealias BetaResponseSteerPendingEvent = dev.octri.showcase.openai.models.BetaResponseSteerPendingEvent
 
-typealias BetaResponseSteerPendingEventSteer =
-    dev.octri.showcase.openai.models.BetaResponseSteerPendingEventSteer
+typealias BetaResponseSteerPendingEventSteer = dev.octri.showcase.openai.models.BetaResponseSteerPendingEventSteer
 
-typealias BetaResponseSteerPendingEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerPendingEventTypeEnum
+typealias BetaResponseSteerPendingEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerPendingEventTypeEnum
 
-typealias BetaResponseSteerPendingReason =
-    dev.octri.showcase.openai.models.BetaResponseSteerPendingReason
+typealias BetaResponseSteerPendingReason = dev.octri.showcase.openai.models.BetaResponseSteerPendingReason
 
-typealias BetaResponseSteerRequiredInput =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInput
+typealias BetaResponseSteerRequiredInput = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInput
 
-typealias BetaResponseSteerRequiredInputVariant0 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant0
+typealias BetaResponseSteerRequiredInputVariant0 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant0
 
-typealias BetaResponseSteerRequiredInputVariant0TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant0TypeEnum
+typealias BetaResponseSteerRequiredInputVariant0TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant0TypeEnum
 
-typealias BetaResponseSteerRequiredInputVariant1 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant1
+typealias BetaResponseSteerRequiredInputVariant1 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant1
 
-typealias BetaResponseSteerRequiredInputVariant1TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant1TypeEnum
+typealias BetaResponseSteerRequiredInputVariant1TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant1TypeEnum
 
-typealias BetaResponseSteerRequiredInputVariant2 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant2
+typealias BetaResponseSteerRequiredInputVariant2 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant2
 
-typealias BetaResponseSteerRequiredInputVariant2TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant2TypeEnum
+typealias BetaResponseSteerRequiredInputVariant2TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant2TypeEnum
 
-typealias BetaResponseSteerRequiredInputVariant3 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant3
+typealias BetaResponseSteerRequiredInputVariant3 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant3
 
-typealias BetaResponseSteerRequiredInputVariant3TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant3TypeEnum
+typealias BetaResponseSteerRequiredInputVariant3TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant3TypeEnum
 
-typealias BetaResponseSteerRequiredInputVariant4 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant4
+typealias BetaResponseSteerRequiredInputVariant4 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant4
 
-typealias BetaResponseSteerRequiredInputVariant4TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant4TypeEnum
+typealias BetaResponseSteerRequiredInputVariant4TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant4TypeEnum
 
-typealias BetaResponseSteerRequiredInputVariant5 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant5
+typealias BetaResponseSteerRequiredInputVariant5 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant5
 
-typealias BetaResponseSteerRequiredInputVariant5ExecutionEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant5ExecutionEnum
+typealias BetaResponseSteerRequiredInputVariant5ExecutionEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant5ExecutionEnum
 
-typealias BetaResponseSteerRequiredInputVariant5TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant5TypeEnum
+typealias BetaResponseSteerRequiredInputVariant5TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant5TypeEnum
 
-typealias BetaResponseSteerRequiredInputVariant6 =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant6
+typealias BetaResponseSteerRequiredInputVariant6 = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant6
 
-typealias BetaResponseSteerRequiredInputVariant6TypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant6TypeEnum
+typealias BetaResponseSteerRequiredInputVariant6TypeEnum = dev.octri.showcase.openai.models.BetaResponseSteerRequiredInputVariant6TypeEnum
 
 typealias BetaResponseStreamEvent = dev.octri.showcase.openai.models.BetaResponseStreamEvent
 
 typealias BetaResponseStreamOptions = dev.octri.showcase.openai.models.BetaResponseStreamOptions
 
-typealias BetaResponsesWebSocketStreamEvent =
-    dev.octri.showcase.openai.models.BetaResponsesWebSocketStreamEvent
+typealias BetaResponsesWebSocketStreamEvent = dev.octri.showcase.openai.models.BetaResponsesWebSocketStreamEvent
 
 typealias BetaResponseTextDeltaEvent = dev.octri.showcase.openai.models.BetaResponseTextDeltaEvent
 
-typealias BetaResponseTextDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseTextDeltaEventTypeEnum
+typealias BetaResponseTextDeltaEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseTextDeltaEventTypeEnum
 
 typealias BetaResponseTextDoneEvent = dev.octri.showcase.openai.models.BetaResponseTextDoneEvent
 
-typealias BetaResponseTextDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseTextDoneEventTypeEnum
+typealias BetaResponseTextDoneEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseTextDoneEventTypeEnum
 
 typealias BetaResponseTextParam = dev.octri.showcase.openai.models.BetaResponseTextParam
 
 typealias BetaResponseUsage = dev.octri.showcase.openai.models.BetaResponseUsage
 
-typealias BetaResponseUsageInputTokensDetails =
-    dev.octri.showcase.openai.models.BetaResponseUsageInputTokensDetails
+typealias BetaResponseUsageInputTokensDetails = dev.octri.showcase.openai.models.BetaResponseUsageInputTokensDetails
 
-typealias BetaResponseUsageOutputTokensDetails =
-    dev.octri.showcase.openai.models.BetaResponseUsageOutputTokensDetails
+typealias BetaResponseUsageOutputTokensDetails = dev.octri.showcase.openai.models.BetaResponseUsageOutputTokensDetails
 
-typealias BetaResponseVariant2IncompleteDetails =
-    dev.octri.showcase.openai.models.BetaResponseVariant2IncompleteDetails
+typealias BetaResponseVariant2IncompleteDetails = dev.octri.showcase.openai.models.BetaResponseVariant2IncompleteDetails
 
-typealias BetaResponseVariant2IncompleteDetailsReasonEnum =
-    dev.octri.showcase.openai.models.BetaResponseVariant2IncompleteDetailsReasonEnum
+typealias BetaResponseVariant2IncompleteDetailsReasonEnum = dev.octri.showcase.openai.models.BetaResponseVariant2IncompleteDetailsReasonEnum
 
-typealias BetaResponseVariant2ObjectEnum =
-    dev.octri.showcase.openai.models.BetaResponseVariant2ObjectEnum
+typealias BetaResponseVariant2ObjectEnum = dev.octri.showcase.openai.models.BetaResponseVariant2ObjectEnum
 
-typealias BetaResponseVariant2StatusEnum =
-    dev.octri.showcase.openai.models.BetaResponseVariant2StatusEnum
+typealias BetaResponseVariant2StatusEnum = dev.octri.showcase.openai.models.BetaResponseVariant2StatusEnum
 
-typealias BetaResponseVariant2TruncationVariant0Enum =
-    dev.octri.showcase.openai.models.BetaResponseVariant2TruncationVariant0Enum
+typealias BetaResponseVariant2TruncationVariant0Enum = dev.octri.showcase.openai.models.BetaResponseVariant2TruncationVariant0Enum
 
-typealias BetaResponseWebSearchCallCompletedEvent =
-    dev.octri.showcase.openai.models.BetaResponseWebSearchCallCompletedEvent
+typealias BetaResponseWebSearchCallCompletedEvent = dev.octri.showcase.openai.models.BetaResponseWebSearchCallCompletedEvent
 
-typealias BetaResponseWebSearchCallCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseWebSearchCallCompletedEventTypeEnum
+typealias BetaResponseWebSearchCallCompletedEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseWebSearchCallCompletedEventTypeEnum
 
-typealias BetaResponseWebSearchCallInProgressEvent =
-    dev.octri.showcase.openai.models.BetaResponseWebSearchCallInProgressEvent
+typealias BetaResponseWebSearchCallInProgressEvent = dev.octri.showcase.openai.models.BetaResponseWebSearchCallInProgressEvent
 
-typealias BetaResponseWebSearchCallInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseWebSearchCallInProgressEventTypeEnum
+typealias BetaResponseWebSearchCallInProgressEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseWebSearchCallInProgressEventTypeEnum
 
-typealias BetaResponseWebSearchCallSearchingEvent =
-    dev.octri.showcase.openai.models.BetaResponseWebSearchCallSearchingEvent
+typealias BetaResponseWebSearchCallSearchingEvent = dev.octri.showcase.openai.models.BetaResponseWebSearchCallSearchingEvent
 
-typealias BetaResponseWebSearchCallSearchingEventTypeEnum =
-    dev.octri.showcase.openai.models.BetaResponseWebSearchCallSearchingEventTypeEnum
+typealias BetaResponseWebSearchCallSearchingEventTypeEnum = dev.octri.showcase.openai.models.BetaResponseWebSearchCallSearchingEventTypeEnum
 
 typealias BetaResponseWsError = dev.octri.showcase.openai.models.BetaResponseWsError
 
@@ -271,57 +195,45 @@ typealias BetaServiceTierEnum = dev.octri.showcase.openai.models.BetaServiceTier
 
 typealias BetaServiceTierResponses = dev.octri.showcase.openai.models.BetaServiceTierResponses
 
-typealias BetaServiceTierResponsesVariant0Enum =
-    dev.octri.showcase.openai.models.BetaServiceTierResponsesVariant0Enum
+typealias BetaServiceTierResponsesVariant0Enum = dev.octri.showcase.openai.models.BetaServiceTierResponsesVariant0Enum
 
 typealias BetaShellCallOutputDelta = dev.octri.showcase.openai.models.BetaShellCallOutputDelta
 
 typealias BetaSkillReferenceParam = dev.octri.showcase.openai.models.BetaSkillReferenceParam
 
-typealias BetaSkillReferenceParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaSkillReferenceParamTypeEnum
+typealias BetaSkillReferenceParamTypeEnum = dev.octri.showcase.openai.models.BetaSkillReferenceParamTypeEnum
 
 typealias BetaSpecificApplyPatchParam = dev.octri.showcase.openai.models.BetaSpecificApplyPatchParam
 
-typealias BetaSpecificApplyPatchParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaSpecificApplyPatchParamTypeEnum
+typealias BetaSpecificApplyPatchParamTypeEnum = dev.octri.showcase.openai.models.BetaSpecificApplyPatchParamTypeEnum
 
-typealias BetaSpecificFunctionShellParam =
-    dev.octri.showcase.openai.models.BetaSpecificFunctionShellParam
+typealias BetaSpecificFunctionShellParam = dev.octri.showcase.openai.models.BetaSpecificFunctionShellParam
 
-typealias BetaSpecificFunctionShellParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaSpecificFunctionShellParamTypeEnum
+typealias BetaSpecificFunctionShellParamTypeEnum = dev.octri.showcase.openai.models.BetaSpecificFunctionShellParamTypeEnum
 
-typealias BetaSpecificProgrammaticToolCallingParam =
-    dev.octri.showcase.openai.models.BetaSpecificProgrammaticToolCallingParam
+typealias BetaSpecificProgrammaticToolCallingParam = dev.octri.showcase.openai.models.BetaSpecificProgrammaticToolCallingParam
 
-typealias BetaSpecificProgrammaticToolCallingParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaSpecificProgrammaticToolCallingParamTypeEnum
+typealias BetaSpecificProgrammaticToolCallingParamTypeEnum = dev.octri.showcase.openai.models.BetaSpecificProgrammaticToolCallingParamTypeEnum
 
 typealias BetaSummaryTextContent = dev.octri.showcase.openai.models.BetaSummaryTextContent
 
-typealias BetaSummaryTextContentTypeEnum =
-    dev.octri.showcase.openai.models.BetaSummaryTextContentTypeEnum
+typealias BetaSummaryTextContentTypeEnum = dev.octri.showcase.openai.models.BetaSummaryTextContentTypeEnum
 
 typealias BetaTextContent = dev.octri.showcase.openai.models.BetaTextContent
 
 typealias BetaTextContentTypeEnum = dev.octri.showcase.openai.models.BetaTextContentTypeEnum
 
-typealias BetaTextResponseFormatConfiguration =
-    dev.octri.showcase.openai.models.BetaTextResponseFormatConfiguration
+typealias BetaTextResponseFormatConfiguration = dev.octri.showcase.openai.models.BetaTextResponseFormatConfiguration
 
-typealias BetaTextResponseFormatJsonSchema =
-    dev.octri.showcase.openai.models.BetaTextResponseFormatJsonSchema
+typealias BetaTextResponseFormatJsonSchema = dev.octri.showcase.openai.models.BetaTextResponseFormatJsonSchema
 
-typealias BetaTextResponseFormatJsonSchemaTypeEnum =
-    dev.octri.showcase.openai.models.BetaTextResponseFormatJsonSchemaTypeEnum
+typealias BetaTextResponseFormatJsonSchemaTypeEnum = dev.octri.showcase.openai.models.BetaTextResponseFormatJsonSchemaTypeEnum
 
 typealias BetaTokenCountsBody = dev.octri.showcase.openai.models.BetaTokenCountsBody
 
 typealias BetaTokenCountsResource = dev.octri.showcase.openai.models.BetaTokenCountsResource
 
-typealias BetaTokenCountsResourceObjectEnum =
-    dev.octri.showcase.openai.models.BetaTokenCountsResourceObjectEnum
+typealias BetaTokenCountsResourceObjectEnum = dev.octri.showcase.openai.models.BetaTokenCountsResourceObjectEnum
 
 typealias BetaTool = dev.octri.showcase.openai.models.BetaTool
 
@@ -331,21 +243,17 @@ typealias BetaToolCallCallerParam = dev.octri.showcase.openai.models.BetaToolCal
 
 typealias BetaToolChoiceAllowed = dev.octri.showcase.openai.models.BetaToolChoiceAllowed
 
-typealias BetaToolChoiceAllowedModeEnum =
-    dev.octri.showcase.openai.models.BetaToolChoiceAllowedModeEnum
+typealias BetaToolChoiceAllowedModeEnum = dev.octri.showcase.openai.models.BetaToolChoiceAllowedModeEnum
 
-typealias BetaToolChoiceAllowedTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolChoiceAllowedTypeEnum
+typealias BetaToolChoiceAllowedTypeEnum = dev.octri.showcase.openai.models.BetaToolChoiceAllowedTypeEnum
 
 typealias BetaToolChoiceCustom = dev.octri.showcase.openai.models.BetaToolChoiceCustom
 
-typealias BetaToolChoiceCustomTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolChoiceCustomTypeEnum
+typealias BetaToolChoiceCustomTypeEnum = dev.octri.showcase.openai.models.BetaToolChoiceCustomTypeEnum
 
 typealias BetaToolChoiceFunction = dev.octri.showcase.openai.models.BetaToolChoiceFunction
 
-typealias BetaToolChoiceFunctionTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolChoiceFunctionTypeEnum
+typealias BetaToolChoiceFunctionTypeEnum = dev.octri.showcase.openai.models.BetaToolChoiceFunctionTypeEnum
 
 typealias BetaToolChoiceMCP = dev.octri.showcase.openai.models.BetaToolChoiceMCP
 
@@ -365,8 +273,7 @@ typealias BetaToolSearchCall = dev.octri.showcase.openai.models.BetaToolSearchCa
 
 typealias BetaToolSearchCallItemParam = dev.octri.showcase.openai.models.BetaToolSearchCallItemParam
 
-typealias BetaToolSearchCallItemParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolSearchCallItemParamTypeEnum
+typealias BetaToolSearchCallItemParamTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchCallItemParamTypeEnum
 
 typealias BetaToolSearchCallTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchCallTypeEnum
 
@@ -374,36 +281,27 @@ typealias BetaToolSearchExecutionType = dev.octri.showcase.openai.models.BetaToo
 
 typealias BetaToolSearchOutput = dev.octri.showcase.openai.models.BetaToolSearchOutput
 
-typealias BetaToolSearchOutputFunctionToolParam =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputFunctionToolParam
+typealias BetaToolSearchOutputFunctionToolParam = dev.octri.showcase.openai.models.BetaToolSearchOutputFunctionToolParam
 
-typealias BetaToolSearchOutputFunctionToolParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputFunctionToolParamTypeEnum
+typealias BetaToolSearchOutputFunctionToolParamTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchOutputFunctionToolParamTypeEnum
 
-typealias BetaToolSearchOutputItemParam =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputItemParam
+typealias BetaToolSearchOutputItemParam = dev.octri.showcase.openai.models.BetaToolSearchOutputItemParam
 
-typealias BetaToolSearchOutputItemParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputItemParamTypeEnum
+typealias BetaToolSearchOutputItemParamTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchOutputItemParamTypeEnum
 
-typealias BetaToolSearchOutputNamespaceToolParam =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputNamespaceToolParam
+typealias BetaToolSearchOutputNamespaceToolParam = dev.octri.showcase.openai.models.BetaToolSearchOutputNamespaceToolParam
 
-typealias BetaToolSearchOutputNamespaceToolParamToolsItem =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputNamespaceToolParamToolsItem
+typealias BetaToolSearchOutputNamespaceToolParamToolsItem = dev.octri.showcase.openai.models.BetaToolSearchOutputNamespaceToolParamToolsItem
 
-typealias BetaToolSearchOutputNamespaceToolParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputNamespaceToolParamTypeEnum
+typealias BetaToolSearchOutputNamespaceToolParamTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchOutputNamespaceToolParamTypeEnum
 
 typealias BetaToolSearchOutputTool = dev.octri.showcase.openai.models.BetaToolSearchOutputTool
 
-typealias BetaToolSearchOutputTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolSearchOutputTypeEnum
+typealias BetaToolSearchOutputTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchOutputTypeEnum
 
 typealias BetaToolSearchToolParam = dev.octri.showcase.openai.models.BetaToolSearchToolParam
 
-typealias BetaToolSearchToolParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaToolSearchToolParamTypeEnum
+typealias BetaToolSearchToolParamTypeEnum = dev.octri.showcase.openai.models.BetaToolSearchToolParamTypeEnum
 
 typealias BetaTopLogProb = dev.octri.showcase.openai.models.BetaTopLogProb
 
@@ -419,22 +317,17 @@ typealias BetaUrlCitationBodyTypeEnum = dev.octri.showcase.openai.models.BetaUrl
 
 typealias BetaUrlCitationParam = dev.octri.showcase.openai.models.BetaUrlCitationParam
 
-typealias BetaUrlCitationParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaUrlCitationParamTypeEnum
+typealias BetaUrlCitationParamTypeEnum = dev.octri.showcase.openai.models.BetaUrlCitationParamTypeEnum
 
 typealias BetaUserMessageItemParam = dev.octri.showcase.openai.models.BetaUserMessageItemParam
 
-typealias BetaUserMessageItemParamContentItem =
-    dev.octri.showcase.openai.models.BetaUserMessageItemParamContentItem
+typealias BetaUserMessageItemParamContentItem = dev.octri.showcase.openai.models.BetaUserMessageItemParamContentItem
 
-typealias BetaUserMessageItemParamRoleEnum =
-    dev.octri.showcase.openai.models.BetaUserMessageItemParamRoleEnum
+typealias BetaUserMessageItemParamRoleEnum = dev.octri.showcase.openai.models.BetaUserMessageItemParamRoleEnum
 
-typealias BetaUserMessageItemParamTypeEnum =
-    dev.octri.showcase.openai.models.BetaUserMessageItemParamTypeEnum
+typealias BetaUserMessageItemParamTypeEnum = dev.octri.showcase.openai.models.BetaUserMessageItemParamTypeEnum
 
-typealias BetaVectorStoreFileAttributes =
-    dev.octri.showcase.openai.models.BetaVectorStoreFileAttributes
+typealias BetaVectorStoreFileAttributes = dev.octri.showcase.openai.models.BetaVectorStoreFileAttributes
 
 typealias BetaVerbosity = dev.octri.showcase.openai.models.BetaVerbosity
 
@@ -446,37 +339,29 @@ typealias BetaWaitParamTypeEnum = dev.octri.showcase.openai.models.BetaWaitParam
 
 typealias BetaWebSearchActionFind = dev.octri.showcase.openai.models.BetaWebSearchActionFind
 
-typealias BetaWebSearchActionFindTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchActionFindTypeEnum
+typealias BetaWebSearchActionFindTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchActionFindTypeEnum
 
 typealias BetaWebSearchActionOpenPage = dev.octri.showcase.openai.models.BetaWebSearchActionOpenPage
 
-typealias BetaWebSearchActionOpenPageTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchActionOpenPageTypeEnum
+typealias BetaWebSearchActionOpenPageTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchActionOpenPageTypeEnum
 
 typealias BetaWebSearchActionSearch = dev.octri.showcase.openai.models.BetaWebSearchActionSearch
 
-typealias BetaWebSearchActionSearchSourcesItem =
-    dev.octri.showcase.openai.models.BetaWebSearchActionSearchSourcesItem
+typealias BetaWebSearchActionSearchSourcesItem = dev.octri.showcase.openai.models.BetaWebSearchActionSearchSourcesItem
 
-typealias BetaWebSearchActionSearchSourcesItemTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchActionSearchSourcesItemTypeEnum
+typealias BetaWebSearchActionSearchSourcesItemTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchActionSearchSourcesItemTypeEnum
 
-typealias BetaWebSearchActionSearchTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchActionSearchTypeEnum
+typealias BetaWebSearchActionSearchTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchActionSearchTypeEnum
 
-typealias BetaWebSearchApproximateLocation =
-    dev.octri.showcase.openai.models.BetaWebSearchApproximateLocation
+typealias BetaWebSearchApproximateLocation = dev.octri.showcase.openai.models.BetaWebSearchApproximateLocation
 
-typealias BetaWebSearchApproximateLocationTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchApproximateLocationTypeEnum
+typealias BetaWebSearchApproximateLocationTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchApproximateLocationTypeEnum
 
 typealias BetaWebSearchCallStatus = dev.octri.showcase.openai.models.BetaWebSearchCallStatus
 
 typealias BetaWebSearchPreviewTool = dev.octri.showcase.openai.models.BetaWebSearchPreviewTool
 
-typealias BetaWebSearchPreviewToolTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchPreviewToolTypeEnum
+typealias BetaWebSearchPreviewToolTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchPreviewToolTypeEnum
 
 typealias BetaWebSearchTool = dev.octri.showcase.openai.models.BetaWebSearchTool
 
@@ -484,13 +369,11 @@ typealias BetaWebSearchToolCall = dev.octri.showcase.openai.models.BetaWebSearch
 
 typealias BetaWebSearchToolCallAction = dev.octri.showcase.openai.models.BetaWebSearchToolCallAction
 
-typealias BetaWebSearchToolCallTypeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchToolCallTypeEnum
+typealias BetaWebSearchToolCallTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchToolCallTypeEnum
 
 typealias BetaWebSearchToolFilters = dev.octri.showcase.openai.models.BetaWebSearchToolFilters
 
-typealias BetaWebSearchToolSearchContextSizeEnum =
-    dev.octri.showcase.openai.models.BetaWebSearchToolSearchContextSizeEnum
+typealias BetaWebSearchToolSearchContextSizeEnum = dev.octri.showcase.openai.models.BetaWebSearchToolSearchContextSizeEnum
 
 typealias BetaWebSearchToolTypeEnum = dev.octri.showcase.openai.models.BetaWebSearchToolTypeEnum
 
@@ -498,37 +381,27 @@ typealias BooleanChoiceValueParam = dev.octri.showcase.openai.models.BooleanChoi
 
 typealias BooleanChoiceValueResource = dev.octri.showcase.openai.models.BooleanChoiceValueResource
 
-typealias BrowserAuthenticationFieldResource =
-    dev.octri.showcase.openai.models.BrowserAuthenticationFieldResource
+typealias BrowserAuthenticationFieldResource = dev.octri.showcase.openai.models.BrowserAuthenticationFieldResource
 
-typealias BrowserAuthenticationFieldValueParam =
-    dev.octri.showcase.openai.models.BrowserAuthenticationFieldValueParam
+typealias BrowserAuthenticationFieldValueParam = dev.octri.showcase.openai.models.BrowserAuthenticationFieldValueParam
 
-typealias BrowserAuthenticationHistoryRequestKindResource =
-    dev.octri.showcase.openai.models.BrowserAuthenticationHistoryRequestKindResource
+typealias BrowserAuthenticationHistoryRequestKindResource = dev.octri.showcase.openai.models.BrowserAuthenticationHistoryRequestKindResource
 
-typealias BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication =
-    dev.octri.showcase.openai.models.BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication
+typealias BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication = dev.octri.showcase.openai.models.BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentication
 
-typealias BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentXb74a1c2233 =
-    dev.octri.showcase.openai.models.BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentXb74a1c2233
+typealias BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentXb74a1c2233 = dev.octri.showcase.openai.models.BrowserAuthenticationHistoryRequestKindResourceBrowserAuthentXb74a1c2233
 
-typealias BrowserAuthenticationOptionResource =
-    dev.octri.showcase.openai.models.BrowserAuthenticationOptionResource
+typealias BrowserAuthenticationOptionResource = dev.octri.showcase.openai.models.BrowserAuthenticationOptionResource
 
-typealias BrowserAuthenticationRequestItemResource =
-    dev.octri.showcase.openai.models.BrowserAuthenticationRequestItemResource
+typealias BrowserAuthenticationRequestItemResource = dev.octri.showcase.openai.models.BrowserAuthenticationRequestItemResource
 
-typealias BrowserAuthenticationRequestItemResourceTypeEnum =
-    dev.octri.showcase.openai.models.BrowserAuthenticationRequestItemResourceTypeEnum
+typealias BrowserAuthenticationRequestItemResourceTypeEnum = dev.octri.showcase.openai.models.BrowserAuthenticationRequestItemResourceTypeEnum
 
-typealias BrowserOriginAccessDecisionParam =
-    dev.octri.showcase.openai.models.BrowserOriginAccessDecisionParam
+typealias BrowserOriginAccessDecisionParam = dev.octri.showcase.openai.models.BrowserOriginAccessDecisionParam
 
 typealias C2PAProvenanceResult = dev.octri.showcase.openai.models.C2PAProvenanceResult
 
-typealias C2PAProvenanceResultTypeEnum =
-    dev.octri.showcase.openai.models.C2PAProvenanceResultTypeEnum
+typealias C2PAProvenanceResultTypeEnum = dev.octri.showcase.openai.models.C2PAProvenanceResultTypeEnum
 
 typealias C2PAValidationStateApi = dev.octri.showcase.openai.models.C2PAValidationStateApi
 
@@ -538,36 +411,28 @@ typealias CallableToolAllowedCaller = dev.octri.showcase.openai.models.CallableT
 
 typealias Certificate = dev.octri.showcase.openai.models.Certificate
 
-typealias CertificateCertificateDetails =
-    dev.octri.showcase.openai.models.CertificateCertificateDetails
+typealias CertificateCertificateDetails = dev.octri.showcase.openai.models.CertificateCertificateDetails
 
 typealias CertificateObjectEnum = dev.octri.showcase.openai.models.CertificateObjectEnum
 
 typealias ChatCompletionAllowedTools = dev.octri.showcase.openai.models.ChatCompletionAllowedTools
 
-typealias ChatCompletionAllowedToolsChoice =
-    dev.octri.showcase.openai.models.ChatCompletionAllowedToolsChoice
+typealias ChatCompletionAllowedToolsChoice = dev.octri.showcase.openai.models.ChatCompletionAllowedToolsChoice
 
-typealias ChatCompletionAllowedToolsChoiceTypeEnum =
-    dev.octri.showcase.openai.models.ChatCompletionAllowedToolsChoiceTypeEnum
+typealias ChatCompletionAllowedToolsChoiceTypeEnum = dev.octri.showcase.openai.models.ChatCompletionAllowedToolsChoiceTypeEnum
 
-typealias ChatCompletionAllowedToolsModeEnum =
-    dev.octri.showcase.openai.models.ChatCompletionAllowedToolsModeEnum
+typealias ChatCompletionAllowedToolsModeEnum = dev.octri.showcase.openai.models.ChatCompletionAllowedToolsModeEnum
 
 typealias ChatCompletionDeleted = dev.octri.showcase.openai.models.ChatCompletionDeleted
 
-typealias ChatCompletionDeletedObjectEnum =
-    dev.octri.showcase.openai.models.ChatCompletionDeletedObjectEnum
+typealias ChatCompletionDeletedObjectEnum = dev.octri.showcase.openai.models.ChatCompletionDeletedObjectEnum
 
-typealias ChatCompletionFunctionCallOption =
-    dev.octri.showcase.openai.models.ChatCompletionFunctionCallOption
+typealias ChatCompletionFunctionCallOption = dev.octri.showcase.openai.models.ChatCompletionFunctionCallOption
 
 typealias ChatCompletionFunctions = dev.octri.showcase.openai.models.ChatCompletionFunctions
 
 typealias ChatCompletionList = dev.octri.showcase.openai.models.ChatCompletionList
 
-typealias ChatCompletionListObjectEnum =
-    dev.octri.showcase.openai.models.ChatCompletionListObjectEnum
+typealias ChatCompletionListObjectEnum = dev.octri.showcase.openai.models.ChatCompletionListObjectEnum
 
-typealias ChatCompletionMessageCustomToolCall =
-    dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCall
+typealias ChatCompletionMessageCustomToolCall = dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCall

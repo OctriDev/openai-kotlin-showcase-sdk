@@ -3,8 +3,8 @@
 
 package dev.octri.showcase.openai.methods
 
-import dev.octri.showcase.openai.ChatSessionResource
 import dev.octri.showcase.openai.ChatkitConfigurationParam
+import dev.octri.showcase.openai.ChatSessionResource
 import dev.octri.showcase.openai.ClientConfig
 import dev.octri.showcase.openai.DeletedThreadResource
 import dev.octri.showcase.openai.ErrorResponse
@@ -22,182 +22,93 @@ import dev.octri.showcase.openai.WorkflowParam
 
 object Chatkit {
 
+
     /**
-     * Cancel an active ChatKit session and return its most recent metadata. Cancelling prevents new
-     * requests from using the issued client secret.
+     * Cancel an active ChatKit session and return its most recent metadata. Cancelling prevents new requests from using the issued client secret.
      *
      * @param sessionId Unique identifier for the ChatKit session to cancel.
      */
-    fun cancelChatkitSession(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        options: RequestOptions? = null,
-    ): ChatSessionResource {
-        return SdkClient.request<ChatSessionResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/chatkit/sessions/${SdkClient.encodePathSegment(sessionId)}/cancel",
-                    config = clientConfig,
-                    operationId = "cancelChatkitSession",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun cancelChatkitSession(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): ChatSessionResource {
+        return SdkClient.request<ChatSessionResource>(SdkClient.RequestSpec("POST", "/chatkit/sessions/${SdkClient.encodePathSegment(sessionId)}/cancel", config = clientConfig, operationId = "cancelChatkitSession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a ChatKit session powered by a specified workflow. Supply `workflow` with its
-     * required `id` and a non-empty `user` identifier; optionally configure expiration, rate
-     * limits, tracing, and ChatKit features. The response includes the session's client secret,
-     * expiration time, and resolved configuration.
+     * Creates a ChatKit session powered by a specified workflow. Supply `workflow` with its required `id` and a non-empty `user` identifier; optionally configure expiration, rate limits, tracing, and ChatKit features. The response includes the session's client secret, expiration time, and resolved configuration.
      *
      * Create a ChatKit session.
      *
      * @param workflow Workflow that powers the session.
-     * @param user A free-form string that identifies your end user; ensures this Session can access
-     *   other objects that have the same `user` scope.
-     * @param expiresAfter Optional override for session expiration timing in seconds from creation.
-     *   Defaults to 10 minutes.
-     * @param rateLimits Optional override for per-minute request limits. When omitted, defaults
-     *   to 10.
-     * @param chatkitConfiguration Optional overrides for ChatKit runtime configuration features
+     * @param user A free-form string that identifies your end user; ensures this
+     *   Session can access other objects that have the same `user` scope.
+     * @param expiresAfter Optional override for session expiration timing in seconds
+     *   from creation. Defaults to 10 minutes.
+     * @param rateLimits Optional override for per-minute request limits. When
+     *   omitted, defaults to 10.
+     * @param chatkitConfiguration Optional overrides for ChatKit runtime
+     *   configuration features
      */
-    fun createChatkitSession(
-        clientConfig: ClientConfig,
-        workflow: WorkflowParam,
-        user: String,
-        expiresAfter: ExpiresAfterParam? = null,
-        rateLimits: RateLimitsParam? = null,
-        chatkitConfiguration: ChatkitConfigurationParam? = null,
-        options: RequestOptions? = null,
-    ): ChatSessionResource {
+    fun createChatkitSession(clientConfig: ClientConfig, workflow: WorkflowParam, user: String, expiresAfter: ExpiresAfterParam? = null, rateLimits: RateLimitsParam? = null, chatkitConfiguration: ChatkitConfigurationParam? = null, options: RequestOptions? = null): ChatSessionResource {
         Validation.validateLength("user", user, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<ChatSessionResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/chatkit/sessions",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "workflow" to (workflow),
-                            "user" to (user),
-                            "expires_after" to (SdkClient.omitIfNull(expiresAfter)),
-                            "rate_limits" to (SdkClient.omitIfNull(rateLimits)),
-                            "chatkit_configuration" to (SdkClient.omitIfNull(chatkitConfiguration)),
-                        ),
-                    operationId = "createChatkitSession",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ChatSessionResource>(SdkClient.RequestSpec("POST", "/chatkit/sessions", config = clientConfig, body = SdkClient.bodyMap("workflow" to (workflow), "user" to (user), "expires_after" to (SdkClient.omitIfNull(expiresAfter)), "rate_limits" to (SdkClient.omitIfNull(rateLimits)), "chatkit_configuration" to
+    (SdkClient.omitIfNull(chatkitConfiguration))), operationId = "createChatkitSession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative
-     * to a thread item ID, and use `limit` and `order` to control the result set. The response
-     * includes pagination identifiers and a `has_more` flag.
+     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative to a thread item ID, and use `limit` and `order` to control the result set. The response includes pagination identifiers and a `has_more` flag.
      *
      * List items that belong to a ChatKit thread.
      *
      * @param threadId Identifier of the ChatKit thread whose items are requested.
      * @param limit Maximum number of thread items to return. Defaults to 20.
      * @param order Sort order for results by creation time. Defaults to `desc`.
-     * @param after List items created after this thread item ID. Defaults to null for the first
-     *   page.
-     * @param before List items created before this thread item ID. Defaults to null for the newest
-     *   results.
+     * @param after List items created after this thread item ID. Defaults to null
+     *   for the first page.
+     * @param before List items created before this thread item ID. Defaults to null
+     *   for the newest results.
      */
-    fun listChatkitThreadItems(
-        clientConfig: ClientConfig,
-        threadId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ThreadItemListResource {
+    fun listChatkitThreadItems(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ThreadItemListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ThreadItemListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/chatkit/threads/${SdkClient.encodePathSegment(threadId)}/items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "listChatkitThreadItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ThreadItemListResource>(SdkClient.RequestSpec("GET", "/chatkit/threads/${SdkClient.encodePathSegment(threadId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listChatkitThreadItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative
-     * to a thread item ID, and use `limit` and `order` to control the result set. The response
-     * includes pagination identifiers and a `has_more` flag.
+     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative to a thread item ID, and use `limit` and `order` to control the result set. The response includes pagination identifiers and a `has_more` flag.
      *
      * List items that belong to a ChatKit thread.
      *
      * @param threadId Identifier of the ChatKit thread whose items are requested.
      * @param limit Maximum number of thread items to return. Defaults to 20.
      * @param order Sort order for results by creation time. Defaults to `desc`.
-     * @param after List items created after this thread item ID. Defaults to null for the first
-     *   page.
-     * @param before List items created before this thread item ID. Defaults to null for the newest
-     *   results.
+     * @param after List items created after this thread item ID. Defaults to null
+     *   for the first page.
+     * @param before List items created before this thread item ID. Defaults to null
+     *   for the newest results.
      */
-    fun listChatkitThreadItemsPaginated(
-        clientConfig: ClientConfig,
-        threadId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ThreadItem) -> Boolean,
-    ) {
+    fun listChatkitThreadItemsPaginated(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (ThreadItem) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listChatkitThreadItems(
-                    clientConfig,
-                    threadId,
-                    limit,
-                    order,
-                    cursor,
-                    before,
-                    options,
-                )
+            val page = listChatkitThreadItems(clientConfig, threadId, limit, order, cursor, before, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -215,28 +126,10 @@ object Chatkit {
         val hasMore: Boolean,
     )
 
-    fun listChatkitThreadItemsPages(
-        clientConfig: ClientConfig,
-        threadId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListChatkitThreadItemsPage) -> Boolean,
-    ) {
+    fun listChatkitThreadItemsPages(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListChatkitThreadItemsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listChatkitThreadItems(
-                    clientConfig,
-                    threadId,
-                    limit,
-                    order,
-                    cursor,
-                    before,
-                    options,
-                )
+            val page = listChatkitThreadItems(clientConfig, threadId, limit, order, cursor, before, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -247,145 +140,82 @@ object Chatkit {
         }
     }
 
+
+
     /**
-     * Retrieves a ChatKit thread by its identifier. Use `thread_id` to select the thread whose
-     * status and metadata you need.
+     * Retrieves a ChatKit thread by its identifier. Use `thread_id` to select the thread whose status and metadata you need.
      *
      * Retrieve a ChatKit thread by its identifier.
      *
      * @param threadId Identifier of the ChatKit thread to retrieve.
      */
-    fun retrieveChatkitThread(
-        clientConfig: ClientConfig,
-        threadId: String,
-        options: RequestOptions? = null,
-    ): ThreadResource {
-        return SdkClient.request<ThreadResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/chatkit/threads/${SdkClient.encodePathSegment(threadId)}",
-                    config = clientConfig,
-                    operationId = "retrieveChatkitThread",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveChatkitThread(clientConfig: ClientConfig, threadId: String, options: RequestOptions? = null): ThreadResource {
+        return SdkClient.request<ThreadResource>(SdkClient.RequestSpec("GET", "/chatkit/threads/${SdkClient.encodePathSegment(threadId)}", config = clientConfig, operationId = "retrieveChatkitThread", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Delete a ChatKit thread along with its items and stored attachments.
      *
      * @param threadId Identifier of the ChatKit thread to delete.
      */
-    fun deleteChatkitThread(
-        clientConfig: ClientConfig,
-        threadId: String,
-        options: RequestOptions? = null,
-    ): DeletedThreadResource {
-        return SdkClient.request<DeletedThreadResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/chatkit/threads/${SdkClient.encodePathSegment(threadId)}",
-                    config = clientConfig,
-                    operationId = "deleteChatkitThread",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteChatkitThread(clientConfig: ClientConfig, threadId: String, options: RequestOptions? = null): DeletedThreadResource {
+        return SdkClient.request<DeletedThreadResource>(SdkClient.RequestSpec("DELETE", "/chatkit/threads/${SdkClient.encodePathSegment(threadId)}", config = clientConfig, operationId = "deleteChatkitThread", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * List ChatKit threads with optional pagination and user filters.
      *
      * @param limit Maximum number of thread items to return. Defaults to 20.
      * @param order Sort order for results by creation time. Defaults to `desc`.
-     * @param after List items created after this thread item ID. Defaults to null for the first
-     *   page.
-     * @param before List items created before this thread item ID. Defaults to null for the newest
-     *   results.
-     * @param user Filter threads that belong to this user identifier. Defaults to null to return
-     *   all users.
+     * @param after List items created after this thread item ID. Defaults to null
+     *   for the first page.
+     * @param before List items created before this thread item ID. Defaults to null
+     *   for the newest results.
+     * @param user Filter threads that belong to this user identifier. Defaults to
+     *   null to return all users.
      */
-    fun listChatkitThreads(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        user: String? = null,
-        options: RequestOptions? = null,
-    ): ThreadListResource {
+    fun listChatkitThreads(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, user: String? = null, options: RequestOptions? = null): ThreadListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-        }
+}
 
         if (user != null) {
             Validation.validateLength("user", user, Validation.LengthOpts(min = 1, max = 512))
-        }
+}
 
-        return SdkClient.request<ThreadListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/chatkit/threads",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                            "user" to SdkClient.queryValue(user, "form", true),
-                        ),
-                    operationId = "listChatkitThreads",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ThreadListResource>(SdkClient.RequestSpec("GET", "/chatkit/threads", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true), "user" to SdkClient.queryValue(user, "form", true)), operationId = "listChatkitThreads", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
 
     /**
      * List ChatKit threads with optional pagination and user filters.
      *
      * @param limit Maximum number of thread items to return. Defaults to 20.
      * @param order Sort order for results by creation time. Defaults to `desc`.
-     * @param after List items created after this thread item ID. Defaults to null for the first
-     *   page.
-     * @param before List items created before this thread item ID. Defaults to null for the newest
-     *   results.
-     * @param user Filter threads that belong to this user identifier. Defaults to null to return
-     *   all users.
+     * @param after List items created after this thread item ID. Defaults to null
+     *   for the first page.
+     * @param before List items created before this thread item ID. Defaults to null
+     *   for the newest results.
+     * @param user Filter threads that belong to this user identifier. Defaults to
+     *   null to return all users.
      */
-    fun listChatkitThreadsPaginated(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        user: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ThreadResource) -> Boolean,
-    ) {
+    fun listChatkitThreadsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, user: String? = null, options: RequestOptions? = null, yieldFn: (ThreadResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listChatkitThreads(clientConfig, limit, order, cursor, before, user, options)
@@ -406,16 +236,7 @@ object Chatkit {
         val hasMore: Boolean,
     )
 
-    fun listChatkitThreadsPages(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        user: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListChatkitThreadsPage) -> Boolean,
-    ) {
+    fun listChatkitThreadsPages(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, user: String? = null, options: RequestOptions? = null, yieldPage: (ListChatkitThreadsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listChatkitThreads(clientConfig, limit, order, cursor, before, user, options)
@@ -428,4 +249,7 @@ object Chatkit {
             cursor = nextCursor
         }
     }
+
+
+
 }

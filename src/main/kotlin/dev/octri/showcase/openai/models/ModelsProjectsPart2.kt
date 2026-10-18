@@ -3,48 +3,66 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ProjectUserListResponse` API schema. */
+/**
+ * Typed representation of the `ProjectUserListResponse` API schema.
+ */
 data class ProjectUserListResponse(
-    /** Required `string` value serialized in the `object` wire field. */
+    /**
+     * Required `string` value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectUser>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
 )
 
-/** Typed representation of the `ProjectUserUpdateRequest` API schema. */
+/**
+ * Typed representation of the `ProjectUserUpdateRequest` API schema.
+ */
 data class ProjectUserUpdateRequest(
-    /** `owner` or `member` */
+    /**
+     * `owner` or `member`
+     */
     val role: String? = null
 )
 
-/** Typed representation of the `UpdateProjectApiKeyBody` API schema. */
+/**
+ * Typed representation of the `UpdateProjectApiKeyBody` API schema.
+ */
 data class UpdateProjectApiKeyBody(
     /**
-     * Number of seconds from this request until the API key expires. Must comply with the
-     * organization and project expiry policies. Expired keys cannot be updated. Retrying resets the
-     * expiry relative to the new request. Omit to keep the current expiration.
+     * Number of seconds from this request until the API key expires. Must comply with the organization and project expiry policies. Expired keys cannot be updated. Retrying resets the expiry relative to the new request. Omit to keep the current expiration.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds")
-    val expiresInSeconds: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds") val expiresInSeconds: Long? = null,
     /**
-     * Replace the API key scope restrictions. Omit to leave scopes unchanged. An empty array
-     * removes key restrictions (All permissions), subject to the owner's effective permissions. Use
-     * \["api.all.read"\] for read-only access. Scopes do not change the owner's roles or grant
-     * administrative permissions.
+     * Replace the API key scope restrictions. Omit to leave scopes unchanged. An empty array removes key restrictions (All permissions), subject to the owner's effective permissions. Use \["api.all.read"\] for read-only access. Scopes do not change the owner's roles or grant administrative permissions.
      */
-    val scopes: List<String>? = null,
+    val scopes: List<String>? = null
 )
 
-/** Parameters for updating a project service account. */
+/**
+ * Parameters for updating a project service account.
+ */
 data class UpdateProjectServiceAccountBody(
-    /** The updated service account name. */
+    /**
+     * The updated service account name.
+     */
     val name: String? = null,
-    /** The updated service account role. */
-    val role: UpdateProjectServiceAccountBodyRoleEnum? = null,
+    /**
+     * The updated service account role.
+     */
+    val role: UpdateProjectServiceAccountBodyRoleEnum? = null
 )

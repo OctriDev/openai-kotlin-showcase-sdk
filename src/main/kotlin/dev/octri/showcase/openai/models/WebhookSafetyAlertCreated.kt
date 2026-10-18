@@ -3,24 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Required object value serialized in the `data` wire field. */
+/**
+ * Required object value serialized in the `data` wire field.
+ */
 data class WebhookSafetyAlertCreatedData(
-    /** The safety alert ID to pass to `GET /v1/safety/alerts/{id}`. */
+    /**
+     * The safety alert ID to pass to `GET /v1/safety/alerts/{id}`.
+     */
     val id: String
 )
 
-/** Sent when an approved safety alert is available for an API project. */
+/**
+ * Sent when an approved safety alert is available for an API project.
+ */
 data class WebhookSafetyAlertCreated(
-    /** The unique ID of the webhook event. */
+    /**
+     * The unique ID of the webhook event.
+     */
     val id: String,
-    /** Always `event`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookSafetyAlertCreatedObjectEnum,
-    /** The Unix timestamp in seconds when the event was created. */
+    /**
+     * Always `event`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookSafetyAlertCreatedObjectEnum,
+    /**
+     * The Unix timestamp in seconds when the event was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Always `safety.alert.created`. */
+    /**
+     * Always `safety.alert.created`.
+     */
     val type: WebhookSafetyAlertCreatedTypeEnum,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: WebhookSafetyAlertCreatedData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookSafetyAlertCreatedData
 )

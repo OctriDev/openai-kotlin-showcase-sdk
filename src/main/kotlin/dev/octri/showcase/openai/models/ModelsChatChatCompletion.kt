@@ -3,387 +3,396 @@
 
 package dev.octri.showcase.openai.models
 
-/** Constrains the tools available to the model to a pre-defined set. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Constrains the tools available to the model to a pre-defined set.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ChatCompletionAllowedToolsChoice(
-    /** Allowed tool configuration type. Always `allowed_tools`. */
+    /**
+     * Allowed tool configuration type. Always `allowed_tools`.
+     */
     val type: ChatCompletionAllowedToolsChoiceTypeEnum,
-    /** Constrains the tools available to the model to a pre-defined set. */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
-    val allowedTools: ChatCompletionAllowedTools,
+    /**
+     * Constrains the tools available to the model to a pre-defined set.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools") val allowedTools: ChatCompletionAllowedTools
 ) : ChatCompletionToolChoiceOption
 
-/** Typed representation of the `ChatCompletionDeleted` API schema. */
+/**
+ * Typed representation of the `ChatCompletionDeleted` API schema.
+ */
 data class ChatCompletionDeleted(
-    /** The type of object being deleted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ChatCompletionDeletedObjectEnum,
-    /** The ID of the chat completion that was deleted. */
+    /**
+     * The type of object being deleted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ChatCompletionDeletedObjectEnum,
+    /**
+     * The ID of the chat completion that was deleted.
+     */
     val id: String,
-    /** Whether the chat completion was deleted. */
-    val deleted: Boolean,
+    /**
+     * Whether the chat completion was deleted.
+     */
+    val deleted: Boolean
 )
 
 /**
- * Specifying a particular function via `{"name": "my_function"}` forces the model to call that
- * function.
+ * Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
  */
 data class ChatCompletionFunctionCallOption(
-    /** The name of the function to call. */
+    /**
+     * The name of the function to call.
+     */
     val name: String
 )
 
-/** Typed representation of the `ChatCompletionFunctions` API schema. */
+/**
+ * Typed representation of the `ChatCompletionFunctions` API schema.
+ */
 data class ChatCompletionFunctions(
     /**
-     * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
-     * dashes, with a maximum length of 64.
+     * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
      */
     val name: String,
     /**
-     * A description of what the function does, used by the model to choose when and how to call the
-     * function.
+     * A description of what the function does, used by the model to choose when and how to call the function.
      */
     val description: String? = null,
     /**
-     * The parameters the functions accepts, described as a JSON Schema object. See the guide for
-     * examples, and the JSON Schema reference for documentation about the format. Omitting
-     * `parameters` defines a function with an empty parameter list.
+     * The parameters the functions accepts, described as a JSON Schema object. See the guide for examples, and the JSON Schema reference for documentation about the format. Omitting `parameters` defines a function with an empty parameter list.
      */
-    val parameters: FunctionParameters? = null,
+    val parameters: FunctionParameters? = null
 )
 
-/** An object representing a list of Chat Completions. */
+/**
+ * An object representing a list of Chat Completions.
+ */
 data class ChatCompletionList(
-    /** The type of this object. It is always set to "list". */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ChatCompletionListObjectEnum,
-    /** An array of chat completion objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<CreateChatCompletionResponse>,
-    /** The identifier of the first chat completion in the data array. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
-    /** The identifier of the last chat completion in the data array. */
+    /**
+     * The type of this object. It is always set to "list".
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ChatCompletionListObjectEnum,
+    /**
+     * An array of chat completion objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<CreateChatCompletionResponse>,
+    /**
+     * The identifier of the first chat completion in the data array.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * The identifier of the last chat completion in the data array.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Indicates whether there are more Chat Completions available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Indicates whether there are more Chat Completions available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )
 
 typealias ChatCompletionModalities = List<String>
 
-/** Required object value serialized in the `function` wire field. */
+/**
+ * Required object value serialized in the `function` wire field.
+ */
 data class ChatCompletionNamedToolChoiceFunction(
-    /** The name of the function to call. */
+    /**
+     * The name of the function to call.
+     */
     val name: String
-)
-
-/** Specifies a tool the model should use. Use to force the model to call a specific function. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ChatCompletionNamedToolChoice(
-    /** For function calling, the type is always `function`. */
-    val type: ChatCompletionNamedToolChoiceTypeEnum,
-    /** Required object value serialized in the `function` wire field. */
-    val function: ChatCompletionNamedToolChoiceFunction,
-) : ChatCompletionToolChoiceOption
-
-/** Required object value serialized in the `custom` wire field. */
-data class ChatCompletionNamedToolChoiceCustomCustom(
-    /** The name of the custom tool to call. */
-    val name: String
-)
-
-/** Specifies a tool the model should use. Use to force the model to call a specific custom tool. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ChatCompletionNamedToolChoiceCustom(
-    /** For custom tool calling, the type is always `custom`. */
-    val type: ChatCompletionNamedToolChoiceCustomTypeEnum,
-    /** Required object value serialized in the `custom` wire field. */
-    val custom: ChatCompletionNamedToolChoiceCustomCustom,
-) : ChatCompletionToolChoiceOption
-
-/** A URL citation when using web search. */
-data class ChatCompletionResponseMessageAnnotationsItemUrlCitation(
-    /** The index of the last character of the URL citation in the message. */
-    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /** The index of the first character of the URL citation in the message. */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /** The URL of the web resource. */
-    val url: String,
-    /** The title of the web resource. */
-    val title: String,
-)
-
-/** A URL citation when using web search. */
-data class ChatCompletionResponseMessageAnnotationsItem(
-    /** The type of the URL citation. Always `url_citation`. */
-    val type: ChatCompletionResponseMessageAnnotationsItemTypeEnum,
-    /** A URL citation when using web search. */
-    @com.fasterxml.jackson.annotation.JsonProperty("url_citation")
-    val urlCitation: ChatCompletionResponseMessageAnnotationsItemUrlCitation,
 )
 
 /**
- * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be
- * called, as generated by the model.
+ * Specifies a tool the model should use. Use to force the model to call a specific function.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ChatCompletionNamedToolChoice(
+    /**
+     * For function calling, the type is always `function`.
+     */
+    val type: ChatCompletionNamedToolChoiceTypeEnum,
+    /**
+     * Required object value serialized in the `function` wire field.
+     */
+    val function: ChatCompletionNamedToolChoiceFunction
+) : ChatCompletionToolChoiceOption
+
+/**
+ * Required object value serialized in the `custom` wire field.
+ */
+data class ChatCompletionNamedToolChoiceCustomCustom(
+    /**
+     * The name of the custom tool to call.
+     */
+    val name: String
+)
+
+/**
+ * Specifies a tool the model should use. Use to force the model to call a specific custom tool.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ChatCompletionNamedToolChoiceCustom(
+    /**
+     * For custom tool calling, the type is always `custom`.
+     */
+    val type: ChatCompletionNamedToolChoiceCustomTypeEnum,
+    /**
+     * Required object value serialized in the `custom` wire field.
+     */
+    val custom: ChatCompletionNamedToolChoiceCustomCustom
+) : ChatCompletionToolChoiceOption
+
+/**
+ * A URL citation when using web search.
+ */
+data class ChatCompletionResponseMessageAnnotationsItemUrlCitation(
+    /**
+     * The index of the last character of the URL citation in the message.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
+    /**
+     * The index of the first character of the URL citation in the message.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
+    /**
+     * The URL of the web resource.
+     */
+    val url: String,
+    /**
+     * The title of the web resource.
+     */
+    val title: String
+)
+
+/**
+ * A URL citation when using web search.
+ */
+data class ChatCompletionResponseMessageAnnotationsItem(
+    /**
+     * The type of the URL citation. Always `url_citation`.
+     */
+    val type: ChatCompletionResponseMessageAnnotationsItemTypeEnum,
+    /**
+     * A URL citation when using web search.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("url_citation") val urlCitation: ChatCompletionResponseMessageAnnotationsItemUrlCitation
+)
+
+/**
+ * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
  */
 data class ChatCompletionResponseMessageFunctionCall(
     /**
-     * The arguments to call the function with, as generated by the model in JSON format. Note that
-     * the model does not always generate valid JSON, and may hallucinate parameters not defined by
-     * your function schema. Validate the arguments in your code before calling your function.
+     * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
      */
     val arguments: String,
-    /** The name of the function to call. */
-    val name: String,
+    /**
+     * The name of the function to call.
+     */
+    val name: String
 )
 
 /**
- * If the audio output modality is requested, this object contains data about the audio response
- * from the model. Learn more.
+ * If the audio output modality is requested, this object contains data about the audio response from the model. Learn more.
  */
 data class ChatCompletionResponseMessageAudio(
-    /** Unique identifier for this audio response. */
+    /**
+     * Unique identifier for this audio response.
+     */
     val id: String,
     /**
-     * The Unix timestamp (in seconds) for when this audio response will no longer be accessible on
-     * the server for use in multi-turn conversations.
+     * The Unix timestamp (in seconds) for when this audio response will no longer be accessible on the server for use in multi-turn conversations.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
     /**
      * Base64 encoded audio bytes generated by the model, in the format specified in the request.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
-    /** Transcript of the audio generated by the model. */
-    val transcript: String,
-)
-
-/** A chat completion message generated by the model. */
-data class ChatCompletionResponseMessage(
-    /** Required `string` value serialized in the `content` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: String?,
-    /** The role of the author of this message. */
-    val role: ChatCompletionResponseMessageRoleEnum,
-    /** Optional `string` value serialized in the `refusal` wire field. */
-    val refusal: String? = null,
-    /** Optional API value serialized in the `tool_calls` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls")
-    val toolCalls: ChatCompletionMessageToolCalls? = null,
-    /** Annotations for the message, when applicable, as when using the web search tool. */
-    val annotations: List<ChatCompletionResponseMessageAnnotationsItem>? = null,
     /**
-     * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be
-     * called, as generated by the model.
+     * Transcript of the audio generated by the model.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_call")
-    val functionCall: ChatCompletionResponseMessageFunctionCall? = null,
-    /**
-     * If the audio output modality is requested, this object contains data about the audio response
-     * from the model. Learn more.
-     */
-    val audio: ChatCompletionResponseMessageAudio? = null,
+    val transcript: String
 )
 
 /**
- * A partial audio response. Audio chunks may carry an ID, base64 data, or transcript text; the
- * final audio update contains only its expiry timestamp.
+ * A chat completion message generated by the model.
+ */
+data class ChatCompletionResponseMessage(
+    /**
+     * Required `string` value serialized in the `content` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: String?,
+    /**
+     * The role of the author of this message.
+     */
+    val role: ChatCompletionResponseMessageRoleEnum,
+    /**
+     * Optional `string` value serialized in the `refusal` wire field.
+     */
+    val refusal: String? = null,
+    /**
+     * Optional API value serialized in the `tool_calls` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls") val toolCalls: ChatCompletionMessageToolCalls? = null,
+    /**
+     * Annotations for the message, when applicable, as when using the web search tool.
+     */
+    val annotations: List<ChatCompletionResponseMessageAnnotationsItem>? = null,
+    /**
+     * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("function_call") val functionCall: ChatCompletionResponseMessageFunctionCall? = null,
+    /**
+     * If the audio output modality is requested, this object contains data about the audio response from the model. Learn more.
+     */
+    val audio: ChatCompletionResponseMessageAudio? = null
+)
+
+/**
+ * A partial audio response. Audio chunks may carry an ID, base64 data, or transcript text; the final audio update contains only its expiry timestamp.
  */
 data class ChatCompletionStreamResponseDeltaAudio(
-    /** Unique identifier for this audio response. */
+    /**
+     * Unique identifier for this audio response.
+     */
     val id: String? = null,
     /**
-     * The Unix timestamp (in seconds) for when this audio response will no longer be accessible on
-     * the server for use in multi-turn conversations.
+     * The Unix timestamp (in seconds) for when this audio response will no longer be accessible on the server for use in multi-turn conversations.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
     /**
      * Base64 encoded audio bytes generated by the model, in the format specified in the request.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /** Transcript text from this audio chunk. */
-    val transcript: String? = null,
+    /**
+     * Transcript text from this audio chunk.
+     */
+    val transcript: String? = null
 )
 
 /**
- * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be
- * called, as generated by the model.
+ * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
  */
 data class ChatCompletionStreamResponseDeltaFunctionCall(
     /**
-     * The arguments to call the function with, as generated by the model in JSON format. Note that
-     * the model does not always generate valid JSON, and may hallucinate parameters not defined by
-     * your function schema. Validate the arguments in your code before calling your function.
+     * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
      */
     val arguments: String? = null,
-    /** The name of the function to call. */
-    val name: String? = null,
+    /**
+     * The name of the function to call.
+     */
+    val name: String? = null
 )
 
 /**
- * A chat completion delta generated by streamed model responses. Streamed audio can arrive in
- * partial updates with an ID, base64 data, or transcript text. The final audio update contains only
- * its expiry timestamp.
+ * A chat completion delta generated by streamed model responses. Streamed audio can arrive in partial updates with an ID, base64 data, or transcript text. The final audio update contains only its expiry timestamp.
  */
 data class ChatCompletionStreamResponseDelta(
     /**
-     * A partial audio response. Audio chunks may carry an ID, base64 data, or transcript text; the
-     * final audio update contains only its expiry timestamp.
+     * A partial audio response. Audio chunks may carry an ID, base64 data, or transcript text; the final audio update contains only its expiry timestamp.
      */
     val audio: ChatCompletionStreamResponseDeltaAudio? = null,
-    /** Optional `string` value serialized in the `content` wire field. */
+    /**
+     * Optional `string` value serialized in the `content` wire field.
+     */
     val content: String? = null,
     /**
-     * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be
-     * called, as generated by the model.
+     * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_call")
-    val functionCall: ChatCompletionStreamResponseDeltaFunctionCall? = null,
-    /** Optional array value serialized in the `tool_calls` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls")
-    val toolCalls: List<ChatCompletionMessageToolCallChunk>? = null,
-    /** The role of the author of this message. */
+    @com.fasterxml.jackson.annotation.JsonProperty("function_call") val functionCall: ChatCompletionStreamResponseDeltaFunctionCall? = null,
+    /**
+     * Optional array value serialized in the `tool_calls` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls") val toolCalls: List<ChatCompletionMessageToolCallChunk>? = null,
+    /**
+     * The role of the author of this message.
+     */
     val role: ChatCompletionStreamResponseDeltaRoleEnum? = null,
-    /** Optional `string` value serialized in the `refusal` wire field. */
-    val refusal: String? = null,
-)
-
-/** Required object value serialized in the `top_logprobs[]` wire field. */
-data class ChatCompletionTokenLogprobTopLogprobsItem(
-    /** The token. */
-    val token: String,
     /**
-     * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise,
-     * the value `-9999.0` is used to signify that the token is very unlikely.
+     * Optional `string` value serialized in the `refusal` wire field.
      */
-    val logprob: Double,
-    /**
-     * A list of integers representing the UTF-8 bytes representation of the token. Useful in
-     * instances where characters are represented by multiple tokens and their byte representations
-     * must be combined to generate the correct text representation. Can be `null` if there is no
-     * bytes representation for the token.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bytes", required = true) val bytes: List<Long>?,
-)
-
-/** Typed representation of the `ChatCompletionTokenLogprob` API schema. */
-data class ChatCompletionTokenLogprob(
-    /** The token. */
-    val token: String,
-    /**
-     * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise,
-     * the value `-9999.0` is used to signify that the token is very unlikely.
-     */
-    val logprob: Double,
-    /**
-     * A list of integers representing the UTF-8 bytes representation of the token. Useful in
-     * instances where characters are represented by multiple tokens and their byte representations
-     * must be combined to generate the correct text representation. Can be `null` if there is no
-     * bytes representation for the token.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bytes", required = true) val bytes: List<Long>?,
-    /**
-     * List of the most likely tokens and their log probability, at this token position. The number
-     * of entries may be fewer than the requested `top_logprobs`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs")
-    val topLogprobs: List<ChatCompletionTokenLogprobTopLogprobsItem>,
+    val refusal: String? = null
 )
 
 /**
- * Controls which (if any) tool is called by the model. `none` means the model will not call any
- * tool and instead generates a message. `auto` means the model can pick between generating a
- * message or calling one or more tools. `required` means the model must call one or more tools.
- * Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}`
- * forces the model to call that tool. `none` is the default when no tools are present. `auto` is
- * the default…
+ * Required object value serialized in the `top_logprobs[]` wire field.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ChatCompletionToolChoiceOption.Deserializer::class
+data class ChatCompletionTokenLogprobTopLogprobsItem(
+    /**
+     * The token.
+     */
+    val token: String,
+    /**
+     * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value `-9999.0` is used to signify that the token is very unlikely.
+     */
+    val logprob: Double,
+    /**
+     * A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("bytes", required = true) val bytes: List<Long>?
 )
+
+/**
+ * Typed representation of the `ChatCompletionTokenLogprob` API schema.
+ */
+data class ChatCompletionTokenLogprob(
+    /**
+     * The token.
+     */
+    val token: String,
+    /**
+     * The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value `-9999.0` is used to signify that the token is very unlikely.
+     */
+    val logprob: Double,
+    /**
+     * A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("bytes", required = true) val bytes: List<Long>?,
+    /**
+     * List of the most likely tokens and their log probability, at this token position. The number of entries may be fewer than the requested `top_logprobs`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: List<ChatCompletionTokenLogprobTopLogprobsItem>
+)
+
+/**
+ * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool. `none` is the default when no tools are present. `auto` is the default…
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ChatCompletionToolChoiceOption.Deserializer::class)
 sealed interface ChatCompletionToolChoiceOption {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<ChatCompletionToolChoiceOption>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ChatCompletionToolChoiceOption>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): ChatCompletionToolChoiceOption {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out ChatCompletionToolChoiceOption>? =
-                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                    "allowed_tools" -> ChatCompletionAllowedToolsChoice::class.java
-                    "function" -> ChatCompletionNamedToolChoice::class.java
-                    "custom" -> ChatCompletionNamedToolChoiceCustom::class.java
-                    null -> null
-                    else -> return UnknownChatCompletionToolChoiceOption(node)
-                }
-            if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out ChatCompletionToolChoiceOption>> =
-                listOf(
-                    ChatCompletionAllowedToolsChoice::class.java,
-                    ChatCompletionNamedToolChoice::class.java,
-                    ChatCompletionNamedToolChoiceCustom::class.java,
-                )
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
+            val taggedType: Class<out ChatCompletionToolChoiceOption>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                "allowed_tools" -> ChatCompletionAllowedToolsChoice::class.java
+                "function" -> ChatCompletionNamedToolChoice::class.java
+                "custom" -> ChatCompletionNamedToolChoiceCustom::class.java
+                null -> null
+                else -> return UnknownChatCompletionToolChoiceOption(node)
             }
+            if (taggedType != null) return mapper.convertValue(node, taggedType)
+            val objectTypes: List<Class<out ChatCompletionToolChoiceOption>> = listOf(ChatCompletionAllowedToolsChoice::class.java, ChatCompletionNamedToolChoice::class.java, ChatCompletionNamedToolChoiceCustom::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                node.isTextual ->
-                    StringChatCompletionToolChoiceOption(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
+                node.isTextual -> StringChatCompletionToolChoiceOption(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
                 else -> UnknownChatCompletionToolChoiceOption(node)
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringChatCompletionToolChoiceOption(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : ChatCompletionToolChoiceOption
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringChatCompletionToolChoiceOption(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ChatCompletionToolChoiceOption
 
-/**
- * A [ChatCompletionToolChoiceOption] whose `type` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownChatCompletionToolChoiceOption
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [ChatCompletionToolChoiceOption] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownChatCompletionToolChoiceOption @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ChatCompletionToolChoiceOption {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

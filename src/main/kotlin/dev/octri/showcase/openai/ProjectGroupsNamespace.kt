@@ -3,114 +3,51 @@
 
 package dev.octri.showcase.openai
 
+
 class ProjectGroupsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the groups that have access to a project. Use `after` to continue from the last group
-     * in a previous response, and set `limit` and `order` to control the page size and sort order.
+     * Lists the groups that have access to a project. Use `after` to continue from the last group in a previous response, and set `limit` and `order` to control the page size and sort order.
      *
      * Lists the groups that have access to a project.
      */
-    fun list(
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListProjectGroupsParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): ProjectGroupListResource {
-        return dev.octri.showcase.openai.methods.ProjectGroups.listProjectGroups(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            order,
-            options,
-        )
+    fun list(projectId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupsParameterEnum? = null, options: RequestOptions? = null): ProjectGroupListResource {
+        return dev.octri.showcase.openai.methods.ProjectGroups.listProjectGroups(clientConfig, projectId, limit, after, order, options)
     }
 
     /**
-     * Lists the groups that have access to a project. Use `after` to continue from the last group
-     * in a previous response, and set `limit` and `order` to control the page size and sort order.
+     * Lists the groups that have access to a project. Use `after` to continue from the last group in a previous response, and set `limit` and `order` to control the page size and sort order.
      *
      * Lists the groups that have access to a project.
      */
-    fun listPaginated(
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListProjectGroupsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ProjectGroup) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.ProjectGroups.listProjectGroupsPaginated(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            order,
-            options,
-            yieldFn,
-        )
+    fun listPaginated(projectId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (ProjectGroup) -> Boolean) {
+        dev.octri.showcase.openai.methods.ProjectGroups.listProjectGroupsPaginated(clientConfig, projectId, limit, after, order, options, yieldFn)
     }
 
     /**
-     * Grants a group access to a project with a specified project role. Supply the group ID and
-     * role identifier to create the group’s project membership.
+     * Grants a group access to a project with a specified project role. Supply the group ID and role identifier to create the group’s project membership.
      *
      * Grants a group access to a project.
      */
-    fun add(
-        projectId: String,
-        groupId: String,
-        role: String,
-        options: RequestOptions? = null,
-    ): ProjectGroup {
-        return dev.octri.showcase.openai.methods.ProjectGroups.addProjectGroup(
-            clientConfig,
-            projectId,
-            groupId,
-            role,
-            options,
-        )
+    fun add(projectId: String, groupId: String, role: String, options: RequestOptions? = null): ProjectGroup {
+        return dev.octri.showcase.openai.methods.ProjectGroups.addProjectGroup(clientConfig, projectId, groupId, role, options)
     }
 
     /**
-     * Retrieves a group's membership details for a project. Use `project_id` and `group_id` to
-     * identify the project and group, and `group_type` to select a group type; it defaults to
-     * `group` when omitted.
+     * Retrieves a group's membership details for a project. Use `project_id` and `group_id` to identify the project and group, and `group_type` to select a group type; it defaults to `group` when omitted.
      *
      * Retrieves a project's group.
      */
-    fun retrieve(
-        projectId: String,
-        groupId: String,
-        groupType: RetrieveProjectGroupParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): ProjectGroup {
-        return dev.octri.showcase.openai.methods.ProjectGroups.retrieveProjectGroup(
-            clientConfig,
-            projectId,
-            groupId,
-            groupType,
-            options,
-        )
+    fun retrieve(projectId: String, groupId: String, groupType: RetrieveProjectGroupParameterEnum? = null, options: RequestOptions? = null): ProjectGroup {
+        return dev.octri.showcase.openai.methods.ProjectGroups.retrieveProjectGroup(clientConfig, projectId, groupId, groupType, options)
     }
 
     /**
-     * Removes a group's access to a project. Use `project_id` and `group_id` to identify the
-     * project membership to revoke. The response confirms whether the membership was removed.
+     * Removes a group's access to a project. Use `project_id` and `group_id` to identify the project membership to revoke. The response confirms whether the membership was removed.
      *
      * Revokes a group's access to a project.
      */
-    fun remove(
-        projectId: String,
-        groupId: String,
-        options: RequestOptions? = null,
-    ): ProjectGroupDeletedResource {
-        return dev.octri.showcase.openai.methods.ProjectGroups.removeProjectGroup(
-            clientConfig,
-            projectId,
-            groupId,
-            options,
-        )
+    fun remove(projectId: String, groupId: String, options: RequestOptions? = null): ProjectGroupDeletedResource {
+        return dev.octri.showcase.openai.methods.ProjectGroups.removeProjectGroup(clientConfig, projectId, groupId, options)
     }
+
 }

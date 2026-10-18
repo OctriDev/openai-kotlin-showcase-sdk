@@ -11,22 +11,18 @@ import dev.octri.showcase.openai.WebhookEventTypeListResource
 
 object WebhookEventTypes {
 
-    /** Returns webhook event types visible to the authenticated project. */
-    fun listWebhookEventTypes(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): WebhookEventTypeListResource {
-        return SdkClient.request<WebhookEventTypeListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/webhook_event_types",
-                    config = clientConfig,
-                    operationId = "listWebhookEventTypes",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("401" to ErrorResponse::class.java),
-                )
-            )
-            .data
+
+    /**
+     * Returns webhook event types visible to the authenticated project.
+     */
+    fun listWebhookEventTypes(clientConfig: ClientConfig, options: RequestOptions? = null): WebhookEventTypeListResource {
+        return SdkClient.request<WebhookEventTypeListResource>(SdkClient.RequestSpec("GET", "/webhook_event_types", config = clientConfig, operationId = "listWebhookEventTypes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

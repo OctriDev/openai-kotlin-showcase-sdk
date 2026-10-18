@@ -4,13 +4,9 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models
- * with different capabilities, performance characteristics, and price points. Refer to the model
- * guide to browse and compare available models.
+ * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the model guide to browse and compare available models.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ModelIdsCompaction.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ModelIdsCompaction.Deserializer::class)
 sealed interface ModelIdsCompaction {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ModelIdsCompaction>() {
@@ -20,8 +16,7 @@ sealed interface ModelIdsCompaction {
         ): ModelIdsCompaction {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out ModelIdsCompaction>> =
-                listOf(ModelIdsResponses::class.java)
+            val objectTypes: List<Class<out ModelIdsCompaction>> = listOf(ModelIdsResponses::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -30,40 +25,15 @@ sealed interface ModelIdsCompaction {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringModelIdsCompaction(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    ValueModelIdsCompaction(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
-                        )
-                    )
+                node.isTextual -> StringModelIdsCompaction(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> ValueModelIdsCompaction(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringModelIdsCompaction(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : ModelIdsCompaction
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringModelIdsCompaction(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ModelIdsCompaction
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ValueModelIdsCompaction(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
-    ModelIdsCompaction
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ValueModelIdsCompaction(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : ModelIdsCompaction

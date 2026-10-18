@@ -22,10 +22,10 @@ import dev.octri.showcase.openai.BetaPromptCacheRetentionEnum
 import dev.octri.showcase.openai.BetaReasoning
 import dev.octri.showcase.openai.BetaResponse
 import dev.octri.showcase.openai.BetaResponseItemList
-import dev.octri.showcase.openai.BetaResponseStreamEvent
-import dev.octri.showcase.openai.BetaResponseTextParam
 import dev.octri.showcase.openai.BetaResponsesCompactParameterItemEnum
 import dev.octri.showcase.openai.BetaResponsesCountInputTokensParameterItemEnum
+import dev.octri.showcase.openai.BetaResponseStreamEvent
+import dev.octri.showcase.openai.BetaResponseTextParam
 import dev.octri.showcase.openai.BetaServiceTierEnum
 import dev.octri.showcase.openai.BetaTokenCountsResource
 import dev.octri.showcase.openai.BetaTool
@@ -57,19 +57,17 @@ import dev.octri.showcase.openai.ToolChoiceParam
 import dev.octri.showcase.openai.TruncationEnum
 
 object Responses {
-    data class DeleteResponseResponse(
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: DeleteResponseResponseObjectEnum,
-        val deleted: Boolean,
-        val id: String,
-    )
+data class DeleteResponseResponse(
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteResponseResponseObjectEnum,
+    val deleted: Boolean,
+    val id: String
+)
 
-    data class BetaDeleteResponseResponse(
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: BetaDeleteResponseResponseObjectEnum,
-        val deleted: Boolean,
-        val id: String,
-    )
+data class BetaDeleteResponseResponse(
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: BetaDeleteResponseResponseObjectEnum,
+    val deleted: Boolean,
+    val id: String
+)
 
     data class ListInputItemsPage(
         val data: ResponseItemList,
@@ -90,7 +88,7 @@ object Responses {
         val personality: PersonalityEnum? = null,
         val conversation: SdkClient.SdkOptional<ConversationParam?>? = null,
         val toolChoice: SdkClient.SdkOptional<ToolChoiceParam?>? = null,
-        val parallelToolCalls: SdkClient.SdkOptional<Boolean?>? = null,
+        val parallelToolCalls: SdkClient.SdkOptional<Boolean?>? = null
     )
 
     /** Parameters for [compactResponses]. */
@@ -102,7 +100,7 @@ object Responses {
         val promptCacheKey: SdkClient.SdkOptional<String?>? = null,
         val promptCacheRetention: SdkClient.SdkOptional<PromptCacheRetentionEnum?>? = null,
         val promptCacheOptions: SdkClient.SdkOptional<PromptCacheOptionsParam?>? = null,
-        val serviceTier: SdkClient.SdkOptional<ServiceTierEnum?>? = null,
+        val serviceTier: SdkClient.SdkOptional<ServiceTierEnum?>? = null
     )
 
     /** Parameters for [betaGetResponse]. */
@@ -112,7 +110,7 @@ object Responses {
         val stream: Boolean? = null,
         val startingAfter: Long? = null,
         val includeObfuscation: Boolean? = null,
-        val openaiBeta: List<BetaGetResponseParameterItemEnum>? = null,
+        val openaiBeta: List<BetaGetResponseParameterItemEnum>? = null
     )
 
     data class BetaGetResponseStreamRequest(
@@ -121,7 +119,7 @@ object Responses {
         val stream: Boolean? = null,
         val startingAfter: Long? = null,
         val includeObfuscation: Boolean? = null,
-        val openaiBeta: List<BetaGetResponseParameterItemEnum>? = null,
+        val openaiBeta: List<BetaGetResponseParameterItemEnum>? = null
     )
 
     /** Parameters for [betaResponsesCompact]. */
@@ -134,7 +132,7 @@ object Responses {
         val promptCacheKey: SdkClient.SdkOptional<String?>? = null,
         val promptCacheRetention: SdkClient.SdkOptional<BetaPromptCacheRetentionEnum?>? = null,
         val promptCacheOptions: SdkClient.SdkOptional<BetaPromptCacheOptionsParam?>? = null,
-        val serviceTier: SdkClient.SdkOptional<BetaServiceTierEnum?>? = null,
+        val serviceTier: SdkClient.SdkOptional<BetaServiceTierEnum?>? = null
     )
 
     /** Parameters for [betaListInputItems]. */
@@ -144,7 +142,7 @@ object Responses {
         val order: BetaListInputItemsParameterEnum? = null,
         val after: String? = null,
         val include: List<BetaIncludeEnum>? = null,
-        val openaiBeta: List<BetaListInputItemsParameterItemEnum>? = null,
+        val openaiBeta: List<BetaListInputItemsParameterItemEnum>? = null
     )
 
     data class BetaListInputItemsPage(
@@ -167,20 +165,13 @@ object Responses {
         val personality: BetaPersonalityEnum? = null,
         val conversation: SdkClient.SdkOptional<BetaConversationParam?>? = null,
         val toolChoice: SdkClient.SdkOptional<BetaToolChoiceParam?>? = null,
-        val parallelToolCalls: SdkClient.SdkOptional<Boolean?>? = null,
+        val parallelToolCalls: SdkClient.SdkOptional<Boolean?>? = null
     )
 
     /**
-     * Creates a model response from text, image, or file input and can produce text or JSON output.
-     * Provide `input` and `model`, and configure `tools` and `tool_choice` when you want the model
-     * to use custom code or built-in tools. Set `background` to run the response asynchronously or
-     * `stream` to receive generated events as they are produced.
+     * Creates a model response from text, image, or file input and can produce text or JSON output. Provide `input` and `model`, and configure `tools` and `tool_choice` when you want the model to use custom code or built-in tools. Set `background` to run the response asynchronously or `stream` to receive generated events as they are produced.
      */
-    fun createResponse(
-        clientConfig: ClientConfig,
-        body: CreateResponse,
-        options: RequestOptions? = null,
-    ): Response =
+    fun createResponse(clientConfig: ClientConfig, body: CreateResponse, options: RequestOptions? = null): Response =
         dev.octri.showcase.openai.methods.ResponsesCreateResponseOperation.createResponse(
             clientConfig,
             body,
@@ -188,37 +179,19 @@ object Responses {
         )
 
     /**
-     * Creates a model response from text, image, or file input and can produce text or JSON output.
-     * Provide `input` and `model`, and configure `tools` and `tool_choice` when you want the model
-     * to use custom code or built-in tools. Set `background` to run the response asynchronously or
-     * `stream` to receive generated events as they are produced.
+     * Creates a model response from text, image, or file input and can produce text or JSON output. Provide `input` and `model`, and configure `tools` and `tool_choice` when you want the model to use custom code or built-in tools. Set `background` to run the response asynchronously or `stream` to receive generated events as they are produced.
      */
-    fun createResponseStream(
-        clientConfig: ClientConfig,
-        body: CreateResponse,
-        options: RequestOptions? = null,
-    ): Sequence<ResponseStreamEvent> =
-        dev.octri.showcase.openai.methods.ResponsesCreateResponseStreamOperation
-            .createResponseStream(
-                clientConfig,
-                body,
-                options,
-            )
+    fun createResponseStream(clientConfig: ClientConfig, body: CreateResponse, options: RequestOptions? = null): Sequence<ResponseStreamEvent> =
+        dev.octri.showcase.openai.methods.ResponsesCreateResponseStreamOperation.createResponseStream(
+            clientConfig,
+            body,
+            options,
+        )
 
     /**
-     * Retrieves a model response by its identifier. Use `include` to request additional response
-     * data, or set `stream` to receive server-sent events. When streaming, use `starting_after` to
-     * resume from an event sequence number.
+     * Retrieves a model response by its identifier. Use `include` to request additional response data, or set `stream` to receive server-sent events. When streaming, use `starting_after` to resume from an event sequence number.
      */
-    fun getResponse(
-        clientConfig: ClientConfig,
-        responseId: String,
-        include: List<IncludeEnum>? = null,
-        stream: Boolean? = null,
-        startingAfter: Long? = null,
-        includeObfuscation: Boolean? = null,
-        options: RequestOptions? = null,
-    ): Response =
+    fun getResponse(clientConfig: ClientConfig, responseId: String, include: List<IncludeEnum>? = null, stream: Boolean? = null, startingAfter: Long? = null, includeObfuscation: Boolean? = null, options: RequestOptions? = null): Response =
         dev.octri.showcase.openai.methods.ResponsesGetResponseOperation.getResponse(
             clientConfig,
             responseId,
@@ -230,19 +203,9 @@ object Responses {
         )
 
     /**
-     * Retrieves a model response by its identifier. Use `include` to request additional response
-     * data, or set `stream` to receive server-sent events. When streaming, use `starting_after` to
-     * resume from an event sequence number.
+     * Retrieves a model response by its identifier. Use `include` to request additional response data, or set `stream` to receive server-sent events. When streaming, use `starting_after` to resume from an event sequence number.
      */
-    fun getResponseStream(
-        clientConfig: ClientConfig,
-        responseId: String,
-        include: List<IncludeEnum>? = null,
-        stream: Boolean? = null,
-        startingAfter: Long? = null,
-        includeObfuscation: Boolean? = null,
-        options: RequestOptions? = null,
-    ): Sequence<ResponseStreamEvent> =
+    fun getResponseStream(clientConfig: ClientConfig, responseId: String, include: List<IncludeEnum>? = null, stream: Boolean? = null, startingAfter: Long? = null, includeObfuscation: Boolean? = null, options: RequestOptions? = null): Sequence<ResponseStreamEvent> =
         dev.octri.showcase.openai.methods.ResponsesGetResponseStreamOperation.getResponseStream(
             clientConfig,
             responseId,
@@ -254,15 +217,9 @@ object Responses {
         )
 
     /**
-     * Deletes a model response by its identifier. Use this operation when you no longer need to
-     * retain the response. The successful result confirms deletion and includes the response
-     * identifier.
+     * Deletes a model response by its identifier. Use this operation when you no longer need to retain the response. The successful result confirms deletion and includes the response identifier.
      */
-    fun deleteResponse(
-        clientConfig: ClientConfig,
-        responseId: String,
-        options: RequestOptions? = null,
-    ): DeleteResponseResponse =
+    fun deleteResponse(clientConfig: ClientConfig, responseId: String, options: RequestOptions? = null): DeleteResponseResponse =
         dev.octri.showcase.openai.methods.ResponsesDeleteResponseOperation.deleteResponse(
             clientConfig,
             responseId,
@@ -270,15 +227,9 @@ object Responses {
         )
 
     /**
-     * Cancels a model response that is running in the background. Use this operation when you need
-     * to stop background generation before it completes. Only responses created with `background`
-     * set to `true` can be cancelled.
+     * Cancels a model response that is running in the background. Use this operation when you need to stop background generation before it completes. Only responses created with `background` set to `true` can be cancelled.
      */
-    fun cancelResponse(
-        clientConfig: ClientConfig,
-        responseId: String,
-        options: RequestOptions? = null,
-    ): Response =
+    fun cancelResponse(clientConfig: ClientConfig, responseId: String, options: RequestOptions? = null): Response =
         dev.octri.showcase.openai.methods.ResponsesCancelResponseOperation.cancelResponse(
             clientConfig,
             responseId,
@@ -286,19 +237,9 @@ object Responses {
         )
 
     /**
-     * Lists the input items used to generate a model response. Use `limit` to set the page size and
-     * `order` to choose the item order. Use `after` with an item identifier to continue through the
-     * results; check `has_more` to determine whether additional items are available.
+     * Lists the input items used to generate a model response. Use `limit` to set the page size and `order` to choose the item order. Use `after` with an item identifier to continue through the results; check `has_more` to determine whether additional items are available.
      */
-    fun listInputItems(
-        clientConfig: ClientConfig,
-        responseId: String,
-        limit: Long? = null,
-        order: ListInputItemsParameterEnum? = null,
-        after: String? = null,
-        include: List<IncludeEnum>? = null,
-        options: RequestOptions? = null,
-    ): ResponseItemList =
+    fun listInputItems(clientConfig: ClientConfig, responseId: String, limit: Long? = null, order: ListInputItemsParameterEnum? = null, after: String? = null, include: List<IncludeEnum>? = null, options: RequestOptions? = null): ResponseItemList =
         dev.octri.showcase.openai.methods.ResponsesListInputItemsOperation.listInputItems(
             clientConfig,
             responseId,
@@ -310,21 +251,9 @@ object Responses {
         )
 
     /**
-     * Iterates through all pages: Lists the input items used to generate a model response. Use
-     * `limit` to set the page size and `order` to choose the item order. Use `after` with an item
-     * identifier to continue through the results; check `has_more` to determine whether additional
-     * items are available.
+     * Iterates through all pages: Lists the input items used to generate a model response. Use `limit` to set the page size and `order` to choose the item order. Use `after` with an item identifier to continue through the results; check `has_more` to determine whether additional items are available.
      */
-    fun listInputItemsPaginated(
-        clientConfig: ClientConfig,
-        responseId: String,
-        limit: Long? = null,
-        order: ListInputItemsParameterEnum? = null,
-        after: String? = null,
-        include: List<IncludeEnum>? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ItemResource) -> Boolean,
-    ) =
+    fun listInputItemsPaginated(clientConfig: ClientConfig, responseId: String, limit: Long? = null, order: ListInputItemsParameterEnum? = null, after: String? = null, include: List<IncludeEnum>? = null, options: RequestOptions? = null, yieldFn: (ItemResource) -> Boolean) =
         dev.octri.showcase.openai.methods.ResponsesListInputItemsOperation.listInputItemsPaginated(
             clientConfig,
             responseId,
@@ -337,20 +266,9 @@ object Responses {
         )
 
     /**
-     * Lists the input items used to generate a model response. Use `limit` to set the page size and
-     * `order` to choose the item order. Use `after` with an item identifier to continue through the
-     * results; check `has_more` to determine whether additional items are available.
+     * Lists the input items used to generate a model response. Use `limit` to set the page size and `order` to choose the item order. Use `after` with an item identifier to continue through the results; check `has_more` to determine whether additional items are available.
      */
-    fun listInputItemsPages(
-        clientConfig: ClientConfig,
-        responseId: String,
-        limit: Long? = null,
-        order: ListInputItemsParameterEnum? = null,
-        after: String? = null,
-        include: List<IncludeEnum>? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListInputItemsPage) -> Boolean,
-    ) =
+    fun listInputItemsPages(clientConfig: ClientConfig, responseId: String, limit: Long? = null, order: ListInputItemsParameterEnum? = null, after: String? = null, include: List<IncludeEnum>? = null, options: RequestOptions? = null, yieldPage: (ListInputItemsPage) -> Boolean) =
         dev.octri.showcase.openai.methods.ResponsesListInputItemsOperation.listInputItemsPages(
             clientConfig,
             responseId,
@@ -363,32 +281,19 @@ object Responses {
         )
 
     /**
-     * Counts the input tokens for a response request. Provide the model and any input or
-     * conversation context to count, and use `input_tokens` in the result to inspect the count. Do
-     * not combine `previous_response_id` with `conversation`.
+     * Counts the input tokens for a response request. Provide the model and any input or conversation context to count, and use `input_tokens` in the result to inspect the count. Do not combine `previous_response_id` with `conversation`.
      */
-    fun countResponsesInputTokens(
-        clientConfig: ClientConfig,
-        request: CountResponsesInputTokensRequest,
-        options: RequestOptions? = null,
-    ): TokenCountsResource =
-        dev.octri.showcase.openai.methods.ResponsesCountResponsesInputTokensOperation
-            .countResponsesInputTokens(
-                clientConfig,
-                request,
-                options,
-            )
+    fun countResponsesInputTokens(clientConfig: ClientConfig, request: CountResponsesInputTokensRequest, options: RequestOptions? = null): TokenCountsResource =
+        dev.octri.showcase.openai.methods.ResponsesCountResponsesInputTokensOperation.countResponsesInputTokens(
+            clientConfig,
+            request,
+            options,
+        )
 
     /**
-     * Compacts conversation input and returns a compacted response object with output items and
-     * token usage. Provide the required `model` and any input or conversation context to compact.
-     * Do not combine `previous_response_id` with `conversation`.
+     * Compacts conversation input and returns a compacted response object with output items and token usage. Provide the required `model` and any input or conversation context to compact. Do not combine `previous_response_id` with `conversation`.
      */
-    fun compactResponses(
-        clientConfig: ClientConfig,
-        request: CompactResponsesRequest,
-        options: RequestOptions? = null,
-    ): CompactResource =
+    fun compactResponses(clientConfig: ClientConfig, request: CompactResponsesRequest, options: RequestOptions? = null): CompactResource =
         dev.octri.showcase.openai.methods.ResponsesCompactResponsesOperation.compactResponses(
             clientConfig,
             request,
@@ -396,16 +301,9 @@ object Responses {
         )
 
     /**
-     * Creates a model response from text, image, or file input, with optional tools and output
-     * configuration. Use `input`, `model`, and `tools` to control what the model processes and how
-     * it generates the response. Set `background` to true if you need to cancel the response later.
+     * Creates a model response from text, image, or file input, with optional tools and output configuration. Use `input`, `model`, and `tools` to control what the model processes and how it generates the response. Set `background` to true if you need to cancel the response later.
      */
-    fun betaCreateResponse(
-        clientConfig: ClientConfig,
-        body: BetaCreateResponse,
-        openaiBeta: List<BetaCreateResponseParameterItemEnum>? = null,
-        options: RequestOptions? = null,
-    ): BetaResponse =
+    fun betaCreateResponse(clientConfig: ClientConfig, body: BetaCreateResponse, openaiBeta: List<BetaCreateResponseParameterItemEnum>? = null, options: RequestOptions? = null): BetaResponse =
         dev.octri.showcase.openai.methods.ResponsesBetaCreateResponseOperation.betaCreateResponse(
             clientConfig,
             body,
@@ -414,34 +312,20 @@ object Responses {
         )
 
     /**
-     * Creates a model response from text, image, or file input, with optional tools and output
-     * configuration. Use `input`, `model`, and `tools` to control what the model processes and how
-     * it generates the response. Set `background` to true if you need to cancel the response later.
+     * Creates a model response from text, image, or file input, with optional tools and output configuration. Use `input`, `model`, and `tools` to control what the model processes and how it generates the response. Set `background` to true if you need to cancel the response later.
      */
-    fun betaCreateResponseStream(
-        clientConfig: ClientConfig,
-        body: BetaCreateResponse,
-        openaiBeta: List<BetaCreateResponseParameterItemEnum>? = null,
-        options: RequestOptions? = null,
-    ): Sequence<BetaResponseStreamEvent> =
-        dev.octri.showcase.openai.methods.ResponsesBetaCreateResponseStreamOperation
-            .betaCreateResponseStream(
-                clientConfig,
-                body,
-                openaiBeta,
-                options,
-            )
+    fun betaCreateResponseStream(clientConfig: ClientConfig, body: BetaCreateResponse, openaiBeta: List<BetaCreateResponseParameterItemEnum>? = null, options: RequestOptions? = null): Sequence<BetaResponseStreamEvent> =
+        dev.octri.showcase.openai.methods.ResponsesBetaCreateResponseStreamOperation.betaCreateResponseStream(
+            clientConfig,
+            body,
+            openaiBeta,
+            options,
+        )
 
     /**
-     * Retrieves a model response by its identifier. Use `include` to request additional response
-     * data, or set `stream` to receive response events as server-sent events. Use `starting_after`
-     * to begin streaming after a particular event sequence number.
+     * Retrieves a model response by its identifier. Use `include` to request additional response data, or set `stream` to receive response events as server-sent events. Use `starting_after` to begin streaming after a particular event sequence number.
      */
-    fun betaGetResponse(
-        clientConfig: ClientConfig,
-        request: BetaGetResponseRequest,
-        options: RequestOptions? = null,
-    ): BetaResponse =
+    fun betaGetResponse(clientConfig: ClientConfig, request: BetaGetResponseRequest, options: RequestOptions? = null): BetaResponse =
         dev.octri.showcase.openai.methods.ResponsesBetaGetResponseOperation.betaGetResponse(
             clientConfig,
             request,
@@ -449,33 +333,19 @@ object Responses {
         )
 
     /**
-     * Retrieves a model response by its identifier. Use `include` to request additional response
-     * data, or set `stream` to receive response events as server-sent events. Use `starting_after`
-     * to begin streaming after a particular event sequence number.
+     * Retrieves a model response by its identifier. Use `include` to request additional response data, or set `stream` to receive response events as server-sent events. Use `starting_after` to begin streaming after a particular event sequence number.
      */
-    fun betaGetResponseStream(
-        clientConfig: ClientConfig,
-        request: BetaGetResponseStreamRequest,
-        options: RequestOptions? = null,
-    ): Sequence<BetaResponseStreamEvent> =
-        dev.octri.showcase.openai.methods.ResponsesBetaGetResponseStreamOperation
-            .betaGetResponseStream(
-                clientConfig,
-                request,
-                options,
-            )
+    fun betaGetResponseStream(clientConfig: ClientConfig, request: BetaGetResponseStreamRequest, options: RequestOptions? = null): Sequence<BetaResponseStreamEvent> =
+        dev.octri.showcase.openai.methods.ResponsesBetaGetResponseStreamOperation.betaGetResponseStream(
+            clientConfig,
+            request,
+            options,
+        )
 
     /**
-     * Deletes a model response by its identifier. Use this operation when you no longer need the
-     * response to remain available. The response identifies the deleted object and indicates that
-     * deletion occurred.
+     * Deletes a model response by its identifier. Use this operation when you no longer need the response to remain available. The response identifies the deleted object and indicates that deletion occurred.
      */
-    fun betaDeleteResponse(
-        clientConfig: ClientConfig,
-        responseId: String,
-        openaiBeta: List<BetaDeleteResponseParameterItemEnum>? = null,
-        options: RequestOptions? = null,
-    ): BetaDeleteResponseResponse =
+    fun betaDeleteResponse(clientConfig: ClientConfig, responseId: String, openaiBeta: List<BetaDeleteResponseParameterItemEnum>? = null, options: RequestOptions? = null): BetaDeleteResponseResponse =
         dev.octri.showcase.openai.methods.ResponsesBetaDeleteResponseOperation.betaDeleteResponse(
             clientConfig,
             responseId,
@@ -484,16 +354,9 @@ object Responses {
         )
 
     /**
-     * Cancels a background model response by its identifier. Use this operation only for responses
-     * created with `background` set to true; responses created without background processing cannot
-     * be cancelled. The response includes the model response object and its current status.
+     * Cancels a background model response by its identifier. Use this operation only for responses created with `background` set to true; responses created without background processing cannot be cancelled. The response includes the model response object and its current status.
      */
-    fun betaCancelResponse(
-        clientConfig: ClientConfig,
-        responseId: String,
-        openaiBeta: List<BetaCancelResponseParameterItemEnum>? = null,
-        options: RequestOptions? = null,
-    ): BetaResponse =
+    fun betaCancelResponse(clientConfig: ClientConfig, responseId: String, openaiBeta: List<BetaCancelResponseParameterItemEnum>? = null, options: RequestOptions? = null): BetaResponse =
         dev.octri.showcase.openai.methods.ResponsesBetaCancelResponseOperation.betaCancelResponse(
             clientConfig,
             responseId,
@@ -502,32 +365,19 @@ object Responses {
         )
 
     /**
-     * Compacts a conversation and returns a compacted response object. Provide the required `model`
-     * and conversation content through `input` or `previous_response_id` to produce a compacted
-     * representation. Use the result to manage the context window in a long-running conversation.
+     * Compacts a conversation and returns a compacted response object. Provide the required `model` and conversation content through `input` or `previous_response_id` to produce a compacted representation. Use the result to manage the context window in a long-running conversation.
      */
-    fun betaResponsesCompact(
-        clientConfig: ClientConfig,
-        request: BetaResponsesCompactRequest,
-        options: RequestOptions? = null,
-    ): BetaCompactResource =
-        dev.octri.showcase.openai.methods.ResponsesBetaResponsesCompactOperation
-            .betaResponsesCompact(
-                clientConfig,
-                request,
-                options,
-            )
+    fun betaResponsesCompact(clientConfig: ClientConfig, request: BetaResponsesCompactRequest, options: RequestOptions? = null): BetaCompactResource =
+        dev.octri.showcase.openai.methods.ResponsesBetaResponsesCompactOperation.betaResponsesCompact(
+            clientConfig,
+            request,
+            options,
+        )
 
     /**
-     * Lists the input items used to generate a model response. Use `limit` to control the number of
-     * returned items and `order` to choose their sequence. Pass `after` with an item ID from a
-     * previous page to continue through the list.
+     * Lists the input items used to generate a model response. Use `limit` to control the number of returned items and `order` to choose their sequence. Pass `after` with an item ID from a previous page to continue through the list.
      */
-    fun betaListInputItems(
-        clientConfig: ClientConfig,
-        request: BetaListInputItemsRequest,
-        options: RequestOptions? = null,
-    ): BetaResponseItemList =
+    fun betaListInputItems(clientConfig: ClientConfig, request: BetaListInputItemsRequest, options: RequestOptions? = null): BetaResponseItemList =
         dev.octri.showcase.openai.methods.ResponsesBetaListInputItemsOperation.betaListInputItems(
             clientConfig,
             request,
@@ -535,57 +385,34 @@ object Responses {
         )
 
     /**
-     * Iterates through all pages: Lists the input items used to generate a model response. Use
-     * `limit` to control the number of returned items and `order` to choose their sequence. Pass
-     * `after` with an item ID from a previous page to continue through the list.
+     * Iterates through all pages: Lists the input items used to generate a model response. Use `limit` to control the number of returned items and `order` to choose their sequence. Pass `after` with an item ID from a previous page to continue through the list.
      */
-    fun betaListInputItemsPaginated(
-        clientConfig: ClientConfig,
-        request: BetaListInputItemsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (BetaItemResource) -> Boolean,
-    ) =
-        dev.octri.showcase.openai.methods.ResponsesBetaListInputItemsOperation
-            .betaListInputItemsPaginated(
-                clientConfig,
-                request,
-                options,
-                yieldFn,
-            )
+    fun betaListInputItemsPaginated(clientConfig: ClientConfig, request: BetaListInputItemsRequest, options: RequestOptions? = null, yieldFn: (BetaItemResource) -> Boolean) =
+        dev.octri.showcase.openai.methods.ResponsesBetaListInputItemsOperation.betaListInputItemsPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
 
     /**
-     * Lists the input items used to generate a model response. Use `limit` to control the number of
-     * returned items and `order` to choose their sequence. Pass `after` with an item ID from a
-     * previous page to continue through the list.
+     * Lists the input items used to generate a model response. Use `limit` to control the number of returned items and `order` to choose their sequence. Pass `after` with an item ID from a previous page to continue through the list.
      */
-    fun betaListInputItemsPages(
-        clientConfig: ClientConfig,
-        request: BetaListInputItemsRequest,
-        options: RequestOptions? = null,
-        yieldPage: (BetaListInputItemsPage) -> Boolean,
-    ) =
-        dev.octri.showcase.openai.methods.ResponsesBetaListInputItemsOperation
-            .betaListInputItemsPages(
-                clientConfig,
-                request,
-                options,
-                yieldPage,
-            )
+    fun betaListInputItemsPages(clientConfig: ClientConfig, request: BetaListInputItemsRequest, options: RequestOptions? = null, yieldPage: (BetaListInputItemsPage) -> Boolean) =
+        dev.octri.showcase.openai.methods.ResponsesBetaListInputItemsOperation.betaListInputItemsPages(
+            clientConfig,
+            request,
+            options,
+            yieldPage,
+        )
 
     /**
-     * Counts the input tokens for a prospective model request. Supply the model and any input,
-     * tool, text, reasoning, or conversation settings whose token contribution you want counted.
-     * Use the returned count to assess the request's input size before generating a response.
+     * Counts the input tokens for a prospective model request. Supply the model and any input, tool, text, reasoning, or conversation settings whose token contribution you want counted. Use the returned count to assess the request's input size before generating a response.
      */
-    fun betaResponsesCountInputTokens(
-        clientConfig: ClientConfig,
-        request: BetaResponsesCountInputTokensRequest,
-        options: RequestOptions? = null,
-    ): BetaTokenCountsResource =
-        dev.octri.showcase.openai.methods.ResponsesBetaResponsesCountInputTokensOperation
-            .betaResponsesCountInputTokens(
-                clientConfig,
-                request,
-                options,
-            )
+    fun betaResponsesCountInputTokens(clientConfig: ClientConfig, request: BetaResponsesCountInputTokensRequest, options: RequestOptions? = null): BetaTokenCountsResource =
+        dev.octri.showcase.openai.methods.ResponsesBetaResponsesCountInputTokensOperation.betaResponsesCountInputTokens(
+            clientConfig,
+            request,
+            options,
+        )
 }

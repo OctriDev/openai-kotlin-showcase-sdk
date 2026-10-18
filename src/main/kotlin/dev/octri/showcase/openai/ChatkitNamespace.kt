@@ -3,162 +3,70 @@
 
 package dev.octri.showcase.openai
 
+
 class ChatkitNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Cancel an active ChatKit session and return its most recent metadata. Cancelling prevents new
-     * requests from using the issued client secret.
+     * Cancel an active ChatKit session and return its most recent metadata. Cancelling prevents new requests from using the issued client secret.
      */
     fun cancelSession(sessionId: String, options: RequestOptions? = null): ChatSessionResource {
-        return dev.octri.showcase.openai.methods.Chatkit.cancelChatkitSession(
-            clientConfig,
-            sessionId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Chatkit.cancelChatkitSession(clientConfig, sessionId, options)
     }
 
     /**
-     * Creates a ChatKit session powered by a specified workflow. Supply `workflow` with its
-     * required `id` and a non-empty `user` identifier; optionally configure expiration, rate
-     * limits, tracing, and ChatKit features. The response includes the session's client secret,
-     * expiration time, and resolved configuration.
+     * Creates a ChatKit session powered by a specified workflow. Supply `workflow` with its required `id` and a non-empty `user` identifier; optionally configure expiration, rate limits, tracing, and ChatKit features. The response includes the session's client secret, expiration time, and resolved configuration.
      *
      * Create a ChatKit session.
      */
-    fun createSession(
-        workflow: WorkflowParam,
-        user: String,
-        expiresAfter: ExpiresAfterParam? = null,
-        rateLimits: RateLimitsParam? = null,
-        chatkitConfiguration: ChatkitConfigurationParam? = null,
-        options: RequestOptions? = null,
-    ): ChatSessionResource {
-        return dev.octri.showcase.openai.methods.Chatkit.createChatkitSession(
-            clientConfig,
-            workflow,
-            user,
-            expiresAfter,
-            rateLimits,
-            chatkitConfiguration,
-            options,
-        )
+    fun createSession(workflow: WorkflowParam, user: String, expiresAfter: ExpiresAfterParam? = null, rateLimits: RateLimitsParam? = null, chatkitConfiguration: ChatkitConfigurationParam? = null, options: RequestOptions? = null): ChatSessionResource {
+        return dev.octri.showcase.openai.methods.Chatkit.createChatkitSession(clientConfig, workflow, user, expiresAfter, rateLimits, chatkitConfiguration, options)
     }
 
     /**
-     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative
-     * to a thread item ID, and use `limit` and `order` to control the result set. The response
-     * includes pagination identifiers and a `has_more` flag.
+     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative to a thread item ID, and use `limit` and `order` to control the result set. The response includes pagination identifiers and a `has_more` flag.
      *
      * List items that belong to a ChatKit thread.
      */
-    fun listThreadItems(
-        threadId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ThreadItemListResource {
-        return dev.octri.showcase.openai.methods.Chatkit.listChatkitThreadItems(
-            clientConfig,
-            threadId,
-            limit,
-            order,
-            after,
-            before,
-            options,
-        )
+    fun listThreadItems(threadId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ThreadItemListResource {
+        return dev.octri.showcase.openai.methods.Chatkit.listChatkitThreadItems(clientConfig, threadId, limit, order, after, before, options)
     }
 
     /**
-     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative
-     * to a thread item ID, and use `limit` and `order` to control the result set. The response
-     * includes pagination identifiers and a `has_more` flag.
+     * Lists items belonging to a ChatKit thread. Use `after` or `before` to select items relative to a thread item ID, and use `limit` and `order` to control the result set. The response includes pagination identifiers and a `has_more` flag.
      *
      * List items that belong to a ChatKit thread.
      */
-    fun listThreadItemsPaginated(
-        threadId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ThreadItem) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Chatkit.listChatkitThreadItemsPaginated(
-            clientConfig,
-            threadId,
-            limit,
-            order,
-            after,
-            before,
-            options,
-            yieldFn,
-        )
+    fun listThreadItemsPaginated(threadId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (ThreadItem) -> Boolean) {
+        dev.octri.showcase.openai.methods.Chatkit.listChatkitThreadItemsPaginated(clientConfig, threadId, limit, order, after, before, options, yieldFn)
     }
 
     /**
-     * Retrieves a ChatKit thread by its identifier. Use `thread_id` to select the thread whose
-     * status and metadata you need.
+     * Retrieves a ChatKit thread by its identifier. Use `thread_id` to select the thread whose status and metadata you need.
      *
      * Retrieve a ChatKit thread by its identifier.
      */
     fun retrieveThread(threadId: String, options: RequestOptions? = null): ThreadResource {
-        return dev.octri.showcase.openai.methods.Chatkit.retrieveChatkitThread(
-            clientConfig,
-            threadId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Chatkit.retrieveChatkitThread(clientConfig, threadId, options)
     }
 
-    /** Delete a ChatKit thread along with its items and stored attachments. */
+    /**
+     * Delete a ChatKit thread along with its items and stored attachments.
+     */
     fun deleteThread(threadId: String, options: RequestOptions? = null): DeletedThreadResource {
-        return dev.octri.showcase.openai.methods.Chatkit.deleteChatkitThread(
-            clientConfig,
-            threadId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Chatkit.deleteChatkitThread(clientConfig, threadId, options)
     }
 
-    /** List ChatKit threads with optional pagination and user filters. */
-    fun listThreads(
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        user: String? = null,
-        options: RequestOptions? = null,
-    ): ThreadListResource {
-        return dev.octri.showcase.openai.methods.Chatkit.listChatkitThreads(
-            clientConfig,
-            limit,
-            order,
-            after,
-            before,
-            user,
-            options,
-        )
+    /**
+     * List ChatKit threads with optional pagination and user filters.
+     */
+    fun listThreads(limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, user: String? = null, options: RequestOptions? = null): ThreadListResource {
+        return dev.octri.showcase.openai.methods.Chatkit.listChatkitThreads(clientConfig, limit, order, after, before, user, options)
     }
 
-    /** List ChatKit threads with optional pagination and user filters. */
-    fun listThreadsPaginated(
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        user: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ThreadResource) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Chatkit.listChatkitThreadsPaginated(
-            clientConfig,
-            limit,
-            order,
-            after,
-            before,
-            user,
-            options,
-            yieldFn,
-        )
+    /**
+     * List ChatKit threads with optional pagination and user filters.
+     */
+    fun listThreadsPaginated(limit: Long? = null, order: OrderEnum? = null, after: String? = null, before: String? = null, user: String? = null, options: RequestOptions? = null, yieldFn: (ThreadResource) -> Boolean) {
+        dev.octri.showcase.openai.methods.Chatkit.listChatkitThreadsPaginated(clientConfig, limit, order, after, before, user, options, yieldFn)
     }
+
 }

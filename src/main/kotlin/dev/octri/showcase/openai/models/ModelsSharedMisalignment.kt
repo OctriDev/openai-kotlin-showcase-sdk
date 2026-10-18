@@ -5,23 +5,34 @@ package dev.octri.showcase.openai.models
 
 typealias MisalignmentErrorType = String
 
-/** Typed representation of the `_MisalignmentSteer` API schema. */
+/**
+ * Typed representation of the `_MisalignmentSteer` API schema.
+ */
 data class MisalignmentSteer(
-    /** The public continuation instruction. */
+    /**
+     * The public continuation instruction.
+     */
     val message: String
 )
 
-/** Typed representation of the `MisalignmentErrorDetailsResource` API schema. */
+/**
+ * Typed representation of the `MisalignmentErrorDetailsResource` API schema.
+ */
 data class MisalignmentErrorDetailsResource(
-    /** Optional API value serialized in the `review_target` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("review_target")
-    val reviewTarget: String? = null,
-    /** An optional classification; clients must accept additional values. */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_type")
-    val errorType: MisalignmentErrorType? = null,
-    /** The public explanation for this block. */
-    @com.fasterxml.jackson.annotation.JsonProperty("detailed_explanation")
-    val detailedExplanation: String? = null,
-    /** An optional public continuation instruction. */
-    val steer: MisalignmentSteer? = null,
+    /**
+     * Optional API value serialized in the `review_target` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("review_target") val reviewTarget: String? = null,
+    /**
+     * An optional classification; clients must accept additional values.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_type") val errorType: MisalignmentErrorType? = null,
+    /**
+     * The public explanation for this block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("detailed_explanation") val detailedExplanation: String? = null,
+    /**
+     * An optional public continuation instruction.
+     */
+    val steer: MisalignmentSteer? = null
 )

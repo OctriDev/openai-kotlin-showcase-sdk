@@ -3,54 +3,60 @@
 
 package dev.octri.showcase.openai.models
 
-/** A header from the SIP Invite. */
+/**
+ * A header from the SIP Invite.
+ */
 data class WebhookRealtimeCallIncomingDataSipHeadersItem(
-    /** Name of the SIP Header. */
+    /**
+     * Name of the SIP Header.
+     */
     val name: String,
-    /** Value of the SIP Header. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-)
-
-/** Event data payload. */
-data class WebhookRealtimeCallIncomingData(
     /**
-     * The ID of the pending SIP call. Pass this value unchanged when accepting or rejecting the
-     * call through the Realtime API. For the Live API, use the `session_id` from
-     * `live.transport.incoming` instead.
+     * Value of the SIP Header.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * Headers from the SIP INVITE, excluding SIP authorization headers. Retained names, values,
-     * repeated entries, and order are preserved. Treat these values as untrusted call metadata.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sip_headers")
-    val sipHeaders: List<WebhookRealtimeCallIncomingDataSipHeadersItem>,
-    /**
-     * Media protection selected on the SIP leg during SDP negotiation. `srtp` indicates SRTP; `rtp`
-     * indicates unencrypted RTP. Omitted when unknown. This does not describe SIP signaling
-     * security or confirm that media has flowed. Clients should handle unrecognized values as
-     * unknown.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sip_media_security")
-    val sipMediaSecurity: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String
 )
 
 /**
- * Sent when an incoming API SIP session is available for Realtime acceptance. The same pending
- * session can also emit `live.transport.incoming`; the first successful Realtime or Live accept
- * endpoint selects the runtime surface.
+ * Event data payload.
+ */
+data class WebhookRealtimeCallIncomingData(
+    /**
+     * The ID of the pending SIP call. Pass this value unchanged when accepting or rejecting the call through the Realtime API. For the Live API, use the `session_id` from `live.transport.incoming` instead.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /**
+     * Headers from the SIP INVITE, excluding SIP authorization headers. Retained names, values, repeated entries, and order are preserved. Treat these values as untrusted call metadata.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sip_headers") val sipHeaders: List<WebhookRealtimeCallIncomingDataSipHeadersItem>,
+    /**
+     * Media protection selected on the SIP leg during SDP negotiation. `srtp` indicates SRTP; `rtp` indicates unencrypted RTP. Omitted when unknown. This does not describe SIP signaling security or confirm that media has flowed. Clients should handle unrecognized values as unknown.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sip_media_security") val sipMediaSecurity: String? = null
+)
+
+/**
+ * Sent when an incoming API SIP session is available for Realtime acceptance. The same pending session can also emit `live.transport.incoming`; the first successful Realtime or Live accept endpoint selects the runtime surface.
  */
 data class WebhookRealtimeCallIncoming(
-    /** The Unix timestamp (in seconds) of when the model response was completed. */
+    /**
+     * The Unix timestamp (in seconds) of when the model response was completed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     val id: String,
-    /** Event data payload. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: WebhookRealtimeCallIncomingData,
-    /** The type of the event. Always `realtime.call.incoming`. */
+    /**
+     * Event data payload.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookRealtimeCallIncomingData,
+    /**
+     * The type of the event. Always `realtime.call.incoming`.
+     */
     val type: WebhookRealtimeCallIncomingTypeEnum,
-    /** The object of the event. Always `event`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookRealtimeCallIncomingObjectEnum? = null,
+    /**
+     * The object of the event. Always `event`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookRealtimeCallIncomingObjectEnum? = null
 )

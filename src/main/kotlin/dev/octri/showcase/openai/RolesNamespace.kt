@@ -3,78 +3,37 @@
 
 package dev.octri.showcase.openai
 
+
 class RolesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists roles configured for the organization. Use `limit` to control the number of roles
-     * returned and `order` to choose the sort direction. Continue through the results with the
-     * `after` cursor from the previous response's `next` field.
+     * Lists roles configured for the organization. Use `limit` to control the number of roles returned and `order` to choose the sort direction. Continue through the results with the `after` cursor from the previous response's `next` field.
      *
      * Lists the roles configured for the organization.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        order: ListRolesParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): PublicRoleListResource {
-        return dev.octri.showcase.openai.methods.Roles.listRoles(
-            clientConfig,
-            limit,
-            after,
-            order,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, order: ListRolesParameterEnum? = null, options: RequestOptions? = null): PublicRoleListResource {
+        return dev.octri.showcase.openai.methods.Roles.listRoles(clientConfig, limit, after, order, options)
     }
 
     /**
-     * Lists roles configured for the organization. Use `limit` to control the number of roles
-     * returned and `order` to choose the sort direction. Continue through the results with the
-     * `after` cursor from the previous response's `next` field.
+     * Lists roles configured for the organization. Use `limit` to control the number of roles returned and `order` to choose the sort direction. Continue through the results with the `after` cursor from the previous response's `next` field.
      *
      * Lists the roles configured for the organization.
      */
-    fun listPaginated(
-        limit: Long? = null,
-        after: String? = null,
-        order: ListRolesParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (Role) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Roles.listRolesPaginated(
-            clientConfig,
-            limit,
-            after,
-            order,
-            options,
-            yieldFn,
-        )
+    fun listPaginated(limit: Long? = null, after: String? = null, order: ListRolesParameterEnum? = null, options: RequestOptions? = null, yieldFn: (Role) -> Boolean) {
+        dev.octri.showcase.openai.methods.Roles.listRolesPaginated(clientConfig, limit, after, order, options, yieldFn)
     }
 
     /**
-     * Creates a custom role for the organization. Provide `role_name` and `permissions`; you can
-     * also include an optional `description`. The response includes the new role's identifier,
-     * permissions, and resource type.
+     * Creates a custom role for the organization. Provide `role_name` and `permissions`; you can also include an optional `description`. The response includes the new role's identifier, permissions, and resource type.
      *
      * Creates a custom role for the organization.
      */
-    fun create(
-        roleName: String,
-        permissions: List<String>,
-        description: SdkClient.SdkOptional<String?>? = null,
-        options: RequestOptions? = null,
-    ): Role {
-        return dev.octri.showcase.openai.methods.Roles.createRole(
-            clientConfig,
-            roleName,
-            permissions,
-            description,
-            options,
-        )
+    fun create(roleName: String, permissions: List<String>, description: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
+        return dev.octri.showcase.openai.methods.Roles.createRole(clientConfig, roleName, permissions, description, options)
     }
 
     /**
-     * Retrieves a role configured for the organization. Use `role_id` to identify the role and
-     * review its name, permissions, and resource type.
+     * Retrieves a role configured for the organization. Use `role_id` to identify the role and review its name, permissions, and resource type.
      *
      * Retrieves an organization role.
      */
@@ -83,32 +42,16 @@ class RolesNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Updates an existing organization role. Use `role_id` to identify the role and provide any of
-     * `permissions`, `description`, or `role_name` to change those values. The response contains
-     * the updated role details.
+     * Updates an existing organization role. Use `role_id` to identify the role and provide any of `permissions`, `description`, or `role_name` to change those values. The response contains the updated role details.
      *
      * Updates an existing organization role.
      */
-    fun update(
-        roleId: String,
-        permissions: SdkClient.SdkOptional<List<String>?>? = null,
-        description: SdkClient.SdkOptional<String?>? = null,
-        roleName: SdkClient.SdkOptional<String?>? = null,
-        options: RequestOptions? = null,
-    ): Role {
-        return dev.octri.showcase.openai.methods.Roles.updateRole(
-            clientConfig,
-            roleId,
-            permissions,
-            description,
-            roleName,
-            options,
-        )
+    fun update(roleId: String, permissions: SdkClient.SdkOptional<List<String>?>? = null, description: SdkClient.SdkOptional<String?>? = null, roleName: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
+        return dev.octri.showcase.openai.methods.Roles.updateRole(clientConfig, roleId, permissions, description, roleName, options)
     }
 
     /**
-     * Deletes a custom role from the organization. Use `role_id` to identify the role to remove.
-     * The response confirms whether the role was deleted and includes its identifier.
+     * Deletes a custom role from the organization. Use `role_id` to identify the role to remove. The response confirms whether the role was deleted and includes its identifier.
      *
      * Deletes a custom role from the organization.
      */
@@ -117,137 +60,57 @@ class RolesNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page
-     * size, `after` to continue from a cursor, and `order` to choose the sort direction.
+     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page size, `after` to continue from a cursor, and `order` to choose the sort direction.
      *
      * Lists the roles configured for a project.
      */
-    fun listProjectRoles(
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListRolesProjectRolesParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): PublicRoleListResource {
-        return dev.octri.showcase.openai.methods.Roles.listRolesProjectRoles(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            order,
-            options,
-        )
+    fun listProjectRoles(projectId: String, limit: Long? = null, after: String? = null, order: ListRolesProjectRolesParameterEnum? = null, options: RequestOptions? = null): PublicRoleListResource {
+        return dev.octri.showcase.openai.methods.Roles.listRolesProjectRoles(clientConfig, projectId, limit, after, order, options)
     }
 
     /**
-     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page
-     * size, `after` to continue from a cursor, and `order` to choose the sort direction.
+     * Lists the roles configured for a project in a paginated response. Use `limit` to set the page size, `after` to continue from a cursor, and `order` to choose the sort direction.
      *
      * Lists the roles configured for a project.
      */
-    fun listProjectRolesPaginated(
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListRolesProjectRolesParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (Role) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Roles.listRolesProjectRolesPaginated(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            order,
-            options,
-            yieldFn,
-        )
+    fun listProjectRolesPaginated(projectId: String, limit: Long? = null, after: String? = null, order: ListRolesProjectRolesParameterEnum? = null, options: RequestOptions? = null, yieldFn: (Role) -> Boolean) {
+        dev.octri.showcase.openai.methods.Roles.listRolesProjectRolesPaginated(clientConfig, projectId, limit, after, order, options, yieldFn)
     }
 
     /**
-     * Creates a custom role for a project with a unique name and a set of permissions. Supply
-     * `role_name` and `permissions`; you can also provide a description for the role.
+     * Creates a custom role for a project with a unique name and a set of permissions. Supply `role_name` and `permissions`; you can also provide a description for the role.
      *
      * Creates a custom role for a project.
      */
-    fun createProjectRole(
-        projectId: String,
-        roleName: String,
-        permissions: List<String>,
-        description: SdkClient.SdkOptional<String?>? = null,
-        options: RequestOptions? = null,
-    ): Role {
-        return dev.octri.showcase.openai.methods.Roles.createRolesProjectRole(
-            clientConfig,
-            projectId,
-            roleName,
-            permissions,
-            description,
-            options,
-        )
+    fun createProjectRole(projectId: String, roleName: String, permissions: List<String>, description: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
+        return dev.octri.showcase.openai.methods.Roles.createRolesProjectRole(clientConfig, projectId, roleName, permissions, description, options)
     }
 
     /**
-     * Retrieves a project role by its identifier. Use `project_id` and `role_id` to identify the
-     * project and role whose details you need.
+     * Retrieves a project role by its identifier. Use `project_id` and `role_id` to identify the project and role whose details you need.
      *
      * Retrieves a project role.
      */
-    fun retrieveProjectRole(
-        projectId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): Role {
-        return dev.octri.showcase.openai.methods.Roles.retrieveRolesProjectRole(
-            clientConfig,
-            projectId,
-            roleId,
-            options,
-        )
+    fun retrieveProjectRole(projectId: String, roleId: String, options: RequestOptions? = null): Role {
+        return dev.octri.showcase.openai.methods.Roles.retrieveRolesProjectRole(clientConfig, projectId, roleId, options)
     }
 
     /**
-     * Updates an existing project role's name, permissions, or description. Provide the fields you
-     * want to change; each body field can be omitted or set to null when it does not need an
-     * update.
+     * Updates an existing project role's name, permissions, or description. Provide the fields you want to change; each body field can be omitted or set to null when it does not need an update.
      *
      * Updates an existing project role.
      */
-    fun updateProjectRole(
-        projectId: String,
-        roleId: String,
-        permissions: SdkClient.SdkOptional<List<String>?>? = null,
-        description: SdkClient.SdkOptional<String?>? = null,
-        roleName: SdkClient.SdkOptional<String?>? = null,
-        options: RequestOptions? = null,
-    ): Role {
-        return dev.octri.showcase.openai.methods.Roles.updateRolesProjectRole(
-            clientConfig,
-            projectId,
-            roleId,
-            permissions,
-            description,
-            roleName,
-            options,
-        )
+    fun updateProjectRole(projectId: String, roleId: String, permissions: SdkClient.SdkOptional<List<String>?>? = null, description: SdkClient.SdkOptional<String?>? = null, roleName: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Role {
+        return dev.octri.showcase.openai.methods.Roles.updateRolesProjectRole(clientConfig, projectId, roleId, permissions, description, roleName, options)
     }
 
     /**
-     * Deletes a custom role from a project. Use `project_id` and `role_id` to identify the project
-     * role to remove. A 200 response confirms deletion and identifies the deleted role.
+     * Deletes a custom role from a project. Use `project_id` and `role_id` to identify the project role to remove. A 200 response confirms deletion and identifies the deleted role.
      *
      * Deletes a custom role from a project.
      */
-    fun deleteProjectRole(
-        projectId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): RoleDeletedResource {
-        return dev.octri.showcase.openai.methods.Roles.deleteRolesProjectRole(
-            clientConfig,
-            projectId,
-            roleId,
-            options,
-        )
+    fun deleteProjectRole(projectId: String, roleId: String, options: RequestOptions? = null): RoleDeletedResource {
+        return dev.octri.showcase.openai.methods.Roles.deleteRolesProjectRole(clientConfig, projectId, roleId, options)
     }
+
 }

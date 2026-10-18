@@ -3,121 +3,111 @@
 
 package dev.octri.showcase.openai.models
 
-/** A completed question always includes its name, including null when unnamed. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownAnswerResource::class,
-)
+/**
+ * A completed question always includes its name, including null when unnamed.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownAnswerResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AnswerResourcePredicate::class,
-        name = "predicate",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AnswerResourceChoice::class,
-        name = "choice",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AnswerResourceScore::class,
-        name = "score",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AnswerResourceRefusal::class,
-        name = "refusal",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AnswerResourcePredicate::class, name = "predicate"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AnswerResourceChoice::class, name = "choice"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AnswerResourceScore::class, name = "score"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AnswerResourceRefusal::class, name = "refusal")
 )
 sealed interface AnswerResource
 
 /** A [AnswerResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownAnswerResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownAnswerResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : AnswerResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `AnswerResourceChoice` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `AnswerResourceChoice` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AnswerResourceChoice(
-    /** The type of the object. Always `choice`. */
+    /**
+     * The type of the object. Always `choice`.
+     */
     val type: AnswerResourceChoiceTypeEnum,
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /** Choice values are typed: a string and a boolean with the same text are distinct. */
+    /**
+     * Choice values are typed: a string and a boolean with the same text are distinct.
+     */
     val choice: ChoiceValueResource,
-    /** Required array value serialized in the `probabilities` wire field. */
+    /**
+     * Required array value serialized in the `probabilities` wire field.
+     */
     val probabilities: List<ChoiceProbabilityResource>,
-    /** Required `number` value serialized in the `confidence` wire field. */
-    val confidence: Double,
-) : AnswerResource
-
-/** Typed representation of the `AnswerResourcePredicate` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class AnswerResourcePredicate(
-    /** The type of the object. Always `predicate`. */
-    val type: AnswerResourcePredicateTypeEnum,
-    /** Required `string` value serialized in the `name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /** Required `number` value serialized in the `probability` wire field. */
-    val probability: Double,
+    /**
+     * Required `number` value serialized in the `confidence` wire field.
+     */
+    val confidence: Double
 ) : AnswerResource
 
 /**
- * The model declined to answer this question. Other questions in the same request can still receive
- * answers.
+ * Typed representation of the `AnswerResourcePredicate` API schema.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class AnswerResourceRefusal(
-    /** The type of the object. Always `refusal`. */
-    val type: AnswerResourceRefusalTypeEnum,
-    /** Required `string` value serialized in the `name` wire field. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class AnswerResourcePredicate(
+    /**
+     * The type of the object. Always `predicate`.
+     */
+    val type: AnswerResourcePredicateTypeEnum,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
+    /**
+     * Required `number` value serialized in the `probability` wire field.
+     */
+    val probability: Double
 ) : AnswerResource
 
-/** Typed representation of the `AnswerResourceScore` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The model declined to answer this question. Other questions in the same request can still receive answers.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class AnswerResourceRefusal(
+    /**
+     * The type of the object. Always `refusal`.
+     */
+    val type: AnswerResourceRefusalTypeEnum,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?
+) : AnswerResource
+
+/**
+ * Typed representation of the `AnswerResourceScore` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AnswerResourceScore(
-    /** The type of the object. Always `score`. */
+    /**
+     * The type of the object. Always `score`.
+     */
     val type: AnswerResourceScoreTypeEnum,
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /** Required `number` value serialized in the `score` wire field. */
+    /**
+     * Required `number` value serialized in the `score` wire field.
+     */
     val score: Double,
-    /** Required array value serialized in the `probabilities` wire field. */
+    /**
+     * Required array value serialized in the `probabilities` wire field.
+     */
     val probabilities: List<ScoreProbabilityResource>,
-    /** Required `number` value serialized in the `confidence` wire field. */
-    val confidence: Double,
+    /**
+     * Required `number` value serialized in the `confidence` wire field.
+     */
+    val confidence: Double
 ) : AnswerResource

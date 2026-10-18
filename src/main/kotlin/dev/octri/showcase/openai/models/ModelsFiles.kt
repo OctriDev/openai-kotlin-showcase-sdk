@@ -3,87 +3,138 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ContainerFileListResource` API schema. */
+/**
+ * Typed representation of the `ContainerFileListResource` API schema.
+ */
 data class ContainerFileListResource(
-    /** The type of object returned, must be 'list'. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ContainerFileListResourceObjectEnum,
-    /** A list of container files. */
+    /**
+     * The type of object returned, must be 'list'.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ContainerFileListResourceObjectEnum,
+    /**
+     * A list of container files.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContainerFileResource>,
-    /** The ID of the first file in the list. */
+    /**
+     * The ID of the first file in the list.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /** The ID of the last file in the list. */
+    /**
+     * The ID of the last file in the list.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /** Whether there are more files available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Whether there are more files available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )
 
-/** Typed representation of the `ContainerFileResource` API schema. */
+/**
+ * Typed representation of the `ContainerFileResource` API schema.
+ */
 data class ContainerFileResource(
-    /** Unique identifier for the file. */
+    /**
+     * Unique identifier for the file.
+     */
     val id: String,
-    /** The type of this object (`container.file`). */
+    /**
+     * The type of this object (`container.file`).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** The container this file belongs to. */
+    /**
+     * The container this file belongs to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /** Unix timestamp (in seconds) when the file was created. */
+    /**
+     * Unix timestamp (in seconds) when the file was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Size of the file in bytes. */
+    /**
+     * Size of the file in bytes.
+     */
     val bytes: Long,
-    /** Path of the file in the container. */
+    /**
+     * Path of the file in the container.
+     */
     val path: String,
-    /** Source of the file (e.g., `user`, `assistant`). */
-    val source: String,
+    /**
+     * Source of the file (e.g., `user`, `assistant`).
+     */
+    val source: String
 )
 
-/** Typed representation of the `CreateContainerFileBody` API schema. */
+/**
+ * Typed representation of the `CreateContainerFileBody` API schema.
+ */
 data class CreateContainerFileBody(
-    /** Name of the file to create. */
+    /**
+     * Name of the file to create.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /** The File object (not file name) to be uploaded. */
-    @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: ByteArray? = null,
+    /**
+     * The File object (not file name) to be uploaded.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: ByteArray? = null
 )
 
-/** Typed representation of the `CreateFileRequest` API schema. */
+/**
+ * Typed representation of the `CreateFileRequest` API schema.
+ */
 data class CreateFileRequest(
-    /** The File object (not file name) to be uploaded. */
+    /**
+     * The File object (not file name) to be uploaded.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: ByteArray,
     /**
-     * The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants
-     * API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `vision`: Images
-     * used for vision fine-tuning - `user_data`: Flexible file type for any purpose - `evals`: Used
-     * for eval data sets
+     * The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `vision`: Images used for vision fine-tuning - `user_data`: Flexible file type for any purpose - `evals`: Used for eval data sets
      */
     val purpose: CreateFileRequestPurposeEnum,
     /**
-     * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days
-     * and all other files are persisted until they are manually deleted.
+     * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days and all other files are persisted until they are manually deleted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
-    val expiresAfter: FileExpirationAfter? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: FileExpirationAfter? = null
 )
 
-/** Typed representation of the `DeleteFileResponse` API schema. */
+/**
+ * Typed representation of the `DeleteFileResponse` API schema.
+ */
 data class DeleteFileResponse(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteFileResponseObjectEnum,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteFileResponseObjectEnum,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
 )
 
-/** Typed representation of the `ListFilesResponse` API schema. */
+/**
+ * Typed representation of the `ListFilesResponse` API schema.
+ */
 data class ListFilesResponse(
-    /** Required `string` value serialized in the `object` wire field. */
+    /**
+     * Required `string` value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OpenAIFile>,
-    /** Required `string` value serialized in the `first_id` wire field. */
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /** Required `string` value serialized in the `last_id` wire field. */
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )

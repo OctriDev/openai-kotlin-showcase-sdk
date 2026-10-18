@@ -3,44 +3,51 @@
 
 package dev.octri.showcase.openai.models
 
-/** The output of a function tool call. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The output of a function tool call.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class FunctionCallOutputItemParam(
-    /** The type of the function tool call output. Always `function_call_output`. */
+    /**
+     * The type of the function tool call output. Always `function_call_output`.
+     */
     val type: FunctionCallOutputItemParamTypeEnum,
-    /** Text, image, or file output of the function tool call. */
+    /**
+     * Text, image, or file output of the function tool call.
+     */
     val output: Any,
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** Optional API value serialized in the `call_id` wire field. */
+    /**
+     * Optional API value serialized in the `call_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /** Optional API value serialized in the `name` wire field. */
+    /**
+     * Optional API value serialized in the `name` wire field.
+     */
     val name: String? = null,
-    /** Optional API value serialized in the `namespace` wire field. */
+    /**
+     * Optional API value serialized in the `namespace` wire field.
+     */
     val namespace: String? = null,
-    /** Optional API value serialized in the `caller` wire field. */
+    /**
+     * Optional API value serialized in the `caller` wire field.
+     */
     val caller: ToolCallCallerParam? = null,
-    /** Optional API value serialized in the `status` wire field. */
-    val status: FunctionCallItemStatus? = null,
+    /**
+     * Optional API value serialized in the `status` wire field.
+     */
+    val status: FunctionCallItemStatus? = null
 ) : Item, ResponseSteerInputItem
 
 typealias ResponseSteerErrorCode = String
 
 /**
- * Input to queue for a continuation of the response. Uses the same string or input-item shape as
- * `response.create.input`, with a non-empty array when supplying input items. Steering accepts only
- * messages with the `user` role. Each message may contain only `type`, `role`, and `content`, with
- * `content` as a string or an array of `input_text`, `input_image`, and `input_file` parts. The
- * optional `type` must be `message`. Other roles, tool outputs, and item types are not supported…
+ * Input to queue for a continuation of the response. Uses the same string or input-item shape as `response.create.input`, with a non-empty array when supplying input items. Steering accepts only messages with the `user` role. Each message may contain only `type`, `role`, and `content`, with `content` as a string or an array of `input_text`, `input_image`, and `input_file` parts. The optional `type` must be `message`. Other roles, tool outputs, and item types are not supported…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ResponseSteerInput.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ResponseSteerInput.Deserializer::class)
 sealed interface ResponseSteerInput {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ResponseSteerInput>() {
@@ -50,8 +57,7 @@ sealed interface ResponseSteerInput {
         ): ResponseSteerInput {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out ResponseSteerInput>> =
-                listOf(ResponseSteerInputItemList::class.java)
+            val objectTypes: List<Class<out ResponseSteerInput>> = listOf(ResponseSteerInputItemList::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -60,263 +66,180 @@ sealed interface ResponseSteerInput {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringResponseSteerInput(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        ResponseSteerInput::class.java,
-                        "no ResponseSteerInput branch accepts this payload",
-                    )
+                node.isTextual -> StringResponseSteerInput(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, ResponseSteerInput::class.java, "no ResponseSteerInput branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringResponseSteerInput(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : ResponseSteerInput
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringResponseSteerInput(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ResponseSteerInput
 
-/** Typed representation of the `ResponseSteerInputItem` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownResponseSteerInputItem::class,
-)
+/**
+ * Typed representation of the `ResponseSteerInputItem` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownResponseSteerInputItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UserMessageItemParam::class,
-        name = "message",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = FunctionCallOutputItemParam::class,
-        name = "function_call_output",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UserMessageItemParam::class, name = "message"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionCallOutputItemParam::class, name = "function_call_output")
 )
 sealed interface ResponseSteerInputItem
 
 /** A [ResponseSteerInputItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownResponseSteerInputItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownResponseSteerInputItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ResponseSteerInputItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ResponseSteerInputItemList
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: List<ResponseSteerInputItem>
-) : ResponseSteerInput
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ResponseSteerInputItemList @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<ResponseSteerInputItem>) : ResponseSteerInput
 
 typealias ResponseSteerPendingReason = String
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant0(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant0TypeEnum,
-    /** Required `string` value serialized in the `call_id` wire field. */
+    /**
+     * Required `string` value serialized in the `call_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** Required `string` value serialized in the `name` wire field. */
-    val name: String,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
+    val name: String
 ) : ResponseSteerRequiredInput
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant1(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant1TypeEnum,
-    /** Required `string` value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /**
+     * Required `string` value serialized in the `call_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String
 ) : ResponseSteerRequiredInput
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant2(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant2TypeEnum,
-    /** Required `string` value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /**
+     * Required `string` value serialized in the `call_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String
 ) : ResponseSteerRequiredInput
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant3(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant3TypeEnum,
-    /** Required `string` value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /**
+     * Required `string` value serialized in the `call_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String
 ) : ResponseSteerRequiredInput
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant4(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant4TypeEnum,
-    /** Required `string` value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /**
+     * Required `string` value serialized in the `call_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String
 ) : ResponseSteerRequiredInput
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant5(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant5TypeEnum,
-    /** Required `string` value serialized in the `call_id` wire field. */
+    /**
+     * Required `string` value serialized in the `call_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** Required enumerated value serialized in the `execution` wire field. */
-    val execution: ResponseSteerRequiredInputVariant5ExecutionEnum,
+    /**
+     * Required enumerated value serialized in the `execution` wire field.
+     */
+    val execution: ResponseSteerRequiredInputVariant5ExecutionEnum
 ) : ResponseSteerRequiredInput
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerRequiredInputVariant6(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseSteerRequiredInputVariant6TypeEnum,
-    /** Required `string` value serialized in the `approval_request_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id")
-    val approvalRequestId: String,
+    /**
+     * Required `string` value serialized in the `approval_request_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id") val approvalRequestId: String
 ) : ResponseSteerRequiredInput
 
 /**
- * An input stub identifying an outstanding client-owned tool result or approval decision. Copy the
- * stub and fill the result fields using the corresponding `response.create` input schema. Use saved
- * results without rerunning the tool. The server does not supply results, approval decisions, or
- * safety acknowledgements in these stubs.
+ * An input stub identifying an outstanding client-owned tool result or approval decision. Copy the stub and fill the result fields using the corresponding `response.create` input schema. Use saved results without rerunning the tool. The server does not supply results, approval decisions, or safety acknowledgements in these stubs.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownResponseSteerRequiredInput::class,
-)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownResponseSteerRequiredInput::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant0::class,
-        name = "function_call_output",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant1::class,
-        name = "custom_tool_call_output",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant2::class,
-        name = "computer_call_output",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant3::class,
-        name = "shell_call_output",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant4::class,
-        name = "apply_patch_call_output",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant5::class,
-        name = "tool_search_output",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerRequiredInputVariant6::class,
-        name = "mcp_approval_response",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant0::class, name = "function_call_output"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant1::class, name = "custom_tool_call_output"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant2::class, name = "computer_call_output"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant3::class, name = "shell_call_output"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant4::class, name = "apply_patch_call_output"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant5::class, name = "tool_search_output"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerRequiredInputVariant6::class, name = "mcp_approval_response")
 )
 sealed interface ResponseSteerRequiredInput
 
 /** A [ResponseSteerRequiredInput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownResponseSteerRequiredInput
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownResponseSteerRequiredInput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ResponseSteerRequiredInput {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `UserMessageItemParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `UserMessageItemParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UserMessageItemParam(
-    /** The item type. Always `message`. */
+    /**
+     * The item type. Always `message`.
+     */
     val type: UserMessageItemParamTypeEnum,
-    /** The message role. Always `user`. */
+    /**
+     * The message role. Always `user`.
+     */
     val role: UserMessageItemParamRoleEnum,
-    /** The message content, as an array of content parts. */
+    /**
+     * The message content, as an array of content parts.
+     */
     val content: Any,
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** Optional `string` value serialized in the `status` wire field. */
-    val status: String? = null,
+    /**
+     * Optional `string` value serialized in the `status` wire field.
+     */
+    val status: String? = null
 ) : ResponseSteerInputItem

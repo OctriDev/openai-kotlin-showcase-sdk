@@ -23,51 +23,25 @@ import dev.octri.showcase.openai.VideoResource
 
 object Videos {
 
+
     /**
      * Create a new video generation job from a prompt and optional reference assets.
      *
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun createVideo(
-        clientConfig: ClientConfig,
-        body: CreateVideoBody? = null,
-        contentType: String? = null,
-        options: RequestOptions? = null,
-    ): VideoResource {
-        return SdkClient.request<VideoResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/videos",
-                    config = clientConfig,
-                    body = body?.value,
-                    contentType = contentType ?: body?.mediaType ?: "application/json",
-                    operationId = "createVideo",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "503" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createVideo(clientConfig: ClientConfig, body: CreateVideoBody? = null, contentType: String? = null, options: RequestOptions? = null): VideoResource {
+        return SdkClient.request<VideoResource>(SdkClient.RequestSpec("POST", "/videos", config = clientConfig, body = body?.value, contentType = contentType ?: body?.mediaType ?: "application/json", operationId = "createVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
     }
 
     /** The request body: one of the values the operation accepts, each sent as its media type. */
-    class CreateVideoBody
-    private constructor(internal val value: Any, internal val mediaType: String) {
+    class CreateVideoBody private constructor(internal val value: Any, internal val mediaType: String) {
         companion object {
             /** Sent as `application/json`. */
-            fun ofCreateVideoJsonBody(value: CreateVideoJsonBody): CreateVideoBody =
-                CreateVideoBody(value, "application/json")
+            fun ofCreateVideoJsonBody(value: CreateVideoJsonBody): CreateVideoBody = CreateVideoBody(value, "application/json")
 
             /** Sent as `multipart/form-data`. */
-            fun ofCreateVideoMultipartBody(value: CreateVideoMultipartBody): CreateVideoBody =
-                CreateVideoBody(value, "multipart/form-data")
+            fun ofCreateVideoMultipartBody(value: CreateVideoMultipartBody): CreateVideoBody = CreateVideoBody(value, "multipart/form-data")
         }
     }
 
@@ -75,63 +49,36 @@ object Videos {
      * List recently generated videos for the current project.
      *
      * @param limit Number of items to retrieve
-     * @param order Sort order of results by timestamp. Use `asc` for ascending order or `desc` for
-     *   descending order.
+     * @param order Sort order of results by timestamp. Use `asc` for ascending order
+     *   or `desc` for descending order.
      * @param after Identifier for the last item from the previous pagination request
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun listVideos(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): VideoListResource {
+    fun listVideos(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null): VideoListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<VideoListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/videos",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listVideos",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<VideoListResource>(SdkClient.RequestSpec("GET", "/videos", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listVideos", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
 
     /**
      * List recently generated videos for the current project.
      *
      * @param limit Number of items to retrieve
-     * @param order Sort order of results by timestamp. Use `asc` for ascending order or `desc` for
-     *   descending order.
+     * @param order Sort order of results by timestamp. Use `asc` for ascending order
+     *   or `desc` for descending order.
      * @param after Identifier for the last item from the previous pagination request
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun listVideosPaginated(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (VideoResource) -> Boolean,
-    ) {
+    fun listVideosPaginated(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (VideoResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listVideos(clientConfig, limit, order, cursor, options)
@@ -152,14 +99,7 @@ object Videos {
         val hasMore: Boolean,
     )
 
-    fun listVideosPages(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListVideosPage) -> Boolean,
-    ) {
+    fun listVideosPages(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListVideosPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listVideos(clientConfig, limit, order, cursor, options)
@@ -173,315 +113,165 @@ object Videos {
         }
     }
 
+
+
     /**
-     * Creates a character from an uploaded video. Send the video in `video` and provide a `name` of
-     * 1 to 80 characters. This operation is closing down and will be removed on a date not
-     * specified in the API definition.
+     * Creates a character from an uploaded video. Send the video in `video` and provide a `name` of 1 to 80 characters. This operation is closing down and will be removed on a date not specified in the API definition.
      *
      * Create a character from an uploaded video.
      *
      * @param video Video file used to create a character.
      * @param name Display name for this API character.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun createVideoCharacter(
-        clientConfig: ClientConfig,
-        video: SdkClient.UploadFile,
-        name: String,
-        options: RequestOptions? = null,
-    ): VideoCharacterResource {
+    fun createVideoCharacter(clientConfig: ClientConfig, video: SdkClient.UploadFile, name: String, options: RequestOptions? = null): VideoCharacterResource {
         Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 80))
 
-        return SdkClient.request<VideoCharacterResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/videos/characters",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("video" to (video), "name" to (name)),
-                    contentType = "multipart/form-data",
-                    operationId = "createVideoCharacter",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "504" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<VideoCharacterResource>(SdkClient.RequestSpec("POST", "/videos/characters", config = clientConfig, body = SdkClient.bodyMap("video" to (video), "name" to (name)), contentType = "multipart/form-data", operationId = "createVideoCharacter", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "504" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves metadata for a video character. Use `character_id` to identify the character whose
-     * details you need. This operation is closing down and will be removed on a date not specified
-     * in the API definition.
+     * Retrieves metadata for a video character. Use `character_id` to identify the character whose details you need. This operation is closing down and will be removed on a date not specified in the API definition.
      *
      * Fetch a character.
      *
      * @param characterId The identifier of the character to retrieve.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun getVideoCharacter(
-        clientConfig: ClientConfig,
-        characterId: String,
-        options: RequestOptions? = null,
-    ): VideoCharacterResource {
-        return SdkClient.request<VideoCharacterResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/videos/characters/${SdkClient.encodePathSegment(characterId)}",
-                    config = clientConfig,
-                    operationId = "getVideoCharacter",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getVideoCharacter(clientConfig: ClientConfig, characterId: String, options: RequestOptions? = null): VideoCharacterResource {
+        return SdkClient.request<VideoCharacterResource>(SdkClient.RequestSpec("GET", "/videos/characters/${SdkClient.encodePathSegment(characterId)}", config = clientConfig, operationId = "getVideoCharacter", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Create a new video generation job by editing a source video or existing generated video.
      *
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun createVideoEdit(
-        clientConfig: ClientConfig,
-        body: CreateVideoEditBody? = null,
-        contentType: String? = null,
-        options: RequestOptions? = null,
-    ): VideoResource {
-        return SdkClient.request<VideoResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/videos/edits",
-                    config = clientConfig,
-                    body = body?.value,
-                    contentType = contentType ?: body?.mediaType ?: "application/json",
-                    operationId = "createVideoEdit",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "503" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createVideoEdit(clientConfig: ClientConfig, body: CreateVideoEditBody? = null, contentType: String? = null, options: RequestOptions? = null): VideoResource {
+        return SdkClient.request<VideoResource>(SdkClient.RequestSpec("POST", "/videos/edits", config = clientConfig, body = body?.value, contentType = contentType ?: body?.mediaType ?: "application/json", operationId = "createVideoEdit", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
     }
 
     /** The request body: one of the values the operation accepts, each sent as its media type. */
-    class CreateVideoEditBody
-    private constructor(internal val value: Any, internal val mediaType: String) {
+    class CreateVideoEditBody private constructor(internal val value: Any, internal val mediaType: String) {
         companion object {
             /** Sent as `application/json`. */
-            fun ofCreateVideoEditJsonBody(value: CreateVideoEditJsonBody): CreateVideoEditBody =
-                CreateVideoEditBody(value, "application/json")
+            fun ofCreateVideoEditJsonBody(value: CreateVideoEditJsonBody): CreateVideoEditBody = CreateVideoEditBody(value, "application/json")
 
             /** Sent as `multipart/form-data`. */
-            fun ofCreateVideoEditMultipartBody(
-                value: CreateVideoEditMultipartBody
-            ): CreateVideoEditBody = CreateVideoEditBody(value, "multipart/form-data")
+            fun ofCreateVideoEditMultipartBody(value: CreateVideoEditMultipartBody): CreateVideoEditBody = CreateVideoEditBody(value, "multipart/form-data")
         }
     }
 
     /**
-     * Creates an extension of a completed video and returns a video generation job. Provide the
-     * source video, an updated `prompt`, and `seconds` set to an accepted duration. This operation
-     * is closing down and will be removed on a date not specified in the API definition.
+     * Creates an extension of a completed video and returns a video generation job. Provide the source video, an updated `prompt`, and `seconds` set to an accepted duration. This operation is closing down and will be removed on a date not specified in the API definition.
      *
      * Create an extension of a completed video.
      *
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun createVideoExtend(
-        clientConfig: ClientConfig,
-        body: CreateVideoExtendBody? = null,
-        contentType: String? = null,
-        options: RequestOptions? = null,
-    ): VideoResource {
-        return SdkClient.request<VideoResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/videos/extensions",
-                    config = clientConfig,
-                    body = body?.value,
-                    contentType = contentType ?: body?.mediaType ?: "application/json",
-                    operationId = "createVideoExtend",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "503" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createVideoExtend(clientConfig: ClientConfig, body: CreateVideoExtendBody? = null, contentType: String? = null, options: RequestOptions? = null): VideoResource {
+        return SdkClient.request<VideoResource>(SdkClient.RequestSpec("POST", "/videos/extensions", config = clientConfig, body = body?.value, contentType = contentType ?: body?.mediaType ?: "application/json", operationId = "createVideoExtend", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
     }
 
     /** The request body: one of the values the operation accepts, each sent as its media type. */
-    class CreateVideoExtendBody
-    private constructor(internal val value: Any, internal val mediaType: String) {
+    class CreateVideoExtendBody private constructor(internal val value: Any, internal val mediaType: String) {
         companion object {
             /** Sent as `application/json`. */
-            fun ofCreateVideoExtendJsonBody(
-                value: CreateVideoExtendJsonBody
-            ): CreateVideoExtendBody = CreateVideoExtendBody(value, "application/json")
+            fun ofCreateVideoExtendJsonBody(value: CreateVideoExtendJsonBody): CreateVideoExtendBody = CreateVideoExtendBody(value, "application/json")
 
             /** Sent as `multipart/form-data`. */
-            fun ofCreateVideoExtendMultipartBody(
-                value: CreateVideoExtendMultipartBody
-            ): CreateVideoExtendBody = CreateVideoExtendBody(value, "multipart/form-data")
+            fun ofCreateVideoExtendMultipartBody(value: CreateVideoExtendMultipartBody): CreateVideoExtendBody = CreateVideoExtendBody(value, "multipart/form-data")
         }
     }
 
     /**
-     * Retrieves the latest metadata for a generated video. Use `video_id` to identify the video job
-     * and check its current status, progress, and other job details.
+     * Retrieves the latest metadata for a generated video. Use `video_id` to identify the video job and check its current status, progress, and other job details.
      *
      * Fetch the latest metadata for a generated video.
      *
      * @param videoId The identifier of the video to retrieve.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun getVideo(
-        clientConfig: ClientConfig,
-        videoId: String,
-        options: RequestOptions? = null,
-    ): VideoResource {
-        return SdkClient.request<VideoResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/videos/${SdkClient.encodePathSegment(videoId)}",
-                    config = clientConfig,
-                    operationId = "getVideo",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getVideo(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): VideoResource {
+        return SdkClient.request<VideoResource>(SdkClient.RequestSpec("GET", "/videos/${SdkClient.encodePathSegment(videoId)}", config = clientConfig, operationId = "getVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Permanently delete a completed or failed video and its stored assets.
      *
      * @param videoId The identifier of the video to delete.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun deleteVideo(
-        clientConfig: ClientConfig,
-        videoId: String,
-        options: RequestOptions? = null,
-    ): DeletedVideoResource {
-        return SdkClient.request<DeletedVideoResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/videos/${SdkClient.encodePathSegment(videoId)}",
-                    config = clientConfig,
-                    operationId = "deleteVideo",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteVideo(clientConfig: ClientConfig, videoId: String, options: RequestOptions? = null): DeletedVideoResource {
+        return SdkClient.request<DeletedVideoResource>(SdkClient.RequestSpec("DELETE", "/videos/${SdkClient.encodePathSegment(videoId)}", config = clientConfig, operationId = "deleteVideo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Download the generated video bytes or a derived preview asset. Streams the rendered video
-     * content for the specified video job.
+     * Download the generated video bytes or a derived preview asset. Streams the rendered video content for the specified video job.
      *
      * @param videoId The identifier of the video whose media to download.
      * @param variant Which downloadable asset to return. Defaults to the MP4 video.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun retrieveVideoContent(
-        clientConfig: ClientConfig,
-        videoId: String,
-        variant: VideoContentVariant? = null,
-        options: RequestOptions? = null,
-    ): ByteArray {
-        return SdkClient.request<ByteArray>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/videos/${SdkClient.encodePathSegment(videoId)}/content",
-                    config = clientConfig,
-                    query = mapOf("variant" to SdkClient.queryValue(variant, "form", true)),
-                    operationId = "retrieveVideoContent",
-                    decoder = SdkClient.ResponseDecoder.BYTES,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveVideoContent(clientConfig: ClientConfig, videoId: String, variant: VideoContentVariant? = null, options: RequestOptions? = null): ByteArray {
+        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/videos/${SdkClient.encodePathSegment(videoId)}/content", config = clientConfig, query = mapOf("variant" to SdkClient.queryValue(variant, "form", true)), operationId = "retrieveVideoContent", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Create a remix of a completed video using a refreshed prompt.
      *
      * @param videoId The identifier of the completed video to remix.
      * @param prompt Updated text prompt that directs the remix generation.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun createVideoRemix(
-        clientConfig: ClientConfig,
-        videoId: String,
-        prompt: String,
-        contentType: String? = null,
-        options: RequestOptions? = null,
-    ): VideoResource {
+    fun createVideoRemix(clientConfig: ClientConfig, videoId: String, prompt: String, contentType: String? = null, options: RequestOptions? = null): VideoResource {
         Validation.validateLength("prompt", prompt, Validation.LengthOpts(min = 1, max = 32000))
 
-        return SdkClient.request<VideoResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/videos/${SdkClient.encodePathSegment(videoId)}/remix",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("prompt" to (prompt)),
-                    contentType = contentType ?: "application/json",
-                    operationId = "createVideoRemix",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "503" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<VideoResource>(SdkClient.RequestSpec("POST", "/videos/${SdkClient.encodePathSegment(videoId)}/remix", config = clientConfig, body = SdkClient.bodyMap("prompt" to (prompt)), contentType = contentType ?: "application/json", operationId = "createVideoRemix", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

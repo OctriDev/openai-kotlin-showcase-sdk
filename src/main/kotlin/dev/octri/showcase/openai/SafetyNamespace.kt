@@ -3,27 +3,22 @@
 
 package dev.octri.showcase.openai
 
+
 class SafetyNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves a safety case by its identifier. Use `id` to specify the safety case you want to
-     * inspect; it can contain at most 128 characters.
+     * Retrieves a safety case by its identifier. Use `id` to specify the safety case you want to inspect; it can contain at most 128 characters.
      *
      * Get a safety case by ID.
      */
     fun retrieveCase(id: String, options: RequestOptions? = null): SafetyCaseResource {
-        return dev.octri.showcase.openai.methods.Safety.retrieveSafetyCase(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Safety.retrieveSafetyCase(clientConfig, id, options)
     }
 
-    /** Get a safety alert belonging to the authenticated API project. */
+    /**
+     * Get a safety alert belonging to the authenticated API project.
+     */
     fun retrieveAlert(id: String, options: RequestOptions? = null): SafetyAlertResource {
-        return dev.octri.showcase.openai.methods.Safety.retrieveSafetyAlert(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Safety.retrieveSafetyAlert(clientConfig, id, options)
     }
+
 }

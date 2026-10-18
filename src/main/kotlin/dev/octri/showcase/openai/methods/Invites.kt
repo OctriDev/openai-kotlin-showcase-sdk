@@ -16,80 +16,55 @@ import dev.octri.showcase.openai.SdkClient
 
 object Invites {
 
-    /** Required object value serialized in the `projects[]` wire field. */
-    data class InviteRequestProjectsItem(
-        /** Project's public ID */
-        val id: String,
-        /** Project membership role */
-        val role: InviteRequestProjectsItemRoleEnum,
-    )
+/**
+ * Required object value serialized in the `projects[]` wire field.
+ */
+data class InviteRequestProjectsItem(
+    /**
+     * Project's public ID
+     */
+    val id: String,
+    /**
+     * Project membership role
+     */
+    val role: InviteRequestProjectsItemRoleEnum
+)
+
 
     /**
-     * Lists organization invites and their status, role, and project access details. Use `limit` to
-     * control the number of results and `after` to continue from an invite ID. The response
-     * includes `has_more` and cursor IDs to help you paginate.
+     * Lists organization invites and their status, role, and project access details. Use `limit` to control the number of results and `after` to continue from an invite ID. The response includes `has_more` and cursor IDs to help you paginate.
      *
      * Returns a list of invites in the organization.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
-     *   100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
-     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
-     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
-     *   the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
      */
-    fun listInvites(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): InviteListResponse {
-        return SdkClient.request<InviteListResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/invites",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listInvites",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun listInvites(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, options: RequestOptions? = null): InviteListResponse {
+        return SdkClient.request<InviteListResponse>(SdkClient.RequestSpec("GET", "/organization/invites", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listInvites", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists organization invites and their status, role, and project access details. Use `limit` to
-     * control the number of results and `after` to continue from an invite ID. The response
-     * includes `has_more` and cursor IDs to help you paginate.
+     * Lists organization invites and their status, role, and project access details. Use `limit` to control the number of results and `after` to continue from an invite ID. The response includes `has_more` and cursor IDs to help you paginate.
      *
      * Returns a list of invites in the organization.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
-     *   100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
-     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
-     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
-     *   the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
      */
-    fun listInvitesPaginated(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (Invite) -> Boolean,
-    ) {
+    fun listInvitesPaginated(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (Invite) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listInvites(clientConfig, limit, cursor, options)
@@ -110,13 +85,7 @@ object Invites {
         val hasMore: Boolean,
     )
 
-    fun listInvitesPages(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListInvitesPage) -> Boolean,
-    ) {
+    fun listInvitesPages(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListInvitesPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listInvites(clientConfig, limit, cursor, options)
@@ -130,110 +99,59 @@ object Invites {
         }
     }
 
+
+
     /**
-     * Create an invite for a user to the organization. The invite must be accepted by the user
-     * before they have access to the organization.
+     * Create an invite for a user to the organization. The invite must be accepted by the user before they have access to the organization.
      *
      * @param email Send an email to this address
      * @param role `owner` or `reader`
-     * @param projects An array of projects to which membership is granted at the same time the org
-     *   invite is accepted. If omitted, the user will be invited to the default project for
-     *   compatibility with legacy behavior. If empty list is passed, the user will not be invited
-     *   to any projects, including the default one.
+     * @param projects An array of projects to which membership is granted at the
+     *   same time the org invite is accepted. If omitted, the user will be invited to
+     *   the default project for compatibility with legacy behavior. If empty list is
+     *   passed, the user will not be invited to any projects, including the default
+     *   one.
      */
-    fun createInvites(
-        clientConfig: ClientConfig,
-        email: String,
-        role: InviteRequestRoleEnum,
-        projects: List<InviteRequestProjectsItem>? = null,
-        options: RequestOptions? = null,
-    ): Invite {
-        return SdkClient.request<Invite>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization/invites",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "email" to (email),
-                            "role" to (role),
-                            "projects" to (SdkClient.omitIfNull(projects)),
-                        ),
-                    operationId = "createInvites",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createInvites(clientConfig: ClientConfig, email: String, role: InviteRequestRoleEnum, projects: List<InviteRequestProjectsItem>? = null, options: RequestOptions? = null): Invite {
+        return SdkClient.request<Invite>(SdkClient.RequestSpec("POST", "/organization/invites", config = clientConfig, body = SdkClient.bodyMap("email" to (email), "role" to (role), "projects" to (SdkClient.omitIfNull(projects))), operationId = "createInvites", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves an organization invite by its identifier. Use `invite_id` to select the invite
-     * whose email address, role, status, and project access you need to inspect.
+     * Retrieves an organization invite by its identifier. Use `invite_id` to select the invite whose email address, role, status, and project access you need to inspect.
      *
      * Retrieves an invite.
      *
      * @param inviteId The ID of the invite to retrieve.
      */
-    fun retrieveInvite(
-        clientConfig: ClientConfig,
-        inviteId: String,
-        options: RequestOptions? = null,
-    ): Invite {
-        return SdkClient.request<Invite>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/invites/${SdkClient.encodePathSegment(inviteId)}",
-                    config = clientConfig,
-                    operationId = "retrieveInvite",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveInvite(clientConfig: ClientConfig, inviteId: String, options: RequestOptions? = null): Invite {
+        return SdkClient.request<Invite>(SdkClient.RequestSpec("GET", "/organization/invites/${SdkClient.encodePathSegment(inviteId)}", config = clientConfig, operationId = "retrieveInvite", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Delete an invite. If the invite has already been accepted, it cannot be deleted.
      *
      * @param inviteId The ID of the invite to delete.
      */
-    fun deleteInvite(
-        clientConfig: ClientConfig,
-        inviteId: String,
-        options: RequestOptions? = null,
-    ): InviteDeleteResponse {
-        return SdkClient.request<InviteDeleteResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization/invites/${SdkClient.encodePathSegment(inviteId)}",
-                    config = clientConfig,
-                    operationId = "deleteInvite",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteInvite(clientConfig: ClientConfig, inviteId: String, options: RequestOptions? = null): InviteDeleteResponse {
+        return SdkClient.request<InviteDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/invites/${SdkClient.encodePathSegment(inviteId)}", config = clientConfig, operationId = "deleteInvite", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

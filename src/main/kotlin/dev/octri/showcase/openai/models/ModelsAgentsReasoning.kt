@@ -3,20 +3,30 @@
 
 package dev.octri.showcase.openai.models
 
-/** Reasoning configuration for the agent. */
+/**
+ * Reasoning configuration for the agent.
+ */
 data class ReasoningParam(
-    /** The amount of reasoning effort the model should use. Omission lets the model select it. */
+    /**
+     * The amount of reasoning effort the model should use. Omission lets the model select it.
+     */
     val effort: ReasoningEffortParam? = null,
-    /** Controls whether the response includes a reasoning summary. */
-    val summary: ReasoningSummaryParam? = null,
+    /**
+     * Controls whether the response includes a reasoning summary.
+     */
+    val summary: ReasoningSummaryParam? = null
 )
 
-/** The reasoning configuration used by an agent. */
+/**
+ * The reasoning configuration used by an agent.
+ */
 data class ReasoningResource(
-    /** The requested reasoning effort, or `null` when the model selects its own default. */
-    @com.fasterxml.jackson.annotation.JsonProperty("effort", required = true)
-    val effort: ReasoningEffortResource?,
-    /** The requested reasoning summary format, or `null` when summaries are disabled. */
-    @com.fasterxml.jackson.annotation.JsonProperty("summary", required = true)
-    val summary: ReasoningSummaryResource?,
+    /**
+     * The requested reasoning effort, or `null` when the model selects its own default.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("effort", required = true) val effort: ReasoningEffortResource?,
+    /**
+     * The requested reasoning summary format, or `null` when summaries are disabled.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("summary", required = true) val summary: ReasoningSummaryResource?
 )

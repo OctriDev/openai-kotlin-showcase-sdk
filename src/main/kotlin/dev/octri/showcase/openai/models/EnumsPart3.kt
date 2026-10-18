@@ -3,13 +3,14 @@
 
 package dev.octri.showcase.openai.models
 
-/** The event type. */
-class AuditLogEventType
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * The event type.
+ */
+class AuditLogEventType private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is AuditLogEventType && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -22,10 +23,8 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val CERTIFICATE_DELETED = AuditLogEventType("certificate.deleted")
         @JvmField val CERTIFICATES_ACTIVATED = AuditLogEventType("certificates.activated")
         @JvmField val CERTIFICATES_DEACTIVATED = AuditLogEventType("certificates.deactivated")
-        @JvmField
-        val CHECKPOINT_PERMISSION_CREATED = AuditLogEventType("checkpoint.permission.created")
-        @JvmField
-        val CHECKPOINT_PERMISSION_DELETED = AuditLogEventType("checkpoint.permission.deleted")
+        @JvmField val CHECKPOINT_PERMISSION_CREATED = AuditLogEventType("checkpoint.permission.created")
+        @JvmField val CHECKPOINT_PERMISSION_DELETED = AuditLogEventType("checkpoint.permission.deleted")
         @JvmField val EXTERNAL_KEY_REGISTERED = AuditLogEventType("external_key.registered")
         @JvmField val EXTERNAL_KEY_REMOVED = AuditLogEventType("external_key.removed")
         @JvmField val EXTERNAL_STORAGE_REGISTERED = AuditLogEventType("external_storage.registered")
@@ -39,10 +38,8 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val IP_ALLOWLIST_CREATED = AuditLogEventType("ip_allowlist.created")
         @JvmField val IP_ALLOWLIST_UPDATED = AuditLogEventType("ip_allowlist.updated")
         @JvmField val IP_ALLOWLIST_DELETED = AuditLogEventType("ip_allowlist.deleted")
-        @JvmField
-        val IP_ALLOWLIST_CONFIG_ACTIVATED = AuditLogEventType("ip_allowlist.config.activated")
-        @JvmField
-        val IP_ALLOWLIST_CONFIG_DEACTIVATED = AuditLogEventType("ip_allowlist.config.deactivated")
+        @JvmField val IP_ALLOWLIST_CONFIG_ACTIVATED = AuditLogEventType("ip_allowlist.config.activated")
+        @JvmField val IP_ALLOWLIST_CONFIG_DEACTIVATED = AuditLogEventType("ip_allowlist.config.deactivated")
         @JvmField val LOGIN_SUCCEEDED = AuditLogEventType("login.succeeded")
         @JvmField val LOGIN_FAILED = AuditLogEventType("login.failed")
         @JvmField val LOGOUT_SUCCEEDED = AuditLogEventType("logout.succeeded")
@@ -58,24 +55,12 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val TUNNEL_CREATED = AuditLogEventType("tunnel.created")
         @JvmField val TUNNEL_UPDATED = AuditLogEventType("tunnel.updated")
         @JvmField val TUNNEL_DELETED = AuditLogEventType("tunnel.deleted")
-        @JvmField
-        val WORKLOAD_IDENTITY_PROVIDER_CREATED =
-            AuditLogEventType("workload_identity_provider.created")
-        @JvmField
-        val WORKLOAD_IDENTITY_PROVIDER_UPDATED =
-            AuditLogEventType("workload_identity_provider.updated")
-        @JvmField
-        val WORKLOAD_IDENTITY_PROVIDER_DELETED =
-            AuditLogEventType("workload_identity_provider.deleted")
-        @JvmField
-        val WORKLOAD_IDENTITY_PROVIDER_MAPPING_CREATED =
-            AuditLogEventType("workload_identity_provider_mapping.created")
-        @JvmField
-        val WORKLOAD_IDENTITY_PROVIDER_MAPPING_UPDATED =
-            AuditLogEventType("workload_identity_provider_mapping.updated")
-        @JvmField
-        val WORKLOAD_IDENTITY_PROVIDER_MAPPING_DELETED =
-            AuditLogEventType("workload_identity_provider_mapping.deleted")
+        @JvmField val WORKLOAD_IDENTITY_PROVIDER_CREATED = AuditLogEventType("workload_identity_provider.created")
+        @JvmField val WORKLOAD_IDENTITY_PROVIDER_UPDATED = AuditLogEventType("workload_identity_provider.updated")
+        @JvmField val WORKLOAD_IDENTITY_PROVIDER_DELETED = AuditLogEventType("workload_identity_provider.deleted")
+        @JvmField val WORKLOAD_IDENTITY_PROVIDER_MAPPING_CREATED = AuditLogEventType("workload_identity_provider_mapping.created")
+        @JvmField val WORKLOAD_IDENTITY_PROVIDER_MAPPING_UPDATED = AuditLogEventType("workload_identity_provider_mapping.updated")
+        @JvmField val WORKLOAD_IDENTITY_PROVIDER_MAPPING_DELETED = AuditLogEventType("workload_identity_provider_mapping.deleted")
         @JvmField val ROLE_CREATED = AuditLogEventType("role.created")
         @JvmField val ROLE_UPDATED = AuditLogEventType("role.updated")
         @JvmField val ROLE_DELETED = AuditLogEventType("role.deleted")
@@ -92,206 +77,103 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val USER_UPDATED = AuditLogEventType("user.updated")
         @JvmField val USER_DELETED = AuditLogEventType("user.deleted")
         @JvmField val TENANT_METADATA_UPDATED = AuditLogEventType("tenant.metadata.updated")
-        @JvmField
-        val TENANT_MICROSOFT_ENTRA_MAPPING_UPSERTED =
-            AuditLogEventType("tenant.microsoft_entra_mapping.upserted")
-        @JvmField
-        val TENANT_MICROSOFT_ENTRA_MAPPING_DELETED =
-            AuditLogEventType("tenant.microsoft_entra_mapping.deleted")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_PROVIDER_CREATED =
-            AuditLogEventType("tenant.workload_identity.provider.created")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_PROVIDER_UPDATED =
-            AuditLogEventType("tenant.workload_identity.provider.updated")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_PROVIDER_ARCHIVED =
-            AuditLogEventType("tenant.workload_identity.provider.archived")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_MAPPING_CREATED =
-            AuditLogEventType("tenant.workload_identity.mapping.created")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_MAPPING_UPDATED =
-            AuditLogEventType("tenant.workload_identity.mapping.updated")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_MAPPING_ARCHIVED =
-            AuditLogEventType("tenant.workload_identity.mapping.archived")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_BINDING_CREATED =
-            AuditLogEventType("tenant.workload_identity.binding.created")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_PRINCIPAL_PROVISIONED =
-            AuditLogEventType("tenant.workload_identity.principal.provisioned")
-        @JvmField
-        val TENANT_WORKLOAD_IDENTITY_ACCESS_TOKEN_ISSUED =
-            AuditLogEventType("tenant.workload_identity.access_token.issued")
-        @JvmField
-        val TENANT_ADMIN_API_KEY_CREATED = AuditLogEventType("tenant.admin_api_key.created")
-        @JvmField
-        val TENANT_ADMIN_API_KEY_UPDATED = AuditLogEventType("tenant.admin_api_key.updated")
-        @JvmField
-        val TENANT_ADMIN_API_KEY_DELETED = AuditLogEventType("tenant.admin_api_key.deleted")
-        @JvmField
-        val TENANT_PROJECT_API_KEY_CREATED = AuditLogEventType("tenant.project_api_key.created")
-        @JvmField
-        val TENANT_TRUSTED_ACCESS_BUSINESS_VERIFICATION_STARTED =
-            AuditLogEventType("tenant.trusted_access.business_verification.started")
-        @JvmField
-        val TENANT_TRUSTED_ACCESS_APPLICATION_SUBMITTED =
-            AuditLogEventType("tenant.trusted_access.application.submitted")
-        @JvmField
-        val TENANT_CHATGPT_ACCESS_TOKEN_REVOKED =
-            AuditLogEventType("tenant.chatgpt_access_token.revoked")
+        @JvmField val TENANT_MICROSOFT_ENTRA_MAPPING_UPSERTED = AuditLogEventType("tenant.microsoft_entra_mapping.upserted")
+        @JvmField val TENANT_MICROSOFT_ENTRA_MAPPING_DELETED = AuditLogEventType("tenant.microsoft_entra_mapping.deleted")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_PROVIDER_CREATED = AuditLogEventType("tenant.workload_identity.provider.created")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_PROVIDER_UPDATED = AuditLogEventType("tenant.workload_identity.provider.updated")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_PROVIDER_ARCHIVED = AuditLogEventType("tenant.workload_identity.provider.archived")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_MAPPING_CREATED = AuditLogEventType("tenant.workload_identity.mapping.created")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_MAPPING_UPDATED = AuditLogEventType("tenant.workload_identity.mapping.updated")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_MAPPING_ARCHIVED = AuditLogEventType("tenant.workload_identity.mapping.archived")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_BINDING_CREATED = AuditLogEventType("tenant.workload_identity.binding.created")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_PRINCIPAL_PROVISIONED = AuditLogEventType("tenant.workload_identity.principal.provisioned")
+        @JvmField val TENANT_WORKLOAD_IDENTITY_ACCESS_TOKEN_ISSUED = AuditLogEventType("tenant.workload_identity.access_token.issued")
+        @JvmField val TENANT_ADMIN_API_KEY_CREATED = AuditLogEventType("tenant.admin_api_key.created")
+        @JvmField val TENANT_ADMIN_API_KEY_UPDATED = AuditLogEventType("tenant.admin_api_key.updated")
+        @JvmField val TENANT_ADMIN_API_KEY_DELETED = AuditLogEventType("tenant.admin_api_key.deleted")
+        @JvmField val TENANT_PROJECT_API_KEY_CREATED = AuditLogEventType("tenant.project_api_key.created")
+        @JvmField val TENANT_TRUSTED_ACCESS_BUSINESS_VERIFICATION_STARTED = AuditLogEventType("tenant.trusted_access.business_verification.started")
+        @JvmField val TENANT_TRUSTED_ACCESS_APPLICATION_SUBMITTED = AuditLogEventType("tenant.trusted_access.application.submitted")
+        @JvmField val TENANT_CHATGPT_ACCESS_TOKEN_REVOKED = AuditLogEventType("tenant.chatgpt_access_token.revoked")
         @JvmField val TENANT_MIGRATION_COMPLETED = AuditLogEventType("tenant.migration.completed")
         @JvmField val TENANT_SSO_MIGRATED = AuditLogEventType("tenant.sso.migrated")
         @JvmField val TENANT_DOMAINS_MIGRATED = AuditLogEventType("tenant.domains.migrated")
-        @JvmField
-        val TENANT_SSO_CONNECTION_CREATED = AuditLogEventType("tenant.sso_connection.created")
-        @JvmField
-        val TENANT_SSO_CONNECTION_UPDATED = AuditLogEventType("tenant.sso_connection.updated")
-        @JvmField
-        val TENANT_SSO_CONNECTION_DELETED = AuditLogEventType("tenant.sso_connection.deleted")
-        @JvmField
-        val TENANT_SSO_CONNECTION_SETUP_STARTED =
-            AuditLogEventType("tenant.sso_connection.setup.started")
+        @JvmField val TENANT_SSO_CONNECTION_CREATED = AuditLogEventType("tenant.sso_connection.created")
+        @JvmField val TENANT_SSO_CONNECTION_UPDATED = AuditLogEventType("tenant.sso_connection.updated")
+        @JvmField val TENANT_SSO_CONNECTION_DELETED = AuditLogEventType("tenant.sso_connection.deleted")
+        @JvmField val TENANT_SSO_CONNECTION_SETUP_STARTED = AuditLogEventType("tenant.sso_connection.setup.started")
         @JvmField val TENANT_POLICY_CREATED = AuditLogEventType("tenant.policy.created")
         @JvmField val TENANT_POLICY_UPDATED = AuditLogEventType("tenant.policy.updated")
         @JvmField val TENANT_POLICY_DELETED = AuditLogEventType("tenant.policy.deleted")
         @JvmField val TENANT_POLICY_ATTACHED = AuditLogEventType("tenant.policy.attached")
         @JvmField val TENANT_POLICY_DETACHED = AuditLogEventType("tenant.policy.detached")
-        @JvmField
-        val TENANT_PRINCIPAL_AUTHENTICATION_POLICY_RESOLVED =
-            AuditLogEventType("tenant.principal_authentication_policy.resolved")
+        @JvmField val TENANT_PRINCIPAL_AUTHENTICATION_POLICY_RESOLVED = AuditLogEventType("tenant.principal_authentication_policy.resolved")
         @JvmField val TENANT_SCIM_SETUP_STARTED = AuditLogEventType("tenant.scim.setup.started")
-        @JvmField
-        val TENANT_SCIM_DELETION_REQUESTED = AuditLogEventType("tenant.scim.deletion.requested")
-        @JvmField
-        val TENANT_SCIM_DIRECTORY_CREATED = AuditLogEventType("tenant.scim.directory.created")
-        @JvmField
-        val TENANT_PRODUCT_ACCESS_POLICY_UPDATED =
-            AuditLogEventType("tenant.product_access_policy.updated")
-        @JvmField
-        val TENANT_RESOURCE_SHARE_GRANT_CREATED =
-            AuditLogEventType("tenant.resource_share_grant.created")
-        @JvmField
-        val TENANT_RESOURCE_SHARE_GRANT_UPDATED =
-            AuditLogEventType("tenant.resource_share_grant.updated")
-        @JvmField
-        val TENANT_RESOURCE_SHARE_GRANT_ACCEPTED =
-            AuditLogEventType("tenant.resource_share_grant.accepted")
-        @JvmField
-        val TENANT_RESOURCE_SHARE_GRANT_DECLINED =
-            AuditLogEventType("tenant.resource_share_grant.declined")
-        @JvmField
-        val TENANT_RESOURCE_SHARE_GRANT_REVOKED =
-            AuditLogEventType("tenant.resource_share_grant.revoked")
-        @JvmField
-        val TENANT_RESOURCE_SHARE_GRANT_DELETED =
-            AuditLogEventType("tenant.resource_share_grant.deleted")
-        @JvmField
-        val TENANT_SERVICE_ACCOUNT_UPDATED = AuditLogEventType("tenant.service_account.updated")
-        @JvmField
-        val TENANT_SERVICE_ACCOUNT_DELETED = AuditLogEventType("tenant.service_account.deleted")
-        @JvmField
-        val TENANT_SERVICE_ACCOUNT_TOKEN_REVOKED =
-            AuditLogEventType("tenant.service_account.token.revoked")
-        @JvmField
-        val TENANT_BILLING_OVERAGE_LIMIT_UPDATED =
-            AuditLogEventType("tenant.billing.overage_limit.updated")
-        @JvmField
-        val TENANT_BILLING_ALERTS_UPDATED = AuditLogEventType("tenant.billing.alerts.updated")
+        @JvmField val TENANT_SCIM_DELETION_REQUESTED = AuditLogEventType("tenant.scim.deletion.requested")
+        @JvmField val TENANT_SCIM_DIRECTORY_CREATED = AuditLogEventType("tenant.scim.directory.created")
+        @JvmField val TENANT_PRODUCT_ACCESS_POLICY_UPDATED = AuditLogEventType("tenant.product_access_policy.updated")
+        @JvmField val TENANT_RESOURCE_SHARE_GRANT_CREATED = AuditLogEventType("tenant.resource_share_grant.created")
+        @JvmField val TENANT_RESOURCE_SHARE_GRANT_UPDATED = AuditLogEventType("tenant.resource_share_grant.updated")
+        @JvmField val TENANT_RESOURCE_SHARE_GRANT_ACCEPTED = AuditLogEventType("tenant.resource_share_grant.accepted")
+        @JvmField val TENANT_RESOURCE_SHARE_GRANT_DECLINED = AuditLogEventType("tenant.resource_share_grant.declined")
+        @JvmField val TENANT_RESOURCE_SHARE_GRANT_REVOKED = AuditLogEventType("tenant.resource_share_grant.revoked")
+        @JvmField val TENANT_RESOURCE_SHARE_GRANT_DELETED = AuditLogEventType("tenant.resource_share_grant.deleted")
+        @JvmField val TENANT_SERVICE_ACCOUNT_UPDATED = AuditLogEventType("tenant.service_account.updated")
+        @JvmField val TENANT_SERVICE_ACCOUNT_DELETED = AuditLogEventType("tenant.service_account.deleted")
+        @JvmField val TENANT_SERVICE_ACCOUNT_TOKEN_REVOKED = AuditLogEventType("tenant.service_account.token.revoked")
+        @JvmField val TENANT_BILLING_OVERAGE_LIMIT_UPDATED = AuditLogEventType("tenant.billing.overage_limit.updated")
+        @JvmField val TENANT_BILLING_ALERTS_UPDATED = AuditLogEventType("tenant.billing.alerts.updated")
         @JvmField val TENANT_BILLING_INFO_UPDATED = AuditLogEventType("tenant.billing.info.updated")
-        @JvmField
-        val TENANT_USAGE_LIMIT_WORKSPACE_UPDATED =
-            AuditLogEventType("tenant.usage_limit.workspace.updated")
-        @JvmField
-        val TENANT_USAGE_LIMIT_GROUP_UPDATED = AuditLogEventType("tenant.usage_limit.group.updated")
-        @JvmField
-        val TENANT_USAGE_LIMIT_USER_UPDATED = AuditLogEventType("tenant.usage_limit.user.updated")
-        @JvmField
-        val TENANT_USAGE_LIMIT_INCREASE_REQUEST_UPDATED =
-            AuditLogEventType("tenant.usage_limit.increase_request.updated")
-        @JvmField
-        val TENANT_USAGE_LIMIT_INCREASE_REQUEST_RESOLVED =
-            AuditLogEventType("tenant.usage_limit.increase_request.resolved")
+        @JvmField val TENANT_USAGE_LIMIT_WORKSPACE_UPDATED = AuditLogEventType("tenant.usage_limit.workspace.updated")
+        @JvmField val TENANT_USAGE_LIMIT_GROUP_UPDATED = AuditLogEventType("tenant.usage_limit.group.updated")
+        @JvmField val TENANT_USAGE_LIMIT_USER_UPDATED = AuditLogEventType("tenant.usage_limit.user.updated")
+        @JvmField val TENANT_USAGE_LIMIT_INCREASE_REQUEST_UPDATED = AuditLogEventType("tenant.usage_limit.increase_request.updated")
+        @JvmField val TENANT_USAGE_LIMIT_INCREASE_REQUEST_RESOLVED = AuditLogEventType("tenant.usage_limit.increase_request.resolved")
         @JvmField val TENANT_GROUP_CREATED = AuditLogEventType("tenant.group.created")
         @JvmField val TENANT_GROUP_UPDATED = AuditLogEventType("tenant.group.updated")
         @JvmField val TENANT_GROUP_DELETED = AuditLogEventType("tenant.group.deleted")
         @JvmField val TENANT_GROUP_MEMBER_ADDED = AuditLogEventType("tenant.group.member.added")
         @JvmField val TENANT_GROUP_MEMBER_REMOVED = AuditLogEventType("tenant.group.member.removed")
-        @JvmField
-        val TENANT_MIGRATION_ROLLOUT_STATUS_UPDATED =
-            AuditLogEventType("tenant.migration_rollout.status.updated")
-        @JvmField
-        val TENANT_MIGRATION_ROLLOUT_TIER_UPDATED =
-            AuditLogEventType("tenant.migration_rollout.tier.updated")
-        @JvmField
-        val TENANT_ROLE_METADATA_UPDATED = AuditLogEventType("tenant.role.metadata.updated")
+        @JvmField val TENANT_MIGRATION_ROLLOUT_STATUS_UPDATED = AuditLogEventType("tenant.migration_rollout.status.updated")
+        @JvmField val TENANT_MIGRATION_ROLLOUT_TIER_UPDATED = AuditLogEventType("tenant.migration_rollout.tier.updated")
+        @JvmField val TENANT_ROLE_METADATA_UPDATED = AuditLogEventType("tenant.role.metadata.updated")
         @JvmField val TENANT_CUSTOM_ROLE_CREATED = AuditLogEventType("tenant.custom_role.created")
         @JvmField val TENANT_CUSTOM_ROLE_UPDATED = AuditLogEventType("tenant.custom_role.updated")
         @JvmField val TENANT_CUSTOM_ROLE_DELETED = AuditLogEventType("tenant.custom_role.deleted")
-        @JvmField
-        val TENANT_ROLE_ASSIGNMENT_CREATED = AuditLogEventType("tenant.role_assignment.created")
-        @JvmField
-        val TENANT_ROLE_ASSIGNMENT_DELETED = AuditLogEventType("tenant.role_assignment.deleted")
-        @JvmField
-        val TENANT_RESOURCE_ROLE_ASSIGNMENT_CREATED =
-            AuditLogEventType("tenant.resource_role_assignment.created")
-        @JvmField
-        val TENANT_RESOURCE_ROLE_ASSIGNMENT_DELETED =
-            AuditLogEventType("tenant.resource_role_assignment.deleted")
-        @JvmField
-        val TENANT_RESOURCE_ACCESS_UPDATED = AuditLogEventType("tenant.resource_access.updated")
-        @JvmField
-        val TENANT_RESOURCE_ACCESS_DELETED = AuditLogEventType("tenant.resource_access.deleted")
-        @JvmField
-        val TENANT_ADS_ACCOUNT_ONBOARDING_REDEMPTION =
-            AuditLogEventType("tenant.ads_account.onboarding.redemption")
-        @JvmField
-        val TENANT_SESSION_POLICY_CREATED = AuditLogEventType("tenant.session_policy.created")
-        @JvmField
-        val TENANT_SESSION_POLICY_UPDATED = AuditLogEventType("tenant.session_policy.updated")
-        @JvmField
-        val TENANT_SESSION_POLICY_DELETED = AuditLogEventType("tenant.session_policy.deleted")
-        @JvmField
-        val TENANT_SESSION_REVOCATION_STARTED =
-            AuditLogEventType("tenant.session_revocation.started")
-        @JvmField
-        val TENANT_THIRD_PARTY_APP_POLICY_UPDATED =
-            AuditLogEventType("tenant.third_party_app_policy.updated")
+        @JvmField val TENANT_ROLE_ASSIGNMENT_CREATED = AuditLogEventType("tenant.role_assignment.created")
+        @JvmField val TENANT_ROLE_ASSIGNMENT_DELETED = AuditLogEventType("tenant.role_assignment.deleted")
+        @JvmField val TENANT_RESOURCE_ROLE_ASSIGNMENT_CREATED = AuditLogEventType("tenant.resource_role_assignment.created")
+        @JvmField val TENANT_RESOURCE_ROLE_ASSIGNMENT_DELETED = AuditLogEventType("tenant.resource_role_assignment.deleted")
+        @JvmField val TENANT_RESOURCE_ACCESS_UPDATED = AuditLogEventType("tenant.resource_access.updated")
+        @JvmField val TENANT_RESOURCE_ACCESS_DELETED = AuditLogEventType("tenant.resource_access.deleted")
+        @JvmField val TENANT_ADS_ACCOUNT_ONBOARDING_REDEMPTION = AuditLogEventType("tenant.ads_account.onboarding.redemption")
+        @JvmField val TENANT_SESSION_POLICY_CREATED = AuditLogEventType("tenant.session_policy.created")
+        @JvmField val TENANT_SESSION_POLICY_UPDATED = AuditLogEventType("tenant.session_policy.updated")
+        @JvmField val TENANT_SESSION_POLICY_DELETED = AuditLogEventType("tenant.session_policy.deleted")
+        @JvmField val TENANT_SESSION_REVOCATION_STARTED = AuditLogEventType("tenant.session_revocation.started")
+        @JvmField val TENANT_THIRD_PARTY_APP_POLICY_UPDATED = AuditLogEventType("tenant.third_party_app_policy.updated")
         @JvmField val TENANT_USER_ADDED = AuditLogEventType("tenant.user.added")
         @JvmField val TENANT_USER_UPDATED = AuditLogEventType("tenant.user.updated")
         @JvmField val TENANT_USER_REMOVED = AuditLogEventType("tenant.user.removed")
         @JvmField val TENANT_USER_LOOKED_UP = AuditLogEventType("tenant.user.looked_up")
         @JvmField val TENANT_USER_INVITED = AuditLogEventType("tenant.user.invited")
         @JvmField val TENANT_MEMBERSHIP_REVOKED = AuditLogEventType("tenant.membership.revoked")
-        @JvmField
-        val TENANT_API_ORGANIZATION_INVITE_UPSERTED =
-            AuditLogEventType("tenant.api_organization_invite.upserted")
-        @JvmField
-        val TENANT_API_ORGANIZATION_INVITE_DELETED =
-            AuditLogEventType("tenant.api_organization_invite.deleted")
-        @JvmField
-        val TENANT_CHATGPT_WORKSPACE_INVITE_UPSERTED =
-            AuditLogEventType("tenant.chatgpt_workspace_invite.upserted")
+        @JvmField val TENANT_API_ORGANIZATION_INVITE_UPSERTED = AuditLogEventType("tenant.api_organization_invite.upserted")
+        @JvmField val TENANT_API_ORGANIZATION_INVITE_DELETED = AuditLogEventType("tenant.api_organization_invite.deleted")
+        @JvmField val TENANT_CHATGPT_WORKSPACE_INVITE_UPSERTED = AuditLogEventType("tenant.chatgpt_workspace_invite.upserted")
         @JvmField val TENANT_MEMBERSHIP_ACCEPTED = AuditLogEventType("tenant.membership.accepted")
         @JvmField val TENANT_MEMBERSHIP_DECLINED = AuditLogEventType("tenant.membership.declined")
-        @JvmField
-        val TENANT_WORKSPACE_INVITE_EMAIL_SETTINGS_UPDATED =
-            AuditLogEventType("tenant.workspace_invite_email_settings.updated")
+        @JvmField val TENANT_WORKSPACE_INVITE_EMAIL_SETTINGS_UPDATED = AuditLogEventType("tenant.workspace_invite_email_settings.updated")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = AuditLogEventType(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = AuditLogEventType(value)
     }
 }
 
-/** Always `auto`. */
-enum class AutoChunkingStrategyRequestParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Always `auto`.
+ */
+enum class AutoChunkingStrategyRequestParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AUTO("auto");
 
     override fun toString() = value
@@ -299,38 +181,34 @@ enum class AutoChunkingStrategyRequestParamTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Always `auto`. */
-class AutoCodeInterpreterToolParamTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is AutoCodeInterpreterToolParamTypeEnum && value == other.value
-
+/**
+ * Always `auto`.
+ */
+class AutoCodeInterpreterToolParamTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is AutoCodeInterpreterToolParamTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AUTO = AutoCodeInterpreterToolParamTypeEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = AutoCodeInterpreterToolParamTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = AutoCodeInterpreterToolParamTypeEnum(value)
     }
 }
 
-/** Required enumerated value serialized in the `type` wire field. */
-enum class AwsExternalStorageProviderParamsTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class AwsExternalStorageProviderParamsTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AWS("aws");
 
     override fun toString() = value
@@ -338,16 +216,15 @@ enum class AwsExternalStorageProviderParamsTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Required enumerated value serialized in the `type` wire field. */
-enum class AwsExternalStorageProviderResponseTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class AwsExternalStorageProviderResponseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AWS("aws");
 
     override fun toString() = value
@@ -355,16 +232,15 @@ enum class AwsExternalStorageProviderResponseTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Required enumerated value serialized in the `type` wire field. */
-enum class AzureExternalStorageProviderParamsTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class AzureExternalStorageProviderParamsTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AZURE("azure");
 
     override fun toString() = value
@@ -372,16 +248,15 @@ enum class AzureExternalStorageProviderParamsTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Required enumerated value serialized in the `type` wire field. */
-enum class AzureExternalStorageProviderResponseTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class AzureExternalStorageProviderResponseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AZURE("azure");
 
     override fun toString() = value
@@ -389,40 +264,38 @@ enum class AzureExternalStorageProviderResponseTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The object type, which is always `batch`. */
-class BatchObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * The object type, which is always `batch`.
+ */
+class BatchObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is BatchObjectEnum && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val BATCH = BatchObjectEnum("batch")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BatchObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BatchObjectEnum(value)
     }
 }
 
-/** The current status of the batch. */
-class BatchStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * The current status of the batch.
+ */
+class BatchStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is BatchStatusEnum && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -436,43 +309,34 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val CANCELLING = BatchStatusEnum("cancelling")
         @JvmField val CANCELLED = BatchStatusEnum("cancelled")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BatchStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BatchStatusEnum(value)
     }
 }
 
 /**
- * Anchor timestamp after which the expiration policy applies. Supported anchors: `created_at`. Note
- * that the anchor is the file creation time, not the time the batch is created.
+ * Anchor timestamp after which the expiration policy applies. Supported anchors: `created_at`. Note that the anchor is the file creation time, not the time the batch is created.
  */
-class BatchFileExpirationAfterAnchorEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BatchFileExpirationAfterAnchorEnum && value == other.value
-
+class BatchFileExpirationAfterAnchorEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BatchFileExpirationAfterAnchorEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val CREATED_AT = BatchFileExpirationAfterAnchorEnum("created_at")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BatchFileExpirationAfterAnchorEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BatchFileExpirationAfterAnchorEnum(value)
     }
 }
 
-/** The type of the item. Always `additional_tools`. */
-enum class BetaAdditionalToolsTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the item. Always `additional_tools`.
+ */
+enum class BetaAdditionalToolsTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     ADDITIONAL_TOOLS("additional_tools");
 
     override fun toString() = value
@@ -480,38 +344,34 @@ enum class BetaAdditionalToolsTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The role that provided the additional tools. Only `developer` is supported. */
-class BetaAdditionalToolsItemParamRoleEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaAdditionalToolsItemParamRoleEnum && value == other.value
-
+/**
+ * The role that provided the additional tools. Only `developer` is supported.
+ */
+class BetaAdditionalToolsItemParamRoleEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaAdditionalToolsItemParamRoleEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val DEVELOPER = BetaAdditionalToolsItemParamRoleEnum("developer")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaAdditionalToolsItemParamRoleEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaAdditionalToolsItemParamRoleEnum(value)
     }
 }
 
-/** The item type. Always `additional_tools`. */
-enum class BetaAdditionalToolsItemParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The item type. Always `additional_tools`.
+ */
+enum class BetaAdditionalToolsItemParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     ADDITIONAL_TOOLS("additional_tools");
 
     override fun toString() = value
@@ -519,13 +379,14 @@ enum class BetaAdditionalToolsItemParamTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the item. Always `agent_message`. */
+/**
+ * The type of the item. Always `agent_message`.
+ */
 enum class BetaAgentMessageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_MESSAGE("agent_message");
 
@@ -534,16 +395,15 @@ enum class BetaAgentMessageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The item type. Always `agent_message`. */
-enum class BetaAgentMessageItemParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The item type. Always `agent_message`.
+ */
+enum class BetaAgentMessageItemParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_MESSAGE("agent_message");
 
     override fun toString() = value
@@ -551,20 +411,19 @@ enum class BetaAgentMessageItemParamTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Typed representation of the `BetaApplyPatchCallOutputStatus` API schema. */
-class BetaApplyPatchCallOutputStatus
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaApplyPatchCallOutputStatus && value == other.value
-
+/**
+ * Typed representation of the `BetaApplyPatchCallOutputStatus` API schema.
+ */
+class BetaApplyPatchCallOutputStatus private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaApplyPatchCallOutputStatus && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -572,22 +431,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val COMPLETED = BetaApplyPatchCallOutputStatus("completed")
         @JvmField val FAILED = BetaApplyPatchCallOutputStatus("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaApplyPatchCallOutputStatus(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaApplyPatchCallOutputStatus(value)
     }
 }
 
-/** Outcome values reported for apply_patch tool call outputs. */
-class BetaApplyPatchCallOutputStatusParam
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaApplyPatchCallOutputStatusParam && value == other.value
-
+/**
+ * Outcome values reported for apply_patch tool call outputs.
+ */
+class BetaApplyPatchCallOutputStatusParam private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaApplyPatchCallOutputStatusParam && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -595,22 +451,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val COMPLETED = BetaApplyPatchCallOutputStatusParam("completed")
         @JvmField val FAILED = BetaApplyPatchCallOutputStatusParam("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaApplyPatchCallOutputStatusParam(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaApplyPatchCallOutputStatusParam(value)
     }
 }
 
-/** Typed representation of the `BetaApplyPatchCallStatus` API schema. */
-class BetaApplyPatchCallStatus
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaApplyPatchCallStatus && value == other.value
-
+/**
+ * Typed representation of the `BetaApplyPatchCallStatus` API schema.
+ */
+class BetaApplyPatchCallStatus private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaApplyPatchCallStatus && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -618,22 +471,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val IN_PROGRESS = BetaApplyPatchCallStatus("in_progress")
         @JvmField val COMPLETED = BetaApplyPatchCallStatus("completed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaApplyPatchCallStatus(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaApplyPatchCallStatus(value)
     }
 }
 
-/** Status values reported for apply_patch tool calls. */
-class BetaApplyPatchCallStatusParam
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaApplyPatchCallStatusParam && value == other.value
-
+/**
+ * Status values reported for apply_patch tool calls.
+ */
+class BetaApplyPatchCallStatusParam private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaApplyPatchCallStatusParam && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -641,18 +491,15 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val IN_PROGRESS = BetaApplyPatchCallStatusParam("in_progress")
         @JvmField val COMPLETED = BetaApplyPatchCallStatusParam("completed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaApplyPatchCallStatusParam(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaApplyPatchCallStatusParam(value)
     }
 }
 
-/** Create a new file with the provided diff. */
-enum class BetaApplyPatchCreateFileOperationTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Create a new file with the provided diff.
+ */
+enum class BetaApplyPatchCreateFileOperationTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     CREATE_FILE("create_file");
 
     override fun toString() = value
@@ -660,16 +507,15 @@ enum class BetaApplyPatchCreateFileOperationTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The operation type. Always `create_file`. */
-enum class BetaApplyPatchCreateFileOperationParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The operation type. Always `create_file`.
+ */
+enum class BetaApplyPatchCreateFileOperationParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     CREATE_FILE("create_file");
 
     override fun toString() = value
@@ -677,16 +523,15 @@ enum class BetaApplyPatchCreateFileOperationParamTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Delete the specified file. */
-enum class BetaApplyPatchDeleteFileOperationTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Delete the specified file.
+ */
+enum class BetaApplyPatchDeleteFileOperationTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     DELETE_FILE("delete_file");
 
     override fun toString() = value
@@ -694,16 +539,15 @@ enum class BetaApplyPatchDeleteFileOperationTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The operation type. Always `delete_file`. */
-enum class BetaApplyPatchDeleteFileOperationParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The operation type. Always `delete_file`.
+ */
+enum class BetaApplyPatchDeleteFileOperationParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     DELETE_FILE("delete_file");
 
     override fun toString() = value
@@ -711,16 +555,15 @@ enum class BetaApplyPatchDeleteFileOperationParamTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the item. Always `apply_patch_call`. */
-enum class BetaApplyPatchToolCallTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the item. Always `apply_patch_call`.
+ */
+enum class BetaApplyPatchToolCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     APPLY_PATCH_CALL("apply_patch_call");
 
     override fun toString() = value
@@ -728,16 +571,15 @@ enum class BetaApplyPatchToolCallTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the item. Always `apply_patch_call`. */
-enum class BetaApplyPatchToolCallItemParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the item. Always `apply_patch_call`.
+ */
+enum class BetaApplyPatchToolCallItemParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     APPLY_PATCH_CALL("apply_patch_call");
 
     override fun toString() = value
@@ -745,16 +587,15 @@ enum class BetaApplyPatchToolCallItemParamTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the item. Always `apply_patch_call_output`. */
-enum class BetaApplyPatchToolCallOutputTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the item. Always `apply_patch_call_output`.
+ */
+enum class BetaApplyPatchToolCallOutputTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     APPLY_PATCH_CALL_OUTPUT("apply_patch_call_output");
 
     override fun toString() = value
@@ -762,8 +603,7 @@ enum class BetaApplyPatchToolCallOutputTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

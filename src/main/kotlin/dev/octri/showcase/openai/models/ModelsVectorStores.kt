@@ -4,589 +4,612 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and
- * `chunk_overlap_tokens` of `400`.
+ * The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and `chunk_overlap_tokens` of `400`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AutoChunkingStrategyRequestParam(
-    /** Always `auto`. */
+    /**
+     * Always `auto`.
+     */
     val type: AutoChunkingStrategyRequestParamTypeEnum
 ) : ChunkingStrategyRequestParam, CreateVectorStoreRequestChunkingStrategy
 
-/** The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownChunkingStrategyRequestParam::class,
-)
+/**
+ * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownChunkingStrategyRequestParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AutoChunkingStrategyRequestParam::class,
-        name = "auto",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = StaticChunkingStrategyRequestParam::class,
-        name = "static",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoChunkingStrategyRequestParam::class, name = "auto"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = StaticChunkingStrategyRequestParam::class, name = "static")
 )
 sealed interface ChunkingStrategyRequestParam
 
-/**
- * A [ChunkingStrategyRequestParam] whose `type` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownChunkingStrategyRequestParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [ChunkingStrategyRequestParam] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownChunkingStrategyRequestParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ChunkingStrategyRequestParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `CreateVectorStoreFileBatchRequest` API schema. */
+/**
+ * Typed representation of the `CreateVectorStoreFileBatchRequest` API schema.
+ */
 data class CreateVectorStoreFileBatchRequest(
     /**
-     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that
-     * can access files. If `attributes` or `chunking_strategy` are provided, they will be applied
-     * to all files in the batch. The maximum batch size is 2000 files. This endpoint is recommended
-     * for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually
-     * exclusive with `files`.
+     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files. If `attributes` or `chunking_strategy` are provided, they will be applied to all files in the batch. The maximum batch size is 2000 files. This endpoint is recommended for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with `files`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
     /**
-     * A list of objects that each include a `file_id` plus optional `attributes` or
-     * `chunking_strategy`. Use this when you need to override metadata for specific files. The
-     * global `attributes` or `chunking_strategy` will be ignored and must be specified for each
-     * file. The maximum batch size is 2000 files. This endpoint is recommended for multi-file
-     * ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with
-     * `file_ids`.
+     * A list of objects that each include a `file_id` plus optional `attributes` or `chunking_strategy`. Use this when you need to override metadata for specific files. The global `attributes` or `chunking_strategy` will be ignored and must be specified for each file. The maximum batch size is 2000 files. This endpoint is recommended for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with `file_ids`.
      */
     val files: List<CreateVectorStoreFileRequest>? = null,
     /**
      * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
-    val chunkingStrategy: ChunkingStrategyRequestParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: ChunkingStrategyRequestParam? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters, booleans, or numbers.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
      */
-    val attributes: VectorStoreFileAttributes? = null,
+    val attributes: VectorStoreFileAttributes? = null
 )
 
-/** Typed representation of the `CreateVectorStoreFileRequest` API schema. */
+/**
+ * Typed representation of the `CreateVectorStoreFileRequest` API schema.
+ */
 data class CreateVectorStoreFileRequest(
     /**
-     * A File ID that the vector store should use. Useful for tools like `file_search` that can
-     * access files. For multi-file ingestion, we recommend `file_batches` to minimize
-     * per-vector-store write requests.
+     * A File ID that the vector store should use. Useful for tools like `file_search` that can access files. For multi-file ingestion, we recommend `file_batches` to minimize per-vector-store write requests.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
     /**
      * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
-    val chunkingStrategy: ChunkingStrategyRequestParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: ChunkingStrategyRequestParam? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters, booleans, or numbers.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
      */
-    val attributes: VectorStoreFileAttributes? = null,
-)
-
-/** Typed representation of the `CreateVectorStoreRequest` API schema. */
-data class CreateVectorStoreRequest(
-    /**
-     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that
-     * can access files.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /** The name of the vector store. */
-    val name: String? = null,
-    /** A description for the vector store. Can be used to describe the vector store's purpose. */
-    val description: String? = null,
-    /** The expiration policy for a vector store. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
-    val expiresAfter: VectorStoreExpirationAfter? = null,
-    /**
-     * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
-     * Only applicable if `file_ids` is non-empty.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
-    val chunkingStrategy: CreateVectorStoreRequestChunkingStrategy? = null,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
-     */
-    val metadata: Metadata? = null,
+    val attributes: VectorStoreFileAttributes? = null
 )
 
 /**
- * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. Only
- * applicable if `file_ids` is non-empty.
+ * Typed representation of the `CreateVectorStoreRequest` API schema.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownCreateVectorStoreRequestChunkingStrategy::class,
+data class CreateVectorStoreRequest(
+    /**
+     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
+    /**
+     * The name of the vector store.
+     */
+    val name: String? = null,
+    /**
+     * A description for the vector store. Can be used to describe the vector store's purpose.
+     */
+    val description: String? = null,
+    /**
+     * The expiration policy for a vector store.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: VectorStoreExpirationAfter? = null,
+    /**
+     * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. Only applicable if `file_ids` is non-empty.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: CreateVectorStoreRequestChunkingStrategy? = null,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     */
+    val metadata: Metadata? = null
 )
+
+/**
+ * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. Only applicable if `file_ids` is non-empty.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateVectorStoreRequestChunkingStrategy::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AutoChunkingStrategyRequestParam::class,
-        name = "auto",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = StaticChunkingStrategyRequestParam::class,
-        name = "static",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AutoChunkingStrategyRequestParam::class, name = "auto"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = StaticChunkingStrategyRequestParam::class, name = "static")
 )
 sealed interface CreateVectorStoreRequestChunkingStrategy
 
-/**
- * A [CreateVectorStoreRequestChunkingStrategy] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownCreateVectorStoreRequestChunkingStrategy
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [CreateVectorStoreRequestChunkingStrategy] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownCreateVectorStoreRequestChunkingStrategy @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : CreateVectorStoreRequestChunkingStrategy {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `DeleteVectorStoreFileResponse` API schema. */
+/**
+ * Typed representation of the `DeleteVectorStoreFileResponse` API schema.
+ */
 data class DeleteVectorStoreFileResponse(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
     val deleted: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteVectorStoreFileResponseObjectEnum,
-)
-
-/** Typed representation of the `DeleteVectorStoreResponse` API schema. */
-data class DeleteVectorStoreResponse(
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteVectorStoreResponseObjectEnum,
-)
-
-/** Typed representation of the `ListVectorStoreFilesResponse` API schema. */
-data class ListVectorStoreFilesResponse(
-    /** Required `string` value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreFileObject>,
-    /** Required `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /** Required `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-)
-
-/** Typed representation of the `ListVectorStoresResponse` API schema. */
-data class ListVectorStoresResponse(
-    /** Required `string` value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreObject>,
-    /** Required `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /** Required `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteVectorStoreFileResponseObjectEnum
 )
 
 /**
- * This is returned when the chunking strategy is unknown. Typically, this is because the file was
- * indexed before the `chunking_strategy` concept was introduced in the API.
+ * Typed representation of the `DeleteVectorStoreResponse` API schema.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+data class DeleteVectorStoreResponse(
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteVectorStoreResponseObjectEnum
 )
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+
+/**
+ * Typed representation of the `ListVectorStoreFilesResponse` API schema.
+ */
+data class ListVectorStoreFilesResponse(
+    /**
+     * Required `string` value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreFileObject>,
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )
+
+/**
+ * Typed representation of the `ListVectorStoresResponse` API schema.
+ */
+data class ListVectorStoresResponse(
+    /**
+     * Required `string` value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreObject>,
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+)
+
+/**
+ * This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the `chunking_strategy` concept was introduced in the API.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class OtherChunkingStrategyResponseParam(
-    /** Always `other`. */
+    /**
+     * Always `other`.
+     */
     val type: OtherChunkingStrategyResponseParamTypeEnum
 ) : VectorStoreFileObjectChunkingStrategy
 
-/** Typed representation of the `StaticChunkingStrategy` API schema. */
+/**
+ * Typed representation of the `StaticChunkingStrategy` API schema.
+ */
 data class StaticChunkingStrategy(
     /**
-     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is
-     * `100` and the maximum value is `4096`.
+     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens")
-    val maxChunkSizeTokens: Long,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens") val maxChunkSizeTokens: Long,
     /**
-     * The number of tokens that overlap between chunks. The default value is `400`. Note that the
-     * overlap must not exceed half of `max_chunk_size_tokens`.
+     * The number of tokens that overlap between chunks. The default value is `400`. Note that the overlap must not exceed half of `max_chunk_size_tokens`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens")
-    val chunkOverlapTokens: Long,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens") val chunkOverlapTokens: Long
 )
 
-/** Customize your own chunking strategy by setting chunk size and chunk overlap. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Customize your own chunking strategy by setting chunk size and chunk overlap.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class StaticChunkingStrategyRequestParam(
-    /** Always `static`. */
+    /**
+     * Always `static`.
+     */
     val type: StaticChunkingStrategyRequestParamTypeEnum,
-    /** Required object value serialized in the `static` wire field. */
-    val static: StaticChunkingStrategy,
+    /**
+     * Required object value serialized in the `static` wire field.
+     */
+    val static: StaticChunkingStrategy
 ) : ChunkingStrategyRequestParam, CreateVectorStoreRequestChunkingStrategy
 
-/** Typed representation of the `StaticChunkingStrategyResponseParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `StaticChunkingStrategyResponseParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class StaticChunkingStrategyResponseParam(
-    /** Always `static`. */
+    /**
+     * Always `static`.
+     */
     val type: StaticChunkingStrategyResponseParamTypeEnum,
-    /** Required object value serialized in the `static` wire field. */
-    val static: StaticChunkingStrategy,
+    /**
+     * Required object value serialized in the `static` wire field.
+     */
+    val static: StaticChunkingStrategy
 ) : VectorStoreFileObjectChunkingStrategy
 
-/** Typed representation of the `UpdateVectorStoreFileAttributesRequest` API schema. */
+/**
+ * Typed representation of the `UpdateVectorStoreFileAttributesRequest` API schema.
+ */
 data class UpdateVectorStoreFileAttributesRequest(
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters, booleans, or numbers.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("attributes", required = true)
-    val attributes: VectorStoreFileAttributes?
+    @com.fasterxml.jackson.annotation.JsonProperty("attributes", required = true) val attributes: VectorStoreFileAttributes?
 )
 
-/** Optional API value serialized in the `expires_after` wire field. */
+/**
+ * Optional API value serialized in the `expires_after` wire field.
+ */
 data class UpdateVectorStoreRequestExpiresAfter(
     /**
-     * Anchor timestamp after which the expiration policy applies. Supported anchors:
-     * `last_active_at`.
+     * Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.
      */
     val anchor: VectorStoreExpirationAfterAnchorEnum,
-    /** The number of days after the anchor time that the vector store will expire. */
-    val days: Long,
-)
-
-/** Typed representation of the `UpdateVectorStoreRequest` API schema. */
-data class UpdateVectorStoreRequest(
-    /** The name of the vector store. */
-    val name: String? = null,
-    /** Optional API value serialized in the `expires_after` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
-    val expiresAfter: UpdateVectorStoreRequestExpiresAfter? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * The number of days after the anchor time that the vector store will expire.
      */
-    val metadata: Metadata? = null,
+    val days: Long
 )
 
-/** The expiration policy for a vector store. */
+/**
+ * Typed representation of the `UpdateVectorStoreRequest` API schema.
+ */
+data class UpdateVectorStoreRequest(
+    /**
+     * The name of the vector store.
+     */
+    val name: String? = null,
+    /**
+     * Optional API value serialized in the `expires_after` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: UpdateVectorStoreRequestExpiresAfter? = null,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     */
+    val metadata: Metadata? = null
+)
+
+/**
+ * The expiration policy for a vector store.
+ */
 data class VectorStoreExpirationAfter(
     /**
-     * Anchor timestamp after which the expiration policy applies. Supported anchors:
-     * `last_active_at`.
+     * Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.
      */
     val anchor: VectorStoreExpirationAfterAnchorEnum,
-    /** The number of days after the anchor time that the vector store will expire. */
-    val days: Long,
+    /**
+     * The number of days after the anchor time that the vector store will expire.
+     */
+    val days: Long
 )
 
-/** Required object value serialized in the `file_counts` wire field. */
+/**
+ * Required object value serialized in the `file_counts` wire field.
+ */
 data class VectorStoreFileBatchObjectFileCounts(
-    /** The number of files that are currently being processed. */
+    /**
+     * The number of files that are currently being processed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("in_progress") val inProgress: Long,
-    /** The number of files that have been processed. */
+    /**
+     * The number of files that have been processed.
+     */
     val completed: Long,
-    /** The number of files that have failed to process. */
+    /**
+     * The number of files that have failed to process.
+     */
     val failed: Long,
-    /** The number of files that where cancelled. */
+    /**
+     * The number of files that where cancelled.
+     */
     val cancelled: Long,
-    /** The total number of files. */
-    val total: Long,
+    /**
+     * The total number of files.
+     */
+    val total: Long
 )
 
-/** A batch of files attached to a vector store. */
+/**
+ * A batch of files attached to a vector store.
+ */
 data class VectorStoreFileBatchObject(
-    /** The identifier, which can be referenced in API endpoints. */
+    /**
+     * The identifier, which can be referenced in API endpoints.
+     */
     val id: String,
-    /** The object type, which is always `vector_store.file_batch`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: VectorStoreFileBatchObjectObjectEnum,
-    /** The Unix timestamp (in seconds) for when the vector store files batch was created. */
+    /**
+     * The object type, which is always `vector_store.file_batch`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VectorStoreFileBatchObjectObjectEnum,
+    /**
+     * The Unix timestamp (in seconds) for when the vector store files batch was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The ID of the vector store that the File is attached to. */
+    /**
+     * The ID of the vector store that the File is attached to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vector_store_id") val vectorStoreId: String,
     /**
-     * The status of the vector store files batch, which can be either `in_progress`, `completed`,
-     * `cancelled` or `failed`.
+     * The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`.
      */
     val status: VectorStoreFileBatchObjectStatusEnum,
-    /** Required object value serialized in the `file_counts` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_counts")
-    val fileCounts: VectorStoreFileBatchObjectFileCounts,
-)
-
-/** Required object value serialized in the `data[]` wire field. */
-data class VectorStoreFileContentResponseDataItem(
-    /** The content type (currently only `"text"`) */
-    val type: String? = null,
-    /** The text content */
-    val text: String? = null,
-)
-
-/** Represents the parsed content of a vector store file. */
-data class VectorStoreFileContentResponse(
-    /** The object type, which is always `vector_store.file_content.page` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: VectorStoreFileContentResponseObjectEnum,
-    /** Parsed content of the file. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<VectorStoreFileContentResponseDataItem>,
-    /** Indicates if there are more content pages to fetch. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Required `string` value serialized in the `next_page` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true)
-    val nextPage: String?,
-)
-
-/** The last error associated with this vector store file. Will be `null` if there are no errors. */
-data class VectorStoreFileObjectLastError(
-    /** One of `server_error`, `unsupported_file`, or `invalid_file`. */
-    val code: VectorStoreFileObjectLastErrorCodeEnum,
-    /** A human-readable description of the error. */
-    val message: String,
-)
-
-/** A list of files attached to a vector store. */
-data class VectorStoreFileObject(
-    /** The identifier, which can be referenced in API endpoints. */
-    val id: String,
-    /** The object type, which is always `vector_store.file`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: VectorStoreFileObjectObjectEnum,
     /**
-     * The total vector store usage in bytes. Note that this may be different from the original file
-     * size.
+     * Required object value serialized in the `file_counts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_counts") val fileCounts: VectorStoreFileBatchObjectFileCounts
+)
+
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
+data class VectorStoreFileContentResponseDataItem(
+    /**
+     * The content type (currently only `"text"`)
+     */
+    val type: String? = null,
+    /**
+     * The text content
+     */
+    val text: String? = null
+)
+
+/**
+ * Represents the parsed content of a vector store file.
+ */
+data class VectorStoreFileContentResponse(
+    /**
+     * The object type, which is always `vector_store.file_content.page`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VectorStoreFileContentResponseObjectEnum,
+    /**
+     * Parsed content of the file.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreFileContentResponseDataItem>,
+    /**
+     * Indicates if there are more content pages to fetch.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Required `string` value serialized in the `next_page` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true) val nextPage: String?
+)
+
+/**
+ * The last error associated with this vector store file. Will be `null` if there are no errors.
+ */
+data class VectorStoreFileObjectLastError(
+    /**
+     * One of `server_error`, `unsupported_file`, or `invalid_file`.
+     */
+    val code: VectorStoreFileObjectLastErrorCodeEnum,
+    /**
+     * A human-readable description of the error.
+     */
+    val message: String
+)
+
+/**
+ * A list of files attached to a vector store.
+ */
+data class VectorStoreFileObject(
+    /**
+     * The identifier, which can be referenced in API endpoints.
+     */
+    val id: String,
+    /**
+     * The object type, which is always `vector_store.file`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VectorStoreFileObjectObjectEnum,
+    /**
+     * The total vector store usage in bytes. Note that this may be different from the original file size.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("usage_bytes") val usageBytes: Long,
-    /** The Unix timestamp (in seconds) for when the vector store file was created. */
+    /**
+     * The Unix timestamp (in seconds) for when the vector store file was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The ID of the vector store that the File is attached to. */
+    /**
+     * The ID of the vector store that the File is attached to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("vector_store_id") val vectorStoreId: String,
     /**
-     * The status of the vector store file, which can be either `in_progress`, `completed`,
-     * `cancelled`, or `failed`. The status `completed` indicates that the vector store file is
-     * ready for use.
+     * The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use.
      */
     val status: VectorStoreFileObjectStatusEnum,
     /**
      * The last error associated with this vector store file. Will be `null` if there are no errors.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_error", required = true)
-    val lastError: VectorStoreFileObjectLastError?,
-    /** The strategy used to chunk the file. */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
-    val chunkingStrategy: VectorStoreFileObjectChunkingStrategy? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("last_error", required = true) val lastError: VectorStoreFileObjectLastError?,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters, booleans, or numbers.
+     * The strategy used to chunk the file.
      */
-    val attributes: VectorStoreFileAttributes? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: VectorStoreFileObjectChunkingStrategy? = null,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+     */
+    val attributes: VectorStoreFileAttributes? = null
 )
 
-/** The strategy used to chunk the file. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownVectorStoreFileObjectChunkingStrategy::class,
-)
+/**
+ * The strategy used to chunk the file.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownVectorStoreFileObjectChunkingStrategy::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = StaticChunkingStrategyResponseParam::class,
-        name = "static",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = OtherChunkingStrategyResponseParam::class,
-        name = "other",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = StaticChunkingStrategyResponseParam::class, name = "static"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OtherChunkingStrategyResponseParam::class, name = "other")
 )
 sealed interface VectorStoreFileObjectChunkingStrategy
 
-/**
- * A [VectorStoreFileObjectChunkingStrategy] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownVectorStoreFileObjectChunkingStrategy
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [VectorStoreFileObjectChunkingStrategy] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownVectorStoreFileObjectChunkingStrategy @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : VectorStoreFileObjectChunkingStrategy {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Required object value serialized in the `file_counts` wire field. */
+/**
+ * Required object value serialized in the `file_counts` wire field.
+ */
 data class VectorStoreObjectFileCounts(
-    /** The number of files that are currently being processed. */
+    /**
+     * The number of files that are currently being processed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("in_progress") val inProgress: Long,
-    /** The number of files that have been successfully processed. */
+    /**
+     * The number of files that have been successfully processed.
+     */
     val completed: Long,
-    /** The number of files that have failed to process. */
+    /**
+     * The number of files that have failed to process.
+     */
     val failed: Long,
-    /** The number of files that were cancelled. */
+    /**
+     * The number of files that were cancelled.
+     */
     val cancelled: Long,
-    /** The total number of files. */
-    val total: Long,
+    /**
+     * The total number of files.
+     */
+    val total: Long
 )
 
-/** A vector store is a collection of processed files can be used by the `file_search` tool. */
+/**
+ * A vector store is a collection of processed files can be used by the `file_search` tool.
+ */
 data class VectorStoreObject(
-    /** The identifier, which can be referenced in API endpoints. */
-    val id: String,
-    /** The object type, which is always `vector_store`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: VectorStoreObjectObjectEnum,
-    /** The Unix timestamp (in seconds) for when the vector store was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The name of the vector store. */
-    val name: String,
-    /** The total number of bytes used by the files in the vector store. */
-    @com.fasterxml.jackson.annotation.JsonProperty("usage_bytes") val usageBytes: Long,
-    /** Required object value serialized in the `file_counts` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_counts")
-    val fileCounts: VectorStoreObjectFileCounts,
     /**
-     * The status of the vector store, which can be either `expired`, `in_progress`, or `completed`.
-     * A status of `completed` indicates that the vector store is ready for use.
+     * The identifier, which can be referenced in API endpoints.
+     */
+    val id: String,
+    /**
+     * The object type, which is always `vector_store`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VectorStoreObjectObjectEnum,
+    /**
+     * The Unix timestamp (in seconds) for when the vector store was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * The name of the vector store.
+     */
+    val name: String,
+    /**
+     * The total number of bytes used by the files in the vector store.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("usage_bytes") val usageBytes: Long,
+    /**
+     * Required object value serialized in the `file_counts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_counts") val fileCounts: VectorStoreObjectFileCounts,
+    /**
+     * The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use.
      */
     val status: VectorStoreObjectStatusEnum,
-    /** Required API value serialized in the `last_active_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_active_at", required = true)
-    val lastActiveAt: Long?,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Required API value serialized in the `last_active_at` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true)
-    val metadata: Metadata?,
-    /** The expiration policy for a vector store. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
-    val expiresAfter: VectorStoreExpirationAfter? = null,
-    /** Optional API value serialized in the `expires_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("last_active_at", required = true) val lastActiveAt: Long?,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true) val metadata: Metadata?,
+    /**
+     * The expiration policy for a vector store.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: VectorStoreExpirationAfter? = null,
+    /**
+     * Optional API value serialized in the `expires_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
 )
 
-/** Ranking options for search. */
+/**
+ * Ranking options for search.
+ */
 data class VectorStoreSearchRequestRankingOptions(
-    /** Enable re-ranking; set to `none` to disable, which can help reduce latency. */
+    /**
+     * Enable re-ranking; set to `none` to disable, which can help reduce latency.
+     */
     val ranker: VectorStoreSearchRequestRankingOptionsRankerEnum? = null,
-    /** Optional `number` value serialized in the `score_threshold` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold")
-    val scoreThreshold: Double? = null,
+    /**
+     * Optional `number` value serialized in the `score_threshold` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold") val scoreThreshold: Double? = null
 )
 
-/** Typed representation of the `VectorStoreSearchRequest` API schema. */
+/**
+ * Typed representation of the `VectorStoreSearchRequest` API schema.
+ */
 data class VectorStoreSearchRequest(
-    /** A query string for a search */
+    /**
+     * A query string for a search
+     */
     val query: Any,
-    /** Whether to rewrite the natural language query for vector search. */
-    @com.fasterxml.jackson.annotation.JsonProperty("rewrite_query")
-    val rewriteQuery: Boolean? = null,
+    /**
+     * Whether to rewrite the natural language query for vector search.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("rewrite_query") val rewriteQuery: Boolean? = null,
     /**
      * The maximum number of results to return. This number should be between 1 and 50 inclusive.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results")
-    val maxNumResults: Long? = null,
-    /** A filter to apply based on file attributes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results") val maxNumResults: Long? = null,
+    /**
+     * A filter to apply based on file attributes.
+     */
     val filters: VectorStoreSearchRequestFilters? = null,
-    /** Ranking options for search. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options")
-    val rankingOptions: VectorStoreSearchRequestRankingOptions? = null,
+    /**
+     * Ranking options for search.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options") val rankingOptions: VectorStoreSearchRequestRankingOptions? = null
 )
 
-/** A filter to apply based on file attributes. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownVectorStoreSearchRequestFilters::class,
-)
+/**
+ * A filter to apply based on file attributes.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownVectorStoreSearchRequestFilters::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ComparisonFilter::class,
-        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CompoundFilter::class,
-        names = ["and", "or"],
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CompoundFilter::class, names = ["and", "or"])
 )
 sealed interface VectorStoreSearchRequestFilters

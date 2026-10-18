@@ -3,42 +3,68 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `UserDeleteResponse` API schema. */
+/**
+ * Typed representation of the `UserDeleteResponse` API schema.
+ */
 data class UserDeleteResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UserDeleteResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UserDeleteResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
 )
 
-/** Typed representation of the `UserListResponse` API schema. */
+/**
+ * Typed representation of the `UserListResponse` API schema.
+ */
 data class UserListResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UserListResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UserListResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<User>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
 )
 
-/** Typed representation of the `UserRoleUpdateRequest` API schema. */
+/**
+ * Typed representation of the `UserRoleUpdateRequest` API schema.
+ */
 data class UserRoleUpdateRequest(
-    /** `owner` or `reader` */
+    /**
+     * `owner` or `reader`
+     */
     val role: String? = null,
-    /** Role ID to assign to the user. */
+    /**
+     * Role ID to assign to the user.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String? = null,
-    /** Technical level metadata. */
-    @com.fasterxml.jackson.annotation.JsonProperty("technical_level")
-    val technicalLevel: String? = null,
-    /** Developer persona metadata. */
-    @com.fasterxml.jackson.annotation.JsonProperty("developer_persona")
-    val developerPersona: String? = null,
+    /**
+     * Technical level metadata.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("technical_level") val technicalLevel: String? = null,
+    /**
+     * Developer persona metadata.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("developer_persona") val developerPersona: String? = null
 )

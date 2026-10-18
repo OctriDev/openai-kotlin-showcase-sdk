@@ -3,166 +3,181 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `AwsExternalStorageProviderParams` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `AwsExternalStorageProviderParams` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AwsExternalStorageProviderParams(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AwsExternalStorageProviderParamsTypeEnum,
-    /** Required `string` value serialized in the `bucket` wire field. */
+    /**
+     * Required `string` value serialized in the `bucket` wire field.
+     */
     val bucket: String,
-    /** Required `string` value serialized in the `role_arn` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_arn") val roleArn: String,
+    /**
+     * Required `string` value serialized in the `role_arn` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_arn") val roleArn: String
 ) : CreateExternalStorageBodyProvider
 
-/** Typed representation of the `AzureExternalStorageProviderParams` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `AzureExternalStorageProviderParams` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AzureExternalStorageProviderParams(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AzureExternalStorageProviderParamsTypeEnum,
-    /** Required `string` value serialized in the `tenant_id` wire field. */
+    /**
+     * Required `string` value serialized in the `tenant_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("tenant_id") val tenantId: String,
-    /** Required `string` value serialized in the `subscription_id` wire field. */
+    /**
+     * Required `string` value serialized in the `subscription_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("subscription_id") val subscriptionId: String,
-    /** Required `string` value serialized in the `resource_group` wire field. */
+    /**
+     * Required `string` value serialized in the `resource_group` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_group") val resourceGroup: String,
-    /** Required `string` value serialized in the `account_name` wire field. */
+    /**
+     * Required `string` value serialized in the `account_name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("account_name") val accountName: String,
-    /** Required `string` value serialized in the `container` wire field. */
-    val container: String,
+    /**
+     * Required `string` value serialized in the `container` wire field.
+     */
+    val container: String
 ) : CreateExternalStorageBodyProvider
 
-/** Typed representation of the `CreateExternalStorageBody` API schema. */
+/**
+ * Typed representation of the `CreateExternalStorageBody` API schema.
+ */
 data class CreateExternalStorageBody(
-    /** Required `string` value serialized in the `project_id` wire field. */
+    /**
+     * Required `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String,
-    /** Required API value serialized in the `provider` wire field. */
-    val provider: CreateExternalStorageBodyProvider,
+    /**
+     * Required API value serialized in the `provider` wire field.
+     */
+    val provider: CreateExternalStorageBodyProvider
 )
 
-/** Required API value serialized in the `provider` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownCreateExternalStorageBodyProvider::class,
-)
+/**
+ * Required API value serialized in the `provider` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateExternalStorageBodyProvider::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AwsExternalStorageProviderParams::class,
-        name = "aws",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AzureExternalStorageProviderParams::class,
-        name = "azure",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = GcpExternalStorageProviderParams::class,
-        name = "gcp",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = OciExternalStorageProviderParams::class,
-        name = "oci",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AwsExternalStorageProviderParams::class, name = "aws"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AzureExternalStorageProviderParams::class, name = "azure"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GcpExternalStorageProviderParams::class, name = "gcp"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OciExternalStorageProviderParams::class, name = "oci")
 )
 sealed interface CreateExternalStorageBodyProvider
 
-/**
- * A [CreateExternalStorageBodyProvider] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownCreateExternalStorageBodyProvider
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [CreateExternalStorageBodyProvider] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownCreateExternalStorageBodyProvider @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : CreateExternalStorageBodyProvider {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `ExternalStorageDeletedResource` API schema. */
+/**
+ * Typed representation of the `ExternalStorageDeletedResource` API schema.
+ */
 data class ExternalStorageDeletedResource(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ExternalStorageDeletedResourceObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ExternalStorageDeletedResourceObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
 )
 
-/** Typed representation of the `ExternalStorageListResource` API schema. */
+/**
+ * Typed representation of the `ExternalStorageListResource` API schema.
+ */
 data class ExternalStorageListResource(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ExternalStorageListResourceObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ExternalStorageResponse>,
-    /** Required `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
-    /** Required `string` value serialized in the `last_id` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ExternalStorageListResourceObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ExternalStorageResponse>,
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )
 
-/** Typed representation of the `GcpExternalStorageProviderParams` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `GcpExternalStorageProviderParams` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class GcpExternalStorageProviderParams(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: GcpExternalStorageProviderParamsTypeEnum,
-    /** Required `string` value serialized in the `bucket` wire field. */
+    /**
+     * Required `string` value serialized in the `bucket` wire field.
+     */
     val bucket: String,
-    /** Required `string` value serialized in the `workload_identity_project_number` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_project_number")
-    val workloadIdentityProjectNumber: String,
-    /** Required `string` value serialized in the `workload_identity_pool_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_pool_id")
-    val workloadIdentityPoolId: String,
-    /** Required `string` value serialized in the `workload_identity_provider_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_id")
-    val workloadIdentityProviderId: String,
+    /**
+     * Required `string` value serialized in the `workload_identity_project_number` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_project_number") val workloadIdentityProjectNumber: String,
+    /**
+     * Required `string` value serialized in the `workload_identity_pool_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_pool_id") val workloadIdentityPoolId: String,
+    /**
+     * Required `string` value serialized in the `workload_identity_provider_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_id") val workloadIdentityProviderId: String
 ) : CreateExternalStorageBodyProvider
 
-/** Typed representation of the `OciExternalStorageProviderParams` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `OciExternalStorageProviderParams` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class OciExternalStorageProviderParams(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: OciExternalStorageProviderParamsTypeEnum,
-    /** Required `string` value serialized in the `tenancy_ocid` wire field. */
+    /**
+     * Required `string` value serialized in the `tenancy_ocid` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("tenancy_ocid") val tenancyOcid: String,
-    /** Required `string` value serialized in the `region` wire field. */
+    /**
+     * Required `string` value serialized in the `region` wire field.
+     */
     val region: String,
-    /** Required `string` value serialized in the `bucket` wire field. */
-    val bucket: String,
+    /**
+     * Required `string` value serialized in the `bucket` wire field.
+     */
+    val bucket: String
 ) : CreateExternalStorageBodyProvider

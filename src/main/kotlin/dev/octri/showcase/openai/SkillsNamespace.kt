@@ -3,74 +3,37 @@
 
 package dev.octri.showcase.openai
 
+
 class SkillsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new skill from uploaded files or a ZIP archive. Include `files` with the skill
-     * contents, either as a directory upload or a single ZIP file. The response includes the
-     * created skill and its version identifiers.
+     * Creates a new skill from uploaded files or a ZIP archive. Include `files` with the skill contents, either as a directory upload or a single ZIP file. The response includes the created skill and its version identifiers.
      *
      * Create a new skill.
      */
-    fun create(
-        files: List<ByteArray>,
-        contentType: String? = null,
-        options: RequestOptions? = null,
-    ): SkillResource {
-        return dev.octri.showcase.openai.methods.Skills.createSkill(
-            clientConfig,
-            files,
-            contentType,
-            options,
-        )
+    fun create(files: List<ByteArray>, contentType: String? = null, options: RequestOptions? = null): SkillResource {
+        return dev.octri.showcase.openai.methods.Skills.createSkill(clientConfig, files, contentType, options)
     }
 
     /**
-     * Lists skills available in the current project. Use `limit` to control the number of results,
-     * `order` to sort them, and `after` to continue from a previous result.
+     * Lists skills available in the current project. Use `limit` to control the number of results, `order` to sort them, and `after` to continue from a previous result.
      *
      * List all skills for the current project.
      */
-    fun list(
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SkillListResource {
-        return dev.octri.showcase.openai.methods.Skills.listSkills(
-            clientConfig,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun list(limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null): SkillListResource {
+        return dev.octri.showcase.openai.methods.Skills.listSkills(clientConfig, limit, order, after, options)
     }
 
     /**
-     * Lists skills available in the current project. Use `limit` to control the number of results,
-     * `order` to sort them, and `after` to continue from a previous result.
+     * Lists skills available in the current project. Use `limit` to control the number of results, `order` to sort them, and `after` to continue from a previous result.
      *
      * List all skills for the current project.
      */
-    fun listPaginated(
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SkillResource) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Skills.listSkillsPaginated(
-            clientConfig,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listPaginated(limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SkillResource) -> Boolean) {
+        dev.octri.showcase.openai.methods.Skills.listSkillsPaginated(clientConfig, limit, order, after, options, yieldFn)
     }
 
     /**
-     * Deletes a skill by its identifier. Use `skill_id` to select the skill to remove. The response
-     * confirms whether the skill was deleted and includes its identifier.
+     * Deletes a skill by its identifier. Use `skill_id` to select the skill to remove. The response confirms whether the skill was deleted and includes its identifier.
      *
      * Delete a skill by its ID.
      */
@@ -79,8 +42,7 @@ class SkillsNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Retrieves a skill by its identifier. Use `skill_id` to select the skill whose details you
-     * need.
+     * Retrieves a skill by its identifier. Use `skill_id` to select the skill whose details you need.
      *
      * Get a skill by its ID.
      */
@@ -89,165 +51,75 @@ class SkillsNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Updates the default version pointer for a skill. Provide `default_version` to select the
-     * version that should be the skill's default. The response contains the updated skill details.
+     * Updates the default version pointer for a skill. Provide `default_version` to select the version that should be the skill's default. The response contains the updated skill details.
      *
      * Update the default version pointer for a skill.
      */
-    fun updateDefaultVersion(
-        skillId: String,
-        defaultVersion: String,
-        options: RequestOptions? = null,
-    ): SkillResource {
-        return dev.octri.showcase.openai.methods.Skills.updateSkillDefaultVersion(
-            clientConfig,
-            skillId,
-            defaultVersion,
-            options,
-        )
+    fun updateDefaultVersion(skillId: String, defaultVersion: String, options: RequestOptions? = null): SkillResource {
+        return dev.octri.showcase.openai.methods.Skills.updateSkillDefaultVersion(clientConfig, skillId, defaultVersion, options)
     }
 
     /**
-     * Retrieves the ZIP bundle for a skill. Use `skill_id` to select the skill whose files you want
-     * to download.
+     * Retrieves the ZIP bundle for a skill. Use `skill_id` to select the skill whose files you want to download.
      *
      * Download a skill zip bundle by its ID.
      */
     fun getContent(skillId: String, options: RequestOptions? = null): ByteArray {
-        return dev.octri.showcase.openai.methods.Skills.getSkillContent(
-            clientConfig,
-            skillId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Skills.getSkillContent(clientConfig, skillId, options)
     }
 
     /**
-     * Creates a new immutable version of a skill from uploaded files or a ZIP archive. Include
-     * `files` with the version contents and optionally set `default` to make the new version the
-     * default. The response contains the created version details.
+     * Creates a new immutable version of a skill from uploaded files or a ZIP archive. Include `files` with the version contents and optionally set `default` to make the new version the default. The response contains the created version details.
      *
      * Create a new immutable skill version.
      */
-    fun createVersion(
-        skillId: String,
-        files: List<ByteArray>,
-        default: Boolean? = null,
-        contentType: String? = null,
-        options: RequestOptions? = null,
-    ): SkillVersionResource {
-        return dev.octri.showcase.openai.methods.Skills.createSkillVersion(
-            clientConfig,
-            skillId,
-            files,
-            default,
-            contentType,
-            options,
-        )
+    fun createVersion(skillId: String, files: List<ByteArray>, default: Boolean? = null, contentType: String? = null, options: RequestOptions? = null): SkillVersionResource {
+        return dev.octri.showcase.openai.methods.Skills.createSkillVersion(clientConfig, skillId, files, default, contentType, options)
     }
 
     /**
-     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to
-     * control the number of results, and `order` to sort by version number.
+     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to control the number of results, and `order` to sort by version number.
      *
      * List skill versions for a skill.
      */
-    fun listVersions(
-        skillId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SkillVersionListResource {
-        return dev.octri.showcase.openai.methods.Skills.listSkillVersions(
-            clientConfig,
-            skillId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listVersions(skillId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null): SkillVersionListResource {
+        return dev.octri.showcase.openai.methods.Skills.listSkillVersions(clientConfig, skillId, limit, order, after, options)
     }
 
     /**
-     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to
-     * control the number of results, and `order` to sort by version number.
+     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to control the number of results, and `order` to sort by version number.
      *
      * List skill versions for a skill.
      */
-    fun listVersionsPaginated(
-        skillId: String,
-        limit: Long? = null,
-        order: OrderEnum? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SkillVersionResource) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Skills.listSkillVersionsPaginated(
-            clientConfig,
-            skillId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listVersionsPaginated(skillId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SkillVersionResource) -> Boolean) {
+        dev.octri.showcase.openai.methods.Skills.listSkillVersionsPaginated(clientConfig, skillId, limit, order, after, options, yieldFn)
     }
 
     /**
-     * Retrieves a specific version of a skill. Provide `skill_id` to identify the skill and
-     * `version` to select the version to retrieve.
+     * Retrieves a specific version of a skill. Provide `skill_id` to identify the skill and `version` to select the version to retrieve.
      *
      * Get a specific skill version.
      */
-    fun getVersion(
-        skillId: String,
-        version: String,
-        options: RequestOptions? = null,
-    ): SkillVersionResource {
-        return dev.octri.showcase.openai.methods.Skills.getSkillVersion(
-            clientConfig,
-            skillId,
-            version,
-            options,
-        )
+    fun getVersion(skillId: String, version: String, options: RequestOptions? = null): SkillVersionResource {
+        return dev.octri.showcase.openai.methods.Skills.getSkillVersion(clientConfig, skillId, version, options)
     }
 
     /**
-     * Deletes a version of a skill. Use `skill_id` and `version` to select the version to remove.
-     * You cannot delete the default version while other versions remain.
+     * Deletes a version of a skill. Use `skill_id` and `version` to select the version to remove. You cannot delete the default version while other versions remain.
      *
      * Delete a skill version.
      */
-    fun deleteVersion(
-        skillId: String,
-        version: String,
-        options: RequestOptions? = null,
-    ): DeletedSkillVersionResource {
-        return dev.octri.showcase.openai.methods.Skills.deleteSkillVersion(
-            clientConfig,
-            skillId,
-            version,
-            options,
-        )
+    fun deleteVersion(skillId: String, version: String, options: RequestOptions? = null): DeletedSkillVersionResource {
+        return dev.octri.showcase.openai.methods.Skills.deleteSkillVersion(clientConfig, skillId, version, options)
     }
 
     /**
-     * Retrieves the ZIP bundle for a specific skill version. Use `skill_id` and `version` to
-     * identify the skill and version whose content you need. The response provides the bundle as a
-     * downloadable binary file.
+     * Retrieves the ZIP bundle for a specific skill version. Use `skill_id` and `version` to identify the skill and version whose content you need. The response provides the bundle as a downloadable binary file.
      *
      * Download a skill version zip bundle.
      */
-    fun getVersionContent(
-        skillId: String,
-        version: String,
-        options: RequestOptions? = null,
-    ): ByteArray {
-        return dev.octri.showcase.openai.methods.Skills.getSkillVersionContent(
-            clientConfig,
-            skillId,
-            version,
-            options,
-        )
+    fun getVersionContent(skillId: String, version: String, options: RequestOptions? = null): ByteArray {
+        return dev.octri.showcase.openai.methods.Skills.getSkillVersionContent(clientConfig, skillId, version, options)
     }
+
 }

@@ -4,113 +4,62 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Specifies the format that the model must output. Compatible with GPT-4o, GPT-4 Turbo, and all
- * GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`. Setting to `{ "type": "json_schema",
- * "json_schema": {...} }` enables Structured Outputs which ensures the model will match your
- * supplied JSON schema. Learn more in the Structured Outputs guide. Setting to `{ "type":
- * "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
- * **Important:** when…
+ * Specifies the format that the model must output. Compatible with GPT-4o, GPT-4 Turbo, and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON. **Important:** when…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = AssistantsApiResponseFormatOption.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = AssistantsApiResponseFormatOption.Deserializer::class)
 sealed interface AssistantsApiResponseFormatOption {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<AssistantsApiResponseFormatOption>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<AssistantsApiResponseFormatOption>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): AssistantsApiResponseFormatOption {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out AssistantsApiResponseFormatOption>? =
-                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                    "text" -> ResponseFormatText::class.java
-                    "json_object" -> ResponseFormatJsonObject::class.java
-                    "json_schema" -> ResponseFormatJsonSchema::class.java
-                    null -> null
-                    else -> return UnknownAssistantsApiResponseFormatOption(node)
-                }
-            if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out AssistantsApiResponseFormatOption>> =
-                listOf(
-                    ResponseFormatText::class.java,
-                    ResponseFormatJsonObject::class.java,
-                    ResponseFormatJsonSchema::class.java,
-                )
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
+            val taggedType: Class<out AssistantsApiResponseFormatOption>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                "text" -> ResponseFormatText::class.java
+                "json_object" -> ResponseFormatJsonObject::class.java
+                "json_schema" -> ResponseFormatJsonSchema::class.java
+                null -> null
+                else -> return UnknownAssistantsApiResponseFormatOption(node)
             }
+            if (taggedType != null) return mapper.convertValue(node, taggedType)
+            val objectTypes: List<Class<out AssistantsApiResponseFormatOption>> = listOf(ResponseFormatText::class.java, ResponseFormatJsonObject::class.java, ResponseFormatJsonSchema::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                node.isTextual ->
-                    StringAssistantsApiResponseFormatOption(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
+                node.isTextual -> StringAssistantsApiResponseFormatOption(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
                 else -> UnknownAssistantsApiResponseFormatOption(node)
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringAssistantsApiResponseFormatOption(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : AssistantsApiResponseFormatOption
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringAssistantsApiResponseFormatOption(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : AssistantsApiResponseFormatOption
 
-/**
- * A [AssistantsApiResponseFormatOption] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownAssistantsApiResponseFormatOption
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [AssistantsApiResponseFormatOption] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownAssistantsApiResponseFormatOption @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : AssistantsApiResponseFormatOption {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * Controls which (if any) tool is called by the model. `none` means the model will not call any
- * tools and instead generates a message. `auto` is the default value and means the model can pick
- * between generating a message or calling one or more tools. `required` means the model must call
- * one or more tools before responding to the user. Specifying a particular tool like `{"type":
- * "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}` forces the model
- * to…
+ * Controls which (if any) tool is called by the model. `none` means the model will not call any tools and instead generates a message. `auto` is the default value and means the model can pick between generating a message or calling one or more tools. `required` means the model must call one or more tools before responding to the user. Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}` forces the model to…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = AssistantsApiToolChoiceOption.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = AssistantsApiToolChoiceOption.Deserializer::class)
 sealed interface AssistantsApiToolChoiceOption {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<AssistantsApiToolChoiceOption>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<AssistantsApiToolChoiceOption>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): AssistantsApiToolChoiceOption {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out AssistantsApiToolChoiceOption>> =
-                listOf(AssistantsNamedToolChoice::class.java)
+            val objectTypes: List<Class<out AssistantsApiToolChoiceOption>> = listOf(AssistantsNamedToolChoice::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -119,125 +68,97 @@ sealed interface AssistantsApiToolChoiceOption {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringAssistantsApiToolChoiceOption(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        AssistantsApiToolChoiceOption::class.java,
-                        "no AssistantsApiToolChoiceOption branch accepts this payload",
-                    )
+                node.isTextual -> StringAssistantsApiToolChoiceOption(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, AssistantsApiToolChoiceOption::class.java, "no AssistantsApiToolChoiceOption branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringAssistantsApiToolChoiceOption(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : AssistantsApiToolChoiceOption
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringAssistantsApiToolChoiceOption(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : AssistantsApiToolChoiceOption
 
-/** Optional object value serialized in the `function` wire field. */
+/**
+ * Optional object value serialized in the `function` wire field.
+ */
 data class AssistantsNamedToolChoiceFunction(
-    /** The name of the function to call. */
+    /**
+     * The name of the function to call.
+     */
     val name: String
 )
 
-/** Specifies a tool the model should use. Use to force the model to call a specific tool. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Specifies a tool the model should use. Use to force the model to call a specific tool.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AssistantsNamedToolChoice(
-    /** The type of the tool. If type is `function`, the function name must be set */
+    /**
+     * The type of the tool. If type is `function`, the function name must be set
+     */
     val type: AssistantsNamedToolChoiceTypeEnum,
-    /** Optional object value serialized in the `function` wire field. */
-    val function: AssistantsNamedToolChoiceFunction? = null,
+    /**
+     * Optional object value serialized in the `function` wire field.
+     */
+    val function: AssistantsNamedToolChoiceFunction? = null
 ) : AssistantsApiToolChoiceOption
 
 /**
- * JSON object response format. An older method of generating JSON responses. Using `json_schema` is
- * recommended for models that support it. Note that the model will not generate JSON without a
- * system or user message instructing it to do so.
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseFormatJsonObject(
-    /** The type of response format being defined. Always `json_object`. */
+    /**
+     * The type of response format being defined. Always `json_object`.
+     */
     val type: ResponseFormatJsonObjectTypeEnum
-) :
-    AssistantsApiResponseFormatOption,
-    TextResponseFormatConfiguration,
-    CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
+) : AssistantsApiResponseFormatOption, TextResponseFormatConfiguration, CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
 
-/** Structured Outputs configuration options, including a JSON Schema. */
+/**
+ * Structured Outputs configuration options, including a JSON Schema.
+ */
 data class ResponseFormatJsonSchemaJsonSchema(
     /**
-     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes,
-     * with a maximum length of 64.
+     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
      */
     val name: String,
     /**
-     * A description of what the response format is for, used by the model to determine how to
-     * respond in the format.
+     * A description of what the response format is for, used by the model to determine how to respond in the format.
      */
     val description: String? = null,
     /**
-     * The schema for the response format, described as a JSON Schema object. Learn how to build
-     * JSON schemas here.
+     * The schema for the response format, described as a JSON Schema object. Learn how to build JSON schemas here.
      */
     val schema: ResponseFormatJsonSchemaSchema? = null,
-    /** Optional `boolean` value serialized in the `strict` wire field. */
-    val strict: Boolean? = null,
+    /**
+     * Optional `boolean` value serialized in the `strict` wire field.
+     */
+    val strict: Boolean? = null
 )
 
 /**
- * JSON Schema response format. Used to generate structured JSON responses. Learn more about
- * Structured Outputs.
+ * JSON Schema response format. Used to generate structured JSON responses. Learn more about Structured Outputs.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseFormatJsonSchema(
-    /** The type of response format being defined. Always `json_schema`. */
+    /**
+     * The type of response format being defined. Always `json_schema`.
+     */
     val type: ResponseFormatJsonSchemaTypeEnum,
-    /** Structured Outputs configuration options, including a JSON Schema. */
-    @com.fasterxml.jackson.annotation.JsonProperty("json_schema")
-    val jsonSchema: ResponseFormatJsonSchemaJsonSchema,
-) :
-    AssistantsApiResponseFormatOption,
-    CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
+    /**
+     * Structured Outputs configuration options, including a JSON Schema.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("json_schema") val jsonSchema: ResponseFormatJsonSchemaJsonSchema
+) : AssistantsApiResponseFormatOption, CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
 
-/** Default response format. Used to generate text responses. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Default response format. Used to generate text responses.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseFormatText(
-    /** The type of response format being defined. Always `text`. */
+    /**
+     * The type of response format being defined. Always `text`.
+     */
     val type: ResponseFormatTextTypeEnum
-) :
-    AssistantsApiResponseFormatOption,
-    TextResponseFormatConfiguration,
-    CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
+) : AssistantsApiResponseFormatOption, TextResponseFormatConfiguration, CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat

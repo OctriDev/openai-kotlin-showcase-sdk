@@ -3,68 +3,51 @@
 
 package dev.octri.showcase.openai.models
 
-/** A grammar defined by the user. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A grammar defined by the user.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaCustomGrammarFormatParam(
-    /** Grammar format. Always `grammar`. */
+    /**
+     * Grammar format. Always `grammar`.
+     */
     val type: BetaCustomGrammarFormatParamTypeEnum,
-    /** The syntax of the grammar definition. One of `lark` or `regex`. */
+    /**
+     * The syntax of the grammar definition. One of `lark` or `regex`.
+     */
     val syntax: BetaGrammarSyntax1,
-    /** The grammar definition. */
-    val definition: String,
+    /**
+     * The grammar definition.
+     */
+    val definition: String
 ) : BetaCustomToolParamFormat
 
-/** Unconstrained free-form text. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Unconstrained free-form text.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaCustomTextFormatParam(
-    /** Unconstrained text format. Always `text`. */
+    /**
+     * Unconstrained text format. Always `text`.
+     */
     val type: BetaCustomTextFormatParamTypeEnum
 ) : BetaCustomToolParamFormat
 
-/** The input format for the custom tool. Default is unconstrained text. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownBetaCustomToolParamFormat::class,
-)
+/**
+ * The input format for the custom tool. Default is unconstrained text.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaCustomToolParamFormat::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaCustomTextFormatParam::class,
-        name = "text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaCustomGrammarFormatParam::class,
-        name = "grammar",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCustomTextFormatParam::class, name = "text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaCustomGrammarFormatParam::class, name = "grammar")
 )
 sealed interface BetaCustomToolParamFormat
 
 /** A [BetaCustomToolParamFormat] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownBetaCustomToolParamFormat
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownBetaCustomToolParamFormat @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : BetaCustomToolParamFormat {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

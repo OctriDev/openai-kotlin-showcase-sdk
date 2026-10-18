@@ -3,30 +3,20 @@
 
 package dev.octri.showcase.openai
 
+
 class AuditLogsNamespace(private val clientConfig: ClientConfig) {
-    /** List user actions and configuration changes within this organization. */
-    fun list(
-        request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest,
-        options: RequestOptions? = null,
-    ): ListAuditLogsResponse {
-        return dev.octri.showcase.openai.methods.AuditLogs.listAuditLogs(
-            clientConfig,
-            request,
-            options,
-        )
+    /**
+     * List user actions and configuration changes within this organization.
+     */
+    fun list(request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest, options: RequestOptions? = null): ListAuditLogsResponse {
+        return dev.octri.showcase.openai.methods.AuditLogs.listAuditLogs(clientConfig, request, options)
     }
 
-    /** List user actions and configuration changes within this organization. */
-    fun listPaginated(
-        request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (AuditLog) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.AuditLogs.listAuditLogsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    /**
+     * List user actions and configuration changes within this organization.
+     */
+    fun listPaginated(request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest, options: RequestOptions? = null, yieldFn: (AuditLog) -> Boolean) {
+        dev.octri.showcase.openai.methods.AuditLogs.listAuditLogsPaginated(clientConfig, request, options, yieldFn)
     }
+
 }

@@ -3,116 +3,190 @@
 
 package dev.octri.showcase.openai.models
 
-/** Parameters for creating or updating a spend alert. */
+/**
+ * Parameters for creating or updating a spend alert.
+ */
 data class CreateSpendAlertBody(
-    /** The alert threshold amount, in cents. */
+    /**
+     * The alert threshold amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. */
+    /**
+     * The currency for the threshold amount.
+     */
     val currency: CreateSpendAlertBodyCurrencyEnum,
-    /** The time interval for evaluating spend against the threshold. */
+    /**
+     * The time interval for evaluating spend against the threshold.
+     */
     val interval: CreateSpendAlertBodyIntervalEnum,
-    /** Email notification settings for a spend alert. */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel")
-    val notificationChannel: SpendAlertNotificationChannel,
+    /**
+     * Email notification settings for a spend alert.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel") val notificationChannel: SpendAlertNotificationChannel
 )
 
-/** Represents a spend alert configured at the organization level. */
+/**
+ * Represents a spend alert configured at the organization level.
+ */
 data class OrganizationSpendAlert(
-    /** The identifier, which can be referenced in API endpoints. */
+    /**
+     * The identifier, which can be referenced in API endpoints.
+     */
     val id: String,
-    /** The object type, which is always `organization.spend_alert`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationSpendAlertObjectEnum,
-    /** The alert threshold amount, in cents. */
+    /**
+     * The object type, which is always `organization.spend_alert`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationSpendAlertObjectEnum,
+    /**
+     * The alert threshold amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. */
+    /**
+     * The currency for the threshold amount.
+     */
     val currency: OrganizationSpendAlertCurrencyEnum,
-    /** The time interval for evaluating spend against the threshold. */
+    /**
+     * The time interval for evaluating spend against the threshold.
+     */
     val interval: OrganizationSpendAlertIntervalEnum,
-    /** Email notification settings for a spend alert. */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel")
-    val notificationChannel: SpendAlertNotificationChannel,
+    /**
+     * Email notification settings for a spend alert.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel") val notificationChannel: SpendAlertNotificationChannel
 )
 
-/** Confirmation payload returned after deleting an organization spend alert. */
+/**
+ * Confirmation payload returned after deleting an organization spend alert.
+ */
 data class OrganizationSpendAlertDeletedResource(
-    /** The deleted spend alert ID. */
+    /**
+     * The deleted spend alert ID.
+     */
     val id: String,
-    /** Always `organization.spend_alert.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationSpendAlertDeletedResourceObjectEnum,
-    /** Whether the spend alert was deleted. */
-    val deleted: Boolean,
+    /**
+     * Always `organization.spend_alert.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationSpendAlertDeletedResourceObjectEnum,
+    /**
+     * Whether the spend alert was deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Paginated list of organization spend alerts. */
+/**
+ * Paginated list of organization spend alerts.
+ */
 data class OrganizationSpendAlertListResource(
-    /** Always `list`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationSpendAlertListResourceObjectEnum,
-    /** Spend alerts returned in the current page. */
+    /**
+     * Always `list`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationSpendAlertListResourceObjectEnum,
+    /**
+     * Spend alerts returned in the current page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationSpendAlert>,
-    /** The ID of the first spend alert in this page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
-    /** The ID of the last spend alert in this page. */
+    /**
+     * The ID of the first spend alert in this page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * The ID of the last spend alert in this page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Whether more spend alerts are available when paginating. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Whether more spend alerts are available when paginating.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )
 
-/** Represents a spend alert configured at the project level. */
+/**
+ * Represents a spend alert configured at the project level.
+ */
 data class ProjectSpendAlert(
-    /** The identifier, which can be referenced in API endpoints. */
+    /**
+     * The identifier, which can be referenced in API endpoints.
+     */
     val id: String,
-    /** The object type, which is always `project.spend_alert`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectSpendAlertObjectEnum,
-    /** The alert threshold amount, in cents. */
+    /**
+     * The object type, which is always `project.spend_alert`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectSpendAlertObjectEnum,
+    /**
+     * The alert threshold amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. */
+    /**
+     * The currency for the threshold amount.
+     */
     val currency: ProjectSpendAlertCurrencyEnum,
-    /** The time interval for evaluating spend against the threshold. */
+    /**
+     * The time interval for evaluating spend against the threshold.
+     */
     val interval: ProjectSpendAlertIntervalEnum,
-    /** Email notification settings for a spend alert. */
-    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel")
-    val notificationChannel: SpendAlertNotificationChannel,
+    /**
+     * Email notification settings for a spend alert.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("notification_channel") val notificationChannel: SpendAlertNotificationChannel
 )
 
-/** Confirmation payload returned after deleting a project spend alert. */
+/**
+ * Confirmation payload returned after deleting a project spend alert.
+ */
 data class ProjectSpendAlertDeletedResource(
-    /** The deleted spend alert ID. */
+    /**
+     * The deleted spend alert ID.
+     */
     val id: String,
-    /** Always `project.spend_alert.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectSpendAlertDeletedResourceObjectEnum,
-    /** Whether the spend alert was deleted. */
-    val deleted: Boolean,
+    /**
+     * Always `project.spend_alert.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectSpendAlertDeletedResourceObjectEnum,
+    /**
+     * Whether the spend alert was deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Paginated list of project spend alerts. */
+/**
+ * Paginated list of project spend alerts.
+ */
 data class ProjectSpendAlertListResource(
-    /** Always `list`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectSpendAlertListResourceObjectEnum,
-    /** Spend alerts returned in the current page. */
+    /**
+     * Always `list`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectSpendAlertListResourceObjectEnum,
+    /**
+     * Spend alerts returned in the current page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectSpendAlert>,
-    /** The ID of the first spend alert in this page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
-    /** The ID of the last spend alert in this page. */
+    /**
+     * The ID of the first spend alert in this page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * The ID of the last spend alert in this page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Whether more spend alerts are available when paginating. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Whether more spend alerts are available when paginating.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )
 
-/** Email notification settings for a spend alert. */
+/**
+ * Email notification settings for a spend alert.
+ */
 data class SpendAlertNotificationChannel(
-    /** The notification channel type. Currently only `email` is supported. */
+    /**
+     * The notification channel type. Currently only `email` is supported.
+     */
     val type: SpendAlertNotificationChannelTypeEnum,
-    /** Email addresses that receive the spend alert notification. */
+    /**
+     * Email addresses that receive the spend alert notification.
+     */
     val recipients: List<String>,
-    /** Optional subject prefix for alert emails. */
-    @com.fasterxml.jackson.annotation.JsonProperty("subject_prefix")
-    val subjectPrefix: String? = null,
+    /**
+     * Optional subject prefix for alert emails.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("subject_prefix") val subjectPrefix: String? = null
 )

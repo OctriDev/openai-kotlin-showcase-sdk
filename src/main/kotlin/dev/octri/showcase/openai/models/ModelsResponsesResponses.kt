@@ -3,630 +3,618 @@
 
 package dev.octri.showcase.openai.models
 
-/** Client events accepted by the Responses WebSocket server. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownResponsesClientEvent::class,
-)
+/**
+ * Client events accepted by the Responses WebSocket server.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownResponsesClientEvent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponsesClientEventResponseCreate::class,
-        name = "response.create",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ResponseSteerEvent::class,
-        name = "response.steer",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponsesClientEventResponseCreate::class, name = "response.create"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ResponseSteerEvent::class, name = "response.steer")
 )
 sealed interface ResponsesClientEvent
 
 /** A [ResponsesClientEvent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownResponsesClientEvent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownResponsesClientEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ResponsesClientEvent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * Client event for creating a response over a persistent WebSocket connection. This payload uses
- * the same top-level fields as `POST /v1/responses`, plus WebSocket-only envelope metadata.
- * Notes: - `stream` is implicit over WebSocket and should not be sent. - `background` is not
- * supported over WebSocket. - `stream_id` is WebSocket-only and is not part of `POST
- * /v1/responses`.
+ * Client event for creating a response over a persistent WebSocket connection. This payload uses the same top-level fields as `POST /v1/responses`, plus WebSocket-only envelope metadata. Notes: - `stream` is implicit over WebSocket and should not be sent. - `background` is not supported over WebSocket. - `stream_id` is WebSocket-only and is not part of `POST /v1/responses`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 class ResponsesClientEventResponseCreate(
-    /** The type of the client event. Always `response.create`. */
+    /**
+     * The type of the client event. Always `response.create`.
+     */
     val type: ResponsesClientEventResponseCreateVariant0TypeEnum,
     /**
-     * The WebSocket lane for this response. Requests with the same `stream_id` are processed FIFO,
-     * and events for the response echo the same `stream_id`. `stream_id` controls routing;
-     * `previous_response_id` controls conversation lineage, so a new lane can fork from a response
-     * created on another lane.
+     * The WebSocket lane for this response. Requests with the same `stream_id` are processed FIFO, and events for the response echo the same `stream_id`. `stream_id` controls routing; `previous_response_id` controls conversation lineage, so a new lane can fork from a response created on another lane.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
     /**
-     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at
-     * each token position, each with an associated log probability. In some cases, the number of
-     * returned tokens may be fewer than requested.
+     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at each token position, each with an associated log probability. In some cases, the number of returned tokens may be fewer than requested.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: Long? = null,
-    /** Optional API value serialized in the `temperature` wire field. */
+    /**
+     * Optional API value serialized in the `temperature` wire field.
+     */
     val temperature: Double? = null,
-    /** Optional API value serialized in the `top_p` wire field. */
+    /**
+     * Optional API value serialized in the `top_p` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
-     * `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your
-     * end-users. Used to boost cache hit rates by better bucketing similar requests and to help
-     * OpenAI detect and prevent abuse. Learn more.
+     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates by better bucketing similar requests and to help OpenAI detect and prevent abuse. Learn more.
      */
     val user: String? = null,
-    /** Optional API value serialized in the `safety_identifier` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
-    val safetyIdentifier: String? = null,
-    /** Optional `string` value serialized in the `prompt_cache_key` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
-    val promptCacheKey: String? = null,
-    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
-    val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
     /**
-     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI
-     * automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to
-     * content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints.
-     * For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation,
-     * without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit
-     * breakpoint. The `ttl`…
+     * Optional API value serialized in the `safety_identifier` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options")
-    val promptCacheOptions: ResponsePromptCacheOptionsParam? = null,
-    /** Optional `string` value serialized in the `previous_response_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
-    val previousResponseId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
     /**
-     * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of
-     * models with different capabilities, performance characteristics, and price points. Refer to
-     * the model guide to browse and compare available models.
+     * Optional `string` value serialized in the `prompt_cache_key` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
+    /**
+     * Optional API value serialized in the `prompt_cache_retention` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
+    /**
+     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl`…
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options") val promptCacheOptions: ResponsePromptCacheOptionsParam? = null,
+    /**
+     * Optional `string` value serialized in the `previous_response_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String? = null,
+    /**
+     * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the model guide to browse and compare available models.
      */
     val model: ModelIdsResponses? = null,
-    /** Optional `boolean` value serialized in the `background` wire field. */
+    /**
+     * Optional `boolean` value serialized in the `background` wire field.
+     */
     val background: Boolean? = null,
-    /** Optional `integer` value serialized in the `max_tool_calls` wire field. */
+    /**
+     * Optional `integer` value serialized in the `max_tool_calls` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("max_tool_calls") val maxToolCalls: Long? = null,
     /**
-     * Configuration options for a text response from the model. Can be plain text or structured
-     * JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+     * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
      */
     val text: ResponseTextParam? = null,
     /**
-     * An array of tools the model may call while generating a response. You can specify which tool
-     * to use by setting the `tool_choice` parameter. We support the following categories of
-     * tools: - **Built-in tools**: Tools that are provided by OpenAI that extend the model's
-     * capabilities, like web search or file search. Learn more about built-in tools. - **MCP
-     * Tools**: Integrations with third-party systems via custom MCP servers or predefined
-     * connectors such as Google Drive and…
+     * An array of tools the model may call while generating a response. You can specify which tool to use by setting the `tool_choice` parameter. We support the following categories of tools: - **Built-in tools**: Tools that are provided by OpenAI that extend the model's capabilities, like web search or file search. Learn more about built-in tools. - **MCP Tools**: Integrations with third-party systems via custom MCP servers or predefined connectors such as Google Drive and…
      */
     val tools: ToolsArray? = null,
     /**
-     * How the model should select which tool (or tools) to use when generating a response. See the
-     * `tools` parameter to see how to specify which tools the model can call.
+     * How the model should select which tool (or tools) to use when generating a response. See the `tools` parameter to see how to specify which tools the model can call.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
-    val toolChoice: ToolChoiceParam? = null,
-    /** Reference to a prompt template and its variables. Learn more. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: ToolChoiceParam? = null,
+    /**
+     * Reference to a prompt template and its variables. Learn more.
+     */
     val prompt: Prompt? = null,
-    /** Domain-specific access programs to use for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("access_programs")
-    val accessPrograms: AccessProgramsParam? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
-    val serviceTier: ServiceTierResponses? = null,
+    /**
+     * Domain-specific access programs to use for this request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("access_programs") val accessPrograms: AccessProgramsParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTierResponses? = null,
     val truncation: CreateResponseVariant2TruncationVariant0Enum? = null,
     val reasoning: Reasoning? = null,
     /**
-     * Text, image, or file inputs to the model, used to generate a response. Learn more: - Text
-     * inputs and outputs - Image inputs - File inputs - Conversation state - Function calling
+     * Text, image, or file inputs to the model, used to generate a response. Learn more: - Text inputs and outputs - Image inputs - File inputs - Conversation state - Function calling
      */
     val input: InputParam? = null,
     /**
-     * Specify additional output data to include in the model response. Currently supported values
-     * are: - `web_search_call.action.sources`: Include the sources of the web search tool call. -
-     * `code_interpreter_call.outputs`: Includes the outputs of python code execution in code
-     * interpreter tool call items. - `computer_call_output.output.image_url`: Include image urls
-     * from the computer call output. - `file_search_call.results`: Include the search results of
-     * the file search tool call.…
+     * Specify additional output data to include in the model response. Currently supported values are: - `web_search_call.action.sources`: Include the sources of the web search tool call. - `code_interpreter_call.outputs`: Includes the outputs of python code execution in code interpreter tool call items. - `computer_call_output.output.image_url`: Include image urls from the computer call output. - `file_search_call.results`: Include the search results of the file search tool call.…
      */
     val include: List<IncludeEnum>? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
-    val parallelToolCalls: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null,
     val store: Boolean? = null,
     val instructions: String? = null,
     val moderation: ModerationParam? = null,
     val stream: Boolean? = null,
-    /** Options for streaming responses. Only set this when you set `stream: true`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_options")
-    val streamOptions: ResponseStreamOptions? = null,
+    /**
+     * Options for streaming responses. Only set this when you set `stream: true`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_options") val streamOptions: ResponseStreamOptions? = null,
     val conversation: ConversationParam? = null,
-    /** Context management configuration for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_management")
-    val contextManagement: List<ContextManagementParam>? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Long? = null,
+    /**
+     * Context management configuration for this request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_management") val contextManagement: List<ContextManagementParam>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Long? = null
 ) : ResponsesClientEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant0(
-    /** The type of the event. Always `response.audio.delta`. */
+    /**
+     * The type of the event. Always `response.audio.delta`.
+     */
     val type: ResponseAudioDeltaEventTypeEnum,
-    /** A sequence number for this chunk of the stream response. */
+    /**
+     * A sequence number for this chunk of the stream response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** A chunk of Base64 encoded response audio bytes. */
+    /**
+     * A chunk of Base64 encoded response audio bytes.
+     */
     val delta: String,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant1(
-    /** The type of the event. Always `response.audio.done`. */
+    /**
+     * The type of the event. Always `response.audio.done`.
+     */
     val type: ResponseAudioDoneEventTypeEnum,
-    /** The sequence number of the delta. */
+    /**
+     * The sequence number of the delta.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant2(
-    /** The type of the event. Always `response.audio.transcript.delta`. */
+    /**
+     * The type of the event. Always `response.audio.transcript.delta`.
+     */
     val type: ResponseAudioTranscriptDeltaEventTypeEnum,
-    /** The partial transcript of the audio response. */
+    /**
+     * The partial transcript of the audio response.
+     */
     val delta: String,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant3(
-    /** The type of the event. Always `response.audio.transcript.done`. */
+    /**
+     * The type of the event. Always `response.audio.transcript.done`.
+     */
     val type: ResponseAudioTranscriptDoneEventTypeEnum,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant4(
-    /** The type of the event. Always `response.code_interpreter_call_code.delta`. */
+    /**
+     * The type of the event. Always `response.code_interpreter_call_code.delta`.
+     */
     val type: ResponseCodeInterpreterCallCodeDeltaEventTypeEnum,
-    /** The index of the output item in the response for which the code is being streamed. */
+    /**
+     * The index of the output item in the response for which the code is being streamed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The unique identifier of the code interpreter tool call item. */
+    /**
+     * The unique identifier of the code interpreter tool call item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The partial code snippet being streamed by the code interpreter. */
+    /**
+     * The partial code snippet being streamed by the code interpreter.
+     */
     val delta: String,
-    /** The sequence number of this event, used to order streaming events. */
+    /**
+     * The sequence number of this event, used to order streaming events.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant5(
-    /** The type of the event. Always `response.code_interpreter_call_code.done`. */
+    /**
+     * The type of the event. Always `response.code_interpreter_call_code.done`.
+     */
     val type: ResponseCodeInterpreterCallCodeDoneEventTypeEnum,
-    /** The index of the output item in the response for which the code is finalized. */
+    /**
+     * The index of the output item in the response for which the code is finalized.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The unique identifier of the code interpreter tool call item. */
+    /**
+     * The unique identifier of the code interpreter tool call item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The final code snippet output by the code interpreter. */
+    /**
+     * The final code snippet output by the code interpreter.
+     */
     val code: String,
-    /** The sequence number of this event, used to order streaming events. */
+    /**
+     * The sequence number of this event, used to order streaming events.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant6(
-    /** The type of the event. Always `response.code_interpreter_call.completed`. */
+    /**
+     * The type of the event. Always `response.code_interpreter_call.completed`.
+     */
     val type: ResponseCodeInterpreterCallCompletedEventTypeEnum,
     /**
-     * The index of the output item in the response for which the code interpreter call is
-     * completed.
+     * The index of the output item in the response for which the code interpreter call is completed.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The unique identifier of the code interpreter tool call item. */
+    /**
+     * The unique identifier of the code interpreter tool call item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The sequence number of this event, used to order streaming events. */
+    /**
+     * The sequence number of this event, used to order streaming events.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant7(
-    /** The type of the event. Always `response.code_interpreter_call.in_progress`. */
+    /**
+     * The type of the event. Always `response.code_interpreter_call.in_progress`.
+     */
     val type: ResponseCodeInterpreterCallInProgressEventTypeEnum,
     /**
-     * The index of the output item in the response for which the code interpreter call is in
-     * progress.
+     * The index of the output item in the response for which the code interpreter call is in progress.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The unique identifier of the code interpreter tool call item. */
+    /**
+     * The unique identifier of the code interpreter tool call item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The sequence number of this event, used to order streaming events. */
+    /**
+     * The sequence number of this event, used to order streaming events.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant8(
-    /** The type of the event. Always `response.code_interpreter_call.interpreting`. */
+    /**
+     * The type of the event. Always `response.code_interpreter_call.interpreting`.
+     */
     val type: ResponseCodeInterpreterCallInterpretingEventTypeEnum,
     /**
-     * The index of the output item in the response for which the code interpreter is interpreting
-     * code.
+     * The index of the output item in the response for which the code interpreter is interpreting code.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The unique identifier of the code interpreter tool call item. */
+    /**
+     * The unique identifier of the code interpreter tool call item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The sequence number of this event, used to order streaming events. */
+    /**
+     * The sequence number of this event, used to order streaming events.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant9(
-    /** The type of the event, always `response.compaction.compacting`. */
+    /**
+     * The type of the event, always `response.compaction.compacting`.
+     */
     val type: ResponseCompactionCompactingStreamingEventTypeEnum,
-    /** The sequence number of the event that was emitted. */
+    /**
+     * The sequence number of the event that was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** The index of the compaction output item. */
+    /**
+     * The index of the compaction output item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The ID of the compaction output item. */
+    /**
+     * The ID of the compaction output item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant10(
-    /** The type of the event. Always `response.completed`. */
+    /**
+     * The type of the event. Always `response.completed`.
+     */
     val type: ResponseCompletedEventTypeEnum,
-    /** Properties of the completed response. */
+    /**
+     * Properties of the completed response.
+     */
     val response: Response,
-    /** The sequence number for this event. */
+    /**
+     * The sequence number for this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant11(
-    /** The type of the event. Always `response.content_part.added`. */
+    /**
+     * The type of the event. Always `response.content_part.added`.
+     */
     val type: ResponseContentPartAddedEventTypeEnum,
-    /** The ID of the output item that the content part was added to. */
+    /**
+     * The ID of the output item that the content part was added to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the output item that the content part was added to. */
+    /**
+     * The index of the output item that the content part was added to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the content part that was added. */
+    /**
+     * The index of the content part that was added.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /** The content part that was added. */
+    /**
+     * The content part that was added.
+     */
     val part: OutputContent,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant12(
-    /** The type of the event. Always `response.content_part.done`. */
+    /**
+     * The type of the event. Always `response.content_part.done`.
+     */
     val type: ResponseContentPartDoneEventTypeEnum,
-    /** The ID of the output item that the content part was added to. */
+    /**
+     * The ID of the output item that the content part was added to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the output item that the content part was added to. */
+    /**
+     * The index of the output item that the content part was added to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the content part that is done. */
+    /**
+     * The index of the content part that is done.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** The content part that is done. */
+    /**
+     * The content part that is done.
+     */
     val part: OutputContent,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant13(
-    /** The type of the event. Always `response.created`. */
+    /**
+     * The type of the event. Always `response.created`.
+     */
     val type: ResponseCreatedEventTypeEnum,
-    /** The response that was created. */
+    /**
+     * The response that was created.
+     */
     val response: Response,
-    /** The sequence number for this event. */
+    /**
+     * The sequence number for this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant14(
-    /** The type of the event. Always `response.file_search_call.completed`. */
+    /**
+     * The type of the event. Always `response.file_search_call.completed`.
+     */
     val type: ResponseFileSearchCallCompletedEventTypeEnum,
-    /** The index of the output item that the file search call is initiated. */
+    /**
+     * The index of the output item that the file search call is initiated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The ID of the output item that the file search call is initiated. */
+    /**
+     * The ID of the output item that the file search call is initiated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant15(
-    /** The type of the event. Always `response.file_search_call.in_progress`. */
+    /**
+     * The type of the event. Always `response.file_search_call.in_progress`.
+     */
     val type: ResponseFileSearchCallInProgressEventTypeEnum,
-    /** The index of the output item that the file search call is initiated. */
+    /**
+     * The index of the output item that the file search call is initiated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The ID of the output item that the file search call is initiated. */
+    /**
+     * The ID of the output item that the file search call is initiated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant16(
-    /** The type of the event. Always `response.file_search_call.searching`. */
+    /**
+     * The type of the event. Always `response.file_search_call.searching`.
+     */
     val type: ResponseFileSearchCallSearchingEventTypeEnum,
-    /** The index of the output item that the file search call is searching. */
+    /**
+     * The index of the output item that the file search call is searching.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The ID of the output item that the file search call is initiated. */
+    /**
+     * The ID of the output item that the file search call is initiated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant17(
-    /** The type of the event. Always `response.function_call_arguments.delta`. */
+    /**
+     * The type of the event. Always `response.function_call_arguments.delta`.
+     */
     val type: ResponseFunctionCallArgumentsDeltaEventTypeEnum,
-    /** The ID of the output item that the function-call arguments delta is added to. */
+    /**
+     * The ID of the output item that the function-call arguments delta is added to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the output item that the function-call arguments delta is added to. */
+    /**
+     * The index of the output item that the function-call arguments delta is added to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** The function-call arguments delta that is added. */
+    /**
+     * The function-call arguments delta that is added.
+     */
     val delta: String,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant18(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ResponseFunctionCallArgumentsDoneEventTypeEnum,
-    /** The ID of the item. */
+    /**
+     * The ID of the item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the output item. */
+    /**
+     * The index of the output item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The sequence number of this event. */
+    /**
+     * The sequence number of this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** The function-call arguments. */
+    /**
+     * The function-call arguments.
+     */
     val arguments: String,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponsesServerEventVariant19(
-    /** The type of the event, always `response.shell_call_command.added`. */
+    /**
+     * The type of the event, always `response.shell_call_command.added`.
+     */
     val type: ResponseShellCallCommandAddedStreamingEventTypeEnum,
-    /** The sequence number of the event that was emitted. */
+    /**
+     * The sequence number of the event that was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** The index of the output item that was updated. */
+    /**
+     * The index of the output item that was updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the shell command that was added. */
+    /**
+     * The index of the shell command that was added.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("command_index") val commandIndex: Long,
-    /** The shell command that was added. */
+    /**
+     * The shell command that was added.
+     */
     val command: String,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating
-     * `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 ) : ResponsesServerEvent

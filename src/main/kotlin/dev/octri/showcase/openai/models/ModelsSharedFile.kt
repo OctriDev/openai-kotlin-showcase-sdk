@@ -4,8 +4,7 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days and
- * all other files are persisted until they are manually deleted.
+ * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days and all other files are persisted until they are manually deleted.
  */
 data class FileExpirationAfter(
     /**
@@ -13,8 +12,7 @@ data class FileExpirationAfter(
      */
     val anchor: FileExpirationAfterAnchorEnum,
     /**
-     * The number of seconds after the anchor time that the file will expire. Must be between 3600
-     * (1 hour) and 2592000 (30 days).
+     * The number of seconds after the anchor time that the file will expire. Must be between 3600 (1 hour) and 2592000 (30 days).
      */
-    val seconds: Long,
+    val seconds: Long
 )

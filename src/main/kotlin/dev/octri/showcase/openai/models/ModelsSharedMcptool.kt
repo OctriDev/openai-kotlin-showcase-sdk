@@ -3,123 +3,109 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `HTTPError` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `HTTPError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HTTPError(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: HTTPErrorTypeEnum,
-    /** Required `integer` value serialized in the `code` wire field. */
+    /**
+     * Required `integer` value serialized in the `code` wire field.
+     */
     val code: Long,
-    /** Required `string` value serialized in the `message` wire field. */
-    val message: String,
+    /**
+     * Required `string` value serialized in the `message` wire field.
+     */
+    val message: String
 ) : MCPToolCallError
 
-/** Typed representation of the `MCPProtocolError` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `MCPProtocolError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class MCPProtocolError(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: MCPProtocolErrorTypeEnum,
-    /** Required `integer` value serialized in the `code` wire field. */
+    /**
+     * Required `integer` value serialized in the `code` wire field.
+     */
     val code: Long,
-    /** Required `string` value serialized in the `message` wire field. */
-    val message: String,
+    /**
+     * Required `string` value serialized in the `message` wire field.
+     */
+    val message: String
 ) : MCPToolCallError
 
-/** Typed representation of the `MCPToolCallError` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownMCPToolCallError::class,
-)
+/**
+ * Typed representation of the `MCPToolCallError` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMCPToolCallError::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = MCPProtocolError::class,
-        name = "mcp_protocol_error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = MCPToolExecutionError::class,
-        name = "mcp_tool_execution_error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HTTPError::class,
-        name = "http_error",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPProtocolError::class, name = "mcp_protocol_error"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPToolExecutionError::class, name = "mcp_tool_execution_error"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HTTPError::class, name = "http_error")
 )
 sealed interface MCPToolCallError
 
 /** A [MCPToolCallError] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownMCPToolCallError
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownMCPToolCallError @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : MCPToolCallError {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `MCPToolExecutionError` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `MCPToolExecutionError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class MCPToolExecutionError(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: MCPToolExecutionErrorTypeEnum,
-    /** Required API value serialized in the `content` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: Any?,
+    /**
+     * Required API value serialized in the `content` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content", required = true) val content: Any?
 ) : MCPToolCallError
 
-/** A filter object to specify which tools are allowed. */
+/**
+ * A filter object to specify which tools are allowed.
+ */
 data class MCPToolFilter(
-    /** List of allowed tool names. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_names")
-    val toolNames: List<String>? = null,
     /**
-     * Indicates whether or not a tool modifies data or is read-only. If an MCP server is annotated
-     * with `readOnlyHint`, it will match this filter.
+     * List of allowed tool names.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("read_only") val readOnly: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_names") val toolNames: List<String>? = null,
+    /**
+     * Indicates whether or not a tool modifies data or is read-only. If an MCP server is annotated with `readOnlyHint`, it will match this filter.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("read_only") val readOnly: Boolean? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class MCPToolRequireApprovalVariant0(
-    /** A filter object to specify which tools are allowed. */
+    /**
+     * A filter object to specify which tools are allowed.
+     */
     val always: MCPToolFilter? = null,
-    /** A filter object to specify which tools are allowed. */
-    val never: MCPToolFilter? = null,
+    /**
+     * A filter object to specify which tools are allowed.
+     */
+    val never: MCPToolFilter? = null
 ) : MCPToolRequireApproval
 
-/** Specify which of the MCP server's tools require approval. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = MCPToolRequireApproval.Deserializer::class
-)
+/**
+ * Specify which of the MCP server's tools require approval.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = MCPToolRequireApproval.Deserializer::class)
 sealed interface MCPToolRequireApproval {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<MCPToolRequireApproval>() {
@@ -129,8 +115,7 @@ sealed interface MCPToolRequireApproval {
         ): MCPToolRequireApproval {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out MCPToolRequireApproval>> =
-                listOf(MCPToolRequireApprovalVariant0::class.java)
+            val objectTypes: List<Class<out MCPToolRequireApproval>> = listOf(MCPToolRequireApprovalVariant0::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -139,30 +124,13 @@ sealed interface MCPToolRequireApproval {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringMCPToolRequireApproval(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        MCPToolRequireApproval::class.java,
-                        "no MCPToolRequireApproval branch accepts this payload",
-                    )
+                node.isTextual -> StringMCPToolRequireApproval(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, MCPToolRequireApproval::class.java, "no MCPToolRequireApproval branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringMCPToolRequireApproval(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : MCPToolRequireApproval
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringMCPToolRequireApproval(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : MCPToolRequireApproval

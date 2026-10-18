@@ -3,25 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/** An error reported while preparing a session environment. */
+/**
+ * An error reported while preparing a session environment.
+ */
 data class SessionEnvironmentErrorResource(
-    /** The error type. */
+    /**
+     * The error type.
+     */
     val type: String,
-    /** A machine-readable error code. */
+    /**
+     * A machine-readable error code.
+     */
     val code: String,
-    /** A human-readable error message. */
-    val message: String,
+    /**
+     * A human-readable error message.
+     */
+    val message: String
 )
 
-/** The current state of a session environment. */
+/**
+ * The current state of a session environment.
+ */
 data class SessionEnvironmentStateResource(
-    /** The public ID of the environment. */
+    /**
+     * The public ID of the environment.
+     */
     val id: String,
-    /** The environment type. */
+    /**
+     * The environment type.
+     */
     val type: String,
-    /** The environment's connection status. */
+    /**
+     * The environment's connection status.
+     */
     val status: SessionEnvironmentStatusResource,
-    /** The error reported while preparing the environment, if any. */
-    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true)
-    val error: SessionEnvironmentErrorResource?,
+    /**
+     * The error reported while preparing the environment, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: SessionEnvironmentErrorResource?
 )

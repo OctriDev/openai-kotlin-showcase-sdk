@@ -3,540 +3,446 @@
 
 package dev.octri.showcase.openai.models
 
-/** A file materialized in an OpenAI-hosted execution environment. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedEnvironmentFileParam::class,
-)
+/**
+ * A file materialized in an OpenAI-hosted execution environment.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedEnvironmentFileParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedEnvironmentFileParamFileId::class,
-        name = "file_id",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedEnvironmentFileParamInline::class,
-        name = "inline",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedEnvironmentFileParamFileId::class, name = "file_id"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedEnvironmentFileParamInline::class, name = "inline")
 )
 sealed interface HostedEnvironmentFileParam
 
 /** A [HostedEnvironmentFileParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedEnvironmentFileParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedEnvironmentFileParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedEnvironmentFileParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A file previously uploaded through the OpenAI Files API. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A file previously uploaded through the OpenAI Files API.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedEnvironmentFileParamFileId(
-    /** The type of the object. Always `file_id`. */
+    /**
+     * The type of the object. Always `file_id`.
+     */
     val type: HostedEnvironmentFileParamFileIdTypeEnum,
-    /** The ID of the uploaded file. */
+    /**
+     * The ID of the uploaded file.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /** The absolute destination path inside `/workspace`. */
-    val path: String,
+    /**
+     * The absolute destination path inside `/workspace`.
+     */
+    val path: String
 ) : HostedEnvironmentFileParam
 
-/** A file supplied directly as standard-base64 data. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A file supplied directly as standard-base64 data.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedEnvironmentFileParamInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedEnvironmentFileParamInlineTypeEnum,
-    /** The standard-base64-encoded file contents. */
+    /**
+     * The standard-base64-encoded file contents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
-    /** The absolute destination path inside `/workspace`. */
-    val path: String,
+    /**
+     * The absolute destination path inside `/workspace`.
+     */
+    val path: String
 ) : HostedEnvironmentFileParam
 
-/** Metadata for a file materialized in an OpenAI-hosted execution environment. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedEnvironmentFileResource::class,
-)
+/**
+ * Metadata for a file materialized in an OpenAI-hosted execution environment.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedEnvironmentFileResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedEnvironmentFileResourceFileId::class,
-        name = "file_id",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedEnvironmentFileResourceInline::class,
-        name = "inline",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedEnvironmentFileResourceFileId::class, name = "file_id"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedEnvironmentFileResourceInline::class, name = "inline")
 )
 sealed interface HostedEnvironmentFileResource
 
-/**
- * A [HostedEnvironmentFileResource] whose `type` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedEnvironmentFileResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [HostedEnvironmentFileResource] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedEnvironmentFileResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedEnvironmentFileResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A file copied from the OpenAI Files API. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A file copied from the OpenAI Files API.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedEnvironmentFileResourceFileId(
-    /** The type of the object. Always `file_id`. */
+    /**
+     * The type of the object. Always `file_id`.
+     */
     val type: HostedEnvironmentFileResourceFileIdTypeEnum,
-    /** The session-scoped ID of the file in the execution environment. */
+    /**
+     * The session-scoped ID of the file in the execution environment.
+     */
     val id: String,
-    /** The ID of the uploaded file. */
+    /**
+     * The ID of the uploaded file.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /** The file's absolute path inside the environment. */
+    /**
+     * The file's absolute path inside the environment.
+     */
     val path: String,
-    /** The decoded file size in bytes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long,
+    /**
+     * The decoded file size in bytes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long
 ) : HostedEnvironmentFileResource
 
-/** A file supplied inline when the session was created. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A file supplied inline when the session was created.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedEnvironmentFileResourceInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedEnvironmentFileResourceInlineTypeEnum,
-    /** The session-scoped ID of the file in the execution environment. */
+    /**
+     * The session-scoped ID of the file in the execution environment.
+     */
     val id: String,
-    /** The file's absolute path inside the environment. */
+    /**
+     * The file's absolute path inside the environment.
+     */
     val path: String,
-    /** The decoded file size in bytes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long,
+    /**
+     * The decoded file size in bytes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long
 ) : HostedEnvironmentFileResource
 
-/** A plugin installed in an OpenAI-hosted environment. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedPluginParam::class,
-)
+/**
+ * A plugin installed in an OpenAI-hosted environment.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedPluginParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedPluginParamInline::class,
-        name = "inline",
-    )
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedPluginParamInline::class, name = "inline")
 )
 sealed interface HostedPluginParam
 
 /** A [HostedPluginParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedPluginParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedPluginParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedPluginParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Supplies a plugin ZIP directly in the session request. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Supplies a plugin ZIP directly in the session request.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedPluginParamInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedPluginParamInlineTypeEnum,
-    /** The plugin name declared in `.codex-plugin/plugin.json`. */
+    /**
+     * The plugin name declared in `.codex-plugin/plugin.json`.
+     */
     val name: String,
-    /** The plugin description declared in `.codex-plugin/plugin.json`. */
+    /**
+     * The plugin description declared in `.codex-plugin/plugin.json`.
+     */
     val description: String,
-    /** The inline ZIP archive. */
-    val source: InlineCapabilitySourceParam,
+    /**
+     * The inline ZIP archive.
+     */
+    val source: InlineCapabilitySourceParam
 ) : HostedPluginParam
 
-/** A plugin installed in an OpenAI-hosted environment. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedPluginResource::class,
-)
+/**
+ * A plugin installed in an OpenAI-hosted environment.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedPluginResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedPluginResourceInline::class,
-        name = "inline",
-    )
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedPluginResourceInline::class, name = "inline")
 )
 sealed interface HostedPluginResource
 
 /** A [HostedPluginResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedPluginResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedPluginResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedPluginResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A plugin installed from an inline ZIP archive. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A plugin installed from an inline ZIP archive.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedPluginResourceInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedPluginResourceInlineTypeEnum,
-    /** The installed plugin name. */
+    /**
+     * The installed plugin name.
+     */
     val name: String,
-    /** The installed plugin description. */
-    val description: String,
+    /**
+     * The installed plugin description.
+     */
+    val description: String
 ) : HostedPluginResource
 
-/** A skill installed in an OpenAI-hosted environment. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedSkillParam::class,
-)
+/**
+ * A skill installed in an OpenAI-hosted environment.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedSkillParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedSkillParamSkillReference::class,
-        name = "skill_reference",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedSkillParamInline::class,
-        name = "inline",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedSkillParamSkillReference::class, name = "skill_reference"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedSkillParamInline::class, name = "inline")
 )
 sealed interface HostedSkillParam
 
 /** A [HostedSkillParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedSkillParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedSkillParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedSkillParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Supplies a skill ZIP directly in the session request. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Supplies a skill ZIP directly in the session request.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedSkillParamInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedSkillParamInlineTypeEnum,
-    /** The skill name declared in `SKILL.md`. */
+    /**
+     * The skill name declared in `SKILL.md`.
+     */
     val name: String,
-    /** The skill description declared in `SKILL.md`. */
+    /**
+     * The skill description declared in `SKILL.md`.
+     */
     val description: String,
-    /** The inline ZIP archive. */
-    val source: InlineCapabilitySourceParam,
+    /**
+     * The inline ZIP archive.
+     */
+    val source: InlineCapabilitySourceParam
 ) : HostedSkillParam
 
-/** References a skill uploaded through the Skills API. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * References a skill uploaded through the Skills API.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedSkillParamSkillReference(
-    /** The type of the object. Always `skill_reference`. */
+    /**
+     * The type of the object. Always `skill_reference`.
+     */
     val type: HostedSkillParamSkillReferenceTypeEnum,
-    /** The ID of the skill created through `/v1/skills`. */
+    /**
+     * The ID of the skill created through `/v1/skills`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
-    /** The skill version, a positive integer or `latest`; omission selects the default. */
-    val version: String? = null,
+    /**
+     * The skill version, a positive integer or `latest`; omission selects the default.
+     */
+    val version: String? = null
 ) : HostedSkillParam
 
-/** A skill installed in an OpenAI-hosted environment. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedSkillResource::class,
-)
+/**
+ * A skill installed in an OpenAI-hosted environment.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedSkillResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedSkillResourceSkillReference::class,
-        name = "skill_reference",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedSkillResourceInline::class,
-        name = "inline",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedSkillResourceSkillReference::class, name = "skill_reference"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedSkillResourceInline::class, name = "inline")
 )
 sealed interface HostedSkillResource
 
 /** A [HostedSkillResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedSkillResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedSkillResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedSkillResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A skill installed from an inline ZIP archive. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A skill installed from an inline ZIP archive.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedSkillResourceInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedSkillResourceInlineTypeEnum,
-    /** The installed skill name. */
+    /**
+     * The installed skill name.
+     */
     val name: String,
-    /** The installed skill description. */
-    val description: String,
+    /**
+     * The installed skill description.
+     */
+    val description: String
 ) : HostedSkillResource
 
-/** A skill installed from the Skills API. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A skill installed from the Skills API.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedSkillResourceSkillReference(
-    /** The type of the object. Always `skill_reference`. */
+    /**
+     * The type of the object. Always `skill_reference`.
+     */
     val type: HostedSkillResourceSkillReferenceTypeEnum,
-    /** The referenced skill ID. */
+    /**
+     * The referenced skill ID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
-    /** The concrete skill version installed for this session. */
+    /**
+     * The concrete skill version installed for this session.
+     */
     val version: String,
-    /** The installed skill name. */
+    /**
+     * The installed skill name.
+     */
     val name: String,
-    /** The installed skill description. */
-    val description: String,
+    /**
+     * The installed skill description.
+     */
+    val description: String
 ) : HostedSkillResource
 
-/** Safe metadata for a file configured by an environment template. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedTemplateFileResource::class,
-)
+/**
+ * Safe metadata for a file configured by an environment template.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedTemplateFileResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedTemplateFileResourceFileId::class,
-        name = "file_id",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedTemplateFileResourceInline::class,
-        name = "inline",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedTemplateFileResourceFileId::class, name = "file_id"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedTemplateFileResourceInline::class, name = "inline")
 )
 sealed interface HostedTemplateFileResource
 
 /** A [HostedTemplateFileResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedTemplateFileResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedTemplateFileResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedTemplateFileResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A project-scoped Files API reference resolved separately for each session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A project-scoped Files API reference resolved separately for each session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedTemplateFileResourceFileId(
-    /** The type of the object. Always `file_id`. */
+    /**
+     * The type of the object. Always `file_id`.
+     */
     val type: HostedTemplateFileResourceFileIdTypeEnum,
-    /** The ID of the uploaded file. */
+    /**
+     * The ID of the uploaded file.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /** The file's absolute path inside the environment. */
-    val path: String,
+    /**
+     * The file's absolute path inside the environment.
+     */
+    val path: String
 ) : HostedTemplateFileResource
 
-/** Metadata for confidential inline file contents. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Metadata for confidential inline file contents.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedTemplateFileResourceInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedTemplateFileResourceInlineTypeEnum,
-    /** The file's absolute path inside the environment. */
+    /**
+     * The file's absolute path inside the environment.
+     */
     val path: String,
-    /** The decoded size of the inline file in bytes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long,
+    /**
+     * The decoded size of the inline file in bytes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("size_bytes") val sizeBytes: Long
 ) : HostedTemplateFileResource
 
-/** Safe metadata for a skill configured by an environment template. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownHostedTemplateSkillResource::class,
-)
+/**
+ * Safe metadata for a skill configured by an environment template.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownHostedTemplateSkillResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedTemplateSkillResourceSkillReference::class,
-        name = "skill_reference",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = HostedTemplateSkillResourceInline::class,
-        name = "inline",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedTemplateSkillResourceSkillReference::class, name = "skill_reference"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = HostedTemplateSkillResourceInline::class, name = "inline")
 )
 sealed interface HostedTemplateSkillResource
 
-/**
- * A [HostedTemplateSkillResource] whose `type` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownHostedTemplateSkillResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [HostedTemplateSkillResource] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownHostedTemplateSkillResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : HostedTemplateSkillResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Safe metadata for an inline skill archive. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Safe metadata for an inline skill archive.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedTemplateSkillResourceInline(
-    /** The type of the object. Always `inline`. */
+    /**
+     * The type of the object. Always `inline`.
+     */
     val type: HostedTemplateSkillResourceInlineTypeEnum,
-    /** The skill name declared in `SKILL.md`. */
+    /**
+     * The skill name declared in `SKILL.md`.
+     */
     val name: String,
-    /** The skill description declared in `SKILL.md`. */
-    val description: String,
+    /**
+     * The skill description declared in `SKILL.md`.
+     */
+    val description: String
 ) : HostedTemplateSkillResource
 
-/** A skill resolved afresh from the Skills API whenever a session starts. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A skill resolved afresh from the Skills API whenever a session starts.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class HostedTemplateSkillResourceSkillReference(
-    /** The type of the object. Always `skill_reference`. */
+    /**
+     * The type of the object. Always `skill_reference`.
+     */
     val type: HostedTemplateSkillResourceSkillReferenceTypeEnum,
-    /** The referenced skill ID. */
+    /**
+     * The referenced skill ID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
-    /** The requested version selector, including `latest`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("version", required = true) val version: String?,
+    /**
+     * The requested version selector, including `latest`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("version", required = true) val version: String?
 ) : HostedTemplateSkillResource

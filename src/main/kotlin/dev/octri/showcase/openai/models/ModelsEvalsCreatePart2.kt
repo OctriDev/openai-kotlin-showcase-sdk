@@ -3,65 +3,84 @@
 
 package dev.octri.showcase.openai.models
 
-/** A EvalResponsesSource object describing a run data source configuration. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A EvalResponsesSource object describing a run data source configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class EvalResponsesSource(
-    /** The type of run data source. Always `responses`. */
+    /**
+     * The type of run data source. Always `responses`.
+     */
     val type: EvalResponsesSourceTypeEnum,
-    /** Optional object value serialized in the `metadata` wire field. */
+    /**
+     * Optional object value serialized in the `metadata` wire field.
+     */
     val metadata: Map<String, Any>? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
     val model: String? = null,
-    /** Optional `string` value serialized in the `instructions_search` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("instructions_search")
-    val instructionsSearch: String? = null,
-    /** Optional API value serialized in the `created_after` wire field. */
+    /**
+     * Optional `string` value serialized in the `instructions_search` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("instructions_search") val instructionsSearch: String? = null,
+    /**
+     * Optional API value serialized in the `created_after` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_after") val createdAfter: Long? = null,
-    /** Optional API value serialized in the `created_before` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_before")
-    val createdBefore: Long? = null,
-    /** Optional API value serialized in the `reasoning_effort` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
-    val reasoningEffort: ReasoningEffort? = null,
-    /** Optional `number` value serialized in the `temperature` wire field. */
+    /**
+     * Optional API value serialized in the `created_before` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_before") val createdBefore: Long? = null,
+    /**
+     * Optional API value serialized in the `reasoning_effort` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
+    /**
+     * Optional `number` value serialized in the `temperature` wire field.
+     */
     val temperature: Double? = null,
-    /** Optional `number` value serialized in the `top_p` wire field. */
+    /**
+     * Optional `number` value serialized in the `top_p` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /** List of user identifiers. This is a query parameter used to select responses. */
+    /**
+     * List of user identifiers. This is a query parameter used to select responses.
+     */
     val users: List<String>? = null,
-    /** List of tool names. This is a query parameter used to select responses. */
-    val tools: List<String>? = null,
+    /**
+     * List of tool names. This is a query parameter used to select responses.
+     */
+    val tools: List<String>? = null
 ) : CreateEvalResponsesRunDataSourceSource
 
-/** A StoredCompletionsRunDataSource configuration describing a set of filters */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A StoredCompletionsRunDataSource configuration describing a set of filters
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class EvalStoredCompletionsSource(
-    /** The type of source. Always `stored_completions`. */
+    /**
+     * The type of source. Always `stored_completions`.
+     */
     val type: EvalStoredCompletionsSourceTypeEnum,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
     val model: String? = null,
-    /** Optional `integer` value serialized in the `created_after` wire field. */
+    /**
+     * Optional `integer` value serialized in the `created_after` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_after") val createdAfter: Long? = null,
-    /** Optional `integer` value serialized in the `created_before` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_before")
-    val createdBefore: Long? = null,
-    /** Optional `integer` value serialized in the `limit` wire field. */
-    val limit: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `created_before` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_before") val createdBefore: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `limit` wire field.
+     */
+    val limit: Long? = null
 ) : CreateEvalCompletionsRunDataSourceSource

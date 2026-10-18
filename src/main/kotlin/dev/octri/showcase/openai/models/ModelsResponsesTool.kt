@@ -3,88 +3,77 @@
 
 package dev.octri.showcase.openai.models
 
-/** Forces the model to call the apply_patch tool when executing a tool call. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Forces the model to call the apply_patch tool when executing a tool call.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SpecificApplyPatchParam(
-    /** The tool to call. Always `apply_patch`. */
+    /**
+     * The tool to call. Always `apply_patch`.
+     */
     val type: SpecificApplyPatchParamTypeEnum
 ) : ToolChoiceParam
 
-/** Forces the model to call the shell tool when a tool call is required. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Forces the model to call the shell tool when a tool call is required.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SpecificFunctionShellParam(
-    /** The tool to call. Always `shell`. */
+    /**
+     * The tool to call. Always `shell`.
+     */
     val type: SpecificFunctionShellParamTypeEnum
 ) : ToolChoiceParam
 
-/** Typed representation of the `SpecificProgrammaticToolCallingParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `SpecificProgrammaticToolCallingParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SpecificProgrammaticToolCallingParam(
-    /** The tool to call. Always `programmatic_tool_calling`. */
+    /**
+     * The tool to call. Always `programmatic_tool_calling`.
+     */
     val type: SpecificProgrammaticToolCallingParamTypeEnum
 ) : ToolChoiceParam
 
-/** Constrains the tools available to the model to a pre-defined set. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Constrains the tools available to the model to a pre-defined set.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ToolChoiceAllowed(
-    /** Allowed tool configuration type. Always `allowed_tools`. */
+    /**
+     * Allowed tool configuration type. Always `allowed_tools`.
+     */
     val type: ToolChoiceAllowedTypeEnum,
     /**
-     * Constrains the tools available to the model to a pre-defined set. `auto` allows the model to
-     * pick from among the allowed tools and generate a message. `required` requires the model to
-     * call one or more of the allowed tools.
+     * Constrains the tools available to the model to a pre-defined set. `auto` allows the model to pick from among the allowed tools and generate a message. `required` requires the model to call one or more of the allowed tools.
      */
     val mode: ToolChoiceAllowedModeEnum,
     /**
-     * A list of tool definitions that the model should be allowed to call. For the Responses API,
-     * the list of tool definitions might look like: ```json [ { "type": "function", "name":
-     * "get_weather" }, { "type": "mcp", "server_label": "deepwiki" }, { "type": "image_generation"
-     * } ] ```
+     * A list of tool definitions that the model should be allowed to call. For the Responses API, the list of tool definitions might look like: ```json [ { "type": "function", "name": "get_weather" }, { "type": "mcp", "server_label": "deepwiki" }, { "type": "image_generation" } ] ```
      */
-    val tools: List<Map<String, Any>>,
-) : ToolChoiceParam
-
-/** Use this option to force the model to call a specific custom tool. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ToolChoiceCustom(
-    /** For custom tool calling, the type is always `custom`. */
-    val type: ToolChoiceCustomTypeEnum,
-    /** The name of the custom tool to call. */
-    val name: String,
+    val tools: List<Map<String, Any>>
 ) : ToolChoiceParam
 
 /**
- * How the model should select which tool (or tools) to use when generating a response. See the
- * `tools` parameter to see how to specify which tools the model can call.
+ * Use this option to force the model to call a specific custom tool.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ToolChoiceParam.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ToolChoiceCustom(
+    /**
+     * For custom tool calling, the type is always `custom`.
+     */
+    val type: ToolChoiceCustomTypeEnum,
+    /**
+     * The name of the custom tool to call.
+     */
+    val name: String
+) : ToolChoiceParam
+
+/**
+ * How the model should select which tool (or tools) to use when generating a response. See the `tools` parameter to see how to specify which tools the model can call.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ToolChoiceParam.Deserializer::class)
 sealed interface ToolChoiceParam {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ToolChoiceParam>() {
@@ -94,41 +83,20 @@ sealed interface ToolChoiceParam {
         ): ToolChoiceParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out ToolChoiceParam>? =
-                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                    "allowed_tools" -> ToolChoiceAllowed::class.java
-                    "file_search",
-                    "web_search_preview",
-                    "computer",
-                    "computer_use_preview",
-                    "computer_use",
-                    "web_search_preview_2025_03_11",
-                    "image_generation",
-                    "code_interpreter" -> ToolChoiceTypes::class.java
-                    "function" -> ToolChoiceFunction::class.java
-                    "mcp" -> ToolChoiceMCP::class.java
-                    "custom" -> ToolChoiceCustom::class.java
-                    "programmatic_tool_calling" -> SpecificProgrammaticToolCallingParam::class.java
-                    "apply_patch" -> SpecificApplyPatchParam::class.java
-                    "shell" -> SpecificFunctionShellParam::class.java
-                    else -> null
-                }
-            if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out ToolChoiceParam>> =
-                listOf(
-                    ToolChoiceOptions::class.java,
-                    ToolChoiceAllowed::class.java,
-                    ToolChoiceTypes::class.java,
-                    ToolChoiceFunction::class.java,
-                    ToolChoiceMCP::class.java,
-                    ToolChoiceCustom::class.java,
-                    SpecificProgrammaticToolCallingParam::class.java,
-                    SpecificApplyPatchParam::class.java,
-                    SpecificFunctionShellParam::class.java,
-                )
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
+            val taggedType: Class<out ToolChoiceParam>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                "allowed_tools" -> ToolChoiceAllowed::class.java
+                "file_search", "web_search_preview", "computer", "computer_use_preview", "computer_use", "web_search_preview_2025_03_11", "image_generation", "code_interpreter" -> ToolChoiceTypes::class.java
+                "function" -> ToolChoiceFunction::class.java
+                "mcp" -> ToolChoiceMCP::class.java
+                "custom" -> ToolChoiceCustom::class.java
+                "programmatic_tool_calling" -> SpecificProgrammaticToolCallingParam::class.java
+                "apply_patch" -> SpecificApplyPatchParam::class.java
+                "shell" -> SpecificFunctionShellParam::class.java
+                else -> null
             }
+            if (taggedType != null) return mapper.convertValue(node, taggedType)
+            val objectTypes: List<Class<out ToolChoiceParam>> = listOf(ToolChoiceOptions::class.java, ToolChoiceAllowed::class.java, ToolChoiceTypes::class.java, ToolChoiceFunction::class.java, ToolChoiceMCP::class.java, ToolChoiceCustom::class.java, SpecificProgrammaticToolCallingParam::class.java, SpecificApplyPatchParam::class.java, SpecificFunctionShellParam::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 else -> UnknownToolChoiceParam(node)
             }
@@ -137,39 +105,21 @@ sealed interface ToolChoiceParam {
 }
 
 /** A [ToolChoiceParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownToolChoiceParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownToolChoiceParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ToolChoiceParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * Indicates that the model should use a built-in tool to generate a response. Learn more about
- * built-in tools.
+ * Indicates that the model should use a built-in tool to generate a response. Learn more about built-in tools.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ToolChoiceTypes(
     /**
-     * The type of hosted tool the model should to use. Learn more about built-in tools. Allowed
-     * values are: - `file_search` - `web_search_preview` - `computer` - `computer_use_preview` -
-     * `computer_use` - `code_interpreter` - `image_generation`
+     * The type of hosted tool the model should to use. Learn more about built-in tools. Allowed values are: - `file_search` - `web_search_preview` - `computer` - `computer_use_preview` - `computer_use` - `code_interpreter` - `image_generation`
      */
     val type: ToolChoiceTypesTypeEnum
 ) : ToolChoiceParam

@@ -4,395 +4,376 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Give the model access to additional tools via remote Model Context Protocol (MCP) servers. Learn
- * more about MCP.
+ * Give the model access to additional tools via remote Model Context Protocol (MCP) servers. Learn more about MCP.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class MCPTool(
-    /** The type of the MCP tool. Always `mcp`. */
+    /**
+     * The type of the MCP tool. Always `mcp`.
+     */
     val type: MCPToolTypeEnum,
-    /** A label for this MCP server, used to identify it in tool calls. */
+    /**
+     * A label for this MCP server, used to identify it in tool calls.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
     /**
-     * The URL for the MCP server. One of `server_url`, `connector_id`, or `tunnel_id` must be
-     * provided.
+     * The URL for the MCP server. One of `server_url`, `connector_id`, or `tunnel_id` must be provided.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String? = null,
     /**
-     * Identifier for service connectors, like those available in ChatGPT. One of `server_url`,
-     * `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here.
-     * This field is deprecated for models released after September 1, 2026. Use `server_url` to
-     * connect to a remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel.
-     * Currently supported `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail:
-     * `connector_gmail` - Google…
+     * Identifier for service connectors, like those available in ChatGPT. One of `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here. This field is deprecated for models released after September 1, 2026. Use `server_url` to connect to a remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel. Currently supported `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail: `connector_gmail` - Google…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("connector_id")
-    val connectorId: MCPToolConnectorIdEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("connector_id") val connectorId: MCPToolConnectorIdEnum? = null,
     /**
-     * The Secure MCP Tunnel ID to use instead of a direct server URL. One of `server_url`,
-     * `connector_id`, or `tunnel_id` must be provided.
+     * The Secure MCP Tunnel ID to use instead of a direct server URL. One of `server_url`, `connector_id`, or `tunnel_id` must be provided.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("tunnel_id") val tunnelId: String? = null,
     /**
-     * An OAuth access token that can be used with a remote MCP server, either with a custom MCP
-     * server URL or a service connector. Your application must handle the OAuth authorization flow
-     * and provide the token here.
+     * An OAuth access token that can be used with a remote MCP server, either with a custom MCP server URL or a service connector. Your application must handle the OAuth authorization flow and provide the token here.
      */
     val authorization: String? = null,
-    /** Optional description of the MCP server, used to provide more context. */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_description")
-    val serverDescription: String? = null,
+    /**
+     * Optional description of the MCP server, used to provide more context.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_description") val serverDescription: String? = null,
     /**
      * Optional HTTP headers to send to the MCP server. Use for authentication or other purposes.
      */
     val headers: Map<String, String>? = null,
-    /** List of allowed tool names or a filter object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
-    @com.fasterxml.jackson.annotation.JsonSubTypes(
-        com.fasterxml.jackson.annotation.JsonSubTypes.Type(MCPToolFilter::class)
-    )
-    val allowedTools: Any? = null,
-    /** The tool invocation context(s). */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
-    val allowedCallers: List<CallableToolAllowedCaller>? = null,
-    /** Specify which of the MCP server's tools require approval. */
-    @com.fasterxml.jackson.annotation.JsonProperty("require_approval")
-    val requireApproval: MCPToolRequireApproval? = null,
-    /** Whether this MCP tool is deferred and discovered via tool search. */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
-    val deferLoading: Boolean? = null,
-) :
-    Tool,
-    ToolSearchOutputTool,
-    RealtimeSessionCreateRequestGAToolsItem,
-    RealtimeResponseCreateParamsToolsItem,
-    RealtimeSessionCreateResponseGAToolsItem
-
-/** Typed representation of the `RealtimeFunctionTool` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class RealtimeFunctionTool(
-    /** The type of the tool, i.e. `function`. */
-    val type: RealtimeFunctionToolTypeEnum? = null,
-    /** The name of the function. */
-    val name: String? = null,
     /**
-     * The description of the function, including guidance on when and how to call it, and guidance
-     * about what to tell the user when calling (if anything).
+     * List of allowed tool names or a filter object.
      */
-    val description: String? = null,
-    /** Parameters of the function in JSON Schema. */
-    val parameters: Map<String, Any>? = null,
-) :
-    RealtimeSessionCreateRequestGAToolsItem,
-    RealtimeResponseCreateParamsToolsItem,
-    RealtimeSessionCreateResponseGAToolsItem
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools") @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(MCPToolFilter::class)) val allowedTools: Any? = null,
+    /**
+     * The tool invocation context(s).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null,
+    /**
+     * Specify which of the MCP server's tools require approval.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("require_approval") val requireApproval: MCPToolRequireApproval? = null,
+    /**
+     * Whether this MCP tool is deferred and discovered via tool search.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null
+) : Tool, ToolSearchOutputTool, RealtimeSessionCreateRequestGAToolsItem, RealtimeResponseCreateParamsToolsItem, RealtimeSessionCreateResponseGAToolsItem
 
 /**
- * A description of the error that caused the response to fail, populated when the `status` is
- * `failed`.
+ * Typed representation of the `RealtimeFunctionTool` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeFunctionTool(
+    /**
+     * The type of the tool, i.e. `function`.
+     */
+    val type: RealtimeFunctionToolTypeEnum? = null,
+    /**
+     * The name of the function.
+     */
+    val name: String? = null,
+    /**
+     * The description of the function, including guidance on when and how to call it, and guidance about what to tell the user when calling (if anything).
+     */
+    val description: String? = null,
+    /**
+     * Parameters of the function in JSON Schema.
+     */
+    val parameters: Map<String, Any>? = null
+) : RealtimeSessionCreateRequestGAToolsItem, RealtimeResponseCreateParamsToolsItem, RealtimeSessionCreateResponseGAToolsItem
+
+/**
+ * A description of the error that caused the response to fail, populated when the `status` is `failed`.
  */
 data class RealtimeResponseStatusDetailsError(
-    /** The type of error. */
+    /**
+     * The type of error.
+     */
     val type: String? = null,
-    /** Error code, if any. */
+    /**
+     * Error code, if any.
+     */
     val code: String? = null,
-    /** A human-readable error message. */
-    val message: String? = null,
+    /**
+     * A human-readable error message.
+     */
+    val message: String? = null
 )
 
-/** Additional details about the status. */
+/**
+ * Additional details about the status.
+ */
 data class RealtimeResponseStatusDetails(
     /**
-     * The type of error that caused the response to fail, corresponding with the `status` field
-     * (`completed`, `cancelled`, `incomplete`, `failed`).
+     * The type of error that caused the response to fail, corresponding with the `status` field (`completed`, `cancelled`, `incomplete`, `failed`).
      */
     val type: RealtimeResponseStatusDetailsTypeEnum? = null,
     /**
-     * The reason the Response did not complete. For a `cancelled` Response, one of `turn_detected`
-     * (the server VAD detected a new start of speech) or `client_cancelled` (the client sent a
-     * cancel event). For an `incomplete` Response, one of `max_output_tokens` or `content_filter`
-     * (the server-side safety filter activated and cut off the response).
+     * The reason the Response did not complete. For a `cancelled` Response, one of `turn_detected` (the server VAD detected a new start of speech) or `client_cancelled` (the client sent a cancel event). For an `incomplete` Response, one of `max_output_tokens` or `content_filter` (the server-side safety filter activated and cut off the response).
      */
     val reason: RealtimeResponseStatusDetailsReasonEnum? = null,
     /**
-     * A description of the error that caused the response to fail, populated when the `status` is
-     * `failed`.
+     * A description of the error that caused the response to fail, populated when the `status` is `failed`.
      */
-    val error: RealtimeResponseStatusDetailsError? = null,
+    val error: RealtimeResponseStatusDetailsError? = null
 )
 
-/** Optional object value serialized in the `output` wire field. */
+/**
+ * Optional object value serialized in the `output` wire field.
+ */
 data class RealtimeResponseAudioOutput(
-    /** The format of the output audio. */
+    /**
+     * The format of the output audio.
+     */
     val format: RealtimeAudioFormats? = null,
     /**
-     * The voice the model uses to respond. Voice cannot be changed during the session once the
-     * model has responded with audio at least once. Current voice options are `alloy`, `ash`,
-     * `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. We recommend
-     * `marin` and `cedar` for best quality.
+     * The voice the model uses to respond. Voice cannot be changed during the session once the model has responded with audio at least once. Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. We recommend `marin` and `cedar` for best quality.
      */
-    val voice: VoiceIdsShared? = null,
+    val voice: VoiceIdsShared? = null
 )
 
-/** Configuration for audio output. */
+/**
+ * Configuration for audio output.
+ */
 data class RealtimeResponseAudio(
-    /** Optional object value serialized in the `output` wire field. */
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
     val output: RealtimeResponseAudioOutput? = null
 )
 
-/** Details about the cached tokens used as input for the Response. */
+/**
+ * Details about the cached tokens used as input for the Response.
+ */
 data class RealtimeResponseUsageInputTokenDetailsCachedTokensDetails(
-    /** The number of cached text tokens used as input for the Response. */
+    /**
+     * The number of cached text tokens used as input for the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /** The number of cached image tokens used as input for the Response. */
+    /**
+     * The number of cached image tokens used as input for the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long? = null,
-    /** The number of cached audio tokens used as input for the Response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
+    /**
+     * The number of cached audio tokens used as input for the Response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null
 )
 
 /**
- * Details about the input tokens used in the Response. Cached tokens are tokens from previous turns
- * in the conversation that are included as context for the current response. Cached tokens here are
- * counted as a subset of input tokens, meaning input tokens will include cached and uncached
- * tokens.
+ * Details about the input tokens used in the Response. Cached tokens are tokens from previous turns in the conversation that are included as context for the current response. Cached tokens here are counted as a subset of input tokens, meaning input tokens will include cached and uncached tokens.
  */
 data class RealtimeResponseUsageInputTokenDetails(
-    /** The number of cached tokens used as input for the Response. */
+    /**
+     * The number of cached tokens used as input for the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long? = null,
-    /** The number of text tokens used as input for the Response. */
+    /**
+     * The number of text tokens used as input for the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /** The number of image tokens used as input for the Response. */
+    /**
+     * The number of image tokens used as input for the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long? = null,
-    /** The number of audio tokens used as input for the Response. */
+    /**
+     * The number of audio tokens used as input for the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
-    /** Details about the cached tokens used as input for the Response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens_details")
-    val cachedTokensDetails: RealtimeResponseUsageInputTokenDetailsCachedTokensDetails? = null,
-)
-
-/** Details about the output tokens used in the Response. */
-data class RealtimeResponseUsageOutputTokenDetails(
-    /** The number of text tokens used in the Response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /** The number of audio tokens used in the Response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
+    /**
+     * Details about the cached tokens used as input for the Response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens_details") val cachedTokensDetails: RealtimeResponseUsageInputTokenDetailsCachedTokensDetails? = null
 )
 
 /**
- * Usage statistics for the Response, this will correspond to billing. A Realtime API session will
- * maintain a conversation context and append new Items to the Conversation, thus output from
- * previous turns (text and audio tokens) will become the input for later turns.
+ * Details about the output tokens used in the Response.
+ */
+data class RealtimeResponseUsageOutputTokenDetails(
+    /**
+     * The number of text tokens used in the Response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
+    /**
+     * The number of audio tokens used in the Response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null
+)
+
+/**
+ * Usage statistics for the Response, this will correspond to billing. A Realtime API session will maintain a conversation context and append new Items to the Conversation, thus output from previous turns (text and audio tokens) will become the input for later turns.
  */
 data class RealtimeResponseUsage(
     /**
      * The total number of tokens in the Response including input and output text and audio tokens.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long? = null,
-    /** The number of input tokens used in the Response, including text and audio tokens. */
+    /**
+     * The number of input tokens used in the Response, including text and audio tokens.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long? = null,
-    /** The number of output tokens sent in the Response, including text and audio tokens. */
+    /**
+     * The number of output tokens sent in the Response, including text and audio tokens.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long? = null,
     /**
-     * Details about the input tokens used in the Response. Cached tokens are tokens from previous
-     * turns in the conversation that are included as context for the current response. Cached
-     * tokens here are counted as a subset of input tokens, meaning input tokens will include cached
-     * and uncached tokens.
+     * Details about the input tokens used in the Response. Cached tokens are tokens from previous turns in the conversation that are included as context for the current response. Cached tokens here are counted as a subset of input tokens, meaning input tokens will include cached and uncached tokens.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_token_details")
-    val inputTokenDetails: RealtimeResponseUsageInputTokenDetails? = null,
-    /** Details about the output tokens used in the Response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_token_details")
-    val outputTokenDetails: RealtimeResponseUsageOutputTokenDetails? = null,
-)
-
-/** The response resource. */
-data class RealtimeResponse(
-    /** The unique ID of the response, will look like `resp_1234`. */
-    val id: String? = null,
-    /** The object type, must be `realtime.response`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: RealtimeResponseObjectEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_token_details") val inputTokenDetails: RealtimeResponseUsageInputTokenDetails? = null,
     /**
-     * The final status of the response (`completed`, `cancelled`, `failed`, or `incomplete`,
-     * `in_progress`).
+     * Details about the output tokens used in the Response.
      */
-    val status: RealtimeResponseStatusEnum? = null,
-    /** Additional details about the status. */
-    @com.fasterxml.jackson.annotation.JsonProperty("status_details")
-    val statusDetails: RealtimeResponseStatusDetails? = null,
-    /** The list of output items generated by the response. */
-    val output: List<RealtimeConversationItem>? = null,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
-     */
-    val metadata: Metadata? = null,
-    /** Configuration for audio output. */
-    val audio: RealtimeResponseAudio? = null,
-    /**
-     * Usage statistics for the Response, this will correspond to billing. A Realtime API session
-     * will maintain a conversation context and append new Items to the Conversation, thus output
-     * from previous turns (text and audio tokens) will become the input for later turns.
-     */
-    val usage: RealtimeResponseUsage? = null,
-    /**
-     * Which conversation the response is added to, determined by the `conversation` field in the
-     * `response.create` event. If `auto`, the response will be added to the default conversation
-     * and the value of `conversation_id` will be an id like `conv_1234`. If `none`, the response
-     * will not be added to any conversation and the value of `conversation_id` will be `null`. If
-     * responses are being triggered automatically by VAD the response will be added to the default
-     * conversation
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
-    val conversationId: String? = null,
-    /**
-     * The set of modalities the model used to respond, currently the only possible values are
-     * `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
-     * output to mode `text` will disable audio output from the model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities")
-    val outputModalities: List<RealtimeResponseOutputModalitiesItemEnum>? = null,
-    /**
-     * Maximum number of output tokens for a single assistant response, inclusive of tool calls,
-     * that was used in this response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Any? = null,
-)
-
-/** Optional object value serialized in the `output` wire field. */
-data class RealtimeResponseCreateParamsAudioOutput(
-    /** The format of the output audio. */
-    val format: RealtimeAudioFormats? = null,
-    /**
-     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`,
-     * `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a
-     * custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Voice cannot be
-     * changed during the session once the model has responded with audio at least once. Custom
-     * voices must be created from audio samples. We recommend `marin` and `cedar` for best quality.
-     */
-    val voice: VoiceIdsOrCustomVoice? = null,
-)
-
-/** Configuration for audio input and output. */
-data class RealtimeResponseCreateParamsAudio(
-    /** Optional object value serialized in the `output` wire field. */
-    val output: RealtimeResponseCreateParamsAudioOutput? = null
-)
-
-/** Create a new Realtime response with these parameters */
-data class RealtimeResponseCreateParams(
-    /**
-     * The set of modalities the model used to respond, currently the only possible values are
-     * `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
-     * output to mode `text` will disable audio output from the model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities")
-    val outputModalities: List<RealtimeResponseCreateParamsOutputModalitiesItemEnum>? = null,
-    /**
-     * The default system instructions (i.e. system message) prepended to model calls. This field
-     * allows the client to guide the model on desired responses. The model can be instructed on
-     * response content and format, (e.g. "be extremely succinct", "act friendly", "here are
-     * examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into
-     * your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the
-     * model, but they provide…
-     */
-    val instructions: String? = null,
-    /** Configuration for audio input and output. */
-    val audio: RealtimeResponseCreateParamsAudio? = null,
-    /** Tools available to the model. */
-    val tools: List<RealtimeResponseCreateParamsToolsItem>? = null,
-    /**
-     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP
-     * tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
-    val toolChoice: RealtimeResponseCreateParamsToolChoice? = null,
-    /**
-     * Whether the model may call multiple tools in parallel. Only supported by reasoning Realtime
-     * models such as `gpt-realtime-2`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
-    val parallelToolCalls: Boolean? = null,
-    /** Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`. */
-    val reasoning: RealtimeReasoning? = null,
-    /**
-     * Maximum number of output tokens for a single assistant response, inclusive of tool calls.
-     * Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum
-     * available tokens for a given model. Defaults to `inf`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Any? = null,
-    /**
-     * Controls which conversation the response is added to. Currently supports `auto` and `none`,
-     * with `auto` as the default value. The `auto` value means that the contents of the response
-     * will be added to the default conversation. Set this to `none` to create an out-of-band
-     * response which will not add items to default conversation.
-     */
-    val conversation: String? = null,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
-     */
-    val metadata: Metadata? = null,
-    /** Reference to a prompt template and its variables. Learn more. */
-    val prompt: Prompt? = null,
-    /**
-     * Input items to include in the prompt for the model. Using this field creates a new context
-     * for this Response instead of using the default conversation. An empty array `[]` will clear
-     * the context for this Response. Note that this can include references to items that previously
-     * appeared in the session using their id.
-     */
-    val input: List<RealtimeConversationItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("output_token_details") val outputTokenDetails: RealtimeResponseUsageOutputTokenDetails? = null
 )
 
 /**
- * How the model chooses tools. Provide one of the string modes or force a specific function/MCP
- * tool.
+ * The response resource.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = RealtimeResponseCreateParamsToolChoice.Deserializer::class
+data class RealtimeResponse(
+    /**
+     * The unique ID of the response, will look like `resp_1234`.
+     */
+    val id: String? = null,
+    /**
+     * The object type, must be `realtime.response`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RealtimeResponseObjectEnum? = null,
+    /**
+     * The final status of the response (`completed`, `cancelled`, `failed`, or `incomplete`, `in_progress`).
+     */
+    val status: RealtimeResponseStatusEnum? = null,
+    /**
+     * Additional details about the status.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("status_details") val statusDetails: RealtimeResponseStatusDetails? = null,
+    /**
+     * The list of output items generated by the response.
+     */
+    val output: List<RealtimeConversationItem>? = null,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     */
+    val metadata: Metadata? = null,
+    /**
+     * Configuration for audio output.
+     */
+    val audio: RealtimeResponseAudio? = null,
+    /**
+     * Usage statistics for the Response, this will correspond to billing. A Realtime API session will maintain a conversation context and append new Items to the Conversation, thus output from previous turns (text and audio tokens) will become the input for later turns.
+     */
+    val usage: RealtimeResponseUsage? = null,
+    /**
+     * Which conversation the response is added to, determined by the `conversation` field in the `response.create` event. If `auto`, the response will be added to the default conversation and the value of `conversation_id` will be an id like `conv_1234`. If `none`, the response will not be added to any conversation and the value of `conversation_id` will be `null`. If responses are being triggered automatically by VAD the response will be added to the default conversation
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
+    /**
+     * The set of modalities the model used to respond, currently the only possible values are `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the output to mode `text` will disable audio output from the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<RealtimeResponseOutputModalitiesItemEnum>? = null,
+    /**
+     * Maximum number of output tokens for a single assistant response, inclusive of tool calls, that was used in this response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Any? = null
 )
+
+/**
+ * Optional object value serialized in the `output` wire field.
+ */
+data class RealtimeResponseCreateParamsAudioOutput(
+    /**
+     * The format of the output audio.
+     */
+    val format: RealtimeAudioFormats? = null,
+    /**
+     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Voice cannot be changed during the session once the model has responded with audio at least once. Custom voices must be created from audio samples. We recommend `marin` and `cedar` for best quality.
+     */
+    val voice: VoiceIdsOrCustomVoice? = null
+)
+
+/**
+ * Configuration for audio input and output.
+ */
+data class RealtimeResponseCreateParamsAudio(
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
+    val output: RealtimeResponseCreateParamsAudioOutput? = null
+)
+
+/**
+ * Create a new Realtime response with these parameters
+ */
+data class RealtimeResponseCreateParams(
+    /**
+     * The set of modalities the model used to respond, currently the only possible values are `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the output to mode `text` will disable audio output from the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<RealtimeResponseCreateParamsOutputModalitiesItemEnum>? = null,
+    /**
+     * The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. "be extremely succinct", "act friendly", "here are examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the model, but they provide…
+     */
+    val instructions: String? = null,
+    /**
+     * Configuration for audio input and output.
+     */
+    val audio: RealtimeResponseCreateParamsAudio? = null,
+    /**
+     * Tools available to the model.
+     */
+    val tools: List<RealtimeResponseCreateParamsToolsItem>? = null,
+    /**
+     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP tool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: RealtimeResponseCreateParamsToolChoice? = null,
+    /**
+     * Whether the model may call multiple tools in parallel. Only supported by reasoning Realtime models such as `gpt-realtime-2`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null,
+    /**
+     * Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.
+     */
+    val reasoning: RealtimeReasoning? = null,
+    /**
+     * Maximum number of output tokens for a single assistant response, inclusive of tool calls. Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum available tokens for a given model. Defaults to `inf`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Any? = null,
+    /**
+     * Controls which conversation the response is added to. Currently supports `auto` and `none`, with `auto` as the default value. The `auto` value means that the contents of the response will be added to the default conversation. Set this to `none` to create an out-of-band response which will not add items to default conversation.
+     */
+    val conversation: String? = null,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     */
+    val metadata: Metadata? = null,
+    /**
+     * Reference to a prompt template and its variables. Learn more.
+     */
+    val prompt: Prompt? = null,
+    /**
+     * Input items to include in the prompt for the model. Using this field creates a new context for this Response instead of using the default conversation. An empty array `[]` will clear the context for this Response. Note that this can include references to items that previously appeared in the session using their id.
+     */
+    val input: List<RealtimeConversationItem>? = null
+)
+
+/**
+ * How the model chooses tools. Provide one of the string modes or force a specific function/MCP tool.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = RealtimeResponseCreateParamsToolChoice.Deserializer::class)
 sealed interface RealtimeResponseCreateParamsToolChoice {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<RealtimeResponseCreateParamsToolChoice>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<RealtimeResponseCreateParamsToolChoice>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): RealtimeResponseCreateParamsToolChoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out RealtimeResponseCreateParamsToolChoice>? =
-                when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
-                    "function" -> ToolChoiceFunction::class.java
-                    "mcp" -> ToolChoiceMCP::class.java
-                    else -> null
-                }
-            if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out RealtimeResponseCreateParamsToolChoice>> =
-                listOf(
-                    ToolChoiceOptions::class.java,
-                    ToolChoiceFunction::class.java,
-                    ToolChoiceMCP::class.java,
-                )
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
+            val taggedType: Class<out RealtimeResponseCreateParamsToolChoice>? = when (node.get("type")?.takeIf { it.isTextual }?.asText()) {
+                "function" -> ToolChoiceFunction::class.java
+                "mcp" -> ToolChoiceMCP::class.java
+                else -> null
             }
+            if (taggedType != null) return mapper.convertValue(node, taggedType)
+            val objectTypes: List<Class<out RealtimeResponseCreateParamsToolChoice>> = listOf(ToolChoiceOptions::class.java, ToolChoiceFunction::class.java, ToolChoiceMCP::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 else -> UnknownRealtimeResponseCreateParamsToolChoice(node)
             }
@@ -400,39 +381,21 @@ sealed interface RealtimeResponseCreateParamsToolChoice {
     }
 }
 
-/**
- * A [RealtimeResponseCreateParamsToolChoice] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeResponseCreateParamsToolChoice
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [RealtimeResponseCreateParamsToolChoice] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeResponseCreateParamsToolChoice @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeResponseCreateParamsToolChoice {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Required API value serialized in the `tools[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-)
+/**
+ * Required API value serialized in the `tools[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeFunctionTool::class,
-        name = "function",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPTool::class, name = "mcp"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeFunctionTool::class, name = "function"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MCPTool::class, name = "mcp")
 )
 sealed interface RealtimeResponseCreateParamsToolsItem

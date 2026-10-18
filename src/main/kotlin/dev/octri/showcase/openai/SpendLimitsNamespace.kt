@@ -3,106 +3,58 @@
 
 package dev.octri.showcase.openai
 
+
 class SpendLimitsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves the hard spend limit configured for the organization. Use this operation to check
-     * the limit amount, currency, evaluation interval, and enforcement state.
+     * Retrieves the hard spend limit configured for the organization. Use this operation to check the limit amount, currency, evaluation interval, and enforcement state.
      *
      * Get the organization's hard spend limit.
      */
     fun retrieveOrganization(options: RequestOptions? = null): OrganizationSpendLimitResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.retrieveSpendLimitsOrganization(
-            clientConfig,
-            options,
-        )
-    }
-
-    /** Create or replace the organization's hard spend limit. */
-    fun updateOrganization(
-        thresholdAmount: Long,
-        currency: UpdateOrganizationSpendLimitBodyCurrencyEnum,
-        interval: UpdateOrganizationSpendLimitBodyIntervalEnum,
-        options: RequestOptions? = null,
-    ): OrganizationSpendLimitResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.updateSpendLimitsOrganization(
-            clientConfig,
-            thresholdAmount,
-            currency,
-            interval,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.SpendLimits.retrieveSpendLimitsOrganization(clientConfig, options)
     }
 
     /**
-     * Deletes the hard spend limit configured for the organization. Use this operation when the
-     * organization should no longer enforce its configured spending threshold. The response
-     * confirms whether the limit was deleted.
+     * Create or replace the organization's hard spend limit.
+     */
+    fun updateOrganization(thresholdAmount: Long, currency: UpdateOrganizationSpendLimitBodyCurrencyEnum, interval: UpdateOrganizationSpendLimitBodyIntervalEnum, options: RequestOptions? = null): OrganizationSpendLimitResource {
+        return dev.octri.showcase.openai.methods.SpendLimits.updateSpendLimitsOrganization(clientConfig, thresholdAmount, currency, interval, options)
+    }
+
+    /**
+     * Deletes the hard spend limit configured for the organization. Use this operation when the organization should no longer enforce its configured spending threshold. The response confirms whether the limit was deleted.
      *
      * Delete the organization's hard spend limit.
      */
     fun deleteOrganization(options: RequestOptions? = null): OrganizationSpendLimitDeletedResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.deleteSpendLimitsOrganization(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.SpendLimits.deleteSpendLimitsOrganization(clientConfig, options)
     }
 
     /**
-     * Retrieves the hard spend limit configured for a project. Use `project_id` to identify the
-     * project whose limit and enforcement state you want to inspect.
+     * Retrieves the hard spend limit configured for a project. Use `project_id` to identify the project whose limit and enforcement state you want to inspect.
      *
      * Get a project's hard spend limit.
      */
-    fun retrieveProject(
-        projectId: String,
-        options: RequestOptions? = null,
-    ): ProjectSpendLimitResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.retrieveSpendLimitsProject(
-            clientConfig,
-            projectId,
-            options,
-        )
+    fun retrieveProject(projectId: String, options: RequestOptions? = null): ProjectSpendLimitResource {
+        return dev.octri.showcase.openai.methods.SpendLimits.retrieveSpendLimitsProject(clientConfig, projectId, options)
     }
 
     /**
-     * Deletes a project's hard spend limit. Use `project_id` to identify the project whose
-     * configured spending threshold you want to remove. The response confirms whether the limit was
-     * deleted.
+     * Deletes a project's hard spend limit. Use `project_id` to identify the project whose configured spending threshold you want to remove. The response confirms whether the limit was deleted.
      *
      * Delete a project's hard spend limit.
      */
-    fun deleteProject(
-        projectId: String,
-        options: RequestOptions? = null,
-    ): ProjectSpendLimitDeletedResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.deleteSpendLimitsProject(
-            clientConfig,
-            projectId,
-            options,
-        )
+    fun deleteProject(projectId: String, options: RequestOptions? = null): ProjectSpendLimitDeletedResource {
+        return dev.octri.showcase.openai.methods.SpendLimits.deleteSpendLimitsProject(clientConfig, projectId, options)
     }
 
     /**
-     * Creates or replaces a project's hard spend limit. Supply `threshold_amount`, `currency`, and
-     * `interval` to set the spending threshold and the period used to evaluate it. The response
-     * includes the resulting limit and its enforcement state.
+     * Creates or replaces a project's hard spend limit. Supply `threshold_amount`, `currency`, and `interval` to set the spending threshold and the period used to evaluate it. The response includes the resulting limit and its enforcement state.
      *
      * Create or replace a project's hard spend limit.
      */
-    fun updateProject(
-        projectId: String,
-        thresholdAmount: Long,
-        currency: UpdateProjectSpendLimitBodyCurrencyEnum,
-        interval: UpdateProjectSpendLimitBodyIntervalEnum,
-        options: RequestOptions? = null,
-    ): ProjectSpendLimitResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.updateSpendLimitsProject(
-            clientConfig,
-            projectId,
-            thresholdAmount,
-            currency,
-            interval,
-            options,
-        )
+    fun updateProject(projectId: String, thresholdAmount: Long, currency: UpdateProjectSpendLimitBodyCurrencyEnum, interval: UpdateProjectSpendLimitBodyIntervalEnum, options: RequestOptions? = null): ProjectSpendLimitResource {
+        return dev.octri.showcase.openai.methods.SpendLimits.updateSpendLimitsProject(clientConfig, projectId, thresholdAmount, currency, interval, options)
     }
+
 }

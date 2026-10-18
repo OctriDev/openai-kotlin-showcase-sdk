@@ -4,209 +4,192 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Returned when an Item is done streaming. Also emitted when a Response is interrupted, incomplete,
- * or cancelled.
+ * Returned when an Item is done streaming. Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeServerEventResponseOutputItemDone(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `response.output_item.done`. */
+    /**
+     * The event type, must be `response.output_item.done`.
+     */
     val type: RealtimeServerEventResponseOutputItemDoneTypeEnum,
-    /** The ID of the Response to which the item belongs. */
+    /**
+     * The ID of the Response to which the item belongs.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
-    /** The index of the output item in the Response. */
+    /**
+     * The index of the output item in the Response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** A single item within a Realtime conversation. */
-    val item: RealtimeConversationItem,
+    /**
+     * A single item within a Realtime conversation.
+     */
+    val item: RealtimeConversationItem
 ) : RealtimeServerEvent
 
-/** Returned when the text value of an "output_text" content part is updated. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Returned when the text value of an "output_text" content part is updated.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeServerEventResponseTextDelta(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `response.output_text.delta`. */
+    /**
+     * The event type, must be `response.output_text.delta`.
+     */
     val type: RealtimeServerEventResponseTextDeltaTypeEnum,
-    /** The ID of the response. */
+    /**
+     * The ID of the response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
-    /** The ID of the item. */
+    /**
+     * The ID of the item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the output item in the response. */
+    /**
+     * The index of the output item in the response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the content part in the item's content array. */
+    /**
+     * The index of the content part in the item's content array.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /** The text delta. */
-    val delta: String,
+    /**
+     * The text delta.
+     */
+    val delta: String
 ) : RealtimeServerEvent
 
 /**
- * Returned when the text value of an "output_text" content part is done streaming. Also emitted
- * when a Response is interrupted, incomplete, or cancelled.
+ * Returned when the text value of an "output_text" content part is done streaming. Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeServerEventResponseTextDone(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `response.output_text.done`. */
+    /**
+     * The event type, must be `response.output_text.done`.
+     */
     val type: RealtimeServerEventResponseTextDoneTypeEnum,
-    /** The ID of the response. */
+    /**
+     * The ID of the response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
-    /** The ID of the item. */
+    /**
+     * The ID of the item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the output item in the response. */
+    /**
+     * The index of the output item in the response.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the content part in the item's content array. */
+    /**
+     * The index of the content part in the item's content array.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /** The final text content. */
-    val text: String,
+    /**
+     * The final text content.
+     */
+    val text: String
 ) : RealtimeServerEvent
 
 /**
- * Returned when a Session is created. Emitted automatically when a new connection is established as
- * the first server event. This event will contain the default Session configuration.
+ * Returned when a Session is created. Emitted automatically when a new connection is established as the first server event. This event will contain the default Session configuration.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeServerEventSessionCreated(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.created`. */
+    /**
+     * The event type, must be `session.created`.
+     */
     val type: RealtimeServerEventSessionCreatedTypeEnum,
-    /** The session configuration. */
-    val session: RealtimeServerEventSessionCreatedSession,
+    /**
+     * The session configuration.
+     */
+    val session: RealtimeServerEventSessionCreatedSession
 ) : RealtimeServerEvent
 
-/** The session configuration. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeServerEventSessionCreatedSession::class,
-)
+/**
+ * The session configuration.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeServerEventSessionCreatedSession::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeSessionCreateResponseGA::class,
-        name = "realtime",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranscriptionSessionCreateResponseGA::class,
-        name = "transcription",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeSessionCreateResponseGA::class, name = "realtime"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranscriptionSessionCreateResponseGA::class, name = "transcription")
 )
 sealed interface RealtimeServerEventSessionCreatedSession
 
-/**
- * A [RealtimeServerEventSessionCreatedSession] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeServerEventSessionCreatedSession
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [RealtimeServerEventSessionCreatedSession] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeServerEventSessionCreatedSession @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeServerEventSessionCreatedSession {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Returned when a session is updated with a `session.update` event, unless there is an error. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Returned when a session is updated with a `session.update` event, unless there is an error.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeServerEventSessionUpdated(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.updated`. */
+    /**
+     * The event type, must be `session.updated`.
+     */
     val type: RealtimeServerEventSessionUpdatedTypeEnum,
-    /** The session configuration. */
-    val session: RealtimeServerEventSessionUpdatedSession,
+    /**
+     * The session configuration.
+     */
+    val session: RealtimeServerEventSessionUpdatedSession
 ) : RealtimeServerEvent
 
-/** The session configuration. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeServerEventSessionUpdatedSession::class,
-)
+/**
+ * The session configuration.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeServerEventSessionUpdatedSession::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeSessionCreateResponseGA::class,
-        name = "realtime",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranscriptionSessionCreateResponseGA::class,
-        name = "transcription",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeSessionCreateResponseGA::class, name = "realtime"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranscriptionSessionCreateResponseGA::class, name = "transcription")
 )
 sealed interface RealtimeServerEventSessionUpdatedSession
 
-/**
- * A [RealtimeServerEventSessionUpdatedSession] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeServerEventSessionUpdatedSession
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [RealtimeServerEventSessionUpdatedSession] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeServerEventSessionUpdatedSession @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeServerEventSessionUpdatedSession {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * Returned when a transcription session is updated with a `transcription_session.update` event,
- * unless there is an error.
+ * Returned when a transcription session is updated with a `transcription_session.update` event, unless there is an error.
  */
 data class RealtimeServerEventTranscriptionSessionUpdated(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `transcription_session.updated`. */
+    /**
+     * The event type, must be `transcription_session.updated`.
+     */
     val type: RealtimeServerEventTranscriptionSessionUpdatedTypeEnum,
     /**
-     * A new Realtime transcription session configuration. When a session is created on the server
-     * via REST API, the session object also contains an ephemeral key. Default TTL for keys is 10
-     * minutes. This property is not present when a session is updated via the WebSocket API.
+     * A new Realtime transcription session configuration. When a session is created on the server via REST API, the session object also contains an ephemeral key. Default TTL for keys is 10 minutes. This property is not present when a session is updated via the WebSocket API.
      */
-    val session: RealtimeTranscriptionSessionCreateResponse,
+    val session: RealtimeTranscriptionSessionCreateResponse
 )

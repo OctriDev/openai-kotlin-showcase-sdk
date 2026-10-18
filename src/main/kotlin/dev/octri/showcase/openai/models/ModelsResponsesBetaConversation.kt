@@ -4,13 +4,9 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The conversation that this response belongs to. Items from this conversation are prepended to
- * `input_items` for this response request. Input items and output items from this response are
- * automatically added to this conversation after this response completes.
+ * The conversation that this response belongs to. Items from this conversation are prepended to `input_items` for this response request. Input items and output items from this response are automatically added to this conversation after this response completes.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = BetaConversationParam.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaConversationParam.Deserializer::class)
 sealed interface BetaConversationParam {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<BetaConversationParam>() {
@@ -20,8 +16,7 @@ sealed interface BetaConversationParam {
         ): BetaConversationParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out BetaConversationParam>> =
-                listOf(BetaConversationParam2::class.java)
+            val objectTypes: List<Class<out BetaConversationParam>> = listOf(BetaConversationParam2::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -30,42 +25,24 @@ sealed interface BetaConversationParam {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringBetaConversationParam(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        BetaConversationParam::class.java,
-                        "no BetaConversationParam branch accepts this payload",
-                    )
+                node.isTextual -> StringBetaConversationParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, BetaConversationParam::class.java, "no BetaConversationParam branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringBetaConversationParam(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : BetaConversationParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringBetaConversationParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : BetaConversationParam
 
-/** The conversation that this response belongs to. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The conversation that this response belongs to.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaConversationParam2(
-    /** The unique ID of the conversation. */
+    /**
+     * The unique ID of the conversation.
+     */
     val id: String
 ) : BetaConversationParam

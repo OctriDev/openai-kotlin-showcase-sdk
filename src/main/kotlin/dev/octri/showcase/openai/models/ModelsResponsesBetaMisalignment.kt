@@ -5,23 +5,34 @@ package dev.octri.showcase.openai.models
 
 typealias BetaMisalignmentErrorType = String
 
-/** Typed representation of the `Beta_MisalignmentSteer` API schema. */
+/**
+ * Typed representation of the `Beta_MisalignmentSteer` API schema.
+ */
 data class BetaMisalignmentSteer(
-    /** The public continuation instruction. */
+    /**
+     * The public continuation instruction.
+     */
     val message: String
 )
 
-/** Typed representation of the `BetaMisalignmentErrorDetailsResource` API schema. */
+/**
+ * Typed representation of the `BetaMisalignmentErrorDetailsResource` API schema.
+ */
 data class BetaMisalignmentErrorDetailsResource(
-    /** Optional API value serialized in the `review_target` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("review_target")
-    val reviewTarget: String? = null,
-    /** An optional classification; clients must accept additional values. */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_type")
-    val errorType: BetaMisalignmentErrorType? = null,
-    /** The public explanation for this block. */
-    @com.fasterxml.jackson.annotation.JsonProperty("detailed_explanation")
-    val detailedExplanation: String? = null,
-    /** An optional public continuation instruction. */
-    val steer: BetaMisalignmentSteer? = null,
+    /**
+     * Optional API value serialized in the `review_target` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("review_target") val reviewTarget: String? = null,
+    /**
+     * An optional classification; clients must accept additional values.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_type") val errorType: BetaMisalignmentErrorType? = null,
+    /**
+     * The public explanation for this block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("detailed_explanation") val detailedExplanation: String? = null,
+    /**
+     * An optional public continuation instruction.
+     */
+    val steer: BetaMisalignmentSteer? = null
 )

@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.openai.models
 
-/** Identifies the environment whose lifecycle changed. */
+/**
+ * Identifies the environment whose lifecycle changed.
+ */
 data class AgentEnvironmentEvent(
-    /** The ID of the environment. */
+    /**
+     * The ID of the environment.
+     */
     val id: String
 )

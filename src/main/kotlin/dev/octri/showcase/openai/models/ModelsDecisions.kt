@@ -3,46 +3,74 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `InputTokensDetailsResource` API schema. */
+/**
+ * Typed representation of the `InputTokensDetailsResource` API schema.
+ */
 data class InputTokensDetailsResource(
-    /** Required `int64`-formatted value serialized in the `cached_tokens` wire field. */
+    /**
+     * Required `int64`-formatted value serialized in the `cached_tokens` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long,
-    /** Required `int64`-formatted value serialized in the `cache_write_tokens` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_tokens") val cacheWriteTokens: Long,
+    /**
+     * Required `int64`-formatted value serialized in the `cache_write_tokens` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_tokens") val cacheWriteTokens: Long
 )
 
-/** Typed representation of the `OutputTokensDetailsResource` API schema. */
+/**
+ * Typed representation of the `OutputTokensDetailsResource` API schema.
+ */
 data class OutputTokensDetailsResource(
-    /** Required `int64`-formatted value serialized in the `reasoning_tokens` wire field. */
+    /**
+     * Required `int64`-formatted value serialized in the `reasoning_tokens` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("reasoning_tokens") val reasoningTokens: Long
 )
 
-/** Typed representation of the `PublicDecisionsUsageResponseResource` API schema. */
+/**
+ * Typed representation of the `PublicDecisionsUsageResponseResource` API schema.
+ */
 data class PublicDecisionsUsageResponseResource(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: PublicDecisionsUsageResponseResourceObjectEnum,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: PublicDecisionsUsageResponseResourceObjectEnum,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Required `string` value serialized in the `next_page` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true)
-    val nextPage: String?,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DecisionsUsageBucket>,
+    /**
+     * Required `string` value serialized in the `next_page` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true) val nextPage: String?,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DecisionsUsageBucket>
 )
 
-/** Typed representation of the `ResponseUsageResource` API schema. */
+/**
+ * Typed representation of the `ResponseUsageResource` API schema.
+ */
 data class ResponseUsageResource(
-    /** Required `int64`-formatted value serialized in the `input_tokens` wire field. */
+    /**
+     * Required `int64`-formatted value serialized in the `input_tokens` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /** Required object value serialized in the `input_tokens_details` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details")
-    val inputTokensDetails: InputTokensDetailsResource,
-    /** Required `int64`-formatted value serialized in the `output_tokens` wire field. */
+    /**
+     * Required object value serialized in the `input_tokens_details` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens_details") val inputTokensDetails: InputTokensDetailsResource,
+    /**
+     * Required `int64`-formatted value serialized in the `output_tokens` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /** Required object value serialized in the `output_tokens_details` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens_details")
-    val outputTokensDetails: OutputTokensDetailsResource,
-    /** Required `int64`-formatted value serialized in the `total_tokens` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
+    /**
+     * Required object value serialized in the `output_tokens_details` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens_details") val outputTokensDetails: OutputTokensDetailsResource,
+    /**
+     * Required `int64`-formatted value serialized in the `total_tokens` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long
 )
