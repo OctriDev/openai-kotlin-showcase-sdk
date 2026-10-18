@@ -7,10 +7,14 @@ import dev.octri.showcase.openai.AudioResponseFormat
 import dev.octri.showcase.openai.ClientConfig
 import dev.octri.showcase.openai.CreateSpeechRequestResponseFormatEnum
 import dev.octri.showcase.openai.CreateSpeechRequestStreamFormatEnum
+import dev.octri.showcase.openai.CreateSpeechRequestVoice
 import dev.octri.showcase.openai.CreateSpeechResponseStreamEvent
+import dev.octri.showcase.openai.CreateTranscriptionRequestChunkingStrategy
 import dev.octri.showcase.openai.CreateTranscriptionRequestTimestampGranularitiesItemEnum
+import dev.octri.showcase.openai.CreateTranscriptionResponse
 import dev.octri.showcase.openai.CreateTranscriptionResponseStreamEvent
 import dev.octri.showcase.openai.CreateTranslationRequestResponseFormatEnum
+import dev.octri.showcase.openai.CreateTranslationResponse
 import dev.octri.showcase.openai.CreateVoiceRequest
 import dev.octri.showcase.openai.ErrorResponse
 import dev.octri.showcase.openai.RequestOptions
@@ -28,7 +32,7 @@ object Audio {
     data class CreateSpeechParams(
         val model: String,
         val input: String,
-        val voice: Any,
+        val voice: CreateSpeechRequestVoice,
         val instructions: String? = null,
         val responseFormat: CreateSpeechRequestResponseFormatEnum? = null,
         val speed: Double? = null,
@@ -121,7 +125,7 @@ object Audio {
     data class CreateSpeechStreamRequest(
         val model: String,
         val input: String,
-        val voice: Any,
+        val voice: CreateSpeechRequestVoice,
         val instructions: String? = null,
         val responseFormat: CreateSpeechRequestResponseFormatEnum? = null,
         val speed: Double? = null,
@@ -221,7 +225,8 @@ object Audio {
             List<CreateTranscriptionRequestTimestampGranularitiesItemEnum>? =
             null,
         val stream: SdkClient.SdkOptional<Boolean?>? = null,
-        val chunkingStrategy: SdkClient.SdkOptional<Any?>? = null,
+        val chunkingStrategy: SdkClient.SdkOptional<CreateTranscriptionRequestChunkingStrategy?>? =
+            null,
         val knownSpeakerNames: List<String>? = null,
         val knownSpeakerReferences: List<String>? = null,
     )
@@ -289,10 +294,10 @@ object Audio {
         clientConfig: ClientConfig,
         request: CreateTranscriptionParams,
         options: RequestOptions? = null,
-    ): Any {
+    ): CreateTranscriptionResponse {
         validateCreateTranscriptionRequest(request)
 
-        return SdkClient.request<Any>(
+        return SdkClient.request<CreateTranscriptionResponse>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/audio/transcriptions",
@@ -389,7 +394,8 @@ object Audio {
         val timestampGranularities:
             List<CreateTranscriptionRequestTimestampGranularitiesItemEnum>? =
             null,
-        val chunkingStrategy: SdkClient.SdkOptional<Any?>? = null,
+        val chunkingStrategy: SdkClient.SdkOptional<CreateTranscriptionRequestChunkingStrategy?>? =
+            null,
         val knownSpeakerNames: List<String>? = null,
         val knownSpeakerReferences: List<String>? = null,
     )
@@ -565,8 +571,8 @@ object Audio {
         responseFormat: CreateTranslationRequestResponseFormatEnum? = null,
         temperature: Double? = null,
         options: RequestOptions? = null,
-    ): Any {
-        return SdkClient.request<Any>(
+    ): CreateTranslationResponse {
+        return SdkClient.request<CreateTranslationResponse>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/audio/translations",

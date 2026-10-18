@@ -3,28 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `BetaMultiAgentCall` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaMultiAgentCall(
-    /** The type of the multi-agent call. Always `multi_agent_call`. */
-    val type: BetaMultiAgentCallTypeEnum,
-    /** The unique ID of the multi-agent call item. */
-    val id: String,
-    /** The unique ID linking this call to its output. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** The multi-agent action to execute. */
-    val action: BetaMultiAgentAction,
-    /** The JSON string of arguments generated for the action. */
-    val arguments: String,
-    /** The agent that produced this item. */
-    val agent: BetaAgentTag? = null,
-) : BetaItemResource, BetaItemField, BetaOutputItem
-
 /** Typed representation of the `BetaMultiAgentCallItemParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
@@ -46,28 +24,6 @@ data class BetaMultiAgentCallItemParam(
     /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
 ) : BetaItem
-
-/** Typed representation of the `BetaMultiAgentCallOutput` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaMultiAgentCallOutput(
-    /** The type of the multi-agent result. Always `multi_agent_call_output`. */
-    val type: BetaMultiAgentCallOutputTypeEnum,
-    /** The unique ID of the multi-agent call output item. */
-    val id: String,
-    /** The unique ID of the multi-agent call. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** The multi-agent action that produced this result. */
-    val action: BetaMultiAgentAction,
-    /** Text output returned by the multi-agent action. */
-    val output: List<BetaOutputTextContent>,
-    /** The agent that produced this item. */
-    val agent: BetaAgentTag? = null,
-) : BetaItemResource, BetaItemField, BetaOutputItem
 
 /** Typed representation of the `BetaMultiAgentCallOutputItemParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(

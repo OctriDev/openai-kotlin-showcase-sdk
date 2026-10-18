@@ -3,36 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** A message to or from the model. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaMessage(
-    /** The type of the message. Always set to `message`. */
-    val type: BetaMessageTypeEnum,
-    /** The unique ID of the message. */
-    val id: String,
-    /**
-     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items
-     * are returned via API.
-     */
-    val status: BetaMessageStatus,
-    /**
-     * The role of the message. One of `unknown`, `user`, `assistant`, `system`, `critic`,
-     * `discriminator`, `developer`, or `tool`.
-     */
-    val role: BetaMessageRole,
-    /** The content of the message */
-    val content: List<BetaMessageContentItem>,
-    /** The agent that produced this item. */
-    val agent: BetaAgentTag? = null,
-    /** Optional API value serialized in the `phase` wire field. */
-    val phase: BetaMessagePhase2? = null,
-) : BetaItemField
-
 /** A content part that makes up an input or output item. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,

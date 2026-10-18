@@ -3,34 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** Occurs when a stream ends. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class DoneEvent(
-    /** Required enumerated value serialized in the `event` wire field. */
-    val event: DoneEventEventEnum,
-    /** Required enumerated value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DoneEventDataEnum,
-) : AssistantStreamEvent
-
-/** Occurs when an error occurs. This can happen due to an internal server error or a timeout. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ErrorEvent(
-    /** Required enumerated value serialized in the `event` wire field. */
-    val event: ErrorEventEventEnum,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Error3,
-) : AssistantStreamEvent
-
 /** Required object value serialized in the `tool_outputs[]` wire field. */
 data class SubmitToolOutputsRunRequestToolOutputsItem(
     /**

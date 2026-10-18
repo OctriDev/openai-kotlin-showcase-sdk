@@ -223,30 +223,19 @@ enum class ComputerUseApprovalResponseParamBrowserAuthenticationCancelPaXcb34dbc
 }
 
 /** Required enumerated value serialized in the `type` wire field. */
-class ComputerUseApprovalResponseParamBrowserAuthenticationCancelParamTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ComputerUseApprovalResponseParamBrowserAuthenticationCancelParamTypeEnum &&
-            value == other.value
+enum class ComputerUseApprovalResponseParamBrowserAuthenticationCancelParamTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    BROWSER_AUTHENTICATION("browser_authentication");
 
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
+    override fun toString() = value
 
     companion object {
-
-        @JvmField
-        val BROWSER_AUTHENTICATION =
-            ComputerUseApprovalResponseParamBrowserAuthenticationCancelParamTypeEnum(
-                "browser_authentication"
-            )
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
+        @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(value: String) =
-            ComputerUseApprovalResponseParamBrowserAuthenticationCancelParamTypeEnum(value)
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
@@ -268,30 +257,19 @@ enum class ComputerUseApprovalResponseParamBrowserAuthenticationSubmitPaXc0a6072
 }
 
 /** Required enumerated value serialized in the `type` wire field. */
-class ComputerUseApprovalResponseParamBrowserAuthenticationSubmitParamTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ComputerUseApprovalResponseParamBrowserAuthenticationSubmitParamTypeEnum &&
-            value == other.value
+enum class ComputerUseApprovalResponseParamBrowserAuthenticationSubmitParamTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    BROWSER_AUTHENTICATION("browser_authentication");
 
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
+    override fun toString() = value
 
     companion object {
-
-        @JvmField
-        val BROWSER_AUTHENTICATION =
-            ComputerUseApprovalResponseParamBrowserAuthenticationSubmitParamTypeEnum(
-                "browser_authentication"
-            )
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
+        @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(value: String) =
-            ComputerUseApprovalResponseParamBrowserAuthenticationSubmitParamTypeEnum(value)
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
@@ -676,5 +654,27 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         )
         @JvmStatic
         fun fromValue(value: String) = ConversationItemListObjectEnum(value)
+    }
+}
+
+/** The object type, which is always `conversation`. */
+class ConversationResourceObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ConversationResourceObjectEnum && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val CONVERSATION = ConversationResourceObjectEnum("conversation")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ConversationResourceObjectEnum(value)
     }
 }

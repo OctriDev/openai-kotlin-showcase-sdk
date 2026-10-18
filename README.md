@@ -88,7 +88,7 @@ When the API declares a model for an error response, the SDK decodes the body in
 
 ## Pagination
 
-73 operations expose generated pagination helpers. Each operation has a `Paginated` companion whose callback can stop iteration early.
+78 operations expose generated pagination helpers. Each operation has a `Paginated` companion whose callback can stop iteration early.
 
 Pagination follows the cursor, offset, page-number, or next-URL contract declared by the OpenAPI operation. It stops when the API signals completion and does not prefetch the entire collection.
 
@@ -99,7 +99,7 @@ Pagination follows the cursor, offset, page-number, or next-URL contract declare
 ## Project layout and API discovery
 
 - Operation implementations are grouped under `src/main/kotlin/dev/octri/showcase/openai/methods/`.
-- 2233 component models are split by API domain under `src/main/kotlin/dev/octri/showcase/openai/models/Models<Domain>.kt` or `models/<tag path>/Models.kt`; real declarations follow those model packages and `dev.octri.showcase.openai.Models.kt` provides compatibility aliases.
+- 2246 component models are split by API domain under `src/main/kotlin/dev/octri/showcase/openai/models/Models<Domain>.kt` or `models/<tag path>/Models.kt`; real declarations follow those model packages and `dev.octri.showcase.openai.Models.kt` provides compatibility aliases.
 - Component schemas can choose a nested model folder with `x-octri-sdk-tags: ["Billing/Invoices"]`; the first tag owns the model and `/` creates nesting.
 - [`sdk-manifest.json`](sdk-manifest.json) is the language-neutral public API index: operations, request/response modes, model properties, enum values, and generation settings.
 - Public barrel/module exports are the compatibility boundary. Import public model names from those exports; internal domain filenames may evolve without changing model names.

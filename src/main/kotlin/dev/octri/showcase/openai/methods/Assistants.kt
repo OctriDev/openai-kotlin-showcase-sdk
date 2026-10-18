@@ -347,6 +347,12 @@ object Assistants {
         val runId: String? = null,
     )
 
+    data class ListMessagesPage(
+        val data: ListMessagesResponse,
+        val items: List<MessageObject>,
+        val hasMore: Boolean,
+    )
+
     data class ListRunsPage(
         val data: ListRunsResponse,
         val items: List<RunObject>,
@@ -407,6 +413,12 @@ object Assistants {
         val after: String? = null,
         val before: String? = null,
         val include: List<ListRunStepsParameterItemEnum>? = null,
+    )
+
+    data class ListRunStepsPage(
+        val data: ListRunStepsResponse,
+        val items: List<RunStepObject>,
+        val hasMore: Boolean,
     )
 
     /**
@@ -681,6 +693,42 @@ object Assistants {
         )
 
     /**
+     * Iterates through all pages: Lists messages belonging to a thread. Use `run_id` to filter by
+     * the run that generated the messages and `order` to control their creation-time order. Use
+     * `after` or `before` cursors to navigate the results.
+     */
+    fun listMessagesPaginated(
+        clientConfig: ClientConfig,
+        request: ListMessagesRequest,
+        options: RequestOptions? = null,
+        yieldFn: (MessageObject) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AssistantsListMessagesOperation.listMessagesPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
+
+    /**
+     * Lists messages belonging to a thread. Use `run_id` to filter by the run that generated the
+     * messages and `order` to control their creation-time order. Use `after` or `before` cursors to
+     * navigate the results.
+     */
+    fun listMessagesPages(
+        clientConfig: ClientConfig,
+        request: ListMessagesRequest,
+        options: RequestOptions? = null,
+        yieldPage: (ListMessagesPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AssistantsListMessagesOperation.listMessagesPages(
+            clientConfig,
+            request,
+            options,
+            yieldPage,
+        )
+
+    /**
      * Creates a message in a thread. Provide the message `role` and `content`, and optionally
      * include file attachments or metadata. Use this operation to add a user or assistant message
      * to an existing conversation thread.
@@ -935,6 +983,41 @@ object Assistants {
             clientConfig,
             request,
             options,
+        )
+
+    /**
+     * Iterates through all pages: Lists the steps belonging to a run on a thread. Use cursor
+     * parameters to page through the steps, and set `order` to control their order by creation
+     * time.
+     */
+    fun listRunStepsPaginated(
+        clientConfig: ClientConfig,
+        request: ListRunStepsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (RunStepObject) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AssistantsListRunStepsOperation.listRunStepsPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
+
+    /**
+     * Lists the steps belonging to a run on a thread. Use cursor parameters to page through the
+     * steps, and set `order` to control their order by creation time.
+     */
+    fun listRunStepsPages(
+        clientConfig: ClientConfig,
+        request: ListRunStepsRequest,
+        options: RequestOptions? = null,
+        yieldPage: (ListRunStepsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AssistantsListRunStepsOperation.listRunStepsPages(
+            clientConfig,
+            request,
+            options,
+            yieldPage,
         )
 
     /**

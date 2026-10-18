@@ -3,6 +3,12 @@
 
 package dev.octri.showcase.openai
 
+typealias BetaResponsesServerEventVariant34 =
+    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant34
+
+typealias BetaResponsesServerEventVariant35 =
+    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant35
+
 typealias BetaResponsesServerEventVariant36 =
     dev.octri.showcase.openai.models.BetaResponsesServerEventVariant36
 
@@ -565,9 +571,3 @@ typealias ChatCompletionListObjectEnum =
 
 typealias ChatCompletionMessageCustomToolCall =
     dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCall
-
-typealias ChatCompletionMessageCustomToolCallCustom =
-    dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCallCustom
-
-typealias ChatCompletionMessageCustomToolCallTypeEnum =
-    dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCallTypeEnum

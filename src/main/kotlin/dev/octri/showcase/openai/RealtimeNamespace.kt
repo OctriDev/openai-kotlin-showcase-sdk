@@ -129,7 +129,9 @@ class RealtimeNamespace(private val clientConfig: ClientConfig) {
         turnDetection:
             dev.octri.showcase.openai.methods.Realtime.RealtimeTranscriptionSessionCreateRequestTurnDetection? =
             null,
-        inputAudioNoiseReduction: Any? = null,
+        inputAudioNoiseReduction:
+            dev.octri.showcase.openai.methods.Realtime.RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction? =
+            null,
         inputAudioFormat: RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum? = null,
         inputAudioTranscription: AudioTranscription? = null,
         include: List<RealtimeTranscriptionSessionCreateRequestIncludeItemEnum>? = null,

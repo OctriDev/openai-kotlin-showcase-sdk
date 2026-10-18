@@ -3,37 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Returned when the Live model delegates work to your application, Responses, or Decisions.
- * Contains delegation metadata and the position on the session timeline where the work was
- * delegated.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDelegationCreated(
-    /** The unique ID of the Live server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, always `session.delegation.created`. */
-    val type: LiveDelegationCreatedTypeEnum,
-    /**
-     * The position on the Live session timeline where the delegation was created, in milliseconds
-     * from the beginning of the session.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("offset_ms") val offsetMs: Long,
-    /**
-     * The delegated work identifier and destination. This object contains metadata, not the task
-     * text.
-     */
-    val delegation: LiveDelegationItem,
-    /** The event_id of the client command associated with this server event, when supplied. */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id")
-    val clientEventId: String? = null,
-) : LiveSidebandServerEvent, LiveServerEvent2
-
 /** Metadata for work delegated by the Live model to your application, Responses, or Decisions. */
 data class LiveDelegationItem(
     /**

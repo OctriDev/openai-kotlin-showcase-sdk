@@ -3,6 +3,8 @@
 
 package dev.octri.showcase.openai
 
+typealias BetaFunctionShellAction = dev.octri.showcase.openai.models.BetaFunctionShellAction
+
 typealias BetaFunctionShellActionParam =
     dev.octri.showcase.openai.models.BetaFunctionShellActionParam
 
@@ -357,6 +359,8 @@ typealias BetaMCPToolExecutionErrorTypeEnum =
 
 typealias BetaMCPToolFilter = dev.octri.showcase.openai.models.BetaMCPToolFilter
 
+typealias BetaMCPToolRequireApproval = dev.octri.showcase.openai.models.BetaMCPToolRequireApproval
+
 typealias BetaMCPToolRequireApprovalVariant0 =
     dev.octri.showcase.openai.models.BetaMCPToolRequireApprovalVariant0
 
@@ -524,8 +528,3 @@ typealias BetaProgramOutputItemStatus = dev.octri.showcase.openai.models.BetaPro
 typealias BetaProgramOutputStatus = dev.octri.showcase.openai.models.BetaProgramOutputStatus
 
 typealias BetaProgramOutputTypeEnum = dev.octri.showcase.openai.models.BetaProgramOutputTypeEnum
-
-typealias BetaProgramToolCallCaller = dev.octri.showcase.openai.models.BetaProgramToolCallCaller
-
-typealias BetaProgramToolCallCallerParam =
-    dev.octri.showcase.openai.models.BetaProgramToolCallCallerParam

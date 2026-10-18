@@ -3,6 +3,56 @@
 
 package dev.octri.showcase.openai.models
 
+/** Typed representation of the `BetaContainerAutoParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaContainerAutoParam(
+    /** Automatically creates a container for this request */
+    val type: BetaContainerAutoParamTypeEnum,
+    /** An optional list of uploaded files to make available to your code. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
+    /** Optional API value serialized in the `memory_limit` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
+    val memoryLimit: BetaContainerMemoryLimit? = null,
+    /** Network access policy for the container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
+    val networkPolicy: BetaContainerAutoParamNetworkPolicy? = null,
+    /** An optional list of skills referenced by id or inline data. */
+    val skills: List<BetaContainerAutoParamSkillsItem>? = null,
+) : BetaFunctionShellToolParamEnvironment
+
+/** Typed representation of the `BetaContainerReferenceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaContainerReferenceParam(
+    /** References a container created with the /v1/containers endpoint */
+    val type: BetaContainerReferenceParamTypeEnum,
+    /** The ID of the referenced container. */
+    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
+) : BetaFunctionShellToolParamEnvironment, BetaFunctionShellCallItemParamEnvironment
+
+/** Represents a container created with /v1/containers. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaContainerReferenceResource(
+    /** The environment type. Always `container_reference`. */
+    val type: BetaContainerReferenceResourceTypeEnum,
+    /** Required `string` value serialized in the `container_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
+) : BetaFunctionShellCallEnvironment
+
 /** Typed representation of the `BetaFunctionAndCustomToolCallOutput` API schema. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
@@ -47,34 +97,6 @@ constructor(
     val tag: String
         get() = raw.path("type").asText()
 }
-
-/** The output of a function tool call. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaFunctionCallOutputItemParam(
-    /** The type of the function tool call output. Always `function_call_output`. */
-    val type: BetaFunctionCallOutputItemParamTypeEnum,
-    /** Text, image, or file output of the function tool call. */
-    val output: Any,
-    /** Optional API value serialized in the `agent` wire field. */
-    val agent: BetaAgentTagParam? = null,
-    /** Optional `string` value serialized in the `id` wire field. */
-    val id: String? = null,
-    /** Optional API value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
-    /** Optional API value serialized in the `name` wire field. */
-    val name: String? = null,
-    /** Optional API value serialized in the `namespace` wire field. */
-    val namespace: String? = null,
-    /** Optional API value serialized in the `caller` wire field. */
-    val caller: BetaToolCallCallerParam? = null,
-    /** Optional API value serialized in the `status` wire field. */
-    val status: BetaFunctionCallItemStatus? = null,
-) : BetaItem, BetaResponseSteerInputItem
 
 /** A piece of message content, such as text, an image, or a file. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
@@ -143,35 +165,6 @@ data class BetaFunctionShellActionParam(
     @com.fasterxml.jackson.annotation.JsonProperty("max_output_length")
     val maxOutputLength: Long? = null,
 )
-
-/** A tool call that executes one or more shell commands in a managed environment. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaFunctionShellCall(
-    /** The type of the item. Always `shell_call`. */
-    val type: BetaFunctionShellCallTypeEnum,
-    /** The unique ID of the shell tool call. Populated when this item is returned via API. */
-    val id: String,
-    /** The unique ID of the shell tool call generated by the model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** The shell commands and limits that describe how to run the tool call. */
-    val action: BetaFunctionShellAction,
-    /** The status of the shell call. One of `in_progress`, `completed`, or `incomplete`. */
-    val status: BetaFunctionShellCallStatus,
-    /** Required API value serialized in the `environment` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("environment", required = true)
-    val environment: BetaFunctionShellCallEnvironment?,
-    /** The agent that produced this item. */
-    val agent: BetaAgentTag? = null,
-    /** Optional API value serialized in the `caller` wire field. */
-    val caller: BetaToolCallCaller? = null,
-    /** The ID of the entity that created this tool call. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-) : BetaItemResource, BetaItemField, BetaOutputItem
 
 /** Required API value serialized in the `environment` wire field. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
@@ -280,35 +273,6 @@ constructor(
     val tag: String
         get() = raw.path("type").asText()
 }
-
-/** The output of a shell tool call that was emitted. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaFunctionShellCallOutput(
-    /** The type of the shell call output. Always `shell_call_output`. */
-    val type: BetaFunctionShellCallOutputTypeEnum,
-    /** The unique ID of the shell call output. Populated when this item is returned via API. */
-    val id: String,
-    /** The unique ID of the shell tool call generated by the model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`. */
-    val status: BetaFunctionShellCallOutputStatusEnum,
-    /** An array of shell call output contents */
-    val output: List<BetaFunctionShellCallOutputContent>,
-    /** Required `integer` value serialized in the `max_output_length` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_length", required = true)
-    val maxOutputLength: Long?,
-    /** The agent that produced this item. */
-    val agent: BetaAgentTag? = null,
-    /** Optional API value serialized in the `caller` wire field. */
-    val caller: BetaToolCallCaller? = null,
-    /** The identifier of the actor that created the item. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-) : BetaItemResource, BetaItemField, BetaOutputItem
 
 /** The content of a shell tool call output that was emitted. */
 data class BetaFunctionShellCallOutputContent(
@@ -499,23 +463,6 @@ data class BetaFunctionShellCallOutputTimeoutOutcomeParam(
     val type: BetaFunctionShellCallOutputTimeoutOutcomeParamTypeEnum
 ) : BetaFunctionShellCallOutputOutcomeParam
 
-/** A tool that allows the model to execute shell commands. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaFunctionShellToolParam(
-    /** The type of the shell tool. Always `shell`. */
-    val type: BetaFunctionShellToolParamTypeEnum,
-    /** Optional API value serialized in the `environment` wire field. */
-    val environment: BetaFunctionShellToolParamEnvironment? = null,
-    /** The tool invocation context(s). */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
-    val allowedCallers: List<BetaCallableToolAllowedCaller>? = null,
-) : BetaTool, BetaToolSearchOutputTool
-
 /** Optional API value serialized in the `environment` wire field. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
@@ -561,72 +508,28 @@ constructor(
         get() = raw.path("type").asText()
 }
 
-/**
- * Defines a function in your own code the model can choose to call. Learn more about function
- * calling.
- */
+/** Typed representation of the `BetaLocalEnvironmentParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class BetaFunctionTool(
-    /** The type of the function tool. Always `function`. */
-    val type: BetaFunctionToolTypeEnum,
-    /** The name of the function to call. */
-    val name: String,
-    /** A JSON schema object describing the parameters of the function. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parameters", required = true)
-    val parameters: Map<String, Any>?,
-    /** Required `boolean` value serialized in the `strict` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("strict", required = true) val strict: Boolean?,
-    /** Optional `boolean` value serialized in the `async` wire field. */
-    val async: Boolean? = null,
-    /** Optional `string` value serialized in the `description` wire field. */
-    val description: String? = null,
-    /**
-     * A JSON schema object describing the JSON value encoded in string outputs for this function.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
-    val outputSchema: Map<String, Any>? = null,
-    /** Whether this function is deferred and loaded via tool search. */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
-    val deferLoading: Boolean? = null,
-    /** The tool invocation context(s). */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
-    val allowedCallers: List<BetaCallableToolAllowedCaller>? = null,
-) : BetaTool, BetaToolSearchOutputTool
+data class BetaLocalEnvironmentParam(
+    /** Use a local computer environment. */
+    val type: BetaLocalEnvironmentParamTypeEnum,
+    /** An optional list of skills. */
+    val skills: List<BetaLocalSkillParam>? = null,
+) : BetaFunctionShellToolParamEnvironment, BetaFunctionShellCallItemParamEnvironment
 
-/** A tool call to run a function. See the function calling guide for more information. */
+/** Represents the use of a local environment to perform shell actions. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class BetaFunctionToolCall(
-    /** The type of the function tool call. Always `function_call`. */
-    val type: BetaFunctionToolCallTypeEnum,
-    /** The unique ID of the function tool call generated by the model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /** The name of the function to run. */
-    val name: String,
-    /** A JSON string of the arguments to pass to the function. */
-    val arguments: String,
-    /** The agent that produced this item. */
-    val agent: BetaAgentTag? = null,
-    /** The unique ID of the function tool call. */
-    val id: String? = null,
-    /** Optional API value serialized in the `caller` wire field. */
-    val caller: BetaToolCallCaller? = null,
-    /** The namespace of the function to run. */
-    val namespace: String? = null,
-    /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when
-     * items are returned via API.
-     */
-    val status: BetaFunctionToolCallStatusEnum? = null,
-    /** Whether the function tool call runs asynchronously. */
-    val async: Boolean? = null,
-) : BetaItem, BetaItemField, BetaOutputItem
+data class BetaLocalEnvironmentResource(
+    /** The environment type. Always `local`. */
+    val type: BetaLocalEnvironmentResourceTypeEnum
+) : BetaFunctionShellCallEnvironment

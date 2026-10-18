@@ -9,6 +9,83 @@ package dev.octri.showcase.openai.models
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
+data class BetaResponsesServerEventVariant53(
+    /** The type of the event. Always 'response.mcp_list_tools.in_progress'. */
+    val type: BetaResponseMCPListToolsInProgressEventTypeEnum,
+    /** The ID of the MCP tool call item that is being processed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The index of the output item that is being processed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponsesServerEventVariant54(
+    /** The type of the event. Always 'response.output_text.annotation.added'. */
+    val type: BetaResponseOutputTextAnnotationAddedEventTypeEnum,
+    /** The unique identifier of the item to which the annotation is being added. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The index of the output item in the response's output array. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The index of the content part within the output item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
+    /** The index of the annotation within the content part. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annotation_index") val annotationIndex: Long,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The annotation object being added. (See annotation schema for details.) */
+    @com.fasterxml.jackson.annotation.JsonProperty("annotation", required = true)
+    val `annotation`: BetaAnnotation?,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponsesServerEventVariant55(
+    /** The type of the event. Always 'response.queued'. */
+    val type: BetaResponseQueuedEventTypeEnum,
+    /** The full response object that is queued. */
+    val response: BetaResponse,
+    /** The sequence number for this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponsesServerEventVariant56(
     /** The event type identifier. */
     val type: BetaResponseCustomToolCallInputDeltaEventTypeEnum,
@@ -341,6 +418,189 @@ constructor(
         get() = raw.path("type").asText()
 }
 
+/** The accepted steering submission. */
+data class BetaResponseSteerAcceptedEventSteer(
+    /** The ID assigned to the steering submission. */
+    val id: String,
+    /** The ID of the response being steered. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
+    val previousResponseId: String,
+)
+
+/**
+ * Emitted when steering input has been validated and queued. Acceptance means the server owns the
+ * input, not that it has been applied. The successor's `response.created` event is the commit
+ * point. If accepted input cannot be committed, `response.steer.failed` returns it with the same
+ * steering ID. When the response stops for client-owned tool output or approval, the input remains
+ * queued and `response.steer.pending` is emitted after `response.completed`. Fill the pending
+ * event's…
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseSteerAcceptedEvent(
+    /** The event discriminator. Always `response.steer.accepted`. */
+    val type: BetaResponseSteerAcceptedEventTypeEnum,
+    /** The sequence number for this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The accepted steering submission. */
+    val steer: BetaResponseSteerAcceptedEventSteer,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the target response's
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent
+
+/**
+ * Queues user input to steer a response on this WebSocket connection. Input can contain text,
+ * images, and files. Steering is supported only for single-agent responses on models and execution
+ * modes that support steering. Responses bound to a conversation or using automatic compaction do
+ * not support steering. A `response.steer.accepted` event acknowledges that the server owns the
+ * queued input, not that it has been applied. The successor's `response.created` event is the
+ * commit…
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseSteerEvent(
+    /** The event discriminator. Always `response.steer`. */
+    val type: BetaResponseSteerEventTypeEnum,
+    /** The ID of the response to steer on this WebSocket connection. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
+    val previousResponseId: String,
+    /**
+     * Input to queue for a continuation of the response. Uses the same string or input-item shape
+     * as `response.create.input`, with a non-empty array when supplying input items. Steering
+     * accepts only messages with the `user` role. Each message may contain only `type`, `role`, and
+     * `content`, with `content` as a string or an array of `input_text`, `input_image`, and
+     * `input_file` parts. The optional `type` must be `message`. Other roles, tool outputs, and
+     * item types are not supported…
+     */
+    val input: BetaResponseSteerInput,
+) : BetaResponsesClientEvent
+
+/** The steering submission that could not be committed. */
+data class BetaResponseSteerFailedEventSteer(
+    /** The ID of the response that was targeted for steering. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
+    val previousResponseId: String,
+    /**
+     * Input to queue for a continuation of the response. Uses the same string or input-item shape
+     * as `response.create.input`, with a non-empty array when supplying input items. Steering
+     * accepts only messages with the `user` role. Each message may contain only `type`, `role`, and
+     * `content`, with `content` as a string or an array of `input_text`, `input_image`, and
+     * `input_file` parts. The optional `type` must be `message`. Other roles, tool outputs, and
+     * item types are not supported…
+     */
+    val input: BetaResponseSteerInput,
+    /** The ID assigned to the steering submission, if one was allocated. */
+    val id: String? = null,
+)
+
+/** Information about why the input could not be committed. */
+data class BetaResponseSteerFailedEventError(
+    /** The error type. Always `invalid_request_error`. */
+    val type: BetaResponseSteerFailedEventErrorTypeEnum,
+    /**
+     * A machine-readable steering error code. Clients should handle unknown values because
+     * additional codes may be introduced. Known values include: - `response_not_found`: The target
+     * response is not available on this connection. - `invalid_input`: The event or input failed
+     * validation. - `steering_not_supported`: The model or response execution mode does not support
+     * steering. - `too_many_pending_steers`: Too much steering input is pending for the response.
+     * -…
+     */
+    val code: BetaResponseSteerErrorCode,
+    /** A human-readable description of the error. */
+    val message: String,
+)
+
+/**
+ * Emitted when steering input is rejected or cannot be committed to a successor response. Returns
+ * the original, uncommitted input so the client can carry it into `response.create` when
+ * appropriate. Invalid input must be corrected before retrying. Failures after acceptance include
+ * the same steering ID. Failures before an ID is allocated omit `steer.id`. A lost connection or
+ * missing acknowledgement leaves the outcome unknown; it is not proof that the input was rejected.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseSteerFailedEvent(
+    /** The event discriminator. Always `response.steer.failed`. */
+    val type: BetaResponseSteerFailedEventTypeEnum,
+    /** The sequence number for this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The steering submission that could not be committed. */
+    val steer: BetaResponseSteerFailedEventSteer,
+    /** Information about why the input could not be committed. */
+    val error: BetaResponseSteerFailedEventError,
+    /**
+     * The WebSocket lane that emitted this event, when the target response is available and its
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent
+
+/** The steering submission that remains queued. */
+data class BetaResponseSteerPendingEventSteer(
+    /** The ID assigned to the steering submission. */
+    val id: String,
+    /** The ID of the response being steered. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
+    val previousResponseId: String,
+)
+
+/**
+ * Emitted when accepted steering input remains queued after the target response completes. The
+ * server still owns the input. Do not resend it. The successor's `response.created` event is the
+ * commit point. When `reason` is `waiting_for_required_input`, this event follows
+ * `response.completed` while the response waits for the tool results or approval decisions
+ * identified by `required_input`. Copy those stubs, fill their result fields using the ordinary
+ * `response.create` input…
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseSteerPendingEvent(
+    /** The event discriminator. Always `response.steer.pending`. */
+    val type: BetaResponseSteerPendingEventTypeEnum,
+    /** The sequence number for this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The steering submission that remains queued. */
+    val steer: BetaResponseSteerPendingEventSteer,
+    /**
+     * An extensible enum describing why accepted steering input is still queued. Clients should
+     * handle unknown values because additional reasons may be introduced. Known values include: -
+     * `waiting_for_required_input`: The response is waiting for the tool results or approval
+     * decisions identified by `required_input`.
+     */
+    val reason: BetaResponseSteerPendingReason,
+    /**
+     * Input stubs identifying outstanding client-owned tool results or approval decisions. Each
+     * stub contains identifying fields only; the client supplies the result before including it in
+     * `response.create`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("required_input")
+    val requiredInput: List<BetaResponseSteerRequiredInput>,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the target response's
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent
+
 /** Typed representation of the `BetaResponsesWebSocketStreamEvent` API schema. */
 data class BetaResponsesWebSocketStreamEvent(
     /**
@@ -349,3 +609,29 @@ data class BetaResponsesWebSocketStreamEvent(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 )
+
+/** Emitted when an error occurs while processing a Responses WebSocket request. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseWsError(
+    /** The type of the event. Always `error`. */
+    val type: BetaResponseWsErrorTypeEnum,
+    /** Details about the error. */
+    val error: BetaErrorPayload,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+    /** The HTTP status code associated with a WebSocket protocol error. */
+    val status: Long? = null,
+    /** The sequence number of an error emitted by the response stream. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number")
+    val sequenceNumber: Long? = null,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+) : BetaResponsesServerEvent

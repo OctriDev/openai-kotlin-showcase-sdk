@@ -3,23 +3,75 @@
 
 package dev.octri.showcase.openai.models
 
-/** Groups function/custom tools under a shared namespace. */
+/** A custom tool that processes input using a specified format. Learn more about custom tools */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class BetaNamespaceToolParam(
-    /** The type of the tool. Always `namespace`. */
-    val type: BetaNamespaceToolParamTypeEnum,
-    /** The namespace name used in tool calls (for example, `crm`). */
+data class BetaCustomToolParam(
+    /** The type of the custom tool. Always `custom`. */
+    val type: BetaCustomToolParamTypeEnum,
+    /** The name of the custom tool, used to identify it in tool calls. */
     val name: String,
-    /** A description of the namespace shown to the model. */
-    val description: String,
-    /** The function/custom tools available inside this namespace. */
-    val tools: List<BetaNamespaceToolParamToolsItem>,
-) : BetaTool
+    /**
+     * Whether the tool response can be returned asynchronously versus immediately returned on next
+     * response creation.
+     */
+    val async: Boolean? = null,
+    /** Optional description of the custom tool, used to provide more context. */
+    val description: String? = null,
+    /** The input format for the custom tool. Default is unconstrained text. */
+    val format: BetaCustomToolParamFormat? = null,
+    /** Whether this tool should be deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<BetaCallableToolAllowedCaller>? = null,
+) :
+    BetaTool,
+    BetaToolSearchOutputTool,
+    BetaToolSearchOutputNamespaceToolParamToolsItem,
+    BetaNamespaceToolParamToolsItem
+
+/** Typed representation of the `BetaFunctionToolParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaFunctionToolParam(
+    /** Required `string` value serialized in the `name` wire field. */
+    val name: String,
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: BetaFunctionToolParamTypeEnum,
+    /** Optional `string` value serialized in the `description` wire field. */
+    val description: String? = null,
+    /** Optional API value serialized in the `parameters` wire field. */
+    val parameters: BetaEmptyModelParam? = null,
+    /** Optional `boolean` value serialized in the `strict` wire field. */
+    val strict: Boolean? = null,
+    /**
+     * Whether the tool response can be returned asynchronously versus immediately returned on next
+     * response creation.
+     */
+    val async: Boolean? = null,
+    /**
+     * A JSON Schema describing the JSON value encoded in string outputs for this function tool.
+     * This does not describe content-array outputs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
+    val outputSchema: Map<String, Any>? = null,
+    /** Whether this function should be deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<BetaCallableToolAllowedCaller>? = null,
+) : BetaNamespaceToolParamToolsItem
 
 /** A function or custom tool that belongs to a namespace. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(

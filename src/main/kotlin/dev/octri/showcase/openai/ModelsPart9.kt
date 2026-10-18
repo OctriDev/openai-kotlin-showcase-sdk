@@ -3,6 +3,28 @@
 
 package dev.octri.showcase.openai
 
+typealias EnvironmentPackagesParam = dev.octri.showcase.openai.models.EnvironmentPackagesParam
+
+typealias EnvironmentPackagesResource = dev.octri.showcase.openai.models.EnvironmentPackagesResource
+
+typealias EnvironmentParam = dev.octri.showcase.openai.models.EnvironmentParam
+
+typealias EnvironmentParamNone = dev.octri.showcase.openai.models.EnvironmentParamNone
+
+typealias EnvironmentParamNoneTypeEnum =
+    dev.octri.showcase.openai.models.EnvironmentParamNoneTypeEnum
+
+typealias EnvironmentParamOpenaiHosted =
+    dev.octri.showcase.openai.models.EnvironmentParamOpenaiHosted
+
+typealias EnvironmentParamOpenaiHostedTypeEnum =
+    dev.octri.showcase.openai.models.EnvironmentParamOpenaiHostedTypeEnum
+
+typealias EnvironmentParamSelfHosted = dev.octri.showcase.openai.models.EnvironmentParamSelfHosted
+
+typealias EnvironmentParamSelfHostedTypeEnum =
+    dev.octri.showcase.openai.models.EnvironmentParamSelfHostedTypeEnum
+
 typealias EnvironmentResource = dev.octri.showcase.openai.models.EnvironmentResource
 
 typealias EnvironmentResourceNone = dev.octri.showcase.openai.models.EnvironmentResourceNone
@@ -506,24 +528,3 @@ typealias FunctionTool = dev.octri.showcase.openai.models.FunctionTool
 typealias FunctionToolCall = dev.octri.showcase.openai.models.FunctionToolCall
 
 typealias FunctionToolCallOutput = dev.octri.showcase.openai.models.FunctionToolCallOutput
-
-typealias FunctionToolCallOutputResource =
-    dev.octri.showcase.openai.models.FunctionToolCallOutputResource
-
-typealias FunctionToolCallOutputStatusEnum =
-    dev.octri.showcase.openai.models.FunctionToolCallOutputStatusEnum
-
-typealias FunctionToolCallOutputTypeEnum =
-    dev.octri.showcase.openai.models.FunctionToolCallOutputTypeEnum
-
-typealias FunctionToolCallResource = dev.octri.showcase.openai.models.FunctionToolCallResource
-
-typealias FunctionToolCallStatusEnum = dev.octri.showcase.openai.models.FunctionToolCallStatusEnum
-
-typealias FunctionToolCallTypeEnum = dev.octri.showcase.openai.models.FunctionToolCallTypeEnum
-
-typealias FunctionToolParam = dev.octri.showcase.openai.models.FunctionToolParam
-
-typealias FunctionToolParamTypeEnum = dev.octri.showcase.openai.models.FunctionToolParamTypeEnum
-
-typealias FunctionToolTypeEnum = dev.octri.showcase.openai.models.FunctionToolTypeEnum

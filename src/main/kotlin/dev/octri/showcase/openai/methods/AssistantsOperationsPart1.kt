@@ -17,8 +17,6 @@ import dev.octri.showcase.openai.ErrorResponse
 import dev.octri.showcase.openai.ListAssistantsParameterEnum
 import dev.octri.showcase.openai.ListAssistantsResponse
 import dev.octri.showcase.openai.ListMessagesResponse
-import dev.octri.showcase.openai.ListRunsParameterEnum
-import dev.octri.showcase.openai.ListRunsResponse
 import dev.octri.showcase.openai.MessageObject
 import dev.octri.showcase.openai.Metadata
 import dev.octri.showcase.openai.ModifyThreadRequestToolResources
@@ -837,6 +835,67 @@ internal object AssistantsListMessagesOperation {
             )
             .data
     }
+
+    /**
+     * Lists messages belonging to a thread. Use `run_id` to filter by the run that generated the
+     * messages and `order` to control their creation-time order. Use `after` or `before` cursors to
+     * navigate the results.
+     *
+     * Returns a list of messages for a given thread.
+     *
+     * @param threadId The ID of the thread the messages belong to.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc` for ascending
+     *   order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that defines your
+     *   place in the list. For instance, if you make a list request and receive 100 objects,
+     *   starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch
+     *   the previous page of the list.
+     * @param runId Filter messages by the run ID that generated them.
+     */
+    fun listMessagesPaginated(
+        clientConfig: ClientConfig,
+        request: Assistants.ListMessagesRequest,
+        options: RequestOptions? = null,
+        yieldFn: (MessageObject) -> Boolean,
+    ) {
+        var cursor = request.after
+        while (true) {
+            val page = listMessages(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            for (item in items) {
+                if (!yieldFn(item)) return
+            }
+            if (page.hasMore != true) return
+            val nextCursor = page.lastId
+            cursor = nextCursor
+        }
+    }
+
+    fun listMessagesPages(
+        clientConfig: ClientConfig,
+        request: Assistants.ListMessagesRequest,
+        options: RequestOptions? = null,
+        yieldPage: (Assistants.ListMessagesPage) -> Boolean,
+    ) {
+        var cursor = request.after
+        while (true) {
+            val page = listMessages(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            val nextCursor = page.lastId
+            val hasMore = page.hasMore == true
+            if (!yieldPage(Assistants.ListMessagesPage(page, items, hasMore))) return
+            if (!hasMore) return
+            cursor = nextCursor
+        }
+    }
 }
 
 internal object AssistantsCreateMessageOperation {
@@ -992,126 +1051,5 @@ internal object AssistantsDeleteMessageOperation {
                 )
             )
             .data
-    }
-}
-
-internal object AssistantsListRunsOperation {
-    /**
-     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or
-     * `before` to navigate through the results. The returned run statuses show whether each run is
-     * queued, active, completed, or in another state.
-     *
-     * Returns a list of runs belonging to a thread.
-     *
-     * @param threadId The ID of the thread the run belongs to.
-     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
-     *   100, and the default is 20.
-     * @param order Sort order by the `created_at` timestamp of the objects. `asc` for ascending
-     *   order and `desc` for descending order.
-     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
-     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
-     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
-     *   the list.
-     * @param before A cursor for use in pagination. `before` is an object ID that defines your
-     *   place in the list. For instance, if you make a list request and receive 100 objects,
-     *   starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch
-     *   the previous page of the list.
-     */
-    fun listRuns(
-        clientConfig: ClientConfig,
-        threadId: String,
-        limit: Long? = null,
-        order: ListRunsParameterEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListRunsResponse {
-        return SdkClient.request<ListRunsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/threads/${SdkClient.encodePathSegment(threadId)}/runs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "listRuns",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("429" to ErrorResponse::class.java),
-                )
-            )
-            .data
-    }
-
-    /**
-     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or
-     * `before` to navigate through the results. The returned run statuses show whether each run is
-     * queued, active, completed, or in another state.
-     *
-     * Returns a list of runs belonging to a thread.
-     *
-     * @param threadId The ID of the thread the run belongs to.
-     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
-     *   100, and the default is 20.
-     * @param order Sort order by the `created_at` timestamp of the objects. `asc` for ascending
-     *   order and `desc` for descending order.
-     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
-     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
-     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
-     *   the list.
-     * @param before A cursor for use in pagination. `before` is an object ID that defines your
-     *   place in the list. For instance, if you make a list request and receive 100 objects,
-     *   starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch
-     *   the previous page of the list.
-     */
-    fun listRunsPaginated(
-        clientConfig: ClientConfig,
-        threadId: String,
-        limit: Long? = null,
-        order: ListRunsParameterEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (RunObject) -> Boolean,
-    ) {
-        var cursor = after
-        while (true) {
-            val page = listRuns(clientConfig, threadId, limit, order, cursor, before, options)
-            val items = page.`data`.orEmpty()
-            if (items.isEmpty()) return
-            for (item in items) {
-                if (!yieldFn(item)) return
-            }
-            if (page.hasMore != true) return
-            val nextCursor = page.lastId
-            cursor = nextCursor
-        }
-    }
-
-    fun listRunsPages(
-        clientConfig: ClientConfig,
-        threadId: String,
-        limit: Long? = null,
-        order: ListRunsParameterEnum? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Assistants.ListRunsPage) -> Boolean,
-    ) {
-        var cursor = after
-        while (true) {
-            val page = listRuns(clientConfig, threadId, limit, order, cursor, before, options)
-            val items = page.`data`.orEmpty()
-            if (items.isEmpty()) return
-            val nextCursor = page.lastId
-            val hasMore = page.hasMore == true
-            if (!yieldPage(Assistants.ListRunsPage(page, items, hasMore))) return
-            if (!hasMore) return
-            cursor = nextCursor
-        }
     }
 }

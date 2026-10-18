@@ -14,18 +14,12 @@ data class CustomToolChatCompletionsCustom(
 )
 
 /** A custom tool that processes input using a specified format. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
 data class CustomToolChatCompletions(
     /** The type of the custom tool. Always `custom`. */
     val type: CustomToolChatCompletionsTypeEnum,
     /** Properties of the custom tool. */
     val custom: CustomToolChatCompletionsCustom,
-) : ToolsItem
+)
 
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class

@@ -3,21 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** The type of the file citation. Always `file_citation`. */
-enum class FileCitationBodyTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    FILE_CITATION("file_citation");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
 /** The citation type. Always `file_citation`. */
 class FileCitationParamTypeEnum
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -694,5 +679,27 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmStatic
         fun fromValue(value: String) =
             FineTuningJobHyperparametersLearningRateMultiplierVariant0Enum(value)
+    }
+}
+
+/** Optional enumerated value serialized in the `n_epochs` wire field. */
+class FineTuningJobHyperparametersNEpochsVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FineTuningJobHyperparametersNEpochsVariant0Enum && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val AUTO = FineTuningJobHyperparametersNEpochsVariant0Enum("auto")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FineTuningJobHyperparametersNEpochsVariant0Enum(value)
     }
 }

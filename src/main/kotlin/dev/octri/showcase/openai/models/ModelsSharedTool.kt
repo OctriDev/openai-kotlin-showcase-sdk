@@ -3,6 +3,320 @@
 
 package dev.octri.showcase.openai.models
 
+/** Allows the assistant to create, delete, or update files using unified diffs. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ApplyPatchToolParam(
+    /** The type of the tool. Always `apply_patch`. */
+    val type: ApplyPatchToolParamTypeEnum,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+) : Tool, ToolSearchOutputTool
+
+/** A tool that runs Python code to help generate a response to a prompt. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class CodeInterpreterTool(
+    /** The type of the code interpreter tool. Always `code_interpreter`. */
+    val type: CodeInterpreterToolTypeEnum,
+    /**
+     * The code interpreter container. Can be a container ID or an object that specifies uploaded
+     * file IDs to make available to your code, along with an optional `memory_limit` setting.
+     */
+    val container: CodeInterpreterToolContainer,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+) : Tool, ToolSearchOutputTool
+
+/** A tool that controls a virtual computer. Learn more about the computer tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ComputerTool(
+    /** The type of the computer tool. Always `computer`. */
+    val type: ComputerToolTypeEnum
+) : Tool, ToolSearchOutputTool
+
+/** A tool that controls a virtual computer. Learn more about the computer tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ComputerUsePreviewTool(
+    /** The type of the computer use tool. Always `computer_use_preview`. */
+    val type: ComputerUsePreviewToolTypeEnum,
+    /** The type of computer environment to control. */
+    val environment: ComputerEnvironment,
+    /** The width of the computer display. */
+    @com.fasterxml.jackson.annotation.JsonProperty("display_width") val displayWidth: Long,
+    /** The height of the computer display. */
+    @com.fasterxml.jackson.annotation.JsonProperty("display_height") val displayHeight: Long,
+) : Tool, ToolSearchOutputTool
+
+/** Typed representation of the `DirectToolCallCaller` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class DirectToolCallCaller(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: DirectToolCallCallerTypeEnum
+) : ToolCallCaller
+
+/** Typed representation of the `DirectToolCallCallerParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class DirectToolCallCallerParam(
+    /** The caller type. Always `direct`. */
+    val type: DirectToolCallCallerParamTypeEnum
+) : ToolCallCallerParam
+
+/**
+ * A tool that searches for relevant content from uploaded files. Learn more about the file search
+ * tool.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class FileSearchTool(
+    /** The type of the file search tool. Always `file_search`. */
+    val type: FileSearchToolTypeEnum,
+    /** The IDs of the vector stores to search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+    val vectorStoreIds: List<String>,
+    /**
+     * The maximum number of results to return. This number should be between 1 and 50 inclusive.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results")
+    val maxNumResults: Long? = null,
+    /** Ranking options for search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options")
+    val rankingOptions: RankingOptions? = null,
+    /** Optional API value serialized in the `filters` wire field. */
+    val filters: Filters? = null,
+) : Tool, ToolSearchOutputTool
+
+/** A tool that allows the model to execute shell commands. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class FunctionShellToolParam(
+    /** The type of the shell tool. Always `shell`. */
+    val type: FunctionShellToolParamTypeEnum,
+    /** Optional API value serialized in the `environment` wire field. */
+    val environment: FunctionShellToolParamEnvironment? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+) : Tool, ToolSearchOutputTool
+
+/**
+ * Defines a function in your own code the model can choose to call. Learn more about function
+ * calling.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class FunctionTool(
+    /** The type of the function tool. Always `function`. */
+    val type: FunctionToolTypeEnum,
+    /** The name of the function to call. */
+    val name: String,
+    /** A JSON schema object describing the parameters of the function. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parameters", required = true)
+    val parameters: Map<String, Any>?,
+    /** Required `boolean` value serialized in the `strict` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("strict", required = true) val strict: Boolean?,
+    /** Optional `boolean` value serialized in the `async` wire field. */
+    val async: Boolean? = null,
+    /** Optional `string` value serialized in the `description` wire field. */
+    val description: String? = null,
+    /**
+     * A JSON schema object describing the JSON value encoded in string outputs for this function.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
+    val outputSchema: Map<String, Any>? = null,
+    /** Whether this function is deferred and loaded via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+) : Tool, ToolSearchOutputTool
+
+/**
+ * Optional mask for inpainting. Contains `image_url` (string, optional) and `file_id` (string,
+ * optional).
+ */
+data class ImageGenToolInputImageMask(
+    /** Base64-encoded mask image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
+    /** File ID for the mask image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
+)
+
+/** A tool that generates images using the GPT image models. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ImageGenTool(
+    /** The type of the image generation tool. Always `image_generation`. */
+    val type: ImageGenToolTypeEnum,
+    /** Optional `string` value serialized in the `model` wire field. */
+    val model: String? = null,
+    /**
+     * The quality of the generated image. The GPT image models support `low`, `medium`, and `high`.
+     * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+     * also support `xhigh` and `max`. Default: `auto`.
+     */
+    val quality: ImageGenToolQualityEnum? = null,
+    /**
+     * The size of the generated images. For `gpt-image-2`, `gpt-image-2-2026-04-21`,
+     * `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
+     * `gpt-image-2.5-flare-2026-09-08`, arbitrary resolutions are supported as `WIDTHxHEIGHT`
+     * strings, for example `1536x864`. Width and height must both be divisible by 16 and the
+     * requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are
+     * experimental, and the maximum supported…
+     */
+    val size: String? = null,
+    /**
+     * The output format of the generated image. One of `png`, `webp`, or `jpeg`. Default: `png`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_format")
+    val outputFormat: ImageGenToolOutputFormatEnum? = null,
+    /** Compression level for the output image. Default: 100. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_compression")
+    val outputCompression: Long? = null,
+    /** Moderation level for the generated image. Default: `auto`. */
+    val moderation: ImageGenToolModerationEnum? = null,
+    /**
+     * Set the background of the generated image. One of `transparent`, `opaque`, or `auto`.
+     * `gpt-image-2.5-sunburst` and `gpt-image-2.5-flare`, including their `2026-09-08` snapshots,
+     * support `opaque` and `transparent` backgrounds. Transparent backgrounds are available for
+     * supported GPT Image models. For `gpt-image-2` and `gpt-image-2-2026-04-21`, this support is
+     * in preview. When using `transparent`, set the output format to `png` or `webp`. Default:
+     * `auto`.
+     */
+    val background: ImageGenToolBackgroundEnum? = null,
+    /** Optional API value serialized in the `input_fidelity` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_fidelity")
+    val inputFidelity: InputFidelity? = null,
+    /**
+     * Optional mask for inpainting. Contains `image_url` (string, optional) and `file_id` (string,
+     * optional).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_image_mask")
+    val inputImageMask: ImageGenToolInputImageMask? = null,
+    /** Number of partial images to generate in streaming mode, from 0 (default value) to 3. */
+    @com.fasterxml.jackson.annotation.JsonProperty("partial_images")
+    val partialImages: Long? = null,
+    /** Whether to generate a new image or edit an existing image. Default: `auto`. */
+    val action: ImageGenActionEnum? = null,
+) : Tool, ToolSearchOutputTool
+
+/** A tool that allows the model to execute shell commands in a local environment. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LocalShellToolParam(
+    /** The type of the local shell tool. Always `local_shell`. */
+    val type: LocalShellToolParamTypeEnum
+) : Tool, ToolSearchOutputTool
+
+/** Groups function/custom tools under a shared namespace. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class NamespaceToolParam(
+    /** The type of the tool. Always `namespace`. */
+    val type: NamespaceToolParamTypeEnum,
+    /** The namespace name used in tool calls (for example, `crm`). */
+    val name: String,
+    /** A description of the namespace shown to the model. */
+    val description: String,
+    /** The function/custom tools available inside this namespace. */
+    val tools: List<NamespaceToolParamToolsItem>,
+) : Tool
+
+/** Typed representation of the `ProgrammaticToolCallingParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ProgrammaticToolCallingParam(
+    /** The type of the tool. Always `programmatic_tool_calling`. */
+    val type: ProgrammaticToolCallingParamTypeEnum
+) : Tool, ToolSearchOutputTool
+
+/** Typed representation of the `ProgramToolCallCaller` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ProgramToolCallCaller(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: ProgramToolCallCallerTypeEnum,
+    /** The call ID of the program item that produced this tool call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("caller_id") val callerId: String,
+) : ToolCallCaller
+
+/** Typed representation of the `ProgramToolCallCallerParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ProgramToolCallCallerParam(
+    /** The caller type. Always `program`. */
+    val type: ProgramToolCallCallerParamTypeEnum,
+    /** The call ID of the program item that produced this tool call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("caller_id") val callerId: String,
+) : ToolCallCallerParam
+
 /** A tool that can be used to generate a response. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
@@ -170,71 +484,6 @@ constructor(
         get() = raw.path("type").asText()
 }
 
-/** Use this option to force the model to call a specific function. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ToolChoiceFunction(
-    /** For function calling, the type is always `function`. */
-    val type: ToolChoiceFunctionTypeEnum,
-    /** The name of the function to call. */
-    val name: String,
-) :
-    ToolChoiceParam,
-    RealtimeBetaResponseCreateParamsToolChoice,
-    RealtimeSessionCreateRequestGAToolChoice,
-    RealtimeResponseCreateParamsToolChoice,
-    RealtimeSessionCreateResponseGAToolChoice
-
-/** Use this option to force the model to call a specific tool on a remote MCP server. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ToolChoiceMCP(
-    /** For MCP tools, the type is always `mcp`. */
-    val type: ToolChoiceMCPTypeEnum,
-    /** The label of the MCP server to use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /** Optional `string` value serialized in the `name` wire field. */
-    val name: String? = null,
-) :
-    ToolChoiceParam,
-    RealtimeBetaResponseCreateParamsToolChoice,
-    RealtimeSessionCreateRequestGAToolChoice,
-    RealtimeResponseCreateParamsToolChoice,
-    RealtimeSessionCreateResponseGAToolChoice
-
-/** Typed representation of the `ToolSearchCall` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ToolSearchCall(
-    /** The type of the item. Always `tool_search_call`. */
-    val type: ToolSearchCallTypeEnum,
-    /** The unique ID of the tool search call item. */
-    val id: String,
-    /** Required `string` value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id", required = true) val callId: String?,
-    /** Whether tool search was executed by the server or by the client. */
-    val execution: ToolSearchExecutionType,
-    /** Arguments used for the tool search call. */
-    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true)
-    val arguments: Any?,
-    /** The status of the tool search call item that was recorded. */
-    val status: FunctionCallStatus,
-    /** The identifier of the actor that created the item. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-) : ConversationItem, ItemResource, OutputItem, ItemField
-
 /** Typed representation of the `ToolSearchCallItemParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
@@ -256,30 +505,6 @@ data class ToolSearchCallItemParam(
     /** Optional API value serialized in the `status` wire field. */
     val status: FunctionCallItemStatus? = null,
 ) : Item
-
-/** Typed representation of the `ToolSearchOutput` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ToolSearchOutput(
-    /** The type of the item. Always `tool_search_output`. */
-    val type: ToolSearchOutputTypeEnum,
-    /** The unique ID of the tool search output item. */
-    val id: String,
-    /** Required `string` value serialized in the `call_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id", required = true) val callId: String?,
-    /** Whether tool search was executed by the server or by the client. */
-    val execution: ToolSearchExecutionType,
-    /** The loaded tool definitions returned by tool search. */
-    val tools: List<Tool>,
-    /** The status of the tool search output item that was recorded. */
-    val status: FunctionCallOutputStatusEnum,
-    /** The identifier of the actor that created the item. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
-) : ConversationItem, ItemResource, OutputItem, ItemField
 
 /** Typed representation of the `ToolSearchOutputFunctionToolParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
@@ -506,4 +731,34 @@ data class ToolSearchToolParam(
     val description: String? = null,
     /** Optional API value serialized in the `parameters` wire field. */
     val parameters: EmptyModelParam? = null,
+) : Tool, ToolSearchOutputTool
+
+/**
+ * This tool searches the web for relevant results to use in a response. Learn more about the web
+ * search tool.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class WebSearchPreviewTool(
+    /**
+     * The type of the web search tool. One of `web_search_preview` or
+     * `web_search_preview_2025_03_11`.
+     */
+    val type: WebSearchPreviewToolTypeEnum,
+    /** Optional API value serialized in the `user_location` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_location")
+    val userLocation: ApproximateLocation? = null,
+    /**
+     * High level guidance for the amount of context window space to use for the search. One of
+     * `low`, `medium`, or `high`. `medium` is the default.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("search_context_size")
+    val searchContextSize: SearchContextSize? = null,
+    /** Optional array value serialized in the `search_content_types` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("search_content_types")
+    val searchContentTypes: List<SearchContentType>? = null,
 ) : Tool, ToolSearchOutputTool

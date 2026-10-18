@@ -53,46 +53,55 @@ typealias Input = List<LiveInitialItem>
 typealias Instructions = String
 
 /**
- * The Live model. Required in the session configuration for every transport; do not pass it as a
- * URL query parameter.
+ * Delegate tasks to your application. The Live session emits delegation events that your backend
+ * handles.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ModelIdsLive.Deserializer::class)
-sealed interface ModelIdsLive {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ModelIdsLive>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): ModelIdsLive {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                node.isTextual ->
-                    StringModelIdsLive(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        ModelIdsLive::class.java,
-                        "no ModelIdsLive branch accepts this payload",
-                    )
-            }
-        }
-    }
-}
-
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class StringModelIdsLive(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
-    ModelIdsLive
+data class LiveClientDelegationParam(
+    /** The delegation owner. Always `client` for tasks handled by your application. */
+    val type: LiveClientDelegationParamTypeEnum
+) :
+    Delegation,
+    LiveSessionCreateParamsDelegation,
+    LiveSessionUpdateParamsDelegation,
+    LiveSessionResourceParamDelegation
+
+/** Typed representation of the `LiveDecisionsDelegationParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveDecisionsDelegationParam(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: LiveDecisionsDelegationParamTypeEnum,
+    /** Required object value serialized in the `decisions` wire field. */
+    val decisions: LiveDecisionsSettingsInputParam,
+) : Delegation
+
+/** Delegate tasks to a Responses model managed by the Live session. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveResponsesDelegationParam(
+    /** The delegation owner. Always `responses` for tasks handled by the Responses API. */
+    val type: LiveResponsesDelegationParamTypeEnum,
+    /**
+     * Backend model, prompt, and tools used when the Live session delegates a task to Responses.
+     */
+    val responses: LiveResponsesDelegationSettingsInputParam,
+) : Delegation, LiveSessionCreateParamsDelegation, LiveSessionResourceParamDelegation
+
+typealias ModelIdsLive = String
 
 typealias PropertiesStore = Boolean
 

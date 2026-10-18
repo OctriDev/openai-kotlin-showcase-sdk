@@ -3,6 +3,18 @@
 
 package dev.octri.showcase.openai.models
 
+/** Typed representation of the `LiveCustomVoiceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveCustomVoiceParam(
+    /** Required `string` value serialized in the `id` wire field. */
+    val id: String
+) : LiveInitialSessionAudioOutputParamVoice
+
 /** An assistant message included in the initial text history of a Live session. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
@@ -162,11 +174,63 @@ data class LiveInitialSessionAudioOutputParam(
      * The voice used for Live speech, as a built-in voice name or a custom voice object containing
      * its ID. Defaults to `marin` and cannot change after startup.
      */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(
-        com.fasterxml.jackson.annotation.JsonSubTypes.Type(LiveCustomVoiceParam::class)
-    )
-    val voice: Any? = null
+    val voice: LiveInitialSessionAudioOutputParamVoice? = null
 )
+
+/**
+ * The voice used for Live speech, as a built-in voice name or a custom voice object containing its
+ * ID. Defaults to `marin` and cannot change after startup.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = LiveInitialSessionAudioOutputParamVoice.Deserializer::class
+)
+sealed interface LiveInitialSessionAudioOutputParamVoice {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<LiveInitialSessionAudioOutputParamVoice>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): LiveInitialSessionAudioOutputParamVoice {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val objectTypes: List<Class<out LiveInitialSessionAudioOutputParamVoice>> =
+                listOf(LiveCustomVoiceParam::class.java)
+            for (objectType in objectTypes) {
+                try {
+                    return mapper.convertValue(node, objectType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Not this branch.
+                }
+            }
+            return when {
+                node.isTextual ->
+                    StringLiveInitialSessionAudioOutputParamVoice(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        LiveInitialSessionAudioOutputParamVoice::class.java,
+                        "no LiveInitialSessionAudioOutputParamVoice branch accepts this payload",
+                    )
+            }
+        }
+    }
+}
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringLiveInitialSessionAudioOutputParamVoice(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : LiveInitialSessionAudioOutputParamVoice
 
 /**
  * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP

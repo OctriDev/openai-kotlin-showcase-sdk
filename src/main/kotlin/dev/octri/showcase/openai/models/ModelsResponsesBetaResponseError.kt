@@ -16,25 +16,3 @@ data class BetaResponseError(
     /** Optional object value serialized in the `misalignment` wire field. */
     val misalignment: BetaMisalignmentErrorDetailsResource? = null,
 )
-
-/** Emitted when an error occurs. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BetaResponseErrorEvent(
-    /** The type of the event. Always `error`. */
-    val type: BetaResponseErrorEventTypeEnum,
-    /** Required `string` value serialized in the `code` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /** The error message. */
-    val message: String,
-    /** Required `string` value serialized in the `param` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /** The sequence number of this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /** The agent that owns this multi-agent streaming event. */
-    val agent: BetaAgentTag? = null,
-) : BetaResponseStreamEvent

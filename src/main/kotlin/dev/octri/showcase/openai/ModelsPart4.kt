@@ -3,6 +3,11 @@
 
 package dev.octri.showcase.openai
 
+typealias BetaProgramToolCallCaller = dev.octri.showcase.openai.models.BetaProgramToolCallCaller
+
+typealias BetaProgramToolCallCallerParam =
+    dev.octri.showcase.openai.models.BetaProgramToolCallCallerParam
+
 typealias BetaProgramToolCallCallerParamTypeEnum =
     dev.octri.showcase.openai.models.BetaProgramToolCallCallerParamTypeEnum
 
@@ -608,9 +613,3 @@ typealias BetaResponsesServerEventVariant32 =
 
 typealias BetaResponsesServerEventVariant33 =
     dev.octri.showcase.openai.models.BetaResponsesServerEventVariant33
-
-typealias BetaResponsesServerEventVariant34 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant34
-
-typealias BetaResponsesServerEventVariant35 =
-    dev.octri.showcase.openai.models.BetaResponsesServerEventVariant35

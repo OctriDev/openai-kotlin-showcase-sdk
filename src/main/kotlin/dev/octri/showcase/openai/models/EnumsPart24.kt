@@ -3,28 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** Optional enumerated value serialized in the `n_epochs` wire field. */
-class FineTuningJobHyperparametersNEpochsVariant0Enum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is FineTuningJobHyperparametersNEpochsVariant0Enum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val AUTO = FineTuningJobHyperparametersNEpochsVariant0Enum("auto")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = FineTuningJobHyperparametersNEpochsVariant0Enum(value)
-    }
-}
-
 /** The object type, which is always "fine_tuning.job". */
 class FineTuningJobObjectEnum
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -657,6 +635,23 @@ enum class FunctionToolCallOutputTypeEnum(
     @com.fasterxml.jackson.annotation.JsonValue val value: String
 ) {
     FUNCTION_CALL_OUTPUT("function_call_output");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/** Required enumerated value serialized in the `type` wire field. */
+enum class FunctionToolParamTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    FUNCTION("function");
 
     override fun toString() = value
 

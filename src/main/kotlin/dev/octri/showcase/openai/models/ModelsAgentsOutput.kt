@@ -3,20 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** A text content part produced by the agent. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class OutputTextResource(
-    /** The content type. Always `output_text`. */
-    val type: OutputTextResourceTypeEnum,
-    /** The text produced by the agent. */
-    val text: String,
-) : AgentContentResource
-
 /** A breakdown of output token usage for a session or turn. */
 data class OutputTokensDetailsResource2(
     /** The number of output tokens used for reasoning. */

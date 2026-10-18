@@ -3,6 +3,50 @@
 
 package dev.octri.showcase.openai.models
 
+/**
+ * Specifies the detail level of the image. `low` uses fewer tokens, you can opt in to high
+ * resolution using `high`.
+ */
+class MessageDeltaContentImageUrlObjectImageUrlDetailEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MessageDeltaContentImageUrlObjectImageUrlDetailEnum && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val AUTO = MessageDeltaContentImageUrlObjectImageUrlDetailEnum("auto")
+        @JvmField val LOW = MessageDeltaContentImageUrlObjectImageUrlDetailEnum("low")
+        @JvmField val HIGH = MessageDeltaContentImageUrlObjectImageUrlDetailEnum("high")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MessageDeltaContentImageUrlObjectImageUrlDetailEnum(value)
+    }
+}
+
+/** Always `image_url`. */
+enum class MessageDeltaContentImageUrlObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    IMAGE_URL("image_url");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
 /** Always `refusal`. */
 enum class MessageDeltaContentRefusalObjectTypeEnum(
     @com.fasterxml.jackson.annotation.JsonValue val value: String
@@ -491,28 +535,6 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
     }
 }
 
-/** Required enumerated value serialized in the `model` wire field. */
-class ModelIdsLiveVariant1Enum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ModelIdsLiveVariant1Enum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val GPT_LIVE_1 = ModelIdsLiveVariant1Enum("gpt-live-1")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ModelIdsLiveVariant1Enum(value)
-    }
-}
-
 /** Optional enumerated value serialized in the `model` wire field. */
 class ModelIdsResponsesVariant1Enum
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -660,21 +682,6 @@ enum class ModerationResultBodyTypeEnum(
     @com.fasterxml.jackson.annotation.JsonValue val value: String
 ) {
     MODERATION_RESULT("moderation_result");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/** Specifies the event type. For a move action, this property is always set to `move`. */
-enum class MoveParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    MOVE("move");
 
     override fun toString() = value
 

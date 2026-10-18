@@ -3,33 +3,36 @@
 
 package dev.octri.showcase.openai.models
 
-/** A message to or from the model. */
+/** A screenshot of a computer. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class Message(
-    /** The type of the message. Always set to `message`. */
-    val type: MessageTypeEnum,
-    /** The unique ID of the message. */
-    val id: String,
+data class ComputerScreenshotContent(
     /**
-     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items
-     * are returned via API.
+     * Specifies the event type. For a computer screenshot, this property is always set to
+     * `computer_screenshot`.
      */
-    val status: MessageStatus,
+    val type: ComputerScreenshotContentTypeEnum,
+    /** Required API value serialized in the `image_url` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url", required = true)
+    val imageUrl: String?,
+    /** Required `string` value serialized in the `file_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id", required = true) val fileId: String?,
     /**
-     * The role of the message. One of `unknown`, `user`, `assistant`, `system`, `critic`,
-     * `discriminator`, `developer`, or `tool`.
+     * The detail level of the screenshot image to be sent to the model. One of `high`, `low`,
+     * `auto`, or `original`. Defaults to `auto`.
      */
-    val role: MessageRole,
-    /** The content of the message */
-    val content: List<MessageContentItem>,
-    /** Optional API value serialized in the `phase` wire field. */
-    val phase: MessagePhase2? = null,
-) : ConversationItem, ItemField
+    val detail: ImageDetail,
+    /**
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the
+     * request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
+    val promptCacheBreakpoint: PromptCacheBreakpointConfig? = null,
+) : MessageContentItem
 
 /** A content part that makes up an input or output item. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
@@ -93,3 +96,77 @@ constructor(
     val tag: String
         get() = raw.path("type").asText()
 }
+
+/** A text output from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class OutputTextContent(
+    /** The type of the output text. Always `output_text`. */
+    val type: OutputTextContentTypeEnum,
+    /** The text output from the model. */
+    val text: String,
+    /** The annotations of the text output. */
+    val annotations: List<AnnotationModel>,
+    /** Required array value serialized in the `logprobs` wire field. */
+    val logprobs: List<LogProb>,
+) : OutputContent, OutputMessageContent, MessageContentItem
+
+/** Reasoning text from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ReasoningTextContent(
+    /** The type of the reasoning text. Always `reasoning_text`. */
+    val type: ReasoningTextContentTypeEnum,
+    /** The reasoning text from the model. */
+    val text: String,
+) : OutputContent, MessageContentItem
+
+/** A refusal from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class RefusalContent(
+    /** The type of the refusal. Always `refusal`. */
+    val type: RefusalContentTypeEnum,
+    /** The refusal explanation from the model. */
+    val refusal: String,
+) : OutputContent, OutputMessageContent, MessageContentItem
+
+/** A summary text from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class SummaryTextContent(
+    /** The type of the object. Always `summary_text`. */
+    val type: SummaryTextContentTypeEnum,
+    /** A summary of the reasoning output from the model so far. */
+    val text: String,
+) : MessageContentItem
+
+/** A text content. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class TextContent(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: TextContentTypeEnum,
+    /** Required `string` value serialized in the `text` wire field. */
+    val text: String,
+) : MessageContentItem

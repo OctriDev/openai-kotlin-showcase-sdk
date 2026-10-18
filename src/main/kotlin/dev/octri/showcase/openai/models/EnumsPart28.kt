@@ -3,28 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** `owner` or `reader` */
-class InviteRoleEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean = other is InviteRoleEnum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val OWNER = InviteRoleEnum("owner")
-        @JvmField val READER = InviteRoleEnum("reader")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = InviteRoleEnum(value)
-    }
-}
-
 /** `accepted`,`expired`, or `pending` */
 class InviteStatusEnum
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -662,5 +640,22 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmStatic
         fun fromValue(value: String) =
             LiveDataChannelConfigParamAllowedServerEventsVariant0Enum(value)
+    }
+}
+
+/** Required enumerated value serialized in the `type` wire field. */
+enum class LiveDecisionChoiceQuestionParamTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    CHOICE("choice");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

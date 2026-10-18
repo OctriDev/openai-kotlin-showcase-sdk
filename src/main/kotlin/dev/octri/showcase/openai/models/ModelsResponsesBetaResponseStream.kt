@@ -3,282 +3,478 @@
 
 package dev.octri.showcase.openai.models
 
-/** Event emitted while a response is streamed. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownBetaResponseStreamEvent::class,
-)
-@com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseAudioDeltaEvent::class,
-        name = "response.audio.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseAudioDoneEvent::class,
-        name = "response.audio.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseAudioTranscriptDeltaEvent::class,
-        name = "response.audio.transcript.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseAudioTranscriptDoneEvent::class,
-        name = "response.audio.transcript.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCodeInterpreterCallCodeDeltaEvent::class,
-        name = "response.code_interpreter_call_code.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCodeInterpreterCallCodeDoneEvent::class,
-        name = "response.code_interpreter_call_code.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCodeInterpreterCallCompletedEvent::class,
-        name = "response.code_interpreter_call.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCodeInterpreterCallInProgressEvent::class,
-        name = "response.code_interpreter_call.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCodeInterpreterCallInterpretingEvent::class,
-        name = "response.code_interpreter_call.interpreting",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCompactionCompactingStreamingEvent::class,
-        name = "response.compaction.compacting",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCompletedEvent::class,
-        name = "response.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseContentPartAddedEvent::class,
-        name = "response.content_part.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseContentPartDoneEvent::class,
-        name = "response.content_part.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCreatedEvent::class,
-        name = "response.created",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseErrorEvent::class,
-        name = "error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFileSearchCallCompletedEvent::class,
-        name = "response.file_search_call.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFileSearchCallInProgressEvent::class,
-        name = "response.file_search_call.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFileSearchCallSearchingEvent::class,
-        name = "response.file_search_call.searching",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFunctionCallArgumentsDeltaEvent::class,
-        name = "response.function_call_arguments.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFunctionCallArgumentsDoneEvent::class,
-        name = "response.function_call_arguments.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseShellCallCommandAddedStreamingEvent::class,
-        name = "response.shell_call_command.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseShellCallCommandDeltaStreamingEvent::class,
-        name = "response.shell_call_command.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseShellCallCommandDoneStreamingEvent::class,
-        name = "response.shell_call_command.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseShellCallOutputContentDeltaStreamingEvent::class,
-        name = "response.shell_call_output_content.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseShellCallOutputContentDoneStreamingEvent::class,
-        name = "response.shell_call_output_content.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseInProgressEvent::class,
-        name = "response.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFailedEvent::class,
-        name = "response.failed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseIncompleteEvent::class,
-        name = "response.incomplete",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseOutputItemAddedEvent::class,
-        name = "response.output_item.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseOutputItemDoneEvent::class,
-        name = "response.output_item.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseReasoningSummaryPartAddedEvent::class,
-        name = "response.reasoning_summary_part.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseReasoningSummaryPartDoneEvent::class,
-        name = "response.reasoning_summary_part.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseReasoningSummaryTextDeltaEvent::class,
-        name = "response.reasoning_summary_text.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseReasoningSummaryTextDoneEvent::class,
-        name = "response.reasoning_summary_text.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseReasoningTextDeltaEvent::class,
-        name = "response.reasoning_text.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseReasoningTextDoneEvent::class,
-        name = "response.reasoning_text.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseRefusalDeltaEvent::class,
-        name = "response.refusal.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseRefusalDoneEvent::class,
-        name = "response.refusal.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseTextDeltaEvent::class,
-        name = "response.output_text.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseTextDoneEvent::class,
-        name = "response.output_text.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseWebSearchCallCompletedEvent::class,
-        name = "response.web_search_call.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseWebSearchCallInProgressEvent::class,
-        name = "response.web_search_call.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseWebSearchCallSearchingEvent::class,
-        name = "response.web_search_call.searching",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseImageGenCallCompletedEvent::class,
-        name = "response.image_generation_call.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseImageGenCallGeneratingEvent::class,
-        name = "response.image_generation_call.generating",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseImageGenCallInProgressEvent::class,
-        name = "response.image_generation_call.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseImageGenCallPartialImageEvent::class,
-        name = "response.image_generation_call.partial_image",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPCallArgumentsDeltaEvent::class,
-        name = "response.mcp_call_arguments.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPCallArgumentsDoneEvent::class,
-        name = "response.mcp_call_arguments.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPCallCompletedEvent::class,
-        name = "response.mcp_call.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPCallFailedEvent::class,
-        name = "response.mcp_call.failed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPCallInProgressEvent::class,
-        name = "response.mcp_call.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPListToolsCompletedEvent::class,
-        name = "response.mcp_list_tools.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPListToolsFailedEvent::class,
-        name = "response.mcp_list_tools.failed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseMCPListToolsInProgressEvent::class,
-        name = "response.mcp_list_tools.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseOutputTextAnnotationAddedEvent::class,
-        name = "response.output_text.annotation.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseQueuedEvent::class,
-        name = "response.queued",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCustomToolCallInputDeltaEvent::class,
-        name = "response.custom_tool_call_input.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseCustomToolCallInputDoneEvent::class,
-        name = "response.custom_tool_call_input.done",
-    ),
-)
-sealed interface BetaResponseStreamEvent
-
-/** A [BetaResponseStreamEvent] whose `type` names no branch this SDK knows, kept as received. */
+/** Emitted when there is a partial audio response. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class UnknownBetaResponseStreamEvent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
-) : BetaResponseStreamEvent {
-    /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
-}
+data class BetaResponseAudioDeltaEvent(
+    /** The type of the event. Always `response.audio.delta`. */
+    val type: BetaResponseAudioDeltaEventTypeEnum,
+    /** A sequence number for this chunk of the stream response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** A chunk of Base64 encoded response audio bytes. */
+    val delta: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
 
-/** Options for streaming responses. Only set this when you set `stream: true`. */
-data class BetaResponseStreamOptions(
-    /**
-     * When true, stream obfuscation will be enabled. Stream obfuscation adds random characters to
-     * an `obfuscation` field on streaming delta events to normalize payload sizes as a mitigation
-     * to certain side-channel attacks. These obfuscation fields are included by default, but add a
-     * small amount of overhead to the data stream. You can set `include_obfuscation` to false to
-     * optimize for bandwidth if you trust the network links between your application and the OpenAI
-     * API.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_obfuscation")
-    val includeObfuscation: Boolean? = null
+/** Emitted when the audio response is complete. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseAudioDoneEvent(
+    /** The type of the event. Always `response.audio.done`. */
+    val type: BetaResponseAudioDoneEventTypeEnum,
+    /** The sequence number of the delta. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when there is a partial transcript of audio. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseAudioTranscriptDeltaEvent(
+    /** The type of the event. Always `response.audio.transcript.delta`. */
+    val type: BetaResponseAudioTranscriptDeltaEventTypeEnum,
+    /** The partial transcript of the audio response. */
+    val delta: String,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when the full audio transcript is completed. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseAudioTranscriptDoneEvent(
+    /** The type of the event. Always `response.audio.transcript.done`. */
+    val type: BetaResponseAudioTranscriptDoneEventTypeEnum,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a partial code snippet is streamed by the code interpreter. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCodeInterpreterCallCodeDeltaEvent(
+    /** The type of the event. Always `response.code_interpreter_call_code.delta`. */
+    val type: BetaResponseCodeInterpreterCallCodeDeltaEventTypeEnum,
+    /** The index of the output item in the response for which the code is being streamed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The unique identifier of the code interpreter tool call item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The partial code snippet being streamed by the code interpreter. */
+    val delta: String,
+    /** The sequence number of this event, used to order streaming events. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when the code snippet is finalized by the code interpreter. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCodeInterpreterCallCodeDoneEvent(
+    /** The type of the event. Always `response.code_interpreter_call_code.done`. */
+    val type: BetaResponseCodeInterpreterCallCodeDoneEventTypeEnum,
+    /** The index of the output item in the response for which the code is finalized. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The unique identifier of the code interpreter tool call item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The final code snippet output by the code interpreter. */
+    val code: String,
+    /** The sequence number of this event, used to order streaming events. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when the code interpreter call is completed. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCodeInterpreterCallCompletedEvent(
+    /** The type of the event. Always `response.code_interpreter_call.completed`. */
+    val type: BetaResponseCodeInterpreterCallCompletedEventTypeEnum,
+    /**
+     * The index of the output item in the response for which the code interpreter call is
+     * completed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The unique identifier of the code interpreter tool call item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The sequence number of this event, used to order streaming events. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a code interpreter call is in progress. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCodeInterpreterCallInProgressEvent(
+    /** The type of the event. Always `response.code_interpreter_call.in_progress`. */
+    val type: BetaResponseCodeInterpreterCallInProgressEventTypeEnum,
+    /**
+     * The index of the output item in the response for which the code interpreter call is in
+     * progress.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The unique identifier of the code interpreter tool call item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The sequence number of this event, used to order streaming events. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when the code interpreter is actively interpreting the code snippet. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCodeInterpreterCallInterpretingEvent(
+    /** The type of the event. Always `response.code_interpreter_call.interpreting`. */
+    val type: BetaResponseCodeInterpreterCallInterpretingEventTypeEnum,
+    /**
+     * The index of the output item in the response for which the code interpreter is interpreting
+     * code.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The unique identifier of the code interpreter tool call item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The sequence number of this event, used to order streaming events. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/**
+ * Emitted when new summary content is sampled for a compaction trigger. Contains no summary
+ * content.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCompactionCompactingStreamingEvent(
+    /** The type of the event, always `response.compaction.compacting`. */
+    val type: BetaResponseCompactionCompactingStreamingEventTypeEnum,
+    /** The sequence number of the event that was emitted. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The index of the compaction output item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The ID of the compaction output item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when the model response is complete. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCompletedEvent(
+    /** The type of the event. Always `response.completed`. */
+    val type: BetaResponseCompletedEventTypeEnum,
+    /** Properties of the completed response. */
+    val response: BetaResponse,
+    /** The sequence number for this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a new content part is added. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseContentPartAddedEvent(
+    /** The type of the event. Always `response.content_part.added`. */
+    val type: BetaResponseContentPartAddedEventTypeEnum,
+    /** The ID of the output item that the content part was added to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The index of the output item that the content part was added to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The index of the content part that was added. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
+    /** The content part that was added. */
+    val part: BetaOutputContent,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a content part is done. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseContentPartDoneEvent(
+    /** The type of the event. Always `response.content_part.done`. */
+    val type: BetaResponseContentPartDoneEventTypeEnum,
+    /** The ID of the output item that the content part was added to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The index of the output item that the content part was added to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The index of the content part that is done. */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The content part that is done. */
+    val part: BetaOutputContent,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** An event that is emitted when a response is created. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCreatedEvent(
+    /** The type of the event. Always `response.created`. */
+    val type: BetaResponseCreatedEventTypeEnum,
+    /** The response that was created. */
+    val response: BetaResponse,
+    /** The sequence number for this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Event representing a delta (partial update) to the input of a custom tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCustomToolCallInputDeltaEvent(
+    /** The event type identifier. */
+    val type: BetaResponseCustomToolCallInputDeltaEventTypeEnum,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The index of the output this delta applies to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** Unique identifier for the API item associated with this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The incremental input data (delta) for the custom tool call. */
+    val delta: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Event indicating that input for a custom tool call is complete. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseCustomToolCallInputDoneEvent(
+    /** The event type identifier. */
+    val type: BetaResponseCustomToolCallInputDoneEventTypeEnum,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The index of the output this event applies to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** Unique identifier for the API item associated with this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The complete input data for the custom tool call. */
+    val input: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when an error occurs. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseErrorEvent(
+    /** The type of the event. Always `error`. */
+    val type: BetaResponseErrorEventTypeEnum,
+    /** Required `string` value serialized in the `code` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
+    /** The error message. */
+    val message: String,
+    /** Required `string` value serialized in the `param` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** An event that is emitted when a response fails. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFailedEvent(
+    /** The type of the event. Always `response.failed`. */
+    val type: BetaResponseFailedEventTypeEnum,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The response that failed. */
+    val response: BetaResponse,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a file search call is completed (results found). */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFileSearchCallCompletedEvent(
+    /** The type of the event. Always `response.file_search_call.completed`. */
+    val type: BetaResponseFileSearchCallCompletedEventTypeEnum,
+    /** The index of the output item that the file search call is initiated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The ID of the output item that the file search call is initiated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a file search call is initiated. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFileSearchCallInProgressEvent(
+    /** The type of the event. Always `response.file_search_call.in_progress`. */
+    val type: BetaResponseFileSearchCallInProgressEventTypeEnum,
+    /** The index of the output item that the file search call is initiated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The ID of the output item that the file search call is initiated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when a file search is currently searching. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFileSearchCallSearchingEvent(
+    /** The type of the event. Always `response.file_search_call.searching`. */
+    val type: BetaResponseFileSearchCallSearchingEventTypeEnum,
+    /** The index of the output item that the file search call is searching. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The ID of the output item that the file search call is initiated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when there is a partial function-call arguments delta. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFunctionCallArgumentsDeltaEvent(
+    /** The type of the event. Always `response.function_call_arguments.delta`. */
+    val type: BetaResponseFunctionCallArgumentsDeltaEventTypeEnum,
+    /** The ID of the output item that the function-call arguments delta is added to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The index of the output item that the function-call arguments delta is added to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The function-call arguments delta that is added. */
+    val delta: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent
+
+/** Emitted when function-call arguments are finalized. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFunctionCallArgumentsDoneEvent(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: BetaResponseFunctionCallArgumentsDoneEventTypeEnum,
+    /** The ID of the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /** The index of the output item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** The sequence number of this event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /** The function-call arguments. */
+    val arguments: String,
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
+) : BetaResponseStreamEvent

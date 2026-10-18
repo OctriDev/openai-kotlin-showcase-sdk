@@ -3,28 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ContainerAutoParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContainerAutoParam(
-    /** Automatically creates a container for this request */
-    val type: ContainerAutoParamTypeEnum,
-    /** An optional list of uploaded files to make available to your code. */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /** Optional API value serialized in the `memory_limit` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
-    val memoryLimit: ContainerMemoryLimit? = null,
-    /** Network access policy for the container. */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
-    val networkPolicy: ContainerAutoParamNetworkPolicy? = null,
-    /** An optional list of skills referenced by id or inline data. */
-    val skills: List<ContainerAutoParamSkillsItem>? = null,
-) : FunctionShellToolParamEnvironment
-
 /** Network access policy for the container. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
@@ -106,64 +84,6 @@ constructor(
         get() = raw.path("type").asText()
 }
 
-/** A citation for a container file used to generate a model response. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContainerFileCitationBody(
-    /** The type of the container file citation. Always `container_file_citation`. */
-    val type: ContainerFileCitationBodyTypeEnum,
-    /** The ID of the container file. */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /** The ID of the file. */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /** The index of the first character of the container file citation in the message. */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /** The index of the last character of the container file citation in the message. */
-    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /** The filename of the container file cited. */
-    val filename: String,
-) : AnnotationModel
-
-/** Typed representation of the `ContainerNetworkPolicyAllowlistParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContainerNetworkPolicyAllowlistParam(
-    /** Allow outbound network access only to specified domains. Always `allowlist`. */
-    val type: ContainerNetworkPolicyAllowlistParamTypeEnum,
-    /** A list of allowed domains when type is `allowlist`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
-    val allowedDomains: List<String>,
-    /** Optional domain-scoped secrets for allowlisted domains. */
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_secrets")
-    val domainSecrets: List<ContainerNetworkPolicyDomainSecretParam>? = null,
-) :
-    AutoCodeInterpreterToolParamNetworkPolicy,
-    ContainerAutoParamNetworkPolicy,
-    CreateContainerBodyNetworkPolicy
-
-/** Typed representation of the `ContainerNetworkPolicyDisabledParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContainerNetworkPolicyDisabledParam(
-    /** Disable outbound network access. Always `disabled`. */
-    val type: ContainerNetworkPolicyDisabledParamTypeEnum
-) :
-    AutoCodeInterpreterToolParamNetworkPolicy,
-    ContainerAutoParamNetworkPolicy,
-    CreateContainerBodyNetworkPolicy
-
 /** Typed representation of the `ContainerNetworkPolicyDomainSecretParam` API schema. */
 data class ContainerNetworkPolicyDomainSecretParam(
     /** The domain associated with the secret. */
@@ -173,31 +93,3 @@ data class ContainerNetworkPolicyDomainSecretParam(
     /** The secret value to inject for the domain. */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
 )
-
-/** Typed representation of the `ContainerReferenceParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContainerReferenceParam(
-    /** References a container created with the /v1/containers endpoint */
-    val type: ContainerReferenceParamTypeEnum,
-    /** The ID of the referenced container. */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-) : FunctionShellToolParamEnvironment, FunctionShellCallItemParamEnvironment
-
-/** Represents a container created with /v1/containers. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContainerReferenceResource(
-    /** The environment type. Always `container_reference`. */
-    val type: ContainerReferenceResourceTypeEnum,
-    /** Required `string` value serialized in the `container_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-) : FunctionShellCallEnvironment

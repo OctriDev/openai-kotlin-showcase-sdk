@@ -3,43 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** Returned when listing MCP tools is in progress for an item. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class RealtimeServerEventMCPListToolsInProgress(
-    /** The unique ID of the server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `mcp_list_tools.in_progress`. */
-    val type: RealtimeServerEventMCPListToolsInProgressTypeEnum,
-    /** The ID of the MCP list tools item. */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-) : RealtimeServerEvent
-
-/**
- * **WebRTC/SIP Only:** Emitted when the output audio buffer is cleared. This happens either in VAD
- * mode when the user has interrupted (`input_audio_buffer.speech_started`), or when the client has
- * emitted the `output_audio_buffer.clear` event to manually cut off the current audio response.
- * Learn more.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class RealtimeServerEventOutputAudioBufferCleared(
-    /** The unique ID of the server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `output_audio_buffer.cleared`. */
-    val type: RealtimeServerEventOutputAudioBufferClearedTypeEnum,
-    /** The unique ID of the response that produced the audio. */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
-) : RealtimeServerEvent
-
 /**
  * **WebRTC/SIP Only:** Emitted when the server begins streaming audio to the client. This event is
  * emitted after an audio content part has been added (`response.content_part.added`) to the
@@ -485,4 +448,24 @@ data class RealtimeServerEventResponseMCPCallInProgress(
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
     /** The ID of the MCP tool call item. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+) : RealtimeServerEvent
+
+/** Returned when a new Item is created during Response generation. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class RealtimeServerEventResponseOutputItemAdded(
+    /** The unique ID of the server event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /** The event type, must be `response.output_item.added`. */
+    val type: RealtimeServerEventResponseOutputItemAddedTypeEnum,
+    /** The ID of the Response to which the item belongs. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
+    /** The index of the output item in the Response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /** A single item within a Realtime conversation. */
+    val item: RealtimeConversationItem,
 ) : RealtimeServerEvent

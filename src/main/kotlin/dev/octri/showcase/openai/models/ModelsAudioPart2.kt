@@ -3,6 +3,122 @@
 
 package dev.octri.showcase.openai.models
 
+/** A segment of diarized transcript text with speaker metadata. */
+data class TranscriptionDiarizedSegment(
+    /** The type of the segment. Always `transcript.text.segment`. */
+    val type: TranscriptionDiarizedSegmentTypeEnum,
+    /** Unique identifier for the segment. */
+    val id: String,
+    /** Start timestamp of the segment in seconds. */
+    val start: Double,
+    /** End timestamp of the segment in seconds. */
+    val end: Double,
+    /** Transcript text for this segment. */
+    val text: String,
+    /**
+     * Speaker label for this segment. When known speakers are provided, the label matches
+     * `known_speaker_names[]`. Otherwise speakers are labeled sequentially using capital letters
+     * (`A`, `B`, ...).
+     */
+    val speaker: String,
+)
+
+/** A language detected in transcribed audio. */
+data class TranscriptionLanguage(
+    /** The code of a language detected in the audio. */
+    val code: String
+)
+
+/** Typed representation of the `TranscriptionSegment` API schema. */
+data class TranscriptionSegment(
+    /** Unique identifier of the segment. */
+    val id: Long,
+    /** Seek offset of the segment. */
+    val seek: Long,
+    /** Start time of the segment in seconds. */
+    val start: Double,
+    /** End time of the segment in seconds. */
+    val end: Double,
+    /** Text content of the segment. */
+    val text: String,
+    /** Array of token IDs for the text content. */
+    val tokens: List<Long>,
+    /** Temperature parameter used for generating the segment. */
+    val temperature: Float,
+    /**
+     * Average logprob of the segment. If the value is lower than -1, consider the logprobs failed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("avg_logprob") val avgLogprob: Float,
+    /**
+     * Compression ratio of the segment. If the value is greater than 2.4, consider the compression
+     * failed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("compression_ratio") val compressionRatio: Float,
+    /**
+     * Probability of no speech in the segment. If the value is higher than 1.0 and the
+     * `avg_logprob` is below -1, consider this segment silent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("no_speech_prob") val noSpeechProb: Float,
+)
+
+/** Typed representation of the `TranscriptionWord` API schema. */
+data class TranscriptionWord(
+    /** The text content of the word. */
+    val word: String,
+    /** Start time of the word in seconds. */
+    val start: Double,
+    /** End time of the word in seconds. */
+    val end: Double,
+)
+
+/** Required object value serialized in the `logprobs[]` wire field. */
+data class TranscriptTextDeltaEventLogprobsItem(
+    /** The token that was used to generate the log probability. */
+    val token: String? = null,
+    /** The log probability of the token. */
+    val logprob: Double? = null,
+    /** The bytes that were used to generate the log probability. */
+    val bytes: List<Long>? = null,
+)
+
+/**
+ * Emitted when there is an additional text delta. This is also the first event emitted when the
+ * transcription starts. Only emitted when you create a transcription with the `Stream` parameter
+ * set to `true`.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class TranscriptTextDeltaEvent(
+    /** The type of the event. Always `transcript.text.delta`. */
+    val type: TranscriptTextDeltaEventTypeEnum,
+    /** The text delta that was additionally transcribed. */
+    val delta: String,
+    /**
+     * The log probabilities of the delta. Only included if you create a transcription with the
+     * `include[]` parameter set to `logprobs`.
+     */
+    val logprobs: List<TranscriptTextDeltaEventLogprobsItem>? = null,
+    /**
+     * Identifier of the diarized segment that this delta belongs to. Only present when using
+     * `gpt-4o-transcribe-diarize`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null,
+) : CreateTranscriptionResponseStreamEvent
+
+/** Required object value serialized in the `logprobs[]` wire field. */
+data class TranscriptTextDoneEventLogprobsItem(
+    /** The token that was used to generate the log probability. */
+    val token: String? = null,
+    /** The log probability of the token. */
+    val logprob: Double? = null,
+    /** The bytes that were used to generate the log probability. */
+    val bytes: List<Long>? = null,
+)
+
 /**
  * Emitted when the transcription is complete. Contains the complete transcription text. Only
  * emitted when you create a transcription with the `Stream` parameter set to `true`.
@@ -58,89 +174,11 @@ data class TranscriptTextSegmentEvent(
     val speaker: String,
 ) : CreateTranscriptionResponseStreamEvent
 
-/** Usage statistics for models billed by audio input duration. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class TranscriptTextUsageDuration(
-    /** The type of the usage object. Always `duration` for this variant. */
-    val type: TranscriptTextUsageDurationTypeEnum,
-    /** Duration of the input audio in seconds. */
-    val seconds: Double,
-) :
-    CreateTranscriptionResponseDiarizedJsonUsage,
-    CreateTranscriptionResponseJsonUsage,
-    RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6aec14c56b,
-    RealtimeServerEventConversationItemInputAudioTranscriptionCompletedUsage
-
-/** Details about the input tokens billed for this request. */
-data class TranscriptTextUsageTokensInputTokenDetails(
-    /** Number of text tokens billed for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /** Number of audio tokens billed for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
-)
-
-/** Usage statistics for models billed by token usage. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class TranscriptTextUsageTokens(
-    /** The type of the usage object. Always `tokens` for this variant. */
-    val type: TranscriptTextUsageTokensTypeEnum,
-    /** Number of input tokens billed for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /** Number of output tokens generated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /** Total number of tokens used (input + output). */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /** Details about the input tokens billed for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_token_details")
-    val inputTokenDetails: TranscriptTextUsageTokensInputTokenDetails? = null,
-) :
-    CreateTranscriptionResponseDiarizedJsonUsage,
-    CreateTranscriptionResponseJsonUsage,
-    RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6aec14c56b,
-    RealtimeServerEventConversationItemInputAudioTranscriptionCompletedUsage
-
 /** Typed representation of the `UpdateVoiceConsentRequest` API schema. */
 data class UpdateVoiceConsentRequest(
     /** The updated label for this consent recording. */
     val name: String
 )
-
-/** Typed representation of the `VadConfig` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class VadConfig(
-    /** Must be set to `server_vad` to enable manual chunking using server side VAD. */
-    val type: VadConfigTypeEnum,
-    /** Amount of audio to include before the VAD detected speech (in milliseconds). */
-    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms")
-    val prefixPaddingMs: Long? = null,
-    /**
-     * Duration of silence to detect speech stop (in milliseconds). With shorter values the model
-     * will respond more quickly, but may jump in on short pauses from the user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms")
-    val silenceDurationMs: Long? = null,
-    /**
-     * Sensitivity threshold (0.0 to 1.0) for voice activity detection. A higher threshold will
-     * require louder audio to activate the model, and thus might perform better in noisy
-     * environments.
-     */
-    val threshold: Double? = null,
-) : TranscriptionChunkingStrategy
 
 /** Typed representation of the `VoiceConsentDeletedResource` API schema. */
 data class VoiceConsentDeletedResource(
@@ -182,6 +220,19 @@ data class VoiceConsentResource(
     /** The Unix timestamp (in seconds) for when the consent recording was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class VoiceIdsShared
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    CreateSpeechRequestVoice, VoiceIdsOrCustomVoice
 
 /** A custom voice that can be used for audio output. */
 data class VoiceResource(

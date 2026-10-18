@@ -51,7 +51,7 @@ class AudioNamespace(private val clientConfig: ClientConfig) {
     fun createTranscription(
         request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionParams,
         options: RequestOptions? = null,
-    ): Any {
+    ): CreateTranscriptionResponse {
         return dev.octri.showcase.openai.methods.Audio.createTranscription(
             clientConfig,
             request,
@@ -94,7 +94,7 @@ class AudioNamespace(private val clientConfig: ClientConfig) {
         responseFormat: CreateTranslationRequestResponseFormatEnum? = null,
         temperature: Double? = null,
         options: RequestOptions? = null,
-    ): Any {
+    ): CreateTranslationResponse {
         return dev.octri.showcase.openai.methods.Audio.createTranslation(
             clientConfig,
             file,

@@ -3,18 +3,29 @@
 
 package dev.octri.showcase.openai.models
 
-/** Combine multiple filters using `and` or `or`. */
+/**
+ * A filter used to compare a specified attribute key to a given value using a defined comparison
+ * operation.
+ */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class CompoundFilter(
-    /** Type of operation: `and` or `or`. */
-    val type: CompoundFilterTypeEnum,
-    /** Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`. */
-    val filters: List<CompoundFilterFiltersItem>,
+data class ComparisonFilter(
+    /**
+     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`:
+     * equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less
+     * than - `lte`: less than or equal - `in`: in - `nin`: not in
+     */
+    val type: ComparisonFilterTypeEnum,
+    /** The key to compare against the value. */
+    val key: String,
+    /**
+     * The value to compare against the attribute key; supports string, number, or boolean types.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
 ) : Filters, CompoundFilterFiltersItem, VectorStoreSearchRequestFilters
 
 /** Required API value serialized in the `filters[]` wire field. */

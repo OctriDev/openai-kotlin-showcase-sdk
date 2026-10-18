@@ -3,6 +3,27 @@
 
 package dev.octri.showcase.openai
 
+typealias FunctionToolCallOutputResource =
+    dev.octri.showcase.openai.models.FunctionToolCallOutputResource
+
+typealias FunctionToolCallOutputStatusEnum =
+    dev.octri.showcase.openai.models.FunctionToolCallOutputStatusEnum
+
+typealias FunctionToolCallOutputTypeEnum =
+    dev.octri.showcase.openai.models.FunctionToolCallOutputTypeEnum
+
+typealias FunctionToolCallResource = dev.octri.showcase.openai.models.FunctionToolCallResource
+
+typealias FunctionToolCallStatusEnum = dev.octri.showcase.openai.models.FunctionToolCallStatusEnum
+
+typealias FunctionToolCallTypeEnum = dev.octri.showcase.openai.models.FunctionToolCallTypeEnum
+
+typealias FunctionToolParam = dev.octri.showcase.openai.models.FunctionToolParam
+
+typealias FunctionToolParamTypeEnum = dev.octri.showcase.openai.models.FunctionToolParamTypeEnum
+
+typealias FunctionToolTypeEnum = dev.octri.showcase.openai.models.FunctionToolTypeEnum
+
 typealias GcpExternalStorageProviderParams =
     dev.octri.showcase.openai.models.GcpExternalStorageProviderParams
 
@@ -504,22 +525,3 @@ typealias InviteRequestProjectsItem = dev.octri.showcase.openai.models.InviteReq
 
 typealias InviteRequestProjectsItemRoleEnum =
     dev.octri.showcase.openai.models.InviteRequestProjectsItemRoleEnum
-
-typealias InviteRequestRoleEnum = dev.octri.showcase.openai.models.InviteRequestRoleEnum
-
-typealias InviteRoleEnum = dev.octri.showcase.openai.models.InviteRoleEnum
-
-typealias InviteStatusEnum = dev.octri.showcase.openai.models.InviteStatusEnum
-
-typealias Item = dev.octri.showcase.openai.models.Item
-
-typealias ItemField = dev.octri.showcase.openai.models.ItemField
-
-typealias ItemReferenceParam = dev.octri.showcase.openai.models.ItemReferenceParam
-
-typealias ItemReferenceParamTypeVariant0Enum =
-    dev.octri.showcase.openai.models.ItemReferenceParamTypeVariant0Enum
-
-typealias ItemResource = dev.octri.showcase.openai.models.ItemResource
-
-typealias KeyPressAction = dev.octri.showcase.openai.models.KeyPressAction

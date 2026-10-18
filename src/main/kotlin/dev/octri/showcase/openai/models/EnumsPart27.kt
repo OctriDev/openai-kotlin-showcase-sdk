@@ -3,30 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** The stage where moderation blocked the image generation call. */
-class ImageGenToolCallModerationDetailsModerationStageEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ImageGenToolCallModerationDetailsModerationStageEnum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val INPUT = ImageGenToolCallModerationDetailsModerationStageEnum("input")
-        @JvmField val OUTPUT = ImageGenToolCallModerationDetailsModerationStageEnum("output")
-        @JvmField val UNKNOWN = ImageGenToolCallModerationDetailsModerationStageEnum("unknown")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = ImageGenToolCallModerationDetailsModerationStageEnum(value)
-    }
-}
-
 /** Typed representation of the `ImageOutputFormat` API schema. */
 class ImageOutputFormat
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -658,5 +634,27 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         )
         @JvmStatic
         fun fromValue(value: String) = InviteProjectsItemRoleEnum(value)
+    }
+}
+
+/** `owner` or `reader` */
+class InviteRoleEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean = other is InviteRoleEnum && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val OWNER = InviteRoleEnum("owner")
+        @JvmField val READER = InviteRoleEnum("reader")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InviteRoleEnum(value)
     }
 }

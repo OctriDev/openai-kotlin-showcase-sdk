@@ -4,6 +4,100 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * Give the model access to additional tools via remote Model Context Protocol (MCP) servers. Learn
+ * more about MCP.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class MCPTool(
+    /** The type of the MCP tool. Always `mcp`. */
+    val type: MCPToolTypeEnum,
+    /** A label for this MCP server, used to identify it in tool calls. */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    /**
+     * The URL for the MCP server. One of `server_url`, `connector_id`, or `tunnel_id` must be
+     * provided.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String? = null,
+    /**
+     * Identifier for service connectors, like those available in ChatGPT. One of `server_url`,
+     * `connector_id`, or `tunnel_id` must be provided. Learn more about service connectors here.
+     * This field is deprecated for models released after September 1, 2026. Use `server_url` to
+     * connect to a remote MCP server, or `tunnel_id` to connect through a Secure MCP Tunnel.
+     * Currently supported `connector_id` values are: - Dropbox: `connector_dropbox` - Gmail:
+     * `connector_gmail` - Google…
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("connector_id")
+    val connectorId: MCPToolConnectorIdEnum? = null,
+    /**
+     * The Secure MCP Tunnel ID to use instead of a direct server URL. One of `server_url`,
+     * `connector_id`, or `tunnel_id` must be provided.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tunnel_id") val tunnelId: String? = null,
+    /**
+     * An OAuth access token that can be used with a remote MCP server, either with a custom MCP
+     * server URL or a service connector. Your application must handle the OAuth authorization flow
+     * and provide the token here.
+     */
+    val authorization: String? = null,
+    /** Optional description of the MCP server, used to provide more context. */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_description")
+    val serverDescription: String? = null,
+    /**
+     * Optional HTTP headers to send to the MCP server. Use for authentication or other purposes.
+     */
+    val headers: Map<String, String>? = null,
+    /** List of allowed tool names or a filter object. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(MCPToolFilter::class)
+    )
+    val allowedTools: Any? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+    /** Specify which of the MCP server's tools require approval. */
+    @com.fasterxml.jackson.annotation.JsonProperty("require_approval")
+    val requireApproval: MCPToolRequireApproval? = null,
+    /** Whether this MCP tool is deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+) :
+    Tool,
+    ToolSearchOutputTool,
+    RealtimeSessionCreateRequestGAToolsItem,
+    RealtimeResponseCreateParamsToolsItem,
+    RealtimeSessionCreateResponseGAToolsItem
+
+/** Typed representation of the `RealtimeFunctionTool` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class RealtimeFunctionTool(
+    /** The type of the tool, i.e. `function`. */
+    val type: RealtimeFunctionToolTypeEnum? = null,
+    /** The name of the function. */
+    val name: String? = null,
+    /**
+     * The description of the function, including guidance on when and how to call it, and guidance
+     * about what to tell the user when calling (if anything).
+     */
+    val description: String? = null,
+    /** Parameters of the function in JSON Schema. */
+    val parameters: Map<String, Any>? = null,
+) :
+    RealtimeSessionCreateRequestGAToolsItem,
+    RealtimeResponseCreateParamsToolsItem,
+    RealtimeSessionCreateResponseGAToolsItem
+
+/**
  * A description of the error that caused the response to fail, populated when the `status` is
  * `failed`.
  */
@@ -296,12 +390,8 @@ sealed interface RealtimeResponseCreateParamsToolChoice {
                     ToolChoiceFunction::class.java,
                     ToolChoiceMCP::class.java,
                 )
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
             }
             return when {
                 else -> UnknownRealtimeResponseCreateParamsToolChoice(node)

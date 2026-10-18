@@ -15,16 +15,6 @@ data class LiveAllowedServerEventParam(
     val responseEvent: String? = null,
 )
 
-/** Typed representation of the `LiveAllowedToolsChoiceParam` API schema. */
-data class LiveAllowedToolsChoiceParam(
-    /** The tool choice type. Always `allowed_tools`. */
-    val type: LiveAllowedToolsChoiceParamTypeEnum,
-    /** The tools that the delegated Responses model may call. */
-    val tools: List<LiveAllowedToolsChoiceParamToolsItem>,
-    /** Optional API value serialized in the `mode` wire field. */
-    val mode: LiveToolChoiceValueEnum? = null,
-)
-
 /** Required API value serialized in the `tools[]` wire field. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
@@ -105,3 +95,191 @@ constructor(
     val tag: String
         get() = raw.path("type").asText()
 }
+
+/** Typed representation of the `LiveFunctionToolChoiceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveFunctionToolChoiceParam(
+    /** The tool to call. Always `function`. */
+    val type: LiveFunctionToolChoiceParamTypeEnum,
+    /** The name of the function tool to call. */
+    val name: String,
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveMCPToolChoiceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveMCPToolChoiceParam(
+    /** The tool to call. Always `mcp`. */
+    val type: LiveMCPToolChoiceParamTypeEnum,
+    /** The label of the MCP server to call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    /** Optional `string` value serialized in the `name` wire field. */
+    val name: String? = null,
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Forces the model to call the apply_patch tool when executing a tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificApplyPatchParam(
+    /** The tool to call. Always `apply_patch`. */
+    val type: LiveSpecificApplyPatchParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificCodeInterpreterParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificCodeInterpreterParam(
+    /** The tool to call. Always `code_interpreter`. */
+    val type: LiveSpecificCodeInterpreterParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificComputerParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificComputerParam(
+    /** The tool to call. Always `computer`. */
+    val type: LiveSpecificComputerParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificCustomToolParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificCustomToolParam(
+    /** The tool to call. Always `custom`. */
+    val type: LiveSpecificCustomToolParamTypeEnum,
+    /** The name of the custom tool to call. */
+    val name: String,
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificFileSearchParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificFileSearchParam(
+    /** The tool to call. Always `file_search`. */
+    val type: LiveSpecificFileSearchParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Forces the model to call the shell tool when a tool call is required. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificFunctionShellParam(
+    /** The tool to call. Always `shell`. */
+    val type: LiveSpecificFunctionShellParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificImageGenParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificImageGenParam(
+    /** The tool to call. Always `image_generation`. */
+    val type: LiveSpecificImageGenParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificProgrammaticToolCallingParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificProgrammaticToolCallingParam(
+    /** The tool to call. Always `programmatic_tool_calling`. */
+    val type: LiveSpecificProgrammaticToolCallingParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificWebSearchParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificWebSearchParam(
+    /** The tool to call. Always `web_search`. */
+    val type: LiveSpecificWebSearchParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+
+/** Typed representation of the `LiveSpecificWebSearchPreviewParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LiveSpecificWebSearchPreviewParam(
+    /** The tool to call. Always `web_search_preview`. */
+    val type: LiveSpecificWebSearchPreviewParamTypeEnum
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveAllowedToolsChoiceParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice

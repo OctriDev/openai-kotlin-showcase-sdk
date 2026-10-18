@@ -257,30 +257,3 @@ data class StringCreateSessionInputParam(
 data class ListCreateSessionInputParam(
     @get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputMessageParam>
 ) : CreateSessionInputParam
-
-/** A request to spawn a subagent. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class CreateSubagentCallItemResource(
-    /** The item type. Always `create_subagent_call`. */
-    val type: CreateSubagentCallItemResourceTypeEnum,
-    /** The ID of the tool call item. */
-    val id: String,
-    /** The ID of the turn that contains this item. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /** The status of the tool call. */
-    val status: FunctionCallStatusResource,
-    /** The ID of the agent that requested the subagent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("agent_id") val agentId: String,
-    /** The task given to the spawned agent. */
-    val content: List<AgentContentResource>,
-    /** The model requested for the spawned agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model", required = true) val model: String?,
-    /** The reasoning effort requested for the spawned agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort", required = true)
-    val reasoningEffort: String?,
-) : SessionTurnItemResource, AgentOutputItemResource

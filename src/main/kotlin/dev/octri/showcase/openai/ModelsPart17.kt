@@ -3,6 +3,71 @@
 
 package dev.octri.showcase.openai
 
+typealias RealtimeTranslationClientEventSessionUpdateTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionUpdateTypeEnum
+
+typealias RealtimeTranslationClientSecretCreateRequest =
+    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequest
+
+typealias RealtimeTranslationClientSecretCreateRequestExpiresAfter =
+    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfter
+
+typealias RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum
+
+typealias RealtimeTranslationClientSecretCreateResponse =
+    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateResponse
+
+typealias RealtimeTranslationServerEvent =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEvent
+
+typealias RealtimeTranslationServerEventSessionClosed =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosed
+
+typealias RealtimeTranslationServerEventSessionClosedTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosedTypeEnum
+
+typealias RealtimeTranslationServerEventSessionCreated =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreated
+
+typealias RealtimeTranslationServerEventSessionCreatedTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreatedTypeEnum
+
+typealias RealtimeTranslationServerEventSessionInputTranscriptDelta =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDelta
+
+typealias RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum
+
+typealias RealtimeTranslationServerEventSessionOutputAudioDelta =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDelta
+
+typealias RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum
+
+typealias RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum
+
+typealias RealtimeTranslationServerEventSessionOutputTranscriptDelta =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDelta
+
+typealias RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum
+
+typealias RealtimeTranslationServerEventSessionUpdated =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdated
+
+typealias RealtimeTranslationServerEventSessionUpdatedTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdatedTypeEnum
+
+typealias RealtimeTranslationSession = dev.octri.showcase.openai.models.RealtimeTranslationSession
+
+typealias RealtimeTranslationSessionAudio =
+    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudio
+
+typealias RealtimeTranslationSessionAudioInput =
+    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInput
+
 typealias RealtimeTranslationSessionAudioInputNoiseReduction =
     dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInputNoiseReduction
 
@@ -276,8 +341,6 @@ typealias ResponseFileSearchCallSearchingEvent =
 typealias ResponseFileSearchCallSearchingEventTypeEnum =
     dev.octri.showcase.openai.models.ResponseFileSearchCallSearchingEventTypeEnum
 
-typealias ResponseFormat = dev.octri.showcase.openai.models.ResponseFormat
-
 typealias ResponseFormatJsonObject = dev.octri.showcase.openai.models.ResponseFormatJsonObject
 
 typealias ResponseFormatJsonObjectTypeEnum =
@@ -532,65 +595,3 @@ typealias ResponseShellCallCommandDeltaStreamingEventTypeEnum =
 
 typealias ResponseShellCallCommandDoneStreamingEvent =
     dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEvent
-
-typealias ResponseShellCallCommandDoneStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum
-
-typealias ResponseShellCallOutputContentDeltaStreamingEvent =
-    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEvent
-
-typealias ResponseShellCallOutputContentDeltaStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEventTypeEnum
-
-typealias ResponseShellCallOutputContentDoneStreamingEvent =
-    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEvent
-
-typealias ResponseShellCallOutputContentDoneStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEventTypeEnum
-
-typealias ResponsesServerEvent = dev.octri.showcase.openai.models.ResponsesServerEvent
-
-typealias ResponsesServerEventVariant0 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant0
-
-typealias ResponsesServerEventVariant1 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant1
-
-typealias ResponsesServerEventVariant10 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant10
-
-typealias ResponsesServerEventVariant11 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant11
-
-typealias ResponsesServerEventVariant12 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant12
-
-typealias ResponsesServerEventVariant13 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant13
-
-typealias ResponsesServerEventVariant14 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant14
-
-typealias ResponsesServerEventVariant15 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant15
-
-typealias ResponsesServerEventVariant16 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant16
-
-typealias ResponsesServerEventVariant17 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant17
-
-typealias ResponsesServerEventVariant18 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant18
-
-typealias ResponsesServerEventVariant19 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant19
-
-typealias ResponsesServerEventVariant2 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant2
-
-typealias ResponsesServerEventVariant20 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant20
-
-typealias ResponsesServerEventVariant21 =
-    dev.octri.showcase.openai.models.ResponsesServerEventVariant21

@@ -270,6 +270,26 @@ class AssistantsNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
+     * Lists messages belonging to a thread. Use `run_id` to filter by the run that generated the
+     * messages and `order` to control their creation-time order. Use `after` or `before` cursors to
+     * navigate the results.
+     *
+     * Returns a list of messages for a given thread.
+     */
+    fun listMessagesPaginated(
+        request: dev.octri.showcase.openai.methods.Assistants.ListMessagesRequest,
+        options: RequestOptions? = null,
+        yieldFn: (MessageObject) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Assistants.listMessagesPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
+    }
+
+    /**
      * Creates a message in a thread. Provide the message `role` and `content`, and optionally
      * include file attachments or metadata. Use this operation to add a user or assistant message
      * to an existing conversation thread.
@@ -519,6 +539,25 @@ class AssistantsNamespace(private val clientConfig: ClientConfig) {
             clientConfig,
             request,
             options,
+        )
+    }
+
+    /**
+     * Lists the steps belonging to a run on a thread. Use cursor parameters to page through the
+     * steps, and set `order` to control their order by creation time.
+     *
+     * Returns a list of run steps belonging to a run.
+     */
+    fun listRunStepsPaginated(
+        request: dev.octri.showcase.openai.methods.Assistants.ListRunStepsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (RunStepObject) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Assistants.listRunStepsPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
         )
     }
 

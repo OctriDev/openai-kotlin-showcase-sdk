@@ -3,26 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** Returned when a new Item is created during Response generation. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class RealtimeServerEventResponseOutputItemAdded(
-    /** The unique ID of the server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `response.output_item.added`. */
-    val type: RealtimeServerEventResponseOutputItemAddedTypeEnum,
-    /** The ID of the Response to which the item belongs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
-    /** The index of the output item in the Response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** A single item within a Realtime conversation. */
-    val item: RealtimeConversationItem,
-) : RealtimeServerEvent
-
 /**
  * Returned when an Item is done streaming. Also emitted when a Response is interrupted, incomplete,
  * or cancelled.

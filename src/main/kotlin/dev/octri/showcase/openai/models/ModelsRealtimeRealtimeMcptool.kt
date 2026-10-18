@@ -3,32 +3,37 @@
 
 package dev.octri.showcase.openai.models
 
-/** A Realtime item representing an invocation of a tool on an MCP server. */
+/** Typed representation of the `RealtimeMCPHTTPError` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class RealtimeMCPToolCall(
-    /** The type of the item. Always `mcp_call`. */
-    val type: RealtimeMCPToolCallTypeEnum,
-    /** The unique ID of the tool call. */
-    val id: String,
-    /** The label of the MCP server running the tool. */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /** The name of the tool that was run. */
-    val name: String,
-    /** A JSON string of the arguments passed to the tool. */
-    val arguments: String,
-    /** Optional `string` value serialized in the `approval_request_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id")
-    val approvalRequestId: String? = null,
-    /** Optional `string` value serialized in the `output` wire field. */
-    val output: String? = null,
-    /** The error from the tool call, if any. */
-    val error: RealtimeMCPToolCallError? = null,
-) : RealtimeConversationItem
+data class RealtimeMCPHTTPError(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: RealtimeMCPHTTPErrorTypeEnum,
+    /** Required `integer` value serialized in the `code` wire field. */
+    val code: Long,
+    /** Required `string` value serialized in the `message` wire field. */
+    val message: String,
+) : RealtimeMCPToolCallError
+
+/** Typed representation of the `RealtimeMCPProtocolError` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class RealtimeMCPProtocolError(
+    /** Required enumerated value serialized in the `type` wire field. */
+    val type: RealtimeMCPProtocolErrorTypeEnum,
+    /** Required `integer` value serialized in the `code` wire field. */
+    val code: Long,
+    /** Required `string` value serialized in the `message` wire field. */
+    val message: String,
+) : RealtimeMCPToolCallError
 
 /** The error from the tool call, if any. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(

@@ -59,41 +59,37 @@ constructor(
 }
 
 /** Typed representation of the `CreateVectorStoreFileBatchRequest` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = CreateVectorStoreFileBatchRequest.Deserializer::class
+data class CreateVectorStoreFileBatchRequest(
+    /**
+     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that
+     * can access files. If `attributes` or `chunking_strategy` are provided, they will be applied
+     * to all files in the batch. The maximum batch size is 2000 files. This endpoint is recommended
+     * for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually
+     * exclusive with `files`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
+    /**
+     * A list of objects that each include a `file_id` plus optional `attributes` or
+     * `chunking_strategy`. Use this when you need to override metadata for specific files. The
+     * global `attributes` or `chunking_strategy` will be ignored and must be specified for each
+     * file. The maximum batch size is 2000 files. This endpoint is recommended for multi-file
+     * ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with
+     * `file_ids`.
+     */
+    val files: List<CreateVectorStoreFileRequest>? = null,
+    /**
+     * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
+    val chunkingStrategy: ChunkingStrategyRequestParam? = null,
+    /**
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters, booleans, or numbers.
+     */
+    val attributes: VectorStoreFileAttributes? = null,
 )
-sealed interface CreateVectorStoreFileBatchRequest {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<CreateVectorStoreFileBatchRequest>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): CreateVectorStoreFileBatchRequest {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else ->
-                    ValueCreateVectorStoreFileBatchRequest(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
-                        )
-                    )
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ValueCreateVectorStoreFileBatchRequest(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
-) : CreateVectorStoreFileBatchRequest
 
 /** Typed representation of the `CreateVectorStoreFileRequest` API schema. */
 data class CreateVectorStoreFileRequest(

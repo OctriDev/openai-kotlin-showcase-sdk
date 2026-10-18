@@ -3,23 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** The type of the object. Always `self_hosted`. */
-enum class EnvironmentResourceSelfHostedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    SELF_HOSTED("self_hosted");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
 /** The public lifecycle status of an execution environment. */
 class EnvironmentStatusResource
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -655,5 +638,20 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         )
         @JvmStatic
         fun fromValue(value: String) = FileAnnotationSourceTypeEnum(value)
+    }
+}
+
+/** The type of the file citation. Always `file_citation`. */
+enum class FileCitationBodyTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    FILE_CITATION("file_citation");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

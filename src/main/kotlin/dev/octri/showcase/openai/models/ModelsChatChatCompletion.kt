@@ -3,6 +3,21 @@
 
 package dev.octri.showcase.openai.models
 
+/** Constrains the tools available to the model to a pre-defined set. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ChatCompletionAllowedToolsChoice(
+    /** Allowed tool configuration type. Always `allowed_tools`. */
+    val type: ChatCompletionAllowedToolsChoiceTypeEnum,
+    /** Constrains the tools available to the model to a pre-defined set. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
+    val allowedTools: ChatCompletionAllowedTools,
+) : ChatCompletionToolChoiceOption
+
 /** Typed representation of the `ChatCompletionDeleted` API schema. */
 data class ChatCompletionDeleted(
     /** The type of object being deleted. */
@@ -61,6 +76,46 @@ data class ChatCompletionList(
 )
 
 typealias ChatCompletionModalities = List<String>
+
+/** Required object value serialized in the `function` wire field. */
+data class ChatCompletionNamedToolChoiceFunction(
+    /** The name of the function to call. */
+    val name: String
+)
+
+/** Specifies a tool the model should use. Use to force the model to call a specific function. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ChatCompletionNamedToolChoice(
+    /** For function calling, the type is always `function`. */
+    val type: ChatCompletionNamedToolChoiceTypeEnum,
+    /** Required object value serialized in the `function` wire field. */
+    val function: ChatCompletionNamedToolChoiceFunction,
+) : ChatCompletionToolChoiceOption
+
+/** Required object value serialized in the `custom` wire field. */
+data class ChatCompletionNamedToolChoiceCustomCustom(
+    /** The name of the custom tool to call. */
+    val name: String
+)
+
+/** Specifies a tool the model should use. Use to force the model to call a specific custom tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ChatCompletionNamedToolChoiceCustom(
+    /** For custom tool calling, the type is always `custom`. */
+    val type: ChatCompletionNamedToolChoiceCustomTypeEnum,
+    /** Required object value serialized in the `custom` wire field. */
+    val custom: ChatCompletionNamedToolChoiceCustomCustom,
+) : ChatCompletionToolChoiceOption
 
 /** A URL citation when using web search. */
 data class ChatCompletionResponseMessageAnnotationsItemUrlCitation(
@@ -285,12 +340,8 @@ sealed interface ChatCompletionToolChoiceOption {
                     ChatCompletionNamedToolChoice::class.java,
                     ChatCompletionNamedToolChoiceCustom::class.java,
                 )
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
             }
             return when {
                 node.isTextual ->

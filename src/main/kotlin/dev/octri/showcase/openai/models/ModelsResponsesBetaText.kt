@@ -3,19 +3,33 @@
 
 package dev.octri.showcase.openai.models
 
-/** A text content. */
+/**
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is
+ * recommended for models that support it. Note that the model will not generate JSON without a
+ * system or user message instructing it to do so.
+ */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
 )
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
     use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
 )
-data class BetaTextContent(
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: BetaTextContentTypeEnum,
-    /** Required `string` value serialized in the `text` wire field. */
-    val text: String,
-) : BetaAgentMessageContentItem, BetaMessageContentItem
+data class BetaResponseFormatJsonObject(
+    /** The type of response format being defined. Always `json_object`. */
+    val type: BetaResponseFormatJsonObjectTypeEnum
+) : BetaTextResponseFormatConfiguration
+
+/** Default response format. Used to generate text responses. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaResponseFormatText(
+    /** The type of response format being defined. Always `text`. */
+    val type: BetaResponseFormatTextTypeEnum
+) : BetaTextResponseFormatConfiguration
 
 /**
  * An object specifying the format that the model must output. Configuring `{ "type": "json_schema"

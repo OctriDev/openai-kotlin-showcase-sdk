@@ -3,6 +3,98 @@
 
 package dev.octri.showcase.openai.models
 
+/** Typed representation of the `AssistantToolsCode` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class AssistantToolsCode(
+    /** The type of tool being defined: `code_interpreter` */
+    val type: AssistantToolsCodeTypeEnum
+) :
+    AssistantObjectToolsItem,
+    RunObjectToolsItem,
+    MessageObjectAttachmentsItemToolsItem,
+    CreateAssistantRequestToolsItem,
+    CreateMessageRequestAttachmentsItemToolsItem,
+    CreateRunRequestToolsItem,
+    CreateThreadAndRunRequestToolsItem,
+    ModifyAssistantRequestToolsItem
+
+/** Overrides for the file search tool. */
+data class AssistantToolsFileSearchFileSearch(
+    /**
+     * The maximum number of results the file search tool should output. The default is 20 for
+     * `gpt-4*` models and 5 for `gpt-3.5-turbo`. This number should be between 1 and 50 inclusive.
+     * Note that the file search tool may output fewer than `max_num_results` results. See the file
+     * search tool documentation for more information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results")
+    val maxNumResults: Long? = null,
+    /**
+     * The ranking options for the file search. If not specified, the file search tool will use the
+     * `auto` ranker and a score_threshold of 0. See the file search tool documentation for more
+     * information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options")
+    val rankingOptions: FileSearchRankingOptions? = null,
+)
+
+/** Typed representation of the `AssistantToolsFileSearch` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class AssistantToolsFileSearch(
+    /** The type of tool being defined: `file_search` */
+    val type: AssistantToolsFileSearchTypeEnum,
+    /** Overrides for the file search tool. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+    val fileSearch: AssistantToolsFileSearchFileSearch? = null,
+) :
+    AssistantObjectToolsItem,
+    RunObjectToolsItem,
+    CreateAssistantRequestToolsItem,
+    CreateRunRequestToolsItem,
+    CreateThreadAndRunRequestToolsItem,
+    ModifyAssistantRequestToolsItem
+
+/** Typed representation of the `AssistantToolsFileSearchTypeOnly` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class AssistantToolsFileSearchTypeOnly(
+    /** The type of tool being defined: `file_search` */
+    val type: AssistantToolsFileSearchTypeOnlyTypeEnum
+) : MessageObjectAttachmentsItemToolsItem, CreateMessageRequestAttachmentsItemToolsItem
+
+/** Typed representation of the `AssistantToolsFunction` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class AssistantToolsFunction(
+    /** The type of tool being defined: `function` */
+    val type: AssistantToolsFunctionTypeEnum,
+    /** Required object value serialized in the `function` wire field. */
+    val function: FunctionObject,
+) :
+    AssistantObjectToolsItem,
+    RunObjectToolsItem,
+    CreateAssistantRequestToolsItem,
+    CreateRunRequestToolsItem,
+    CreateThreadAndRunRequestToolsItem,
+    ModifyAssistantRequestToolsItem
+
 /** Optional object value serialized in the `code_interpreter` wire field. */
 data class CreateAssistantRequestToolResourcesCodeInterpreter(
     /**
@@ -723,84 +815,3 @@ data class CreateThreadRequestToolResources(
     @com.fasterxml.jackson.annotation.JsonProperty("file_search")
     val fileSearch: CreateThreadRequestToolResourcesFileSearch? = null,
 )
-
-/**
- * Options to create a new thread. If no thread is provided when running a request, an empty thread
- * will be created.
- */
-data class CreateThreadRequest(
-    /** A list of messages to start the thread with. */
-    val messages: List<CreateMessageRequest>? = null,
-    /**
-     * A set of resources that are made available to the assistant's tools in this thread. The
-     * resources are specific to the type of tool. For example, the `code_interpreter` tool requires
-     * a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources")
-    val toolResources: CreateThreadRequestToolResources? = null,
-    /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
-     */
-    val metadata: Metadata? = null,
-)
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51(
-    /** Always `auto`. */
-    val type: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX1758507317
-) : CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
-
-/** Required object value serialized in the `static` wire field. */
-data class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce(
-    /**
-     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is
-     * `100` and the maximum value is `4096`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens")
-    val maxChunkSizeTokens: Long,
-    /**
-     * The number of tokens that overlap between chunks. The default value is `400`. Note that the
-     * overlap must not exceed half of `max_chunk_size_tokens`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens")
-    val chunkOverlapTokens: Long,
-)
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4(
-    /** Always `static`. */
-    val type: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f2112e7,
-    /** Required object value serialized in the `static` wire field. */
-    val static: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce,
-) : CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
-
-/** The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-)
-@com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51::class,
-        name = "auto",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4::class,
-        name = "static",
-    ),
-)
-sealed interface CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179

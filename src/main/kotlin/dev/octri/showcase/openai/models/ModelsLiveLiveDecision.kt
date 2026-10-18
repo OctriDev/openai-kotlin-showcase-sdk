@@ -37,54 +37,6 @@ data class LiveDecisionCompleted(
     val decision: DecisionResponse,
 )
 
-/**
- * Evaluate the configured questions using the current conversation and Decision inputs. Reusing an
- * event_id is rejected for the lifetime of the session.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDecisionCreateParam(
-    /** Required `string` value serialized in the `event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveDecisionCreateParamTypeEnum,
-) : LiveClientEvent, LiveForkClientEvent, LiveSidebandClientEvent
-
-/**
- * A Decision API event for a Live delegation or transcript trigger. For a trigger, source_event_id
- * identifies the transcript delta that caused this evaluation.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDecisionEvent(
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveDecisionEventTypeEnum,
-    /** The unique ID of this Live server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** Required `string` value serialized in the `delegation_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("delegation_id", required = true)
-    val delegationId: String?,
-    /** Required `string` value serialized in the `trigger_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("trigger_id", required = true)
-    val triggerId: String?,
-    /** Required API value serialized in the `source_event_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_event_type", required = true)
-    val sourceEventType: LiveDecisionEventSourceEventTypeVariant0Enum?,
-    /** Required `string` value serialized in the `source_event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_event_id", required = true)
-    val sourceEventId: String?,
-    /** Required object value serialized in the `event` wire field. */
-    val event: LiveDecisionCompleted,
-) : LiveSidebandServerEvent, LiveServerEvent2
-
 /** Typed representation of the `LiveDecisionInputImageParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
@@ -167,82 +119,6 @@ data class LiveDecisionInputTextParam(
     /** The text input to the model. */
     val text: String,
 ) : LiveDecisionInputItemParamContentItem, LiveDecisionStoredInputItemParamContentItem
-
-/** An input item was appended for future decisions. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDecisionItemCreated(
-    /** The unique ID of the Live server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveDecisionItemCreatedTypeEnum,
-    /** Required object value serialized in the `item` wire field. */
-    val item: LiveDecisionStoredInputItemParam,
-    /** The event_id of the client command associated with this server event, when supplied. */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id")
-    val clientEventId: String? = null,
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
- * Append an input item for future decisions without starting an evaluation or changing Live voice
- * context.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDecisionItemCreateParam(
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveDecisionItemCreateParamTypeEnum,
-    /** Required object value serialized in the `item` wire field. */
-    val item: LiveDecisionInputItemParam,
-    /** Optional API value serialized in the `event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
-) : LiveClientEvent, LiveForkClientEvent, LiveSidebandClientEvent
-
-/** An input item was removed from future decisions. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDecisionItemDeleted(
-    /** The unique ID of the Live server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveDecisionItemDeletedTypeEnum,
-    /** Required `string` value serialized in the `item_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The event_id of the client command associated with this server event, when supplied. */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id")
-    val clientEventId: String? = null,
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
- * Delete an input item from future decisions without starting an evaluation or changing Live voice
- * context.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class LiveDecisionItemDeleteParam(
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: LiveDecisionItemDeleteParamTypeEnum,
-    /** Required `string` value serialized in the `item_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** Optional API value serialized in the `event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
-) : LiveClientEvent, LiveForkClientEvent, LiveSidebandClientEvent
 
 /** Typed representation of the `LiveDecisionPredicateQuestionParam` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(

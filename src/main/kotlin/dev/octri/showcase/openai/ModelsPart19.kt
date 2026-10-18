@@ -3,6 +3,55 @@
 
 package dev.octri.showcase.openai
 
+typealias RunStepObjectObjectEnum = dev.octri.showcase.openai.models.RunStepObjectObjectEnum
+
+typealias RunStepObjectStatusEnum = dev.octri.showcase.openai.models.RunStepObjectStatusEnum
+
+typealias RunStepObjectStepDetails = dev.octri.showcase.openai.models.RunStepObjectStepDetails
+
+typealias RunStepObjectTypeEnum = dev.octri.showcase.openai.models.RunStepObjectTypeEnum
+
+typealias RunStepStreamEvent = dev.octri.showcase.openai.models.RunStepStreamEvent
+
+typealias RunStepStreamEventVariant0 = dev.octri.showcase.openai.models.RunStepStreamEventVariant0
+
+typealias RunStepStreamEventVariant0EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant0EventEnum
+
+typealias RunStepStreamEventVariant1 = dev.octri.showcase.openai.models.RunStepStreamEventVariant1
+
+typealias RunStepStreamEventVariant1EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant1EventEnum
+
+typealias RunStepStreamEventVariant2 = dev.octri.showcase.openai.models.RunStepStreamEventVariant2
+
+typealias RunStepStreamEventVariant2EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant2EventEnum
+
+typealias RunStepStreamEventVariant3 = dev.octri.showcase.openai.models.RunStepStreamEventVariant3
+
+typealias RunStepStreamEventVariant3EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant3EventEnum
+
+typealias RunStepStreamEventVariant4 = dev.octri.showcase.openai.models.RunStepStreamEventVariant4
+
+typealias RunStepStreamEventVariant4EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant4EventEnum
+
+typealias RunStepStreamEventVariant5 = dev.octri.showcase.openai.models.RunStepStreamEventVariant5
+
+typealias RunStepStreamEventVariant5EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant5EventEnum
+
+typealias RunStepStreamEventVariant6 = dev.octri.showcase.openai.models.RunStepStreamEventVariant6
+
+typealias RunStepStreamEventVariant6EventEnum =
+    dev.octri.showcase.openai.models.RunStepStreamEventVariant6EventEnum
+
+typealias RunStreamEvent = dev.octri.showcase.openai.models.RunStreamEvent
+
+typealias RunStreamEventVariant0 = dev.octri.showcase.openai.models.RunStreamEventVariant0
+
 typealias RunStreamEventVariant0EventEnum =
     dev.octri.showcase.openai.models.RunStreamEventVariant0EventEnum
 
@@ -514,54 +563,3 @@ typealias StaticChunkingStrategyRequestParamTypeEnum =
 
 typealias StaticChunkingStrategyResponseParam =
     dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParam
-
-typealias StaticChunkingStrategyResponseParamTypeEnum =
-    dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParamTypeEnum
-
-typealias StopConfiguration = dev.octri.showcase.openai.models.StopConfiguration
-
-typealias Store = dev.octri.showcase.openai.models.Store
-
-typealias StringAssistantsApiResponseFormatOption =
-    dev.octri.showcase.openai.models.StringAssistantsApiResponseFormatOption
-
-typealias StringAssistantsApiToolChoiceOption =
-    dev.octri.showcase.openai.models.StringAssistantsApiToolChoiceOption
-
-typealias StringBetaConversationParam = dev.octri.showcase.openai.models.StringBetaConversationParam
-
-typealias StringBetaInputParam = dev.octri.showcase.openai.models.StringBetaInputParam
-
-typealias StringBetaModelIdsCompaction =
-    dev.octri.showcase.openai.models.StringBetaModelIdsCompaction
-
-typealias StringBetaModelIdsResponses = dev.octri.showcase.openai.models.StringBetaModelIdsResponses
-
-typealias StringBetaReasoningEffort = dev.octri.showcase.openai.models.StringBetaReasoningEffort
-
-typealias StringBetaResponseSteerInput =
-    dev.octri.showcase.openai.models.StringBetaResponseSteerInput
-
-typealias StringBetaServiceTierResponses =
-    dev.octri.showcase.openai.models.StringBetaServiceTierResponses
-
-typealias StringBetaVerbosity = dev.octri.showcase.openai.models.StringBetaVerbosity
-
-typealias StringChatCompletionToolChoiceOption =
-    dev.octri.showcase.openai.models.StringChatCompletionToolChoiceOption
-
-typealias StringChoiceValueParam = dev.octri.showcase.openai.models.StringChoiceValueParam
-
-typealias StringChoiceValueResource = dev.octri.showcase.openai.models.StringChoiceValueResource
-
-typealias StringConversationParam = dev.octri.showcase.openai.models.StringConversationParam
-
-typealias StringCreateSessionInputParam =
-    dev.octri.showcase.openai.models.StringCreateSessionInputParam
-
-typealias StringDecisionInput = dev.octri.showcase.openai.models.StringDecisionInput
-
-typealias StringDecisionInputContent = dev.octri.showcase.openai.models.StringDecisionInputContent
-
-typealias StringDecisionInputToolOutputContent =
-    dev.octri.showcase.openai.models.StringDecisionInputToolOutputContent

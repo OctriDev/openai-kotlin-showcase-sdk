@@ -3,34 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** The reasoning configuration applied by this update. */
-data class ResponseConfigurationUpdateReasoning(
-    /**
-     * The reasoning effort used for subsequent responses until another configuration update
-     * replaces it.
-     */
-    val effort: ReasoningEffort? = null
-)
-
-/**
- * A configuration update that applies to subsequent responses until it is replaced by another
- * configuration update.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ResponseConfigurationUpdate(
-    /** The unique ID of the configuration update item. */
-    val id: String,
-    /** The item type. Always `configuration_update`. */
-    val type: ResponseConfigurationUpdateTypeEnum,
-    /** The reasoning configuration applied by this update. */
-    val reasoning: ResponseConfigurationUpdateReasoning? = null,
-) : ConversationItem, ItemResource
-
 /** Updates to reasoning configuration. Only effort is supported. */
 data class ResponseConfigurationUpdateItemParamReasoning(
     /**
@@ -59,84 +31,6 @@ data class ResponseConfigurationUpdateItemParam(
     val reasoning: ResponseConfigurationUpdateItemParamReasoning? = null,
 ) : Item
 
-/**
- * JSON object response format. An older method of generating JSON responses. Using `json_schema` is
- * recommended for models that support it. Note that the model will not generate JSON without a
- * system or user message instructing it to do so.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ResponseFormatJsonObject(
-    /** The type of response format being defined. Always `json_object`. */
-    val type: ResponseFormatJsonObjectTypeEnum
-) :
-    AssistantsApiResponseFormatOption,
-    TextResponseFormatConfiguration,
-    ResponseFormat,
-    CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
-
-/** Structured Outputs configuration options, including a JSON Schema. */
-data class ResponseFormatJsonSchemaJsonSchema(
-    /**
-     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes,
-     * with a maximum length of 64.
-     */
-    val name: String,
-    /**
-     * A description of what the response format is for, used by the model to determine how to
-     * respond in the format.
-     */
-    val description: String? = null,
-    /**
-     * The schema for the response format, described as a JSON Schema object. Learn how to build
-     * JSON schemas here.
-     */
-    val schema: ResponseFormatJsonSchemaSchema? = null,
-    /** Optional `boolean` value serialized in the `strict` wire field. */
-    val strict: Boolean? = null,
-)
-
-/**
- * JSON Schema response format. Used to generate structured JSON responses. Learn more about
- * Structured Outputs.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ResponseFormatJsonSchema(
-    /** The type of response format being defined. Always `json_schema`. */
-    val type: ResponseFormatJsonSchemaTypeEnum,
-    /** Structured Outputs configuration options, including a JSON Schema. */
-    @com.fasterxml.jackson.annotation.JsonProperty("json_schema")
-    val jsonSchema: ResponseFormatJsonSchemaJsonSchema,
-) :
-    AssistantsApiResponseFormatOption,
-    ResponseFormat,
-    CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
-
 typealias ResponseFormatJsonSchemaSchema = Map<String, Any>
-
-/** Default response format. Used to generate text responses. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ResponseFormatText(
-    /** The type of response format being defined. Always `text`. */
-    val type: ResponseFormatTextTypeEnum
-) :
-    AssistantsApiResponseFormatOption,
-    TextResponseFormatConfiguration,
-    ResponseFormat,
-    CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
 
 typealias ResponsePromptVariables = Map<String, Any>

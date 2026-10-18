@@ -3,6 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
+/** Forces the model to call the apply_patch tool when executing a tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class SpecificApplyPatchParam(
+    /** The tool to call. Always `apply_patch`. */
+    val type: SpecificApplyPatchParamTypeEnum
+) : ToolChoiceParam
+
+/** Forces the model to call the shell tool when a tool call is required. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class SpecificFunctionShellParam(
+    /** The tool to call. Always `shell`. */
+    val type: SpecificFunctionShellParamTypeEnum
+) : ToolChoiceParam
+
+/** Typed representation of the `SpecificProgrammaticToolCallingParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class SpecificProgrammaticToolCallingParam(
+    /** The tool to call. Always `programmatic_tool_calling`. */
+    val type: SpecificProgrammaticToolCallingParamTypeEnum
+) : ToolChoiceParam
+
 /** Constrains the tools available to the model to a pre-defined set. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(
     using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
@@ -90,12 +126,8 @@ sealed interface ToolChoiceParam {
                     SpecificApplyPatchParam::class.java,
                     SpecificFunctionShellParam::class.java,
                 )
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
             }
             return when {
                 else -> UnknownToolChoiceParam(node)

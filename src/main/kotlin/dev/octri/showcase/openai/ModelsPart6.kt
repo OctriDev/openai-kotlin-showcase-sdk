@@ -3,6 +3,12 @@
 
 package dev.octri.showcase.openai
 
+typealias ChatCompletionMessageCustomToolCallCustom =
+    dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCallCustom
+
+typealias ChatCompletionMessageCustomToolCallTypeEnum =
+    dev.octri.showcase.openai.models.ChatCompletionMessageCustomToolCallTypeEnum
+
 typealias ChatCompletionMessageList = dev.octri.showcase.openai.models.ChatCompletionMessageList
 
 typealias ChatCompletionMessageListDataItem =
@@ -347,6 +353,9 @@ typealias CodeInterpreterToolCallStatusEnum =
 typealias CodeInterpreterToolCallTypeEnum =
     dev.octri.showcase.openai.models.CodeInterpreterToolCallTypeEnum
 
+typealias CodeInterpreterToolContainer =
+    dev.octri.showcase.openai.models.CodeInterpreterToolContainer
+
 typealias CodeInterpreterToolTypeEnum = dev.octri.showcase.openai.models.CodeInterpreterToolTypeEnum
 
 typealias CommandExecutionItemResource =
@@ -572,12 +581,3 @@ typealias ContainerNetworkPolicyAllowlistParam =
 
 typealias ContainerNetworkPolicyAllowlistParamTypeEnum =
     dev.octri.showcase.openai.models.ContainerNetworkPolicyAllowlistParamTypeEnum
-
-typealias ContainerNetworkPolicyDisabledParam =
-    dev.octri.showcase.openai.models.ContainerNetworkPolicyDisabledParam
-
-typealias ContainerNetworkPolicyDisabledParamTypeEnum =
-    dev.octri.showcase.openai.models.ContainerNetworkPolicyDisabledParamTypeEnum
-
-typealias ContainerNetworkPolicyDomainSecretParam =
-    dev.octri.showcase.openai.models.ContainerNetworkPolicyDomainSecretParam

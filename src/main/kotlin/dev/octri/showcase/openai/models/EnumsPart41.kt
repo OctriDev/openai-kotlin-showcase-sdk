@@ -3,6 +3,23 @@
 
 package dev.octri.showcase.openai.models
 
+/** The event type, must be `conversation.item.delete`. */
+enum class RealtimeClientEventConversationItemDeleteTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    CONVERSATION_ITEM_DELETE("conversation.item.delete");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
 /** The event type, must be `conversation.item.retrieve`. */
 enum class RealtimeClientEventConversationItemRetrieveTypeEnum(
     @com.fasterxml.jackson.annotation.JsonValue val value: String

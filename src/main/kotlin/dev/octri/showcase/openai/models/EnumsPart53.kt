@@ -108,24 +108,20 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
     }
 }
 
-class ThreadStreamEventVariant0EventEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is ThreadStreamEventVariant0EventEnum && value == other.value
+/** Required enumerated value serialized in the `event` wire field. */
+enum class ThreadStreamEventEventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    THREAD_CREATED("thread.created");
 
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
+    override fun toString() = value
 
     companion object {
-
-        @JvmField val THREAD_CREATED = ThreadStreamEventVariant0EventEnum("thread.created")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
+        @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(value: String) = ThreadStreamEventVariant0EventEnum(value)
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 

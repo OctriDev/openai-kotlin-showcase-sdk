@@ -148,7 +148,12 @@ class CreateChatCompletionRequest(
      * preferred for models that support it.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("response_format")
-    val responseFormat: ResponseFormat? = null,
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(ResponseFormatText::class),
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(ResponseFormatJsonSchema::class),
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(ResponseFormatJsonObject::class),
+    )
+    val responseFormat: Any? = null,
     /**
      * Parameters for audio output. Required when audio output is requested with `modalities:
      * "audio"]`. \[Learn more.
@@ -219,7 +224,7 @@ class CreateChatCompletionRequest(
     /**
      * A list of tools the model may call. You can provide either custom tools or function tools.
      */
-    val tools: List<ToolsItem>? = null,
+    val tools: List<Any>? = null,
     /**
      * Controls which (if any) tool is called by the model. `none` means the model will not call any
      * tool and instead generates a message. `auto` means the model can pick between generating a

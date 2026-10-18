@@ -560,39 +560,12 @@ data class ImageGenUsage(
  * Reference an input image by either URL or uploaded file ID. Provide exactly one of `image_url` or
  * `file_id`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ImageRefParam.Deserializer::class
+data class ImageRefParam(
+    /** A fully qualified URL or base64-encoded data URL. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
+    /** The File API ID of an uploaded image to use as input. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
 )
-sealed interface ImageRefParam {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ImageRefParam>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): ImageRefParam {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else ->
-                    ValueImageRefParam(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
-                        )
-                    )
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ValueImageRefParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
-    ImageRefParam
 
 /** The response from the image generation endpoint. */
 data class ImagesResponse(
@@ -673,3 +646,21 @@ sealed interface PartialImages {
         }
     }
 }
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class LongPartialImages(@get:com.fasterxml.jackson.annotation.JsonValue val value: Long) :
+    PartialImages
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValuePartialImages(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    PartialImages

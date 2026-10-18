@@ -3,6 +3,37 @@
 
 package dev.octri.showcase.openai
 
+typealias LiveInitialDeveloperMessageItemParamRoleEnum =
+    dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamRoleEnum
+
+typealias LiveInitialDeveloperMessageItemParamTypeEnum =
+    dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamTypeEnum
+
+typealias LiveInitialInputTextContentPartParam =
+    dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParam
+
+typealias LiveInitialInputTextContentPartParamTypeEnum =
+    dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParamTypeEnum
+
+typealias LiveInitialItem = dev.octri.showcase.openai.models.LiveInitialItem
+
+typealias LiveInitialMessageStatus = dev.octri.showcase.openai.models.LiveInitialMessageStatus
+
+typealias LiveInitialOutputTextContentPartParam =
+    dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParam
+
+typealias LiveInitialOutputTextContentPartParamTypeEnum =
+    dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParamTypeEnum
+
+typealias LiveInitialSessionAudioOutputParam =
+    dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParam
+
+typealias LiveInitialSessionAudioOutputParamVoice =
+    dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParamVoice
+
+typealias LiveInitialSessionAudioOutputParamVoiceVariant1Enum =
+    dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParamVoiceVariant1Enum
+
 typealias LiveInitialSessionAudioParam =
     dev.octri.showcase.openai.models.LiveInitialSessionAudioParam
 
@@ -170,11 +201,17 @@ typealias LiveResponsesDelegationParamTypeEnum =
 typealias LiveResponsesDelegationSettingsInputParam =
     dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParam
 
+typealias LiveResponsesDelegationSettingsInputParamToolChoice =
+    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParamToolChoice
+
 typealias LiveResponsesDelegationSettingsInputParamToolsItem =
     dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParamToolsItem
 
 typealias LiveResponsesDelegationSettingsUpdateInputParam =
     dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParam
+
+typealias LiveResponsesDelegationSettingsUpdateInputParamToolChoice =
+    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParamToolChoice
 
 typealias LiveResponsesDelegationSettingsUpdateInputParamToolsItem =
     dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParamToolsItem
@@ -512,36 +549,3 @@ typealias MCPApprovalResponseTypeEnum = dev.octri.showcase.openai.models.MCPAppr
 typealias McpCallItemResource = dev.octri.showcase.openai.models.McpCallItemResource
 
 typealias McpCallItemResourceTypeEnum = dev.octri.showcase.openai.models.McpCallItemResourceTypeEnum
-
-typealias McpConnectionOriginParam = dev.octri.showcase.openai.models.McpConnectionOriginParam
-
-typealias McpConnectionOriginResource = dev.octri.showcase.openai.models.McpConnectionOriginResource
-
-typealias MCPListTools = dev.octri.showcase.openai.models.MCPListTools
-
-typealias MCPListToolsTool = dev.octri.showcase.openai.models.MCPListToolsTool
-
-typealias MCPListToolsTypeEnum = dev.octri.showcase.openai.models.MCPListToolsTypeEnum
-
-typealias McpOauthRefreshResource = dev.octri.showcase.openai.models.McpOauthRefreshResource
-
-typealias McpOauthTokenEndpointAuthResource =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResource
-
-typealias McpOauthTokenEndpointAuthResourceClientSecretBasic =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretBasic
-
-typealias McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum
-
-typealias McpOauthTokenEndpointAuthResourceClientSecretPost =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretPost
-
-typealias McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum
-
-typealias McpOauthTokenEndpointAuthResourceNone =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceNone
-
-typealias McpOauthTokenEndpointAuthResourceNoneTypeEnum =
-    dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceNoneTypeEnum

@@ -3,6 +3,20 @@
 
 package dev.octri.showcase.openai
 
+typealias CreateSpendAlertBodyIntervalEnum =
+    dev.octri.showcase.openai.models.CreateSpendAlertBodyIntervalEnum
+
+typealias CreateSubagentCallItemResource =
+    dev.octri.showcase.openai.models.CreateSubagentCallItemResource
+
+typealias CreateSubagentCallItemResourceTypeEnum =
+    dev.octri.showcase.openai.models.CreateSubagentCallItemResourceTypeEnum
+
+typealias CreateThreadAndRunRequest = dev.octri.showcase.openai.models.CreateThreadAndRunRequest
+
+typealias CreateThreadAndRunRequestToolResources =
+    dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResources
+
 typealias CreateThreadAndRunRequestToolResourcesCodeInterpreter =
     dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResourcesCodeInterpreter
 
@@ -49,11 +63,16 @@ typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8
 
 typealias CreateTranscriptionRequest = dev.octri.showcase.openai.models.CreateTranscriptionRequest
 
+typealias CreateTranscriptionRequestChunkingStrategy =
+    dev.octri.showcase.openai.models.CreateTranscriptionRequestChunkingStrategy
+
 typealias CreateTranscriptionRequestChunkingStrategyVariant0Enum =
     dev.octri.showcase.openai.models.CreateTranscriptionRequestChunkingStrategyVariant0Enum
 
 typealias CreateTranscriptionRequestTimestampGranularitiesItemEnum =
     dev.octri.showcase.openai.models.CreateTranscriptionRequestTimestampGranularitiesItemEnum
+
+typealias CreateTranscriptionResponse = dev.octri.showcase.openai.models.CreateTranscriptionResponse
 
 typealias CreateTranscriptionResponseDiarizedJson =
     dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJson
@@ -83,6 +102,8 @@ typealias CreateTranslationRequest = dev.octri.showcase.openai.models.CreateTran
 
 typealias CreateTranslationRequestResponseFormatEnum =
     dev.octri.showcase.openai.models.CreateTranslationRequestResponseFormatEnum
+
+typealias CreateTranslationResponse = dev.octri.showcase.openai.models.CreateTranslationResponse
 
 typealias CreateTranslationResponseJson =
     dev.octri.showcase.openai.models.CreateTranslationResponseJson
@@ -331,6 +352,9 @@ typealias DecisionsUsageGroupBy = dev.octri.showcase.openai.models.DecisionsUsag
 typealias DecisionsUsagePermissionErrorResponse =
     dev.octri.showcase.openai.models.DecisionsUsagePermissionErrorResponse
 
+typealias DecisionsUsagePermissionErrorResponseError =
+    dev.octri.showcase.openai.models.DecisionsUsagePermissionErrorResponseError
+
 typealias DecisionsUsageResult = dev.octri.showcase.openai.models.DecisionsUsageResult
 
 typealias DecisionsUsageResultObjectEnum =
@@ -538,25 +562,3 @@ typealias EnvironmentFileResource = dev.octri.showcase.openai.models.Environment
 
 typealias EnvironmentFileResourceObjectEnum =
     dev.octri.showcase.openai.models.EnvironmentFileResourceObjectEnum
-
-typealias EnvironmentPackagesParam = dev.octri.showcase.openai.models.EnvironmentPackagesParam
-
-typealias EnvironmentPackagesResource = dev.octri.showcase.openai.models.EnvironmentPackagesResource
-
-typealias EnvironmentParam = dev.octri.showcase.openai.models.EnvironmentParam
-
-typealias EnvironmentParamNone = dev.octri.showcase.openai.models.EnvironmentParamNone
-
-typealias EnvironmentParamNoneTypeEnum =
-    dev.octri.showcase.openai.models.EnvironmentParamNoneTypeEnum
-
-typealias EnvironmentParamOpenaiHosted =
-    dev.octri.showcase.openai.models.EnvironmentParamOpenaiHosted
-
-typealias EnvironmentParamOpenaiHostedTypeEnum =
-    dev.octri.showcase.openai.models.EnvironmentParamOpenaiHostedTypeEnum
-
-typealias EnvironmentParamSelfHosted = dev.octri.showcase.openai.models.EnvironmentParamSelfHosted
-
-typealias EnvironmentParamSelfHostedTypeEnum =
-    dev.octri.showcase.openai.models.EnvironmentParamSelfHostedTypeEnum

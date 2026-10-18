@@ -3,20 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** A text content. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class TextContent(
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: TextContentTypeEnum,
-    /** Required `string` value serialized in the `text` wire field. */
-    val text: String,
-) : MessageContentItem
-
 /**
  * An object specifying the format that the model must output. Configuring `{ "type": "json_schema"
  * }` enables Structured Outputs, which ensures the model will match your supplied JSON schema.

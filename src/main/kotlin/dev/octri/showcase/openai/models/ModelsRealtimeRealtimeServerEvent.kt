@@ -561,40 +561,6 @@ data class RealtimeServerEventConversationItemTruncated(
     @com.fasterxml.jackson.annotation.JsonProperty("audio_end_ms") val audioEndMs: Long,
 ) : RealtimeServerEvent
 
-/** Details of the error. */
-data class RealtimeServerEventErrorError(
-    /** The type of error (e.g., "invalid_request_error", "server_error"). */
-    val type: String,
-    /** A human-readable error message. */
-    val message: String,
-    /** Optional `string` value serialized in the `code` wire field. */
-    val code: String? = null,
-    /** Optional `string` value serialized in the `param` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
-    /** Optional `string` value serialized in the `event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
-)
-
-/**
- * Returned when an error occurs, which could be a client problem or a server problem. Most errors
- * are recoverable and the session will stay open, we recommend to implementors to monitor and log
- * error messages by default.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class RealtimeServerEventError(
-    /** The unique ID of the server event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `error`. */
-    val type: RealtimeServerEventErrorTypeEnum,
-    /** Details of the error. */
-    val error: RealtimeServerEventErrorError,
-) : RealtimeServerEvent, RealtimeTranslationServerEvent
-
 /**
  * Returned when the input audio buffer is cleared by the client with a `input_audio_buffer.clear`
  * event.
@@ -772,4 +738,41 @@ data class RealtimeServerEventMCPListToolsFailed(
     val type: RealtimeServerEventMCPListToolsFailedTypeEnum,
     /** The ID of the MCP list tools item. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+) : RealtimeServerEvent
+
+/** Returned when listing MCP tools is in progress for an item. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class RealtimeServerEventMCPListToolsInProgress(
+    /** The unique ID of the server event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /** The event type, must be `mcp_list_tools.in_progress`. */
+    val type: RealtimeServerEventMCPListToolsInProgressTypeEnum,
+    /** The ID of the MCP list tools item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+) : RealtimeServerEvent
+
+/**
+ * **WebRTC/SIP Only:** Emitted when the output audio buffer is cleared. This happens either in VAD
+ * mode when the user has interrupted (`input_audio_buffer.speech_started`), or when the client has
+ * emitted the `output_audio_buffer.clear` event to manually cut off the current audio response.
+ * Learn more.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class RealtimeServerEventOutputAudioBufferCleared(
+    /** The unique ID of the server event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /** The event type, must be `output_audio_buffer.cleared`. */
+    val type: RealtimeServerEventOutputAudioBufferClearedTypeEnum,
+    /** The unique ID of the response that produced the audio. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
 ) : RealtimeServerEvent
