@@ -3,318 +3,215 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Parameters for creating a character from an uploaded video.
- */
+/** Parameters for creating a character from an uploaded video. */
 data class CreateVideoCharacterBody(
-    /**
-     * Video file used to create a character.
-     */
+    /** Video file used to create a character. */
     val video: ByteArray,
-    /**
-     * Display name for this API character.
-     */
-    val name: String
+    /** Display name for this API character. */
+    val name: String,
 )
 
-/**
- * JSON parameters for editing an existing generated video.
- */
+/** JSON parameters for editing an existing generated video. */
 data class CreateVideoEditJsonBody(
-    /**
-     * Reference to the completed video to edit.
-     */
+    /** Reference to the completed video to edit. */
     val video: VideoReferenceInputParam,
-    /**
-     * Text prompt that describes how to edit the source video.
-     */
-    val prompt: String
+    /** Text prompt that describes how to edit the source video. */
+    val prompt: String,
 )
 
-/**
- * Parameters for editing an existing generated video.
- */
+/** Parameters for editing an existing generated video. */
 data class CreateVideoEditMultipartBody(
-    /**
-     * Required API value serialized in the `video` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(VideoReferenceInputParam::class)) val video: Any,
-    /**
-     * Text prompt that describes how to edit the source video.
-     */
-    val prompt: String
+    /** Required API value serialized in the `video` wire field. */
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(VideoReferenceInputParam::class)
+    )
+    val video: Any,
+    /** Text prompt that describes how to edit the source video. */
+    val prompt: String,
 )
 
-/**
- * JSON parameters for extending an existing generated video.
- */
+/** JSON parameters for extending an existing generated video. */
 data class CreateVideoExtendJsonBody(
-    /**
-     * Reference to the completed video to extend.
-     */
+    /** Reference to the completed video to extend. */
     val video: VideoReferenceInputParam,
-    /**
-     * Updated text prompt that directs the extension generation.
-     */
+    /** Updated text prompt that directs the extension generation. */
     val prompt: String,
     /**
-     * Length of the newly generated extension segment in seconds (allowed values: 4, 8, 12, 16, 20).
+     * Length of the newly generated extension segment in seconds (allowed values: 4, 8, 12, 16,
+     * 20).
      */
-    val seconds: VideoSeconds
+    val seconds: VideoSeconds,
 )
 
-/**
- * Multipart parameters for extending an existing generated video.
- */
+/** Multipart parameters for extending an existing generated video. */
 data class CreateVideoExtendMultipartBody(
-    /**
-     * Required API value serialized in the `video` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(VideoReferenceInputParam::class)) val video: Any,
-    /**
-     * Updated text prompt that directs the extension generation.
-     */
+    /** Required API value serialized in the `video` wire field. */
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(VideoReferenceInputParam::class)
+    )
+    val video: Any,
+    /** Updated text prompt that directs the extension generation. */
     val prompt: String,
     /**
-     * Length of the newly generated extension segment in seconds (allowed values: 4, 8, 12, 16, 20).
+     * Length of the newly generated extension segment in seconds (allowed values: 4, 8, 12, 16,
+     * 20).
      */
-    val seconds: VideoSeconds
+    val seconds: VideoSeconds,
 )
 
-/**
- * JSON parameters for creating a new video generation job.
- */
+/** JSON parameters for creating a new video generation job. */
 data class CreateVideoJsonBody(
-    /**
-     * Text prompt that describes the video to generate.
-     */
+    /** Text prompt that describes the video to generate. */
     val prompt: String,
     /**
      * The video generation model to use (allowed values: sora-2, sora-2-pro). Defaults to `sora-2`.
      */
     val model: VideoModel? = null,
     /**
-     * Optional reference object that guides generation. Provide exactly one of `image_url` or `file_id`.
+     * Optional reference object that guides generation. Provide exactly one of `image_url` or
+     * `file_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_reference") val inputReference: ImageRefParam2? = null,
-    /**
-     * Clip duration in seconds (allowed values: 4, 8, 12). Defaults to 4 seconds.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_reference")
+    val inputReference: ImageRefParam2? = null,
+    /** Clip duration in seconds (allowed values: 4, 8, 12). Defaults to 4 seconds. */
     val seconds: VideoSeconds? = null,
     /**
-     * Output resolution formatted as width x height (allowed values: 720x1280, 1280x720, 1024x1792, 1792x1024). Defaults to 720x1280.
+     * Output resolution formatted as width x height (allowed values: 720x1280, 1280x720, 1024x1792,
+     * 1792x1024). Defaults to 720x1280.
      */
-    val size: VideoSize? = null
+    val size: VideoSize? = null,
 )
 
-/**
- * Multipart parameters for creating a new video generation job.
- */
+/** Multipart parameters for creating a new video generation job. */
 data class CreateVideoMultipartBody(
-    /**
-     * Text prompt that describes the video to generate.
-     */
+    /** Text prompt that describes the video to generate. */
     val prompt: String,
     /**
      * The video generation model to use (allowed values: sora-2, sora-2-pro). Defaults to `sora-2`.
      */
     val model: VideoModel? = null,
-    /**
-     * Optional API value serialized in the `input_reference` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_reference") @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(ImageRefParam2::class)) val inputReference: Any? = null,
-    /**
-     * Clip duration in seconds (allowed values: 4, 8, 12). Defaults to 4 seconds.
-     */
+    /** Optional API value serialized in the `input_reference` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_reference")
+    @com.fasterxml.jackson.annotation.JsonSubTypes(
+        com.fasterxml.jackson.annotation.JsonSubTypes.Type(ImageRefParam2::class)
+    )
+    val inputReference: Any? = null,
+    /** Clip duration in seconds (allowed values: 4, 8, 12). Defaults to 4 seconds. */
     val seconds: VideoSeconds? = null,
     /**
-     * Output resolution formatted as width x height (allowed values: 720x1280, 1280x720, 1024x1792, 1792x1024). Defaults to 720x1280.
+     * Output resolution formatted as width x height (allowed values: 720x1280, 1280x720, 1024x1792,
+     * 1792x1024). Defaults to 720x1280.
      */
-    val size: VideoSize? = null
+    val size: VideoSize? = null,
 )
 
-/**
- * Parameters for remixing an existing generated video.
- */
+/** Parameters for remixing an existing generated video. */
 data class CreateVideoRemixBody(
-    /**
-     * Updated text prompt that directs the remix generation.
-     */
+    /** Updated text prompt that directs the remix generation. */
     val prompt: String
 )
 
-/**
- * Confirmation payload returned after deleting a video.
- */
+/** Confirmation payload returned after deleting a video. */
 data class DeletedVideoResource(
-    /**
-     * The object type that signals the deletion response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedVideoResourceObjectEnum,
-    /**
-     * Indicates that the video resource was deleted.
-     */
+    /** The object type that signals the deletion response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedVideoResourceObjectEnum,
+    /** Indicates that the video resource was deleted. */
     val deleted: Boolean,
-    /**
-     * Identifier of the deleted video.
-     */
-    val id: String
+    /** Identifier of the deleted video. */
+    val id: String,
 )
 
-/**
- * An error that occurred while generating the response.
- */
+/** An error that occurred while generating the response. */
 data class Error2(
-    /**
-     * A machine-readable error code that was returned.
-     */
+    /** A machine-readable error code that was returned. */
     val code: String,
-    /**
-     * A human-readable description of the error that was returned.
-     */
+    /** A human-readable description of the error that was returned. */
     val message: String,
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
-    /**
-     * Optional `string` value serialized in the `param` wire field.
-     */
+    /** Optional `string` value serialized in the `param` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
-    /**
-     * The Retry-After and Retry-After-Ms headers returned with the original error, if any.
-     */
+    /** The Retry-After and Retry-After-Ms headers returned with the original error, if any. */
     val headers: Map<String, String>? = null,
-    /**
-     * Optional object value serialized in the `misalignment` wire field.
-     */
-    val misalignment: MisalignmentErrorDetailsResource? = null
+    /** Optional object value serialized in the `misalignment` wire field. */
+    val misalignment: MisalignmentErrorDetailsResource? = null,
 )
 
-/**
- * Typed representation of the `ImageRefParam2` API schema.
- */
+/** Typed representation of the `ImageRefParam2` API schema. */
 data class ImageRefParam2(
-    /**
-     * A fully qualified URL or base64-encoded data URL.
-     */
+    /** A fully qualified URL or base64-encoded data URL. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /**
-     * Optional `string` value serialized in the `file_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null
+    /** Optional `string` value serialized in the `file_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
 )
 
-/**
- * Typed representation of the `VideoCharacterResource` API schema.
- */
+/** Typed representation of the `VideoCharacterResource` API schema. */
 data class VideoCharacterResource(
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("id", required = true) val id: String?,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /**
-     * Unix timestamp (in seconds) when the character was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** Unix timestamp (in seconds) when the character was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
 
-/**
- * Typed representation of the `VideoListResource` API schema.
- */
+/** Typed representation of the `VideoListResource` API schema. */
 data class VideoListResource(
-    /**
-     * The type of object returned, must be `list`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VideoListResourceObjectEnum,
-    /**
-     * A list of items
-     */
+    /** The type of object returned, must be `list`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VideoListResourceObjectEnum,
+    /** A list of items */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VideoResource>,
-    /**
-     * Required `string` value serialized in the `first_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
-    /**
-     * Required `string` value serialized in the `last_id` wire field.
-     */
+    /** Required `string` value serialized in the `first_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
+    val firstId: String?,
+    /** Required `string` value serialized in the `last_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /**
-     * Whether there are more items available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+    /** Whether there are more items available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
 )
 
 typealias VideoModel = String
 
-/**
- * Reference to the completed video.
- */
+/** Reference to the completed video. */
 data class VideoReferenceInputParam(
-    /**
-     * The identifier of the completed video.
-     */
+    /** The identifier of the completed video. */
     val id: String
 )
 
-/**
- * Structured information describing a generated video job.
- */
+/** Structured information describing a generated video job. */
 data class VideoResource(
-    /**
-     * Unique identifier for the video job.
-     */
+    /** Unique identifier for the video job. */
     val id: String,
-    /**
-     * The object type, which is always `video`.
-     */
+    /** The object type, which is always `video`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VideoResourceObjectEnum,
-    /**
-     * The video generation model that produced the job.
-     */
+    /** The video generation model that produced the job. */
     val model: VideoModel,
-    /**
-     * Current lifecycle status of the video job.
-     */
+    /** Current lifecycle status of the video job. */
     val status: VideoStatus,
-    /**
-     * Approximate completion percentage for the generation task.
-     */
+    /** Approximate completion percentage for the generation task. */
     val progress: Long,
-    /**
-     * Unix timestamp (seconds) for when the job was created.
-     */
+    /** Unix timestamp (seconds) for when the job was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Required API value serialized in the `completed_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at", required = true) val completedAt: Long?,
-    /**
-     * Required API value serialized in the `expires_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true) val expiresAt: Long?,
-    /**
-     * Required `string` value serialized in the `prompt` wire field.
-     */
+    /** Required API value serialized in the `completed_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at", required = true)
+    val completedAt: Long?,
+    /** Required API value serialized in the `expires_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true)
+    val expiresAt: Long?,
+    /** Required `string` value serialized in the `prompt` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("prompt", required = true) val prompt: String?,
-    /**
-     * The resolution of the generated video.
-     */
+    /** The resolution of the generated video. */
     val size: VideoSize,
     /**
-     * Duration of the generated clip in seconds. For extensions, this is the stitched total duration.
+     * Duration of the generated clip in seconds. For extensions, this is the stitched total
+     * duration.
      */
     val seconds: String,
-    /**
-     * Required `string` value serialized in the `remixed_from_video_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("remixed_from_video_id", required = true) val remixedFromVideoId: String?,
-    /**
-     * Required API value serialized in the `error` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: Error2?
+    /** Required `string` value serialized in the `remixed_from_video_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("remixed_from_video_id", required = true)
+    val remixedFromVideoId: String?,
+    /** Required API value serialized in the `error` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: Error2?,
 )

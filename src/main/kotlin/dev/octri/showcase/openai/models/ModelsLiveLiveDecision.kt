@@ -3,301 +3,290 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveDecisionChoiceParam` API schema.
- */
+/** Typed representation of the `LiveDecisionChoiceParam` API schema. */
 data class LiveDecisionChoiceParam(
-    /**
-     * Required API value serialized in the `value` wire field.
-     */
+    /** Required API value serialized in the `value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
-    val description: String? = null
+    /** Optional `string` value serialized in the `description` wire field. */
+    val description: String? = null,
 )
 
-/**
- * Typed representation of the `LiveDecisionChoiceQuestionParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionChoiceQuestionParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionChoiceQuestionParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionChoiceQuestionParamTypeEnum,
-    /**
-     * Required `string` value serialized in the `instructions` wire field.
-     */
+    /** Required `string` value serialized in the `instructions` wire field. */
     val instructions: String,
-    /**
-     * Required array value serialized in the `choices` wire field.
-     */
+    /** Required array value serialized in the `choices` wire field. */
     val choices: List<LiveDecisionChoiceParam>,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
-    val name: String? = null
+    /** Optional `string` value serialized in the `name` wire field. */
+    val name: String? = null,
 ) : LiveDecisionQuestion
 
-/**
- * Typed representation of the `LiveDecisionCompleted` API schema.
- */
+/** Typed representation of the `LiveDecisionCompleted` API schema. */
 data class LiveDecisionCompleted(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionCompletedTypeEnum,
-    /**
-     * The native Decision API response, including its model, ordered answers, and token usage.
-     */
-    val decision: DecisionResponse
+    /** The native Decision API response, including its model, ordered answers, and token usage. */
+    val decision: DecisionResponse,
 )
 
-/**
- * Typed representation of the `LiveDecisionInputImageParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionInputImageParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionInputImageParam(
-    /**
-     * The type of the input item. Always `input_image`.
-     */
+    /** The type of the input item. Always `input_image`. */
     val type: LiveDecisionInputImageParamTypeEnum,
-    /**
-     * An inline image encoded as a data URL.
-     */
+    /** An inline image encoded as a data URL. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String,
-    /**
-     * Optional API value serialized in the `detail` wire field.
-     */
-    val detail: LiveDetailEnum? = null
+    /** Optional API value serialized in the `detail` wire field. */
+    val detail: LiveDetailEnum? = null,
 ) : LiveDecisionInputItemParamContentItem, LiveDecisionStoredInputItemParamContentItem
 
-/**
- * Typed representation of the `LiveDecisionInputItemParam` API schema.
- */
+/** Typed representation of the `LiveDecisionInputItemParam` API schema. */
 data class LiveDecisionInputItemParam(
-    /**
-     * The message role. Always `user`.
-     */
+    /** The message role. Always `user`. */
     val role: LiveDecisionInputItemParamRoleEnum,
-    /**
-     * Required API value serialized in the `content` wire field.
-     */
+    /** Required API value serialized in the `content` wire field. */
     val content: Any,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveDecisionInputItemParamTypeEnum? = null
+    /** Optional enumerated value serialized in the `type` wire field. */
+    val type: LiveDecisionInputItemParamTypeEnum? = null,
 )
 
-/**
- * Required API value serialized in the `content[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveDecisionInputItemParamContentItem::class)
+/** Required API value serialized in the `content[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveDecisionInputItemParamContentItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionInputTextParam::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionInputImageParam::class, name = "input_image")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionInputTextParam::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionInputImageParam::class,
+        name = "input_image",
+    ),
 )
 sealed interface LiveDecisionInputItemParamContentItem
 
-/** A [LiveDecisionInputItemParamContentItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveDecisionInputItemParamContentItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveDecisionInputItemParamContentItem] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveDecisionInputItemParamContentItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveDecisionInputItemParamContentItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `LiveDecisionInputTextParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionInputTextParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionInputTextParam(
-    /**
-     * The type of the input item. Always `input_text`.
-     */
+    /** The type of the input item. Always `input_text`. */
     val type: LiveDecisionInputTextParamTypeEnum,
-    /**
-     * The text input to the model.
-     */
-    val text: String
+    /** The text input to the model. */
+    val text: String,
 ) : LiveDecisionInputItemParamContentItem, LiveDecisionStoredInputItemParamContentItem
 
-/**
- * Typed representation of the `LiveDecisionPredicateQuestionParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionPredicateQuestionParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionPredicateQuestionParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionPredicateQuestionParamTypeEnum,
-    /**
-     * Required `string` value serialized in the `instructions` wire field.
-     */
+    /** Required `string` value serialized in the `instructions` wire field. */
     val instructions: String,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
-    val name: String? = null
+    /** Optional `string` value serialized in the `name` wire field. */
+    val name: String? = null,
 ) : LiveDecisionQuestion
 
-/**
- * Typed representation of the `LiveDecisionQuestion` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveDecisionQuestion::class)
+/** Typed representation of the `LiveDecisionQuestion` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveDecisionQuestion::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionChoiceQuestionParam::class, name = "choice"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionPredicateQuestionParam::class, name = "predicate"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionScoreQuestionParam::class, name = "score")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionChoiceQuestionParam::class,
+        name = "choice",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionPredicateQuestionParam::class,
+        name = "predicate",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionScoreQuestionParam::class,
+        name = "score",
+    ),
 )
 sealed interface LiveDecisionQuestion
 
 /** A [LiveDecisionQuestion] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveDecisionQuestion @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveDecisionQuestion
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveDecisionQuestion {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Questions evaluated using the current transcript and the session's shared Decision items.
- */
+/** Questions evaluated using the current transcript and the session's shared Decision items. */
 data class LiveDecisionQuestionsInputParam(
-    /**
-     * Native Decision API questions evaluated together, in order.
-     */
+    /** Native Decision API questions evaluated together, in order. */
     val questions: List<LiveDecisionQuestion>
 )
 
-/**
- * Questions evaluated using the current transcript and the session's shared Decision items.
- */
+/** Questions evaluated using the current transcript and the session's shared Decision items. */
 data class LiveDecisionQuestionsInputParam2(
-    /**
-     * Native Decision API questions evaluated together, in order.
-     */
+    /** Native Decision API questions evaluated together, in order. */
     val questions: List<QuestionParam>
 )
 
-/**
- * Typed representation of the `LiveDecisionScoreLevelParam` API schema.
- */
+/** Typed representation of the `LiveDecisionScoreLevelParam` API schema. */
 data class LiveDecisionScoreLevelParam(
-    /**
-     * Required `string` value serialized in the `label` wire field.
-     */
+    /** Required `string` value serialized in the `label` wire field. */
     val label: String,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
-    val description: String? = null
+    /** Optional `string` value serialized in the `description` wire field. */
+    val description: String? = null,
 )
 
-/**
- * Typed representation of the `LiveDecisionScoreQuestionParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionScoreQuestionParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionScoreQuestionParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionScoreQuestionParamTypeEnum,
-    /**
-     * Required `string` value serialized in the `instructions` wire field.
-     */
+    /** Required `string` value serialized in the `instructions` wire field. */
     val instructions: String,
-    /**
-     * Required array value serialized in the `levels` wire field.
-     */
+    /** Required array value serialized in the `levels` wire field. */
     val levels: List<LiveDecisionScoreLevelParam>,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
-    val name: String? = null
+    /** Optional `string` value serialized in the `name` wire field. */
+    val name: String? = null,
 ) : LiveDecisionQuestion
 
-/**
- * Typed representation of the `LiveDecisionStoredInputItemParam` API schema.
- */
+/** Typed representation of the `LiveDecisionStoredInputItemParam` API schema. */
 data class LiveDecisionStoredInputItemParam(
-    /**
-     * The ID of the stored Decision input item.
-     */
+    /** The ID of the stored Decision input item. */
     val id: String,
-    /**
-     * The message role. Always `user`.
-     */
+    /** The message role. Always `user`. */
     val role: LiveDecisionStoredInputItemParamRoleEnum,
-    /**
-     * Required API value serialized in the `content` wire field.
-     */
+    /** Required API value serialized in the `content` wire field. */
     val content: Any,
-    /**
-     * Optional enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveDecisionStoredInputItemParamTypeEnum? = null
+    /** Optional enumerated value serialized in the `type` wire field. */
+    val type: LiveDecisionStoredInputItemParamTypeEnum? = null,
 )
 
-/**
- * Required API value serialized in the `content[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveDecisionStoredInputItemParamContentItem::class)
+/** Required API value serialized in the `content[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveDecisionStoredInputItemParamContentItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionInputTextParam::class, name = "input_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionInputImageParam::class, name = "input_image")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionInputTextParam::class,
+        name = "input_text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionInputImageParam::class,
+        name = "input_image",
+    ),
 )
 sealed interface LiveDecisionStoredInputItemParamContentItem
 
-/** A [LiveDecisionStoredInputItemParamContentItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveDecisionStoredInputItemParamContentItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveDecisionStoredInputItemParamContentItem] whose `type` names no branch this SDK knows, kept
+ * as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveDecisionStoredInputItemParamContentItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveDecisionStoredInputItemParamContentItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `LiveDecisionTriggerInputParam` API schema.
- */
+/** Typed representation of the `LiveDecisionTriggerInputParam` API schema. */
 data class LiveDecisionTriggerInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionTriggerInputParamTypeEnum,
-    /**
-     * Required enumerated value serialized in the `event_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_type") val eventType: LiveDecisionTriggerInputParamEventTypeEnum,
-    /**
-     * Questions evaluated using the current transcript and the session's shared Decision items.
-     */
-    val decisions: LiveDecisionQuestionsInputParam
+    /** Required enumerated value serialized in the `event_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_type")
+    val eventType: LiveDecisionTriggerInputParamEventTypeEnum,
+    /** Questions evaluated using the current transcript and the session's shared Decision items. */
+    val decisions: LiveDecisionQuestionsInputParam,
 )
 
-/**
- * Typed representation of the `LiveDecisionTriggerInputParam2` API schema.
- */
+/** Typed representation of the `LiveDecisionTriggerInputParam2` API schema. */
 data class LiveDecisionTriggerInputParam2(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionTriggerInputParam2TypeEnum,
-    /**
-     * Required enumerated value serialized in the `event_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_type") val eventType: LiveDecisionTriggerInputParam2EventTypeEnum,
-    /**
-     * Questions evaluated using the current transcript and the session's shared Decision items.
-     */
-    val decisions: LiveDecisionQuestionsInputParam2
+    /** Required enumerated value serialized in the `event_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_type")
+    val eventType: LiveDecisionTriggerInputParam2EventTypeEnum,
+    /** Questions evaluated using the current transcript and the session's shared Decision items. */
+    val decisions: LiveDecisionQuestionsInputParam2,
 )

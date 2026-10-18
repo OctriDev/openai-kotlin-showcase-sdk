@@ -3,210 +3,226 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Instruction describing how to create a file via the apply_patch tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Instruction describing how to create a file via the apply_patch tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchCreateFileOperation(
-    /**
-     * Create a new file with the provided diff.
-     */
+    /** Create a new file with the provided diff. */
     val type: ApplyPatchCreateFileOperationTypeEnum,
-    /**
-     * Path of the file to create.
-     */
+    /** Path of the file to create. */
     val path: String,
-    /**
-     * Diff to apply.
-     */
-    val diff: String
+    /** Diff to apply. */
+    val diff: String,
 ) : ApplyPatchToolCallOperation
 
-/**
- * Instruction for creating a new file via the apply_patch tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Instruction for creating a new file via the apply_patch tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchCreateFileOperationParam(
-    /**
-     * The operation type. Always `create_file`.
-     */
+    /** The operation type. Always `create_file`. */
     val type: ApplyPatchCreateFileOperationParamTypeEnum,
-    /**
-     * Path of the file to create relative to the workspace root.
-     */
+    /** Path of the file to create relative to the workspace root. */
     val path: String,
-    /**
-     * Unified diff content to apply when creating the file.
-     */
-    val diff: String
+    /** Unified diff content to apply when creating the file. */
+    val diff: String,
 ) : ApplyPatchOperationParam
 
-/**
- * Instruction describing how to delete a file via the apply_patch tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Instruction describing how to delete a file via the apply_patch tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchDeleteFileOperation(
-    /**
-     * Delete the specified file.
-     */
+    /** Delete the specified file. */
     val type: ApplyPatchDeleteFileOperationTypeEnum,
-    /**
-     * Path of the file to delete.
-     */
-    val path: String
+    /** Path of the file to delete. */
+    val path: String,
 ) : ApplyPatchToolCallOperation
 
-/**
- * Instruction for deleting an existing file via the apply_patch tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Instruction for deleting an existing file via the apply_patch tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchDeleteFileOperationParam(
-    /**
-     * The operation type. Always `delete_file`.
-     */
+    /** The operation type. Always `delete_file`. */
     val type: ApplyPatchDeleteFileOperationParamTypeEnum,
-    /**
-     * Path of the file to delete relative to the workspace root.
-     */
-    val path: String
+    /** Path of the file to delete relative to the workspace root. */
+    val path: String,
 ) : ApplyPatchOperationParam
 
 /**
  * One of the create_file, delete_file, or update_file operations supplied to the apply_patch tool.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownApplyPatchOperationParam::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownApplyPatchOperationParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchCreateFileOperationParam::class, name = "create_file"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchDeleteFileOperationParam::class, name = "delete_file"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchUpdateFileOperationParam::class, name = "update_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchCreateFileOperationParam::class,
+        name = "create_file",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchDeleteFileOperationParam::class,
+        name = "delete_file",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchUpdateFileOperationParam::class,
+        name = "update_file",
+    ),
 )
 sealed interface ApplyPatchOperationParam
 
 /** A [ApplyPatchOperationParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownApplyPatchOperationParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownApplyPatchOperationParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ApplyPatchOperationParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * A tool call representing a request to create, delete, or update files using diff patches.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A tool call representing a request to create, delete, or update files using diff patches. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchToolCallItemParam(
-    /**
-     * The type of the item. Always `apply_patch_call`.
-     */
+    /** The type of the item. Always `apply_patch_call`. */
     val type: ApplyPatchToolCallItemParamTypeEnum,
-    /**
-     * The unique ID of the apply patch tool call generated by the model.
-     */
+    /** The unique ID of the apply patch tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The status of the apply patch tool call. One of `in_progress` or `completed`.
-     */
+    /** The status of the apply patch tool call. One of `in_progress` or `completed`. */
     val status: ApplyPatchCallStatusParam,
-    /**
-     * The specific create, delete, or update instruction for the apply_patch tool call.
-     */
+    /** The specific create, delete, or update instruction for the apply_patch tool call. */
     val operation: ApplyPatchOperationParam,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
-    val caller: ToolCallCallerParam? = null
+    /** Optional API value serialized in the `caller` wire field. */
+    val caller: ToolCallCallerParam? = null,
 ) : Item
 
-/**
- * One of the create_file, delete_file, or update_file operations applied via apply_patch.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownApplyPatchToolCallOperation::class)
+/** One of the create_file, delete_file, or update_file operations applied via apply_patch. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownApplyPatchToolCallOperation::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchCreateFileOperation::class, name = "create_file"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchDeleteFileOperation::class, name = "delete_file"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ApplyPatchUpdateFileOperation::class, name = "update_file")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchCreateFileOperation::class,
+        name = "create_file",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchDeleteFileOperation::class,
+        name = "delete_file",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ApplyPatchUpdateFileOperation::class,
+        name = "update_file",
+    ),
 )
 sealed interface ApplyPatchToolCallOperation
 
-/** A [ApplyPatchToolCallOperation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownApplyPatchToolCallOperation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [ApplyPatchToolCallOperation] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownApplyPatchToolCallOperation
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ApplyPatchToolCallOperation {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The streamed output emitted by an apply patch tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The streamed output emitted by an apply patch tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchToolCallOutputItemParam(
-    /**
-     * The type of the item. Always `apply_patch_call_output`.
-     */
+    /** The type of the item. Always `apply_patch_call_output`. */
     val type: ApplyPatchToolCallOutputItemParamTypeEnum,
-    /**
-     * The unique ID of the apply patch tool call generated by the model.
-     */
+    /** The unique ID of the apply patch tool call generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The status of the apply patch tool call output. One of `completed` or `failed`.
-     */
+    /** The status of the apply patch tool call output. One of `completed` or `failed`. */
     val status: ApplyPatchCallOutputStatusParam,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional API value serialized in the `caller` wire field.
-     */
+    /** Optional API value serialized in the `caller` wire field. */
     val caller: ToolCallCallerParam? = null,
-    /**
-     * Optional API value serialized in the `output` wire field.
-     */
-    val output: String? = null
+    /** Optional API value serialized in the `output` wire field. */
+    val output: String? = null,
 ) : Item
 
-/**
- * Instruction describing how to update a file via the apply_patch tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Instruction describing how to update a file via the apply_patch tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchUpdateFileOperation(
-    /**
-     * Update an existing file with the provided diff.
-     */
+    /** Update an existing file with the provided diff. */
     val type: ApplyPatchUpdateFileOperationTypeEnum,
-    /**
-     * Path of the file to update.
-     */
+    /** Path of the file to update. */
     val path: String,
-    /**
-     * Diff to apply.
-     */
-    val diff: String
+    /** Diff to apply. */
+    val diff: String,
 ) : ApplyPatchToolCallOperation
 
-/**
- * Instruction for updating an existing file via the apply_patch tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Instruction for updating an existing file via the apply_patch tool. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ApplyPatchUpdateFileOperationParam(
-    /**
-     * The operation type. Always `update_file`.
-     */
+    /** The operation type. Always `update_file`. */
     val type: ApplyPatchUpdateFileOperationParamTypeEnum,
-    /**
-     * Path of the file to update relative to the workspace root.
-     */
+    /** Path of the file to update relative to the workspace root. */
     val path: String,
-    /**
-     * Unified diff content to apply to the existing file.
-     */
-    val diff: String
+    /** Unified diff content to apply to the existing file. */
+    val diff: String,
 ) : ApplyPatchOperationParam

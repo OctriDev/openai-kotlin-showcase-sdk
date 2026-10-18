@@ -3,50 +3,29 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Execute a shell command on the server.
- */
+/** Execute a shell command on the server. */
 data class BetaLocalShellExecAction(
-    /**
-     * The type of the local shell action. Always `exec`.
-     */
+    /** The type of the local shell action. Always `exec`. */
     val type: BetaLocalShellExecActionTypeEnum,
-    /**
-     * The command to run.
-     */
+    /** The command to run. */
     val command: List<String>,
-    /**
-     * Environment variables to set for the command.
-     */
+    /** Environment variables to set for the command. */
     val env: Map<String, String>,
-    /**
-     * Optional `integer` value serialized in the `timeout_ms` wire field.
-     */
+    /** Optional `integer` value serialized in the `timeout_ms` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("timeout_ms") val timeoutMs: Long? = null,
-    /**
-     * Optional `string` value serialized in the `working_directory` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("working_directory") val workingDirectory: String? = null,
-    /**
-     * Optional `string` value serialized in the `user` wire field.
-     */
-    val user: String? = null
+    /** Optional `string` value serialized in the `working_directory` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("working_directory")
+    val workingDirectory: String? = null,
+    /** Optional `string` value serialized in the `user` wire field. */
+    val user: String? = null,
 )
 
-/**
- * Typed representation of the `BetaLocalSkillParam` API schema.
- */
+/** Typed representation of the `BetaLocalSkillParam` API schema. */
 data class BetaLocalSkillParam(
-    /**
-     * The name of the skill.
-     */
+    /** The name of the skill. */
     val name: String,
-    /**
-     * The description of the skill.
-     */
+    /** The description of the skill. */
     val description: String,
-    /**
-     * The path to the directory containing the skill.
-     */
-    val path: String
+    /** The path to the directory containing the skill. */
+    val path: String,
 )

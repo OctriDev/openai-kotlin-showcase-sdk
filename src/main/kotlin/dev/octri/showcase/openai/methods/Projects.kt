@@ -56,7 +56,7 @@ object Projects {
         val maxImagesPer1Minute: Long? = null,
         val maxAudioMegabytesPer1Minute: Long? = null,
         val maxRequestsPer1Day: Long? = null,
-        val batch1DayMaxInputTokens: Long? = null
+        val batch1DayMaxInputTokens: Long? = null,
     )
 
     data class ListProjectServiceAccountsPage(
@@ -72,9 +72,17 @@ object Projects {
     )
 
     /**
-     * Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * Lists projects in the organization. Use `include_archived` to include archived projects and
+     * `limit` and `after` to control and continue through the results. The response includes a
+     * `has_more` flag and cursor IDs for pagination.
      */
-    fun listProjects(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null): ProjectListResponse =
+    fun listProjects(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ProjectListResponse =
         dev.octri.showcase.openai.methods.ProjectsListProjectsOperation.listProjects(
             clientConfig,
             limit,
@@ -84,9 +92,18 @@ object Projects {
         )
 
     /**
-     * Iterates through all pages: Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * Iterates through all pages: Lists projects in the organization. Use `include_archived` to
+     * include archived projects and `limit` and `after` to control and continue through the
+     * results. The response includes a `has_more` flag and cursor IDs for pagination.
      */
-    fun listProjectsPaginated(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null, yieldFn: (Project) -> Boolean) =
+    fun listProjectsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Project) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.ProjectsListProjectsOperation.listProjectsPaginated(
             clientConfig,
             limit,
@@ -97,9 +114,18 @@ object Projects {
         )
 
     /**
-     * Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * Lists projects in the organization. Use `include_archived` to include archived projects and
+     * `limit` and `after` to control and continue through the results. The response includes a
+     * `has_more` flag and cursor IDs for pagination.
      */
-    fun listProjectsPages(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null, yieldPage: (ListProjectsPage) -> Boolean) =
+    fun listProjectsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectsPage) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.ProjectsListProjectsOperation.listProjectsPages(
             clientConfig,
             limit,
@@ -110,9 +136,17 @@ object Projects {
         )
 
     /**
-     * Create a new project in the organization. Projects can be created and archived, but cannot be deleted.
+     * Create a new project in the organization. Projects can be created and archived, but cannot be
+     * deleted.
      */
-    fun createProject(clientConfig: ClientConfig, name: String, geography: SdkClient.SdkOptional<String?>? = null, residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Project =
+    fun createProject(
+        clientConfig: ClientConfig,
+        name: String,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Project =
         dev.octri.showcase.openai.methods.ProjectsCreateProjectOperation.createProject(
             clientConfig,
             name,
@@ -123,9 +157,14 @@ object Projects {
         )
 
     /**
-     * Retrieves a project in the organization by its identifier. Use `project_id` to select the project whose name, status, and residency configuration you need to inspect.
+     * Retrieves a project in the organization by its identifier. Use `project_id` to select the
+     * project whose name, status, and residency configuration you need to inspect.
      */
-    fun retrieveProject(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): Project =
+    fun retrieveProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): Project =
         dev.octri.showcase.openai.methods.ProjectsRetrieveProjectOperation.retrieveProject(
             clientConfig,
             projectId,
@@ -133,9 +172,19 @@ object Projects {
         )
 
     /**
-     * Updates a project in the organization. Supply any of `name`, `external_key_id`, or `geography` to change the corresponding project value; omitted fields are not specified for update. The `geography` field is retained for backward compatibility, while data residency is configured with `residency` when creating a project.
+     * Updates a project in the organization. Supply any of `name`, `external_key_id`, or
+     * `geography` to change the corresponding project value; omitted fields are not specified for
+     * update. The `geography` field is retained for backward compatibility, while data residency is
+     * configured with `residency` when creating a project.
      */
-    fun modifyProject(clientConfig: ClientConfig, projectId: String, name: SdkClient.SdkOptional<String?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, geography: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Project =
+    fun modifyProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: SdkClient.SdkOptional<String?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Project =
         dev.octri.showcase.openai.methods.ProjectsModifyProjectOperation.modifyProject(
             clientConfig,
             projectId,
@@ -146,9 +195,19 @@ object Projects {
         )
 
     /**
-     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their owner's effective project access, and `limit` and `after` to control and continue through the results. The response includes redacted key values, owner details, and a `has_more` flag for pagination.
+     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their
+     * owner's effective project access, and `limit` and `after` to control and continue through the
+     * results. The response includes redacted key values, owner details, and a `has_more` flag for
+     * pagination.
      */
-    fun listProjectApiKeys(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, ownerProjectAccess: ListProjectApiKeysParameterEnum? = null, options: RequestOptions? = null): ProjectApiKeyListResponse =
+    fun listProjectApiKeys(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        ownerProjectAccess: ListProjectApiKeysParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): ProjectApiKeyListResponse =
         dev.octri.showcase.openai.methods.ProjectsListProjectApiKeysOperation.listProjectApiKeys(
             clientConfig,
             projectId,
@@ -159,48 +218,86 @@ object Projects {
         )
 
     /**
-     * Iterates through all pages: Lists API keys in an organization project. Use `owner_project_access` to filter keys by their owner's effective project access, and `limit` and `after` to control and continue through the results. The response includes redacted key values, owner details, and a `has_more` flag for pagination.
+     * Iterates through all pages: Lists API keys in an organization project. Use
+     * `owner_project_access` to filter keys by their owner's effective project access, and `limit`
+     * and `after` to control and continue through the results. The response includes redacted key
+     * values, owner details, and a `has_more` flag for pagination.
      */
-    fun listProjectApiKeysPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, ownerProjectAccess: ListProjectApiKeysParameterEnum? = null, options: RequestOptions? = null, yieldFn: (ProjectApiKey) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectApiKeysOperation.listProjectApiKeysPaginated(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            ownerProjectAccess,
-            options,
-            yieldFn,
-        )
+    fun listProjectApiKeysPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        ownerProjectAccess: ListProjectApiKeysParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectApiKey) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectApiKeysOperation
+            .listProjectApiKeysPaginated(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                ownerProjectAccess,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their owner's effective project access, and `limit` and `after` to control and continue through the results. The response includes redacted key values, owner details, and a `has_more` flag for pagination.
+     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their
+     * owner's effective project access, and `limit` and `after` to control and continue through the
+     * results. The response includes redacted key values, owner details, and a `has_more` flag for
+     * pagination.
      */
-    fun listProjectApiKeysPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, ownerProjectAccess: ListProjectApiKeysParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListProjectApiKeysPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectApiKeysOperation.listProjectApiKeysPages(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            ownerProjectAccess,
-            options,
-            yieldPage,
-        )
+    fun listProjectApiKeysPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        ownerProjectAccess: ListProjectApiKeysParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectApiKeysPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectApiKeysOperation
+            .listProjectApiKeysPages(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                ownerProjectAccess,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Retrieves an API key in an organization project by its identifier. Use `project_id` and `api_key_id` to select the project and key whose redacted value, owner access, and usage timestamps you need to inspect.
+     * Retrieves an API key in an organization project by its identifier. Use `project_id` and
+     * `api_key_id` to select the project and key whose redacted value, owner access, and usage
+     * timestamps you need to inspect.
      */
-    fun retrieveProjectApiKey(clientConfig: ClientConfig, projectId: String, apiKeyId: String, options: RequestOptions? = null): ProjectApiKey =
-        dev.octri.showcase.openai.methods.ProjectsRetrieveProjectApiKeyOperation.retrieveProjectApiKey(
-            clientConfig,
-            projectId,
-            apiKeyId,
-            options,
-        )
+    fun retrieveProjectApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): ProjectApiKey =
+        dev.octri.showcase.openai.methods.ProjectsRetrieveProjectApiKeyOperation
+            .retrieveProjectApiKey(
+                clientConfig,
+                projectId,
+                apiKeyId,
+                options,
+            )
 
     /**
-     * Deletes an API key from the project. Returns confirmation of the key deletion, or an error if the key belonged to a service account.
+     * Deletes an API key from the project. Returns confirmation of the key deletion, or an error if
+     * the key belonged to a service account.
      */
-    fun deleteProjectApiKey(clientConfig: ClientConfig, projectId: String, apiKeyId: String, options: RequestOptions? = null): ProjectApiKeyDeleteResponse =
+    fun deleteProjectApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): ProjectApiKeyDeleteResponse =
         dev.octri.showcase.openai.methods.ProjectsDeleteProjectApiKeyOperation.deleteProjectApiKey(
             clientConfig,
             projectId,
@@ -209,9 +306,28 @@ object Projects {
         )
 
     /**
-     * Updates the scopes and/or expiration of an existing API key in the project, including a service-account-owned key. Requires permission to write project API keys. Provide at least one of `scopes` or `expires_in_seconds`. Omitted fields stay unchanged; neither field accepts `null`. Both changes are saved together. `scopes` replaces the key's scope restrictions using the same scope identifiers as the dashboard. An empty array means All permissions, subject to the owner's effective access; it does not mean no access. Use `["api.all.read"]` for read-only access or specific scopes such as `["api.files.read"]` for restricted access. This does not change user or service-account roles or grant admin permissions. Scope changes follow the same authentication-cache propagation as dashboard edits. Provide `expires_in_seconds` to set the expiration relative to this request. The value must satisfy the organization's and project's expiry policies. Expired keys cannot be updated. Retrying resets the expiration relative to the new request. The response contains only the redacted key, not its secret.
+     * Updates the scopes and/or expiration of an existing API key in the project, including a
+     * service-account-owned key. Requires permission to write project API keys. Provide at least
+     * one of `scopes` or `expires_in_seconds`. Omitted fields stay unchanged; neither field accepts
+     * `null`. Both changes are saved together. `scopes` replaces the key's scope restrictions using
+     * the same scope identifiers as the dashboard. An empty array means All permissions, subject to
+     * the owner's effective access; it does not mean no access. Use `["api.all.read"]` for
+     * read-only access or specific scopes such as `["api.files.read"]` for restricted access. This
+     * does not change user or service-account roles or grant admin permissions. Scope changes
+     * follow the same authentication-cache propagation as dashboard edits. Provide
+     * `expires_in_seconds` to set the expiration relative to this request. The value must satisfy
+     * the organization's and project's expiry policies. Expired keys cannot be updated. Retrying
+     * resets the expiration relative to the new request. The response contains only the redacted
+     * key, not its secret.
      */
-    fun updateProjectApiKey(clientConfig: ClientConfig, projectId: String, apiKeyId: String, expiresInSeconds: Long? = null, scopes: List<String>? = null, options: RequestOptions? = null): ProjectApiKey =
+    fun updateProjectApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        apiKeyId: String,
+        expiresInSeconds: Long? = null,
+        scopes: List<String>? = null,
+        options: RequestOptions? = null,
+    ): ProjectApiKey =
         dev.octri.showcase.openai.methods.ProjectsUpdateProjectApiKeyOperation.updateProjectApiKey(
             clientConfig,
             projectId,
@@ -221,10 +337,12 @@ object Projects {
             options,
         )
 
-    /**
-     * Archives a project in the organization. Archived projects cannot be used or updated.
-     */
-    fun archiveProject(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): Project =
+    /** Archives a project in the organization. Archived projects cannot be used or updated. */
+    fun archiveProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): Project =
         dev.octri.showcase.openai.methods.ProjectsArchiveProjectOperation.archiveProject(
             clientConfig,
             projectId,
@@ -232,178 +350,295 @@ object Projects {
         )
 
     /**
-     * Retrieves the model permission policy for a project. Use `project_id` to identify the project whose model access policy you want to inspect. The response includes the policy mode and the model IDs it applies to.
+     * Retrieves the model permission policy for a project. Use `project_id` to identify the project
+     * whose model access policy you want to inspect. The response includes the policy mode and the
+     * model IDs it applies to.
      */
-    fun retrieveProjectModelPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectModelPermissions =
-        dev.octri.showcase.openai.methods.ProjectsRetrieveProjectModelPermissionsOperation.retrieveProjectModelPermissions(
-            clientConfig,
-            projectId,
-            options,
-        )
+    fun retrieveProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissions =
+        dev.octri.showcase.openai.methods.ProjectsRetrieveProjectModelPermissionsOperation
+            .retrieveProjectModelPermissions(
+                clientConfig,
+                projectId,
+                options,
+            )
 
     /**
-     * Updates a project's model permission policy. Provide `mode` and `model_ids` to specify whether the listed models are allowed or denied. The response returns the updated policy.
+     * Updates a project's model permission policy. Provide `mode` and `model_ids` to specify
+     * whether the listed models are allowed or denied. The response returns the updated policy.
      */
-    fun updateProjectModelPermissions(clientConfig: ClientConfig, projectId: String, mode: ProjectModelPermissionsUpdateRequestModeEnum, modelIds: List<String>, options: RequestOptions? = null): ProjectModelPermissions =
-        dev.octri.showcase.openai.methods.ProjectsUpdateProjectModelPermissionsOperation.updateProjectModelPermissions(
-            clientConfig,
-            projectId,
-            mode,
-            modelIds,
-            options,
-        )
+    fun updateProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        mode: ProjectModelPermissionsUpdateRequestModeEnum,
+        modelIds: List<String>,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissions =
+        dev.octri.showcase.openai.methods.ProjectsUpdateProjectModelPermissionsOperation
+            .updateProjectModelPermissions(
+                clientConfig,
+                projectId,
+                mode,
+                modelIds,
+                options,
+            )
 
     /**
-     * Deletes the model permission policy for a project. Use `project_id` to identify the project whose policy you want to remove. The response confirms whether the permissions were deleted.
+     * Deletes the model permission policy for a project. Use `project_id` to identify the project
+     * whose policy you want to remove. The response confirms whether the permissions were deleted.
      */
-    fun deleteProjectModelPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectModelPermissionsDeleteResponse =
-        dev.octri.showcase.openai.methods.ProjectsDeleteProjectModelPermissionsOperation.deleteProjectModelPermissions(
-            clientConfig,
-            projectId,
-            options,
-        )
+    fun deleteProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissionsDeleteResponse =
+        dev.octri.showcase.openai.methods.ProjectsDeleteProjectModelPermissionsOperation
+            .deleteProjectModelPermissions(
+                clientConfig,
+                projectId,
+                options,
+            )
 
     /**
-     * Lists the rate limits configured for a project, with each result describing limits for a model. Use `limit` to set the number of results and `after` or `before` to navigate the list using cursors.
+     * Lists the rate limits configured for a project, with each result describing limits for a
+     * model. Use `limit` to set the number of results and `after` or `before` to navigate the list
+     * using cursors.
      */
-    fun listProjectRateLimits(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ProjectRateLimitListResponse =
-        dev.octri.showcase.openai.methods.ProjectsListProjectRateLimitsOperation.listProjectRateLimits(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listProjectRateLimits(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectRateLimitListResponse =
+        dev.octri.showcase.openai.methods.ProjectsListProjectRateLimitsOperation
+            .listProjectRateLimits(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                before,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists the rate limits configured for a project, with each result describing limits for a model. Use `limit` to set the number of results and `after` or `before` to navigate the list using cursors.
+     * Iterates through all pages: Lists the rate limits configured for a project, with each result
+     * describing limits for a model. Use `limit` to set the number of results and `after` or
+     * `before` to navigate the list using cursors.
      */
-    fun listProjectRateLimitsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (ProjectRateLimit) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectRateLimitsOperation.listProjectRateLimitsPaginated(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            before,
-            options,
-            yieldFn,
-        )
+    fun listProjectRateLimitsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectRateLimit) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectRateLimitsOperation
+            .listProjectRateLimitsPaginated(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                before,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists the rate limits configured for a project, with each result describing limits for a model. Use `limit` to set the number of results and `after` or `before` to navigate the list using cursors.
+     * Lists the rate limits configured for a project, with each result describing limits for a
+     * model. Use `limit` to set the number of results and `after` or `before` to navigate the list
+     * using cursors.
      */
-    fun listProjectRateLimitsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListProjectRateLimitsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectRateLimitsOperation.listProjectRateLimitsPages(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            before,
-            options,
-            yieldPage,
-        )
+    fun listProjectRateLimitsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectRateLimitsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectRateLimitsOperation
+            .listProjectRateLimitsPages(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                before,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Updates a rate limit configuration for a project. Use `project_id` and `rate_limit_id` to identify the project and rate limit, then provide the limit values to change. The response returns the updated rate limit configuration.
+     * Updates a rate limit configuration for a project. Use `project_id` and `rate_limit_id` to
+     * identify the project and rate limit, then provide the limit values to change. The response
+     * returns the updated rate limit configuration.
      */
-    fun updateProjectRateLimits(clientConfig: ClientConfig, request: UpdateProjectRateLimitsRequest, options: RequestOptions? = null): ProjectRateLimit =
-        dev.octri.showcase.openai.methods.ProjectsUpdateProjectRateLimitsOperation.updateProjectRateLimits(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateProjectRateLimits(
+        clientConfig: ClientConfig,
+        request: UpdateProjectRateLimitsRequest,
+        options: RequestOptions? = null,
+    ): ProjectRateLimit =
+        dev.octri.showcase.openai.methods.ProjectsUpdateProjectRateLimitsOperation
+            .updateProjectRateLimits(
+                clientConfig,
+                request,
+                options,
+            )
+
+    /** Returns a list of service accounts in the project. */
+    fun listProjectServiceAccounts(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountListResponse =
+        dev.octri.showcase.openai.methods.ProjectsListProjectServiceAccountsOperation
+            .listProjectServiceAccounts(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                options,
+            )
+
+    /** Iterates through all pages: Returns a list of service accounts in the project. */
+    fun listProjectServiceAccountsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectServiceAccount) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectServiceAccountsOperation
+            .listProjectServiceAccountsPaginated(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                options,
+                yieldFn,
+            )
+
+    /** Returns a list of service accounts in the project. */
+    fun listProjectServiceAccountsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectServiceAccountsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectServiceAccountsOperation
+            .listProjectServiceAccountsPages(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Returns a list of service accounts in the project.
+     * Creates a service account in a project and, by default, returns an unredacted API key for it.
+     * Supply a `name`; set `create_service_account_only` to create the account without default
+     * roles or an API key, and use `expires_in_seconds` to configure the initial key's lifetime.
      */
-    fun listProjectServiceAccounts(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ProjectServiceAccountListResponse =
-        dev.octri.showcase.openai.methods.ProjectsListProjectServiceAccountsOperation.listProjectServiceAccounts(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            options,
-        )
+    fun createProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: String,
+        createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountCreateResponse =
+        dev.octri.showcase.openai.methods.ProjectsCreateProjectServiceAccountOperation
+            .createProjectServiceAccount(
+                clientConfig,
+                projectId,
+                name,
+                createServiceAccountOnly,
+                expiresInSeconds,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Returns a list of service accounts in the project.
+     * Retrieves a service account in a project. Use the project and service account identifiers to
+     * inspect the account's name, role, and creation timestamp.
      */
-    fun listProjectServiceAccountsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ProjectServiceAccount) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectServiceAccountsOperation.listProjectServiceAccountsPaginated(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            options,
-            yieldFn,
-        )
+    fun retrieveProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccount =
+        dev.octri.showcase.openai.methods.ProjectsRetrieveProjectServiceAccountOperation
+            .retrieveProjectServiceAccount(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                options,
+            )
 
     /**
-     * Returns a list of service accounts in the project.
+     * Updates a service account in a project. Supply `name` or `role` to change the corresponding
+     * account property; the role must be `member` or `owner`.
      */
-    fun listProjectServiceAccountsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListProjectServiceAccountsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectServiceAccountsOperation.listProjectServiceAccountsPages(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            options,
-            yieldPage,
-        )
+    fun updateProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        role: UpdateProjectServiceAccountBodyRoleEnum? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccount =
+        dev.octri.showcase.openai.methods.ProjectsUpdateProjectServiceAccountOperation
+            .updateProjectServiceAccount(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                name,
+                role,
+                options,
+            )
 
     /**
-     * Creates a service account in a project and, by default, returns an unredacted API key for it. Supply a `name`; set `create_service_account_only` to create the account without default roles or an API key, and use `expires_in_seconds` to configure the initial key's lifetime.
+     * Deletes a service account from the project. Returns confirmation of service account deletion,
+     * or an error if the project is archived (archived projects have no service accounts).
      */
-    fun createProjectServiceAccount(clientConfig: ClientConfig, projectId: String, name: String, createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): ProjectServiceAccountCreateResponse =
-        dev.octri.showcase.openai.methods.ProjectsCreateProjectServiceAccountOperation.createProjectServiceAccount(
-            clientConfig,
-            projectId,
-            name,
-            createServiceAccountOnly,
-            expiresInSeconds,
-            options,
-        )
+    fun deleteProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountDeleteResponse =
+        dev.octri.showcase.openai.methods.ProjectsDeleteProjectServiceAccountOperation
+            .deleteProjectServiceAccount(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                options,
+            )
 
     /**
-     * Retrieves a service account in a project. Use the project and service account identifiers to inspect the account's name, role, and creation timestamp.
+     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of
+     * results and pass an `after` cursor from a previous response to continue through the list.
      */
-    fun retrieveProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): ProjectServiceAccount =
-        dev.octri.showcase.openai.methods.ProjectsRetrieveProjectServiceAccountOperation.retrieveProjectServiceAccount(
-            clientConfig,
-            projectId,
-            serviceAccountId,
-            options,
-        )
-
-    /**
-     * Updates a service account in a project. Supply `name` or `role` to change the corresponding account property; the role must be `member` or `owner`.
-     */
-    fun updateProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, role: UpdateProjectServiceAccountBodyRoleEnum? = null, options: RequestOptions? = null): ProjectServiceAccount =
-        dev.octri.showcase.openai.methods.ProjectsUpdateProjectServiceAccountOperation.updateProjectServiceAccount(
-            clientConfig,
-            projectId,
-            serviceAccountId,
-            name,
-            role,
-            options,
-        )
-
-    /**
-     * Deletes a service account from the project. Returns confirmation of service account deletion, or an error if the project is archived (archived projects have no service accounts).
-     */
-    fun deleteProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): ProjectServiceAccountDeleteResponse =
-        dev.octri.showcase.openai.methods.ProjectsDeleteProjectServiceAccountOperation.deleteProjectServiceAccount(
-            clientConfig,
-            projectId,
-            serviceAccountId,
-            options,
-        )
-
-    /**
-     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
-     */
-    fun listProjectUsers(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ProjectUserListResponse =
+    fun listProjectUsers(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectUserListResponse =
         dev.octri.showcase.openai.methods.ProjectsListProjectUsersOperation.listProjectUsers(
             clientConfig,
             projectId,
@@ -413,22 +648,40 @@ object Projects {
         )
 
     /**
-     * Iterates through all pages: Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
+     * Iterates through all pages: Lists users in a project using cursor-based pagination. Set
+     * `limit` to control the number of results and pass an `after` cursor from a previous response
+     * to continue through the list.
      */
-    fun listProjectUsersPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ProjectUser) -> Boolean) =
-        dev.octri.showcase.openai.methods.ProjectsListProjectUsersOperation.listProjectUsersPaginated(
-            clientConfig,
-            projectId,
-            limit,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listProjectUsersPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectUser) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.ProjectsListProjectUsersOperation
+            .listProjectUsersPaginated(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
+     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of
+     * results and pass an `after` cursor from a previous response to continue through the list.
      */
-    fun listProjectUsersPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListProjectUsersPage) -> Boolean) =
+    fun listProjectUsersPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectUsersPage) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.ProjectsListProjectUsersOperation.listProjectUsersPages(
             clientConfig,
             projectId,
@@ -439,9 +692,17 @@ object Projects {
         )
 
     /**
-     * Adds a user to the project. Users must already be members of the organization to be added to a project.
+     * Adds a user to the project. Users must already be members of the organization to be added to
+     * a project.
      */
-    fun createProjectUser(clientConfig: ClientConfig, projectId: String, role: String, userId: SdkClient.SdkOptional<String?>? = null, email: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): ProjectUser =
+    fun createProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        role: String,
+        userId: SdkClient.SdkOptional<String?>? = null,
+        email: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectUser =
         dev.octri.showcase.openai.methods.ProjectsCreateProjectUserOperation.createProjectUser(
             clientConfig,
             projectId,
@@ -452,9 +713,15 @@ object Projects {
         )
 
     /**
-     * Retrieves a user's membership details for a project. Use `project_id` and `user_id` to identify the project and user, and review the returned role and membership timestamp.
+     * Retrieves a user's membership details for a project. Use `project_id` and `user_id` to
+     * identify the project and user, and review the returned role and membership timestamp.
      */
-    fun retrieveProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): ProjectUser =
+    fun retrieveProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): ProjectUser =
         dev.octri.showcase.openai.methods.ProjectsRetrieveProjectUserOperation.retrieveProjectUser(
             clientConfig,
             projectId,
@@ -463,9 +730,16 @@ object Projects {
         )
 
     /**
-     * Updates a user's role in a project. Use `project_id` and `user_id` to identify the project membership, and set `role` to `owner` or `member` when changing the role.
+     * Updates a user's role in a project. Use `project_id` and `user_id` to identify the project
+     * membership, and set `role` to `owner` or `member` when changing the role.
      */
-    fun modifyProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, role: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): ProjectUser =
+    fun modifyProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        role: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectUser =
         dev.octri.showcase.openai.methods.ProjectsModifyProjectUserOperation.modifyProjectUser(
             clientConfig,
             projectId,
@@ -475,9 +749,15 @@ object Projects {
         )
 
     /**
-     * Deletes a user from the project. Returns confirmation of project user deletion, or an error if the project is archived (archived projects have no users).
+     * Deletes a user from the project. Returns confirmation of project user deletion, or an error
+     * if the project is archived (archived projects have no users).
      */
-    fun deleteProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): ProjectUserDeleteResponse =
+    fun deleteProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): ProjectUserDeleteResponse =
         dev.octri.showcase.openai.methods.ProjectsDeleteProjectUserOperation.deleteProjectUser(
             clientConfig,
             projectId,
@@ -486,16 +766,27 @@ object Projects {
         )
 
     /**
-     * Creates an API key for a service account in a project. Use `name` and `scopes` to set the key's label and scopes, and `expires_in_seconds` to configure its lifetime. The response includes the unredacted key value and its identifier.
+     * Creates an API key for a service account in a project. Use `name` and `scopes` to set the
+     * key's label and scopes, and `expires_in_seconds` to configure its lifetime. The response
+     * includes the unredacted key value and its identifier.
      */
-    fun createProjectsServiceAccountApiKey(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, scopes: List<String>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): ServiceAccountApiKeyBody =
-        dev.octri.showcase.openai.methods.ProjectsCreateProjectsServiceAccountApiKeyOperation.createProjectsServiceAccountApiKey(
-            clientConfig,
-            projectId,
-            serviceAccountId,
-            name,
-            scopes,
-            expiresInSeconds,
-            options,
-        )
+    fun createProjectsServiceAccountApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        scopes: List<String>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): ServiceAccountApiKeyBody =
+        dev.octri.showcase.openai.methods.ProjectsCreateProjectsServiceAccountApiKeyOperation
+            .createProjectsServiceAccountApiKey(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                name,
+                scopes,
+                expiresInSeconds,
+                options,
+            )
 }

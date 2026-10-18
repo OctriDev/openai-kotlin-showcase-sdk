@@ -3,29 +3,22 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `BetaAdditionalToolsItemParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaAdditionalToolsItemParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaAdditionalToolsItemParam(
-    /**
-     * The item type. Always `additional_tools`.
-     */
+    /** The item type. Always `additional_tools`. */
     val type: BetaAdditionalToolsItemParamTypeEnum,
-    /**
-     * The role that provided the additional tools. Only `developer` is supported.
-     */
+    /** The role that provided the additional tools. Only `developer` is supported. */
     val role: BetaAdditionalToolsItemParamRoleEnum,
-    /**
-     * A list of additional tools made available at this item.
-     */
+    /** A list of additional tools made available at this item. */
     val tools: List<BetaTool>,
-    /**
-     * Optional API value serialized in the `agent` wire field.
-     */
+    /** Optional API value serialized in the `agent` wire field. */
     val agent: BetaAgentTagParam? = null,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
-    val id: String? = null
+    /** Optional `string` value serialized in the `id` wire field. */
+    val id: String? = null,
 ) : BetaItem

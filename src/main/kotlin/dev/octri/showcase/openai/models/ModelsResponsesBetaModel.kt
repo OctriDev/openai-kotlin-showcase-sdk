@@ -4,9 +4,13 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the model guide to browse and compare available models.
+ * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models
+ * with different capabilities, performance characteristics, and price points. Refer to the model
+ * guide to browse and compare available models.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaModelIdsCompaction.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = BetaModelIdsCompaction.Deserializer::class
+)
 sealed interface BetaModelIdsCompaction {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<BetaModelIdsCompaction>() {
@@ -16,7 +20,8 @@ sealed interface BetaModelIdsCompaction {
         ): BetaModelIdsCompaction {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out BetaModelIdsCompaction>> = listOf(BetaModelIdsResponses::class.java)
+            val objectTypes: List<Class<out BetaModelIdsCompaction>> =
+                listOf(BetaModelIdsResponses::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -25,23 +30,49 @@ sealed interface BetaModelIdsCompaction {
                 }
             }
             return when {
-                node.isTextual -> StringBetaModelIdsCompaction(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> ValueBetaModelIdsCompaction(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringBetaModelIdsCompaction(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    ValueBetaModelIdsCompaction(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringBetaModelIdsCompaction(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : BetaModelIdsCompaction
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringBetaModelIdsCompaction(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : BetaModelIdsCompaction
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueBetaModelIdsCompaction(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : BetaModelIdsCompaction
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueBetaModelIdsCompaction(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
+) : BetaModelIdsCompaction
 
-/**
- * Typed representation of the `BetaModelIdsResponses` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = BetaModelIdsResponses.Deserializer::class)
+/** Typed representation of the `BetaModelIdsResponses` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = BetaModelIdsResponses.Deserializer::class
+)
 sealed interface BetaModelIdsResponses : BetaModelIdsCompaction {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<BetaModelIdsResponses>() {
@@ -51,7 +82,8 @@ sealed interface BetaModelIdsResponses : BetaModelIdsCompaction {
         ): BetaModelIdsResponses {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out BetaModelIdsResponses>> = listOf(BetaModelIdsShared::class.java)
+            val objectTypes: List<Class<out BetaModelIdsResponses>> =
+                listOf(BetaModelIdsShared::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -60,54 +92,76 @@ sealed interface BetaModelIdsResponses : BetaModelIdsCompaction {
                 }
             }
             return when {
-                node.isTextual -> StringBetaModelIdsResponses(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, BetaModelIdsResponses::class.java, "no BetaModelIdsResponses branch accepts this payload")
+                node.isTextual ->
+                    StringBetaModelIdsResponses(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        BetaModelIdsResponses::class.java,
+                        "no BetaModelIdsResponses branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringBetaModelIdsResponses(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : BetaModelIdsResponses
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringBetaModelIdsResponses(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : BetaModelIdsResponses
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaModelIdsShared @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : BetaModelIdsResponses
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaModelIdsShared
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    BetaModelIdsResponses
 
-/**
- * Typed representation of the `BetaModelResponseProperties` API schema.
- */
+/** Typed representation of the `BetaModelResponseProperties` API schema. */
 data class BetaModelResponseProperties(
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
     val metadata: BetaMetadata? = null,
-    /**
-     * Optional API value serialized in the `top_logprobs` wire field.
-     */
+    /** Optional API value serialized in the `top_logprobs` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: Long? = null,
-    /**
-     * Optional API value serialized in the `temperature` wire field.
-     */
+    /** Optional API value serialized in the `temperature` wire field. */
     val temperature: Double? = null,
-    /**
-     * Optional API value serialized in the `top_p` wire field.
-     */
+    /** Optional API value serialized in the `top_p` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates by better bucketing similar requests and to help OpenAI detect and prevent abuse. Learn more.
+     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
+     * `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your
+     * end-users. Used to boost cache hit rates by better bucketing similar requests and to help
+     * OpenAI detect and prevent abuse. Learn more.
      */
     val user: String? = null,
-    /**
-     * Optional API value serialized in the `safety_identifier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
-    /**
-     * Optional `string` value serialized in the `prompt_cache_key` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
-    /**
-     * Optional API value serialized in the `prompt_cache_retention` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: BetaModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null
+    /** Optional API value serialized in the `safety_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
+    /** Optional `string` value serialized in the `prompt_cache_key` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
+    val promptCacheKey: String? = null,
+    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
+    val promptCacheRetention: BetaModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
 )

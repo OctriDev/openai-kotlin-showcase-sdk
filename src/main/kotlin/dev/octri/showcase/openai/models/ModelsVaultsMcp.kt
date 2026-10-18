@@ -3,81 +3,99 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Configuration used to refresh an MCP OAuth access token, excluding secret values.
- */
+/** Configuration used to refresh an MCP OAuth access token, excluding secret values. */
 data class McpOauthRefreshResource(
-    /**
-     * The HTTPS OAuth token endpoint used for refresh.
-     */
+    /** The HTTPS OAuth token endpoint used for refresh. */
     @com.fasterxml.jackson.annotation.JsonProperty("token_endpoint") val tokenEndpoint: String,
-    /**
-     * The OAuth client ID used when requesting a new access token.
-     */
+    /** The OAuth client ID used when requesting a new access token. */
     @com.fasterxml.jackson.annotation.JsonProperty("client_id") val clientId: String,
-    /**
-     * The resource URI sent to the OAuth token endpoint during refresh, if configured.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource", required = true) val resource: String?,
-    /**
-     * Space-separated OAuth scopes requested during refresh, if configured.
-     */
+    /** The resource URI sent to the OAuth token endpoint during refresh, if configured. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource", required = true)
+    val resource: String?,
+    /** Space-separated OAuth scopes requested during refresh, if configured. */
     @com.fasterxml.jackson.annotation.JsonProperty("scope", required = true) val scope: String?,
-    /**
-     * How the OAuth client authenticates to the token endpoint, excluding its client secret.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("token_endpoint_auth") val tokenEndpointAuth: McpOauthTokenEndpointAuthResource
+    /** How the OAuth client authenticates to the token endpoint, excluding its client secret. */
+    @com.fasterxml.jackson.annotation.JsonProperty("token_endpoint_auth")
+    val tokenEndpointAuth: McpOauthTokenEndpointAuthResource,
 )
 
-/**
- * The client authentication method used for OAuth token refresh.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMcpOauthTokenEndpointAuthResource::class)
+/** The client authentication method used for OAuth token refresh. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownMcpOauthTokenEndpointAuthResource::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpOauthTokenEndpointAuthResourceNone::class, name = "none"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpOauthTokenEndpointAuthResourceClientSecretBasic::class, name = "client_secret_basic"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpOauthTokenEndpointAuthResourceClientSecretPost::class, name = "client_secret_post")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = McpOauthTokenEndpointAuthResourceNone::class,
+        name = "none",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = McpOauthTokenEndpointAuthResourceClientSecretBasic::class,
+        name = "client_secret_basic",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = McpOauthTokenEndpointAuthResourceClientSecretPost::class,
+        name = "client_secret_post",
+    ),
 )
 sealed interface McpOauthTokenEndpointAuthResource
 
-/** A [McpOauthTokenEndpointAuthResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownMcpOauthTokenEndpointAuthResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [McpOauthTokenEndpointAuthResource] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownMcpOauthTokenEndpointAuthResource
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : McpOauthTokenEndpointAuthResource {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Sends the client ID and secret using HTTP Basic authentication.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Sends the client ID and secret using HTTP Basic authentication. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class McpOauthTokenEndpointAuthResourceClientSecretBasic(
-    /**
-     * The type of the object. Always `client_secret_basic`.
-     */
+    /** The type of the object. Always `client_secret_basic`. */
     val type: McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum
 ) : McpOauthTokenEndpointAuthResource
 
-/**
- * Sends the client ID and secret in the token request body.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Sends the client ID and secret in the token request body. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class McpOauthTokenEndpointAuthResourceClientSecretPost(
-    /**
-     * The type of the object. Always `client_secret_post`.
-     */
+    /** The type of the object. Always `client_secret_post`. */
     val type: McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum
 ) : McpOauthTokenEndpointAuthResource
 
-/**
- * Sends the client ID without a client secret.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Sends the client ID without a client secret. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class McpOauthTokenEndpointAuthResourceNone(
-    /**
-     * The type of the object. Always `none`.
-     */
+    /** The type of the object. Always `none`. */
     val type: McpOauthTokenEndpointAuthResourceNoneTypeEnum
 ) : McpOauthTokenEndpointAuthResource

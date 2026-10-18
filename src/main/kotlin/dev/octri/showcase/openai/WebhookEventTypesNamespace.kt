@@ -3,13 +3,12 @@
 
 package dev.octri.showcase.openai
 
-
 class WebhookEventTypesNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Returns webhook event types visible to the authenticated project.
-     */
+    /** Returns webhook event types visible to the authenticated project. */
     fun list(options: RequestOptions? = null): WebhookEventTypeListResource {
-        return dev.octri.showcase.openai.methods.WebhookEventTypes.listWebhookEventTypes(clientConfig, options)
+        return dev.octri.showcase.openai.methods.WebhookEventTypes.listWebhookEventTypes(
+            clientConfig,
+            options,
+        )
     }
-
 }

@@ -3,62 +3,60 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Optional object value serialized in the `code_interpreter` wire field.
- */
+/** Optional object value serialized in the `code_interpreter` wire field. */
 data class ThreadObjectToolResourcesCodeInterpreter(
     /**
-     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files associated with the tool.
+     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of
+     * 20 files associated with the tool.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
 )
 
-/**
- * Optional object value serialized in the `file_search` wire field.
- */
+/** Optional object value serialized in the `file_search` wire field. */
 data class ThreadObjectToolResourcesFileSearch(
     /**
-     * The vector store attached to this thread. There can be a maximum of 1 vector store attached to the thread.
+     * The vector store attached to this thread. There can be a maximum of 1 vector store attached
+     * to the thread.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+    val vectorStoreIds: List<String>? = null
 )
 
 /**
- * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+ * A set of resources that are made available to the assistant's tools in this thread. The resources
+ * are specific to the type of tool. For example, the `code_interpreter` tool requires a list of
+ * file IDs, while the `file_search` tool requires a list of vector store IDs.
  */
 data class ThreadObjectToolResources(
-    /**
-     * Optional object value serialized in the `code_interpreter` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: ThreadObjectToolResourcesCodeInterpreter? = null,
-    /**
-     * Optional object value serialized in the `file_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: ThreadObjectToolResourcesFileSearch? = null
+    /** Optional object value serialized in the `code_interpreter` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
+    val codeInterpreter: ThreadObjectToolResourcesCodeInterpreter? = null,
+    /** Optional object value serialized in the `file_search` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+    val fileSearch: ThreadObjectToolResourcesFileSearch? = null,
 )
 
-/**
- * Represents a thread that contains messages.
- */
+/** Represents a thread that contains messages. */
 data class ThreadObject(
-    /**
-     * The identifier, which can be referenced in API endpoints.
-     */
+    /** The identifier, which can be referenced in API endpoints. */
     val id: String,
-    /**
-     * The object type, which is always `thread`.
-     */
+    /** The object type, which is always `thread`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ThreadObjectObjectEnum,
-    /**
-     * The Unix timestamp (in seconds) for when the thread was created.
-     */
+    /** The Unix timestamp (in seconds) for when the thread was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
     /**
-     * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+     * A set of resources that are made available to the assistant's tools in this thread. The
+     * resources are specific to the type of tool. For example, the `code_interpreter` tool requires
+     * a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources", required = true) val toolResources: ThreadObjectToolResources?,
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources", required = true)
+    val toolResources: ThreadObjectToolResources?,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true) val metadata: Metadata?
+    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true)
+    val metadata: Metadata?,
 )

@@ -3,48 +3,34 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Metadata for work delegated by the Live model to your application, Responses, or Decisions.
- */
+/** Metadata for work delegated by the Live model to your application, Responses, or Decisions. */
 data class LiveDelegationItem(
     /**
-     * The unique ID of the delegation. Use this as delegation_id when replying to client-owned work or correlating backend events.
+     * The unique ID of the delegation. Use this as delegation_id when replying to client-owned work
+     * or correlating backend events.
      */
     val id: String,
-    /**
-     * The object type, always `delegation`.
-     */
+    /** The object type, always `delegation`. */
     val type: LiveDelegationItemTypeEnum,
-    /**
-     * Where the Live model delegated the work: `client`, `responses`, or `decisions`.
-     */
+    /** Where the Live model delegated the work: `client`, `responses`, or `decisions`. */
     val target: LiveDelegationItemTargetVariant0Enum,
     /**
-     * The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations.
+     * The ID of the Responses API response associated with a Responses delegation. Omitted for
+     * client delegations.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String? = null,
 )
 
-/**
- * Reasoning options for Responses requests made on behalf of the Live session.
- */
+/** Reasoning options for Responses requests made on behalf of the Live session. */
 data class LiveDelegationReasoningInputParam(
-    /**
-     * Optional API value serialized in the `effort` wire field.
-     */
+    /** Optional API value serialized in the `effort` wire field. */
     val effort: LiveReasoningEffort? = null,
-    /**
-     * Optional API value serialized in the `summary` wire field.
-     */
-    val summary: LiveReasoningSummary? = null
+    /** Optional API value serialized in the `summary` wire field. */
+    val summary: LiveReasoningSummary? = null,
 )
 
-/**
- * Text generation options for the Live session’s Responses backend.
- */
+/** Text generation options for the Live session’s Responses backend. */
 data class LiveDelegationTextInputParam(
-    /**
-     * Optional API value serialized in the `verbosity` wire field.
-     */
+    /** Optional API value serialized in the `verbosity` wire field. */
     val verbosity: LiveTextVerbosity? = null
 )

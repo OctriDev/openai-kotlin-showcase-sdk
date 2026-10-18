@@ -3,90 +3,190 @@
 
 package dev.octri.showcase.openai
 
-
 class VaultsNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Lists vaults using ID-based pagination. See vaults.
-     */
-    fun list(limit: Long? = null, order: ListOrderParam? = null, after: String? = null, metadata: Map<String, String>? = null, status: VaultStatusFilterParam? = null, options: RequestOptions? = null): VaultListResource {
-        return dev.octri.showcase.openai.methods.Vaults.listVaults(clientConfig, limit, order, after, metadata, status, options)
+    /** Lists vaults using ID-based pagination. See vaults. */
+    fun list(
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        metadata: Map<String, String>? = null,
+        status: VaultStatusFilterParam? = null,
+        options: RequestOptions? = null,
+    ): VaultListResource {
+        return dev.octri.showcase.openai.methods.Vaults.listVaults(
+            clientConfig,
+            limit,
+            order,
+            after,
+            metadata,
+            status,
+            options,
+        )
     }
 
-    /**
-     * Lists vaults using ID-based pagination. See vaults.
-     */
-    fun listPaginated(limit: Long? = null, order: ListOrderParam? = null, after: String? = null, metadata: Map<String, String>? = null, status: VaultStatusFilterParam? = null, options: RequestOptions? = null, yieldFn: (VaultResource) -> Boolean) {
-        dev.octri.showcase.openai.methods.Vaults.listVaultsPaginated(clientConfig, limit, order, after, metadata, status, options, yieldFn)
+    /** Lists vaults using ID-based pagination. See vaults. */
+    fun listPaginated(
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        metadata: Map<String, String>? = null,
+        status: VaultStatusFilterParam? = null,
+        options: RequestOptions? = null,
+        yieldFn: (VaultResource) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Vaults.listVaultsPaginated(
+            clientConfig,
+            limit,
+            order,
+            after,
+            metadata,
+            status,
+            options,
+            yieldFn,
+        )
     }
 
-    /**
-     * Creates a vault for the current project. See vaults.
-     */
-    fun create(name: String? = null, metadata: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): VaultResource {
-        return dev.octri.showcase.openai.methods.Vaults.createVault(clientConfig, name, metadata, options)
+    /** Creates a vault for the current project. See vaults. */
+    fun create(
+        name: String? = null,
+        metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
+        options: RequestOptions? = null,
+    ): VaultResource {
+        return dev.octri.showcase.openai.methods.Vaults.createVault(
+            clientConfig,
+            name,
+            metadata,
+            options,
+        )
     }
 
-    /**
-     * Retrieves a vault by its ID. See vaults.
-     */
+    /** Retrieves a vault by its ID. See vaults. */
     fun retrieve(vaultId: String, options: RequestOptions? = null): VaultResource {
-        return dev.octri.showcase.openai.methods.Vaults.retrieveVault(clientConfig, vaultId, options)
+        return dev.octri.showcase.openai.methods.Vaults.retrieveVault(
+            clientConfig,
+            vaultId,
+            options,
+        )
     }
 
     /**
      * Updates the name or metadata of an active vault. Omitted fields remain unchanged. See vaults.
      */
-    fun update(vaultId: String, metadata: Map<String, String>? = null, name: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): VaultResource {
-        return dev.octri.showcase.openai.methods.Vaults.updateVault(clientConfig, vaultId, metadata, name, options)
+    fun update(
+        vaultId: String,
+        metadata: Map<String, String>? = null,
+        name: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): VaultResource {
+        return dev.octri.showcase.openai.methods.Vaults.updateVault(
+            clientConfig,
+            vaultId,
+            metadata,
+            name,
+            options,
+        )
     }
 
-    /**
-     * Deletes a vault and all its credentials. See vaults.
-     */
+    /** Deletes a vault and all its credentials. See vaults. */
     fun delete(vaultId: String, options: RequestOptions? = null): DeletedVaultResource {
         return dev.octri.showcase.openai.methods.Vaults.deleteVault(clientConfig, vaultId, options)
     }
 
     /**
-     * Lists a vault's credentials using ID-based pagination without returning secret values. See vaults.
+     * Lists a vault's credentials using ID-based pagination without returning secret values. See
+     * vaults.
      */
-    fun listCredentials(request: dev.octri.showcase.openai.methods.Vaults.ListVaultCredentialsRequest, options: RequestOptions? = null): VaultCredentialListResource {
-        return dev.octri.showcase.openai.methods.Vaults.listVaultCredentials(clientConfig, request, options)
+    fun listCredentials(
+        request: dev.octri.showcase.openai.methods.Vaults.ListVaultCredentialsRequest,
+        options: RequestOptions? = null,
+    ): VaultCredentialListResource {
+        return dev.octri.showcase.openai.methods.Vaults.listVaultCredentials(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists a vault's credentials using ID-based pagination without returning secret values. See vaults.
+     * Lists a vault's credentials using ID-based pagination without returning secret values. See
+     * vaults.
      */
-    fun listCredentialsPaginated(request: dev.octri.showcase.openai.methods.Vaults.ListVaultCredentialsRequest, options: RequestOptions? = null, yieldFn: (VaultCredentialResource) -> Boolean) {
-        dev.octri.showcase.openai.methods.Vaults.listVaultCredentialsPaginated(clientConfig, request, options, yieldFn)
+    fun listCredentialsPaginated(
+        request: dev.octri.showcase.openai.methods.Vaults.ListVaultCredentialsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (VaultCredentialResource) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Vaults.listVaultCredentialsPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
     }
 
     /**
      * Creates a vault credential. Secret values are write-only and are never returned. See vaults.
      */
-    fun createCredential(vaultId: String, name: String, auth: CreateVaultCredentialAuthParam, metadata: Map<String, String>? = null, options: RequestOptions? = null): VaultCredentialResource {
-        return dev.octri.showcase.openai.methods.Vaults.createVaultCredential(clientConfig, vaultId, name, auth, metadata, options)
+    fun createCredential(
+        vaultId: String,
+        name: String,
+        auth: CreateVaultCredentialAuthParam,
+        metadata: Map<String, String>? = null,
+        options: RequestOptions? = null,
+    ): VaultCredentialResource {
+        return dev.octri.showcase.openai.methods.Vaults.createVaultCredential(
+            clientConfig,
+            vaultId,
+            name,
+            auth,
+            metadata,
+            options,
+        )
     }
 
-    /**
-     * Retrieves vault credential metadata without returning secret values. See vaults.
-     */
-    fun retrieveCredential(vaultId: String, credentialId: String, options: RequestOptions? = null): VaultCredentialResource {
-        return dev.octri.showcase.openai.methods.Vaults.retrieveVaultCredential(clientConfig, vaultId, credentialId, options)
+    /** Retrieves vault credential metadata without returning secret values. See vaults. */
+    fun retrieveCredential(
+        vaultId: String,
+        credentialId: String,
+        options: RequestOptions? = null,
+    ): VaultCredentialResource {
+        return dev.octri.showcase.openai.methods.Vaults.retrieveVaultCredential(
+            clientConfig,
+            vaultId,
+            credentialId,
+            options,
+        )
     }
 
-    /**
-     * Updates credential metadata or rotates its write-only secret. See vaults.
-     */
-    fun rotateCredential(vaultId: String, credentialId: String, auth: RotateVaultCredentialAuthParam? = null, metadata: Map<String, String>? = null, options: RequestOptions? = null): VaultCredentialResource {
-        return dev.octri.showcase.openai.methods.Vaults.rotateVaultCredential(clientConfig, vaultId, credentialId, auth, metadata, options)
+    /** Updates credential metadata or rotates its write-only secret. See vaults. */
+    fun rotateCredential(
+        vaultId: String,
+        credentialId: String,
+        auth: RotateVaultCredentialAuthParam? = null,
+        metadata: Map<String, String>? = null,
+        options: RequestOptions? = null,
+    ): VaultCredentialResource {
+        return dev.octri.showcase.openai.methods.Vaults.rotateVaultCredential(
+            clientConfig,
+            vaultId,
+            credentialId,
+            auth,
+            metadata,
+            options,
+        )
     }
 
-    /**
-     * Deletes a vault credential. See vaults.
-     */
-    fun deleteCredential(vaultId: String, credentialId: String, options: RequestOptions? = null): DeletedVaultCredentialResource {
-        return dev.octri.showcase.openai.methods.Vaults.deleteVaultCredential(clientConfig, vaultId, credentialId, options)
+    /** Deletes a vault credential. See vaults. */
+    fun deleteCredential(
+        vaultId: String,
+        credentialId: String,
+        options: RequestOptions? = null,
+    ): DeletedVaultCredentialResource {
+        return dev.octri.showcase.openai.methods.Vaults.deleteVaultCredential(
+            clientConfig,
+            vaultId,
+            credentialId,
+            options,
+        )
     }
-
 }

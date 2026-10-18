@@ -3,116 +3,77 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `AddUploadPartRequest` API schema.
- */
+/** Typed representation of the `AddUploadPartRequest` API schema. */
 data class AddUploadPartRequest(
-    /**
-     * The chunk of bytes for this Part.
-     */
+    /** The chunk of bytes for this Part. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ByteArray
 )
 
-/**
- * Typed representation of the `CompleteUploadRequest` API schema.
- */
+/** Typed representation of the `CompleteUploadRequest` API schema. */
 data class CompleteUploadRequest(
-    /**
-     * The ordered list of Part IDs.
-     */
+    /** The ordered list of Part IDs. */
     @com.fasterxml.jackson.annotation.JsonProperty("part_ids") val partIds: List<String>,
     /**
-     * The optional md5 checksum for the file contents to verify if the bytes uploaded matches what you expect.
+     * The optional md5 checksum for the file contents to verify if the bytes uploaded matches what
+     * you expect.
      */
-    val md5: String? = null
+    val md5: String? = null,
 )
 
-/**
- * Typed representation of the `CreateUploadRequest` API schema.
- */
+/** Typed representation of the `CreateUploadRequest` API schema. */
 data class CreateUploadRequest(
-    /**
-     * The name of the file to upload.
-     */
+    /** The name of the file to upload. */
     val filename: String,
     /**
-     * The intended purpose of the uploaded file. See the \[documentation on File purposes\](developers.openai.com).
+     * The intended purpose of the uploaded file. See the \[documentation on File
+     * purposes\](developers.openai.com).
      */
     val purpose: CreateUploadRequestPurposeEnum,
-    /**
-     * The number of bytes in the file you are uploading.
-     */
+    /** The number of bytes in the file you are uploading. */
     val bytes: Long,
     /**
-     * The MIME type of the file. This must fall within the supported MIME types for your file purpose. See the supported MIME types for assistants and vision.
+     * The MIME type of the file. This must fall within the supported MIME types for your file
+     * purpose. See the supported MIME types for assistants and vision.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("mime_type") val mimeType: String,
     /**
-     * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days and all other files are persisted until they are manually deleted.
+     * The expiration policy for a file. By default, files with `purpose=batch` expire after 30 days
+     * and all other files are persisted until they are manually deleted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: FileExpirationAfter? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
+    val expiresAfter: FileExpirationAfter? = null,
 )
 
-/**
- * The Upload object can accept byte chunks in the form of Parts.
- */
+/** The Upload object can accept byte chunks in the form of Parts. */
 data class Upload(
-    /**
-     * The Upload unique identifier, which can be referenced in API endpoints.
-     */
+    /** The Upload unique identifier, which can be referenced in API endpoints. */
     val id: String,
-    /**
-     * The Unix timestamp (in seconds) for when the Upload was created.
-     */
+    /** The Unix timestamp (in seconds) for when the Upload was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The name of the file to be uploaded.
-     */
+    /** The name of the file to be uploaded. */
     val filename: String,
-    /**
-     * The intended number of bytes to be uploaded.
-     */
+    /** The intended number of bytes to be uploaded. */
     val bytes: Long,
-    /**
-     * The intended purpose of the file. Please refer here for acceptable values.
-     */
+    /** The intended purpose of the file. Please refer here for acceptable values. */
     val purpose: String,
-    /**
-     * The status of the Upload.
-     */
+    /** The status of the Upload. */
     val status: UploadStatusEnum,
-    /**
-     * The Unix timestamp (in seconds) for when the Upload will expire.
-     */
+    /** The Unix timestamp (in seconds) for when the Upload will expire. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
-    /**
-     * The object type, which is always "upload".
-     */
+    /** The object type, which is always "upload". */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UploadObjectEnum? = null,
-    /**
-     * The ready File object after the Upload is completed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: OpenAIFile? = null
+    /** The ready File object after the Upload is completed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: OpenAIFile? = null,
 )
 
-/**
- * The upload Part represents a chunk of bytes we can add to an Upload object.
- */
+/** The upload Part represents a chunk of bytes we can add to an Upload object. */
 data class UploadPart(
-    /**
-     * The upload Part unique identifier, which can be referenced in API endpoints.
-     */
+    /** The upload Part unique identifier, which can be referenced in API endpoints. */
     val id: String,
-    /**
-     * The Unix timestamp (in seconds) for when the Part was created.
-     */
+    /** The Unix timestamp (in seconds) for when the Part was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The ID of the Upload object that this Part was added to.
-     */
+    /** The ID of the Upload object that this Part was added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("upload_id") val uploadId: String,
-    /**
-     * The object type, which is always `upload.part`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UploadPartObjectEnum
+    /** The object type, which is always `upload.part`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UploadPartObjectEnum,
 )

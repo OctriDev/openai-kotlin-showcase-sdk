@@ -3,156 +3,215 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Updates to an MCP credential's existing OAuth refresh configuration.
- */
+/** Updates to an MCP credential's existing OAuth refresh configuration. */
 data class RotateMcpOauthRefreshParam(
     /**
-     * The replacement refresh token. Omit or pass `null` to keep the stored token. This secret is never returned in resources.
+     * The replacement refresh token. Omit or pass `null` to keep the stored token. This secret is
+     * never returned in resources.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("refresh_token") val refreshToken: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("refresh_token")
+    val refreshToken: String? = null,
     /**
-     * Replacement space-separated OAuth scopes for refresh requests. Omit to keep the scopes, or pass `null` to stop sending a scope parameter.
+     * Replacement space-separated OAuth scopes for refresh requests. Omit to keep the scopes, or
+     * pass `null` to stop sending a scope parameter.
      */
     val scope: String? = null,
-    /**
-     * Client-secret updates for the existing token endpoint authentication method.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("token_endpoint_auth") val tokenEndpointAuth: RotateMcpOauthTokenEndpointAuthParam? = null
+    /** Client-secret updates for the existing token endpoint authentication method. */
+    @com.fasterxml.jackson.annotation.JsonProperty("token_endpoint_auth")
+    val tokenEndpointAuth: RotateMcpOauthTokenEndpointAuthParam? = null,
 )
 
-/**
- * Client-secret updates that preserve the credential's OAuth authentication method.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRotateMcpOauthTokenEndpointAuthParam::class)
+/** Client-secret updates that preserve the credential's OAuth authentication method. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownRotateMcpOauthTokenEndpointAuthParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RotateMcpOauthTokenEndpointAuthParamClientSecretBasic::class, name = "client_secret_basic"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RotateMcpOauthTokenEndpointAuthParamClientSecretPost::class, name = "client_secret_post")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RotateMcpOauthTokenEndpointAuthParamClientSecretBasic::class,
+        name = "client_secret_basic",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RotateMcpOauthTokenEndpointAuthParamClientSecretPost::class,
+        name = "client_secret_post",
+    ),
 )
 sealed interface RotateMcpOauthTokenEndpointAuthParam
 
-/** A [RotateMcpOauthTokenEndpointAuthParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownRotateMcpOauthTokenEndpointAuthParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [RotateMcpOauthTokenEndpointAuthParam] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownRotateMcpOauthTokenEndpointAuthParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : RotateMcpOauthTokenEndpointAuthParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Updates credentials sent using HTTP Basic authentication.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Updates credentials sent using HTTP Basic authentication. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RotateMcpOauthTokenEndpointAuthParamClientSecretBasic(
-    /**
-     * The type of the object. Always `client_secret_basic`.
-     */
+    /** The type of the object. Always `client_secret_basic`. */
     val type: RotateMcpOauthTokenEndpointAuthParamClientSecretBasicTypeEnum,
     /**
-     * The replacement OAuth client secret. Omit or pass `null` to keep the stored secret. This secret is never returned in resources.
+     * The replacement OAuth client secret. Omit or pass `null` to keep the stored secret. This
+     * secret is never returned in resources.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_secret") val clientSecret: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("client_secret")
+    val clientSecret: String? = null,
 ) : RotateMcpOauthTokenEndpointAuthParam
 
-/**
- * Updates credentials sent in the token request body.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Updates credentials sent in the token request body. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RotateMcpOauthTokenEndpointAuthParamClientSecretPost(
-    /**
-     * The type of the object. Always `client_secret_post`.
-     */
+    /** The type of the object. Always `client_secret_post`. */
     val type: RotateMcpOauthTokenEndpointAuthParamClientSecretPostTypeEnum,
     /**
-     * The replacement OAuth client secret. Omit or pass `null` to keep the stored secret. This secret is never returned in resources.
+     * The replacement OAuth client secret. Omit or pass `null` to keep the stored secret. This
+     * secret is never returned in resources.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_secret") val clientSecret: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("client_secret")
+    val clientSecret: String? = null,
 ) : RotateMcpOauthTokenEndpointAuthParam
 
 /**
- * Updates to a vault credential without changing its authentication method or destination configuration.
+ * Updates to a vault credential without changing its authentication method or destination
+ * configuration.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRotateVaultCredentialAuthParam::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownRotateVaultCredentialAuthParam::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RotateVaultCredentialAuthParamMcpOauth::class, name = "mcp_oauth"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RotateVaultCredentialAuthParamStaticBearer::class, name = "static_bearer"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RotateVaultCredentialAuthParamEnvironmentVariable::class, name = "environment_variable")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RotateVaultCredentialAuthParamMcpOauth::class,
+        name = "mcp_oauth",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RotateVaultCredentialAuthParamStaticBearer::class,
+        name = "static_bearer",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RotateVaultCredentialAuthParamEnvironmentVariable::class,
+        name = "environment_variable",
+    ),
 )
 sealed interface RotateVaultCredentialAuthParam
 
-/** A [RotateVaultCredentialAuthParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownRotateVaultCredentialAuthParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [RotateVaultCredentialAuthParam] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownRotateVaultCredentialAuthParam
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : RotateVaultCredentialAuthParam {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Replace the secret for an OpenAI-hosted environment credential. The environment variable name and networking configuration remain unchanged.
+ * Replace the secret for an OpenAI-hosted environment credential. The environment variable name and
+ * networking configuration remain unchanged.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RotateVaultCredentialAuthParamEnvironmentVariable(
-    /**
-     * The type of the object. Always `environment_variable`.
-     */
+    /** The type of the object. Always `environment_variable`. */
     val type: RotateVaultCredentialAuthParamEnvironmentVariableTypeEnum,
     /**
-     * The write-only replacement secret. Never returned in credential resources or supplied directly to sandbox code. Must be nonempty and must not contain carriage returns, newlines, or NUL bytes.
+     * The write-only replacement secret. Never returned in credential resources or supplied
+     * directly to sandbox code. Must be nonempty and must not contain carriage returns, newlines,
+     * or NUL bytes.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("secret_value") val secretValue: String
+    @com.fasterxml.jackson.annotation.JsonProperty("secret_value") val secretValue: String,
 ) : RotateVaultCredentialAuthParam
 
-/**
- * Rotate an OAuth credential for an HTTPS MCP destination.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Rotate an OAuth credential for an HTTPS MCP destination. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RotateVaultCredentialAuthParamMcpOauth(
-    /**
-     * The type of the object. Always `mcp_oauth`.
-     */
+    /** The type of the object. Always `mcp_oauth`. */
     val type: RotateVaultCredentialAuthParamMcpOauthTypeEnum,
-    /**
-     * A write-only replacement OAuth access token.
-     */
+    /** A write-only replacement OAuth access token. */
     @com.fasterxml.jackson.annotation.JsonProperty("access_token") val accessToken: String? = null,
     /**
-     * The replacement expiry as an RFC 3339 timestamp, or `null` to clear it. Omitting this field preserves the expiry unless a new access token is supplied, in which case the expiry is cleared.
+     * The replacement expiry as an RFC 3339 timestamp, or `null` to clear it. Omitting this field
+     * preserves the expiry unless a new access token is supplied, in which case the expiry is
+     * cleared.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: String? = null,
-    /**
-     * Optional write-only refresh-token and client-secret updates.
-     */
-    val refresh: RotateMcpOauthRefreshParam? = null
+    /** Optional write-only refresh-token and client-secret updates. */
+    val refresh: RotateMcpOauthRefreshParam? = null,
 ) : RotateVaultCredentialAuthParam
 
-/**
- * Replace the bearer token for the credential's MCP server.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Replace the bearer token for the credential's MCP server. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RotateVaultCredentialAuthParamStaticBearer(
-    /**
-     * The type of the object. Always `static_bearer`.
-     */
+    /** The type of the object. Always `static_bearer`. */
     val type: RotateVaultCredentialAuthParamStaticBearerTypeEnum,
-    /**
-     * The replacement bearer token. This secret is never returned in credential resources.
-     */
-    val token: String
+    /** The replacement bearer token. This secret is never returned in credential resources. */
+    val token: String,
 ) : RotateVaultCredentialAuthParam
 
 /**
- * Metadata, secret, expiry, and OAuth refresh scope updates for an existing vault credential. Supply at least one of `auth` or `metadata`.
+ * Metadata, secret, expiry, and OAuth refresh scope updates for an existing vault credential.
+ * Supply at least one of `auth` or `metadata`.
  */
 data class RotateVaultCredentialParams(
-    /**
-     * Replacement values for the credential's existing authentication method.
-     */
+    /** Replacement values for the credential's existing authentication method. */
     val auth: RotateVaultCredentialAuthParam? = null,
     /**
-     * Replaces all metadata. Omit to preserve it, or pass {} to clear it. Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters.
+     * Replaces all metadata. Omit to preserve it, or pass {} to clear it. Up to 16 string key-value
+     * pairs, with keys up to 64 and values up to 512 characters.
      */
-    val metadata: Map<String, String>? = null
+    val metadata: Map<String, String>? = null,
 )

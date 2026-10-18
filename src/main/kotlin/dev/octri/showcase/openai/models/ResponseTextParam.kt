@@ -4,15 +4,19 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+ * Configuration options for a text response from the model. Can be plain text or structured JSON
+ * data. Learn more: - Text inputs and outputs - Structured Outputs
  */
 data class ResponseTextParam(
     /**
-     * An object specifying the format that the model must output. Configuring `{ "type": "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type": "text" }` with no additional options. **Not recommended for gpt-4o and newer models:** Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid…
+     * An object specifying the format that the model must output. Configuring `{ "type":
+     * "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied
+     * JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type":
+     * "text" }` with no additional options. **Not recommended for gpt-4o and newer models:**
+     * Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message
+     * the model generates is valid…
      */
     val format: TextResponseFormatConfiguration? = null,
-    /**
-     * Optional API value serialized in the `verbosity` wire field.
-     */
-    val verbosity: Verbosity? = null
+    /** Optional API value serialized in the `verbosity` wire field. */
+    val verbosity: Verbosity? = null,
 )

@@ -3,38 +3,23 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event data payload.
- */
+/** Event data payload. */
 data class WebhookResponseCompletedData(
-    /**
-     * The unique ID of the model response.
-     */
+    /** The unique ID of the model response. */
     val id: String
 )
 
-/**
- * Sent when a background response has been completed.
- */
+/** Sent when a background response has been completed. */
 data class WebhookResponseCompleted(
-    /**
-     * The Unix timestamp (in seconds) of when the model response was completed.
-     */
+    /** The Unix timestamp (in seconds) of when the model response was completed. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * Event data payload.
-     */
+    /** Event data payload. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookResponseCompletedData,
-    /**
-     * The type of the event. Always `response.completed`.
-     */
+    /** The type of the event. Always `response.completed`. */
     val type: WebhookResponseCompletedTypeEnum,
-    /**
-     * The object of the event. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookResponseCompletedObjectEnum? = null
+    /** The object of the event. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookResponseCompletedObjectEnum? = null,
 )

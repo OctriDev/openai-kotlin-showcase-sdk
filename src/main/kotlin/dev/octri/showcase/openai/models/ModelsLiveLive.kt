@@ -4,121 +4,143 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately.
+ * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection.
+ * WebRTC and SIP negotiate their media format separately.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveAudioFormat::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveAudioFormat::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSessionAudioFormatPCMParam::class, name = "audio/pcm"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSessionAudioFormatPCMUParam::class, name = "audio/pcmu"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSessionAudioFormatPCMAParam::class, name = "audio/pcma")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSessionAudioFormatPCMParam::class,
+        name = "audio/pcm",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSessionAudioFormatPCMUParam::class,
+        name = "audio/pcmu",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSessionAudioFormatPCMAParam::class,
+        name = "audio/pcma",
+    ),
 )
 sealed interface LiveAudioFormat
 
 /** A [LiveAudioFormat] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveAudioFormat @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveAudioFormat
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveAudioFormat {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `LiveConnectParams` API schema.
- */
+/** Typed representation of the `LiveConnectParams` API schema. */
 class LiveConnectParams
 
 /**
- * The latest measured context-window usage of the Live model. This is separate from billing usage and delegated Responses token usage.
+ * The latest measured context-window usage of the Live model. This is separate from billing usage
+ * and delegated Responses token usage.
  */
 data class LiveContextWindowUsage(
     /**
-     * The latest active context token count divided by the Live model context limit. Can decrease after compaction and may lag between measured audio frames.
+     * The latest active context token count divided by the Live model context limit. Can decrease
+     * after compaction and may lag between measured audio frames.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("usage_ratio") val usageRatio: Double
 )
 
 /**
- * Control which Live events an untrusted WebRTC frontend can send and receive over its data channel. These restrictions do not apply to trusted sideband connections.
+ * Control which Live events an untrusted WebRTC frontend can send and receive over its data
+ * channel. These restrictions do not apply to trusted sideband connections.
  */
 data class LiveDataChannelConfigParam(
     /**
-     * Client event types that the frontend data channel may send. Use 'all' to allow every client event; an empty array allows none. Omission preserves the existing allow-all behavior.
+     * Client event types that the frontend data channel may send. Use 'all' to allow every client
+     * event; an empty array allows none. Omission preserves the existing allow-all behavior.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_client_events") val allowedClientEvents: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_client_events")
+    val allowedClientEvents: Any? = null,
     /**
-     * Server events that may be sent to the frontend data channel. Use 'all' to allow every server event; an empty array allows none. Omission preserves the existing allow-all behavior. Responses events use an object with type 'response.event' and a response_event selector.
+     * Server events that may be sent to the frontend data channel. Use 'all' to allow every server
+     * event; an empty array allows none. Omission preserves the existing allow-all behavior.
+     * Responses events use an object with type 'response.event' and a response_event selector.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_server_events") val allowedServerEvents: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_server_events")
+    val allowedServerEvents: Any? = null,
 )
 
 /**
- * Details of an error encountered by the Live session, including the affected parameter or client command when available.
+ * Details of an error encountered by the Live session, including the affected parameter or client
+ * command when available.
  */
 data class LiveLiveError(
     /**
      * The category of error, such as `invalid_request_error` for an invalid Live client command.
      */
     val type: String,
-    /**
-     * A machine-readable code identifying the Live error, such as `unknown_parameter`.
-     */
+    /** A machine-readable code identifying the Live error, such as `unknown_parameter`. */
     val code: String,
-    /**
-     * A human-readable explanation of the Live error.
-     */
+    /** A human-readable explanation of the Live error. */
     val message: String,
-    /**
-     * The parameter that caused the error, when applicable, such as `session.voice`.
-     */
+    /** The parameter that caused the error, when applicable, such as `session.voice`. */
     @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
-    /**
-     * The event_id of the client command that caused the error, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
+    /** The event_id of the client command that caused the error, when supplied. */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id")
+    val clientEventId: String? = null,
 )
 
-/**
- * Raw, mono G.711 A-law audio for a Live WebSocket connection.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Raw, mono G.711 A-law audio for a Live WebSocket connection. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveSessionAudioFormatPCMAParam(
-    /**
-     * The audio encoding. Always `audio/pcma`.
-     */
+    /** The audio encoding. Always `audio/pcma`. */
     val type: LiveSessionAudioFormatPCMAParamTypeEnum,
-    /**
-     * Audio sample rate in hertz. G.711 audio uses 8000 Hz.
-     */
-    val rate: Long
+    /** Audio sample rate in hertz. G.711 audio uses 8000 Hz. */
+    val rate: Long,
 ) : LiveAudioFormat
 
-/**
- * Raw, mono 16-bit little-endian PCM audio for a Live WebSocket connection.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Raw, mono 16-bit little-endian PCM audio for a Live WebSocket connection. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveSessionAudioFormatPCMParam(
-    /**
-     * The audio encoding. Always `audio/pcm`.
-     */
+    /** The audio encoding. Always `audio/pcm`. */
     val type: LiveSessionAudioFormatPCMParamTypeEnum,
-    /**
-     * Audio sample rate in hertz. Live WebSocket PCM audio supports 16000 or 24000 Hz.
-     */
-    val rate: Long
+    /** Audio sample rate in hertz. Live WebSocket PCM audio supports 16000 or 24000 Hz. */
+    val rate: Long,
 ) : LiveAudioFormat
 
-/**
- * Raw, mono G.711 μ-law audio for a Live WebSocket connection.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Raw, mono G.711 μ-law audio for a Live WebSocket connection. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveSessionAudioFormatPCMUParam(
-    /**
-     * The audio encoding. Always `audio/pcmu`.
-     */
+    /** The audio encoding. Always `audio/pcmu`. */
     val type: LiveSessionAudioFormatPCMUParamTypeEnum,
-    /**
-     * Audio sample rate in hertz. G.711 audio uses 8000 Hz.
-     */
-    val rate: Long
+    /** Audio sample rate in hertz. G.711 audio uses 8000 Hz. */
+    val rate: Long,
 ) : LiveAudioFormat

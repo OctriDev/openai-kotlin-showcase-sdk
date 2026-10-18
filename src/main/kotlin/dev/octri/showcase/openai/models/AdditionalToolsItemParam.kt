@@ -3,25 +3,20 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `AdditionalToolsItemParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `AdditionalToolsItemParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class AdditionalToolsItemParam(
-    /**
-     * The item type. Always `additional_tools`.
-     */
+    /** The item type. Always `additional_tools`. */
     val type: AdditionalToolsItemParamTypeEnum,
-    /**
-     * The role that provided the additional tools. Only `developer` is supported.
-     */
+    /** The role that provided the additional tools. Only `developer` is supported. */
     val role: AdditionalToolsItemParamRoleEnum,
-    /**
-     * A list of additional tools made available at this item.
-     */
+    /** A list of additional tools made available at this item. */
     val tools: List<Tool>,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
-    val id: String? = null
+    /** Optional `string` value serialized in the `id` wire field. */
+    val id: String? = null,
 ) : Item

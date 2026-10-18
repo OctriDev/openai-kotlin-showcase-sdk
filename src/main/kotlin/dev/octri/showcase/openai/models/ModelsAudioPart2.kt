@@ -3,332 +3,247 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A segment of diarized transcript text with speaker metadata.
- */
+/** A segment of diarized transcript text with speaker metadata. */
 data class TranscriptionDiarizedSegment(
-    /**
-     * The type of the segment. Always `transcript.text.segment`.
-     */
+    /** The type of the segment. Always `transcript.text.segment`. */
     val type: TranscriptionDiarizedSegmentTypeEnum,
-    /**
-     * Unique identifier for the segment.
-     */
+    /** Unique identifier for the segment. */
     val id: String,
-    /**
-     * Start timestamp of the segment in seconds.
-     */
+    /** Start timestamp of the segment in seconds. */
     val start: Double,
-    /**
-     * End timestamp of the segment in seconds.
-     */
+    /** End timestamp of the segment in seconds. */
     val end: Double,
-    /**
-     * Transcript text for this segment.
-     */
+    /** Transcript text for this segment. */
     val text: String,
     /**
-     * Speaker label for this segment. When known speakers are provided, the label matches `known_speaker_names[]`. Otherwise speakers are labeled sequentially using capital letters (`A`, `B`, ...).
+     * Speaker label for this segment. When known speakers are provided, the label matches
+     * `known_speaker_names[]`. Otherwise speakers are labeled sequentially using capital letters
+     * (`A`, `B`, ...).
      */
-    val speaker: String
+    val speaker: String,
 )
 
-/**
- * A language detected in transcribed audio.
- */
+/** A language detected in transcribed audio. */
 data class TranscriptionLanguage(
-    /**
-     * The code of a language detected in the audio.
-     */
+    /** The code of a language detected in the audio. */
     val code: String
 )
 
-/**
- * Typed representation of the `TranscriptionSegment` API schema.
- */
+/** Typed representation of the `TranscriptionSegment` API schema. */
 data class TranscriptionSegment(
-    /**
-     * Unique identifier of the segment.
-     */
+    /** Unique identifier of the segment. */
     val id: Long,
-    /**
-     * Seek offset of the segment.
-     */
+    /** Seek offset of the segment. */
     val seek: Long,
-    /**
-     * Start time of the segment in seconds.
-     */
+    /** Start time of the segment in seconds. */
     val start: Double,
-    /**
-     * End time of the segment in seconds.
-     */
+    /** End time of the segment in seconds. */
     val end: Double,
-    /**
-     * Text content of the segment.
-     */
+    /** Text content of the segment. */
     val text: String,
-    /**
-     * Array of token IDs for the text content.
-     */
+    /** Array of token IDs for the text content. */
     val tokens: List<Long>,
-    /**
-     * Temperature parameter used for generating the segment.
-     */
+    /** Temperature parameter used for generating the segment. */
     val temperature: Float,
     /**
      * Average logprob of the segment. If the value is lower than -1, consider the logprobs failed.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("avg_logprob") val avgLogprob: Float,
     /**
-     * Compression ratio of the segment. If the value is greater than 2.4, consider the compression failed.
+     * Compression ratio of the segment. If the value is greater than 2.4, consider the compression
+     * failed.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("compression_ratio") val compressionRatio: Float,
     /**
-     * Probability of no speech in the segment. If the value is higher than 1.0 and the `avg_logprob` is below -1, consider this segment silent.
+     * Probability of no speech in the segment. If the value is higher than 1.0 and the
+     * `avg_logprob` is below -1, consider this segment silent.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("no_speech_prob") val noSpeechProb: Float
+    @com.fasterxml.jackson.annotation.JsonProperty("no_speech_prob") val noSpeechProb: Float,
 )
 
-/**
- * Typed representation of the `TranscriptionWord` API schema.
- */
+/** Typed representation of the `TranscriptionWord` API schema. */
 data class TranscriptionWord(
-    /**
-     * The text content of the word.
-     */
+    /** The text content of the word. */
     val word: String,
-    /**
-     * Start time of the word in seconds.
-     */
+    /** Start time of the word in seconds. */
     val start: Double,
-    /**
-     * End time of the word in seconds.
-     */
-    val end: Double
+    /** End time of the word in seconds. */
+    val end: Double,
 )
 
-/**
- * Required object value serialized in the `logprobs[]` wire field.
- */
+/** Required object value serialized in the `logprobs[]` wire field. */
 data class TranscriptTextDeltaEventLogprobsItem(
-    /**
-     * The token that was used to generate the log probability.
-     */
+    /** The token that was used to generate the log probability. */
     val token: String? = null,
-    /**
-     * The log probability of the token.
-     */
+    /** The log probability of the token. */
     val logprob: Double? = null,
-    /**
-     * The bytes that were used to generate the log probability.
-     */
-    val bytes: List<Long>? = null
+    /** The bytes that were used to generate the log probability. */
+    val bytes: List<Long>? = null,
 )
 
 /**
- * Emitted when there is an additional text delta. This is also the first event emitted when the transcription starts. Only emitted when you create a transcription with the `Stream` parameter set to `true`.
+ * Emitted when there is an additional text delta. This is also the first event emitted when the
+ * transcription starts. Only emitted when you create a transcription with the `Stream` parameter
+ * set to `true`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TranscriptTextDeltaEvent(
-    /**
-     * The type of the event. Always `transcript.text.delta`.
-     */
+    /** The type of the event. Always `transcript.text.delta`. */
     val type: TranscriptTextDeltaEventTypeEnum,
-    /**
-     * The text delta that was additionally transcribed.
-     */
+    /** The text delta that was additionally transcribed. */
     val delta: String,
     /**
-     * The log probabilities of the delta. Only included if you create a transcription with the `include[]` parameter set to `logprobs`.
+     * The log probabilities of the delta. Only included if you create a transcription with the
+     * `include[]` parameter set to `logprobs`.
      */
     val logprobs: List<TranscriptTextDeltaEventLogprobsItem>? = null,
     /**
-     * Identifier of the diarized segment that this delta belongs to. Only present when using `gpt-4o-transcribe-diarize`.
+     * Identifier of the diarized segment that this delta belongs to. Only present when using
+     * `gpt-4o-transcribe-diarize`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null,
 ) : CreateTranscriptionResponseStreamEvent
 
-/**
- * Required object value serialized in the `logprobs[]` wire field.
- */
+/** Required object value serialized in the `logprobs[]` wire field. */
 data class TranscriptTextDoneEventLogprobsItem(
-    /**
-     * The token that was used to generate the log probability.
-     */
+    /** The token that was used to generate the log probability. */
     val token: String? = null,
-    /**
-     * The log probability of the token.
-     */
+    /** The log probability of the token. */
     val logprob: Double? = null,
-    /**
-     * The bytes that were used to generate the log probability.
-     */
-    val bytes: List<Long>? = null
+    /** The bytes that were used to generate the log probability. */
+    val bytes: List<Long>? = null,
 )
 
 /**
- * Emitted when the transcription is complete. Contains the complete transcription text. Only emitted when you create a transcription with the `Stream` parameter set to `true`.
+ * Emitted when the transcription is complete. Contains the complete transcription text. Only
+ * emitted when you create a transcription with the `Stream` parameter set to `true`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TranscriptTextDoneEvent(
-    /**
-     * The type of the event. Always `transcript.text.done`.
-     */
+    /** The type of the event. Always `transcript.text.done`. */
     val type: TranscriptTextDoneEventTypeEnum,
-    /**
-     * The text that was transcribed.
-     */
+    /** The text that was transcribed. */
     val text: String,
     /**
-     * The languages detected in the audio. Returned by `gpt-transcribe`. An empty array indicates that no language could be reliably detected.
+     * The languages detected in the audio. Returned by `gpt-transcribe`. An empty array indicates
+     * that no language could be reliably detected.
      */
     val languages: List<TranscriptionLanguage>? = null,
     /**
-     * The log probabilities of the individual tokens in the transcription. Only included if you create a transcription with the `include[]` parameter set to `logprobs`.
+     * The log probabilities of the individual tokens in the transcription. Only included if you
+     * create a transcription with the `include[]` parameter set to `logprobs`.
      */
     val logprobs: List<TranscriptTextDoneEventLogprobsItem>? = null,
-    /**
-     * Usage statistics for models billed by token usage.
-     */
-    val usage: TranscriptTextUsageTokens? = null
+    /** Usage statistics for models billed by token usage. */
+    val usage: TranscriptTextUsageTokens? = null,
 ) : CreateTranscriptionResponseStreamEvent
 
 /**
- * Emitted when a diarized transcription returns a completed segment with speaker information. Only emitted when you create a transcription with `stream` set to `true` and `response_format` set to `diarized_json`.
+ * Emitted when a diarized transcription returns a completed segment with speaker information. Only
+ * emitted when you create a transcription with `stream` set to `true` and `response_format` set to
+ * `diarized_json`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TranscriptTextSegmentEvent(
-    /**
-     * The type of the event. Always `transcript.text.segment`.
-     */
+    /** The type of the event. Always `transcript.text.segment`. */
     val type: TranscriptTextSegmentEventTypeEnum,
-    /**
-     * Unique identifier for the segment.
-     */
+    /** Unique identifier for the segment. */
     val id: String,
-    /**
-     * Start timestamp of the segment in seconds.
-     */
+    /** Start timestamp of the segment in seconds. */
     val start: Double,
-    /**
-     * End timestamp of the segment in seconds.
-     */
+    /** End timestamp of the segment in seconds. */
     val end: Double,
-    /**
-     * Transcript text for this segment.
-     */
+    /** Transcript text for this segment. */
     val text: String,
-    /**
-     * Speaker label for this segment.
-     */
-    val speaker: String
+    /** Speaker label for this segment. */
+    val speaker: String,
 ) : CreateTranscriptionResponseStreamEvent
 
-/**
- * Typed representation of the `UpdateVoiceConsentRequest` API schema.
- */
+/** Typed representation of the `UpdateVoiceConsentRequest` API schema. */
 data class UpdateVoiceConsentRequest(
-    /**
-     * The updated label for this consent recording.
-     */
+    /** The updated label for this consent recording. */
     val name: String
 )
 
-/**
- * Typed representation of the `VoiceConsentDeletedResource` API schema.
- */
+/** Typed representation of the `VoiceConsentDeletedResource` API schema. */
 data class VoiceConsentDeletedResource(
-    /**
-     * The consent recording identifier.
-     */
+    /** The consent recording identifier. */
     val id: String,
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VoiceConsentDeletedResourceObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
-    val deleted: Boolean
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VoiceConsentDeletedResourceObjectEnum,
+    /** Required `boolean` value serialized in the `deleted` wire field. */
+    val deleted: Boolean,
 )
 
-/**
- * Typed representation of the `VoiceConsentListResource` API schema.
- */
+/** Typed representation of the `VoiceConsentListResource` API schema. */
 data class VoiceConsentListResource(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VoiceConsentListResourceObjectEnum,
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VoiceConsentListResourceObjectEnum,
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VoiceConsentResource>,
-    /**
-     * Required `boolean` value serialized in the `has_more` wire field.
-     */
+    /** Required `boolean` value serialized in the `has_more` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Optional `string` value serialized in the `first_id` wire field.
-     */
+    /** Optional `string` value serialized in the `first_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /**
-     * Optional `string` value serialized in the `last_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+    /** Optional `string` value serialized in the `last_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
 )
 
-/**
- * A consent recording used to authorize creation of a custom voice.
- */
+/** A consent recording used to authorize creation of a custom voice. */
 data class VoiceConsentResource(
-    /**
-     * The object type, which is always `audio.voice_consent`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VoiceConsentResourceObjectEnum,
-    /**
-     * The consent recording identifier.
-     */
+    /** The object type, which is always `audio.voice_consent`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VoiceConsentResourceObjectEnum,
+    /** The consent recording identifier. */
     val id: String,
-    /**
-     * The label provided when the consent recording was uploaded.
-     */
+    /** The label provided when the consent recording was uploaded. */
     val name: String,
-    /**
-     * The BCP 47 language tag for the consent phrase (for example, `en-US`).
-     */
+    /** The BCP 47 language tag for the consent phrase (for example, `en-US`). */
     val language: String,
-    /**
-     * The Unix timestamp (in seconds) for when the consent recording was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** The Unix timestamp (in seconds) for when the consent recording was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class VoiceIdsShared @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CreateSpeechRequestVoice, VoiceIdsOrCustomVoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class VoiceIdsShared
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    CreateSpeechRequestVoice, VoiceIdsOrCustomVoice
 
-/**
- * A custom voice that can be used for audio output.
- */
+/** A custom voice that can be used for audio output. */
 data class VoiceResource(
-    /**
-     * The object type, which is always `audio.voice`.
-     */
+    /** The object type, which is always `audio.voice`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VoiceResourceObjectEnum,
-    /**
-     * The voice identifier, which can be referenced in API endpoints.
-     */
+    /** The voice identifier, which can be referenced in API endpoints. */
     val id: String,
-    /**
-     * How the voice was created.
-     */
+    /** How the voice was created. */
     val type: VoiceResourceTypeEnum,
-    /**
-     * The name of the voice.
-     */
+    /** The name of the voice. */
     val name: String,
-    /**
-     * The Unix timestamp (in seconds) for when the voice was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** The Unix timestamp (in seconds) for when the voice was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )

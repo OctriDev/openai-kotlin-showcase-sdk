@@ -14,54 +14,94 @@ import dev.octri.showcase.openai.SdkClient
 
 object Models {
 
-
     /**
-     * Lists currently available models and basic information about each one, including its owner and availability. Use the list to inspect model identifiers and ownership before selecting a model for another request.
+     * Lists currently available models and basic information about each one, including its owner
+     * and availability. Use the list to inspect model identifiers and ownership before selecting a
+     * model for another request.
      *
-     * Lists the currently available models, and provides basic information about each one such as the owner and availability.
+     * Lists the currently available models, and provides basic information about each one such as
+     * the owner and availability.
      */
-    fun listModels(clientConfig: ClientConfig, options: RequestOptions? = null): ListModelsResponse {
-        return SdkClient.request<ListModelsResponse>(SdkClient.RequestSpec("GET", "/models", config = clientConfig, operationId = "listModels", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java))).data
+    fun listModels(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListModelsResponse {
+        return SdkClient.request<ListModelsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/models",
+                    config = clientConfig,
+                    operationId = "listModels",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("403" to PermissionErrorResponse::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves information about a specific model, including its owner and permissioning details. Use the model identifier to look up the model before referencing it in other API requests.
+     * Retrieves information about a specific model, including its owner and permissioning details.
+     * Use the model identifier to look up the model before referencing it in other API requests.
      *
-     * Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
+     * Retrieves a model instance, providing basic information about the model such as the owner and
+     * permissioning.
      *
      * @param model The ID of the model to use for this request
      */
-    fun retrieveModel(clientConfig: ClientConfig, model: String, options: RequestOptions? = null): Model {
-        return SdkClient.request<Model>(SdkClient.RequestSpec("GET", "/models/${SdkClient.encodePathSegment(model)}", config = clientConfig, operationId = "retrieveModel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveModel(
+        clientConfig: ClientConfig,
+        model: String,
+        options: RequestOptions? = null,
+    ): Model {
+        return SdkClient.request<Model>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/models/${SdkClient.encodePathSegment(model)}",
+                    config = clientConfig,
+                    operationId = "retrieveModel",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes a fine-tuned model. The authenticated user must have the Owner role in the organization and a credential that permits model deletion. Use `model` to identify the fine-tuned model to remove.
+     * Deletes a fine-tuned model. The authenticated user must have the Owner role in the
+     * organization and a credential that permits model deletion. Use `model` to identify the
+     * fine-tuned model to remove.
      *
-     * Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
+     * Delete a fine-tuned model. You must have the Owner role in your organization to delete a
+     * model.
      *
      * @param model The model to delete
      */
-    fun deleteModel(clientConfig: ClientConfig, model: String, options: RequestOptions? = null): DeleteModelResponse {
-        return SdkClient.request<DeleteModelResponse>(SdkClient.RequestSpec("DELETE", "/models/${SdkClient.encodePathSegment(model)}", config = clientConfig, operationId = "deleteModel", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun deleteModel(
+        clientConfig: ClientConfig,
+        model: String,
+        options: RequestOptions? = null,
+    ): DeleteModelResponse {
+        return SdkClient.request<DeleteModelResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/models/${SdkClient.encodePathSegment(model)}",
+                    config = clientConfig,
+                    operationId = "deleteModel",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }
