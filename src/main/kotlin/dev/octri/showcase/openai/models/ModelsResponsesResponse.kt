@@ -168,48 +168,6 @@ class Response(
 )
 
 /**
- * Emitted when new summary content is sampled for a compaction trigger. Contains no summary content.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseCompactionCompactingStreamingEvent(
-    /**
-     * The type of the event, always `response.compaction.compacting`.
-     */
-    val type: ResponseCompactionCompactingStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the compaction output item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The ID of the compaction output item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String
-) : ResponseStreamEvent
-
-/**
- * Emitted when the model response is complete.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseCompletedEvent(
-    /**
-     * The type of the event. Always `response.completed`.
-     */
-    val type: ResponseCompletedEventTypeEnum,
-    /**
-     * Properties of the completed response.
-     */
-    val response: Response,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
-) : ResponseStreamEvent
-
-/**
  * The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.
  */
 data class ResponseConversation(
@@ -218,82 +176,6 @@ data class ResponseConversation(
      */
     val id: String
 )
-
-/**
- * An event that is emitted when a response is created.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseCreatedEvent(
-    /**
-     * The type of the event. Always `response.created`.
-     */
-    val type: ResponseCreatedEventTypeEnum,
-    /**
-     * The response that was created.
-     */
-    val response: Response,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
-) : ResponseStreamEvent
-
-/**
- * An event that is emitted when a response fails.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseFailedEvent(
-    /**
-     * The type of the event. Always `response.failed`.
-     */
-    val type: ResponseFailedEventTypeEnum,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The response that failed.
-     */
-    val response: Response
-) : ResponseStreamEvent
-
-/**
- * An event that is emitted when a response finishes as incomplete. Over WebSocket, steering can finish a response with `response.incomplete_details.reason` set to `steered`, followed automatically by a successor `response.created` that commits the queued steering input.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseIncompleteEvent(
-    /**
-     * The type of the event. Always `response.incomplete`.
-     */
-    val type: ResponseIncompleteEventTypeEnum,
-    /**
-     * The response that was incomplete.
-     */
-    val response: Response,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
-) : ResponseStreamEvent
-
-/**
- * Emitted when the response is in progress.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseInProgressEvent(
-    /**
-     * The type of the event. Always `response.in_progress`.
-     */
-    val type: ResponseInProgressEventTypeEnum,
-    /**
-     * The response that is in progress.
-     */
-    val response: Response,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
-) : ResponseStreamEvent
 
 /**
  * A list of Response items.
@@ -412,25 +294,6 @@ data class ResponseProperties(
      */
     val prompt: Prompt? = null
 )
-
-/**
- * Emitted when a response is queued and waiting to be processed.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseQueuedEvent(
-    /**
-     * The type of the event. Always 'response.queued'.
-     */
-    val type: ResponseQueuedEventTypeEnum,
-    /**
-     * The full response object that is queued.
-     */
-    val response: Response,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
-) : ResponseStreamEvent
 
 /**
  * A detailed breakdown of the input tokens.

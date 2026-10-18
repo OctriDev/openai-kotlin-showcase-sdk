@@ -4,95 +4,49 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Raw, mono G.711 A-law audio for a Live WebSocket connection.
+ * Typed representation of the `LiveDecisionsDelegationParam2` API schema.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionAudioFormatPCMAParam(
+data class LiveDecisionsDelegationParam2(
     /**
-     * The audio encoding. Always `audio/pcma`.
+     * Required enumerated value serialized in the `type` wire field.
      */
-    val type: LiveSessionAudioFormatPCMAParamTypeEnum,
+    val type: LiveDecisionsDelegationParam2TypeEnum,
     /**
-     * Audio sample rate in hertz. G.711 audio uses 8000 Hz.
+     * Required object value serialized in the `decisions` wire field.
      */
-    val rate: Long
-) : LiveAudioFormat
+    val decisions: LiveDecisionsSettingsInputParam2
+) : LiveSessionCreateParamsDelegation, LiveSessionResourceParamDelegation
 
 /**
- * Raw, mono 16-bit little-endian PCM audio for a Live WebSocket connection.
+ * Typed representation of the `LiveDecisionsDelegationUpdateParam` API schema.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionAudioFormatPCMParam(
+data class LiveDecisionsDelegationUpdateParam(
     /**
-     * The audio encoding. Always `audio/pcm`.
+     * Required enumerated value serialized in the `type` wire field.
      */
-    val type: LiveSessionAudioFormatPCMParamTypeEnum,
+    val type: LiveDecisionsDelegationUpdateParamTypeEnum,
     /**
-     * Audio sample rate in hertz. Live WebSocket PCM audio supports 16000 or 24000 Hz.
+     * Optional object value serialized in the `decisions` wire field.
      */
-    val rate: Long
-) : LiveAudioFormat
+    val decisions: LiveDecisionsSettingsUpdateParam? = null
+) : LiveSessionUpdateParamsDelegation
 
 /**
- * Raw, mono G.711 μ-law audio for a Live WebSocket connection.
+ * Update the Responses backend for an existing Live session without changing delegation ownership.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionAudioFormatPCMUParam(
+data class LiveResponsesDelegationUpdateParam(
     /**
-     * The audio encoding. Always `audio/pcmu`.
+     * The delegation owner. Always `responses` for tasks handled by the Responses API.
      */
-    val type: LiveSessionAudioFormatPCMUParamTypeEnum,
+    val type: LiveResponsesDelegationUpdateParamTypeEnum,
     /**
-     * Audio sample rate in hertz. G.711 audio uses 8000 Hz.
+     * Responses backend settings to update. Omitted settings keep their existing values.
      */
-    val rate: Long
-) : LiveAudioFormat
-
-/**
- * Returned after the Live session finishes finalizing, with the close reason, final session snapshot, and cumulative audio usage. A connection closing without this event does not confirm successful finalization.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionClosed(
-    /**
-     * The unique ID of the Live server event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /**
-     * The event type, always `session.closed`.
-     */
-    val type: LiveSessionClosedTypeEnum,
-    /**
-     * Why the Live session ended: `close_requested` for an application close or hangup request, `expired` for the session duration limit, `content` for a safety filter, `remote_hangup` for a graceful remote disconnect, or `connection_lost` for an unexpected primary or upstream disconnection.
-     */
-    val reason: LiveSessionClosedReasonVariant0Enum,
-    /**
-     * The resolved Live session configuration and server-assigned session metadata.
-     */
-    val session: LiveSessionResourceParam,
-    /**
-     * The final cumulative Live audio usage after session finalization.
-     */
-    val usage: LiveSessionUsage,
-    /**
-     * The event_id of the client command associated with this server event, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
- * Request that the Live session close. The terminal `session.closed` event contains the close reason and final usage.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionCloseParam(
-    /**
-     * The Live client event type. Always `session.close`.
-     */
-    val type: LiveSessionCloseParamTypeEnum,
-    /**
-     * Optional API value serialized in the `event_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
-) : LiveClientEvent, LiveForkClientEvent, LiveSidebandClientEvent
+    val responses: LiveResponsesDelegationSettingsUpdateInputParam? = null
+) : LiveSessionUpdateParamsDelegation
 
 /**
  * Initial configuration for a Live session, including its model, conversation instructions, audio, and delegated task handling.
@@ -330,90 +284,6 @@ data class UnknownLiveSessionResourceParamDelegation @com.fasterxml.jackson.anno
 }
 
 /**
- * Returned when a Live session has started. Contains the resolved session configuration, including server defaults.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionStarted(
-    /**
-     * The event type, always `session.started`.
-     */
-    val type: LiveSessionStartedTypeEnum,
-    /**
-     * The unique ID of the Live server event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /**
-     * The resolved Live session configuration and server-assigned session metadata.
-     */
-    val session: LiveSessionResourceParam,
-    /**
-     * The event_id of the client command associated with this server event, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
- * Start a Live session on a primary WebSocket. Send this event before other commands and wait for `session.started`.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionStartEvent(
-    /**
-     * The Live client event type. Always `session.start`.
-     */
-    val type: LiveSessionStartEventTypeEnum,
-    /**
-     * Initial configuration for a primary WebSocket. Send session.start first and wait for session.started before application commands. WebRTC creation already starts the session; do not send this event again on its data channel.
-     */
-    val session: LiveSessionCreateParams,
-    /**
-     * Optional API value serialized in the `event_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
-) : LiveClientEvent
-
-/**
- * Returned when a Live session update is accepted. Contains the resolved session configuration after the update.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionUpdated(
-    /**
-     * The event type, always `session.updated`.
-     */
-    val type: LiveSessionUpdatedTypeEnum,
-    /**
-     * The unique ID of the Live server event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /**
-     * The resolved Live session configuration and server-assigned session metadata.
-     */
-    val session: LiveSessionResourceParam,
-    /**
-     * The event_id of the client command associated with this server event, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
- * Update the delegation settings or transcript triggers of an active Live session. The server acknowledges accepted changes with `session.updated`.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionUpdateParam(
-    /**
-     * The Live client event type. Always `session.update`.
-     */
-    val type: LiveSessionUpdateParamTypeEnum,
-    /**
-     * Sparse delegation and trigger updates. Omitted settings retain their values. The delegation type cannot change. Model, frontend instructions, audio, and startup input are immutable.
-     */
-    val session: LiveSessionUpdateParams,
-    /**
-     * Optional API value serialized in the `event_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
-) : LiveClientEvent, LiveForkClientEvent, LiveSidebandClientEvent
-
-/**
  * Changes to an active Live session's delegation settings and transcript triggers.
  */
 data class LiveSessionUpdateParams(
@@ -458,28 +328,54 @@ data class LiveSessionUsage(
 )
 
 /**
- * Reports cumulative Live audio usage and, when available, the most recent context-window usage. Delegated Responses token usage is reported separately in response.event events.
+ * Place an outbound SIP call using your provider's trunk. Outbound SIP calling must be enabled for your organization. The trunk must support TLS signaling, Opus audio, and SDES-SRTP media. See Telephony and SIP.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSessionUsageUpdated(
+data class LiveSIPTransport(
     /**
-     * The unique ID of the Live server event.
+     * The transport used for the Live session. Always `sip`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    val type: LiveSIPTransportTypeEnum,
     /**
-     * The event type, always `session.usage.updated`.
+     * Phone number to call in E.164 format. SIP URI destinations are not supported.
      */
-    val type: LiveSessionUsageUpdatedTypeEnum,
+    val destination: String,
     /**
-     * The cumulative Live audio usage so far.
+     * SIP trunk configuration supplied for this call. Keep trunk credentials on your server. The creation response does not return this configuration.
      */
-    val usage: LiveSessionUsage,
+    val trunk: LiveSIPTrunk
+) : LiveSessionCreateRequestTransport
+
+/**
+ * Place an outbound SIP call using your provider's trunk. Outbound SIP calling must be enabled for your organization. The trunk must support TLS signaling, Opus audio, and SDES-SRTP media. See Telephony and SIP.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class LiveSIPTransportRequest(
     /**
-     * The event_id of the client command associated with this server event, when supplied.
+     * The transport used for the Live session. Always `sip`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null,
+    val type: LiveSIPTransportRequestTypeEnum,
     /**
-     * The latest measured Live context-window usage. Omitted when the context limit is unknown.
+     * Phone number to call in E.164 format. SIP URI destinations are not supported.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_window") val contextWindow: LiveContextWindowUsage? = null
-) : LiveSidebandServerEvent, LiveServerEvent2
+    val destination: String,
+    /**
+     * SIP trunk configuration supplied for this call. Keep trunk credentials on your server. The creation response does not return this configuration.
+     */
+    val trunk: LiveSIPTrunkRequest
+) : LiveSessionCreateRequestTransportRequest
+
+/**
+ * WebRTC transport carrying the offer SDP in a creation request or answer SDP in its response.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class LiveWebRTCTransport(
+    /**
+     * The transport used for the Live session. Always `webrtc`.
+     */
+    val type: LiveWebRTCTransportTypeEnum,
+    /**
+     * Session Description Protocol message for the WebRTC connection.
+     */
+    val sdp: String
+) : LiveSessionCreateRequestTransport, LiveSessionCreateResponseTransport, LiveSessionCreateRequestTransportRequest

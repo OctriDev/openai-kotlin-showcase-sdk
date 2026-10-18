@@ -15,6 +15,15 @@ class VectorStoresNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
+     * Lists vector stores, which are collections of processed files that you can use with the `file_search` tool. Use the cursor parameters to move forward or backward through the results, and set `order` to control sorting by creation time.
+     *
+     * Returns a list of vector stores.
+     */
+    fun listPaginated(limit: Long? = null, order: ListVectorStoresParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (VectorStoreObject) -> Boolean) {
+        dev.octri.showcase.openai.methods.VectorStores.listVectorStoresPaginated(clientConfig, limit, order, after, before, options, yieldFn)
+    }
+
+    /**
      * Creates a vector store to collect processed files for use with the `file_search` tool. Supply `file_ids` to add files at creation, and optionally set a name, description, expiration policy, chunking strategy, or metadata.
      *
      * Create a vector store.
@@ -87,12 +96,30 @@ class VectorStoresNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
+     * Lists the files in a vector store file batch. Use `filter` to limit results by processing status and the cursor parameters to navigate through the batch's files.
+     *
+     * Returns a list of vector store files in a batch.
+     */
+    fun listFilesInBatchPaginated(request: dev.octri.showcase.openai.methods.VectorStores.ListFilesInVectorStoreBatchRequest, options: RequestOptions? = null, yieldFn: (VectorStoreFileObject) -> Boolean) {
+        dev.octri.showcase.openai.methods.VectorStores.listFilesInVectorStoreBatchPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
      * Lists files attached to a vector store, with pagination and an optional status filter. Use `after` or `before` to navigate the list, and `filter` to select files by processing status.
      *
      * Returns a list of vector store files.
      */
     fun listFiles(request: dev.octri.showcase.openai.methods.VectorStores.ListVectorStoreFilesRequest, options: RequestOptions? = null): ListVectorStoreFilesResponse {
         return dev.octri.showcase.openai.methods.VectorStores.listVectorStoreFiles(clientConfig, request, options)
+    }
+
+    /**
+     * Lists files attached to a vector store, with pagination and an optional status filter. Use `after` or `before` to navigate the list, and `filter` to select files by processing status.
+     *
+     * Returns a list of vector store files.
+     */
+    fun listFilesPaginated(request: dev.octri.showcase.openai.methods.VectorStores.ListVectorStoreFilesRequest, options: RequestOptions? = null, yieldFn: (VectorStoreFileObject) -> Boolean) {
+        dev.octri.showcase.openai.methods.VectorStores.listVectorStoreFilesPaginated(clientConfig, request, options, yieldFn)
     }
 
     /**

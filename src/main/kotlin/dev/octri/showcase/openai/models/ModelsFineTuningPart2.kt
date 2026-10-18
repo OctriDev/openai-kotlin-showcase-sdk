@@ -4,6 +4,117 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * A ScoreModelGrader object that uses a model to assign a score to the input.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class GraderScoreModel(
+    /**
+     * The object type, which is always `score_model`.
+     */
+    val type: GraderScoreModelTypeEnum,
+    /**
+     * The name of the grader.
+     */
+    val name: String,
+    /**
+     * The model to use for the evaluation.
+     */
+    val model: String,
+    /**
+     * The input messages evaluated by the grader. Supports text, output text, input image, and input audio content blocks, and may include template strings.
+     */
+    val input: List<EvalItem>,
+    /**
+     * The sampling parameters for the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: GraderScoreModelSamplingParams? = null,
+    /**
+     * The service requires two numbers for the score range. Defaults to `[0, 1]`.
+     */
+    val range: List<Double>? = null
+) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+
+/**
+ * A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class GraderStringCheck(
+    /**
+     * The object type, which is always `string_check`.
+     */
+    val type: GraderStringCheckTypeEnum,
+    /**
+     * The name of the grader.
+     */
+    val name: String,
+    /**
+     * The input text. This may include template strings.
+     */
+    val input: String,
+    /**
+     * The reference text. This may include template strings.
+     */
+    val reference: String,
+    /**
+     * The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
+     */
+    val operation: GraderStringCheckOperationEnum
+) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+
+/**
+ * A TextSimilarityGrader object which grades text based on similarity metrics.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class GraderTextSimilarity(
+    /**
+     * The type of grader.
+     */
+    val type: GraderTextSimilarityTypeEnum,
+    /**
+     * The name of the grader.
+     */
+    val name: String,
+    /**
+     * The text being graded.
+     */
+    val input: String,
+    /**
+     * The text being graded against.
+     */
+    val reference: String,
+    /**
+     * The evaluation metric to use. One of `cosine`, `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_metric") val evaluationMetric: GraderTextSimilarityEvaluationMetricEnum
+) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+
+/**
+ * Typed representation of the `ListFineTuningCheckpointPermissionResponse` API schema.
+ */
+data class ListFineTuningCheckpointPermissionResponse(
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<FineTuningCheckpointPermission>,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListFineTuningCheckpointPermissionResponseObjectEnum,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+)
+
+/**
  * Typed representation of the `ListFineTuningJobCheckpointsResponse` API schema.
  */
 data class ListFineTuningJobCheckpointsResponse(

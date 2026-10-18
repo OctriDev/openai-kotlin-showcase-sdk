@@ -3,6 +3,24 @@
 
 package dev.octri.showcase.openai
 
+typealias InviteRequestRoleEnum = dev.octri.showcase.openai.models.InviteRequestRoleEnum
+
+typealias InviteRoleEnum = dev.octri.showcase.openai.models.InviteRoleEnum
+
+typealias InviteStatusEnum = dev.octri.showcase.openai.models.InviteStatusEnum
+
+typealias Item = dev.octri.showcase.openai.models.Item
+
+typealias ItemField = dev.octri.showcase.openai.models.ItemField
+
+typealias ItemReferenceParam = dev.octri.showcase.openai.models.ItemReferenceParam
+
+typealias ItemReferenceParamTypeVariant0Enum = dev.octri.showcase.openai.models.ItemReferenceParamTypeVariant0Enum
+
+typealias ItemResource = dev.octri.showcase.openai.models.ItemResource
+
+typealias KeyPressAction = dev.octri.showcase.openai.models.KeyPressAction
+
 typealias KeyPressActionTypeEnum = dev.octri.showcase.openai.models.KeyPressActionTypeEnum
 
 typealias ListAdminApiKeysParameterEnum = dev.octri.showcase.openai.models.ListAdminApiKeysParameterEnum
@@ -418,21 +436,3 @@ typealias LiveInitialAssistantMessageItemParamRoleEnum = dev.octri.showcase.open
 typealias LiveInitialAssistantMessageItemParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialAssistantMessageItemParamTypeEnum
 
 typealias LiveInitialDeveloperMessageItemParam = dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParam
-
-typealias LiveInitialDeveloperMessageItemParamRoleEnum = dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamRoleEnum
-
-typealias LiveInitialDeveloperMessageItemParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamTypeEnum
-
-typealias LiveInitialInputTextContentPartParam = dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParam
-
-typealias LiveInitialInputTextContentPartParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParamTypeEnum
-
-typealias LiveInitialItem = dev.octri.showcase.openai.models.LiveInitialItem
-
-typealias LiveInitialMessageStatus = dev.octri.showcase.openai.models.LiveInitialMessageStatus
-
-typealias LiveInitialOutputTextContentPartParam = dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParam
-
-typealias LiveInitialOutputTextContentPartParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParamTypeEnum
-
-typealias LiveInitialSessionAudioOutputParam = dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParam

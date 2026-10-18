@@ -3,6 +3,58 @@
 
 package dev.octri.showcase.openai
 
+typealias WebhookAgentEnvironmentReadyVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentEnvironmentReadyVariant1TypeEnum
+
+typealias WebhookAgentEnvironmentSuspended = dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspended
+
+typealias WebhookAgentEnvironmentSuspendedVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspendedVariant1TypeEnum
+
+typealias WebhookAgentSessionActionRequired = dev.octri.showcase.openai.models.WebhookAgentSessionActionRequired
+
+typealias WebhookAgentSessionActionRequiredVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionActionRequiredVariant1TypeEnum
+
+typealias WebhookAgentSessionCreated = dev.octri.showcase.openai.models.WebhookAgentSessionCreated
+
+typealias WebhookAgentSessionCreatedVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionCreatedVariant1TypeEnum
+
+typealias WebhookAgentSessionEnvelope = dev.octri.showcase.openai.models.WebhookAgentSessionEnvelope
+
+typealias WebhookAgentSessionEnvelopeObjectEnum = dev.octri.showcase.openai.models.WebhookAgentSessionEnvelopeObjectEnum
+
+typealias WebhookAgentSessionFailed = dev.octri.showcase.openai.models.WebhookAgentSessionFailed
+
+typealias WebhookAgentSessionFailedVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionFailedVariant1TypeEnum
+
+typealias WebhookAgentSessionIdle = dev.octri.showcase.openai.models.WebhookAgentSessionIdle
+
+typealias WebhookAgentSessionIdleVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionIdleVariant1TypeEnum
+
+typealias WebhookAgentSessionInProgress = dev.octri.showcase.openai.models.WebhookAgentSessionInProgress
+
+typealias WebhookAgentSessionInProgressVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionInProgressVariant1TypeEnum
+
+typealias WebhookBatchCancelled = dev.octri.showcase.openai.models.WebhookBatchCancelled
+
+typealias WebhookBatchCancelledData = dev.octri.showcase.openai.models.WebhookBatchCancelledData
+
+typealias WebhookBatchCancelledObjectEnum = dev.octri.showcase.openai.models.WebhookBatchCancelledObjectEnum
+
+typealias WebhookBatchCancelledTypeEnum = dev.octri.showcase.openai.models.WebhookBatchCancelledTypeEnum
+
+typealias WebhookBatchCompleted = dev.octri.showcase.openai.models.WebhookBatchCompleted
+
+typealias WebhookBatchCompletedData = dev.octri.showcase.openai.models.WebhookBatchCompletedData
+
+typealias WebhookBatchCompletedObjectEnum = dev.octri.showcase.openai.models.WebhookBatchCompletedObjectEnum
+
+typealias WebhookBatchCompletedTypeEnum = dev.octri.showcase.openai.models.WebhookBatchCompletedTypeEnum
+
+typealias WebhookBatchExpired = dev.octri.showcase.openai.models.WebhookBatchExpired
+
+typealias WebhookBatchExpiredData = dev.octri.showcase.openai.models.WebhookBatchExpiredData
+
+typealias WebhookBatchExpiredObjectEnum = dev.octri.showcase.openai.models.WebhookBatchExpiredObjectEnum
+
 typealias WebhookBatchExpiredTypeEnum = dev.octri.showcase.openai.models.WebhookBatchExpiredTypeEnum
 
 typealias WebhookBatchFailed = dev.octri.showcase.openai.models.WebhookBatchFailed

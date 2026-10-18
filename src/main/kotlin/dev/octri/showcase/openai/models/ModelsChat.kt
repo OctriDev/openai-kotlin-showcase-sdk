@@ -17,6 +17,8 @@ data class PredictionContent(
     val content: Any
 )
 
+typealias ResponseModalities = List<String>
+
 /**
  * Typed representation of the `ServiceTier` API schema.
  */
@@ -43,22 +45,3 @@ data class StringServiceTier(@get:com.fasterxml.jackson.annotation.JsonValue val
 
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ValueServiceTier(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : ServiceTier
-
-/**
- * Typed representation of the `ToolsItem` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownToolsItem::class)
-@com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ChatCompletionTool::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolChatCompletions::class, name = "custom")
-)
-sealed interface ToolsItem
-
-/** A [ToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
-) : ToolsItem {
-    /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
-}

@@ -101,30 +101,3 @@ data class BrowserAuthenticationOptionResource(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("field_ids") val fieldIds: List<String>
 )
-
-/**
- * A credential-free history record of the emitted login request.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BrowserAuthenticationRequestItemResource(
-    /**
-     * Required `string` value serialized in the `turn_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * Required `string` value serialized in the `request_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String,
-    /**
-     * Required API value serialized in the `request` wire field.
-     */
-    val request: BrowserAuthenticationHistoryRequestKindResource,
-    /**
-     * The stable history item ID.
-     */
-    val id: String,
-    /**
-     * The item type. Always computer_use_approval_request.
-     */
-    val type: BrowserAuthenticationRequestItemResourceTypeEnum
-) : SessionTurnItemResource, AgentOutputItemResource

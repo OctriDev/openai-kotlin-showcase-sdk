@@ -3,6 +3,12 @@
 
 package dev.octri.showcase.openai
 
+typealias ContainerNetworkPolicyDisabledParam = dev.octri.showcase.openai.models.ContainerNetworkPolicyDisabledParam
+
+typealias ContainerNetworkPolicyDisabledParamTypeEnum = dev.octri.showcase.openai.models.ContainerNetworkPolicyDisabledParamTypeEnum
+
+typealias ContainerNetworkPolicyDomainSecretParam = dev.octri.showcase.openai.models.ContainerNetworkPolicyDomainSecretParam
+
 typealias ContainerReferenceParam = dev.octri.showcase.openai.models.ContainerReferenceParam
 
 typealias ContainerReferenceParamTypeEnum = dev.octri.showcase.openai.models.ContainerReferenceParamTypeEnum
@@ -229,6 +235,8 @@ typealias CreateEvalResponsesRunDataSourceInputMessages = dev.octri.showcase.ope
 
 typealias CreateEvalResponsesRunDataSourceInputMessagesVariant0 = dev.octri.showcase.openai.models.CreateEvalResponsesRunDataSourceInputMessagesVariant0
 
+typealias CreateEvalResponsesRunDataSourceInputMessagesVariant0TemplateX7a13727553 = dev.octri.showcase.openai.models.CreateEvalResponsesRunDataSourceInputMessagesVariant0TemplateX7a13727553
+
 typealias CreateEvalResponsesRunDataSourceInputMessagesVariant0TypeEnum = dev.octri.showcase.openai.models.CreateEvalResponsesRunDataSourceInputMessagesVariant0TypeEnum
 
 typealias CreateEvalResponsesRunDataSourceInputMessagesVariant1 = dev.octri.showcase.openai.models.CreateEvalResponsesRunDataSourceInputMessagesVariant1
@@ -417,22 +425,14 @@ typealias CreateSpeechRequestResponseFormatEnum = dev.octri.showcase.openai.mode
 
 typealias CreateSpeechRequestStreamFormatEnum = dev.octri.showcase.openai.models.CreateSpeechRequestStreamFormatEnum
 
-typealias CreateSpeechRequestVoiceVariant0Variant1Enum = dev.octri.showcase.openai.models.CreateSpeechRequestVoiceVariant0Variant1Enum
+typealias CreateSpeechRequestVoice = dev.octri.showcase.openai.models.CreateSpeechRequestVoice
 
-typealias CreateSpeechRequestVoiceVariant1 = dev.octri.showcase.openai.models.CreateSpeechRequestVoiceVariant1
+typealias CreateSpeechRequestVoiceVariant1Enum = dev.octri.showcase.openai.models.CreateSpeechRequestVoiceVariant1Enum
+
+typealias CreateSpeechRequestVoiceVariant2 = dev.octri.showcase.openai.models.CreateSpeechRequestVoiceVariant2
 
 typealias CreateSpeechResponseStreamEvent = dev.octri.showcase.openai.models.CreateSpeechResponseStreamEvent
 
 typealias CreateSpendAlertBody = dev.octri.showcase.openai.models.CreateSpendAlertBody
 
 typealias CreateSpendAlertBodyCurrencyEnum = dev.octri.showcase.openai.models.CreateSpendAlertBodyCurrencyEnum
-
-typealias CreateSpendAlertBodyIntervalEnum = dev.octri.showcase.openai.models.CreateSpendAlertBodyIntervalEnum
-
-typealias CreateSubagentCallItemResource = dev.octri.showcase.openai.models.CreateSubagentCallItemResource
-
-typealias CreateSubagentCallItemResourceTypeEnum = dev.octri.showcase.openai.models.CreateSubagentCallItemResourceTypeEnum
-
-typealias CreateThreadAndRunRequest = dev.octri.showcase.openai.models.CreateThreadAndRunRequest
-
-typealias CreateThreadAndRunRequestToolResources = dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResources

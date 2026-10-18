@@ -28,7 +28,7 @@ class AudioNamespace(private val clientConfig: ClientConfig) {
      *
      * Transcribes audio into the input language. Returns a transcription object in `json`, `diarized_json`, or `verbose_json` format, plain text in `text`, `srt`, or `vtt` format, or a stream of transcript events. Supported formats depend on the model.
      */
-    fun createTranscription(request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionParams, options: RequestOptions? = null): Any {
+    fun createTranscription(request: dev.octri.showcase.openai.methods.Audio.CreateTranscriptionParams, options: RequestOptions? = null): CreateTranscriptionResponse {
         return dev.octri.showcase.openai.methods.Audio.createTranscription(clientConfig, request, options)
     }
 
@@ -46,7 +46,7 @@ class AudioNamespace(private val clientConfig: ClientConfig) {
      *
      * Translates audio into English.
      */
-    fun createTranslation(file: SdkClient.UploadFile, model: String, prompt: String? = null, responseFormat: CreateTranslationRequestResponseFormatEnum? = null, temperature: Double? = null, options: RequestOptions? = null): Any {
+    fun createTranslation(file: SdkClient.UploadFile, model: String, prompt: String? = null, responseFormat: CreateTranslationRequestResponseFormatEnum? = null, temperature: Double? = null, options: RequestOptions? = null): CreateTranslationResponse {
         return dev.octri.showcase.openai.methods.Audio.createTranslation(clientConfig, file, model, prompt, responseFormat, temperature, options)
     }
 

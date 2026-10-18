@@ -4,22 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The type of the custom tool. Always `custom`.
- */
-enum class CustomToolParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    CUSTOM("custom");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
  * Typed representation of the `CyberAccessProgramEnum` API schema.
  */
 class CyberAccessProgramEnum private constructor(
@@ -593,5 +577,24 @@ class DeletedVaultCredentialResourceObjectEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = DeletedVaultCredentialResourceObjectEnum(value)
+    }
+}
+
+/**
+ * The object type. Always `vault.deleted`.
+ */
+class DeletedVaultResourceObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DeletedVaultResourceObjectEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val VAULT_DELETED = DeletedVaultResourceObjectEnum("vault.deleted")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DeletedVaultResourceObjectEnum(value)
     }
 }

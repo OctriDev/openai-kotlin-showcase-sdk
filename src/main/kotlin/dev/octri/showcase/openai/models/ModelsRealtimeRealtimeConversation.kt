@@ -27,13 +27,7 @@ sealed interface RealtimeConversationItem {
             }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
             val objectTypes: List<Class<out RealtimeConversationItem>> = listOf(RealtimeConversationItemMessageSystem::class.java, RealtimeConversationItemMessageUser::class.java, RealtimeConversationItemMessageAssistant::class.java, RealtimeConversationItemFunctionCall::class.java, RealtimeConversationItemFunctionCallOutput::class.java, RealtimeMCPApprovalResponse::class.java, RealtimeMCPListTools::class.java, RealtimeMCPToolCall::class.java, RealtimeMCPApprovalRequest::class.java)
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
-            }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 else -> UnknownRealtimeConversationItem(node)
             }
@@ -346,3 +340,119 @@ data class RealtimeConversationItemWithReference(
      */
     val output: String? = null
 )
+
+/**
+ * A Realtime item requesting human approval of a tool invocation.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeMCPApprovalRequest(
+    /**
+     * The type of the item. Always `mcp_approval_request`.
+     */
+    val type: RealtimeMCPApprovalRequestTypeEnum,
+    /**
+     * The unique ID of the approval request.
+     */
+    val id: String,
+    /**
+     * The label of the MCP server making the request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    /**
+     * The name of the tool to run.
+     */
+    val name: String,
+    /**
+     * A JSON string of arguments for the tool.
+     */
+    val arguments: String
+) : RealtimeConversationItem
+
+/**
+ * A Realtime item responding to an MCP approval request.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeMCPApprovalResponse(
+    /**
+     * The type of the item. Always `mcp_approval_response`.
+     */
+    val type: RealtimeMCPApprovalResponseTypeEnum,
+    /**
+     * The unique ID of the approval response.
+     */
+    val id: String,
+    /**
+     * The ID of the approval request being answered.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id") val approvalRequestId: String,
+    /**
+     * Whether the request was approved.
+     */
+    val approve: Boolean,
+    /**
+     * Optional `string` value serialized in the `reason` wire field.
+     */
+    val reason: String? = null
+) : RealtimeConversationItem
+
+/**
+ * A Realtime item listing tools available on an MCP server.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeMCPListTools(
+    /**
+     * The type of the item. Always `mcp_list_tools`.
+     */
+    val type: RealtimeMCPListToolsTypeEnum,
+    /**
+     * The label of the MCP server.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    /**
+     * The tools available on the server.
+     */
+    val tools: List<MCPListToolsTool>,
+    /**
+     * The unique ID of the list.
+     */
+    val id: String? = null
+) : RealtimeConversationItem
+
+/**
+ * A Realtime item representing an invocation of a tool on an MCP server.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeMCPToolCall(
+    /**
+     * The type of the item. Always `mcp_call`.
+     */
+    val type: RealtimeMCPToolCallTypeEnum,
+    /**
+     * The unique ID of the tool call.
+     */
+    val id: String,
+    /**
+     * The label of the MCP server running the tool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    /**
+     * The name of the tool that was run.
+     */
+    val name: String,
+    /**
+     * A JSON string of the arguments passed to the tool.
+     */
+    val arguments: String,
+    /**
+     * Optional `string` value serialized in the `approval_request_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id") val approvalRequestId: String? = null,
+    /**
+     * Optional `string` value serialized in the `output` wire field.
+     */
+    val output: String? = null,
+    /**
+     * The error from the tool call, if any.
+     */
+    val error: RealtimeMCPToolCallError? = null
+) : RealtimeConversationItem

@@ -277,13 +277,7 @@ sealed interface RealtimeBetaResponseCreateParamsToolChoice {
             }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
             val objectTypes: List<Class<out RealtimeBetaResponseCreateParamsToolChoice>> = listOf(ToolChoiceOptions::class.java, ToolChoiceFunction::class.java, ToolChoiceMCP::class.java)
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
-            }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 else -> UnknownRealtimeBetaResponseCreateParamsToolChoice(node)
             }
@@ -299,3 +293,37 @@ data class UnknownRealtimeBetaResponseCreateParamsToolChoice @com.fasterxml.jack
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
+
+/**
+ * Use this option to force the model to call a specific function.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ToolChoiceFunction(
+    /**
+     * For function calling, the type is always `function`.
+     */
+    val type: ToolChoiceFunctionTypeEnum,
+    /**
+     * The name of the function to call.
+     */
+    val name: String
+) : ToolChoiceParam, RealtimeBetaResponseCreateParamsToolChoice, RealtimeSessionCreateRequestGAToolChoice, RealtimeResponseCreateParamsToolChoice, RealtimeSessionCreateResponseGAToolChoice
+
+/**
+ * Use this option to force the model to call a specific tool on a remote MCP server.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ToolChoiceMCP(
+    /**
+     * For MCP tools, the type is always `mcp`.
+     */
+    val type: ToolChoiceMCPTypeEnum,
+    /**
+     * The label of the MCP server to use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
+    val name: String? = null
+) : ToolChoiceParam, RealtimeBetaResponseCreateParamsToolChoice, RealtimeSessionCreateRequestGAToolChoice, RealtimeResponseCreateParamsToolChoice, RealtimeSessionCreateResponseGAToolChoice

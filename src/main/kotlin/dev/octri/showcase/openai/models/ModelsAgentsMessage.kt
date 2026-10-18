@@ -67,38 +67,3 @@ data class MessageContentResourceOutputText(
      */
     val text: String
 ) : MessageContentResource
-
-/**
- * A user or assistant message recorded in a session.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class MessageItemResource(
-    /**
-     * The item type. Always `message`.
-     */
-    val type: MessageItemResourceTypeEnum,
-    /**
-     * The ID of this item, or null for legacy user messages whose ID was not recorded.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("id", required = true) val id: String?,
-    /**
-     * The ID of the turn that contains this item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The role of the message author.
-     */
-    val role: SessionMessageRoleResource,
-    /**
-     * The content of the message. User messages contain input text or images; assistant messages contain output text.
-     */
-    val content: List<MessageContentResource>,
-    /**
-     * The status of the message. User messages are always `completed`.
-     */
-    val status: OutputItemStatusResource,
-    /**
-     * The phase of an assistant message. Null for user messages.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("phase", required = true) val phase: MessagePhaseResource?
-) : SessionTurnItemResource

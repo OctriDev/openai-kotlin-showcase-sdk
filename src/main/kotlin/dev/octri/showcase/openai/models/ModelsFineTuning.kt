@@ -581,27 +581,24 @@ data class GraderMulti(
 ) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
 
 /**
- * Typed representation of the `ListFineTuningCheckpointPermissionResponse` API schema.
+ * A PythonGrader object that runs a python script on the input.
  */
-data class ListFineTuningCheckpointPermissionResponse(
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class GraderPython(
     /**
-     * Required array value serialized in the `data` wire field.
+     * The object type, which is always `python`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<FineTuningCheckpointPermission>,
+    val type: GraderPythonTypeEnum,
     /**
-     * Required enumerated value serialized in the `object` wire field.
+     * The name of the grader.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListFineTuningCheckpointPermissionResponseObjectEnum,
+    val name: String,
     /**
-     * Required `boolean` value serialized in the `has_more` wire field.
+     * The source code of the python script.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    val source: String,
     /**
-     * Optional `string` value serialized in the `first_id` wire field.
+     * The image tag to use for the python script.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /**
-     * Optional `string` value serialized in the `last_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
-)
+    @com.fasterxml.jackson.annotation.JsonProperty("image_tag") val imageTag: String? = null
+) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader

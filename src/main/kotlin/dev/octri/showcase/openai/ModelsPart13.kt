@@ -3,6 +3,32 @@
 
 package dev.octri.showcase.openai
 
+typealias McpConnectionOriginParam = dev.octri.showcase.openai.models.McpConnectionOriginParam
+
+typealias McpConnectionOriginResource = dev.octri.showcase.openai.models.McpConnectionOriginResource
+
+typealias MCPListTools = dev.octri.showcase.openai.models.MCPListTools
+
+typealias MCPListToolsTool = dev.octri.showcase.openai.models.MCPListToolsTool
+
+typealias MCPListToolsTypeEnum = dev.octri.showcase.openai.models.MCPListToolsTypeEnum
+
+typealias McpOauthRefreshResource = dev.octri.showcase.openai.models.McpOauthRefreshResource
+
+typealias McpOauthTokenEndpointAuthResource = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResource
+
+typealias McpOauthTokenEndpointAuthResourceClientSecretBasic = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretBasic
+
+typealias McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretBasicTypeEnum
+
+typealias McpOauthTokenEndpointAuthResourceClientSecretPost = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretPost
+
+typealias McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceClientSecretPostTypeEnum
+
+typealias McpOauthTokenEndpointAuthResourceNone = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceNone
+
+typealias McpOauthTokenEndpointAuthResourceNoneTypeEnum = dev.octri.showcase.openai.models.McpOauthTokenEndpointAuthResourceNoneTypeEnum
+
 typealias MCPProtocolError = dev.octri.showcase.openai.models.MCPProtocolError
 
 typealias MCPProtocolErrorTypeEnum = dev.octri.showcase.openai.models.MCPProtocolErrorTypeEnum
@@ -24,6 +50,8 @@ typealias MCPToolExecutionError = dev.octri.showcase.openai.models.MCPToolExecut
 typealias MCPToolExecutionErrorTypeEnum = dev.octri.showcase.openai.models.MCPToolExecutionErrorTypeEnum
 
 typealias MCPToolFilter = dev.octri.showcase.openai.models.MCPToolFilter
+
+typealias MCPToolRequireApproval = dev.octri.showcase.openai.models.MCPToolRequireApproval
 
 typealias MCPToolRequireApprovalVariant0 = dev.octri.showcase.openai.models.MCPToolRequireApprovalVariant0
 
@@ -237,8 +265,6 @@ typealias ModelIdsCompaction = dev.octri.showcase.openai.models.ModelIdsCompacti
 
 typealias ModelIdsLive = dev.octri.showcase.openai.models.ModelIdsLive
 
-typealias ModelIdsLiveVariant1Enum = dev.octri.showcase.openai.models.ModelIdsLiveVariant1Enum
-
 typealias ModelIdsResponses = dev.octri.showcase.openai.models.ModelIdsResponses
 
 typealias ModelIdsResponsesVariant1Enum = dev.octri.showcase.openai.models.ModelIdsResponsesVariant1Enum
@@ -410,29 +436,3 @@ typealias OutputAudioTypeEnum = dev.octri.showcase.openai.models.OutputAudioType
 typealias OutputContent = dev.octri.showcase.openai.models.OutputContent
 
 typealias OutputItem = dev.octri.showcase.openai.models.OutputItem
-
-typealias OutputItemStatusResource = dev.octri.showcase.openai.models.OutputItemStatusResource
-
-typealias OutputMessage = dev.octri.showcase.openai.models.OutputMessage
-
-typealias OutputMessageContent = dev.octri.showcase.openai.models.OutputMessageContent
-
-typealias OutputMessageRoleEnum = dev.octri.showcase.openai.models.OutputMessageRoleEnum
-
-typealias OutputMessageStatusEnum = dev.octri.showcase.openai.models.OutputMessageStatusEnum
-
-typealias OutputMessageTypeEnum = dev.octri.showcase.openai.models.OutputMessageTypeEnum
-
-typealias OutputTextContent = dev.octri.showcase.openai.models.OutputTextContent
-
-typealias OutputTextContentTypeEnum = dev.octri.showcase.openai.models.OutputTextContentTypeEnum
-
-typealias OutputTextResource = dev.octri.showcase.openai.models.OutputTextResource
-
-typealias OutputTextResourceTypeEnum = dev.octri.showcase.openai.models.OutputTextResourceTypeEnum
-
-typealias OutputTokensDetailsResource = dev.octri.showcase.openai.models.OutputTokensDetailsResource
-
-typealias OutputTokensDetailsResource2 = dev.octri.showcase.openai.models.OutputTokensDetailsResource2
-
-typealias ParallelToolCalls = dev.octri.showcase.openai.models.ParallelToolCalls

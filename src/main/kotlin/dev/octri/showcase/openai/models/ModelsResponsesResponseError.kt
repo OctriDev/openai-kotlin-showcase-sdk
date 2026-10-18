@@ -28,30 +28,3 @@ data class ResponseError(
      */
     val misalignment: MisalignmentErrorDetailsResource? = null
 )
-
-/**
- * Emitted when an error occurs.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseErrorEvent(
-    /**
-     * The type of the event. Always `error`.
-     */
-    val type: ResponseErrorEventTypeEnum,
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /**
-     * The error message.
-     */
-    val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long
-) : ResponseStreamEvent

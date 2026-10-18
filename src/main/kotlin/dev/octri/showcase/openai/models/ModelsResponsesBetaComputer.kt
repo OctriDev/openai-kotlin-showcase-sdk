@@ -4,6 +4,33 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * A click action.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaClickParam(
+    /**
+     * Specifies the event type. For a click action, this property is always `click`.
+     */
+    val type: BetaClickParamTypeEnum,
+    /**
+     * Indicates which mouse button was pressed during the click. One of `left`, `right`, `wheel`, `back`, or `forward`.
+     */
+    val button: BetaClickButtonType,
+    /**
+     * The x-coordinate where the click occurred.
+     */
+    val x: Long,
+    /**
+     * The y-coordinate where the click occurred.
+     */
+    val y: Long,
+    /**
+     * The keys being held while clicking.
+     */
+    val keys: List<String>? = null
+) : BetaComputerAction
+
+/**
  * Typed representation of the `BetaComputerAction` API schema.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaComputerAction::class)
@@ -85,33 +112,6 @@ data class BetaComputerCallSafetyCheckParam(
 )
 
 /**
- * A screenshot of a computer.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaComputerScreenshotContent(
-    /**
-     * Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
-     */
-    val type: BetaComputerScreenshotContentTypeEnum,
-    /**
-     * Required API value serialized in the `image_url` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_url", required = true) val imageUrl: String?,
-    /**
-     * Required `string` value serialized in the `file_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id", required = true) val fileId: String?,
-    /**
-     * The detail level of the screenshot image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
-     */
-    val detail: BetaImageDetail,
-    /**
-     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointConfig? = null
-) : BetaAgentMessageContentItem, BetaMessageContentItem
-
-/**
  * A computer screenshot image used with the computer use tool.
  */
 data class BetaComputerScreenshotImage(
@@ -128,56 +128,6 @@ data class BetaComputerScreenshotImage(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null
 )
-
-/**
- * A tool that controls a virtual computer. Learn more about the computer tool.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaComputerTool(
-    /**
-     * The type of the computer tool. Always `computer`.
-     */
-    val type: BetaComputerToolTypeEnum
-) : BetaTool, BetaToolSearchOutputTool
-
-/**
- * A tool call to a computer use tool. See the computer use guide for more information.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaComputerToolCall(
-    /**
-     * The type of the computer call. Always `computer_call`.
-     */
-    val type: BetaComputerToolCallTypeEnum,
-    /**
-     * The unique ID of the computer call.
-     */
-    val id: String,
-    /**
-     * An identifier used when responding to the tool call with output.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The pending safety checks for the computer call.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pending_safety_checks") val pendingSafetyChecks: List<BetaComputerCallSafetyCheckParam>,
-    /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
-     */
-    val status: BetaComputerToolCallStatusEnum,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null,
-    /**
-     * Optional API value serialized in the `action` wire field.
-     */
-    val action: BetaComputerAction? = null,
-    /**
-     * Flattened batched actions for `computer_use`. Each action includes an `type` discriminator and action-specific fields.
-     */
-    val actions: BetaComputerActionList? = null
-) : BetaItem, BetaItemResource, BetaItemField, BetaOutputItem
 
 /**
  * The output of a computer tool call.
@@ -214,63 +164,149 @@ data class BetaComputerToolCallOutput(
 )
 
 /**
- * Typed representation of the `BetaComputerToolCallOutputResource` API schema.
+ * A double click action.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaComputerToolCallOutputResource(
+data class BetaDoubleClickAction(
     /**
-     * The type of the computer tool call output. Always `computer_call_output`.
+     * Specifies the event type. For a double click action, this property is always set to `double_click`.
      */
-    val type: BetaComputerToolCallOutputTypeEnum,
+    val type: BetaDoubleClickActionTypeEnum,
     /**
-     * The ID of the computer tool call output.
+     * The x-coordinate where the double click occurred.
      */
-    val id: String,
+    val x: Long,
     /**
-     * The ID of the computer tool call that produced the output.
+     * The y-coordinate where the double click occurred.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    val y: Long,
     /**
-     * A computer screenshot image used with the computer use tool.
+     * The keys being held while double-clicking.
      */
-    val output: BetaComputerScreenshotImage,
-    /**
-     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
-     */
-    val status: BetaComputerCallOutputStatus,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null,
-    /**
-     * The safety checks reported by the API that have been acknowledged by the developer.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("acknowledged_safety_checks") val acknowledgedSafetyChecks: List<BetaComputerCallSafetyCheckParam>? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
-) : BetaItemResource, BetaItemField, BetaOutputItem
+    @com.fasterxml.jackson.annotation.JsonProperty("keys", required = true) val keys: List<String>?
+) : BetaComputerAction
 
 /**
- * A tool that controls a virtual computer. Learn more about the computer tool.
+ * A drag action.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaComputerUsePreviewTool(
+data class BetaDragParam(
     /**
-     * The type of the computer use tool. Always `computer_use_preview`.
+     * Specifies the event type. For a drag action, this property is always set to `drag`.
      */
-    val type: BetaComputerUsePreviewToolTypeEnum,
+    val type: BetaDragParamTypeEnum,
     /**
-     * The type of computer environment to control.
+     * An array of coordinates representing the path of the drag action. Coordinates will appear as an array of objects, eg ``` [ { x: 100, y: 200 }, { x: 200, y: 300 } ] ```
      */
-    val environment: BetaComputerEnvironment,
+    val path: List<BetaCoordParam>,
     /**
-     * The width of the computer display.
+     * The keys being held while dragging the mouse.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("display_width") val displayWidth: Long,
+    val keys: List<String>? = null
+) : BetaComputerAction
+
+/**
+ * A collection of keypresses the model would like to perform.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaKeyPressAction(
     /**
-     * The height of the computer display.
+     * Specifies the event type. For a keypress action, this property is always set to `keypress`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("display_height") val displayHeight: Long
-) : BetaTool, BetaToolSearchOutputTool
+    val type: BetaKeyPressActionTypeEnum,
+    /**
+     * The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.
+     */
+    val keys: List<String>
+) : BetaComputerAction
+
+/**
+ * A mouse move action.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaMoveParam(
+    /**
+     * Specifies the event type. For a move action, this property is always set to `move`.
+     */
+    val type: BetaMoveParamTypeEnum,
+    /**
+     * The x-coordinate to move to.
+     */
+    val x: Long,
+    /**
+     * The y-coordinate to move to.
+     */
+    val y: Long,
+    /**
+     * The keys being held while moving the mouse.
+     */
+    val keys: List<String>? = null
+) : BetaComputerAction
+
+/**
+ * A screenshot action.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaScreenshotParam(
+    /**
+     * Specifies the event type. For a screenshot action, this property is always set to `screenshot`.
+     */
+    val type: BetaScreenshotParamTypeEnum
+) : BetaComputerAction
+
+/**
+ * A scroll action.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaScrollParam(
+    /**
+     * Specifies the event type. For a scroll action, this property is always set to `scroll`.
+     */
+    val type: BetaScrollParamTypeEnum,
+    /**
+     * The x-coordinate where the scroll occurred.
+     */
+    val x: Long,
+    /**
+     * The y-coordinate where the scroll occurred.
+     */
+    val y: Long,
+    /**
+     * The horizontal scroll distance.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scroll_x") val scrollX: Long,
+    /**
+     * The vertical scroll distance.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scroll_y") val scrollY: Long,
+    /**
+     * The keys being held while scrolling.
+     */
+    val keys: List<String>? = null
+) : BetaComputerAction
+
+/**
+ * An action to type in text.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaTypeParam(
+    /**
+     * Specifies the event type. For a type action, this property is always set to `type`.
+     */
+    val type: BetaTypeParamTypeEnum,
+    /**
+     * The text to type.
+     */
+    val text: String
+) : BetaComputerAction
+
+/**
+ * A wait action.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaWaitParam(
+    /**
+     * Specifies the event type. For a wait action, this property is always set to `wait`.
+     */
+    val type: BetaWaitParamTypeEnum
+) : BetaComputerAction

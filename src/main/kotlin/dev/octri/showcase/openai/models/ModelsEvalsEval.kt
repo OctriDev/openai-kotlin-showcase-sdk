@@ -4,6 +4,153 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * Optional object value serialized in the `sampling_params` wire field.
+ */
+data class CreateEvalCompletionsRunDataSourceSamplingParams(
+    /**
+     * Optional API value serialized in the `reasoning_effort` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
+    /**
+     * A higher temperature increases randomness in the outputs.
+     */
+    val temperature: Double? = null,
+    /**
+     * The maximum number of tokens in the generated output.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long? = null,
+    /**
+     * An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
+    /**
+     * A seed value to initialize the randomness, during sampling.
+     */
+    val seed: Long? = null,
+    /**
+     * An object specifying the format that the model must output. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the \[Structured Outputs guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid JSON. Using `json_schema` is preferred for models that support it.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat? = null,
+    /**
+     * A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for. A max of 128 functions are supported.
+     */
+    val tools: List<ChatCompletionTool>? = null
+)
+
+/**
+ * A CompletionsRunDataSource object describing a model sampling configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class CreateEvalCompletionsRunDataSource(
+    /**
+     * The type of run data source. Always `completions`.
+     */
+    val type: CreateEvalCompletionsRunDataSourceTypeEnum,
+    /**
+     * Determines what populates the `item` namespace in this run's data source.
+     */
+    val source: CreateEvalCompletionsRunDataSourceSource,
+    /**
+     * Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_messages") val inputMessages: CreateEvalCompletionsRunDataSourceInputMessages? = null,
+    /**
+     * Optional object value serialized in the `sampling_params` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: CreateEvalCompletionsRunDataSourceSamplingParams? = null,
+    /**
+     * The name of the model to use for generating completions (e.g. "o3-mini").
+     */
+    val model: String? = null
+) : CreateEvalRunRequestDataSource, EvalRunDataSource
+
+/**
+ * A JsonlRunDataSource object with that specifies a JSONL file that matches the eval
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class CreateEvalJsonlRunDataSource(
+    /**
+     * The type of data source. Always `jsonl`.
+     */
+    val type: CreateEvalJsonlRunDataSourceTypeEnum,
+    /**
+     * Determines what populates the `item` namespace in the data source.
+     */
+    val source: CreateEvalJsonlRunDataSourceSource
+) : CreateEvalRunRequestDataSource, EvalRunDataSource
+
+/**
+ * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+ */
+data class CreateEvalResponsesRunDataSourceSamplingParamsText(
+    /**
+     * An object specifying the format that the model must output. Configuring `{ "type": "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type": "text" }` with no additional options. **Not recommended for gpt-4o and newer models:** Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid…
+     */
+    val format: TextResponseFormatConfiguration? = null
+)
+
+/**
+ * Optional object value serialized in the `sampling_params` wire field.
+ */
+data class CreateEvalResponsesRunDataSourceSamplingParams(
+    /**
+     * Optional API value serialized in the `reasoning_effort` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
+    /**
+     * A higher temperature increases randomness in the outputs.
+     */
+    val temperature: Double? = null,
+    /**
+     * The maximum number of tokens in the generated output.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long? = null,
+    /**
+     * An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
+    /**
+     * A seed value to initialize the randomness, during sampling.
+     */
+    val seed: Long? = null,
+    /**
+     * An array of tools the model may call while generating a response. You can specify which tool to use by setting the `tool_choice` parameter. The two categories of tools you can provide the model are: - **Built-in tools**: Tools that are provided by OpenAI that extend the model's capabilities, like web search or file search. Learn more about built-in tools. - **Function calls (custom tools)**: Functions that are defined by you, enabling the model to call your own code. Learn…
+     */
+    val tools: List<Tool>? = null,
+    /**
+     * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+     */
+    val text: CreateEvalResponsesRunDataSourceSamplingParamsText? = null
+)
+
+/**
+ * A ResponsesRunDataSource object describing a model sampling configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class CreateEvalResponsesRunDataSource(
+    /**
+     * The type of run data source. Always `responses`.
+     */
+    val type: CreateEvalResponsesRunDataSourceTypeEnum,
+    /**
+     * Determines what populates the `item` namespace in this run's data source.
+     */
+    val source: CreateEvalResponsesRunDataSourceSource,
+    /**
+     * Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_messages") val inputMessages: CreateEvalResponsesRunDataSourceInputMessages? = null,
+    /**
+     * Optional object value serialized in the `sampling_params` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: CreateEvalResponsesRunDataSourceSamplingParams? = null,
+    /**
+     * The name of the model to use for generating completions (e.g. "o3-mini").
+     */
+    val model: String? = null
+) : CreateEvalRunRequestDataSource, EvalRunDataSource
+
+/**
  * An Eval object with a data source config and testing criteria. An Eval represents a task to be done for your LLM integration. Like: - Improve the quality of my chatbot - See how well my chatbot handles customer support - Check if o4-mini is better at my usecase than gpt-6-astra
  */
 data class Eval(
@@ -118,196 +265,6 @@ data class EvalGraderLabelModel(
 ) : EvalTestingCriteriaItem
 
 /**
- * Typed representation of the `EvalGraderPython` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalGraderPython(
-    /**
-     * The object type, which is always `python`.
-     */
-    val type: GraderPythonTypeEnum,
-    /**
-     * The name of the grader.
-     */
-    val name: String,
-    /**
-     * The source code of the python script.
-     */
-    val source: String,
-    /**
-     * The image tag to use for the python script.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_tag") val imageTag: String? = null,
-    /**
-     * The threshold for the score.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pass_threshold") val passThreshold: Double? = null
-) : CreateEvalRequestTestingCriteriaItem, EvalTestingCriteriaItem
-
-/**
- * The sampling parameters for the model.
- */
-data class GraderScoreModelSamplingParams(
-    /**
-     * Optional `integer` value serialized in the `seed` wire field.
-     */
-    val seed: Long? = null,
-    /**
-     * Optional `number` value serialized in the `top_p` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /**
-     * Optional `number` value serialized in the `temperature` wire field.
-     */
-    val temperature: Double? = null,
-    /**
-     * Optional API value serialized in the `max_completions_tokens` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_completions_tokens") val maxCompletionsTokens: Long? = null,
-    /**
-     * Optional API value serialized in the `reasoning_effort` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null
-)
-
-/**
- * Typed representation of the `EvalGraderScoreModel` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalGraderScoreModel(
-    /**
-     * The object type, which is always `score_model`.
-     */
-    val type: GraderScoreModelTypeEnum,
-    /**
-     * The name of the grader.
-     */
-    val name: String,
-    /**
-     * The model to use for the evaluation.
-     */
-    val model: String,
-    /**
-     * The input messages evaluated by the grader. Supports text, output text, input image, and input audio content blocks, and may include template strings.
-     */
-    val input: List<EvalItem>,
-    /**
-     * The sampling parameters for the model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: GraderScoreModelSamplingParams? = null,
-    /**
-     * The service requires two numbers for the score range. Defaults to `[0, 1]`.
-     */
-    val range: List<Double>? = null,
-    /**
-     * The threshold for the score.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pass_threshold") val passThreshold: Double? = null
-) : CreateEvalRequestTestingCriteriaItem, EvalTestingCriteriaItem
-
-/**
- * Typed representation of the `EvalGraderStringCheck` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalGraderStringCheck(
-    /**
-     * The object type, which is always `string_check`.
-     */
-    val type: GraderStringCheckTypeEnum,
-    /**
-     * The name of the grader.
-     */
-    val name: String,
-    /**
-     * The input text. This may include template strings.
-     */
-    val input: String,
-    /**
-     * The reference text. This may include template strings.
-     */
-    val reference: String,
-    /**
-     * The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
-     */
-    val operation: GraderStringCheckOperationEnum
-) : CreateEvalRequestTestingCriteriaItem, EvalTestingCriteriaItem
-
-/**
- * Typed representation of the `EvalGraderTextSimilarity` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalGraderTextSimilarity(
-    /**
-     * The type of grader.
-     */
-    val type: GraderTextSimilarityTypeEnum,
-    /**
-     * The name of the grader.
-     */
-    val name: String,
-    /**
-     * The text being graded.
-     */
-    val input: String,
-    /**
-     * The text being graded against.
-     */
-    val reference: String,
-    /**
-     * The evaluation metric to use. One of `cosine`, `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_metric") val evaluationMetric: GraderTextSimilarityEvaluationMetricEnum,
-    /**
-     * The threshold for the score.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("pass_threshold") val passThreshold: Double
-) : CreateEvalRequestTestingCriteriaItem, EvalTestingCriteriaItem
-
-/**
- * Required object value serialized in the `content[]` wire field.
- */
-data class EvalJsonlFileContentSourceContentItem(
-    /**
-     * Required object value serialized in the `item` wire field.
-     */
-    val item: Map<String, Any>,
-    /**
-     * Optional object value serialized in the `sample` wire field.
-     */
-    val sample: Map<String, Any>? = null
-)
-
-/**
- * Typed representation of the `EvalJsonlFileContentSource` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalJsonlFileContentSource(
-    /**
-     * The type of jsonl source. Always `file_content`.
-     */
-    val type: EvalJsonlFileContentSourceTypeEnum,
-    /**
-     * The content of the jsonl file.
-     */
-    val content: List<EvalJsonlFileContentSourceContentItem>
-) : CreateEvalCompletionsRunDataSourceSource, CreateEvalJsonlRunDataSourceSource, CreateEvalResponsesRunDataSourceSource
-
-/**
- * Typed representation of the `EvalJsonlFileIdSource` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalJsonlFileIdSource(
-    /**
-     * The type of jsonl source. Always `file_id`.
-     */
-    val type: EvalJsonlFileIdSourceTypeEnum,
-    /**
-     * The identifier of the file.
-     */
-    val id: String
-) : CreateEvalCompletionsRunDataSourceSource, CreateEvalJsonlRunDataSourceSource, CreateEvalResponsesRunDataSourceSource
-
-/**
  * An object representing a list of evals.
  */
 data class EvalList(
@@ -351,57 +308,6 @@ data class EvalLogsDataSourceConfig(
      */
     val metadata: Metadata? = null
 ) : EvalDataSourceConfig
-
-/**
- * A EvalResponsesSource object describing a run data source configuration.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class EvalResponsesSource(
-    /**
-     * The type of run data source. Always `responses`.
-     */
-    val type: EvalResponsesSourceTypeEnum,
-    /**
-     * Optional object value serialized in the `metadata` wire field.
-     */
-    val metadata: Map<String, Any>? = null,
-    /**
-     * Optional `string` value serialized in the `model` wire field.
-     */
-    val model: String? = null,
-    /**
-     * Optional `string` value serialized in the `instructions_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("instructions_search") val instructionsSearch: String? = null,
-    /**
-     * Optional API value serialized in the `created_after` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_after") val createdAfter: Long? = null,
-    /**
-     * Optional API value serialized in the `created_before` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_before") val createdBefore: Long? = null,
-    /**
-     * Optional API value serialized in the `reasoning_effort` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
-    /**
-     * Optional `number` value serialized in the `temperature` wire field.
-     */
-    val temperature: Double? = null,
-    /**
-     * Optional `number` value serialized in the `top_p` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /**
-     * List of user identifiers. This is a query parameter used to select responses.
-     */
-    val users: List<String>? = null,
-    /**
-     * List of tool names. This is a query parameter used to select responses.
-     */
-    val tools: List<String>? = null
-) : CreateEvalResponsesRunDataSourceSource
 
 /**
  * Counters summarizing the outcomes of the evaluation run.
@@ -607,4 +513,118 @@ data class EvalRunOutputItemSampleOutputItem(
      * The content of the message.
      */
     val content: String? = null
+)
+
+/**
+ * Token usage details for the sample.
+ */
+data class EvalRunOutputItemSampleUsage(
+    /**
+     * The total number of tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
+    /**
+     * The number of completion tokens generated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens") val completionTokens: Long,
+    /**
+     * The number of prompt tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens") val promptTokens: Long,
+    /**
+     * The number of tokens retrieved from cache.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long
+)
+
+/**
+ * A sample containing the input and output of the evaluation run.
+ */
+data class EvalRunOutputItemSample(
+    /**
+     * An array of input messages.
+     */
+    val input: List<EvalRunOutputItemSampleInputItem>,
+    /**
+     * An array of output messages.
+     */
+    val output: List<EvalRunOutputItemSampleOutputItem>,
+    /**
+     * The reason why the sample generation was finished.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("finish_reason") val finishReason: String,
+    /**
+     * The model used for generating the sample.
+     */
+    val model: String,
+    /**
+     * Token usage details for the sample.
+     */
+    val usage: EvalRunOutputItemSampleUsage,
+    /**
+     * Required API value serialized in the `error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: EvalApiError?,
+    /**
+     * The sampling temperature used.
+     */
+    val temperature: Double,
+    /**
+     * The maximum number of tokens allowed for completion.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long,
+    /**
+     * The top_p value used for sampling.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double,
+    /**
+     * The seed used for generating the sample.
+     */
+    val seed: Long
+)
+
+/**
+ * A schema representing an evaluation run output item.
+ */
+data class EvalRunOutputItem(
+    /**
+     * The type of the object. Always "eval.run.output_item".
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: EvalRunOutputItemObjectEnum,
+    /**
+     * Unique identifier for the evaluation run output item.
+     */
+    val id: String,
+    /**
+     * The identifier of the evaluation run associated with this output item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("run_id") val runId: String,
+    /**
+     * The identifier of the evaluation group.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("eval_id") val evalId: String,
+    /**
+     * Unix timestamp (in seconds) when the evaluation run was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * The status of the evaluation run.
+     */
+    val status: String,
+    /**
+     * The identifier for the data source item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("datasource_item_id") val datasourceItemId: Long,
+    /**
+     * Details of the input data source item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("datasource_item") val datasourceItem: Map<String, Any>,
+    /**
+     * A list of grader results for this output item.
+     */
+    val results: List<EvalRunOutputItemResult>,
+    /**
+     * A sample containing the input and output of the evaluation run.
+     */
+    val sample: EvalRunOutputItemSample
 )

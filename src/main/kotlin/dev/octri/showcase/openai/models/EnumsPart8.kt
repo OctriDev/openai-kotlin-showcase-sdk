@@ -30,26 +30,6 @@ class BetaMCPToolConnectorIdEnum private constructor(
 }
 
 /**
- * Specify a single approval policy for all tools. One of `always` or `never`. When set to `always`, all tools will require approval. When set to `never`, all tools will not require approval.
- */
-class BetaMCPToolRequireApprovalVariant1Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is BetaMCPToolRequireApprovalVariant1Enum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val ALWAYS = BetaMCPToolRequireApprovalVariant1Enum("always")
-        @JvmField val NEVER = BetaMCPToolRequireApprovalVariant1Enum("never")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = BetaMCPToolRequireApprovalVariant1Enum(value)
-    }
-}
-
-/**
  * The type of the MCP tool. Always `mcp`.
  */
 enum class BetaMCPToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -117,6 +97,26 @@ enum class BetaMCPToolExecutionErrorTypeEnum(@com.fasterxml.jackson.annotation.J
         @JvmStatic
         fun fromValue(v: String) = values().find { it.value == v }
             ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * Specify a single approval policy for all tools. One of `always` or `never`. When set to `always`, all tools will require approval. When set to `never`, all tools will not require approval.
+ */
+class BetaMCPToolRequireApprovalVariant1Enum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaMCPToolRequireApprovalVariant1Enum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val ALWAYS = BetaMCPToolRequireApprovalVariant1Enum("always")
+        @JvmField val NEVER = BetaMCPToolRequireApprovalVariant1Enum("never")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaMCPToolRequireApprovalVariant1Enum(value)
     }
 }
 

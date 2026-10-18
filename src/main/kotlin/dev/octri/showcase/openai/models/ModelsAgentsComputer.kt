@@ -83,33 +83,6 @@ data class ComputerUseApprovalRequestKindResourceBrowserOriginAccess(
 ) : ComputerUseApprovalRequestKindResource
 
 /**
- * A credential-free record of an admitted response, not proof of completion.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ComputerUseApprovalRequestResultItemResource(
-    /**
-     * The stable history item ID.
-     */
-    val id: String,
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: ComputerUseApprovalRequestResultItemResourceTypeEnum,
-    /**
-     * The ID of the turn that contains this item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The registered request answered by this item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String,
-    /**
-     * The admitted response, without submitted credential values.
-     */
-    val response: ComputerUseApprovalResponseKindResource
-) : SessionTurnItemResource
-
-/**
  * Typed representation of the `ComputerUseApprovalResponseKindResource` API schema.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "action", visible = true, defaultImpl = UnknownComputerUseApprovalResponseKindResource::class)
@@ -183,13 +156,7 @@ sealed interface ComputerUseApprovalResponseParam {
             }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
             val objectTypes: List<Class<out ComputerUseApprovalResponseParam>> = listOf(ComputerUseApprovalResponseParamBrowserOriginAccessParam::class.java, ComputerUseApprovalResponseParamBrowserAuthentication::class.java)
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
-            }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 else -> UnknownComputerUseApprovalResponseParam(node)
             }
@@ -277,34 +244,3 @@ data class ComputerUseApprovalResponseParamBrowserOriginAccessParam(
      */
     val decision: BrowserOriginAccessDecisionParam
 ) : ComputerUseApprovalResponseParam
-
-/**
- * One execution of the platform-provided computer-use capability.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ComputerUseCallItemResource(
-    /**
-     * The item type. Always `computer_use_call`.
-     */
-    val type: ComputerUseCallItemResourceTypeEnum,
-    /**
-     * The ID of the activity item.
-     */
-    val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * A model-generated description of the activity, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("title", required = true) val title: String?,
-    /**
-     * The execution status of the activity.
-     */
-    val status: FunctionCallStatusResource,
-    /**
-     * The last screenshot emitted by the model. Null when screenshot inclusion is disabled or the call emitted no screenshot.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output", required = true) val output: ComputerScreenshotResource?
-) : SessionTurnItemResource, AgentOutputItemResource

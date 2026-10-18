@@ -3,6 +3,34 @@
 
 package dev.octri.showcase.openai
 
+typealias RealtimeBetaClientEventOutputAudioBufferClearTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClearTypeEnum
+
+typealias RealtimeBetaClientEventResponseCancel = dev.octri.showcase.openai.models.RealtimeBetaClientEventResponseCancel
+
+typealias RealtimeBetaClientEventResponseCancelTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventResponseCancelTypeEnum
+
+typealias RealtimeBetaClientEventResponseCreate = dev.octri.showcase.openai.models.RealtimeBetaClientEventResponseCreate
+
+typealias RealtimeBetaClientEventResponseCreateTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventResponseCreateTypeEnum
+
+typealias RealtimeBetaClientEventSessionUpdate = dev.octri.showcase.openai.models.RealtimeBetaClientEventSessionUpdate
+
+typealias RealtimeBetaClientEventSessionUpdateTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventSessionUpdateTypeEnum
+
+typealias RealtimeBetaClientEventTranscriptionSessionUpdate = dev.octri.showcase.openai.models.RealtimeBetaClientEventTranscriptionSessionUpdate
+
+typealias RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum
+
+typealias RealtimeBetaResponse = dev.octri.showcase.openai.models.RealtimeBetaResponse
+
+typealias RealtimeBetaResponseCreateParams = dev.octri.showcase.openai.models.RealtimeBetaResponseCreateParams
+
+typealias RealtimeBetaResponseCreateParamsConversationVariant1Enum = dev.octri.showcase.openai.models.RealtimeBetaResponseCreateParamsConversationVariant1Enum
+
+typealias RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum
+
+typealias RealtimeBetaResponseCreateParamsModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeBetaResponseCreateParamsModalitiesItemEnum
+
 typealias RealtimeBetaResponseCreateParamsOutputAudioFormatEnum = dev.octri.showcase.openai.models.RealtimeBetaResponseCreateParamsOutputAudioFormatEnum
 
 typealias RealtimeBetaResponseCreateParamsToolChoice = dev.octri.showcase.openai.models.RealtimeBetaResponseCreateParamsToolChoice
@@ -408,31 +436,3 @@ typealias RealtimeResponseAudioOutput = dev.octri.showcase.openai.models.Realtim
 typealias RealtimeResponseCreateParams = dev.octri.showcase.openai.models.RealtimeResponseCreateParams
 
 typealias RealtimeResponseCreateParamsAudio = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsAudio
-
-typealias RealtimeResponseCreateParamsAudioOutput = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsAudioOutput
-
-typealias RealtimeResponseCreateParamsConversationVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsConversationVariant1Enum
-
-typealias RealtimeResponseCreateParamsMaxOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsMaxOutputTokensVariant1Enum
-
-typealias RealtimeResponseCreateParamsOutputModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsOutputModalitiesItemEnum
-
-typealias RealtimeResponseCreateParamsToolChoice = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsToolChoice
-
-typealias RealtimeResponseCreateParamsToolsItem = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsToolsItem
-
-typealias RealtimeResponseMaxOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseMaxOutputTokensVariant1Enum
-
-typealias RealtimeResponseObjectEnum = dev.octri.showcase.openai.models.RealtimeResponseObjectEnum
-
-typealias RealtimeResponseOutputModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeResponseOutputModalitiesItemEnum
-
-typealias RealtimeResponseStatusDetails = dev.octri.showcase.openai.models.RealtimeResponseStatusDetails
-
-typealias RealtimeResponseStatusDetailsError = dev.octri.showcase.openai.models.RealtimeResponseStatusDetailsError
-
-typealias RealtimeResponseStatusDetailsReasonEnum = dev.octri.showcase.openai.models.RealtimeResponseStatusDetailsReasonEnum
-
-typealias RealtimeResponseStatusDetailsTypeEnum = dev.octri.showcase.openai.models.RealtimeResponseStatusDetailsTypeEnum
-
-typealias RealtimeResponseStatusEnum = dev.octri.showcase.openai.models.RealtimeResponseStatusEnum

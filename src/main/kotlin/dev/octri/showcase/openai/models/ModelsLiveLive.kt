@@ -4,17 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Typed representation of the `LiveApplyPatchToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveApplyPatchToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveApplyPatchToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
-
-/**
  * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveAudioFormat::class)
@@ -33,28 +22,6 @@ data class UnknownLiveAudioFormat @com.fasterxml.jackson.annotation.JsonCreator(
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
-
-/**
- * Typed representation of the `LiveCodeInterpreterToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveCodeInterpreterToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveCodeInterpreterToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
-
-/**
- * Typed representation of the `LiveComputerToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveComputerToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveComputerToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
 /**
  * Typed representation of the `LiveConnectParams` API schema.
@@ -86,78 +53,6 @@ data class LiveDataChannelConfigParam(
 )
 
 /**
- * Reports an error in the Live session, such as an invalid client command. Use error.client_event_id, when present, to identify the command that caused the error.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveErrorEvent(
-    /**
-     * The unique ID of the Live server event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /**
-     * The event type, always `error`.
-     */
-    val type: LiveErrorEventTypeEnum,
-    /**
-     * Details of the Live error and the client command that caused it, when known.
-     */
-    val error: LiveLiveError,
-    /**
-     * The event_id of the client command associated with this server event, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
- * Typed representation of the `LiveFileSearchToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveFileSearchToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveFileSearchToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
-
-/**
- * Typed representation of the `LiveImageGenerationToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveImageGenerationToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveImageGenerationToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
-
-/**
- * An informational notice about the Live session, such as the event permissions applied to a frontend data channel.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveInfoEvent(
-    /**
-     * The unique ID of the Live server event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /**
-     * The event type, always `info`.
-     */
-    val type: LiveInfoEventTypeEnum,
-    /**
-     * A machine-readable code for the notice, such as `data_channel_permissions`.
-     */
-    val code: String,
-    /**
-     * A human-readable explanation of the Live session notice.
-     */
-    val message: String,
-    /**
-     * The event_id of the client command associated with this server event, when supplied.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_event_id") val clientEventId: String? = null
-) : LiveSidebandServerEvent, LiveServerEvent2
-
-/**
  * Details of an error encountered by the Live session, including the affected parameter or client command when available.
  */
 data class LiveLiveError(
@@ -184,42 +79,46 @@ data class LiveLiveError(
 )
 
 /**
- * Typed representation of the `LiveNamespaceToolInputParam` API schema.
+ * Raw, mono G.711 A-law audio for a Live WebSocket connection.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveNamespaceToolInputParam(
+data class LiveSessionAudioFormatPCMAParam(
     /**
-     * Required enumerated value serialized in the `type` wire field.
+     * The audio encoding. Always `audio/pcma`.
      */
-    val type: LiveNamespaceToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+    val type: LiveSessionAudioFormatPCMAParamTypeEnum,
+    /**
+     * Audio sample rate in hertz. G.711 audio uses 8000 Hz.
+     */
+    val rate: Long
+) : LiveAudioFormat
 
 /**
- * Typed representation of the `LiveProgrammaticToolInputParam` API schema.
+ * Raw, mono 16-bit little-endian PCM audio for a Live WebSocket connection.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveProgrammaticToolInputParam(
+data class LiveSessionAudioFormatPCMParam(
     /**
-     * Required enumerated value serialized in the `type` wire field.
+     * The audio encoding. Always `audio/pcm`.
      */
-    val type: LiveProgrammaticToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+    val type: LiveSessionAudioFormatPCMParamTypeEnum,
+    /**
+     * Audio sample rate in hertz. Live WebSocket PCM audio supports 16000 or 24000 Hz.
+     */
+    val rate: Long
+) : LiveAudioFormat
 
 /**
- * Typed representation of the `LiveSkillReferenceParam` API schema.
+ * Raw, mono G.711 μ-law audio for a Live WebSocket connection.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveSkillReferenceParam(
+data class LiveSessionAudioFormatPCMUParam(
     /**
-     * References a skill created with the /v1/skills endpoint.
+     * The audio encoding. Always `audio/pcmu`.
      */
-    val type: LiveSkillReferenceParamTypeEnum,
+    val type: LiveSessionAudioFormatPCMUParamTypeEnum,
     /**
-     * The ID of the referenced skill.
+     * Audio sample rate in hertz. G.711 audio uses 8000 Hz.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
-    /**
-     * Optional `string` value serialized in the `version` wire field.
-     */
-    val version: String? = null
-) : LiveHostedShellContainerAutoParamSkillsItem
+    val rate: Long
+) : LiveAudioFormat

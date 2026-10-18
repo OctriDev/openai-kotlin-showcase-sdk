@@ -168,56 +168,6 @@ class BetaResponse(
 )
 
 /**
- * Emitted when new summary content is sampled for a compaction trigger. Contains no summary content.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseCompactionCompactingStreamingEvent(
-    /**
-     * The type of the event, always `response.compaction.compacting`.
-     */
-    val type: BetaResponseCompactionCompactingStreamingEventTypeEnum,
-    /**
-     * The sequence number of the event that was emitted.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the compaction output item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The ID of the compaction output item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
-
-/**
- * Emitted when the model response is complete.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseCompletedEvent(
-    /**
-     * The type of the event. Always `response.completed`.
-     */
-    val type: BetaResponseCompletedEventTypeEnum,
-    /**
-     * Properties of the completed response.
-     */
-    val response: BetaResponse,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
-
-/**
  * The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.
  */
 data class BetaResponseConversation(
@@ -226,98 +176,6 @@ data class BetaResponseConversation(
      */
     val id: String
 )
-
-/**
- * An event that is emitted when a response is created.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseCreatedEvent(
-    /**
-     * The type of the event. Always `response.created`.
-     */
-    val type: BetaResponseCreatedEventTypeEnum,
-    /**
-     * The response that was created.
-     */
-    val response: BetaResponse,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
-
-/**
- * An event that is emitted when a response fails.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseFailedEvent(
-    /**
-     * The type of the event. Always `response.failed`.
-     */
-    val type: BetaResponseFailedEventTypeEnum,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The response that failed.
-     */
-    val response: BetaResponse,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
-
-/**
- * An event that is emitted when a response finishes as incomplete. Over WebSocket, steering can finish a response with `response.incomplete_details.reason` set to `steered`, followed automatically by a successor `response.created` that commits the queued steering input.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseIncompleteEvent(
-    /**
-     * The type of the event. Always `response.incomplete`.
-     */
-    val type: BetaResponseIncompleteEventTypeEnum,
-    /**
-     * The response that was incomplete.
-     */
-    val response: BetaResponse,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
-
-/**
- * Emitted when the response is in progress.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseInProgressEvent(
-    /**
-     * The type of the event. Always `response.in_progress`.
-     */
-    val type: BetaResponseInProgressEventTypeEnum,
-    /**
-     * The response that is in progress.
-     */
-    val response: BetaResponse,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
 
 /**
  * A list of Response items.
@@ -414,29 +272,6 @@ data class BetaResponseProperties(
      */
     val prompt: BetaPrompt? = null
 )
-
-/**
- * Emitted when a response is queued and waiting to be processed.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponseQueuedEvent(
-    /**
-     * The type of the event. Always 'response.queued'.
-     */
-    val type: BetaResponseQueuedEventTypeEnum,
-    /**
-     * The full response object that is queued.
-     */
-    val response: BetaResponse,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaResponseStreamEvent
 
 /**
  * A detailed breakdown of the input tokens.

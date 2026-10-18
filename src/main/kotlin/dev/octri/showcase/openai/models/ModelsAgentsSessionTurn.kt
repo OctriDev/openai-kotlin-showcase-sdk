@@ -4,6 +4,134 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * A message exchanged between agent threads.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class AgentMessageItemResource(
+    /**
+     * The ID of the message.
+     */
+    val id: String,
+    /**
+     * The ID of the turn that contains this item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
+    /**
+     * The item type. Always `agent_message`.
+     */
+    val type: AgentMessageItemResourceTypeEnum,
+    /**
+     * The ID or name of the sending agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sender_agent_id") val senderAgentId: String,
+    /**
+     * The ID or name of the receiving agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("recipient_agent_id") val recipientAgentId: String,
+    /**
+     * The content exchanged between the agents.
+     */
+    val content: List<AgentContentResource>
+) : SessionTurnItemResource
+
+/**
+ * A credential-free record of an admitted response, not proof of completion.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ComputerUseApprovalRequestResultItemResource(
+    /**
+     * The stable history item ID.
+     */
+    val id: String,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ComputerUseApprovalRequestResultItemResourceTypeEnum,
+    /**
+     * The ID of the turn that contains this item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
+    /**
+     * The registered request answered by this item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String,
+    /**
+     * The admitted response, without submitted credential values.
+     */
+    val response: ComputerUseApprovalResponseKindResource
+) : SessionTurnItemResource
+
+/**
+ * The result supplied for a function call.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class FunctionCallOutputItemResource(
+    /**
+     * The ID of the function call output item.
+     */
+    val id: String,
+    /**
+     * The ID of the turn that contains this item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
+    /**
+     * The item type. Always `function_call_output`.
+     */
+    val type: FunctionCallOutputItemResourceTypeEnum,
+    /**
+     * The ID of the function call that produced this output.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /**
+     * The status of the function call.
+     */
+    val status: FunctionCallStatusResource,
+    /**
+     * The function result, if the call succeeded.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output", required = true) val output: FunctionCallOutputResource?,
+    /**
+     * The error message, if the call failed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: String?
+) : SessionTurnItemResource
+
+/**
+ * A user or assistant message recorded in a session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class MessageItemResource(
+    /**
+     * The item type. Always `message`.
+     */
+    val type: MessageItemResourceTypeEnum,
+    /**
+     * The ID of this item, or null for legacy user messages whose ID was not recorded.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("id", required = true) val id: String?,
+    /**
+     * The ID of the turn that contains this item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
+    /**
+     * The role of the message author.
+     */
+    val role: SessionMessageRoleResource,
+    /**
+     * The content of the message. User messages contain input text or images; assistant messages contain output text.
+     */
+    val content: List<MessageContentResource>,
+    /**
+     * The status of the message. User messages are always `completed`.
+     */
+    val status: OutputItemStatusResource,
+    /**
+     * The phase of an assistant message. Null for user messages.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("phase", required = true) val phase: MessagePhaseResource?
+) : SessionTurnItemResource
+
+/**
  * A customer-safe error describing why a session request failed.
  */
 data class SessionTurnErrorResource(

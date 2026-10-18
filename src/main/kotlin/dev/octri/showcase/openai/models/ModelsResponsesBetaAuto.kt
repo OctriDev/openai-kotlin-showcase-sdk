@@ -4,28 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
- */
-data class BetaAutoCodeInterpreterToolParam(
-    /**
-     * Always `auto`.
-     */
-    val type: BetaAutoCodeInterpreterToolParamTypeEnum,
-    /**
-     * An optional list of uploaded files to make available to your code.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * Optional API value serialized in the `memory_limit` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: BetaContainerMemoryLimit? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: BetaAutoCodeInterpreterToolParamNetworkPolicy? = null
-)
-
-/**
  * Network access policy for the container.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy::class)
@@ -43,3 +21,33 @@ data class UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy @com.fasterxml.j
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
+
+/**
+ * Typed representation of the `BetaContainerNetworkPolicyAllowlistParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaContainerNetworkPolicyAllowlistParam(
+    /**
+     * Allow outbound network access only to specified domains. Always `allowlist`.
+     */
+    val type: BetaContainerNetworkPolicyAllowlistParamTypeEnum,
+    /**
+     * A list of allowed domains when type is `allowlist`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>,
+    /**
+     * Optional domain-scoped secrets for allowlisted domains.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_secrets") val domainSecrets: List<BetaContainerNetworkPolicyDomainSecretParam>? = null
+) : BetaAutoCodeInterpreterToolParamNetworkPolicy, BetaContainerAutoParamNetworkPolicy
+
+/**
+ * Typed representation of the `BetaContainerNetworkPolicyDisabledParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaContainerNetworkPolicyDisabledParam(
+    /**
+     * Disable outbound network access. Always `disabled`.
+     */
+    val type: BetaContainerNetworkPolicyDisabledParamTypeEnum
+) : BetaAutoCodeInterpreterToolParamNetworkPolicy, BetaContainerAutoParamNetworkPolicy

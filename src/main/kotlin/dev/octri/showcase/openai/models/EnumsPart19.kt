@@ -4,26 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Required enumerated value serialized in the `self-harm/instructions[]` wire field.
- */
-class CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254 private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254 && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val TEXT = CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254("text")
-        @JvmField val IMAGE = CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254("image")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254(value)
-    }
-}
-
-/**
  * Required enumerated value serialized in the `self-harm/intent[]` wire field.
  */
 class CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe613af1f72 private constructor(
@@ -189,21 +169,21 @@ class CreateSpeechRequestStreamFormatEnum private constructor(
 /**
  * Required enumerated value serialized in the `voice` wire field.
  */
-class CreateSpeechRequestVoiceVariant0Variant1Enum private constructor(
+class CreateSpeechRequestVoiceVariant1Enum private constructor(
     @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
 ) {
-    override fun equals(other: Any?): Boolean = other is CreateSpeechRequestVoiceVariant0Variant1Enum && value == other.value
+    override fun equals(other: Any?): Boolean = other is CreateSpeechRequestVoiceVariant1Enum && value == other.value
     override fun hashCode(): Int = value.hashCode()
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val FABLE = CreateSpeechRequestVoiceVariant0Variant1Enum("fable")
-        @JvmField val ONYX = CreateSpeechRequestVoiceVariant0Variant1Enum("onyx")
-        @JvmField val NOVA = CreateSpeechRequestVoiceVariant0Variant1Enum("nova")
+        @JvmField val FABLE = CreateSpeechRequestVoiceVariant1Enum("fable")
+        @JvmField val ONYX = CreateSpeechRequestVoiceVariant1Enum("onyx")
+        @JvmField val NOVA = CreateSpeechRequestVoiceVariant1Enum("nova")
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateSpeechRequestVoiceVariant0Variant1Enum(value)
+        @JvmStatic fun fromValue(value: String) = CreateSpeechRequestVoiceVariant1Enum(value)
     }
 }
 
@@ -294,25 +274,6 @@ enum class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f211
 }
 
 /**
- * Automatically set chunking parameters based on the audio. Must be set to `"auto"`.
- */
-class CreateTranscriptionRequestChunkingStrategyVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateTranscriptionRequestChunkingStrategyVariant0Enum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val AUTO = CreateTranscriptionRequestChunkingStrategyVariant0Enum("auto")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateTranscriptionRequestChunkingStrategyVariant0Enum(value)
-    }
-}
-
-/**
  * Required enumerated value serialized in the `timestamp_granularities[]` wire field.
  */
 class CreateTranscriptionRequestTimestampGranularitiesItemEnum private constructor(
@@ -329,6 +290,25 @@ class CreateTranscriptionRequestTimestampGranularitiesItemEnum private construct
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = CreateTranscriptionRequestTimestampGranularitiesItemEnum(value)
+    }
+}
+
+/**
+ * Automatically set chunking parameters based on the audio. Must be set to `"auto"`.
+ */
+class CreateTranscriptionRequestChunkingStrategyVariant0Enum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is CreateTranscriptionRequestChunkingStrategyVariant0Enum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val AUTO = CreateTranscriptionRequestChunkingStrategyVariant0Enum("auto")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = CreateTranscriptionRequestChunkingStrategyVariant0Enum(value)
     }
 }
 
@@ -581,6 +561,22 @@ class CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum private con
  */
 enum class CustomToolChatCompletionsCustomFormatVariant1TypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     GRAMMAR("grammar");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The type of the custom tool. Always `custom`.
+ */
+enum class CustomToolParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    CUSTOM("custom");
 
     override fun toString() = value
 

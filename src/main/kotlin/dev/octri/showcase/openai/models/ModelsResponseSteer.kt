@@ -4,125 +4,45 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The accepted steering submission.
- */
-data class ResponseSteerAcceptedEventSteer(
-    /**
-     * The ID assigned to the steering submission.
-     */
-    val id: String,
-    /**
-     * The ID of the response being steered.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String
-)
-
-/**
- * Emitted when steering input has been validated and queued. Acceptance means the server owns the input, not that it has been applied. The successor's `response.created` event is the commit point. If accepted input cannot be committed, `response.steer.failed` returns it with the same steering ID. When the response stops for client-owned tool output or approval, the input remains queued and `response.steer.pending` is emitted after `response.completed`. Fill the pending event's…
+ * The output of a function tool call.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseSteerAcceptedEvent(
+data class FunctionCallOutputItemParam(
     /**
-     * The event discriminator. Always `response.steer.accepted`.
+     * The type of the function tool call output. Always `function_call_output`.
      */
-    val type: ResponseSteerAcceptedEventTypeEnum,
+    val type: FunctionCallOutputItemParamTypeEnum,
     /**
-     * The sequence number for this event.
+     * Text, image, or file output of the function tool call.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    val output: Any,
     /**
-     * The accepted steering submission.
+     * Optional `string` value serialized in the `id` wire field.
      */
-    val steer: ResponseSteerAcceptedEventSteer,
+    val id: String? = null,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the target response's `response.create` event supplied a `stream_id`.
+     * Optional API value serialized in the `call_id` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
-) : ResponsesServerEvent
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String? = null,
+    /**
+     * Optional API value serialized in the `name` wire field.
+     */
+    val name: String? = null,
+    /**
+     * Optional API value serialized in the `namespace` wire field.
+     */
+    val namespace: String? = null,
+    /**
+     * Optional API value serialized in the `caller` wire field.
+     */
+    val caller: ToolCallCallerParam? = null,
+    /**
+     * Optional API value serialized in the `status` wire field.
+     */
+    val status: FunctionCallItemStatus? = null
+) : Item, ResponseSteerInputItem
 
 typealias ResponseSteerErrorCode = String
-
-/**
- * Queues user input to steer a response on this WebSocket connection. Input can contain text, images, and files. Steering is supported only for single-agent responses on models and execution modes that support steering. Responses bound to a conversation or using automatic compaction do not support steering. A `response.steer.accepted` event acknowledges that the server owns the queued input, not that it has been applied. The successor's `response.created` event is the commit…
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseSteerEvent(
-    /**
-     * The event discriminator. Always `response.steer`.
-     */
-    val type: ResponseSteerEventTypeEnum,
-    /**
-     * The ID of the response to steer on this WebSocket connection.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String,
-    /**
-     * Input to queue for a continuation of the response. Uses the same string or input-item shape as `response.create.input`, with a non-empty array when supplying input items. Steering accepts only messages with the `user` role. Each message may contain only `type`, `role`, and `content`, with `content` as a string or an array of `input_text`, `input_image`, and `input_file` parts. The optional `type` must be `message`. Other roles, tool outputs, and item types are not supported…
-     */
-    val input: ResponseSteerInput
-) : ResponsesClientEvent
-
-/**
- * The steering submission that could not be committed.
- */
-data class ResponseSteerFailedEventSteer(
-    /**
-     * The ID of the response that was targeted for steering.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String,
-    /**
-     * Input to queue for a continuation of the response. Uses the same string or input-item shape as `response.create.input`, with a non-empty array when supplying input items. Steering accepts only messages with the `user` role. Each message may contain only `type`, `role`, and `content`, with `content` as a string or an array of `input_text`, `input_image`, and `input_file` parts. The optional `type` must be `message`. Other roles, tool outputs, and item types are not supported…
-     */
-    val input: ResponseSteerInput,
-    /**
-     * The ID assigned to the steering submission, if one was allocated.
-     */
-    val id: String? = null
-)
-
-/**
- * Information about why the input could not be committed.
- */
-data class ResponseSteerFailedEventError(
-    /**
-     * The error type. Always `invalid_request_error`.
-     */
-    val type: ResponseSteerFailedEventErrorTypeEnum,
-    /**
-     * A machine-readable steering error code. Clients should handle unknown values because additional codes may be introduced. Known values include: - `response_not_found`: The target response is not available on this connection. - `invalid_input`: The event or input failed validation. - `steering_not_supported`: The model or response execution mode does not support steering. - `too_many_pending_steers`: Too much steering input is pending for the response. -…
-     */
-    val code: ResponseSteerErrorCode,
-    /**
-     * A human-readable description of the error.
-     */
-    val message: String
-)
-
-/**
- * Emitted when steering input is rejected or cannot be committed to a successor response. Returns the original, uncommitted input so the client can carry it into `response.create` when appropriate. Invalid input must be corrected before retrying. Failures after acceptance include the same steering ID. Failures before an ID is allocated omit `steer.id`. A lost connection or missing acknowledgement leaves the outcome unknown; it is not proof that the input was rejected.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseSteerFailedEvent(
-    /**
-     * The event discriminator. Always `response.steer.failed`.
-     */
-    val type: ResponseSteerFailedEventTypeEnum,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The steering submission that could not be committed.
-     */
-    val steer: ResponseSteerFailedEventSteer,
-    /**
-     * Information about why the input could not be committed.
-     */
-    val error: ResponseSteerFailedEventError,
-    /**
-     * The WebSocket lane that emitted this event, when the target response is available and its `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
-) : ResponsesServerEvent
 
 /**
  * Input to queue for a continuation of the response. Uses the same string or input-item shape as `response.create.input`, with a non-empty array when supplying input items. Steering accepts only messages with the `user` role. Each message may contain only `type`, `role`, and `content`, with `content` as a string or an array of `input_text`, `input_image`, and `input_file` parts. The optional `type` must be `message`. Other roles, tool outputs, and item types are not supported…
@@ -178,51 +98,6 @@ data class UnknownResponseSteerInputItem @com.fasterxml.jackson.annotation.JsonC
 
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ResponseSteerInputItemList @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<ResponseSteerInputItem>) : ResponseSteerInput
-
-/**
- * The steering submission that remains queued.
- */
-data class ResponseSteerPendingEventSteer(
-    /**
-     * The ID assigned to the steering submission.
-     */
-    val id: String,
-    /**
-     * The ID of the response being steered.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String
-)
-
-/**
- * Emitted when accepted steering input remains queued after the target response completes. The server still owns the input. Do not resend it. The successor's `response.created` event is the commit point. When `reason` is `waiting_for_required_input`, this event follows `response.completed` while the response waits for the tool results or approval decisions identified by `required_input`. Copy those stubs, fill their result fields using the ordinary `response.create` input…
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ResponseSteerPendingEvent(
-    /**
-     * The event discriminator. Always `response.steer.pending`.
-     */
-    val type: ResponseSteerPendingEventTypeEnum,
-    /**
-     * The sequence number for this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The steering submission that remains queued.
-     */
-    val steer: ResponseSteerPendingEventSteer,
-    /**
-     * An extensible enum describing why accepted steering input is still queued. Clients should handle unknown values because additional reasons may be introduced. Known values include: - `waiting_for_required_input`: The response is waiting for the tool results or approval decisions identified by `required_input`.
-     */
-    val reason: ResponseSteerPendingReason,
-    /**
-     * Input stubs identifying outstanding client-owned tool results or approval decisions. Each stub contains identifying fields only; the client supplies the result before including it in `response.create`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_input") val requiredInput: List<ResponseSteerRequiredInput>,
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the target response's `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
-) : ResponsesServerEvent
 
 typealias ResponseSteerPendingReason = String
 
@@ -341,3 +216,30 @@ data class UnknownResponseSteerRequiredInput @com.fasterxml.jackson.annotation.J
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
+
+/**
+ * Typed representation of the `UserMessageItemParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UserMessageItemParam(
+    /**
+     * The item type. Always `message`.
+     */
+    val type: UserMessageItemParamTypeEnum,
+    /**
+     * The message role. Always `user`.
+     */
+    val role: UserMessageItemParamRoleEnum,
+    /**
+     * The message content, as an array of content parts.
+     */
+    val content: Any,
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
+    val id: String? = null,
+    /**
+     * Optional `string` value serialized in the `status` wire field.
+     */
+    val status: String? = null
+) : ResponseSteerInputItem

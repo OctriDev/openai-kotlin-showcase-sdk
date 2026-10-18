@@ -4,6 +4,41 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * Use `digest` for SIP Digest authentication. Handles 401 and 407 challenges.
+ */
+class LiveSIPTrunkAuthRequestTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is LiveSIPTrunkAuthRequestTypeEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val DIGEST = LiveSIPTrunkAuthRequestTypeEnum("digest")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = LiveSIPTrunkAuthRequestTypeEnum(value)
+    }
+}
+
+/**
+ * References a skill created with the /v1/skills endpoint.
+ */
+enum class LiveSkillReferenceParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    SKILL_REFERENCE("skill_reference");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
  * The tool to call. Always `apply_patch`.
  */
 enum class LiveSpecificApplyPatchParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -219,9 +254,10 @@ enum class LiveThinkingAppendParamTypeEnum(@com.fasterxml.jackson.annotation.Jso
 /**
  * Typed representation of the `LiveToolChoiceEnum` API schema.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class)
 class LiveToolChoiceEnum private constructor(
     @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+) : LiveResponsesDelegationSettingsInputParamToolChoice, LiveResponsesDelegationSettingsUpdateInputParamToolChoice {
     override fun equals(other: Any?): Boolean = other is LiveToolChoiceEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
     override fun toString(): String = value
@@ -551,54 +587,6 @@ enum class LocalShellToolParamTypeEnum(@com.fasterxml.jackson.annotation.JsonVal
  */
 enum class LockedStatusTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     LOCKED("locked");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * The type of the item. Always `mcp_approval_request`.
- */
-enum class MCPApprovalRequestTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    MCP_APPROVAL_REQUEST("mcp_approval_request");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * The type of the item. Always `mcp_approval_response`.
- */
-enum class MCPApprovalResponseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    MCP_APPROVAL_RESPONSE("mcp_approval_response");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * The type of the item. Always `mcp_approval_response`.
- */
-enum class MCPApprovalResponseResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    MCP_APPROVAL_RESPONSE("mcp_approval_response");
 
     override fun toString() = value
 

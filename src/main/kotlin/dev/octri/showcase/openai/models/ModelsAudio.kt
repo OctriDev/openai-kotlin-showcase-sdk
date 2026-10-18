@@ -4,16 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Custom voice reference.
- */
-data class CreateSpeechRequestVoiceVariant1(
-    /**
-     * The custom voice ID, e.g. `voice_1234`.
-     */
-    val id: String
-)
-
-/**
  * Typed representation of the `CreateSpeechRequest` API schema.
  */
 data class CreateSpeechRequest(
@@ -28,7 +18,7 @@ data class CreateSpeechRequest(
     /**
      * The voice to use when generating the audio. Supported built-in voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Previews of the voices are available in the Text to speech guide. Custom voices must be created from audio samples.
      */
-    val voice: Any,
+    val voice: CreateSpeechRequestVoice,
     /**
      * Control the voice of your generated audio with additional instructions. Does not work with `tts-1` or `tts-1-hd`.
      */
@@ -46,6 +36,53 @@ data class CreateSpeechRequest(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("stream_format") val streamFormat: CreateSpeechRequestStreamFormatEnum? = null
 )
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class CreateSpeechRequestVoiceVariant2(
+    /**
+     * The custom voice ID, e.g. `voice_1234`.
+     */
+    val id: String
+) : CreateSpeechRequestVoice
+
+/**
+ * The voice to use when generating the audio. Supported built-in voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Previews of the voices are available in the Text to speech guide. Custom voices must be created from audio samples.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateSpeechRequestVoice.Deserializer::class)
+sealed interface CreateSpeechRequestVoice {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateSpeechRequestVoice>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): CreateSpeechRequestVoice {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val ownedType = CreateSpeechRequestVoiceOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            if (ownedType != null) {
+                try {
+                    return mapper.convertValue(node, ownedType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Tried with the other branches below.
+                }
+            }
+            val objectTypes: List<Class<out CreateSpeechRequestVoice>> = listOf(VoiceIdsShared::class.java, CreateSpeechRequestVoiceVariant2::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            return when {
+                node.isTextual -> StringCreateSpeechRequestVoice(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateSpeechRequestVoice::class.java, "no CreateSpeechRequestVoice branch accepts this payload")
+            }
+        }
+    }
+}
+
+internal val CreateSpeechRequestVoiceOwnedTypes: List<Pair<List<String>, Class<out CreateSpeechRequestVoice>>> = listOf(
+    listOf("id") to CreateSpeechRequestVoiceVariant2::class.java,
+)
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringCreateSpeechRequestVoice(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CreateSpeechRequestVoice
 
 /**
  * Typed representation of the `CreateSpeechResponseStreamEvent` API schema.
@@ -117,7 +154,7 @@ data class CreateTranscriptionRequest(
     /**
      * Controls how the audio is cut into chunks. When set to `"auto"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block. Required when using `gpt-4o-transcribe-diarize` for inputs longer than 30 seconds.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(VadConfig::class)) val chunkingStrategy: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: CreateTranscriptionRequestChunkingStrategy? = null,
     /**
      * Optional list of speaker names that correspond to the audio samples provided in `known_speaker_references[]`. Each entry should be a short identifier (for example `customer` or `agent`). Up to 4 speakers are supported.
      */
@@ -129,8 +166,91 @@ data class CreateTranscriptionRequest(
 )
 
 /**
+ * Controls how the audio is cut into chunks. When set to `"auto"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block. Required when using `gpt-4o-transcribe-diarize` for inputs longer than 30 seconds.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateTranscriptionRequestChunkingStrategy.Deserializer::class)
+sealed interface CreateTranscriptionRequestChunkingStrategy {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateTranscriptionRequestChunkingStrategy>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): CreateTranscriptionRequestChunkingStrategy {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val ownedType = CreateTranscriptionRequestChunkingStrategyOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            if (ownedType != null) {
+                try {
+                    return mapper.convertValue(node, ownedType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Tried with the other branches below.
+                }
+            }
+            val objectTypes: List<Class<out CreateTranscriptionRequestChunkingStrategy>> = listOf(VadConfig::class.java)
+            for (objectType in objectTypes) {
+                try {
+                    return mapper.convertValue(node, objectType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Not this branch.
+                }
+            }
+            return when {
+                node.isTextual -> StringCreateTranscriptionRequestChunkingStrategy(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateTranscriptionRequestChunkingStrategy::class.java, "no CreateTranscriptionRequestChunkingStrategy branch accepts this payload")
+            }
+        }
+    }
+}
+
+internal val CreateTranscriptionRequestChunkingStrategyOwnedTypes: List<Pair<List<String>, Class<out CreateTranscriptionRequestChunkingStrategy>>> = listOf(
+    listOf("type", "prefix_padding_ms", "silence_duration_ms", "threshold") to VadConfig::class.java,
+)
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringCreateTranscriptionRequestChunkingStrategy(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CreateTranscriptionRequestChunkingStrategy
+
+/**
+ * Typed representation of the `CreateTranscriptionResponse` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateTranscriptionResponse.Deserializer::class)
+sealed interface CreateTranscriptionResponse {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateTranscriptionResponse>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): CreateTranscriptionResponse {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val ownedType = CreateTranscriptionResponseOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            if (ownedType != null) {
+                try {
+                    return mapper.convertValue(node, ownedType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Tried with the other branches below.
+                }
+            }
+            val objectTypes: List<Class<out CreateTranscriptionResponse>> = listOf(CreateTranscriptionResponseJson::class.java, CreateTranscriptionResponseDiarizedJson::class.java, CreateTranscriptionResponseVerboseJson::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            return when {
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateTranscriptionResponse::class.java, "no CreateTranscriptionResponse branch accepts this payload")
+            }
+        }
+    }
+}
+
+internal val CreateTranscriptionResponseOwnedTypes: List<Pair<List<String>, Class<out CreateTranscriptionResponse>>> = listOf(
+    listOf("languages", "logprobs") to CreateTranscriptionResponseJson::class.java,
+    listOf("task") to CreateTranscriptionResponseDiarizedJson::class.java,
+    listOf("language", "words") to CreateTranscriptionResponseVerboseJson::class.java,
+)
+
+/**
  * Represents a diarized transcription response returned by the model, including the combined transcript and speaker-segment annotations.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranscriptionResponseDiarizedJson(
     /**
      * The type of task that was run. Always `transcribe`.
@@ -152,7 +272,7 @@ data class CreateTranscriptionResponseDiarizedJson(
      * Token or duration usage statistics for the request.
      */
     val usage: CreateTranscriptionResponseDiarizedJsonUsage? = null
-)
+) : CreateTranscriptionResponse
 
 /**
  * Token or duration usage statistics for the request.
@@ -194,6 +314,7 @@ data class CreateTranscriptionResponseJsonLogprobsItem(
 /**
  * Represents a transcription response returned by model, based on the provided input.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranscriptionResponseJson(
     /**
      * The transcribed text.
@@ -211,7 +332,7 @@ data class CreateTranscriptionResponseJson(
      * Token usage statistics for the request.
      */
     val usage: CreateTranscriptionResponseJsonUsage? = null
-)
+) : CreateTranscriptionResponse
 
 /**
  * Token usage statistics for the request.
@@ -255,6 +376,7 @@ data class UnknownCreateTranscriptionResponseStreamEvent @com.fasterxml.jackson.
 /**
  * Represents a verbose json transcription response returned by model, based on the provided input.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranscriptionResponseVerboseJson(
     /**
      * The language of the input audio.
@@ -280,7 +402,7 @@ data class CreateTranscriptionResponseVerboseJson(
      * Usage statistics for models billed by audio input duration.
      */
     val usage: TranscriptTextUsageDuration? = null
-)
+) : CreateTranscriptionResponse
 
 /**
  * Typed representation of the `CreateTranslationRequest` API schema.
@@ -309,18 +431,55 @@ data class CreateTranslationRequest(
 )
 
 /**
+ * Typed representation of the `CreateTranslationResponse` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateTranslationResponse.Deserializer::class)
+sealed interface CreateTranslationResponse {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateTranslationResponse>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): CreateTranslationResponse {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val ownedType = CreateTranslationResponseOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            if (ownedType != null) {
+                try {
+                    return mapper.convertValue(node, ownedType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Tried with the other branches below.
+                }
+            }
+            val objectTypes: List<Class<out CreateTranslationResponse>> = listOf(CreateTranslationResponseJson::class.java, CreateTranslationResponseVerboseJson::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            return when {
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateTranslationResponse::class.java, "no CreateTranslationResponse branch accepts this payload")
+            }
+        }
+    }
+}
+
+internal val CreateTranslationResponseOwnedTypes: List<Pair<List<String>, Class<out CreateTranslationResponse>>> = listOf(
+    listOf("language", "duration", "segments") to CreateTranslationResponseVerboseJson::class.java,
+)
+
+/**
  * Typed representation of the `CreateTranslationResponseJson` API schema.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranslationResponseJson(
     /**
      * Required `string` value serialized in the `text` wire field.
      */
     val text: String
-)
+) : CreateTranslationResponse
 
 /**
  * Typed representation of the `CreateTranslationResponseVerboseJson` API schema.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranslationResponseVerboseJson(
     /**
      * The language of the output translation (always `english`).
@@ -338,7 +497,7 @@ data class CreateTranslationResponseVerboseJson(
      * Segments of the translated text and their corresponding details.
      */
     val segments: List<TranscriptionSegment>? = null
-)
+) : CreateTranslationResponse
 
 /**
  * Typed representation of the `CreateVoiceConsentRequest` API schema.
@@ -446,166 +605,3 @@ data class SpeechAudioDoneEvent(
      */
     val usage: SpeechAudioDoneEventUsage
 ) : CreateSpeechResponseStreamEvent
-
-/**
- * A segment of diarized transcript text with speaker metadata.
- */
-data class TranscriptionDiarizedSegment(
-    /**
-     * The type of the segment. Always `transcript.text.segment`.
-     */
-    val type: TranscriptionDiarizedSegmentTypeEnum,
-    /**
-     * Unique identifier for the segment.
-     */
-    val id: String,
-    /**
-     * Start timestamp of the segment in seconds.
-     */
-    val start: Double,
-    /**
-     * End timestamp of the segment in seconds.
-     */
-    val end: Double,
-    /**
-     * Transcript text for this segment.
-     */
-    val text: String,
-    /**
-     * Speaker label for this segment. When known speakers are provided, the label matches `known_speaker_names[]`. Otherwise speakers are labeled sequentially using capital letters (`A`, `B`, ...).
-     */
-    val speaker: String
-)
-
-/**
- * A language detected in transcribed audio.
- */
-data class TranscriptionLanguage(
-    /**
-     * The code of a language detected in the audio.
-     */
-    val code: String
-)
-
-/**
- * Typed representation of the `TranscriptionSegment` API schema.
- */
-data class TranscriptionSegment(
-    /**
-     * Unique identifier of the segment.
-     */
-    val id: Long,
-    /**
-     * Seek offset of the segment.
-     */
-    val seek: Long,
-    /**
-     * Start time of the segment in seconds.
-     */
-    val start: Double,
-    /**
-     * End time of the segment in seconds.
-     */
-    val end: Double,
-    /**
-     * Text content of the segment.
-     */
-    val text: String,
-    /**
-     * Array of token IDs for the text content.
-     */
-    val tokens: List<Long>,
-    /**
-     * Temperature parameter used for generating the segment.
-     */
-    val temperature: Float,
-    /**
-     * Average logprob of the segment. If the value is lower than -1, consider the logprobs failed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("avg_logprob") val avgLogprob: Float,
-    /**
-     * Compression ratio of the segment. If the value is greater than 2.4, consider the compression failed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("compression_ratio") val compressionRatio: Float,
-    /**
-     * Probability of no speech in the segment. If the value is higher than 1.0 and the `avg_logprob` is below -1, consider this segment silent.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("no_speech_prob") val noSpeechProb: Float
-)
-
-/**
- * Typed representation of the `TranscriptionWord` API schema.
- */
-data class TranscriptionWord(
-    /**
-     * The text content of the word.
-     */
-    val word: String,
-    /**
-     * Start time of the word in seconds.
-     */
-    val start: Double,
-    /**
-     * End time of the word in seconds.
-     */
-    val end: Double
-)
-
-/**
- * Required object value serialized in the `logprobs[]` wire field.
- */
-data class TranscriptTextDeltaEventLogprobsItem(
-    /**
-     * The token that was used to generate the log probability.
-     */
-    val token: String? = null,
-    /**
-     * The log probability of the token.
-     */
-    val logprob: Double? = null,
-    /**
-     * The bytes that were used to generate the log probability.
-     */
-    val bytes: List<Long>? = null
-)
-
-/**
- * Emitted when there is an additional text delta. This is also the first event emitted when the transcription starts. Only emitted when you create a transcription with the `Stream` parameter set to `true`.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class TranscriptTextDeltaEvent(
-    /**
-     * The type of the event. Always `transcript.text.delta`.
-     */
-    val type: TranscriptTextDeltaEventTypeEnum,
-    /**
-     * The text delta that was additionally transcribed.
-     */
-    val delta: String,
-    /**
-     * The log probabilities of the delta. Only included if you create a transcription with the `include[]` parameter set to `logprobs`.
-     */
-    val logprobs: List<TranscriptTextDeltaEventLogprobsItem>? = null,
-    /**
-     * Identifier of the diarized segment that this delta belongs to. Only present when using `gpt-4o-transcribe-diarize`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null
-) : CreateTranscriptionResponseStreamEvent
-
-/**
- * Required object value serialized in the `logprobs[]` wire field.
- */
-data class TranscriptTextDoneEventLogprobsItem(
-    /**
-     * The token that was used to generate the log probability.
-     */
-    val token: String? = null,
-    /**
-     * The log probability of the token.
-     */
-    val logprob: Double? = null,
-    /**
-     * The bytes that were used to generate the log probability.
-     */
-    val bytes: List<Long>? = null
-)

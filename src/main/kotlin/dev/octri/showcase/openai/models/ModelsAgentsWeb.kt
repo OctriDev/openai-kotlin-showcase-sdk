@@ -89,33 +89,6 @@ data class WebSearchActionResourceSearch(
 ) : WebSearchActionResource
 
 /**
- * A web search call produced by the agent.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class WebSearchCallItemResource(
-    /**
-     * The item type. Always `web_search_call`.
-     */
-    val type: WebSearchCallItemResourceTypeEnum,
-    /**
-     * The ID of the web search call.
-     */
-    val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The status of the web search call.
-     */
-    val status: OutputItemStatusResource,
-    /**
-     * The action performed by the web search tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("action", required = true) val action: WebSearchActionResource?
-) : SessionTurnItemResource, AgentOutputItemResource
-
-/**
  * Approximate user location used to localize web search results.
  */
 data class WebSearchLocationParam(

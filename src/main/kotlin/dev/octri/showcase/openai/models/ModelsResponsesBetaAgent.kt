@@ -14,37 +14,6 @@ data class BetaAgentTagParam(
 )
 
 /**
- * Typed representation of the `BetaAgentMessage` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaAgentMessage(
-    /**
-     * The type of the item. Always `agent_message`.
-     */
-    val type: BetaAgentMessageTypeEnum,
-    /**
-     * The unique ID of the agent message.
-     */
-    val id: String,
-    /**
-     * The sending agent identity.
-     */
-    val author: String,
-    /**
-     * The destination agent identity.
-     */
-    val recipient: String,
-    /**
-     * Encrypted content sent between agents.
-     */
-    val content: List<BetaAgentMessageContentItem>,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaItemResource, BetaItemField, BetaOutputItem
-
-/**
  * A content part that makes up an input or output item.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaAgentMessageContentItem::class)
@@ -131,3 +100,224 @@ data class BetaAgentTag(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_name") val agentName: String
 )
+
+/**
+ * A screenshot of a computer.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaComputerScreenshotContent(
+    /**
+     * Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
+     */
+    val type: BetaComputerScreenshotContentTypeEnum,
+    /**
+     * Required API value serialized in the `image_url` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url", required = true) val imageUrl: String?,
+    /**
+     * Required `string` value serialized in the `file_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id", required = true) val fileId: String?,
+    /**
+     * The detail level of the screenshot image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+     */
+    val detail: BetaImageDetail,
+    /**
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointConfig? = null
+) : BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * Opaque encrypted content that Responses API decrypts inside trusted model execution.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaEncryptedContent(
+    /**
+     * The type of the input item. Always `encrypted_content`.
+     */
+    val type: BetaEncryptedContentTypeEnum,
+    /**
+     * Opaque encrypted content.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String
+) : BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * Opaque encrypted content that Responses API decrypts inside trusted model execution.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaEncryptedContentParam(
+    /**
+     * The type of the input item. Always `encrypted_content`.
+     */
+    val type: BetaEncryptedContentParamTypeEnum,
+    /**
+     * Opaque encrypted content.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String
+) : BetaAgentMessageItemParamContentItem
+
+/**
+ * A file input to the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaInputFileContent(
+    /**
+     * The type of the input item. Always `input_file`.
+     */
+    val type: BetaInputFileContentTypeEnum,
+    /**
+     * Optional `string` value serialized in the `file_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
+    /**
+     * The name of the file to be sent to the model.
+     */
+    val filename: String? = null,
+    /**
+     * The content of the file to be sent to the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_data") val fileData: String? = null,
+    /**
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointConfig? = null,
+    /**
+     * The URL of the file to be sent to the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_url") val fileUrl: String? = null,
+    /**
+     * The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
+     */
+    val detail: BetaFileInputDetail? = null
+) : BetaFunctionAndCustomToolCallOutput, BetaInputContent, BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * An image input to the model. Learn about image inputs.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaInputImageContent(
+    /**
+     * The type of the input item. Always `input_image`.
+     */
+    val type: BetaInputImageContentTypeEnum,
+    /**
+     * The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
+     */
+    val detail: BetaImageDetail,
+    /**
+     * Optional API value serialized in the `image_url` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
+    /**
+     * Optional `string` value serialized in the `file_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
+    /**
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointConfig? = null
+) : BetaFunctionAndCustomToolCallOutput, BetaInputContent, BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * A text input to the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaInputTextContent(
+    /**
+     * The type of the input item. Always `input_text`.
+     */
+    val type: BetaInputTextContentTypeEnum,
+    /**
+     * The text input to the model.
+     */
+    val text: String,
+    /**
+     * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointConfig? = null
+) : BetaFunctionAndCustomToolCallOutput, BetaInputContent, BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * A text output from the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaOutputTextContent(
+    /**
+     * The type of the output text. Always `output_text`.
+     */
+    val type: BetaOutputTextContentTypeEnum,
+    /**
+     * The text output from the model.
+     */
+    val text: String,
+    /**
+     * The annotations of the text output.
+     */
+    val annotations: List<BetaAnnotation>,
+    /**
+     * Required array value serialized in the `logprobs` wire field.
+     */
+    val logprobs: List<BetaLogProb>
+) : BetaOutputMessageContent, BetaOutputContent, BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * Reasoning text from the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaReasoningTextContent(
+    /**
+     * The type of the reasoning text. Always `reasoning_text`.
+     */
+    val type: BetaReasoningTextContentTypeEnum,
+    /**
+     * The reasoning text from the model.
+     */
+    val text: String
+) : BetaOutputContent, BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * A refusal from the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaRefusalContent(
+    /**
+     * The type of the refusal. Always `refusal`.
+     */
+    val type: BetaRefusalContentTypeEnum,
+    /**
+     * The refusal explanation from the model.
+     */
+    val refusal: String
+) : BetaOutputMessageContent, BetaOutputContent, BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * A summary text from the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaSummaryTextContent(
+    /**
+     * The type of the object. Always `summary_text`.
+     */
+    val type: BetaSummaryTextContentTypeEnum,
+    /**
+     * A summary of the reasoning output from the model so far.
+     */
+    val text: String
+) : BetaAgentMessageContentItem, BetaMessageContentItem
+
+/**
+ * A text content.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaTextContent(
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: BetaTextContentTypeEnum,
+    /**
+     * Required `string` value serialized in the `text` wire field.
+     */
+    val text: String
+) : BetaAgentMessageContentItem, BetaMessageContentItem

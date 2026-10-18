@@ -4,30 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `vision`: Images used for vision fine-tuning - `user_data`: Flexible file type for any purpose - `evals`: Used for eval data sets
- */
-class CreateFileRequestPurposeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateFileRequestPurposeEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val ASSISTANTS = CreateFileRequestPurposeEnum("assistants")
-        @JvmField val BATCH = CreateFileRequestPurposeEnum("batch")
-        @JvmField val FINE_TUNE = CreateFileRequestPurposeEnum("fine-tune")
-        @JvmField val VISION = CreateFileRequestPurposeEnum("vision")
-        @JvmField val USER_DATA = CreateFileRequestPurposeEnum("user_data")
-        @JvmField val EVALS = CreateFileRequestPurposeEnum("evals")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateFileRequestPurposeEnum(value)
-    }
-}
-
-/**
  * Optional enumerated value serialized in the `batch_size` wire field.
  */
 class CreateFineTuningJobRequestHyperparametersBatchSizeVariant0Enum private constructor(
@@ -590,5 +566,25 @@ class CreateModerationResponseResultsItemCategoryAppliedInputTypesSX48101471de p
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = CreateModerationResponseResultsItemCategoryAppliedInputTypesSX48101471de(value)
+    }
+}
+
+/**
+ * Required enumerated value serialized in the `self-harm/instructions[]` wire field.
+ */
+class CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254 private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254 && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val TEXT = CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254("text")
+        @JvmField val IMAGE = CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254("image")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = CreateModerationResponseResultsItemCategoryAppliedInputTypesSXe7b57e4254(value)
     }
 }

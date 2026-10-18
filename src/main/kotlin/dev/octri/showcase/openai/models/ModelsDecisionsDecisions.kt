@@ -28,6 +28,7 @@ data class DecisionsUsageBucket(
 /**
  * Typed representation of the `DecisionsUsageErrorDetails` API schema.
  */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class DecisionsUsageErrorDetails(
     /**
      * Required `string` value serialized in the `code` wire field.
@@ -45,7 +46,7 @@ data class DecisionsUsageErrorDetails(
      * Required `string` value serialized in the `type` wire field.
      */
     val type: String
-)
+) : DecisionsUsagePermissionErrorResponseError
 
 /**
  * Typed representation of the `DecisionsUsageErrorResponse` API schema.
@@ -64,8 +65,41 @@ data class DecisionsUsagePermissionErrorResponse(
     /**
      * Details about the permission error.
      */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(DecisionsUsageErrorDetails::class)) val error: Any
+    val error: DecisionsUsagePermissionErrorResponseError
 ) : dev.octri.showcase.openai.ErrorBody
+
+/**
+ * Details about the permission error.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = DecisionsUsagePermissionErrorResponseError.Deserializer::class)
+sealed interface DecisionsUsagePermissionErrorResponseError {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<DecisionsUsagePermissionErrorResponseError>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): DecisionsUsagePermissionErrorResponseError {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val objectTypes: List<Class<out DecisionsUsagePermissionErrorResponseError>> = listOf(DecisionsUsageErrorDetails::class.java)
+            for (objectType in objectTypes) {
+                try {
+                    return mapper.convertValue(node, objectType)
+                } catch (ignored: IllegalArgumentException) {
+                    // Not this branch.
+                }
+            }
+            return when {
+                node.isTextual -> StringDecisionsUsagePermissionErrorResponseError(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, DecisionsUsagePermissionErrorResponseError::class.java, "no DecisionsUsagePermissionErrorResponseError branch accepts this payload")
+            }
+        }
+    }
+}
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringDecisionsUsagePermissionErrorResponseError(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : DecisionsUsagePermissionErrorResponseError
 
 /**
  * The aggregated Decisions API usage details of the specific time bucket.

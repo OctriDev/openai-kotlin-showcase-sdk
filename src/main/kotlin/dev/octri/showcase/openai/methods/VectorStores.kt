@@ -75,6 +75,60 @@ data class VectorStoreSearchRequestRankingOptions(
 
 
 
+    /**
+     * Lists vector stores, which are collections of processed files that you can use with the `file_search` tool. Use the cursor parameters to move forward or backward through the results, and set `order` to control sorting by creation time.
+     *
+     * Returns a list of vector stores.
+     *
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc`
+     *   for ascending order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
+     */
+    fun listVectorStoresPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListVectorStoresParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (VectorStoreObject) -> Boolean) {
+        var cursor = after
+        while (true) {
+            val page = listVectorStores(clientConfig, limit, order, cursor, before, options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            for (item in items) {
+                if (!yieldFn(item)) return
+            }
+            if (page.hasMore != true) return
+            val nextCursor = page.lastId
+            cursor = nextCursor
+        }
+    }
+
+    data class ListVectorStoresPage(
+        val data: ListVectorStoresResponse,
+        val items: List<VectorStoreObject>,
+        val hasMore: Boolean,
+    )
+
+    fun listVectorStoresPages(clientConfig: ClientConfig, limit: Long? = null, order: ListVectorStoresParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListVectorStoresPage) -> Boolean) {
+        var cursor = after
+        while (true) {
+            val page = listVectorStores(clientConfig, limit, order, cursor, before, options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            val nextCursor = page.lastId
+            val hasMore = page.hasMore == true
+            if (!yieldPage(ListVectorStoresPage(page, items, hasMore))) return
+            if (!hasMore) return
+            cursor = nextCursor
+        }
+    }
+
+
 
     /** Parameters for [createVectorStore]. */
     data class CreateVectorStoreParams(
@@ -316,6 +370,64 @@ data class VectorStoreSearchRequestRankingOptions(
 
 
 
+    /**
+     * Lists the files in a vector store file batch. Use `filter` to limit results by processing status and the cursor parameters to navigate through the batch's files.
+     *
+     * Returns a list of vector store files in a batch.
+     *
+     * @param vectorStoreId The ID of the vector store that the files belong to.
+     * @param batchId The ID of the file batch that the files belong to.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc`
+     *   for ascending order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
+     * @param filter Filter by file status. One of `in_progress`, `completed`,
+     *   `failed`, `cancelled`.
+     */
+    fun listFilesInVectorStoreBatchPaginated(clientConfig: ClientConfig, request: ListFilesInVectorStoreBatchRequest, options: RequestOptions? = null, yieldFn: (VectorStoreFileObject) -> Boolean) {
+        var cursor = request.after
+        while (true) {
+            val page = listFilesInVectorStoreBatch(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            for (item in items) {
+                if (!yieldFn(item)) return
+            }
+            if (page.hasMore != true) return
+            val nextCursor = page.lastId
+            cursor = nextCursor
+        }
+    }
+
+    data class ListFilesInVectorStoreBatchPage(
+        val data: ListVectorStoreFilesResponse,
+        val items: List<VectorStoreFileObject>,
+        val hasMore: Boolean,
+    )
+
+    fun listFilesInVectorStoreBatchPages(clientConfig: ClientConfig, request: ListFilesInVectorStoreBatchRequest, options: RequestOptions? = null, yieldPage: (ListFilesInVectorStoreBatchPage) -> Boolean) {
+        var cursor = request.after
+        while (true) {
+            val page = listFilesInVectorStoreBatch(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            val nextCursor = page.lastId
+            val hasMore = page.hasMore == true
+            if (!yieldPage(ListFilesInVectorStoreBatchPage(page, items, hasMore))) return
+            if (!hasMore) return
+            cursor = nextCursor
+        }
+    }
+
+
 
     /** Parameters for [listVectorStoreFiles]. */
     data class ListVectorStoreFilesRequest(
@@ -357,6 +469,63 @@ data class VectorStoreSearchRequestRankingOptions(
 
 
 
+
+
+    /**
+     * Lists files attached to a vector store, with pagination and an optional status filter. Use `after` or `before` to navigate the list, and `filter` to select files by processing status.
+     *
+     * Returns a list of vector store files.
+     *
+     * @param vectorStoreId The ID of the vector store that the files belong to.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc`
+     *   for ascending order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
+     * @param filter Filter by file status. One of `in_progress`, `completed`,
+     *   `failed`, `cancelled`.
+     */
+    fun listVectorStoreFilesPaginated(clientConfig: ClientConfig, request: ListVectorStoreFilesRequest, options: RequestOptions? = null, yieldFn: (VectorStoreFileObject) -> Boolean) {
+        var cursor = request.after
+        while (true) {
+            val page = listVectorStoreFiles(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            for (item in items) {
+                if (!yieldFn(item)) return
+            }
+            if (page.hasMore != true) return
+            val nextCursor = page.lastId
+            cursor = nextCursor
+        }
+    }
+
+    data class ListVectorStoreFilesPage(
+        val data: ListVectorStoreFilesResponse,
+        val items: List<VectorStoreFileObject>,
+        val hasMore: Boolean,
+    )
+
+    fun listVectorStoreFilesPages(clientConfig: ClientConfig, request: ListVectorStoreFilesRequest, options: RequestOptions? = null, yieldPage: (ListVectorStoreFilesPage) -> Boolean) {
+        var cursor = request.after
+        while (true) {
+            val page = listVectorStoreFiles(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            val nextCursor = page.lastId
+            val hasMore = page.hasMore == true
+            if (!yieldPage(ListVectorStoreFilesPage(page, items, hasMore))) return
+            if (!hasMore) return
+            cursor = nextCursor
+        }
+    }
 
 
 

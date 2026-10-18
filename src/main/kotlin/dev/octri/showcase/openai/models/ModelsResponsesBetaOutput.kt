@@ -4,24 +4,58 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Typed representation of the `BetaOutputContent` API schema.
+ * Typed representation of the `BetaContainerFileCitationParam` API schema.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaOutputContent::class)
-@com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaOutputTextContent::class, name = "output_text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaRefusalContent::class, name = "refusal"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaReasoningTextContent::class, name = "reasoning_text")
-)
-sealed interface BetaOutputContent : BetaContent
-
-/** A [BetaOutputContent] whose `type` names no branch this SDK knows, kept as received. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownBetaOutputContent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
-) : BetaOutputContent {
-    /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
-}
+data class BetaContainerFileCitationParam(
+    /**
+     * The citation type. Always `container_file_citation`.
+     */
+    val type: BetaContainerFileCitationParamTypeEnum,
+    /**
+     * The index of the first character of the citation in the message.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
+    /**
+     * The index of the last character of the citation in the message.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
+    /**
+     * The ID of the container.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
+    /**
+     * The ID of the container file.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
+    /**
+     * The filename of the container file cited.
+     */
+    val filename: String
+) : BetaOutputTextContentParamAnnotationsItem
+
+/**
+ * Typed representation of the `BetaFileCitationParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaFileCitationParam(
+    /**
+     * The citation type. Always `file_citation`.
+     */
+    val type: BetaFileCitationParamTypeEnum,
+    /**
+     * The index of the file in the list of files.
+     */
+    val index: Long,
+    /**
+     * The ID of the file.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
+    /**
+     * The filename of the file cited.
+     */
+    val filename: String
+) : BetaOutputTextContentParamAnnotationsItem
 
 /**
  * Typed representation of the `BetaOutputItem` API schema.
@@ -72,41 +106,6 @@ data class UnknownBetaOutputItem @com.fasterxml.jackson.annotation.JsonCreator(m
 }
 
 /**
- * An output message from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaOutputMessage(
-    /**
-     * The unique ID of the output message.
-     */
-    val id: String,
-    /**
-     * The type of the output message. Always `message`.
-     */
-    val type: BetaOutputMessageTypeEnum,
-    /**
-     * The role of the output message. Always `assistant`.
-     */
-    val role: BetaOutputMessageRoleEnum,
-    /**
-     * The content of the output message.
-     */
-    val content: List<BetaOutputMessageContent>,
-    /**
-     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
-     */
-    val status: BetaOutputMessageStatusEnum,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null,
-    /**
-     * Optional API value serialized in the `phase` wire field.
-     */
-    val phase: BetaMessagePhase? = null
-) : BetaItem, BetaItemResource, BetaOutputItem
-
-/**
  * Typed representation of the `BetaOutputMessageContent` API schema.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaOutputMessageContent::class)
@@ -124,29 +123,6 @@ data class UnknownBetaOutputMessageContent @com.fasterxml.jackson.annotation.Jso
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
-
-/**
- * A text output from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaOutputTextContent(
-    /**
-     * The type of the output text. Always `output_text`.
-     */
-    val type: BetaOutputTextContentTypeEnum,
-    /**
-     * The text output from the model.
-     */
-    val text: String,
-    /**
-     * The annotations of the text output.
-     */
-    val annotations: List<BetaAnnotation>,
-    /**
-     * Required array value serialized in the `logprobs` wire field.
-     */
-    val logprobs: List<BetaLogProb>
-) : BetaOutputMessageContent, BetaOutputContent, BetaAgentMessageContentItem, BetaMessageContentItem
 
 /**
  * Typed representation of the `BetaOutputTextContentParam` API schema.
@@ -185,3 +161,30 @@ data class UnknownBetaOutputTextContentParamAnnotationsItem @com.fasterxml.jacks
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
+
+/**
+ * Typed representation of the `BetaUrlCitationParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaUrlCitationParam(
+    /**
+     * The citation type. Always `url_citation`.
+     */
+    val type: BetaUrlCitationParamTypeEnum,
+    /**
+     * The index of the first character of the citation in the message.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
+    /**
+     * The index of the last character of the citation in the message.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
+    /**
+     * The URL of the cited resource.
+     */
+    val url: String,
+    /**
+     * The title of the cited resource.
+     */
+    val title: String
+) : BetaOutputTextContentParamAnnotationsItem

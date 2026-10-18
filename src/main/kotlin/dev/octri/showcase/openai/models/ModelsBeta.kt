@@ -17,13 +17,7 @@ sealed interface BetaContent {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             val objectTypes: List<Class<out BetaContent>> = listOf(BetaInputContent::class.java, BetaOutputContent::class.java)
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
-            }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
                     parser, BetaContent::class.java, "no BetaContent branch accepts this payload")
@@ -91,6 +85,26 @@ data class BetaInputAudio(
 )
 
 /**
+ * Typed representation of the `BetaInputContent` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaInputContent::class)
+@com.fasterxml.jackson.annotation.JsonSubTypes(
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputTextContent::class, name = "input_text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputImageContent::class, name = "input_image"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputFileContent::class, name = "input_file")
+)
+sealed interface BetaInputContent : BetaContent
+
+/** A [BetaInputContent] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownBetaInputContent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+) : BetaInputContent {
+    /** The tag the server sent. */
+    val tag: String get() = raw.path("type").asText()
+}
+
+/**
  * An audio output from the model.
  */
 data class BetaOutputAudio(
@@ -107,3 +121,23 @@ data class BetaOutputAudio(
      */
     val transcript: String
 )
+
+/**
+ * Typed representation of the `BetaOutputContent` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaOutputContent::class)
+@com.fasterxml.jackson.annotation.JsonSubTypes(
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaOutputTextContent::class, name = "output_text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaRefusalContent::class, name = "refusal"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaReasoningTextContent::class, name = "reasoning_text")
+)
+sealed interface BetaOutputContent : BetaContent
+
+/** A [BetaOutputContent] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownBetaOutputContent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+) : BetaOutputContent {
+    /** The tag the server sent. */
+    val tag: String get() = raw.path("type").asText()
+}

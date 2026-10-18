@@ -4,43 +4,42 @@
 package dev.octri.showcase.openai.models
 
 /**
- * A Realtime item representing an invocation of a tool on an MCP server.
+ * Typed representation of the `RealtimeMCPHTTPError` API schema.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class RealtimeMCPToolCall(
+data class RealtimeMCPHTTPError(
     /**
-     * The type of the item. Always `mcp_call`.
+     * Required enumerated value serialized in the `type` wire field.
      */
-    val type: RealtimeMCPToolCallTypeEnum,
+    val type: RealtimeMCPHTTPErrorTypeEnum,
     /**
-     * The unique ID of the tool call.
+     * Required `integer` value serialized in the `code` wire field.
      */
-    val id: String,
+    val code: Long,
     /**
-     * The label of the MCP server running the tool.
+     * Required `string` value serialized in the `message` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
+    val message: String
+) : RealtimeMCPToolCallError
+
+/**
+ * Typed representation of the `RealtimeMCPProtocolError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeMCPProtocolError(
     /**
-     * The name of the tool that was run.
+     * Required enumerated value serialized in the `type` wire field.
      */
-    val name: String,
+    val type: RealtimeMCPProtocolErrorTypeEnum,
     /**
-     * A JSON string of the arguments passed to the tool.
+     * Required `integer` value serialized in the `code` wire field.
      */
-    val arguments: String,
+    val code: Long,
     /**
-     * Optional `string` value serialized in the `approval_request_id` wire field.
+     * Required `string` value serialized in the `message` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("approval_request_id") val approvalRequestId: String? = null,
-    /**
-     * Optional `string` value serialized in the `output` wire field.
-     */
-    val output: String? = null,
-    /**
-     * The error from the tool call, if any.
-     */
-    val error: RealtimeMCPToolCallError? = null
-) : RealtimeConversationItem
+    val message: String
+) : RealtimeMCPToolCallError
 
 /**
  * The error from the tool call, if any.

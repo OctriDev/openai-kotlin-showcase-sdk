@@ -4,6 +4,27 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
+ */
+class OutputMessageStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is OutputMessageStatusEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val IN_PROGRESS = OutputMessageStatusEnum("in_progress")
+        @JvmField val COMPLETED = OutputMessageStatusEnum("completed")
+        @JvmField val INCOMPLETE = OutputMessageStatusEnum("incomplete")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = OutputMessageStatusEnum(value)
+    }
+}
+
+/**
  * The type of the output message. Always `message`.
  */
 enum class OutputMessageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -572,24 +593,5 @@ class ProjectApiKeyDeleteResponseObjectEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = ProjectApiKeyDeleteResponseObjectEnum(value)
-    }
-}
-
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class ProjectApiKeyListResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ProjectApiKeyListResponseObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val LIST = ProjectApiKeyListResponseObjectEnum("list")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ProjectApiKeyListResponseObjectEnum(value)
     }
 }

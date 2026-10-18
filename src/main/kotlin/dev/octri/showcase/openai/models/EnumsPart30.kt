@@ -4,22 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The tool to call. Always `function`.
- */
-enum class LiveFunctionToolChoiceParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    FUNCTION("function");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
  * The tool type. Always `function`.
  */
 enum class LiveFunctionToolInputParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -237,6 +221,55 @@ enum class LiveInitialOutputTextContentPartParamTypeEnum(@com.fasterxml.jackson.
         @JvmStatic
         fun fromValue(v: String) = values().find { it.value == v }
             ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * Optional enumerated value serialized in the `voice` wire field.
+ */
+class LiveInitialSessionAudioOutputParamVoiceVariant1Enum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is LiveInitialSessionAudioOutputParamVoiceVariant1Enum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val ALLOY = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("alloy")
+        @JvmField val ASH = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("ash")
+        @JvmField val BALLAD = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("ballad")
+        @JvmField val BEACON = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("beacon")
+        @JvmField val BOSSA = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("bossa")
+        @JvmField val BRISE = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("brise")
+        @JvmField val CEDAR = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("cedar")
+        @JvmField val CINDER = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("cinder")
+        @JvmField val CORAL = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("coral")
+        @JvmField val DELTA = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("delta")
+        @JvmField val ECHO = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("echo")
+        @JvmField val FLITZ = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("flitz")
+        @JvmField val GLEAM = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("gleam")
+        @JvmField val HAREMA = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("harema")
+        @JvmField val JUNI = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("juni")
+        @JvmField val MARIN = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("marin")
+        @JvmField val MERIDIAN = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("meridian")
+        @JvmField val NIRA = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("nira")
+        @JvmField val NOEUL = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("noeul")
+        @JvmField val NURI = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("nuri")
+        @JvmField val QUARTZ = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("quartz")
+        @JvmField val RIPPLE = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("ripple")
+        @JvmField val SAGE = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("sage")
+        @JvmField val SHIDA = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("shida")
+        @JvmField val SHIMMER = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("shimmer")
+        @JvmField val SILLAGE = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("sillage")
+        @JvmField val STONE = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("stone")
+        @JvmField val TEMPO = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("tempo")
+        @JvmField val VERSE = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("verse")
+        @JvmField val VESPER = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("vesper")
+        @JvmField val WILLOW = LiveInitialSessionAudioOutputParamVoiceVariant1Enum("willow")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = LiveInitialSessionAudioOutputParamVoiceVariant1Enum(value)
     }
 }
 
@@ -558,38 +591,6 @@ enum class LiveNamespaceToolInputParamTypeEnum(@com.fasterxml.jackson.annotation
  */
 enum class LiveOutputAudioDeltaTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     SESSION_OUTPUT_AUDIO_DELTA("session.output_audio.delta");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
-enum class LiveOutputAudioFixturePlayedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    SESSION_OUTPUT_AUDIO_FIXTURE_PLAYED("session.output_audio.fixture.played");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
-enum class LiveOutputAudioFixturePlayingTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    SESSION_OUTPUT_AUDIO_FIXTURE_PLAYING("session.output_audio.fixture.playing");
 
     override fun toString() = value
 

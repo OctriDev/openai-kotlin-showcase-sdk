@@ -4,25 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The object type. Always `vault.deleted`.
- */
-class DeletedVaultResourceObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is DeletedVaultResourceObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val VAULT_DELETED = DeletedVaultResourceObjectEnum("vault.deleted")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = DeletedVaultResourceObjectEnum(value)
-    }
-}
-
-/**
  * The object type that signals the deletion response.
  */
 class DeletedVideoResourceObjectEnum private constructor(
@@ -581,6 +562,22 @@ enum class EnvironmentResourceNoneTypeEnum(@com.fasterxml.jackson.annotation.Jso
  */
 enum class EnvironmentResourceOpenaiHostedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     OPENAI_HOSTED("openai_hosted");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The type of the object. Always `self_hosted`.
+ */
+enum class EnvironmentResourceSelfHostedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    SELF_HOSTED("self_hosted");
 
     override fun toString() = value
 

@@ -4,19 +4,26 @@
 package dev.octri.showcase.openai.models
 
 /**
- * A text content.
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaTextContent(
+data class BetaResponseFormatJsonObject(
     /**
-     * Required enumerated value serialized in the `type` wire field.
+     * The type of response format being defined. Always `json_object`.
      */
-    val type: BetaTextContentTypeEnum,
+    val type: BetaResponseFormatJsonObjectTypeEnum
+) : BetaTextResponseFormatConfiguration
+
+/**
+ * Default response format. Used to generate text responses.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaResponseFormatText(
     /**
-     * Required `string` value serialized in the `text` wire field.
+     * The type of response format being defined. Always `text`.
      */
-    val text: String
-) : BetaAgentMessageContentItem, BetaMessageContentItem
+    val type: BetaResponseFormatTextTypeEnum
+) : BetaTextResponseFormatConfiguration
 
 /**
  * An object specifying the format that the model must output. Configuring `{ "type": "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type": "text" }` with no additional options. **Not recommended for gpt-4o and newer models:** Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid…

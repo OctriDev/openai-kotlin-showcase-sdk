@@ -73,3 +73,34 @@ data class UnknownModerationOutput @com.fasterxml.jackson.annotation.JsonCreator
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
+
+/**
+ * A moderation result produced for the response input or output.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ModerationResultBody(
+    /**
+     * The object type, which was always `moderation_result` for successful moderation results.
+     */
+    val type: ModerationResultBodyTypeEnum,
+    /**
+     * The moderation model that produced this result.
+     */
+    val model: String,
+    /**
+     * A boolean indicating whether the content was flagged by any category.
+     */
+    val flagged: Boolean,
+    /**
+     * A dictionary of moderation categories to booleans, True if the input is flagged under this category.
+     */
+    val categories: Map<String, Boolean>,
+    /**
+     * A dictionary of moderation categories to scores.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("category_scores") val categoryScores: Map<String, Double>,
+    /**
+     * Which modalities of input are reflected by the score for each category.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("category_applied_input_types") val categoryAppliedInputTypes: Map<String, List<ModerationInputType>>
+) : ModerationInput, ModerationOutput

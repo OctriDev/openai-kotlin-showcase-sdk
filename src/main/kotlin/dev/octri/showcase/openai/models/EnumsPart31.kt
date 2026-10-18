@@ -6,6 +6,38 @@ package dev.octri.showcase.openai.models
 /**
  * Required enumerated value serialized in the `type` wire field.
  */
+enum class LiveOutputAudioFixturePlayedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    SESSION_OUTPUT_AUDIO_FIXTURE_PLAYED("session.output_audio.fixture.played");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class LiveOutputAudioFixturePlayingTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    SESSION_OUTPUT_AUDIO_FIXTURE_PLAYING("session.output_audio.fixture.playing");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
 enum class LiveOutputAudioFixturePlayParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     SESSION_OUTPUT_AUDIO_FIXTURE_PLAY("session.output_audio.fixture.play");
 
@@ -558,40 +590,5 @@ class LiveSIPTrunkAuthTypeEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = LiveSIPTrunkAuthTypeEnum(value)
-    }
-}
-
-/**
- * Use `digest` for SIP Digest authentication. Handles 401 and 407 challenges.
- */
-class LiveSIPTrunkAuthRequestTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LiveSIPTrunkAuthRequestTypeEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val DIGEST = LiveSIPTrunkAuthRequestTypeEnum("digest")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LiveSIPTrunkAuthRequestTypeEnum(value)
-    }
-}
-
-/**
- * References a skill created with the /v1/skills endpoint.
- */
-enum class LiveSkillReferenceParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    SKILL_REFERENCE("skill_reference");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

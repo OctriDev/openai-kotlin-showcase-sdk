@@ -3,6 +3,48 @@
 
 package dev.octri.showcase.openai
 
+typealias ResponseShellCallCommandDoneStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum
+
+typealias ResponseShellCallOutputContentDeltaStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEvent
+
+typealias ResponseShellCallOutputContentDeltaStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEventTypeEnum
+
+typealias ResponseShellCallOutputContentDoneStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEvent
+
+typealias ResponseShellCallOutputContentDoneStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDoneStreamingEventTypeEnum
+
+typealias ResponsesServerEvent = dev.octri.showcase.openai.models.ResponsesServerEvent
+
+typealias ResponsesServerEventVariant0 = dev.octri.showcase.openai.models.ResponsesServerEventVariant0
+
+typealias ResponsesServerEventVariant1 = dev.octri.showcase.openai.models.ResponsesServerEventVariant1
+
+typealias ResponsesServerEventVariant10 = dev.octri.showcase.openai.models.ResponsesServerEventVariant10
+
+typealias ResponsesServerEventVariant11 = dev.octri.showcase.openai.models.ResponsesServerEventVariant11
+
+typealias ResponsesServerEventVariant12 = dev.octri.showcase.openai.models.ResponsesServerEventVariant12
+
+typealias ResponsesServerEventVariant13 = dev.octri.showcase.openai.models.ResponsesServerEventVariant13
+
+typealias ResponsesServerEventVariant14 = dev.octri.showcase.openai.models.ResponsesServerEventVariant14
+
+typealias ResponsesServerEventVariant15 = dev.octri.showcase.openai.models.ResponsesServerEventVariant15
+
+typealias ResponsesServerEventVariant16 = dev.octri.showcase.openai.models.ResponsesServerEventVariant16
+
+typealias ResponsesServerEventVariant17 = dev.octri.showcase.openai.models.ResponsesServerEventVariant17
+
+typealias ResponsesServerEventVariant18 = dev.octri.showcase.openai.models.ResponsesServerEventVariant18
+
+typealias ResponsesServerEventVariant19 = dev.octri.showcase.openai.models.ResponsesServerEventVariant19
+
+typealias ResponsesServerEventVariant2 = dev.octri.showcase.openai.models.ResponsesServerEventVariant2
+
+typealias ResponsesServerEventVariant20 = dev.octri.showcase.openai.models.ResponsesServerEventVariant20
+
+typealias ResponsesServerEventVariant21 = dev.octri.showcase.openai.models.ResponsesServerEventVariant21
+
 typealias ResponsesServerEventVariant22 = dev.octri.showcase.openai.models.ResponsesServerEventVariant22
 
 typealias ResponsesServerEventVariant23 = dev.octri.showcase.openai.models.ResponsesServerEventVariant23
@@ -394,45 +436,3 @@ typealias RunStepObject = dev.octri.showcase.openai.models.RunStepObject
 typealias RunStepObjectLastError = dev.octri.showcase.openai.models.RunStepObjectLastError
 
 typealias RunStepObjectLastErrorCodeEnum = dev.octri.showcase.openai.models.RunStepObjectLastErrorCodeEnum
-
-typealias RunStepObjectObjectEnum = dev.octri.showcase.openai.models.RunStepObjectObjectEnum
-
-typealias RunStepObjectStatusEnum = dev.octri.showcase.openai.models.RunStepObjectStatusEnum
-
-typealias RunStepObjectStepDetails = dev.octri.showcase.openai.models.RunStepObjectStepDetails
-
-typealias RunStepObjectTypeEnum = dev.octri.showcase.openai.models.RunStepObjectTypeEnum
-
-typealias RunStepStreamEvent = dev.octri.showcase.openai.models.RunStepStreamEvent
-
-typealias RunStepStreamEventVariant0 = dev.octri.showcase.openai.models.RunStepStreamEventVariant0
-
-typealias RunStepStreamEventVariant0EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant0EventEnum
-
-typealias RunStepStreamEventVariant1 = dev.octri.showcase.openai.models.RunStepStreamEventVariant1
-
-typealias RunStepStreamEventVariant1EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant1EventEnum
-
-typealias RunStepStreamEventVariant2 = dev.octri.showcase.openai.models.RunStepStreamEventVariant2
-
-typealias RunStepStreamEventVariant2EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant2EventEnum
-
-typealias RunStepStreamEventVariant3 = dev.octri.showcase.openai.models.RunStepStreamEventVariant3
-
-typealias RunStepStreamEventVariant3EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant3EventEnum
-
-typealias RunStepStreamEventVariant4 = dev.octri.showcase.openai.models.RunStepStreamEventVariant4
-
-typealias RunStepStreamEventVariant4EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant4EventEnum
-
-typealias RunStepStreamEventVariant5 = dev.octri.showcase.openai.models.RunStepStreamEventVariant5
-
-typealias RunStepStreamEventVariant5EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant5EventEnum
-
-typealias RunStepStreamEventVariant6 = dev.octri.showcase.openai.models.RunStepStreamEventVariant6
-
-typealias RunStepStreamEventVariant6EventEnum = dev.octri.showcase.openai.models.RunStepStreamEventVariant6EventEnum
-
-typealias RunStreamEvent = dev.octri.showcase.openai.models.RunStreamEvent
-
-typealias RunStreamEventVariant0 = dev.octri.showcase.openai.models.RunStreamEventVariant0

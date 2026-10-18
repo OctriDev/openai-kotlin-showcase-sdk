@@ -276,3 +276,209 @@ data class RealtimeClientEventTranscriptionSessionUpdate(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 )
+
+/**
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+ */
+data class RealtimeSessionCreateRequestGAAudioInputNoiseReduction(
+    /**
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
+     */
+    val type: NoiseReductionType? = null
+)
+
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
+data class RealtimeSessionCreateRequestGAAudioInput(
+    /**
+     * The format of the input audio.
+     */
+    val format: RealtimeAudioFormats? = null,
+    /**
+     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn off once on. Input audio transcription is not native to the model, since the model consumes audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint and should be treated as guidance of input audio content rather than precisely what the model heard. The client can optionally set the language and prompt for transcription, these offer additional…
+     */
+    val transcription: AudioTranscription? = null,
+    /**
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeSessionCreateRequestGAAudioInputNoiseReduction? = null,
+    /**
+     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTurnDetection? = null
+)
+
+/**
+ * Optional object value serialized in the `output` wire field.
+ */
+data class RealtimeSessionCreateRequestGAAudioOutput(
+    /**
+     * The format of the output audio.
+     */
+    val format: RealtimeAudioFormats? = null,
+    /**
+     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Voice cannot be changed during the session once the model has responded with audio at least once. Custom voices must be created from audio samples. We recommend `marin` and `cedar` for best quality.
+     */
+    val voice: VoiceIdsOrCustomVoice? = null,
+    /**
+     * The speed of the model's spoken response as a multiple of the original speed. 1.0 is the default speed. 0.25 is the minimum speed. 1.5 is the maximum speed. This value can only be changed in between model turns, not while a response is in progress. This parameter is a post-processing adjustment to the audio after it is generated, it's also possible to prompt the model to speak faster or slower.
+     */
+    val speed: Double? = null
+)
+
+/**
+ * Configuration for input and output audio.
+ */
+data class RealtimeSessionCreateRequestGAAudio(
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
+    val input: RealtimeSessionCreateRequestGAAudioInput? = null,
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
+    val output: RealtimeSessionCreateRequestGAAudioOutput? = null
+)
+
+/**
+ * Granular configuration for tracing.
+ */
+data class RealtimeSessionCreateRequestGATracingVariant1(
+    /**
+     * The name of the workflow to attach to this trace. This is used to name the trace in the Traces Dashboard.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name") val workflowName: String? = null,
+    /**
+     * The group id to attach to this trace to enable filtering and grouping in the Traces Dashboard.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("group_id") val groupId: String? = null,
+    /**
+     * The arbitrary metadata to attach to this trace to enable filtering in the Traces Dashboard.
+     */
+    val metadata: Map<String, Any>? = null
+)
+
+/**
+ * Realtime session object configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeSessionCreateRequestGA(
+    /**
+     * The type of session to create. Always `realtime` for the Realtime API.
+     */
+    val type: RealtimeSessionCreateRequestGATypeEnum,
+    /**
+     * The set of modalities the model can respond with. It defaults to `["audio"]`, indicating that the model will respond with audio plus a transcript. `["text"]` can be used to make the model respond with text only. It is not possible to request both `text` and `audio` at the same time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<RealtimeSessionCreateRequestGAOutputModalitiesItemEnum>? = null,
+    /**
+     * The Realtime model used for this session.
+     */
+    val model: String? = null,
+    /**
+     * The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. "be extremely succinct", "act friendly", "here are examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the model, but they provide…
+     */
+    val instructions: String? = null,
+    /**
+     * Configuration for input and output audio.
+     */
+    val audio: RealtimeSessionCreateRequestGAAudio? = null,
+    /**
+     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
+     */
+    val include: List<RealtimeSessionCreateRequestGAIncludeItemEnum>? = null,
+    /**
+     * Realtime API can write session traces to the Traces Dashboard. Set to null to disable tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto` will create a trace for the session with default values for the workflow name, group id, and metadata.
+     */
+    val tracing: Any? = null,
+    /**
+     * Tools available to the model.
+     */
+    val tools: List<RealtimeSessionCreateRequestGAToolsItem>? = null,
+    /**
+     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP tool.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: RealtimeSessionCreateRequestGAToolChoice? = null,
+    /**
+     * Whether the model may call multiple tools in parallel. Only supported by reasoning Realtime models such as `gpt-realtime-2`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null,
+    /**
+     * Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.
+     */
+    val reasoning: RealtimeReasoning? = null,
+    /**
+     * Maximum number of output tokens for a single assistant response, inclusive of tool calls. Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum available tokens for a given model. Defaults to `inf`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Any? = null,
+    /**
+     * When the number of tokens in a conversation exceeds the model's input token limit, the conversation be truncated, meaning messages (starting from the oldest) will not be included in the model's context. A 32k context model with 4,096 max output tokens can only include 28,224 tokens in the context before truncation occurs. Clients can configure truncation behavior to truncate with a lower max token limit, which is an effective way to control token usage and cost. Truncation…
+     */
+    val truncation: RealtimeTruncation? = null,
+    /**
+     * Reference to a prompt template and its variables. Learn more.
+     */
+    val prompt: Prompt? = null
+) : RealtimeClientEventSessionUpdateSession, RealtimeCreateClientSecretRequestSession
+
+/**
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+ */
+data class RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction(
+    /**
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
+     */
+    val type: NoiseReductionType? = null
+)
+
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
+data class RealtimeTranscriptionSessionCreateRequestGAAudioInput(
+    /**
+     * Optional API value serialized in the `format` wire field.
+     */
+    val format: RealtimeAudioFormats? = null,
+    /**
+     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn off once on. Input audio transcription is not native to the model, since the model consumes audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint and should be treated as guidance of input audio content rather than precisely what the model heard. The client can optionally set the language and prompt for transcription, these offer additional…
+     */
+    val transcription: AudioTranscription? = null,
+    /**
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction? = null,
+    /**
+     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTurnDetection? = null
+)
+
+/**
+ * Configuration for input and output audio.
+ */
+data class RealtimeTranscriptionSessionCreateRequestGAAudio(
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
+    val input: RealtimeTranscriptionSessionCreateRequestGAAudioInput? = null
+)
+
+/**
+ * Realtime transcription session object configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeTranscriptionSessionCreateRequestGA(
+    /**
+     * The type of session to create. Always `transcription` for transcription sessions.
+     */
+    val type: RealtimeTranscriptionSessionCreateRequestGATypeEnum,
+    /**
+     * Configuration for input and output audio.
+     */
+    val audio: RealtimeTranscriptionSessionCreateRequestGAAudio? = null,
+    /**
+     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
+     */
+    val include: List<RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum>? = null
+) : RealtimeClientEventSessionUpdateSession, RealtimeCreateClientSecretRequestSession

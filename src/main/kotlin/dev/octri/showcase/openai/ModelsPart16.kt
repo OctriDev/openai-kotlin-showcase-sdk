@@ -3,6 +3,34 @@
 
 package dev.octri.showcase.openai
 
+typealias RealtimeResponseCreateParamsAudioOutput = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsAudioOutput
+
+typealias RealtimeResponseCreateParamsConversationVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsConversationVariant1Enum
+
+typealias RealtimeResponseCreateParamsMaxOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsMaxOutputTokensVariant1Enum
+
+typealias RealtimeResponseCreateParamsOutputModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsOutputModalitiesItemEnum
+
+typealias RealtimeResponseCreateParamsToolChoice = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsToolChoice
+
+typealias RealtimeResponseCreateParamsToolsItem = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsToolsItem
+
+typealias RealtimeResponseMaxOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseMaxOutputTokensVariant1Enum
+
+typealias RealtimeResponseObjectEnum = dev.octri.showcase.openai.models.RealtimeResponseObjectEnum
+
+typealias RealtimeResponseOutputModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeResponseOutputModalitiesItemEnum
+
+typealias RealtimeResponseStatusDetails = dev.octri.showcase.openai.models.RealtimeResponseStatusDetails
+
+typealias RealtimeResponseStatusDetailsError = dev.octri.showcase.openai.models.RealtimeResponseStatusDetailsError
+
+typealias RealtimeResponseStatusDetailsReasonEnum = dev.octri.showcase.openai.models.RealtimeResponseStatusDetailsReasonEnum
+
+typealias RealtimeResponseStatusDetailsTypeEnum = dev.octri.showcase.openai.models.RealtimeResponseStatusDetailsTypeEnum
+
+typealias RealtimeResponseStatusEnum = dev.octri.showcase.openai.models.RealtimeResponseStatusEnum
+
 typealias RealtimeResponseUsage = dev.octri.showcase.openai.models.RealtimeResponseUsage
 
 typealias RealtimeResponseUsageInputTokenDetails = dev.octri.showcase.openai.models.RealtimeResponseUsageInputTokenDetails
@@ -237,6 +265,8 @@ typealias RealtimeSessionCreateRequestGAAudio = dev.octri.showcase.openai.models
 
 typealias RealtimeSessionCreateRequestGAAudioInput = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestGAAudioInput
 
+typealias RealtimeSessionCreateRequestGAAudioInputNoiseReduction = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestGAAudioInputNoiseReduction
+
 typealias RealtimeSessionCreateRequestGAAudioOutput = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestGAAudioOutput
 
 typealias RealtimeSessionCreateRequestGAIncludeItemEnum = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestGAIncludeItemEnum
@@ -264,6 +294,8 @@ typealias RealtimeSessionCreateRequestModalitiesItemEnum = dev.octri.showcase.op
 typealias RealtimeSessionCreateRequestToolsItem = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestToolsItem
 
 typealias RealtimeSessionCreateRequestToolsItemTypeEnum = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestToolsItemTypeEnum
+
+typealias RealtimeSessionCreateRequestTracing = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestTracing
 
 typealias RealtimeSessionCreateRequestTracingVariant0Enum = dev.octri.showcase.openai.models.RealtimeSessionCreateRequestTracingVariant0Enum
 
@@ -305,6 +337,8 @@ typealias RealtimeSessionCreateResponseGAToolChoice = dev.octri.showcase.openai.
 
 typealias RealtimeSessionCreateResponseGAToolsItem = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseGAToolsItem
 
+typealias RealtimeSessionCreateResponseGATracing = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseGATracing
+
 typealias RealtimeSessionCreateResponseGATracingVariant0Enum = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseGATracingVariant0Enum
 
 typealias RealtimeSessionCreateResponseGATracingVariant1 = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseGATracingVariant1
@@ -317,6 +351,8 @@ typealias RealtimeSessionCreateResponseMaxOutputTokensVariant1Enum = dev.octri.s
 
 typealias RealtimeSessionCreateResponseOutputModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseOutputModalitiesItemEnum
 
+typealias RealtimeSessionCreateResponseTracing = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseTracing
+
 typealias RealtimeSessionCreateResponseTracingVariant0Enum = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseTracingVariant0Enum
 
 typealias RealtimeSessionCreateResponseTracingVariant1 = dev.octri.showcase.openai.models.RealtimeSessionCreateResponseTracingVariant1
@@ -327,6 +363,8 @@ typealias RealtimeSessionIncludeItemEnum = dev.octri.showcase.openai.models.Real
 
 typealias RealtimeSessionInputAudioFormatEnum = dev.octri.showcase.openai.models.RealtimeSessionInputAudioFormatEnum
 
+typealias RealtimeSessionInputAudioNoiseReduction = dev.octri.showcase.openai.models.RealtimeSessionInputAudioNoiseReduction
+
 typealias RealtimeSessionMaxResponseOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeSessionMaxResponseOutputTokensVariant1Enum
 
 typealias RealtimeSessionModalitiesItemEnum = dev.octri.showcase.openai.models.RealtimeSessionModalitiesItemEnum
@@ -334,6 +372,8 @@ typealias RealtimeSessionModalitiesItemEnum = dev.octri.showcase.openai.models.R
 typealias RealtimeSessionObjectEnum = dev.octri.showcase.openai.models.RealtimeSessionObjectEnum
 
 typealias RealtimeSessionOutputAudioFormatEnum = dev.octri.showcase.openai.models.RealtimeSessionOutputAudioFormatEnum
+
+typealias RealtimeSessionTracing = dev.octri.showcase.openai.models.RealtimeSessionTracing
 
 typealias RealtimeSessionTracingVariant0Enum = dev.octri.showcase.openai.models.RealtimeSessionTracingVariant0Enum
 
@@ -347,6 +387,8 @@ typealias RealtimeTranscriptionSessionCreateRequestGAAudio = dev.octri.showcase.
 
 typealias RealtimeTranscriptionSessionCreateRequestGAAudioInput = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestGAAudioInput
 
+typealias RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction
+
 typealias RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum
 
 typealias RealtimeTranscriptionSessionCreateRequestGATypeEnum = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestGATypeEnum
@@ -354,6 +396,8 @@ typealias RealtimeTranscriptionSessionCreateRequestGATypeEnum = dev.octri.showca
 typealias RealtimeTranscriptionSessionCreateRequestIncludeItemEnum = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestIncludeItemEnum
 
 typealias RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum
+
+typealias RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction
 
 typealias RealtimeTranscriptionSessionCreateRequestTurnDetection = dev.octri.showcase.openai.models.RealtimeTranscriptionSessionCreateRequestTurnDetection
 
@@ -392,47 +436,3 @@ typealias RealtimeTranslationClientEventSessionClose = dev.octri.showcase.openai
 typealias RealtimeTranslationClientEventSessionCloseTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionCloseTypeEnum
 
 typealias RealtimeTranslationClientEventSessionUpdate = dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionUpdate
-
-typealias RealtimeTranslationClientEventSessionUpdateTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionUpdateTypeEnum
-
-typealias RealtimeTranslationClientSecretCreateRequest = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequest
-
-typealias RealtimeTranslationClientSecretCreateRequestExpiresAfter = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfter
-
-typealias RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum
-
-typealias RealtimeTranslationClientSecretCreateResponse = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateResponse
-
-typealias RealtimeTranslationServerEvent = dev.octri.showcase.openai.models.RealtimeTranslationServerEvent
-
-typealias RealtimeTranslationServerEventSessionClosed = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosed
-
-typealias RealtimeTranslationServerEventSessionClosedTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosedTypeEnum
-
-typealias RealtimeTranslationServerEventSessionCreated = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreated
-
-typealias RealtimeTranslationServerEventSessionCreatedTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreatedTypeEnum
-
-typealias RealtimeTranslationServerEventSessionInputTranscriptDelta = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDelta
-
-typealias RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum
-
-typealias RealtimeTranslationServerEventSessionOutputAudioDelta = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDelta
-
-typealias RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum
-
-typealias RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum
-
-typealias RealtimeTranslationServerEventSessionOutputTranscriptDelta = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDelta
-
-typealias RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum
-
-typealias RealtimeTranslationServerEventSessionUpdated = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdated
-
-typealias RealtimeTranslationServerEventSessionUpdatedTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdatedTypeEnum
-
-typealias RealtimeTranslationSession = dev.octri.showcase.openai.models.RealtimeTranslationSession
-
-typealias RealtimeTranslationSessionAudio = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudio
-
-typealias RealtimeTranslationSessionAudioInput = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInput

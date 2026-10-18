@@ -7,6 +7,8 @@ import dev.octri.showcase.openai.AssistantStreamEvent
 import dev.octri.showcase.openai.ClientConfig
 import dev.octri.showcase.openai.ErrorResponse
 import dev.octri.showcase.openai.GetRunStepParameterItemEnum
+import dev.octri.showcase.openai.ListRunsParameterEnum
+import dev.octri.showcase.openai.ListRunsResponse
 import dev.octri.showcase.openai.ListRunStepsResponse
 import dev.octri.showcase.openai.Metadata
 import dev.octri.showcase.openai.RequestOptions
@@ -15,6 +17,86 @@ import dev.octri.showcase.openai.RunStepObject
 import dev.octri.showcase.openai.SdkClient
 import dev.octri.showcase.openai.SubmitToolOutputsRunRequestToolOutputsItem
 import dev.octri.showcase.openai.Validation
+
+internal object AssistantsListRunsOperation {
+    /**
+     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or `before` to navigate through the results. The returned run statuses show whether each run is queued, active, completed, or in another state.
+     *
+     * Returns a list of runs belonging to a thread.
+     *
+     * @param threadId The ID of the thread the run belongs to.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc`
+     *   for ascending order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
+     */
+    fun listRuns(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: ListRunsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListRunsResponse {
+        return SdkClient.request<ListRunsResponse>(SdkClient.RequestSpec("GET", "/threads/${SdkClient.encodePathSegment(threadId)}/runs", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listRuns", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("429" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+    /**
+     * Lists runs belonging to a thread. Use `order` to sort runs by creation time and `after` or `before` to navigate through the results. The returned run statuses show whether each run is queued, active, completed, or in another state.
+     *
+     * Returns a list of runs belonging to a thread.
+     *
+     * @param threadId The ID of the thread the run belongs to.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc`
+     *   for ascending order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
+     */
+    fun listRunsPaginated(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: ListRunsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (RunObject) -> Boolean) {
+        var cursor = after
+        while (true) {
+            val page = listRuns(clientConfig, threadId, limit, order, cursor, before, options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            for (item in items) {
+                if (!yieldFn(item)) return
+            }
+            if (page.hasMore != true) return
+            val nextCursor = page.lastId
+            cursor = nextCursor
+        }
+    }
+
+
+
+    fun listRunsPages(clientConfig: ClientConfig, threadId: String, limit: Long? = null, order: ListRunsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (Assistants.ListRunsPage) -> Boolean) {
+        var cursor = after
+        while (true) {
+            val page = listRuns(clientConfig, threadId, limit, order, cursor, before, options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            val nextCursor = page.lastId
+            val hasMore = page.hasMore == true
+            if (!yieldPage(Assistants.ListRunsPage(page, items, hasMore))) return
+            if (!hasMore) return
+            cursor = nextCursor
+        }
+    }
+}
 
 internal object AssistantsCreateRunOperation {
     /**
@@ -382,6 +464,67 @@ internal object AssistantsListRunStepsOperation {
         return SdkClient.request<ListRunStepsResponse>(SdkClient.RequestSpec("GET", "/threads/${SdkClient.encodePathSegment(request.threadId)}/runs/${SdkClient.encodePathSegment(request.runId)}/steps", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(request.limit, "form", true), "order" to SdkClient.queryValue(request.order, "form", true), "after" to SdkClient.queryValue(request.after, "form", true), "before" to
     SdkClient.queryValue(request.before, "form", true), "include[]" to
     SdkClient.queryValue(request.include, "form", true)), operationId = "listRunSteps", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("429" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+    /**
+     * Lists the steps belonging to a run on a thread. Use cursor parameters to page through the steps, and set `order` to control their order by creation time.
+     *
+     * Returns a list of run steps belonging to a run.
+     *
+     * @param threadId The ID of the thread the run and run steps belong to.
+     * @param runId The ID of the run the run steps belong to.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param order Sort order by the `created_at` timestamp of the objects. `asc`
+     *   for ascending order and `desc` for descending order.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
+     * @param include A list of additional fields to include in the response.
+     *   Currently the only supported value is
+     *   `step_details.tool_calls*].file_search.results[*].content` to fetch the file
+     *   search result content. See the \[file search tool documentation for more
+     *   information.
+     */
+    fun listRunStepsPaginated(clientConfig: ClientConfig, request: Assistants.ListRunStepsRequest, options: RequestOptions? = null, yieldFn: (RunStepObject) -> Boolean) {
+        var cursor = request.after
+        while (true) {
+            val page = listRunSteps(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            for (item in items) {
+                if (!yieldFn(item)) return
+            }
+            if (page.hasMore != true) return
+            val nextCursor = page.lastId
+            cursor = nextCursor
+        }
+    }
+
+
+
+    fun listRunStepsPages(clientConfig: ClientConfig, request: Assistants.ListRunStepsRequest, options: RequestOptions? = null, yieldPage: (Assistants.ListRunStepsPage) -> Boolean) {
+        var cursor = request.after
+        while (true) {
+            val page = listRunSteps(clientConfig, request.copy(after = cursor), options)
+            val items = page.`data`.orEmpty()
+            if (items.isEmpty()) return
+            val nextCursor = page.lastId
+            val hasMore = page.hasMore == true
+            if (!yieldPage(Assistants.ListRunStepsPage(page, items, hasMore))) return
+            if (!hasMore) return
+            cursor = nextCursor
+        }
     }
 }
 

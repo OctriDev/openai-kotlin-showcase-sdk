@@ -119,7 +119,7 @@ class CreateChatCompletionRequest(
     /**
      * An object specifying the format that the model must output. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the \[Structured Outputs guide\](developers.openai.com). Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid JSON. Using `json_schema` is preferred for models that support it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: ResponseFormat? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format") @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(ResponseFormatText::class), com.fasterxml.jackson.annotation.JsonSubTypes.Type(ResponseFormatJsonSchema::class), com.fasterxml.jackson.annotation.JsonSubTypes.Type(ResponseFormatJsonObject::class)) val responseFormat: Any? = null,
     /**
      * Parameters for audio output. Required when audio output is requested with `modalities: "audio"]`. \[Learn more.
      */
@@ -168,7 +168,7 @@ class CreateChatCompletionRequest(
     /**
      * A list of tools the model may call. You can provide either custom tools or function tools.
      */
-    val tools: List<ToolsItem>? = null,
+    val tools: List<Any>? = null,
     /**
      * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool. `none` is the default when no tools are present. `auto` is the default…
      */

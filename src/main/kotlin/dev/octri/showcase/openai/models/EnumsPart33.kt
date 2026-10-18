@@ -4,6 +4,54 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * The type of the item. Always `mcp_approval_request`.
+ */
+enum class MCPApprovalRequestTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    MCP_APPROVAL_REQUEST("mcp_approval_request");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The type of the item. Always `mcp_approval_response`.
+ */
+enum class MCPApprovalResponseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    MCP_APPROVAL_RESPONSE("mcp_approval_response");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The type of the item. Always `mcp_approval_response`.
+ */
+enum class MCPApprovalResponseResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    MCP_APPROVAL_RESPONSE("mcp_approval_response");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
  * The item type. Always `mcp_call`.
  */
 enum class McpCallItemResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -166,26 +214,6 @@ class MCPToolConnectorIdEnum private constructor(
 }
 
 /**
- * Specify a single approval policy for all tools. One of `always` or `never`. When set to `always`, all tools will require approval. When set to `never`, all tools will not require approval.
- */
-class MCPToolRequireApprovalVariant1Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MCPToolRequireApprovalVariant1Enum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val ALWAYS = MCPToolRequireApprovalVariant1Enum("always")
-        @JvmField val NEVER = MCPToolRequireApprovalVariant1Enum("never")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MCPToolRequireApprovalVariant1Enum(value)
-    }
-}
-
-/**
  * The type of the MCP tool. Always `mcp`.
  */
 enum class MCPToolTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -253,6 +281,26 @@ enum class MCPToolExecutionErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonV
         @JvmStatic
         fun fromValue(v: String) = values().find { it.value == v }
             ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * Specify a single approval policy for all tools. One of `always` or `never`. When set to `always`, all tools will require approval. When set to `never`, all tools will not require approval.
+ */
+class MCPToolRequireApprovalVariant1Enum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is MCPToolRequireApprovalVariant1Enum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val ALWAYS = MCPToolRequireApprovalVariant1Enum("always")
+        @JvmField val NEVER = MCPToolRequireApprovalVariant1Enum("never")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = MCPToolRequireApprovalVariant1Enum(value)
     }
 }
 
@@ -548,43 +596,6 @@ class MessageDeltaContentImageFileObjectImageFileDetailEnum private constructor(
  */
 enum class MessageDeltaContentImageFileObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     IMAGE_FILE("image_file");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * Specifies the detail level of the image. `low` uses fewer tokens, you can opt in to high resolution using `high`.
- */
-class MessageDeltaContentImageUrlObjectImageUrlDetailEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MessageDeltaContentImageUrlObjectImageUrlDetailEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val AUTO = MessageDeltaContentImageUrlObjectImageUrlDetailEnum("auto")
-        @JvmField val LOW = MessageDeltaContentImageUrlObjectImageUrlDetailEnum("low")
-        @JvmField val HIGH = MessageDeltaContentImageUrlObjectImageUrlDetailEnum("high")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MessageDeltaContentImageUrlObjectImageUrlDetailEnum(value)
-    }
-}
-
-/**
- * Always `image_url`.
- */
-enum class MessageDeltaContentImageUrlObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    IMAGE_URL("image_url");
 
     override fun toString() = value
 

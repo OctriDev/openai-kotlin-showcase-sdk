@@ -30,6 +30,36 @@ data class ContainerListResource(
 )
 
 /**
+ * Typed representation of the `ContainerNetworkPolicyAllowlistParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ContainerNetworkPolicyAllowlistParam(
+    /**
+     * Allow outbound network access only to specified domains. Always `allowlist`.
+     */
+    val type: ContainerNetworkPolicyAllowlistParamTypeEnum,
+    /**
+     * A list of allowed domains when type is `allowlist`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>,
+    /**
+     * Optional domain-scoped secrets for allowlisted domains.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_secrets") val domainSecrets: List<ContainerNetworkPolicyDomainSecretParam>? = null
+) : AutoCodeInterpreterToolParamNetworkPolicy, ContainerAutoParamNetworkPolicy, CreateContainerBodyNetworkPolicy
+
+/**
+ * Typed representation of the `ContainerNetworkPolicyDisabledParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ContainerNetworkPolicyDisabledParam(
+    /**
+     * Disable outbound network access. Always `disabled`.
+     */
+    val type: ContainerNetworkPolicyDisabledParamTypeEnum
+) : AutoCodeInterpreterToolParamNetworkPolicy, ContainerAutoParamNetworkPolicy, CreateContainerBodyNetworkPolicy
+
+/**
  * The container will expire after this time period. The anchor is the reference point for the expiration. The minutes is the number of minutes after the anchor before the container expires.
  */
 data class ContainerResourceExpiresAfter(
@@ -180,3 +210,45 @@ data class UnknownCreateContainerBodySkillsItem @com.fasterxml.jackson.annotatio
     /** The tag the server sent. */
     val tag: String get() = raw.path("type").asText()
 }
+
+/**
+ * Typed representation of the `InlineSkillParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class InlineSkillParam(
+    /**
+     * Defines an inline skill for this request.
+     */
+    val type: InlineSkillParamTypeEnum,
+    /**
+     * The name of the skill.
+     */
+    val name: String,
+    /**
+     * The description of the skill.
+     */
+    val description: String,
+    /**
+     * Inline skill payload
+     */
+    val source: InlineSkillSourceParam
+) : ContainerAutoParamSkillsItem, CreateContainerBodySkillsItem
+
+/**
+ * Typed representation of the `SkillReferenceParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SkillReferenceParam(
+    /**
+     * References a skill created with the /v1/skills endpoint.
+     */
+    val type: SkillReferenceParamTypeEnum,
+    /**
+     * The ID of the referenced skill.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
+    /**
+     * Optional skill version. Use a positive integer or 'latest'. Omit for default.
+     */
+    val version: String? = null
+) : ContainerAutoParamSkillsItem, CreateContainerBodySkillsItem

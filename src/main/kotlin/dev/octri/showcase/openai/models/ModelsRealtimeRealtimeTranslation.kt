@@ -4,6 +4,51 @@
 package dev.octri.showcase.openai.models
 
 /**
+ * Details of the error.
+ */
+data class RealtimeServerEventErrorError(
+    /**
+     * The type of error (e.g., "invalid_request_error", "server_error").
+     */
+    val type: String,
+    /**
+     * A human-readable error message.
+     */
+    val message: String,
+    /**
+     * Optional `string` value serialized in the `code` wire field.
+     */
+    val code: String? = null,
+    /**
+     * Optional `string` value serialized in the `param` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
+    /**
+     * Optional `string` value serialized in the `event_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
+)
+
+/**
+ * Returned when an error occurs, which could be a client problem or a server problem. Most errors are recoverable and the session will stay open, we recommend to implementors to monitor and log error messages by default.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class RealtimeServerEventError(
+    /**
+     * The unique ID of the server event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The event type, must be `error`.
+     */
+    val type: RealtimeServerEventErrorTypeEnum,
+    /**
+     * Details of the error.
+     */
+    val error: RealtimeServerEventErrorError
+) : RealtimeServerEvent, RealtimeTranslationServerEvent
+
+/**
  * A Realtime translation client event.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeTranslationClientEvent::class)

@@ -20,7 +20,6 @@ data class ChatCompletionStreamOptions(
 /**
  * A function tool that can be used to generate a response.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ChatCompletionTool(
     /**
      * The type of the tool. Currently, only `function` is supported.
@@ -30,7 +29,7 @@ data class ChatCompletionTool(
      * Required object value serialized in the `function` wire field.
      */
     val function: FunctionObject
-) : ToolsItem
+)
 
 /**
  * Automatic thread title preferences for the session.

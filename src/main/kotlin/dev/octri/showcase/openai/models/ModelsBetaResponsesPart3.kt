@@ -4,6 +4,78 @@
 package dev.octri.showcase.openai.models
 
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaResponsesServerEventVariant34(
+    /**
+     * The type of the event. Always `response.reasoning_text.done`.
+     */
+    val type: BetaResponseReasoningTextDoneEventTypeEnum,
+    /**
+     * The ID of the item this reasoning text is associated with.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /**
+     * The index of the output item this reasoning text is associated with.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /**
+     * The index of the reasoning content part.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
+    /**
+     * The full text of the completed reasoning content.
+     */
+    val text: String,
+    /**
+     * The sequence number of this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /**
+     * The agent that owns this multi-agent streaming event.
+     */
+    val agent: BetaAgentTag? = null,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
+) : BetaResponsesServerEvent
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BetaResponsesServerEventVariant35(
+    /**
+     * The type of the event. Always `response.refusal.delta`.
+     */
+    val type: BetaResponseRefusalDeltaEventTypeEnum,
+    /**
+     * The ID of the output item that the refusal text is added to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
+    /**
+     * The index of the output item that the refusal text is added to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
+    /**
+     * The index of the content part that the refusal text is added to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
+    /**
+     * The refusal text that is added.
+     */
+    val delta: String,
+    /**
+     * The sequence number of this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
+    /**
+     * The agent that owns this multi-agent streaming event.
+     */
+    val agent: BetaAgentTag? = null,
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
+) : BetaResponsesServerEvent
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaResponsesServerEventVariant36(
     /**
      * The type of the event. Always `response.refusal.done`.
@@ -531,98 +603,6 @@ data class BetaResponsesServerEventVariant52(
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
     /**
      * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null,
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
-) : BetaResponsesServerEvent
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponsesServerEventVariant53(
-    /**
-     * The type of the event. Always 'response.mcp_list_tools.in_progress'.
-     */
-    val type: BetaResponseMCPListToolsInProgressEventTypeEnum,
-    /**
-     * The ID of the MCP tool call item that is being processed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that is being processed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null,
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
-) : BetaResponsesServerEvent
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponsesServerEventVariant54(
-    /**
-     * The type of the event. Always 'response.output_text.annotation.added'.
-     */
-    val type: BetaResponseOutputTextAnnotationAddedEventTypeEnum,
-    /**
-     * The unique identifier of the item to which the annotation is being added.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item in the response's output array.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part within the output item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The index of the annotation within the content part.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annotation_index") val annotationIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The annotation object being added. (See annotation schema for details.)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annotation", required = true) val `annotation`: BetaAnnotation?,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null,
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
-) : BetaResponsesServerEvent
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaResponsesServerEventVariant55(
-    /**
-     * The type of the event. Always 'response.queued'.
-     */
-    val type: BetaResponseQueuedEventTypeEnum,
-    /**
-     * The full response object that is queued.
-     */
-    val response: BetaResponse,
-    /**
-     * The sequence number for this event.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
     /**

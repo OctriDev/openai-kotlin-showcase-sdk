@@ -4,51 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Typed representation of the `LiveDecisionsDelegationParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveDecisionsDelegationParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveDecisionsDelegationParamTypeEnum,
-    /**
-     * Required object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsInputParam
-) : Delegation
-
-/**
- * Typed representation of the `LiveDecisionsDelegationParam2` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveDecisionsDelegationParam2(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveDecisionsDelegationParam2TypeEnum,
-    /**
-     * Required object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsInputParam2
-) : LiveSessionCreateParamsDelegation, LiveSessionResourceParamDelegation
-
-/**
- * Typed representation of the `LiveDecisionsDelegationUpdateParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class LiveDecisionsDelegationUpdateParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: LiveDecisionsDelegationUpdateParamTypeEnum,
-    /**
-     * Optional object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsUpdateParam? = null
-) : LiveSessionUpdateParamsDelegation
-
-/**
  * Typed representation of the `LiveDecisionsSettingsInputParam` API schema.
  */
 data class LiveDecisionsSettingsInputParam(

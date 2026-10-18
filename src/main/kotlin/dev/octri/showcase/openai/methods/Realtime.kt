@@ -6,6 +6,7 @@ package dev.octri.showcase.openai.methods
 import dev.octri.showcase.openai.AudioTranscription
 import dev.octri.showcase.openai.ClientConfig
 import dev.octri.showcase.openai.ErrorResponse
+import dev.octri.showcase.openai.NoiseReductionType
 import dev.octri.showcase.openai.Prompt
 import dev.octri.showcase.openai.RealtimeAudioFormats
 import dev.octri.showcase.openai.RealtimeCallCreateRequest
@@ -20,6 +21,7 @@ import dev.octri.showcase.openai.RealtimeSessionCreateRequestGAToolsItem
 import dev.octri.showcase.openai.RealtimeSessionCreateRequestGATypeEnum
 import dev.octri.showcase.openai.RealtimeSessionCreateRequestModalitiesItemEnum
 import dev.octri.showcase.openai.RealtimeSessionCreateRequestToolsItemTypeEnum
+import dev.octri.showcase.openai.RealtimeSessionCreateRequestTracing
 import dev.octri.showcase.openai.RealtimeSessionCreateResponse
 import dev.octri.showcase.openai.RealtimeTranscriptionSessionCreateRequestIncludeItemEnum
 import dev.octri.showcase.openai.RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum
@@ -38,6 +40,16 @@ import dev.octri.showcase.openai.VoiceIdsOrCustomVoice
 object Realtime {
 
 /**
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+ */
+data class RealtimeSessionCreateRequestGAAudioInputNoiseReduction(
+    /**
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
+     */
+    val type: NoiseReductionType? = null
+)
+
+/**
  * Optional object value serialized in the `input` wire field.
  */
 data class RealtimeSessionCreateRequestGAAudioInput(
@@ -52,7 +64,7 @@ data class RealtimeSessionCreateRequestGAAudioInput(
     /**
      * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeSessionCreateRequestGAAudioInputNoiseReduction? = null,
     /**
      * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
      */
@@ -193,6 +205,16 @@ data class RealtimeTranscriptionSessionCreateRequestTurnDetection(
      * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms") val silenceDurationMs: Long? = null
+)
+
+/**
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
+ */
+data class RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction(
+    /**
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
+     */
+    val type: NoiseReductionType? = null
 )
 
 /**
@@ -431,7 +453,7 @@ data class RealtimeTranslationClientSecretCreateRequestExpiresAfter(
         val outputAudioFormat: String? = null,
         val inputAudioTranscription: RealtimeSessionCreateRequestInputAudioTranscription? = null,
         val speed: Double? = null,
-        val tracing: Any? = null,
+        val tracing: RealtimeSessionCreateRequestTracing? = null,
         val turnDetection: RealtimeSessionCreateRequestTurnDetection? = null,
         val tools: List<RealtimeSessionCreateRequestToolsItem>? = null,
         val toolChoice: String? = null,
@@ -574,7 +596,7 @@ data class RealtimeTranslationClientSecretCreateRequestExpiresAfter(
      * @param include The set of items to include in the transcription. Current
      *   available items are: `item.input_audio_transcription.logprobs`
      */
-    fun createRealtimeTranscriptionSession(clientConfig: ClientConfig, turnDetection: RealtimeTranscriptionSessionCreateRequestTurnDetection? = null, inputAudioNoiseReduction: Any? = null, inputAudioFormat: RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum? = null, inputAudioTranscription: AudioTranscription? = null, include: List<RealtimeTranscriptionSessionCreateRequestIncludeItemEnum>? = null, options: RequestOptions? = null): RealtimeTranscriptionSessionCreateResponse {
+    fun createRealtimeTranscriptionSession(clientConfig: ClientConfig, turnDetection: RealtimeTranscriptionSessionCreateRequestTurnDetection? = null, inputAudioNoiseReduction: RealtimeTranscriptionSessionCreateRequestInputAudioNoiseReduction? = null, inputAudioFormat: RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum? = null, inputAudioTranscription: AudioTranscription? = null, include: List<RealtimeTranscriptionSessionCreateRequestIncludeItemEnum>? = null, options: RequestOptions? = null): RealtimeTranscriptionSessionCreateResponse {
         return SdkClient.request<RealtimeTranscriptionSessionCreateResponse>(SdkClient.RequestSpec("POST", "/realtime/transcription_sessions", config = clientConfig, body = SdkClient.bodyMap("turn_detection" to (SdkClient.omitIfNull(turnDetection)), "input_audio_noise_reduction" to
     (SdkClient.omitIfNull(inputAudioNoiseReduction)), "input_audio_format" to
     (SdkClient.omitIfNull(inputAudioFormat)), "input_audio_transcription" to

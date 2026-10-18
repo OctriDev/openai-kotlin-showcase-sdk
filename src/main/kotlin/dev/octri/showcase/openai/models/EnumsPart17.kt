@@ -4,25 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The object type, which is always `conversation`.
- */
-class ConversationResourceObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ConversationResourceObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val CONVERSATION = ConversationResourceObjectEnum("conversation")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ConversationResourceObjectEnum(value)
-    }
-}
-
-/**
  * Optional enumerated value serialized in the `api_source` wire field.
  */
 class CostsResultApiSourceVariant0Enum private constructor(
@@ -591,5 +572,29 @@ enum class CreateEvalStoredCompletionsDataSourceConfigTypeEnum(@com.fasterxml.ja
         @JvmStatic
         fun fromValue(v: String) = values().find { it.value == v }
             ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `vision`: Images used for vision fine-tuning - `user_data`: Flexible file type for any purpose - `evals`: Used for eval data sets
+ */
+class CreateFileRequestPurposeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is CreateFileRequestPurposeEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val ASSISTANTS = CreateFileRequestPurposeEnum("assistants")
+        @JvmField val BATCH = CreateFileRequestPurposeEnum("batch")
+        @JvmField val FINE_TUNE = CreateFileRequestPurposeEnum("fine-tune")
+        @JvmField val VISION = CreateFileRequestPurposeEnum("vision")
+        @JvmField val USER_DATA = CreateFileRequestPurposeEnum("user_data")
+        @JvmField val EVALS = CreateFileRequestPurposeEnum("evals")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = CreateFileRequestPurposeEnum(value)
     }
 }

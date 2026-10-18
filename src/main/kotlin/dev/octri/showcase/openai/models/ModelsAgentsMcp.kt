@@ -4,49 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * A call to a tool on an MCP server.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class McpCallItemResource(
-    /**
-     * The item type. Always `mcp_call`.
-     */
-    val type: McpCallItemResourceTypeEnum,
-    /**
-     * The ID of the MCP call item.
-     */
-    val id: String,
-    /**
-     * The ID of the turn that contains this item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /**
-     * The label of the MCP server.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /**
-     * The name of the MCP tool.
-     */
-    val name: String,
-    /**
-     * The arguments passed to the MCP tool.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true) val arguments: Any?,
-    /**
-     * The status of the MCP tool call.
-     */
-    val status: FunctionCallStatusResource,
-    /**
-     * The output returned by the MCP tool, if any.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("output", required = true) val output: Any?,
-    /**
-     * The error returned by the MCP tool, if any.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: Any?
-) : SessionTurnItemResource, AgentOutputItemResource
-
-/**
  * The transport used to connect to an MCP server.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMcpTransportConfigParam::class)

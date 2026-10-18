@@ -187,6 +187,29 @@ sealed interface ModelIds {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             val objectTypes: List<Class<out ModelIds>> = listOf(ModelIdsShared::class.java, ModelIdsResponses::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            return when {
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, ModelIds::class.java, "no ModelIds branch accepts this payload")
+            }
+        }
+    }
+}
+
+/**
+ * Typed representation of the `ModelIdsResponses` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ModelIdsResponses.Deserializer::class)
+sealed interface ModelIdsResponses : ModelIds, ModelIdsCompaction {
+    /** Chooses the branch this payload is shaped like. */
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ModelIdsResponses>() {
+        override fun deserialize(
+            parser: com.fasterxml.jackson.core.JsonParser,
+            context: com.fasterxml.jackson.databind.DeserializationContext,
+        ): ModelIdsResponses {
+            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
+            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
+            val objectTypes: List<Class<out ModelIdsResponses>> = listOf(ModelIdsShared::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -195,12 +218,19 @@ sealed interface ModelIds {
                 }
             }
             return when {
+                node.isTextual -> StringModelIdsResponses(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
                 else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ModelIds::class.java, "no ModelIds branch accepts this payload")
+                    parser, ModelIdsResponses::class.java, "no ModelIdsResponses branch accepts this payload")
             }
         }
     }
 }
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringModelIdsResponses(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ModelIdsResponses
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ModelIdsShared @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ModelIds, ModelIdsResponses
 
 /**
  * An audio output from the model.
@@ -278,3 +308,26 @@ data class UrlCitationParam(
      */
     val title: String
 )
+
+/**
+ * Typed representation of the `VadConfig` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VadConfig(
+    /**
+     * Must be set to `server_vad` to enable manual chunking using server side VAD.
+     */
+    val type: VadConfigTypeEnum,
+    /**
+     * Amount of audio to include before the VAD detected speech (in milliseconds).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms") val prefixPaddingMs: Long? = null,
+    /**
+     * Duration of silence to detect speech stop (in milliseconds). With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms") val silenceDurationMs: Long? = null,
+    /**
+     * Sensitivity threshold (0.0 to 1.0) for voice activity detection. A higher threshold will require louder audio to activate the model, and thus might perform better in noisy environments.
+     */
+    val threshold: Double? = null
+) : TranscriptionChunkingStrategy, CreateTranscriptionRequestChunkingStrategy

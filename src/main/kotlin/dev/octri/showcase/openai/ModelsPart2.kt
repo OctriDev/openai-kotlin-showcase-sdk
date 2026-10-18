@@ -191,6 +191,8 @@ typealias BetaCodeInterpreterToolCallStatusEnum = dev.octri.showcase.openai.mode
 
 typealias BetaCodeInterpreterToolCallTypeEnum = dev.octri.showcase.openai.models.BetaCodeInterpreterToolCallTypeEnum
 
+typealias BetaCodeInterpreterToolContainer = dev.octri.showcase.openai.models.BetaCodeInterpreterToolContainer
+
 typealias BetaCodeInterpreterToolTypeEnum = dev.octri.showcase.openai.models.BetaCodeInterpreterToolTypeEnum
 
 typealias BetaCompactionBody = dev.octri.showcase.openai.models.BetaCompactionBody
@@ -434,5 +436,3 @@ typealias BetaFunctionCallOutputItemParamTypeEnum = dev.octri.showcase.openai.mo
 typealias BetaFunctionCallOutputStatusEnum = dev.octri.showcase.openai.models.BetaFunctionCallOutputStatusEnum
 
 typealias BetaFunctionCallStatus = dev.octri.showcase.openai.models.BetaFunctionCallStatus
-
-typealias BetaFunctionShellAction = dev.octri.showcase.openai.models.BetaFunctionShellAction

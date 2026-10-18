@@ -25,13 +25,7 @@ sealed interface AssistantsApiResponseFormatOption {
             }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
             val objectTypes: List<Class<out AssistantsApiResponseFormatOption>> = listOf(ResponseFormatText::class.java, ResponseFormatJsonObject::class.java, ResponseFormatJsonSchema::class.java)
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
-            }
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
                 node.isTextual -> StringAssistantsApiResponseFormatOption(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
                 else -> UnknownAssistantsApiResponseFormatOption(node)
@@ -109,3 +103,62 @@ data class AssistantsNamedToolChoice(
      */
     val function: AssistantsNamedToolChoiceFunction? = null
 ) : AssistantsApiToolChoiceOption
+
+/**
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ResponseFormatJsonObject(
+    /**
+     * The type of response format being defined. Always `json_object`.
+     */
+    val type: ResponseFormatJsonObjectTypeEnum
+) : AssistantsApiResponseFormatOption, TextResponseFormatConfiguration, CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
+
+/**
+ * Structured Outputs configuration options, including a JSON Schema.
+ */
+data class ResponseFormatJsonSchemaJsonSchema(
+    /**
+     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+     */
+    val name: String,
+    /**
+     * A description of what the response format is for, used by the model to determine how to respond in the format.
+     */
+    val description: String? = null,
+    /**
+     * The schema for the response format, described as a JSON Schema object. Learn how to build JSON schemas here.
+     */
+    val schema: ResponseFormatJsonSchemaSchema? = null,
+    /**
+     * Optional `boolean` value serialized in the `strict` wire field.
+     */
+    val strict: Boolean? = null
+)
+
+/**
+ * JSON Schema response format. Used to generate structured JSON responses. Learn more about Structured Outputs.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ResponseFormatJsonSchema(
+    /**
+     * The type of response format being defined. Always `json_schema`.
+     */
+    val type: ResponseFormatJsonSchemaTypeEnum,
+    /**
+     * Structured Outputs configuration options, including a JSON Schema.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("json_schema") val jsonSchema: ResponseFormatJsonSchemaJsonSchema
+) : AssistantsApiResponseFormatOption, CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat
+
+/**
+ * Default response format. Used to generate text responses.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ResponseFormatText(
+    /**
+     * The type of response format being defined. Always `text`.
+     */
+    val type: ResponseFormatTextTypeEnum
+) : AssistantsApiResponseFormatOption, TextResponseFormatConfiguration, CreateEvalCompletionsRunDataSourceSamplingParamsResponseFormat

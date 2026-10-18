@@ -4,33 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Typed representation of the `BetaContainerAutoParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerAutoParam(
-    /**
-     * Automatically creates a container for this request
-     */
-    val type: BetaContainerAutoParamTypeEnum,
-    /**
-     * An optional list of uploaded files to make available to your code.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /**
-     * Optional API value serialized in the `memory_limit` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: BetaContainerMemoryLimit? = null,
-    /**
-     * Network access policy for the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: BetaContainerAutoParamNetworkPolicy? = null,
-    /**
-     * An optional list of skills referenced by id or inline data.
-     */
-    val skills: List<BetaContainerAutoParamSkillsItem>? = null
-) : BetaFunctionShellToolParamEnvironment
-
-/**
  * Network access policy for the container.
  */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaContainerAutoParamNetworkPolicy::class)
@@ -69,98 +42,6 @@ data class UnknownBetaContainerAutoParamSkillsItem @com.fasterxml.jackson.annota
 }
 
 /**
- * A citation for a container file used to generate a model response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerFileCitationBody(
-    /**
-     * The type of the container file citation. Always `container_file_citation`.
-     */
-    val type: BetaContainerFileCitationBodyTypeEnum,
-    /**
-     * The ID of the container file.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /**
-     * The ID of the file.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The index of the first character of the container file citation in the message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /**
-     * The index of the last character of the container file citation in the message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /**
-     * The filename of the container file cited.
-     */
-    val filename: String
-) : BetaAnnotation
-
-/**
- * Typed representation of the `BetaContainerFileCitationParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerFileCitationParam(
-    /**
-     * The citation type. Always `container_file_citation`.
-     */
-    val type: BetaContainerFileCitationParamTypeEnum,
-    /**
-     * The index of the first character of the citation in the message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /**
-     * The index of the last character of the citation in the message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /**
-     * The ID of the container.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /**
-     * The ID of the container file.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The filename of the container file cited.
-     */
-    val filename: String
-) : BetaOutputTextContentParamAnnotationsItem
-
-/**
- * Typed representation of the `BetaContainerNetworkPolicyAllowlistParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerNetworkPolicyAllowlistParam(
-    /**
-     * Allow outbound network access only to specified domains. Always `allowlist`.
-     */
-    val type: BetaContainerNetworkPolicyAllowlistParamTypeEnum,
-    /**
-     * A list of allowed domains when type is `allowlist`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>,
-    /**
-     * Optional domain-scoped secrets for allowlisted domains.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_secrets") val domainSecrets: List<BetaContainerNetworkPolicyDomainSecretParam>? = null
-) : BetaAutoCodeInterpreterToolParamNetworkPolicy, BetaContainerAutoParamNetworkPolicy
-
-/**
- * Typed representation of the `BetaContainerNetworkPolicyDisabledParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerNetworkPolicyDisabledParam(
-    /**
-     * Disable outbound network access. Always `disabled`.
-     */
-    val type: BetaContainerNetworkPolicyDisabledParamTypeEnum
-) : BetaAutoCodeInterpreterToolParamNetworkPolicy, BetaContainerAutoParamNetworkPolicy
-
-/**
  * Typed representation of the `BetaContainerNetworkPolicyDomainSecretParam` API schema.
  */
 data class BetaContainerNetworkPolicyDomainSecretParam(
@@ -179,31 +60,43 @@ data class BetaContainerNetworkPolicyDomainSecretParam(
 )
 
 /**
- * Typed representation of the `BetaContainerReferenceParam` API schema.
+ * Typed representation of the `BetaInlineSkillParam` API schema.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerReferenceParam(
+data class BetaInlineSkillParam(
     /**
-     * References a container created with the /v1/containers endpoint
+     * Defines an inline skill for this request.
      */
-    val type: BetaContainerReferenceParamTypeEnum,
+    val type: BetaInlineSkillParamTypeEnum,
     /**
-     * The ID of the referenced container.
+     * The name of the skill.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String
-) : BetaFunctionShellToolParamEnvironment, BetaFunctionShellCallItemParamEnvironment
+    val name: String,
+    /**
+     * The description of the skill.
+     */
+    val description: String,
+    /**
+     * Inline skill payload
+     */
+    val source: BetaInlineSkillSourceParam
+) : BetaContainerAutoParamSkillsItem
 
 /**
- * Represents a container created with /v1/containers.
+ * Typed representation of the `BetaSkillReferenceParam` API schema.
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaContainerReferenceResource(
+data class BetaSkillReferenceParam(
     /**
-     * The environment type. Always `container_reference`.
+     * References a skill created with the /v1/skills endpoint.
      */
-    val type: BetaContainerReferenceResourceTypeEnum,
+    val type: BetaSkillReferenceParamTypeEnum,
     /**
-     * Required `string` value serialized in the `container_id` wire field.
+     * The ID of the referenced skill.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String
-) : BetaFunctionShellCallEnvironment
+    @com.fasterxml.jackson.annotation.JsonProperty("skill_id") val skillId: String,
+    /**
+     * Optional skill version. Use a positive integer or 'latest'. Omit for default.
+     */
+    val version: String? = null
+) : BetaContainerAutoParamSkillsItem

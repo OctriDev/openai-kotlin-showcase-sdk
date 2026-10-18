@@ -6,22 +6,6 @@ package dev.octri.showcase.openai.models
 /**
  * Required enumerated value serialized in the `type` wire field.
  */
-enum class FunctionToolParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    FUNCTION("function");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
 enum class GcpExternalStorageProviderParamsTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     GCP("gcp");
 
@@ -585,6 +569,22 @@ enum class HostedTemplateSkillResourceInlineTypeEnum(@com.fasterxml.jackson.anno
  */
 enum class HostedTemplateSkillResourceSkillReferenceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     SKILL_REFERENCE("skill_reference");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class HTTPErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    HTTP_ERROR("http_error");
 
     override fun toString() = value
 
