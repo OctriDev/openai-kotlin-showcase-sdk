@@ -5706,7 +5706,9 @@
           ],
           "client": {
             "data_channel": {
-              "allowed_client_events": "all",
+              "allowed_client_events": [
+                "error"
+              ],
               "allowed_server_events": "all"
             }
           }
@@ -5935,7 +5937,9 @@
           },
           "client": {
             "data_channel": {
-              "allowed_client_events": "all",
+              "allowed_client_events": [
+                "error"
+              ],
               "allowed_server_events": "all"
             }
           }

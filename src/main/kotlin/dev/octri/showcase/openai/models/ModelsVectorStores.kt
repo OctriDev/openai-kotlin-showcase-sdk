@@ -556,7 +556,7 @@ data class VectorStoreSearchRequestRankingOptions(
 /** Typed representation of the `VectorStoreSearchRequest` API schema. */
 data class VectorStoreSearchRequest(
     /** A query string for a search */
-    val query: Any,
+    val query: List<String>,
     /** Whether to rewrite the natural language query for vector search. */
     @com.fasterxml.jackson.annotation.JsonProperty("rewrite_query")
     val rewriteQuery: Boolean? = null,

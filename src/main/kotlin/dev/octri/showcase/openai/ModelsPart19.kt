@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias RunStepObjectObjectEnum = dev.octri.showcase.openai.models.RunStepObjectObjectEnum
-
 typealias RunStepObjectStatusEnum = dev.octri.showcase.openai.models.RunStepObjectStatusEnum
 
 typealias RunStepObjectStepDetails = dev.octri.showcase.openai.models.RunStepObjectStepDetails
@@ -563,3 +561,6 @@ typealias StaticChunkingStrategyRequestParamTypeEnum =
 
 typealias StaticChunkingStrategyResponseParam =
     dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParam
+
+typealias StaticChunkingStrategyResponseParamTypeEnum =
+    dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParamTypeEnum

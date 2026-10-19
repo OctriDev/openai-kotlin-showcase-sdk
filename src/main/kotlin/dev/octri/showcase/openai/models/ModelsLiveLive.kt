@@ -73,7 +73,7 @@ data class LiveDataChannelConfigParam(
      * event; an empty array allows none. Omission preserves the existing allow-all behavior.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("allowed_client_events")
-    val allowedClientEvents: Any? = null,
+    val allowedClientEvents: List<String>? = null,
     /**
      * Server events that may be sent to the frontend data channel. Use 'all' to allow every server
      * event; an empty array allows none. Omission preserves the existing allow-all behavior.

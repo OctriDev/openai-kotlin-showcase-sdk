@@ -3,9 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias RealtimeBetaClientEventOutputAudioBufferClearTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClearTypeEnum
-
 typealias RealtimeBetaClientEventResponseCancel =
     dev.octri.showcase.openai.models.RealtimeBetaClientEventResponseCancel
 
@@ -632,3 +629,6 @@ typealias RealtimeResponseCreateParams =
 
 typealias RealtimeResponseCreateParamsAudio =
     dev.octri.showcase.openai.models.RealtimeResponseCreateParamsAudio
+
+typealias RealtimeResponseCreateParamsAudioOutput =
+    dev.octri.showcase.openai.models.RealtimeResponseCreateParamsAudioOutput
