@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias McpConnectionOriginParam = dev.octri.showcase.openai.models.McpConnectionOriginParam
-
 typealias McpConnectionOriginResource = dev.octri.showcase.openai.models.McpConnectionOriginResource
 
 typealias MCPListTools = dev.octri.showcase.openai.models.MCPListTools
@@ -436,3 +434,5 @@ typealias OutputAudioTypeEnum = dev.octri.showcase.openai.models.OutputAudioType
 typealias OutputContent = dev.octri.showcase.openai.models.OutputContent
 
 typealias OutputItem = dev.octri.showcase.openai.models.OutputItem
+
+typealias OutputItemStatusResource = dev.octri.showcase.openai.models.OutputItemStatusResource

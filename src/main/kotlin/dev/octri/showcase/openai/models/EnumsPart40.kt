@@ -4,25 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The event type, must be `mcp_list_tools.completed`.
- */
-class RealtimeBetaServerEventMCPListToolsCompletedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventMCPListToolsCompletedTypeEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val MCP_LIST_TOOLS_COMPLETED = RealtimeBetaServerEventMCPListToolsCompletedTypeEnum("mcp_list_tools.completed")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventMCPListToolsCompletedTypeEnum(value)
-    }
-}
-
-/**
  * The event type, must be `mcp_list_tools.failed`.
  */
 class RealtimeBetaServerEventMCPListToolsFailedTypeEnum private constructor(
@@ -581,6 +562,22 @@ class RealtimeBetaServerEventTranscriptionSessionUpdatedTypeEnum private constru
  */
 enum class RealtimeClientEventConversationItemCreateTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     CONVERSATION_ITEM_CREATE("conversation.item.create");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The event type, must be `conversation.item.delete`.
+ */
+enum class RealtimeClientEventConversationItemDeleteTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    CONVERSATION_ITEM_DELETE("conversation.item.delete");
 
     override fun toString() = value
 

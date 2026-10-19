@@ -4,25 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Required enumerated value serialized in the `object` wire field.
- */
-class ProjectApiKeyListResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ProjectApiKeyListResponseObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val LIST = ProjectApiKeyListResponseObjectEnum("list")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ProjectApiKeyListResponseObjectEnum(value)
-    }
-}
-
-/**
  * The object type, which is always `project.data_retention`.
  */
 class ProjectDataRetentionObjectEnum private constructor(
@@ -588,5 +569,24 @@ class ProjectSpendLimitResourceObjectEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = ProjectSpendLimitResourceObjectEnum(value)
+    }
+}
+
+/**
+ * The object type, which is always `organization.project.user`
+ */
+class ProjectUserObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ProjectUserObjectEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val ORGANIZATION_PROJECT_USER = ProjectUserObjectEnum("organization.project.user")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ProjectUserObjectEnum(value)
     }
 }

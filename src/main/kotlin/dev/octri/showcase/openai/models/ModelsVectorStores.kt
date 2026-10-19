@@ -585,7 +585,7 @@ data class VectorStoreSearchRequest(
     /**
      * A query string for a search
      */
-    val query: Any,
+    val query: List<String>,
     /**
      * Whether to rewrite the natural language query for vector search.
      */

@@ -4,25 +4,6 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The object type, which is always `organization.project.user`
- */
-class ProjectUserObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ProjectUserObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val ORGANIZATION_PROJECT_USER = ProjectUserObjectEnum("organization.project.user")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ProjectUserObjectEnum(value)
-    }
-}
-
-/**
  * Required enumerated value serialized in the `object` wire field.
  */
 class ProjectUserDeleteResponseObjectEnum private constructor(
@@ -596,5 +577,24 @@ class RealtimeBetaClientEventInputAudioBufferCommitTypeEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = RealtimeBetaClientEventInputAudioBufferCommitTypeEnum(value)
+    }
+}
+
+/**
+ * The event type, must be `output_audio_buffer.clear`.
+ */
+class RealtimeBetaClientEventOutputAudioBufferClearTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is RealtimeBetaClientEventOutputAudioBufferClearTypeEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val OUTPUT_AUDIO_BUFFER_CLEAR = RealtimeBetaClientEventOutputAudioBufferClearTypeEnum("output_audio_buffer.clear")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = RealtimeBetaClientEventOutputAudioBufferClearTypeEnum(value)
     }
 }

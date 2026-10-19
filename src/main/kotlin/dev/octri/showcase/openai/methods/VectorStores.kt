@@ -638,7 +638,7 @@ data class VectorStoreSearchRequestRankingOptions(
     /** Parameters for [searchVectorStore]. */
     data class SearchVectorStoreRequest(
         val vectorStoreId: String,
-        val query: Any,
+        val query: List<String>,
         val rewriteQuery: Boolean? = null,
         val maxNumResults: Long? = null,
         val filters: VectorStoreSearchRequestFilters? = null,

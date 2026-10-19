@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias OutputItemStatusResource = dev.octri.showcase.openai.models.OutputItemStatusResource
-
 typealias OutputMessage = dev.octri.showcase.openai.models.OutputMessage
 
 typealias OutputMessageContent = dev.octri.showcase.openai.models.OutputMessageContent
@@ -436,3 +434,5 @@ typealias RealtimeBetaClientEventInputAudioBufferCommit = dev.octri.showcase.ope
 typealias RealtimeBetaClientEventInputAudioBufferCommitTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferCommitTypeEnum
 
 typealias RealtimeBetaClientEventOutputAudioBufferClear = dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClear
+
+typealias RealtimeBetaClientEventOutputAudioBufferClearTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClearTypeEnum

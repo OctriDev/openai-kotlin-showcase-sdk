@@ -19830,7 +19830,9 @@
             },
             "client": {
               "data_channel": {
-                "allowed_client_events": "all",
+                "allowed_client_events": [
+                  "error"
+                ],
                 "allowed_server_events": "all"
               }
             }
@@ -41484,7 +41486,9 @@
             ],
             "client": {
               "data_channel": {
-                "allowed_client_events": "all",
+                "allowed_client_events": [
+                  "error"
+                ],
                 "allowed_server_events": "all"
               }
             }
@@ -47082,8 +47086,8 @@
         "fields": [
           {
             "wireName": "query",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -47112,7 +47116,9 @@
           }
         ],
         "example": {
-          "query": "query",
+          "query": [
+            "query"
+          ],
           "rewrite_query": false,
           "max_num_results": 10,
           "filters": {

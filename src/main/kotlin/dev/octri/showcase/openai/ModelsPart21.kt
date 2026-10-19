@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias UnknownBetaResponsesServerEvent = dev.octri.showcase.openai.models.UnknownBetaResponsesServerEvent
-
 typealias UnknownBetaResponseSteerInputItem = dev.octri.showcase.openai.models.UnknownBetaResponseSteerInputItem
 
 typealias UnknownBetaResponseSteerRequiredInput = dev.octri.showcase.openai.models.UnknownBetaResponseSteerRequiredInput
@@ -436,3 +434,5 @@ typealias UpdateProjectApiKeyBody = dev.octri.showcase.openai.models.UpdateProje
 typealias UpdateProjectDataRetentionBody = dev.octri.showcase.openai.models.UpdateProjectDataRetentionBody
 
 typealias UpdateProjectDataRetentionBodyRetentionTypeEnum = dev.octri.showcase.openai.models.UpdateProjectDataRetentionBodyRetentionTypeEnum
+
+typealias UpdateProjectServiceAccountBody = dev.octri.showcase.openai.models.UpdateProjectServiceAccountBody

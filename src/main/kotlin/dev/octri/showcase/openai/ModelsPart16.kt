@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias RealtimeResponseCreateParamsAudioOutput = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsAudioOutput
-
 typealias RealtimeResponseCreateParamsConversationVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsConversationVariant1Enum
 
 typealias RealtimeResponseCreateParamsMaxOutputTokensVariant1Enum = dev.octri.showcase.openai.models.RealtimeResponseCreateParamsMaxOutputTokensVariant1Enum
@@ -436,3 +434,5 @@ typealias RealtimeTranslationClientEventSessionClose = dev.octri.showcase.openai
 typealias RealtimeTranslationClientEventSessionCloseTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionCloseTypeEnum
 
 typealias RealtimeTranslationClientEventSessionUpdate = dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionUpdate
+
+typealias RealtimeTranslationClientEventSessionUpdateTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionUpdateTypeEnum

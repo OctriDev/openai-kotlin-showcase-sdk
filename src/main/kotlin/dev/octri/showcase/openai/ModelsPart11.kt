@@ -237,8 +237,6 @@ typealias LiveCustomVoiceParam = dev.octri.showcase.openai.models.LiveCustomVoic
 
 typealias LiveDataChannelConfigParam = dev.octri.showcase.openai.models.LiveDataChannelConfigParam
 
-typealias LiveDataChannelConfigParamAllowedClientEventsVariant0Enum = dev.octri.showcase.openai.models.LiveDataChannelConfigParamAllowedClientEventsVariant0Enum
-
 typealias LiveDataChannelConfigParamAllowedServerEventsVariant0Enum = dev.octri.showcase.openai.models.LiveDataChannelConfigParamAllowedServerEventsVariant0Enum
 
 typealias LiveDecisionChoiceParam = dev.octri.showcase.openai.models.LiveDecisionChoiceParam
@@ -436,3 +434,5 @@ typealias LiveInitialAssistantMessageItemParamRoleEnum = dev.octri.showcase.open
 typealias LiveInitialAssistantMessageItemParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialAssistantMessageItemParamTypeEnum
 
 typealias LiveInitialDeveloperMessageItemParam = dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParam
+
+typealias LiveInitialDeveloperMessageItemParamRoleEnum = dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamRoleEnum

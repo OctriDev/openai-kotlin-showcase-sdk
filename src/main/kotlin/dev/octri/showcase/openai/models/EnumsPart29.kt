@@ -6,25 +6,6 @@ package dev.octri.showcase.openai.models
 /**
  * Required enumerated value serialized in the `type` wire field.
  */
-class LiveDecisionCompletedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is LiveDecisionCompletedTypeEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val DECISION_COMPLETED = LiveDecisionCompletedTypeEnum("decision.completed")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = LiveDecisionCompletedTypeEnum(value)
-    }
-}
-
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
 enum class LiveDecisionCreateParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     DECISION_CREATE("decision.create");
 
@@ -588,6 +569,22 @@ enum class LiveForkSessionStartEventTypeEnum(@com.fasterxml.jackson.annotation.J
  * The tool to call. Always `function`.
  */
 enum class LiveFunctionToolChoiceParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    FUNCTION("function");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/**
+ * The tool type. Always `function`.
+ */
+enum class LiveFunctionToolInputParamTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FUNCTION("function");
 
     override fun toString() = value

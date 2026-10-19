@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias ResponseShellCallCommandDoneStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum
-
 typealias ResponseShellCallOutputContentDeltaStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEvent
 
 typealias ResponseShellCallOutputContentDeltaStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallOutputContentDeltaStreamingEventTypeEnum
@@ -436,3 +434,5 @@ typealias RunStepObject = dev.octri.showcase.openai.models.RunStepObject
 typealias RunStepObjectLastError = dev.octri.showcase.openai.models.RunStepObjectLastError
 
 typealias RunStepObjectLastErrorCodeEnum = dev.octri.showcase.openai.models.RunStepObjectLastErrorCodeEnum
+
+typealias RunStepObjectObjectEnum = dev.octri.showcase.openai.models.RunStepObjectObjectEnum
