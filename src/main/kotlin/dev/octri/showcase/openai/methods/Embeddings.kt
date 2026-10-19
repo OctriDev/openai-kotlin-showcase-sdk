@@ -13,67 +13,41 @@ import dev.octri.showcase.openai.Validation
 
 object Embeddings {
 
+
     /**
-     * Creates embedding vectors for the supplied text or token input. Provide `model` and `input`,
-     * and use `encoding_format` or `dimensions` to control the returned vectors when the selected
-     * model supports those options.
+     * Creates embedding vectors for the supplied text or token input. Provide `model` and `input`, and use `encoding_format` or `dimensions` to control the returned vectors when the selected model supports those options.
      *
      * Creates an embedding vector representing the input text.
      *
-     * @param input Input text to embed, encoded as a string or array of tokens. To embed multiple
-     *   inputs in a single request, pass an array of strings or array of token arrays. The input
-     *   must not exceed the max input tokens for the model (8192 tokens for all embedding models),
-     *   cannot be an empty string, and any array must be 2048 dimensions or less. Example Python
-     *   code for counting tokens. In addition to the per-input token limit, all embedding models
-     *   enforce a maximum of 300,000 tokens summed…
-     * @param model ID of the model to use. You can use the List models API to see all of your
-     *   available models, or see our Model overview for descriptions of them.
-     * @param encodingFormat The format to return the embeddings in. Can be either `float` or
-     *   `base64`.
-     * @param dimensions The number of dimensions the resulting output embeddings should have. Only
-     *   supported in `text-embedding-3` and later models.
-     * @param user A unique identifier representing your end-user, which can help OpenAI to monitor
-     *   and detect abuse. Learn more.
+     * @param input Input text to embed, encoded as a string or array of tokens. To
+     *   embed multiple inputs in a single request, pass an array of strings or array
+     *   of token arrays. The input must not exceed the max input tokens for the model
+     *   (8192 tokens for all embedding models), cannot be an empty string, and any
+     *   array must be 2048 dimensions or less. Example Python code for counting
+     *   tokens. In addition to the per-input token limit, all embedding models enforce
+     *   a maximum of 300,000 tokens summed…
+     * @param model ID of the model to use. You can use the List models API to see
+     *   all of your available models, or see our Model overview for descriptions of
+     *   them.
+     * @param encodingFormat The format to return the embeddings in. Can be either
+     *   `float` or `base64`.
+     * @param dimensions The number of dimensions the resulting output embeddings
+     *   should have. Only supported in `text-embedding-3` and later models.
+     * @param user A unique identifier representing your end-user, which can help
+     *   OpenAI to monitor and detect abuse. Learn more.
      */
-    fun createEmbedding(
-        clientConfig: ClientConfig,
-        input: Any,
-        model: String,
-        encodingFormat: CreateEmbeddingRequestEncodingFormatEnum? = null,
-        dimensions: Long? = null,
-        user: String? = null,
-        options: RequestOptions? = null,
-    ): CreateEmbeddingResponse {
+    fun createEmbedding(clientConfig: ClientConfig, input: Any, model: String, encodingFormat: CreateEmbeddingRequestEncodingFormatEnum? = null, dimensions: Long? = null, user: String? = null, options: RequestOptions? = null): CreateEmbeddingResponse {
         if (dimensions != null) {
             Validation.validateRange("dimensions", dimensions, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<CreateEmbeddingResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/embeddings",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "input" to (input),
-                            "model" to (model),
-                            "encoding_format" to (SdkClient.omitIfNull(encodingFormat)),
-                            "dimensions" to (SdkClient.omitIfNull(dimensions)),
-                            "user" to (SdkClient.omitIfNull(user)),
-                        ),
-                    operationId = "createEmbedding",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "401" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "503" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<CreateEmbeddingResponse>(SdkClient.RequestSpec("POST", "/embeddings", config = clientConfig, body = SdkClient.bodyMap("input" to (input), "model" to (model), "encoding_format" to (SdkClient.omitIfNull(encodingFormat)), "dimensions" to (SdkClient.omitIfNull(dimensions)), "user" to (SdkClient.omitIfNull(user))), operationId = "createEmbedding", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

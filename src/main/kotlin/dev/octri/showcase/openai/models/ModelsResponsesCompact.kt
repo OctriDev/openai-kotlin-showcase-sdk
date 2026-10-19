@@ -3,47 +3,66 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `CompactResource` API schema. */
+/**
+ * Typed representation of the `CompactResource` API schema.
+ */
 data class CompactResource(
-    /** The unique identifier for the compacted response. */
+    /**
+     * The unique identifier for the compacted response.
+     */
     val id: String,
-    /** The object type. Always `response.compaction`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: CompactResourceObjectEnum,
-    /** The compacted list of output items. */
+    /**
+     * The object type. Always `response.compaction`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CompactResourceObjectEnum,
+    /**
+     * The compacted list of output items.
+     */
     val output: List<ItemField>,
-    /** Unix timestamp (in seconds) when the compacted conversation was created. */
+    /**
+     * Unix timestamp (in seconds) when the compacted conversation was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Token accounting for the compaction pass, including cached, reasoning, and total tokens. */
-    val usage: ResponseUsage,
+    /**
+     * Token accounting for the compaction pass, including cached, reasoning, and total tokens.
+     */
+    val usage: ResponseUsage
 )
 
-/** Typed representation of the `CompactResponseMethodPublicBody` API schema. */
+/**
+ * Typed representation of the `CompactResponseMethodPublicBody` API schema.
+ */
 data class CompactResponseMethodPublicBody(
     /**
-     * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of
-     * models with different capabilities, performance characteristics, and price points. Refer to
-     * the model guide to browse and compare available models.
+     * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the model guide to browse and compare available models.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("model", required = true)
-    val model: ModelIdsCompaction?,
-    /** Text, image, or file inputs to the model, used to generate a response */
+    @com.fasterxml.jackson.annotation.JsonProperty("model", required = true) val model: ModelIdsCompaction?,
+    /**
+     * Text, image, or file inputs to the model, used to generate a response
+     */
     val input: Any? = null,
-    /** Optional `string` value serialized in the `previous_response_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
-    val previousResponseId: String? = null,
-    /** Optional `string` value serialized in the `instructions` wire field. */
+    /**
+     * Optional `string` value serialized in the `previous_response_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String? = null,
+    /**
+     * Optional `string` value serialized in the `instructions` wire field.
+     */
     val instructions: String? = null,
-    /** Optional API value serialized in the `prompt_cache_key` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
-    val promptCacheKey: String? = null,
-    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
-    val promptCacheRetention: PromptCacheRetentionEnum? = null,
-    /** Optional API value serialized in the `prompt_cache_options` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options")
-    val promptCacheOptions: PromptCacheOptionsParam? = null,
-    /** Optional API value serialized in the `service_tier` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
-    val serviceTier: ServiceTierEnum? = null,
+    /**
+     * Optional API value serialized in the `prompt_cache_key` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
+    /**
+     * Optional API value serialized in the `prompt_cache_retention` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: PromptCacheRetentionEnum? = null,
+    /**
+     * Optional API value serialized in the `prompt_cache_options` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options") val promptCacheOptions: PromptCacheOptionsParam? = null,
+    /**
+     * Optional API value serialized in the `service_tier` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTierEnum? = null
 )

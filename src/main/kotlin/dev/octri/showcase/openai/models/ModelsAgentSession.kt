@@ -3,47 +3,76 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `AgentSessionActionRequiredPayloadResource` API schema. */
+/**
+ * Typed representation of the `AgentSessionActionRequiredPayloadResource` API schema.
+ */
 data class AgentSessionActionRequiredPayloadResource(
-    /** The ID of the session. */
+    /**
+     * The ID of the session.
+     */
     val id: String,
-    /** The action type. Retrieve the session for action details. */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_action")
-    val requiredAction: AgentSessionRequiredActionPayloadResource,
+    /**
+     * The action type. Retrieve the session for action details.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("required_action") val requiredAction: AgentSessionRequiredActionPayloadResource
 )
 
-/** Typed representation of the `AgentSessionConnectPayloadResource` API schema. */
+/**
+ * Typed representation of the `AgentSessionConnectPayloadResource` API schema.
+ */
 data class AgentSessionConnectPayloadResource(
-    /** The URL used to connect the self-hosted environment. */
+    /**
+     * The URL used to connect the self-hosted environment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("remote_url") val remoteUrl: String
 )
 
-/** Typed representation of the `AgentSessionCreatedPayloadResource` API schema. */
+/**
+ * Typed representation of the `AgentSessionCreatedPayloadResource` API schema.
+ */
 data class AgentSessionCreatedPayloadResource(
-    /** The ID of the session. */
+    /**
+     * The ID of the session.
+     */
     val id: String,
-    /** The environment type: `none`, `openai_hosted`, or `self_hosted`. */
+    /**
+     * The environment type: `none`, `openai_hosted`, or `self_hosted`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("environment_type") val environmentType: String,
-    /** The ID of the environment, when one exists. */
-    @com.fasterxml.jackson.annotation.JsonProperty("environment_id")
-    val environmentId: String? = null,
-    /** Optional object value serialized in the `connect` wire field. */
-    val connect: AgentSessionConnectPayloadResource? = null,
+    /**
+     * The ID of the environment, when one exists.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("environment_id") val environmentId: String? = null,
+    /**
+     * Optional object value serialized in the `connect` wire field.
+     */
+    val connect: AgentSessionConnectPayloadResource? = null
 )
 
-/** Typed representation of the `AgentSessionEnvironmentPayloadResource` API schema. */
+/**
+ * Typed representation of the `AgentSessionEnvironmentPayloadResource` API schema.
+ */
 data class AgentSessionEnvironmentPayloadResource(
-    /** The ID of the session. */
+    /**
+     * The ID of the session.
+     */
     val id: String,
-    /** The environment type: `none`, `openai_hosted`, or `self_hosted`. */
+    /**
+     * The environment type: `none`, `openai_hosted`, or `self_hosted`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("environment_type") val environmentType: String,
-    /** The ID of the environment, when one exists. */
-    @com.fasterxml.jackson.annotation.JsonProperty("environment_id")
-    val environmentId: String? = null,
+    /**
+     * The ID of the environment, when one exists.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("environment_id") val environmentId: String? = null
 )
 
-/** Typed representation of the `AgentSessionRequiredActionPayloadResource` API schema. */
+/**
+ * Typed representation of the `AgentSessionRequiredActionPayloadResource` API schema.
+ */
 data class AgentSessionRequiredActionPayloadResource(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AgentSessionRequiredActionTypeResource
 )

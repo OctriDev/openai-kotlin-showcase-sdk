@@ -18,84 +18,45 @@ import dev.octri.showcase.openai.Validation
 
 object GroupUsers {
 
+
     /**
-     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier
-     * in a previous response, and use `limit` and `order` to control the page size and sort order.
-     * The response indicates whether more users are available and provides the cursor for the next
-     * page.
+     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier in a previous response, and use `limit` and `order` to control the page size and sort order. The response indicates whether more users are available and provides the cursor for the next page.
      *
      * Lists the users assigned to a group.
      *
      * @param groupId The ID of the group to inspect.
-     * @param limit A limit on the number of users to be returned. Limit can range between 0 and
-     *   1000, and the default is 100.
-     * @param after A cursor for use in pagination. Provide the ID of the last user from the
-     *   previous list response to retrieve the next page.
+     * @param limit A limit on the number of users to be returned. Limit can range
+     *   between 0 and 1000, and the default is 100.
+     * @param after A cursor for use in pagination. Provide the ID of the last user
+     *   from the previous list response to retrieve the next page.
      * @param order Specifies the sort order of users in the list.
      */
-    fun listGroupUsers(
-        clientConfig: ClientConfig,
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupUsersParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): UserListResource {
+    fun listGroupUsers(clientConfig: ClientConfig, groupId: String, limit: Long? = null, after: String? = null, order: ListGroupUsersParameterEnum? = null, options: RequestOptions? = null): UserListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 1000.0))
-        }
+}
 
-        return SdkClient.request<UserListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listGroupUsers",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "502" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<UserListResource>(SdkClient.RequestSpec("GET", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listGroupUsers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "502" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier
-     * in a previous response, and use `limit` and `order` to control the page size and sort order.
-     * The response indicates whether more users are available and provides the cursor for the next
-     * page.
+     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier in a previous response, and use `limit` and `order` to control the page size and sort order. The response indicates whether more users are available and provides the cursor for the next page.
      *
      * Lists the users assigned to a group.
      *
      * @param groupId The ID of the group to inspect.
-     * @param limit A limit on the number of users to be returned. Limit can range between 0 and
-     *   1000, and the default is 100.
-     * @param after A cursor for use in pagination. Provide the ID of the last user from the
-     *   previous list response to retrieve the next page.
+     * @param limit A limit on the number of users to be returned. Limit can range
+     *   between 0 and 1000, and the default is 100.
+     * @param after A cursor for use in pagination. Provide the ID of the last user
+     *   from the previous list response to retrieve the next page.
      * @param order Specifies the sort order of users in the list.
      */
-    fun listGroupUsersPaginated(
-        clientConfig: ClientConfig,
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupUsersParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (GroupUser) -> Boolean,
-    ) {
+    fun listGroupUsersPaginated(clientConfig: ClientConfig, groupId: String, limit: Long? = null, after: String? = null, order: ListGroupUsersParameterEnum? = null, options: RequestOptions? = null, yieldFn: (GroupUser) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listGroupUsers(clientConfig, groupId, limit, cursor, order, options)
@@ -116,15 +77,7 @@ object GroupUsers {
         val hasMore: Boolean,
     )
 
-    fun listGroupUsersPages(
-        clientConfig: ClientConfig,
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupUsersParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListGroupUsersPage) -> Boolean,
-    ) {
+    fun listGroupUsersPages(clientConfig: ClientConfig, groupId: String, limit: Long? = null, after: String? = null, order: ListGroupUsersParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListGroupUsersPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listGroupUsers(clientConfig, groupId, limit, cursor, order, options)
@@ -138,113 +91,60 @@ object GroupUsers {
         }
     }
 
+
+
     /**
-     * Adds a user to a group in the organization. Supply the user's identifier in `user_id` to
-     * specify the membership to create. The response confirms the added user and the group they
-     * were added to.
+     * Adds a user to a group in the organization. Supply the user's identifier in `user_id` to specify the membership to create. The response confirms the added user and the group they were added to.
      *
      * Adds a user to a group.
      *
      * @param groupId The ID of the group to update.
      * @param userId Identifier of the user to add to the group.
      */
-    fun addGroupUser(
-        clientConfig: ClientConfig,
-        groupId: String,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GroupUserAssignment {
-        return SdkClient.request<GroupUserAssignment>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("user_id" to (userId)),
-                    operationId = "addGroupUser",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "409" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun addGroupUser(clientConfig: ClientConfig, groupId: String, userId: String, options: RequestOptions? = null): GroupUserAssignment {
+        return SdkClient.request<GroupUserAssignment>(SdkClient.RequestSpec("POST", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users", config = clientConfig, body = SdkClient.bodyMap("user_id" to (userId)), operationId = "addGroupUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a user's membership details for a group. Provide both `group_id` and `user_id` to
-     * identify the membership to inspect. The response includes the user's name, email, profile
-     * picture, account type, and service-account status.
+     * Retrieves a user's membership details for a group. Provide both `group_id` and `user_id` to identify the membership to inspect. The response includes the user's name, email, profile picture, account type, and service-account status.
      *
      * Retrieves a user in a group.
      *
      * @param groupId The ID of the group to inspect.
      * @param userId The ID of the user to retrieve from the group.
      */
-    fun retrieveGroupUser(
-        clientConfig: ClientConfig,
-        groupId: String,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GroupMemberUser {
-        return SdkClient.request<GroupMemberUser>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users/${SdkClient.encodePathSegment(userId)}",
-                    config = clientConfig,
-                    operationId = "retrieveGroupUser",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveGroupUser(clientConfig: ClientConfig, groupId: String, userId: String, options: RequestOptions? = null): GroupMemberUser {
+        return SdkClient.request<GroupMemberUser>(SdkClient.RequestSpec("GET", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "retrieveGroupUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Removes a user's membership from a group. Supply `group_id` and `user_id` to identify the
-     * group membership to remove. The response confirms whether the membership was deleted.
+     * Removes a user's membership from a group. Supply `group_id` and `user_id` to identify the group membership to remove. The response confirms whether the membership was deleted.
      *
      * Removes a user from a group.
      *
      * @param groupId The ID of the group to update.
      * @param userId The ID of the user to remove from the group.
      */
-    fun removeGroupUser(
-        clientConfig: ClientConfig,
-        groupId: String,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GroupUserDeletedResource {
-        return SdkClient.request<GroupUserDeletedResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users/${SdkClient.encodePathSegment(userId)}",
-                    config = clientConfig,
-                    operationId = "removeGroupUser",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "409" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun removeGroupUser(clientConfig: ClientConfig, groupId: String, userId: String, options: RequestOptions? = null): GroupUserDeletedResource {
+        return SdkClient.request<GroupUserDeletedResource>(SdkClient.RequestSpec("DELETE", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "removeGroupUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

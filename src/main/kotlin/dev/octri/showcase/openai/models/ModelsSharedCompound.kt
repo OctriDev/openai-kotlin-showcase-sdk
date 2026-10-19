@@ -4,64 +4,39 @@
 package dev.octri.showcase.openai.models
 
 /**
- * A filter used to compare a specified attribute key to a given value using a defined comparison
- * operation.
+ * A filter used to compare a specified attribute key to a given value using a defined comparison operation.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ComparisonFilter(
     /**
-     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`:
-     * equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less
-     * than - `lte`: less than or equal - `in`: in - `nin`: not in
+     * Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`. - `eq`: equals - `ne`: not equal - `gt`: greater than - `gte`: greater than or equal - `lt`: less than - `lte`: less than or equal - `in`: in - `nin`: not in
      */
     val type: ComparisonFilterTypeEnum,
-    /** The key to compare against the value. */
+    /**
+     * The key to compare against the value.
+     */
     val key: String,
     /**
      * The value to compare against the attribute key; supports string, number, or boolean types.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any,
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any
 ) : Filters, CompoundFilterFiltersItem, VectorStoreSearchRequestFilters
 
-/** Required API value serialized in the `filters[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownCompoundFilterFiltersItem::class,
-)
+/**
+ * Required API value serialized in the `filters[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCompoundFilterFiltersItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ComparisonFilter::class,
-        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CompoundFilter::class,
-        names = ["and", "or"],
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CompoundFilter::class, names = ["and", "or"])
 )
 sealed interface CompoundFilterFiltersItem
 
 /** A [CompoundFilterFiltersItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownCompoundFilterFiltersItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownCompoundFilterFiltersItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : CompoundFilterFiltersItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

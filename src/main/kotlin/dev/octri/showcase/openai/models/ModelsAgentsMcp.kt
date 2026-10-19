@@ -3,152 +3,136 @@
 
 package dev.octri.showcase.openai.models
 
-/** The transport used to connect to an MCP server. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownMcpTransportConfigParam::class,
-)
+/**
+ * The transport used to connect to an MCP server.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMcpTransportConfigParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = McpTransportConfigParamHttp::class,
-        name = "http",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = McpTransportConfigParamStdio::class,
-        name = "stdio",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpTransportConfigParamHttp::class, name = "http"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpTransportConfigParamStdio::class, name = "stdio")
 )
 sealed interface McpTransportConfigParam
 
 /** A [McpTransportConfigParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownMcpTransportConfigParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownMcpTransportConfigParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : McpTransportConfigParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Connects to an MCP server over HTTP. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Connects to an MCP server over HTTP.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class McpTransportConfigParamHttp(
-    /** The type of the object. Always `http`. */
+    /**
+     * The type of the object. Always `http`.
+     */
     val type: McpTransportConfigParamHttpTypeEnum,
-    /** The URL of the MCP server. */
+    /**
+     * The URL of the MCP server.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String,
-    /** The authorization value sent to the MCP server, if any. */
+    /**
+     * The authorization value sent to the MCP server, if any.
+     */
     val authorization: String? = null,
-    /** Additional HTTP headers sent to the MCP server. */
-    val headers: Map<String, String>? = null,
+    /**
+     * Additional HTTP headers sent to the MCP server.
+     */
+    val headers: Map<String, String>? = null
 ) : McpTransportConfigParam
 
-/** Starts an MCP server as a local process. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Starts an MCP server as a local process.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class McpTransportConfigParamStdio(
-    /** The type of the object. Always `stdio`. */
+    /**
+     * The type of the object. Always `stdio`.
+     */
     val type: McpTransportConfigParamStdioTypeEnum,
-    /** The command used to start the MCP server. */
+    /**
+     * The command used to start the MCP server.
+     */
     val command: String,
-    /** The working directory used to start the MCP server. */
+    /**
+     * The working directory used to start the MCP server.
+     */
     val cwd: String,
-    /** Arguments passed to the MCP server command. */
+    /**
+     * Arguments passed to the MCP server command.
+     */
     val args: List<String>? = null,
-    /** Environment variables set for the MCP server process. */
+    /**
+     * Environment variables set for the MCP server process.
+     */
     val env: Map<String, String>? = null,
-    /** Environment variable names to inherit from the selected execution environment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("env_vars") val envVars: List<String>? = null,
+    /**
+     * Environment variable names to inherit from the selected execution environment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("env_vars") val envVars: List<String>? = null
 ) : McpTransportConfigParam
 
-/** The transport used to connect to an MCP server. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownMcpTransportResource::class,
-)
+/**
+ * The transport used to connect to an MCP server.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownMcpTransportResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = McpTransportResourceHttp::class,
-        name = "http",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = McpTransportResourceStdio::class,
-        name = "stdio",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpTransportResourceHttp::class, name = "http"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = McpTransportResourceStdio::class, name = "stdio")
 )
 sealed interface McpTransportResource
 
 /** A [McpTransportResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownMcpTransportResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownMcpTransportResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : McpTransportResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Connects to an MCP server over HTTP. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Connects to an MCP server over HTTP.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class McpTransportResourceHttp(
-    /** The type of the object. Always `http`. */
+    /**
+     * The type of the object. Always `http`.
+     */
     val type: McpTransportResourceHttpTypeEnum,
-    /** The URL of the MCP server. */
-    @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String,
+    /**
+     * The URL of the MCP server.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("server_url") val serverUrl: String
 ) : McpTransportResource
 
-/** Starts an MCP server as a local process. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Starts an MCP server as a local process.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class McpTransportResourceStdio(
-    /** The type of the object. Always `stdio`. */
+    /**
+     * The type of the object. Always `stdio`.
+     */
     val type: McpTransportResourceStdioTypeEnum,
-    /** The command used to start the MCP server. */
+    /**
+     * The command used to start the MCP server.
+     */
     val command: String,
-    /** Arguments passed to the MCP server command. */
+    /**
+     * Arguments passed to the MCP server command.
+     */
     val args: List<String>,
-    /** The working directory used to start the MCP server. */
+    /**
+     * The working directory used to start the MCP server.
+     */
     val cwd: String,
-    /** Environment variable names inherited from the execution environment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("env_vars") val envVars: List<String>,
+    /**
+     * Environment variable names inherited from the execution environment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("env_vars") val envVars: List<String>
 ) : McpTransportResource

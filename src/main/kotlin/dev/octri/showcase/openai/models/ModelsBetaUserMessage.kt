@@ -3,121 +3,103 @@
 
 package dev.octri.showcase.openai.models
 
-/** A file input to the model. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A file input to the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaInputFileContentParam(
-    /** The type of the input item. Always `input_file`. */
+    /**
+     * The type of the input item. Always `input_file`.
+     */
     val type: BetaInputFileContentParamTypeEnum,
-    /** Optional `string` value serialized in the `file_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `file_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /** Optional `string` value serialized in the `filename` wire field. */
+    /**
+     * Optional `string` value serialized in the `filename` wire field.
+     */
     val filename: String? = null,
-    /** Optional API value serialized in the `file_data` wire field. */
+    /**
+     * Optional API value serialized in the `file_data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_data") val fileData: String? = null,
-    /** Optional API value serialized in the `file_url` wire field. */
+    /**
+     * Optional API value serialized in the `file_url` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_url") val fileUrl: String? = null,
     /**
-     * The detail level of the file to be sent to the model. Use `auto` to let the system select the
-     * detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may
-     * increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file
-     * at higher quality. Defaults to `auto`.
+     * The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
      */
     val detail: BetaFileDetailEnum? = null,
-    /** Optional API value serialized in the `prompt_cache_breakpoint` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
-    val promptCacheBreakpoint: BetaPromptCacheBreakpointParam? = null,
+    /**
+     * Optional API value serialized in the `prompt_cache_breakpoint` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointParam? = null
 ) : BetaFunctionCallOutputItemParamOutputItem, BetaUserMessageItemParamContentItem
 
-/** An image input to the model. Learn about image inputs */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * An image input to the model. Learn about image inputs
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaInputImageContentParamAutoParam(
-    /** The type of the input item. Always `input_image`. */
+    /**
+     * The type of the input item. Always `input_image`.
+     */
     val type: BetaInputImageContentParamAutoParamTypeEnum,
-    /** Optional API value serialized in the `image_url` wire field. */
+    /**
+     * Optional API value serialized in the `image_url` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
-    /** Optional `string` value serialized in the `file_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `file_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String? = null,
-    /** Optional API value serialized in the `detail` wire field. */
+    /**
+     * Optional API value serialized in the `detail` wire field.
+     */
     val detail: BetaDetailEnum? = null,
-    /** Optional API value serialized in the `prompt_cache_breakpoint` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
-    val promptCacheBreakpoint: BetaPromptCacheBreakpointParam? = null,
-) :
-    BetaFunctionCallOutputItemParamOutputItem,
-    BetaAgentMessageItemParamContentItem,
-    BetaUserMessageItemParamContentItem
+    /**
+     * Optional API value serialized in the `prompt_cache_breakpoint` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointParam? = null
+) : BetaFunctionCallOutputItemParamOutputItem, BetaAgentMessageItemParamContentItem, BetaUserMessageItemParamContentItem
 
-/** A text input to the model. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A text input to the model.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaInputTextContentParam(
-    /** The type of the input item. Always `input_text`. */
+    /**
+     * The type of the input item. Always `input_text`.
+     */
     val type: BetaInputTextContentParamTypeEnum,
-    /** The text input to the model. */
+    /**
+     * The text input to the model.
+     */
     val text: String,
-    /** Optional API value serialized in the `prompt_cache_breakpoint` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint")
-    val promptCacheBreakpoint: BetaPromptCacheBreakpointParam? = null,
-) :
-    BetaFunctionCallOutputItemParamOutputItem,
-    BetaAgentMessageItemParamContentItem,
-    BetaUserMessageItemParamContentItem
+    /**
+     * Optional API value serialized in the `prompt_cache_breakpoint` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_breakpoint") val promptCacheBreakpoint: BetaPromptCacheBreakpointParam? = null
+) : BetaFunctionCallOutputItemParamOutputItem, BetaAgentMessageItemParamContentItem, BetaUserMessageItemParamContentItem
 
-/** A piece of message content, such as text, an image, or a file. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownBetaUserMessageItemParamContentItem::class,
-)
+/**
+ * A piece of message content, such as text, an image, or a file.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaUserMessageItemParamContentItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaInputTextContentParam::class,
-        name = "input_text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaInputImageContentParamAutoParam::class,
-        name = "input_image",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaInputFileContentParam::class,
-        name = "input_file",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputTextContentParam::class, name = "input_text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputImageContentParamAutoParam::class, name = "input_image"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaInputFileContentParam::class, name = "input_file")
 )
 sealed interface BetaUserMessageItemParamContentItem
 
-/**
- * A [BetaUserMessageItemParamContentItem] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownBetaUserMessageItemParamContentItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [BetaUserMessageItemParamContentItem] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownBetaUserMessageItemParamContentItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : BetaUserMessageItemParamContentItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

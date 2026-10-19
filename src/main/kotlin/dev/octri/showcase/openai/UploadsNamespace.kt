@@ -3,101 +3,42 @@
 
 package dev.octri.showcase.openai
 
+
 class UploadsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an upload that accepts file parts before they are assembled into a usable file.
-     * Provide the filename, purpose, byte count, and MIME type; uploads can contain up to 8 GB and
-     * expire after one hour. Add parts to the upload, then complete it to create the file.
+     * Creates an upload that accepts file parts before they are assembled into a usable file. Provide the filename, purpose, byte count, and MIME type; uploads can contain up to 8 GB and expire after one hour. Add parts to the upload, then complete it to create the file.
      *
-     * Creates an intermediate Upload object that you can add Parts to. Currently, an Upload can
-     * accept at most 8 GB in total and expires after an hour after you create it. Once you complete
-     * the Upload, we will create a File object that contains all the parts you uploaded. This File
-     * is usable in the rest of our platform as a regular File object. For certain `purpose` values,
-     * the correct `mime_type` must be specified. Please refer to documentation for the supported
-     * MIME types for…
+     * Creates an intermediate Upload object that you can add Parts to. Currently, an Upload can accept at most 8 GB in total and expires after an hour after you create it. Once you complete the Upload, we will create a File object that contains all the parts you uploaded. This File is usable in the rest of our platform as a regular File object. For certain `purpose` values, the correct `mime_type` must be specified. Please refer to documentation for the supported MIME types for…
      */
-    fun create(
-        filename: String,
-        purpose: CreateUploadRequestPurposeEnum,
-        bytes: Long,
-        mimeType: String,
-        expiresAfter: FileExpirationAfter? = null,
-        options: RequestOptions? = null,
-    ): Upload {
-        return dev.octri.showcase.openai.methods.Uploads.createUpload(
-            clientConfig,
-            filename,
-            purpose,
-            bytes,
-            mimeType,
-            expiresAfter,
-            options,
-        )
+    fun create(filename: String, purpose: CreateUploadRequestPurposeEnum, bytes: Long, mimeType: String, expiresAfter: FileExpirationAfter? = null, options: RequestOptions? = null): Upload {
+        return dev.octri.showcase.openai.methods.Uploads.createUpload(clientConfig, filename, purpose, bytes, mimeType, expiresAfter, options)
     }
 
     /**
-     * Cancels a pending upload so that no more parts can be added. Use this operation when you no
-     * longer intend to complete the upload; the returned upload object has status `cancelled`.
+     * Cancels a pending upload so that no more parts can be added. Use this operation when you no longer intend to complete the upload; the returned upload object has status `cancelled`.
      *
-     * Cancels the Upload. No Parts may be added after an Upload is cancelled. Returns the Upload
-     * object with status `cancelled`.
+     * Cancels the Upload. No Parts may be added after an Upload is cancelled. Returns the Upload object with status `cancelled`.
      */
     fun cancel(uploadId: String, options: RequestOptions? = null): Upload {
-        return dev.octri.showcase.openai.methods.Uploads.cancelUpload(
-            clientConfig,
-            uploadId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.Uploads.cancelUpload(clientConfig, uploadId, options)
     }
 
     /**
-     * Completes an upload by assembling its parts into a file that can be used on the platform.
-     * Supply the ordered part IDs and optionally an MD5 checksum; the total uploaded bytes must
-     * match the byte count specified when creating the upload. No more parts can be added after
-     * completion.
+     * Completes an upload by assembling its parts into a file that can be used on the platform. Supply the ordered part IDs and optionally an MD5 checksum; the total uploaded bytes must match the byte count specified when creating the upload. No more parts can be added after completion.
      *
-     * Completes the Upload. Within the returned Upload object, there is a nested File object that
-     * is ready to use in the rest of the platform. You can specify the order of the Parts by
-     * passing in an ordered list of the Part IDs. The number of bytes uploaded upon completion must
-     * match the number of bytes initially specified when creating the Upload object. No Parts may
-     * be added after an Upload is completed. Returns the Upload object with status `completed`,
-     * including an additional…
+     * Completes the Upload. Within the returned Upload object, there is a nested File object that is ready to use in the rest of the platform. You can specify the order of the Parts by passing in an ordered list of the Part IDs. The number of bytes uploaded upon completion must match the number of bytes initially specified when creating the Upload object. No Parts may be added after an Upload is completed. Returns the Upload object with status `completed`, including an additional…
      */
-    fun complete(
-        uploadId: String,
-        partIds: List<String>,
-        md5: String? = null,
-        options: RequestOptions? = null,
-    ): Upload {
-        return dev.octri.showcase.openai.methods.Uploads.completeUpload(
-            clientConfig,
-            uploadId,
-            partIds,
-            md5,
-            options,
-        )
+    fun complete(uploadId: String, partIds: List<String>, md5: String? = null, options: RequestOptions? = null): Upload {
+        return dev.octri.showcase.openai.methods.Uploads.completeUpload(clientConfig, uploadId, partIds, md5, options)
     }
 
     /**
-     * Adds a chunk of file bytes as a part of an existing upload. Send the chunk in the `data`
-     * field; each part can be at most 64 MB, and the upload can contain up to 8 GB in total. You
-     * can add parts in parallel and specify their order when you complete the upload.
+     * Adds a chunk of file bytes as a part of an existing upload. Send the chunk in the `data` field; each part can be at most 64 MB, and the upload can contain up to 8 GB in total. You can add parts in parallel and specify their order when you complete the upload.
      *
-     * Adds a Part to an Upload object. A Part represents a chunk of bytes from the file you are
-     * trying to upload. Each Part can be at most 64 MB, and you can add Parts until you hit the
-     * Upload maximum of 8 GB. It is possible to add multiple Parts in parallel. You can decide the
-     * intended order of the Parts when you complete the Upload.
+     * Adds a Part to an Upload object. A Part represents a chunk of bytes from the file you are trying to upload. Each Part can be at most 64 MB, and you can add Parts until you hit the Upload maximum of 8 GB. It is possible to add multiple Parts in parallel. You can decide the intended order of the Parts when you complete the Upload.
      */
-    fun addPart(
-        uploadId: String,
-        data: SdkClient.UploadFile,
-        options: RequestOptions? = null,
-    ): UploadPart {
-        return dev.octri.showcase.openai.methods.Uploads.addUploadPart(
-            clientConfig,
-            uploadId,
-            data,
-            options,
-        )
+    fun addPart(uploadId: String, data: SdkClient.UploadFile, options: RequestOptions? = null): UploadPart {
+        return dev.octri.showcase.openai.methods.Uploads.addUploadPart(clientConfig, uploadId, data, options)
     }
+
 }

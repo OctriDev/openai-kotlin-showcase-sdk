@@ -3,102 +3,51 @@
 
 package dev.octri.showcase.openai
 
+
 class AdminApiKeysNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists organization API keys, including keys associated with projects. Use `after` to continue
-     * from a key ID and `order` to control creation-time sorting. The response includes pagination
-     * metadata to help you determine whether more keys are available.
+     * Lists organization API keys, including keys associated with projects. Use `after` to continue from a key ID and `order` to control creation-time sorting. The response includes pagination metadata to help you determine whether more keys are available.
      *
      * List organization API keys
      */
-    fun list(
-        after: SdkClient.SdkOptional<String?>? = null,
-        order: ListAdminApiKeysParameterEnum? = null,
-        limit: Long? = null,
-        options: RequestOptions? = null,
-    ): ApiKeyList {
-        return dev.octri.showcase.openai.methods.AdminApiKeys.listAdminApiKeys(
-            clientConfig,
-            after,
-            order,
-            limit,
-            options,
-        )
+    fun list(after: SdkClient.SdkOptional<String?>? = null, order: ListAdminApiKeysParameterEnum? = null, limit: Long? = null, options: RequestOptions? = null): ApiKeyList {
+        return dev.octri.showcase.openai.methods.AdminApiKeys.listAdminApiKeys(clientConfig, after, order, limit, options)
     }
 
     /**
-     * Lists organization API keys, including keys associated with projects. Use `after` to continue
-     * from a key ID and `order` to control creation-time sorting. The response includes pagination
-     * metadata to help you determine whether more keys are available.
+     * Lists organization API keys, including keys associated with projects. Use `after` to continue from a key ID and `order` to control creation-time sorting. The response includes pagination metadata to help you determine whether more keys are available.
      *
      * List organization API keys
      */
-    fun listPaginated(
-        after: SdkClient.SdkOptional<String?>? = null,
-        order: ListAdminApiKeysParameterEnum? = null,
-        limit: Long? = null,
-        options: RequestOptions? = null,
-        yieldFn: (AdminApiKey) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.AdminApiKeys.listAdminApiKeysPaginated(
-            clientConfig,
-            after,
-            order,
-            limit,
-            options,
-            yieldFn,
-        )
+    fun listPaginated(after: SdkClient.SdkOptional<String?>? = null, order: ListAdminApiKeysParameterEnum? = null, limit: Long? = null, options: RequestOptions? = null, yieldFn: (AdminApiKey) -> Boolean) {
+        dev.octri.showcase.openai.methods.AdminApiKeys.listAdminApiKeysPaginated(clientConfig, after, order, limit, options, yieldFn)
     }
 
     /**
-     * Creates an organization admin API key. Provide a `name` and, optionally, `expires_in_seconds`
-     * to set the key's lifetime. The response includes the key value, which is returned only once
-     * when the key is created.
+     * Creates an organization admin API key. Provide a `name` and, optionally, `expires_in_seconds` to set the key's lifetime. The response includes the key value, which is returned only once when the key is created.
      *
      * Create an organization admin API key
      */
-    fun create(
-        name: String,
-        expiresInSeconds: Long? = null,
-        options: RequestOptions? = null,
-    ): AdminApiKeyCreateResponse {
-        return dev.octri.showcase.openai.methods.AdminApiKeys.createAdminApiKeys(
-            clientConfig,
-            name,
-            expiresInSeconds,
-            options,
-        )
+    fun create(name: String, expiresInSeconds: Long? = null, options: RequestOptions? = null): AdminApiKeyCreateResponse {
+        return dev.octri.showcase.openai.methods.AdminApiKeys.createAdminApiKeys(clientConfig, name, expiresInSeconds, options)
     }
 
     /**
-     * Retrieves details for an organization API key. Use `key_id` to identify the key whose
-     * metadata you need. The response includes the redacted key value, creation and expiration
-     * timestamps, last-use time, and owner details.
+     * Retrieves details for an organization API key. Use `key_id` to identify the key whose metadata you need. The response includes the redacted key value, creation and expiration timestamps, last-use time, and owner details.
      *
      * Retrieve a single organization API key
      */
     fun retrieve(keyId: String, options: RequestOptions? = null): AdminApiKey {
-        return dev.octri.showcase.openai.methods.AdminApiKeys.retrieveAdminApiKeys(
-            clientConfig,
-            keyId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.AdminApiKeys.retrieveAdminApiKeys(clientConfig, keyId, options)
     }
 
     /**
-     * Deletes an organization admin API key. Use `key_id` to identify the key to remove. The
-     * response confirms deletion with the key identifier and a `deleted` flag.
+     * Deletes an organization admin API key. Use `key_id` to identify the key to remove. The response confirms deletion with the key identifier and a `deleted` flag.
      *
      * Delete an organization admin API key
      */
-    fun delete(
-        keyId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.openai.methods.AdminApiKeys.DeleteAdminApiKeysResponse {
-        return dev.octri.showcase.openai.methods.AdminApiKeys.deleteAdminApiKeys(
-            clientConfig,
-            keyId,
-            options,
-        )
+    fun delete(keyId: String, options: RequestOptions? = null): dev.octri.showcase.openai.methods.AdminApiKeys.DeleteAdminApiKeysResponse {
+        return dev.octri.showcase.openai.methods.AdminApiKeys.deleteAdminApiKeys(clientConfig, keyId, options)
     }
+
 }

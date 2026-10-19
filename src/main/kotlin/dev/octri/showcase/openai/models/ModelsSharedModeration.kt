@@ -3,24 +3,40 @@
 
 package dev.octri.showcase.openai.models
 
-/** The moderation policy for the response input. */
+/**
+ * The moderation policy for the response input.
+ */
 data class ModerationConfigParam(
-    /** Required enumerated value serialized in the `mode` wire field. */
+    /**
+     * Required enumerated value serialized in the `mode` wire field.
+     */
     val mode: ModerationMode
 )
 
-/** Configuration for running moderation on the input and output of this response. */
+/**
+ * Configuration for running moderation on the input and output of this response.
+ */
 data class ModerationParam(
-    /** The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'. */
+    /**
+     * The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'.
+     */
     val model: String,
-    /** Optional API value serialized in the `policy` wire field. */
-    val policy: ModerationPolicyParam? = null,
+    /**
+     * Optional API value serialized in the `policy` wire field.
+     */
+    val policy: ModerationPolicyParam? = null
 )
 
-/** The policy to apply to moderated response input and output. */
+/**
+ * The policy to apply to moderated response input and output.
+ */
 data class ModerationPolicyParam(
-    /** Optional API value serialized in the `input` wire field. */
+    /**
+     * Optional API value serialized in the `input` wire field.
+     */
     val input: ModerationConfigParam? = null,
-    /** Optional API value serialized in the `output` wire field. */
-    val output: ModerationConfigParam? = null,
+    /**
+     * Optional API value serialized in the `output` wire field.
+     */
+    val output: ModerationConfigParam? = null
 )

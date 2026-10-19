@@ -3,46 +3,78 @@
 
 package dev.octri.showcase.openai.models
 
-/** Request payload for creating a custom role. */
+/**
+ * Request payload for creating a custom role.
+ */
 data class PublicCreateOrganizationRoleBody(
-    /** Unique name for the role. */
+    /**
+     * Unique name for the role.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_name") val roleName: String,
-    /** Permissions to grant to the role. */
+    /**
+     * Permissions to grant to the role.
+     */
     val permissions: List<String>,
-    /** Optional description of the role. */
-    val description: String? = null,
+    /**
+     * Optional description of the role.
+     */
+    val description: String? = null
 )
 
-/** Paginated list of roles available on an organization or project. */
+/**
+ * Paginated list of roles available on an organization or project.
+ */
 data class PublicRoleListResource(
-    /** Always `list`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: PublicRoleListResourceObjectEnum,
-    /** Roles returned in the current page. */
+    /**
+     * Always `list`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: PublicRoleListResourceObjectEnum,
+    /**
+     * Roles returned in the current page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Role>,
-    /** Whether more roles are available when paginating. */
+    /**
+     * Whether more roles are available when paginating.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Cursor to fetch the next page of results, or `null` when there are no additional roles. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next", required = true) val next: String?,
+    /**
+     * Cursor to fetch the next page of results, or `null` when there are no additional roles.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next", required = true) val next: String?
 )
 
-/** Request payload for updating an existing role. */
+/**
+ * Request payload for updating an existing role.
+ */
 data class PublicUpdateOrganizationRoleBody(
-    /** Updated set of permissions for the role. */
+    /**
+     * Updated set of permissions for the role.
+     */
     val permissions: List<String>? = null,
-    /** New description for the role. */
+    /**
+     * New description for the role.
+     */
     val description: String? = null,
-    /** New name for the role. */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_name") val roleName: String? = null,
+    /**
+     * New name for the role.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_name") val roleName: String? = null
 )
 
-/** Confirmation payload returned after deleting a role. */
+/**
+ * Confirmation payload returned after deleting a role.
+ */
 data class RoleDeletedResource(
-    /** Always `role.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: RoleDeletedResourceObjectEnum,
-    /** Identifier of the deleted role. */
+    /**
+     * Always `role.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RoleDeletedResourceObjectEnum,
+    /**
+     * Identifier of the deleted role.
+     */
     val id: String,
-    /** Whether the role was deleted. */
-    val deleted: Boolean,
+    /**
+     * Whether the role was deleted.
+     */
+    val deleted: Boolean
 )

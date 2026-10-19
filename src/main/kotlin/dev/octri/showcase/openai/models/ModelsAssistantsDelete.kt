@@ -3,35 +3,56 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `DeleteAssistantResponse` API schema. */
+/**
+ * Typed representation of the `DeleteAssistantResponse` API schema.
+ */
 data class DeleteAssistantResponse(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
     val deleted: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteAssistantResponseObjectEnum,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteAssistantResponseObjectEnum
 )
 
-/** Typed representation of the `DeleteMessageResponse` API schema. */
+/**
+ * Typed representation of the `DeleteMessageResponse` API schema.
+ */
 data class DeleteMessageResponse(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
     val deleted: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteMessageResponseObjectEnum,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteMessageResponseObjectEnum
 )
 
-/** Typed representation of the `DeleteThreadResponse` API schema. */
+/**
+ * Typed representation of the `DeleteThreadResponse` API schema.
+ */
 data class DeleteThreadResponse(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
     val deleted: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteThreadResponseObjectEnum,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteThreadResponseObjectEnum
 )

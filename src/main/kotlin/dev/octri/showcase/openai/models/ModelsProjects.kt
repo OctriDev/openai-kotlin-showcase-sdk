@@ -3,388 +3,616 @@
 
 package dev.octri.showcase.openai.models
 
-/** Represents an individual project. */
+/**
+ * Represents an individual project.
+ */
 data class Project(
-    /** The identifier, which can be referenced in API endpoints */
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
     val id: String,
-    /** The object type, which is always `organization.project` */
+    /**
+     * The object type, which is always `organization.project`
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectObjectEnum,
-    /** The Unix timestamp (in seconds) of when the project was created. */
+    /**
+     * The Unix timestamp (in seconds) of when the project was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The name of the project. This appears in reporting. */
+    /**
+     * The name of the project. This appears in reporting.
+     */
     val name: String? = null,
-    /** Optional API value serialized in the `archived_at` wire field. */
+    /**
+     * Optional API value serialized in the `archived_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("archived_at") val archivedAt: Long? = null,
-    /** `active` or `archived` */
+    /**
+     * `active` or `archived`
+     */
     val status: String? = null,
-    /** The external key associated with the project. */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id")
-    val externalKeyId: String? = null,
-    /** The residency configuration for the project. */
-    val residency: PublicProjectResidency? = null,
+    /**
+     * The external key associated with the project.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id") val externalKeyId: String? = null,
+    /**
+     * The residency configuration for the project.
+     */
+    val residency: PublicProjectResidency? = null
 )
 
-/** Required object value serialized in the `owner` wire field. */
+/**
+ * Required object value serialized in the `owner` wire field.
+ */
 data class ProjectApiKeyOwner(
-    /** `user` or `service_account` */
+    /**
+     * `user` or `service_account`
+     */
     val type: ProjectApiKeyOwnerTypeEnum? = null,
-    /** The user that owns a project API key. */
+    /**
+     * The user that owns a project API key.
+     */
     val user: ProjectApiKeyOwnerUser? = null,
-    /** The service account that owns a project API key. */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_account")
-    val serviceAccount: ProjectApiKeyOwnerServiceAccount? = null,
+    /**
+     * The service account that owns a project API key.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_account") val serviceAccount: ProjectApiKeyOwnerServiceAccount? = null
 )
 
-/** Represents an individual API key in a project. */
+/**
+ * Represents an individual API key in a project.
+ */
 data class ProjectApiKey(
-    /** The object type, which is always `organization.project.api_key` */
+    /**
+     * The object type, which is always `organization.project.api_key`
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectApiKeyObjectEnum,
-    /** The redacted value of the API key */
+    /**
+     * The redacted value of the API key
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("redacted_value") val redactedValue: String,
-    /** The name of the API key */
-    val name: String,
-    /** The Unix timestamp (in seconds) of when the API key was created */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The Unix timestamp (in seconds) of when the API key was last used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
-    val lastUsedAt: Long?,
-    /** The identifier, which can be referenced in API endpoints */
-    val id: String,
-    /** Whether the API key's owner currently has effective access to the project. */
-    @com.fasterxml.jackson.annotation.JsonProperty("owner_project_access")
-    val ownerProjectAccess: ProjectApiKeyOwnerProjectAccessEnum,
-    /** Required object value serialized in the `owner` wire field. */
-    val owner: ProjectApiKeyOwner,
-    /** The Unix timestamp (in seconds) when the API key expires, or null if it does not expire. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
-)
-
-/** Typed representation of the `ProjectApiKeyDeleteResponse` API schema. */
-data class ProjectApiKeyDeleteResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectApiKeyDeleteResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
-)
-
-/** Typed representation of the `ProjectApiKeyListResponse` API schema. */
-data class ProjectApiKeyListResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectApiKeyListResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectApiKey>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
-)
-
-/** The service account that owns a project API key. */
-data class ProjectApiKeyOwnerServiceAccount(
-    /** The identifier, which can be referenced in API endpoints */
-    val id: String,
-    /** The name of the service account. */
-    val name: String,
-    /** The Unix timestamp (in seconds) of when the service account was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The service account's project role. */
-    val role: String,
-)
-
-/** The user that owns a project API key. */
-data class ProjectApiKeyOwnerUser(
-    /** The identifier, which can be referenced in API endpoints */
-    val id: String,
-    /** The email address of the user. */
-    val email: String,
-    /** The name of the user. */
-    val name: String,
-    /** The Unix timestamp (in seconds) of when the user was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The user's project role. */
-    val role: String,
-)
-
-/** Typed representation of the `ProjectCreateRequest` API schema. */
-data class ProjectCreateRequest(
-    /** The friendly name of the project, this name appears in reports. */
+    /**
+     * The name of the API key
+     */
     val name: String,
     /**
-     * Create the project with the specified data residency region. Your organization must have
-     * access to Data residency functionality in order to use. See data residency controls to review
-     * the functionality and limitations of setting this field. Deprecated: use `residency` instead.
-     * Do not provide both `geography` and `residency`.
+     * The Unix timestamp (in seconds) of when the API key was created
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * The Unix timestamp (in seconds) of when the API key was last used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Long?,
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
+    val id: String,
+    /**
+     * Whether the API key's owner currently has effective access to the project.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("owner_project_access") val ownerProjectAccess: ProjectApiKeyOwnerProjectAccessEnum,
+    /**
+     * Required object value serialized in the `owner` wire field.
+     */
+    val owner: ProjectApiKeyOwner,
+    /**
+     * The Unix timestamp (in seconds) when the API key expires, or null if it does not expire.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
+)
+
+/**
+ * Typed representation of the `ProjectApiKeyDeleteResponse` API schema.
+ */
+data class ProjectApiKeyDeleteResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectApiKeyDeleteResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
+)
+
+/**
+ * Typed representation of the `ProjectApiKeyListResponse` API schema.
+ */
+data class ProjectApiKeyListResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectApiKeyListResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectApiKey>,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+)
+
+/**
+ * The service account that owns a project API key.
+ */
+data class ProjectApiKeyOwnerServiceAccount(
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
+    val id: String,
+    /**
+     * The name of the service account.
+     */
+    val name: String,
+    /**
+     * The Unix timestamp (in seconds) of when the service account was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * The service account's project role.
+     */
+    val role: String
+)
+
+/**
+ * The user that owns a project API key.
+ */
+data class ProjectApiKeyOwnerUser(
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
+    val id: String,
+    /**
+     * The email address of the user.
+     */
+    val email: String,
+    /**
+     * The name of the user.
+     */
+    val name: String,
+    /**
+     * The Unix timestamp (in seconds) of when the user was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * The user's project role.
+     */
+    val role: String
+)
+
+/**
+ * Typed representation of the `ProjectCreateRequest` API schema.
+ */
+data class ProjectCreateRequest(
+    /**
+     * The friendly name of the project, this name appears in reports.
+     */
+    val name: String,
+    /**
+     * Create the project with the specified data residency region. Your organization must have access to Data residency functionality in order to use. See data residency controls to review the functionality and limitations of setting this field. Deprecated: use `residency` instead. Do not provide both `geography` and `residency`.
      */
     val geography: String? = null,
     /**
-     * Create the project with the specified residency configuration. Your organization must have
-     * access to the requested residency configuration in order to use it. See data residency
-     * controls to review the functionality and limitations of setting this field.
+     * Create the project with the specified residency configuration. Your organization must have access to the requested residency configuration in order to use it. See data residency controls to review the functionality and limitations of setting this field.
      */
     val residency: PublicProjectResidency? = null,
-    /** External key ID to associate with the project. */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id")
-    val externalKeyId: String? = null,
-)
-
-/** Typed representation of the `ProjectListResponse` API schema. */
-data class ProjectListResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectListResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Project>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
-)
-
-/** Represents the model allowlist or denylist policy for a project. */
-data class ProjectModelPermissions(
-    /** The object type, which is always `project.model_permissions`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectModelPermissionsObjectEnum,
-    /** Whether the project uses an allowlist or a denylist. */
-    val mode: ProjectModelPermissionsModeEnum,
-    /** The model IDs included in the model permissions policy. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_ids") val modelIds: List<String>,
-)
-
-/** Confirmation payload returned after deleting project model permissions. */
-data class ProjectModelPermissionsDeleteResponse(
-    /** The object type, which is always `project.model_permissions.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectModelPermissionsDeleteResponseObjectEnum,
-    /** Whether the project model permissions were deleted. */
-    val deleted: Boolean,
-)
-
-/** Typed representation of the `ProjectModelPermissionsUpdateRequest` API schema. */
-data class ProjectModelPermissionsUpdateRequest(
-    /** The model permissions mode to apply. */
-    val mode: ProjectModelPermissionsUpdateRequestModeEnum,
-    /** The model IDs included in this permissions policy. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_ids") val modelIds: List<String>,
-)
-
-/** Represents a project rate limit config. */
-data class ProjectRateLimit(
-    /** The object type, which is always `project.rate_limit` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectRateLimitObjectEnum,
-    /** The identifier, which can be referenced in API endpoints. */
-    val id: String,
-    /** The model this rate limit applies to. */
-    val model: String,
-    /** The maximum requests per minute. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_minute")
-    val maxRequestsPer1Minute: Long,
-    /** The maximum tokens per minute. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_tokens_per_1_minute")
-    val maxTokensPer1Minute: Long,
-    /** The maximum images per minute. Only present for relevant models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_images_per_1_minute")
-    val maxImagesPer1Minute: Long? = null,
-    /** The maximum audio megabytes per minute. Only present for relevant models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_audio_megabytes_per_1_minute")
-    val maxAudioMegabytesPer1Minute: Long? = null,
-    /** The maximum requests per day. Only present for relevant models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_day")
-    val maxRequestsPer1Day: Long? = null,
-    /** The maximum batch input tokens per day. Only present for relevant models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("batch_1_day_max_input_tokens")
-    val batch1DayMaxInputTokens: Long? = null,
-)
-
-/** Typed representation of the `ProjectRateLimitListResponse` API schema. */
-data class ProjectRateLimitListResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectRateLimitListResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectRateLimit>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
-)
-
-/** Typed representation of the `ProjectRateLimitUpdateRequest` API schema. */
-data class ProjectRateLimitUpdateRequest(
-    /** The maximum requests per minute. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_minute")
-    val maxRequestsPer1Minute: Long? = null,
-    /** The maximum tokens per minute. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_tokens_per_1_minute")
-    val maxTokensPer1Minute: Long? = null,
-    /** The maximum images per minute. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_images_per_1_minute")
-    val maxImagesPer1Minute: Long? = null,
-    /** The maximum audio megabytes per minute. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_audio_megabytes_per_1_minute")
-    val maxAudioMegabytesPer1Minute: Long? = null,
-    /** The maximum requests per day. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_day")
-    val maxRequestsPer1Day: Long? = null,
-    /** The maximum batch input tokens per day. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("batch_1_day_max_input_tokens")
-    val batch1DayMaxInputTokens: Long? = null,
-)
-
-/** Represents an individual service account in a project. */
-data class ProjectServiceAccount(
-    /** The object type, which is always `organization.project.service_account` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountObjectEnum,
-    /** The identifier, which can be referenced in API endpoints */
-    val id: String,
-    /** The name of the service account */
-    val name: String,
-    /** `owner`, `member`, or `none` */
-    val role: ProjectServiceAccountRoleEnum,
-    /** The Unix timestamp (in seconds) of when the service account was created */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-)
-
-/** Typed representation of the `ProjectServiceAccountApiKey` API schema. */
-data class ProjectServiceAccountApiKey(
-    /** The object type, which is always `organization.project.service_account.api_key` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountApiKeyObjectEnum,
-    /** Required `string` value serialized in the `value` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /** Required `string` value serialized in the `name` wire field. */
-    val name: String,
-    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
-    /** The Unix timestamp (in seconds) when the API key expires, or null if it does not expire. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
-)
-
-/** Typed representation of the `ProjectServiceAccountCreateRequest` API schema. */
-data class ProjectServiceAccountCreateRequest(
-    /** The name of the service account being created. */
-    val name: String,
-    /** Optional `boolean` value serialized in the `create_service_account_only` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("create_service_account_only")
-    val createServiceAccountOnly: Boolean? = null,
     /**
-     * Number of seconds until the initial API key expires. If omitted or null, the key does not
-     * expire unless the effective organization or project policy requires an expiration. When a
-     * policy sets a maximum lifetime, this value must be provided and must not exceed that limit. A
-     * non-null value cannot be used when `create_service_account_only` is true.
+     * External key ID to associate with the project.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds")
-    val expiresInSeconds: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id") val externalKeyId: String? = null
 )
 
-/** Typed representation of the `ProjectServiceAccountCreateResponse` API schema. */
-data class ProjectServiceAccountCreateResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountCreateResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+/**
+ * Typed representation of the `ProjectListResponse` API schema.
+ */
+data class ProjectListResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectListResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Project>,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+)
+
+/**
+ * Represents the model allowlist or denylist policy for a project.
+ */
+data class ProjectModelPermissions(
+    /**
+     * The object type, which is always `project.model_permissions`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectModelPermissionsObjectEnum,
+    /**
+     * Whether the project uses an allowlist or a denylist.
+     */
+    val mode: ProjectModelPermissionsModeEnum,
+    /**
+     * The model IDs included in the model permissions policy.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_ids") val modelIds: List<String>
+)
+
+/**
+ * Confirmation payload returned after deleting project model permissions.
+ */
+data class ProjectModelPermissionsDeleteResponse(
+    /**
+     * The object type, which is always `project.model_permissions.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectModelPermissionsDeleteResponseObjectEnum,
+    /**
+     * Whether the project model permissions were deleted.
+     */
+    val deleted: Boolean
+)
+
+/**
+ * Typed representation of the `ProjectModelPermissionsUpdateRequest` API schema.
+ */
+data class ProjectModelPermissionsUpdateRequest(
+    /**
+     * The model permissions mode to apply.
+     */
+    val mode: ProjectModelPermissionsUpdateRequestModeEnum,
+    /**
+     * The model IDs included in this permissions policy.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_ids") val modelIds: List<String>
+)
+
+/**
+ * Represents a project rate limit config.
+ */
+data class ProjectRateLimit(
+    /**
+     * The object type, which is always `project.rate_limit`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectRateLimitObjectEnum,
+    /**
+     * The identifier, which can be referenced in API endpoints.
+     */
     val id: String,
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * The model this rate limit applies to.
+     */
+    val model: String,
+    /**
+     * The maximum requests per minute.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_minute") val maxRequestsPer1Minute: Long,
+    /**
+     * The maximum tokens per minute.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_tokens_per_1_minute") val maxTokensPer1Minute: Long,
+    /**
+     * The maximum images per minute. Only present for relevant models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_images_per_1_minute") val maxImagesPer1Minute: Long? = null,
+    /**
+     * The maximum audio megabytes per minute. Only present for relevant models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_audio_megabytes_per_1_minute") val maxAudioMegabytesPer1Minute: Long? = null,
+    /**
+     * The maximum requests per day. Only present for relevant models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_day") val maxRequestsPer1Day: Long? = null,
+    /**
+     * The maximum batch input tokens per day. Only present for relevant models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("batch_1_day_max_input_tokens") val batch1DayMaxInputTokens: Long? = null
+)
+
+/**
+ * Typed representation of the `ProjectRateLimitListResponse` API schema.
+ */
+data class ProjectRateLimitListResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectRateLimitListResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectRateLimit>,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+)
+
+/**
+ * Typed representation of the `ProjectRateLimitUpdateRequest` API schema.
+ */
+data class ProjectRateLimitUpdateRequest(
+    /**
+     * The maximum requests per minute.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_minute") val maxRequestsPer1Minute: Long? = null,
+    /**
+     * The maximum tokens per minute.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_tokens_per_1_minute") val maxTokensPer1Minute: Long? = null,
+    /**
+     * The maximum images per minute. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_images_per_1_minute") val maxImagesPer1Minute: Long? = null,
+    /**
+     * The maximum audio megabytes per minute. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_audio_megabytes_per_1_minute") val maxAudioMegabytesPer1Minute: Long? = null,
+    /**
+     * The maximum requests per day. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_day") val maxRequestsPer1Day: Long? = null,
+    /**
+     * The maximum batch input tokens per day. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("batch_1_day_max_input_tokens") val batch1DayMaxInputTokens: Long? = null
+)
+
+/**
+ * Represents an individual service account in a project.
+ */
+data class ProjectServiceAccount(
+    /**
+     * The object type, which is always `organization.project.service_account`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountObjectEnum,
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
+    val id: String,
+    /**
+     * The name of the service account
+     */
     val name: String,
     /**
-     * Service accounts created with default project membership have role `member`. Accounts created
-     * with `create_service_account_only` have role `none`.
+     * `owner`, `member`, or `none`
+     */
+    val role: ProjectServiceAccountRoleEnum,
+    /**
+     * The Unix timestamp (in seconds) of when the service account was created
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+)
+
+/**
+ * Typed representation of the `ProjectServiceAccountApiKey` API schema.
+ */
+data class ProjectServiceAccountApiKey(
+    /**
+     * The object type, which is always `organization.project.service_account.api_key`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountApiKeyObjectEnum,
+    /**
+     * Required `string` value serialized in the `value` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
+    val name: String,
+    /**
+     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * The Unix timestamp (in seconds) when the API key expires, or null if it does not expire.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
+)
+
+/**
+ * Typed representation of the `ProjectServiceAccountCreateRequest` API schema.
+ */
+data class ProjectServiceAccountCreateRequest(
+    /**
+     * The name of the service account being created.
+     */
+    val name: String,
+    /**
+     * Optional `boolean` value serialized in the `create_service_account_only` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("create_service_account_only") val createServiceAccountOnly: Boolean? = null,
+    /**
+     * Number of seconds until the initial API key expires. If omitted or null, the key does not expire unless the effective organization or project policy requires an expiration. When a policy sets a maximum lifetime, this value must be provided and must not exceed that limit. A non-null value cannot be used when `create_service_account_only` is true.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds") val expiresInSeconds: Long? = null
+)
+
+/**
+ * Typed representation of the `ProjectServiceAccountCreateResponse` API schema.
+ */
+data class ProjectServiceAccountCreateResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountCreateResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
+    val name: String,
+    /**
+     * Service accounts created with default project membership have role `member`. Accounts created with `create_service_account_only` have role `none`.
      */
     val role: ProjectServiceAccountCreateResponseRoleEnum,
-    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required API value serialized in the `api_key` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key", required = true)
-    val apiKey: ProjectServiceAccountApiKey?,
-)
-
-/** Typed representation of the `ProjectServiceAccountDeleteResponse` API schema. */
-data class ProjectServiceAccountDeleteResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountDeleteResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
-)
-
-/** Typed representation of the `ProjectServiceAccountListResponse` API schema. */
-data class ProjectServiceAccountListResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountListResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectServiceAccount>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
-)
-
-/** Typed representation of the `ProjectUpdateRequest` API schema. */
-data class ProjectUpdateRequest(
-    /** The updated name of the project, this name appears in reports. */
-    val name: String? = null,
-    /** External key ID to associate with the project. */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id")
-    val externalKeyId: String? = null,
     /**
-     * Geography for the project. Deprecated: use `residency` when creating a project to configure
-     * data residency. This field is retained for backward compatibility.
+     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
      */
-    val geography: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * Required API value serialized in the `api_key` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key", required = true) val apiKey: ProjectServiceAccountApiKey?
 )
 
-/** Represents an individual user in a project. */
-data class ProjectUser(
-    /** The object type, which is always `organization.project.user` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectUserObjectEnum,
-    /** The identifier, which can be referenced in API endpoints */
+/**
+ * Typed representation of the `ProjectServiceAccountDeleteResponse` API schema.
+ */
+data class ProjectServiceAccountDeleteResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountDeleteResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** `owner` or `member` */
-    val role: String,
-    /** The Unix timestamp (in seconds) of when the project was added. */
-    @com.fasterxml.jackson.annotation.JsonProperty("added_at") val addedAt: Long,
-    /** The name of the user */
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
+)
+
+/**
+ * Typed representation of the `ProjectServiceAccountListResponse` API schema.
+ */
+data class ProjectServiceAccountListResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountListResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectServiceAccount>,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+)
+
+/**
+ * Typed representation of the `ProjectUpdateRequest` API schema.
+ */
+data class ProjectUpdateRequest(
+    /**
+     * The updated name of the project, this name appears in reports.
+     */
     val name: String? = null,
-    /** The email address of the user */
-    val email: String? = null,
+    /**
+     * External key ID to associate with the project.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id") val externalKeyId: String? = null,
+    /**
+     * Geography for the project. Deprecated: use `residency` when creating a project to configure data residency. This field is retained for backward compatibility.
+     */
+    val geography: String? = null
 )
 
-/** Typed representation of the `ProjectUserCreateRequest` API schema. */
-data class ProjectUserCreateRequest(
-    /** `owner` or `member` */
-    val role: String,
-    /** The ID of the user. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Email of the user to add. */
-    val email: String? = null,
-)
-
-/** Typed representation of the `ProjectUserDeleteResponse` API schema. */
-data class ProjectUserDeleteResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectUserDeleteResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+/**
+ * Represents an individual user in a project.
+ */
+data class ProjectUser(
+    /**
+     * The object type, which is always `organization.project.user`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectUserObjectEnum,
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
+    /**
+     * `owner` or `member`
+     */
+    val role: String,
+    /**
+     * The Unix timestamp (in seconds) of when the project was added.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("added_at") val addedAt: Long,
+    /**
+     * The name of the user
+     */
+    val name: String? = null,
+    /**
+     * The email address of the user
+     */
+    val email: String? = null
+)
+
+/**
+ * Typed representation of the `ProjectUserCreateRequest` API schema.
+ */
+data class ProjectUserCreateRequest(
+    /**
+     * `owner` or `member`
+     */
+    val role: String,
+    /**
+     * The ID of the user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    /**
+     * Email of the user to add.
+     */
+    val email: String? = null
+)
+
+/**
+ * Typed representation of the `ProjectUserDeleteResponse` API schema.
+ */
+data class ProjectUserDeleteResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectUserDeleteResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
 )

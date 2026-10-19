@@ -3,23 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Event data payload. */
+/**
+ * Event data payload.
+ */
 data class WebhookEvalRunFailedData(
-    /** The unique ID of the eval run. */
+    /**
+     * The unique ID of the eval run.
+     */
     val id: String
 )
 
-/** Sent when an eval run has failed. */
+/**
+ * Sent when an eval run has failed.
+ */
 data class WebhookEvalRunFailed(
-    /** The Unix timestamp (in seconds) of when the eval run failed. */
+    /**
+     * The Unix timestamp (in seconds) of when the eval run failed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     val id: String,
-    /** Event data payload. */
+    /**
+     * Event data payload.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookEvalRunFailedData,
-    /** The type of the event. Always `eval.run.failed`. */
+    /**
+     * The type of the event. Always `eval.run.failed`.
+     */
     val type: WebhookEvalRunFailedTypeEnum,
-    /** The object of the event. Always `event`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookEvalRunFailedObjectEnum? = null,
+    /**
+     * The object of the event. Always `event`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookEvalRunFailedObjectEnum? = null
 )

@@ -3,166 +3,121 @@
 
 package dev.octri.showcase.openai
 
-typealias CreateSpendAlertBodyIntervalEnum =
-    dev.octri.showcase.openai.models.CreateSpendAlertBodyIntervalEnum
+typealias CreateSpendAlertBodyIntervalEnum = dev.octri.showcase.openai.models.CreateSpendAlertBodyIntervalEnum
 
-typealias CreateSubagentCallItemResource =
-    dev.octri.showcase.openai.models.CreateSubagentCallItemResource
+typealias CreateSubagentCallItemResource = dev.octri.showcase.openai.models.CreateSubagentCallItemResource
 
-typealias CreateSubagentCallItemResourceTypeEnum =
-    dev.octri.showcase.openai.models.CreateSubagentCallItemResourceTypeEnum
+typealias CreateSubagentCallItemResourceTypeEnum = dev.octri.showcase.openai.models.CreateSubagentCallItemResourceTypeEnum
 
 typealias CreateThreadAndRunRequest = dev.octri.showcase.openai.models.CreateThreadAndRunRequest
 
-typealias CreateThreadAndRunRequestToolResources =
-    dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResources
+typealias CreateThreadAndRunRequestToolResources = dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResources
 
-typealias CreateThreadAndRunRequestToolResourcesCodeInterpreter =
-    dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResourcesCodeInterpreter
+typealias CreateThreadAndRunRequestToolResourcesCodeInterpreter = dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResourcesCodeInterpreter
 
-typealias CreateThreadAndRunRequestToolResourcesFileSearch =
-    dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResourcesFileSearch
+typealias CreateThreadAndRunRequestToolResourcesFileSearch = dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolResourcesFileSearch
 
-typealias CreateThreadAndRunRequestToolsItem =
-    dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolsItem
+typealias CreateThreadAndRunRequestToolsItem = dev.octri.showcase.openai.models.CreateThreadAndRunRequestToolsItem
 
-typealias CreateThreadAndRunRequestTruncationStrategy =
-    dev.octri.showcase.openai.models.CreateThreadAndRunRequestTruncationStrategy
+typealias CreateThreadAndRunRequestTruncationStrategy = dev.octri.showcase.openai.models.CreateThreadAndRunRequestTruncationStrategy
 
 typealias CreateThreadRequest = dev.octri.showcase.openai.models.CreateThreadRequest
 
-typealias CreateThreadRequestToolResources =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResources
+typealias CreateThreadRequestToolResources = dev.octri.showcase.openai.models.CreateThreadRequestToolResources
 
-typealias CreateThreadRequestToolResourcesCodeInterpreter =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesCodeInterpreter
+typealias CreateThreadRequestToolResourcesCodeInterpreter = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesCodeInterpreter
 
-typealias CreateThreadRequestToolResourcesFileSearch =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearch
+typealias CreateThreadRequestToolResourcesFileSearch = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearch
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItem =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItem
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItem = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItem
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX1758507317 =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX1758507317
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX1758507317 = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX1758507317
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f2112e7 =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f2112e7
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f2112e7 = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f2112e7
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179 =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179 = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51 =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51 = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce
 
-typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4 =
-    dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4
+typealias CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4 = dev.octri.showcase.openai.models.CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4
 
 typealias CreateTranscriptionRequest = dev.octri.showcase.openai.models.CreateTranscriptionRequest
 
-typealias CreateTranscriptionRequestChunkingStrategy =
-    dev.octri.showcase.openai.models.CreateTranscriptionRequestChunkingStrategy
+typealias CreateTranscriptionRequestChunkingStrategy = dev.octri.showcase.openai.models.CreateTranscriptionRequestChunkingStrategy
 
-typealias CreateTranscriptionRequestChunkingStrategyVariant0Enum =
-    dev.octri.showcase.openai.models.CreateTranscriptionRequestChunkingStrategyVariant0Enum
+typealias CreateTranscriptionRequestChunkingStrategyVariant0Enum = dev.octri.showcase.openai.models.CreateTranscriptionRequestChunkingStrategyVariant0Enum
 
-typealias CreateTranscriptionRequestTimestampGranularitiesItemEnum =
-    dev.octri.showcase.openai.models.CreateTranscriptionRequestTimestampGranularitiesItemEnum
+typealias CreateTranscriptionRequestTimestampGranularitiesItemEnum = dev.octri.showcase.openai.models.CreateTranscriptionRequestTimestampGranularitiesItemEnum
 
 typealias CreateTranscriptionResponse = dev.octri.showcase.openai.models.CreateTranscriptionResponse
 
-typealias CreateTranscriptionResponseDiarizedJson =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJson
+typealias CreateTranscriptionResponseDiarizedJson = dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJson
 
-typealias CreateTranscriptionResponseDiarizedJsonTaskEnum =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJsonTaskEnum
+typealias CreateTranscriptionResponseDiarizedJsonTaskEnum = dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJsonTaskEnum
 
-typealias CreateTranscriptionResponseDiarizedJsonUsage =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJsonUsage
+typealias CreateTranscriptionResponseDiarizedJsonUsage = dev.octri.showcase.openai.models.CreateTranscriptionResponseDiarizedJsonUsage
 
-typealias CreateTranscriptionResponseJson =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseJson
+typealias CreateTranscriptionResponseJson = dev.octri.showcase.openai.models.CreateTranscriptionResponseJson
 
-typealias CreateTranscriptionResponseJsonLogprobsItem =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseJsonLogprobsItem
+typealias CreateTranscriptionResponseJsonLogprobsItem = dev.octri.showcase.openai.models.CreateTranscriptionResponseJsonLogprobsItem
 
-typealias CreateTranscriptionResponseJsonUsage =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseJsonUsage
+typealias CreateTranscriptionResponseJsonUsage = dev.octri.showcase.openai.models.CreateTranscriptionResponseJsonUsage
 
-typealias CreateTranscriptionResponseStreamEvent =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseStreamEvent
+typealias CreateTranscriptionResponseStreamEvent = dev.octri.showcase.openai.models.CreateTranscriptionResponseStreamEvent
 
-typealias CreateTranscriptionResponseVerboseJson =
-    dev.octri.showcase.openai.models.CreateTranscriptionResponseVerboseJson
+typealias CreateTranscriptionResponseVerboseJson = dev.octri.showcase.openai.models.CreateTranscriptionResponseVerboseJson
 
 typealias CreateTranslationRequest = dev.octri.showcase.openai.models.CreateTranslationRequest
 
-typealias CreateTranslationRequestResponseFormatEnum =
-    dev.octri.showcase.openai.models.CreateTranslationRequestResponseFormatEnum
+typealias CreateTranslationRequestResponseFormatEnum = dev.octri.showcase.openai.models.CreateTranslationRequestResponseFormatEnum
 
 typealias CreateTranslationResponse = dev.octri.showcase.openai.models.CreateTranslationResponse
 
-typealias CreateTranslationResponseJson =
-    dev.octri.showcase.openai.models.CreateTranslationResponseJson
+typealias CreateTranslationResponseJson = dev.octri.showcase.openai.models.CreateTranslationResponseJson
 
-typealias CreateTranslationResponseVerboseJson =
-    dev.octri.showcase.openai.models.CreateTranslationResponseVerboseJson
+typealias CreateTranslationResponseVerboseJson = dev.octri.showcase.openai.models.CreateTranslationResponseVerboseJson
 
 typealias CreateUploadRequest = dev.octri.showcase.openai.models.CreateUploadRequest
 
-typealias CreateUploadRequestPurposeEnum =
-    dev.octri.showcase.openai.models.CreateUploadRequestPurposeEnum
+typealias CreateUploadRequestPurposeEnum = dev.octri.showcase.openai.models.CreateUploadRequestPurposeEnum
 
-typealias CreateVaultCredentialAuthParam =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParam
+typealias CreateVaultCredentialAuthParam = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParam
 
-typealias CreateVaultCredentialAuthParamEnvironmentVariable =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamEnvironmentVariable
+typealias CreateVaultCredentialAuthParamEnvironmentVariable = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamEnvironmentVariable
 
-typealias CreateVaultCredentialAuthParamEnvironmentVariableTypeEnum =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamEnvironmentVariableTypeEnum
+typealias CreateVaultCredentialAuthParamEnvironmentVariableTypeEnum = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamEnvironmentVariableTypeEnum
 
-typealias CreateVaultCredentialAuthParamMcpOauth =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamMcpOauth
+typealias CreateVaultCredentialAuthParamMcpOauth = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamMcpOauth
 
-typealias CreateVaultCredentialAuthParamMcpOauthTypeEnum =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamMcpOauthTypeEnum
+typealias CreateVaultCredentialAuthParamMcpOauthTypeEnum = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamMcpOauthTypeEnum
 
-typealias CreateVaultCredentialAuthParamStaticBearer =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamStaticBearer
+typealias CreateVaultCredentialAuthParamStaticBearer = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamStaticBearer
 
-typealias CreateVaultCredentialAuthParamStaticBearerTypeEnum =
-    dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamStaticBearerTypeEnum
+typealias CreateVaultCredentialAuthParamStaticBearerTypeEnum = dev.octri.showcase.openai.models.CreateVaultCredentialAuthParamStaticBearerTypeEnum
 
 typealias CreateVaultCredentialParams = dev.octri.showcase.openai.models.CreateVaultCredentialParams
 
 typealias CreateVaultParams = dev.octri.showcase.openai.models.CreateVaultParams
 
-typealias CreateVectorStoreFileBatchRequest =
-    dev.octri.showcase.openai.models.CreateVectorStoreFileBatchRequest
+typealias CreateVectorStoreFileBatchRequest = dev.octri.showcase.openai.models.CreateVectorStoreFileBatchRequest
 
-typealias CreateVectorStoreFileRequest =
-    dev.octri.showcase.openai.models.CreateVectorStoreFileRequest
+typealias CreateVectorStoreFileRequest = dev.octri.showcase.openai.models.CreateVectorStoreFileRequest
 
 typealias CreateVectorStoreRequest = dev.octri.showcase.openai.models.CreateVectorStoreRequest
 
-typealias CreateVectorStoreRequestChunkingStrategy =
-    dev.octri.showcase.openai.models.CreateVectorStoreRequestChunkingStrategy
+typealias CreateVectorStoreRequestChunkingStrategy = dev.octri.showcase.openai.models.CreateVectorStoreRequestChunkingStrategy
 
 typealias CreateVideoCharacterBody = dev.octri.showcase.openai.models.CreateVideoCharacterBody
 
 typealias CreateVideoEditJsonBody = dev.octri.showcase.openai.models.CreateVideoEditJsonBody
 
-typealias CreateVideoEditMultipartBody =
-    dev.octri.showcase.openai.models.CreateVideoEditMultipartBody
+typealias CreateVideoEditMultipartBody = dev.octri.showcase.openai.models.CreateVideoEditMultipartBody
 
 typealias CreateVideoExtendJsonBody = dev.octri.showcase.openai.models.CreateVideoExtendJsonBody
 
-typealias CreateVideoExtendMultipartBody =
-    dev.octri.showcase.openai.models.CreateVideoExtendMultipartBody
+typealias CreateVideoExtendMultipartBody = dev.octri.showcase.openai.models.CreateVideoExtendMultipartBody
 
 typealias CreateVideoJsonBody = dev.octri.showcase.openai.models.CreateVideoJsonBody
 
@@ -172,33 +127,27 @@ typealias CreateVideoRemixBody = dev.octri.showcase.openai.models.CreateVideoRem
 
 typealias CreateVoiceConsentRequest = dev.octri.showcase.openai.models.CreateVoiceConsentRequest
 
-typealias CreateVoiceFromConsentRequest =
-    dev.octri.showcase.openai.models.CreateVoiceFromConsentRequest
+typealias CreateVoiceFromConsentRequest = dev.octri.showcase.openai.models.CreateVoiceFromConsentRequest
 
-typealias CreateVoiceFromConsentRequestTypeEnum =
-    dev.octri.showcase.openai.models.CreateVoiceFromConsentRequestTypeEnum
+typealias CreateVoiceFromConsentRequestTypeEnum = dev.octri.showcase.openai.models.CreateVoiceFromConsentRequestTypeEnum
 
 typealias CreateVoiceRequest = dev.octri.showcase.openai.models.CreateVoiceRequest
 
 typealias CustomGrammarFormatParam = dev.octri.showcase.openai.models.CustomGrammarFormatParam
 
-typealias CustomGrammarFormatParamTypeEnum =
-    dev.octri.showcase.openai.models.CustomGrammarFormatParamTypeEnum
+typealias CustomGrammarFormatParamTypeEnum = dev.octri.showcase.openai.models.CustomGrammarFormatParamTypeEnum
 
 typealias CustomTextFormatParam = dev.octri.showcase.openai.models.CustomTextFormatParam
 
-typealias CustomTextFormatParamTypeEnum =
-    dev.octri.showcase.openai.models.CustomTextFormatParamTypeEnum
+typealias CustomTextFormatParamTypeEnum = dev.octri.showcase.openai.models.CustomTextFormatParamTypeEnum
 
 typealias CustomToolCall = dev.octri.showcase.openai.models.CustomToolCall
 
 typealias CustomToolCallOutput = dev.octri.showcase.openai.models.CustomToolCallOutput
 
-typealias CustomToolCallOutputResource =
-    dev.octri.showcase.openai.models.CustomToolCallOutputResource
+typealias CustomToolCallOutputResource = dev.octri.showcase.openai.models.CustomToolCallOutputResource
 
-typealias CustomToolCallOutputTypeEnum =
-    dev.octri.showcase.openai.models.CustomToolCallOutputTypeEnum
+typealias CustomToolCallOutputTypeEnum = dev.octri.showcase.openai.models.CustomToolCallOutputTypeEnum
 
 typealias CustomToolCallResource = dev.octri.showcase.openai.models.CustomToolCallResource
 
@@ -206,32 +155,23 @@ typealias CustomToolCallTypeEnum = dev.octri.showcase.openai.models.CustomToolCa
 
 typealias CustomToolChatCompletions = dev.octri.showcase.openai.models.CustomToolChatCompletions
 
-typealias CustomToolChatCompletionsCustom =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustom
+typealias CustomToolChatCompletionsCustom = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustom
 
-typealias CustomToolChatCompletionsCustomFormat =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormat
+typealias CustomToolChatCompletionsCustomFormat = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormat
 
-typealias CustomToolChatCompletionsCustomFormatVariant0 =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant0
+typealias CustomToolChatCompletionsCustomFormatVariant0 = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant0
 
-typealias CustomToolChatCompletionsCustomFormatVariant0TypeEnum =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant0TypeEnum
+typealias CustomToolChatCompletionsCustomFormatVariant0TypeEnum = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant0TypeEnum
 
-typealias CustomToolChatCompletionsCustomFormatVariant1 =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1
+typealias CustomToolChatCompletionsCustomFormatVariant1 = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1
 
-typealias CustomToolChatCompletionsCustomFormatVariant1Grammar =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1Grammar
+typealias CustomToolChatCompletionsCustomFormatVariant1Grammar = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1Grammar
 
-typealias CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum
+typealias CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum
 
-typealias CustomToolChatCompletionsCustomFormatVariant1TypeEnum =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1TypeEnum
+typealias CustomToolChatCompletionsCustomFormatVariant1TypeEnum = dev.octri.showcase.openai.models.CustomToolChatCompletionsCustomFormatVariant1TypeEnum
 
-typealias CustomToolChatCompletionsTypeEnum =
-    dev.octri.showcase.openai.models.CustomToolChatCompletionsTypeEnum
+typealias CustomToolChatCompletionsTypeEnum = dev.octri.showcase.openai.models.CustomToolChatCompletionsTypeEnum
 
 typealias CustomToolParam = dev.octri.showcase.openai.models.CustomToolParam
 
@@ -247,38 +187,29 @@ typealias DecisionInputContent = dev.octri.showcase.openai.models.DecisionInputC
 
 typealias DecisionInputContentParts = dev.octri.showcase.openai.models.DecisionInputContentParts
 
-typealias DecisionInputContentPartsItem =
-    dev.octri.showcase.openai.models.DecisionInputContentPartsItem
+typealias DecisionInputContentPartsItem = dev.octri.showcase.openai.models.DecisionInputContentPartsItem
 
 typealias DecisionInputCustomToolCall = dev.octri.showcase.openai.models.DecisionInputCustomToolCall
 
-typealias DecisionInputCustomToolCallOutput =
-    dev.octri.showcase.openai.models.DecisionInputCustomToolCallOutput
+typealias DecisionInputCustomToolCallOutput = dev.octri.showcase.openai.models.DecisionInputCustomToolCallOutput
 
-typealias DecisionInputCustomToolCallOutputTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputCustomToolCallOutputTypeEnum
+typealias DecisionInputCustomToolCallOutputTypeEnum = dev.octri.showcase.openai.models.DecisionInputCustomToolCallOutputTypeEnum
 
-typealias DecisionInputCustomToolCallTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputCustomToolCallTypeEnum
+typealias DecisionInputCustomToolCallTypeEnum = dev.octri.showcase.openai.models.DecisionInputCustomToolCallTypeEnum
 
 typealias DecisionInputFunctionCall = dev.octri.showcase.openai.models.DecisionInputFunctionCall
 
-typealias DecisionInputFunctionCallOutput =
-    dev.octri.showcase.openai.models.DecisionInputFunctionCallOutput
+typealias DecisionInputFunctionCallOutput = dev.octri.showcase.openai.models.DecisionInputFunctionCallOutput
 
-typealias DecisionInputFunctionCallOutputTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputFunctionCallOutputTypeEnum
+typealias DecisionInputFunctionCallOutputTypeEnum = dev.octri.showcase.openai.models.DecisionInputFunctionCallOutputTypeEnum
 
-typealias DecisionInputFunctionCallTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputFunctionCallTypeEnum
+typealias DecisionInputFunctionCallTypeEnum = dev.octri.showcase.openai.models.DecisionInputFunctionCallTypeEnum
 
 typealias DecisionInputImage = dev.octri.showcase.openai.models.DecisionInputImage
 
-typealias DecisionInputImagePromptCacheBreakpoint =
-    dev.octri.showcase.openai.models.DecisionInputImagePromptCacheBreakpoint
+typealias DecisionInputImagePromptCacheBreakpoint = dev.octri.showcase.openai.models.DecisionInputImagePromptCacheBreakpoint
 
-typealias DecisionInputImagePromptCacheBreakpointModeEnum =
-    dev.octri.showcase.openai.models.DecisionInputImagePromptCacheBreakpointModeEnum
+typealias DecisionInputImagePromptCacheBreakpointModeEnum = dev.octri.showcase.openai.models.DecisionInputImagePromptCacheBreakpointModeEnum
 
 typealias DecisionInputImageTypeEnum = dev.octri.showcase.openai.models.DecisionInputImageTypeEnum
 
@@ -286,51 +217,39 @@ typealias DecisionInputItem = dev.octri.showcase.openai.models.DecisionInputItem
 
 typealias DecisionInputMessage = dev.octri.showcase.openai.models.DecisionInputMessage
 
-typealias DecisionInputMessageRoleEnum =
-    dev.octri.showcase.openai.models.DecisionInputMessageRoleEnum
+typealias DecisionInputMessageRoleEnum = dev.octri.showcase.openai.models.DecisionInputMessageRoleEnum
 
-typealias DecisionInputMessageTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputMessageTypeEnum
+typealias DecisionInputMessageTypeEnum = dev.octri.showcase.openai.models.DecisionInputMessageTypeEnum
 
 typealias DecisionInputOutputText = dev.octri.showcase.openai.models.DecisionInputOutputText
 
-typealias DecisionInputOutputTextTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputOutputTextTypeEnum
+typealias DecisionInputOutputTextTypeEnum = dev.octri.showcase.openai.models.DecisionInputOutputTextTypeEnum
 
 typealias DecisionInputRefusal = dev.octri.showcase.openai.models.DecisionInputRefusal
 
-typealias DecisionInputRefusalTypeEnum =
-    dev.octri.showcase.openai.models.DecisionInputRefusalTypeEnum
+typealias DecisionInputRefusalTypeEnum = dev.octri.showcase.openai.models.DecisionInputRefusalTypeEnum
 
 typealias DecisionInputText = dev.octri.showcase.openai.models.DecisionInputText
 
-typealias DecisionInputTextPromptCacheBreakpoint =
-    dev.octri.showcase.openai.models.DecisionInputTextPromptCacheBreakpoint
+typealias DecisionInputTextPromptCacheBreakpoint = dev.octri.showcase.openai.models.DecisionInputTextPromptCacheBreakpoint
 
-typealias DecisionInputTextPromptCacheBreakpointModeEnum =
-    dev.octri.showcase.openai.models.DecisionInputTextPromptCacheBreakpointModeEnum
+typealias DecisionInputTextPromptCacheBreakpointModeEnum = dev.octri.showcase.openai.models.DecisionInputTextPromptCacheBreakpointModeEnum
 
 typealias DecisionInputTextTypeEnum = dev.octri.showcase.openai.models.DecisionInputTextTypeEnum
 
-typealias DecisionInputToolOutputContent =
-    dev.octri.showcase.openai.models.DecisionInputToolOutputContent
+typealias DecisionInputToolOutputContent = dev.octri.showcase.openai.models.DecisionInputToolOutputContent
 
-typealias DecisionInputToolOutputContentParts =
-    dev.octri.showcase.openai.models.DecisionInputToolOutputContentParts
+typealias DecisionInputToolOutputContentParts = dev.octri.showcase.openai.models.DecisionInputToolOutputContentParts
 
-typealias DecisionInputToolOutputContentPartsItem =
-    dev.octri.showcase.openai.models.DecisionInputToolOutputContentPartsItem
+typealias DecisionInputToolOutputContentPartsItem = dev.octri.showcase.openai.models.DecisionInputToolOutputContentPartsItem
 
 typealias DecisionRequest = dev.octri.showcase.openai.models.DecisionRequest
 
-typealias DecisionRequestPromptCacheOptions =
-    dev.octri.showcase.openai.models.DecisionRequestPromptCacheOptions
+typealias DecisionRequestPromptCacheOptions = dev.octri.showcase.openai.models.DecisionRequestPromptCacheOptions
 
-typealias DecisionRequestPromptCacheOptionsModeEnum =
-    dev.octri.showcase.openai.models.DecisionRequestPromptCacheOptionsModeEnum
+typealias DecisionRequestPromptCacheOptionsModeEnum = dev.octri.showcase.openai.models.DecisionRequestPromptCacheOptionsModeEnum
 
-typealias DecisionRequestPromptCacheOptionsTtlEnum =
-    dev.octri.showcase.openai.models.DecisionRequestPromptCacheOptionsTtlEnum
+typealias DecisionRequestPromptCacheOptionsTtlEnum = dev.octri.showcase.openai.models.DecisionRequestPromptCacheOptionsTtlEnum
 
 typealias DecisionResponse = dev.octri.showcase.openai.models.DecisionResponse
 
@@ -338,8 +257,7 @@ typealias DecisionsUsageApiSource = dev.octri.showcase.openai.models.DecisionsUs
 
 typealias DecisionsUsageBucket = dev.octri.showcase.openai.models.DecisionsUsageBucket
 
-typealias DecisionsUsageBucketObjectEnum =
-    dev.octri.showcase.openai.models.DecisionsUsageBucketObjectEnum
+typealias DecisionsUsageBucketObjectEnum = dev.octri.showcase.openai.models.DecisionsUsageBucketObjectEnum
 
 typealias DecisionsUsageBucketWidth = dev.octri.showcase.openai.models.DecisionsUsageBucketWidth
 
@@ -349,143 +267,109 @@ typealias DecisionsUsageErrorResponse = dev.octri.showcase.openai.models.Decisio
 
 typealias DecisionsUsageGroupBy = dev.octri.showcase.openai.models.DecisionsUsageGroupBy
 
-typealias DecisionsUsagePermissionErrorResponse =
-    dev.octri.showcase.openai.models.DecisionsUsagePermissionErrorResponse
+typealias DecisionsUsagePermissionErrorResponse = dev.octri.showcase.openai.models.DecisionsUsagePermissionErrorResponse
 
-typealias DecisionsUsagePermissionErrorResponseError =
-    dev.octri.showcase.openai.models.DecisionsUsagePermissionErrorResponseError
+typealias DecisionsUsagePermissionErrorResponseError = dev.octri.showcase.openai.models.DecisionsUsagePermissionErrorResponseError
 
 typealias DecisionsUsageResult = dev.octri.showcase.openai.models.DecisionsUsageResult
 
-typealias DecisionsUsageResultObjectEnum =
-    dev.octri.showcase.openai.models.DecisionsUsageResultObjectEnum
+typealias DecisionsUsageResultObjectEnum = dev.octri.showcase.openai.models.DecisionsUsageResultObjectEnum
 
 typealias Delegation = dev.octri.showcase.openai.models.Delegation
 
-typealias DeleteAdminApiKeysResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteAdminApiKeysResponseObjectEnum
+typealias DeleteAdminApiKeysResponseObjectEnum = dev.octri.showcase.openai.models.DeleteAdminApiKeysResponseObjectEnum
 
 typealias DeleteAssistantResponse = dev.octri.showcase.openai.models.DeleteAssistantResponse
 
-typealias DeleteAssistantResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteAssistantResponseObjectEnum
+typealias DeleteAssistantResponseObjectEnum = dev.octri.showcase.openai.models.DeleteAssistantResponseObjectEnum
 
 typealias DeleteCertificateResponse = dev.octri.showcase.openai.models.DeleteCertificateResponse
 
-typealias DeleteCertificateResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteCertificateResponseObjectEnum
+typealias DeleteCertificateResponseObjectEnum = dev.octri.showcase.openai.models.DeleteCertificateResponseObjectEnum
 
-typealias DeleteContainerFileResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteContainerFileResponseObjectEnum
+typealias DeleteContainerFileResponseObjectEnum = dev.octri.showcase.openai.models.DeleteContainerFileResponseObjectEnum
 
-typealias DeleteContainerResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteContainerResponseObjectEnum
+typealias DeleteContainerResponseObjectEnum = dev.octri.showcase.openai.models.DeleteContainerResponseObjectEnum
 
 typealias DeletedAgentResource = dev.octri.showcase.openai.models.DeletedAgentResource
 
-typealias DeletedAgentResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedAgentResourceObjectEnum
+typealias DeletedAgentResourceObjectEnum = dev.octri.showcase.openai.models.DeletedAgentResourceObjectEnum
 
 typealias DeletedConversation = dev.octri.showcase.openai.models.DeletedConversation
 
 typealias DeletedConversationResource = dev.octri.showcase.openai.models.DeletedConversationResource
 
-typealias DeletedConversationResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedConversationResourceObjectEnum
+typealias DeletedConversationResourceObjectEnum = dev.octri.showcase.openai.models.DeletedConversationResourceObjectEnum
 
-typealias DeletedEnvironmentTemplateResource =
-    dev.octri.showcase.openai.models.DeletedEnvironmentTemplateResource
+typealias DeletedEnvironmentTemplateResource = dev.octri.showcase.openai.models.DeletedEnvironmentTemplateResource
 
-typealias DeletedEnvironmentTemplateResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedEnvironmentTemplateResourceObjectEnum
+typealias DeletedEnvironmentTemplateResourceObjectEnum = dev.octri.showcase.openai.models.DeletedEnvironmentTemplateResourceObjectEnum
 
-typealias DeletedRoleAssignmentResource =
-    dev.octri.showcase.openai.models.DeletedRoleAssignmentResource
+typealias DeletedRoleAssignmentResource = dev.octri.showcase.openai.models.DeletedRoleAssignmentResource
 
-typealias DeletedSessionArtifactResource =
-    dev.octri.showcase.openai.models.DeletedSessionArtifactResource
+typealias DeletedSessionArtifactResource = dev.octri.showcase.openai.models.DeletedSessionArtifactResource
 
-typealias DeletedSessionArtifactResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedSessionArtifactResourceObjectEnum
+typealias DeletedSessionArtifactResourceObjectEnum = dev.octri.showcase.openai.models.DeletedSessionArtifactResourceObjectEnum
 
 typealias DeletedSessionResource = dev.octri.showcase.openai.models.DeletedSessionResource
 
-typealias DeletedSessionResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedSessionResourceObjectEnum
+typealias DeletedSessionResourceObjectEnum = dev.octri.showcase.openai.models.DeletedSessionResourceObjectEnum
 
 typealias DeletedSkillResource = dev.octri.showcase.openai.models.DeletedSkillResource
 
-typealias DeletedSkillResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedSkillResourceObjectEnum
+typealias DeletedSkillResourceObjectEnum = dev.octri.showcase.openai.models.DeletedSkillResourceObjectEnum
 
 typealias DeletedSkillVersionResource = dev.octri.showcase.openai.models.DeletedSkillVersionResource
 
-typealias DeletedSkillVersionResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedSkillVersionResourceObjectEnum
+typealias DeletedSkillVersionResourceObjectEnum = dev.octri.showcase.openai.models.DeletedSkillVersionResourceObjectEnum
 
 typealias DeletedThreadResource = dev.octri.showcase.openai.models.DeletedThreadResource
 
-typealias DeletedThreadResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedThreadResourceObjectEnum
+typealias DeletedThreadResourceObjectEnum = dev.octri.showcase.openai.models.DeletedThreadResourceObjectEnum
 
-typealias DeletedVaultCredentialResource =
-    dev.octri.showcase.openai.models.DeletedVaultCredentialResource
+typealias DeletedVaultCredentialResource = dev.octri.showcase.openai.models.DeletedVaultCredentialResource
 
-typealias DeletedVaultCredentialResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedVaultCredentialResourceObjectEnum
+typealias DeletedVaultCredentialResourceObjectEnum = dev.octri.showcase.openai.models.DeletedVaultCredentialResourceObjectEnum
 
 typealias DeletedVaultResource = dev.octri.showcase.openai.models.DeletedVaultResource
 
-typealias DeletedVaultResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedVaultResourceObjectEnum
+typealias DeletedVaultResourceObjectEnum = dev.octri.showcase.openai.models.DeletedVaultResourceObjectEnum
 
 typealias DeletedVideoResource = dev.octri.showcase.openai.models.DeletedVideoResource
 
-typealias DeletedVideoResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedVideoResourceObjectEnum
+typealias DeletedVideoResourceObjectEnum = dev.octri.showcase.openai.models.DeletedVideoResourceObjectEnum
 
-typealias DeletedWebhookEndpointResource =
-    dev.octri.showcase.openai.models.DeletedWebhookEndpointResource
+typealias DeletedWebhookEndpointResource = dev.octri.showcase.openai.models.DeletedWebhookEndpointResource
 
-typealias DeletedWebhookEndpointResourceObjectEnum =
-    dev.octri.showcase.openai.models.DeletedWebhookEndpointResourceObjectEnum
+typealias DeletedWebhookEndpointResourceObjectEnum = dev.octri.showcase.openai.models.DeletedWebhookEndpointResourceObjectEnum
 
 typealias DeleteFileResponse = dev.octri.showcase.openai.models.DeleteFileResponse
 
-typealias DeleteFileResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteFileResponseObjectEnum
+typealias DeleteFileResponseObjectEnum = dev.octri.showcase.openai.models.DeleteFileResponseObjectEnum
 
-typealias DeleteFineTuningCheckpointPermissionResponse =
-    dev.octri.showcase.openai.models.DeleteFineTuningCheckpointPermissionResponse
+typealias DeleteFineTuningCheckpointPermissionResponse = dev.octri.showcase.openai.models.DeleteFineTuningCheckpointPermissionResponse
 
-typealias DeleteFineTuningCheckpointPermissionResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteFineTuningCheckpointPermissionResponseObjectEnum
+typealias DeleteFineTuningCheckpointPermissionResponseObjectEnum = dev.octri.showcase.openai.models.DeleteFineTuningCheckpointPermissionResponseObjectEnum
 
 typealias DeleteMessageResponse = dev.octri.showcase.openai.models.DeleteMessageResponse
 
-typealias DeleteMessageResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteMessageResponseObjectEnum
+typealias DeleteMessageResponseObjectEnum = dev.octri.showcase.openai.models.DeleteMessageResponseObjectEnum
 
 typealias DeleteModelResponse = dev.octri.showcase.openai.models.DeleteModelResponse
 
-typealias DeleteResponseResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteResponseResponseObjectEnum
+typealias DeleteResponseResponseObjectEnum = dev.octri.showcase.openai.models.DeleteResponseResponseObjectEnum
 
 typealias DeleteThreadResponse = dev.octri.showcase.openai.models.DeleteThreadResponse
 
-typealias DeleteThreadResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteThreadResponseObjectEnum
+typealias DeleteThreadResponseObjectEnum = dev.octri.showcase.openai.models.DeleteThreadResponseObjectEnum
 
-typealias DeleteVectorStoreFileResponse =
-    dev.octri.showcase.openai.models.DeleteVectorStoreFileResponse
+typealias DeleteVectorStoreFileResponse = dev.octri.showcase.openai.models.DeleteVectorStoreFileResponse
 
-typealias DeleteVectorStoreFileResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteVectorStoreFileResponseObjectEnum
+typealias DeleteVectorStoreFileResponseObjectEnum = dev.octri.showcase.openai.models.DeleteVectorStoreFileResponseObjectEnum
 
 typealias DeleteVectorStoreResponse = dev.octri.showcase.openai.models.DeleteVectorStoreResponse
 
-typealias DeleteVectorStoreResponseObjectEnum =
-    dev.octri.showcase.openai.models.DeleteVectorStoreResponseObjectEnum
+typealias DeleteVectorStoreResponseObjectEnum = dev.octri.showcase.openai.models.DeleteVectorStoreResponseObjectEnum
 
 typealias DesktopParam = dev.octri.showcase.openai.models.DesktopParam
 
@@ -497,11 +381,9 @@ typealias DirectToolCallCaller = dev.octri.showcase.openai.models.DirectToolCall
 
 typealias DirectToolCallCallerParam = dev.octri.showcase.openai.models.DirectToolCallCallerParam
 
-typealias DirectToolCallCallerParamTypeEnum =
-    dev.octri.showcase.openai.models.DirectToolCallCallerParamTypeEnum
+typealias DirectToolCallCallerParamTypeEnum = dev.octri.showcase.openai.models.DirectToolCallCallerParamTypeEnum
 
-typealias DirectToolCallCallerTypeEnum =
-    dev.octri.showcase.openai.models.DirectToolCallCallerTypeEnum
+typealias DirectToolCallCallerTypeEnum = dev.octri.showcase.openai.models.DirectToolCallCallerTypeEnum
 
 typealias DoneEvent = dev.octri.showcase.openai.models.DoneEvent
 
@@ -527,20 +409,15 @@ typealias EasyInputMessageTypeEnum = dev.octri.showcase.openai.models.EasyInputM
 
 typealias EditImageBodyJsonParam = dev.octri.showcase.openai.models.EditImageBodyJsonParam
 
-typealias EditImageBodyJsonParamBackgroundVariant0Enum =
-    dev.octri.showcase.openai.models.EditImageBodyJsonParamBackgroundVariant0Enum
+typealias EditImageBodyJsonParamBackgroundVariant0Enum = dev.octri.showcase.openai.models.EditImageBodyJsonParamBackgroundVariant0Enum
 
-typealias EditImageBodyJsonParamInputFidelityVariant0Enum =
-    dev.octri.showcase.openai.models.EditImageBodyJsonParamInputFidelityVariant0Enum
+typealias EditImageBodyJsonParamInputFidelityVariant0Enum = dev.octri.showcase.openai.models.EditImageBodyJsonParamInputFidelityVariant0Enum
 
-typealias EditImageBodyJsonParamModerationVariant0Enum =
-    dev.octri.showcase.openai.models.EditImageBodyJsonParamModerationVariant0Enum
+typealias EditImageBodyJsonParamModerationVariant0Enum = dev.octri.showcase.openai.models.EditImageBodyJsonParamModerationVariant0Enum
 
-typealias EditImageBodyJsonParamOutputFormatVariant0Enum =
-    dev.octri.showcase.openai.models.EditImageBodyJsonParamOutputFormatVariant0Enum
+typealias EditImageBodyJsonParamOutputFormatVariant0Enum = dev.octri.showcase.openai.models.EditImageBodyJsonParamOutputFormatVariant0Enum
 
-typealias EditImageBodyJsonParamQualityVariant0Enum =
-    dev.octri.showcase.openai.models.EditImageBodyJsonParamQualityVariant0Enum
+typealias EditImageBodyJsonParamQualityVariant0Enum = dev.octri.showcase.openai.models.EditImageBodyJsonParamQualityVariant0Enum
 
 typealias Embedding = dev.octri.showcase.openai.models.Embedding
 
@@ -550,15 +427,12 @@ typealias EmptyModelParam = dev.octri.showcase.openai.models.EmptyModelParam
 
 typealias EncryptedContentResource = dev.octri.showcase.openai.models.EncryptedContentResource
 
-typealias EncryptedContentResourceTypeEnum =
-    dev.octri.showcase.openai.models.EncryptedContentResourceTypeEnum
+typealias EncryptedContentResourceTypeEnum = dev.octri.showcase.openai.models.EncryptedContentResourceTypeEnum
 
 typealias EnvironmentFileListResource = dev.octri.showcase.openai.models.EnvironmentFileListResource
 
-typealias EnvironmentFilePageObjectResource =
-    dev.octri.showcase.openai.models.EnvironmentFilePageObjectResource
+typealias EnvironmentFilePageObjectResource = dev.octri.showcase.openai.models.EnvironmentFilePageObjectResource
 
 typealias EnvironmentFileResource = dev.octri.showcase.openai.models.EnvironmentFileResource
 
-typealias EnvironmentFileResourceObjectEnum =
-    dev.octri.showcase.openai.models.EnvironmentFileResourceObjectEnum
+typealias EnvironmentFileResourceObjectEnum = dev.octri.showcase.openai.models.EnvironmentFileResourceObjectEnum

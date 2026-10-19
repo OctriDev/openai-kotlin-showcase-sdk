@@ -3,38 +3,44 @@
 
 package dev.octri.showcase.openai.models
 
-/** Required object value serialized in the `tool_outputs[]` wire field. */
+/**
+ * Required object value serialized in the `tool_outputs[]` wire field.
+ */
 data class SubmitToolOutputsRunRequestToolOutputsItem(
     /**
-     * The ID of the tool call in the `required_action` object within the run object the output is
-     * being submitted for.
+     * The ID of the tool call in the `required_action` object within the run object the output is being submitted for.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("tool_call_id") val toolCallId: String? = null,
-    /** The output of the tool call to be submitted to continue the run. */
-    val output: String? = null,
-)
-
-/** Typed representation of the `SubmitToolOutputsRunRequest` API schema. */
-data class SubmitToolOutputsRunRequest(
-    /** A list of tools for which the outputs are being submitted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_outputs")
-    val toolOutputs: List<SubmitToolOutputsRunRequestToolOutputsItem>,
-    /** Optional `boolean` value serialized in the `stream` wire field. */
-    val stream: Boolean? = null,
+    /**
+     * The output of the tool call to be submitted to continue the run.
+     */
+    val output: String? = null
 )
 
 /**
- * Controls for how a thread will be truncated prior to the run. Use this to control the initial
- * context window of the run.
+ * Typed representation of the `SubmitToolOutputsRunRequest` API schema.
+ */
+data class SubmitToolOutputsRunRequest(
+    /**
+     * A list of tools for which the outputs are being submitted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_outputs") val toolOutputs: List<SubmitToolOutputsRunRequestToolOutputsItem>,
+    /**
+     * Optional `boolean` value serialized in the `stream` wire field.
+     */
+    val stream: Boolean? = null
+)
+
+/**
+ * Controls for how a thread will be truncated prior to the run. Use this to control the initial context window of the run.
  */
 data class TruncationObject(
     /**
-     * The truncation strategy to use for the thread. The default is `auto`. If set to
-     * `last_messages`, the thread will be truncated to the n most recent messages in the thread.
-     * When set to `auto`, messages in the middle of the thread will be dropped to fit the context
-     * length of the model, `max_prompt_tokens`.
+     * The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will be truncated to the n most recent messages in the thread. When set to `auto`, messages in the middle of the thread will be dropped to fit the context length of the model, `max_prompt_tokens`.
      */
     val type: TruncationObjectTypeEnum,
-    /** Optional API value serialized in the `last_messages` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_messages") val lastMessages: Long? = null,
+    /**
+     * Optional API value serialized in the `last_messages` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_messages") val lastMessages: Long? = null
 )

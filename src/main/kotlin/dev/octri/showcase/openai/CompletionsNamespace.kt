@@ -3,44 +3,24 @@
 
 package dev.octri.showcase.openai
 
+
 class CompletionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a completion from a prompt using the specified model and generation parameters.
-     * Supply `model` and `prompt`; use `stream` to receive partial results as server-sent events
-     * instead of a single response. The response contains generated text choices and usage
-     * statistics.
+     * Creates a completion from a prompt using the specified model and generation parameters. Supply `model` and `prompt`; use `stream` to receive partial results as server-sent events instead of a single response. The response contains generated text choices and usage statistics.
      *
-     * Creates a completion for the provided prompt and parameters. Returns a completion object, or
-     * a sequence of completion objects if the request is streamed.
+     * Creates a completion for the provided prompt and parameters. Returns a completion object, or a sequence of completion objects if the request is streamed.
      */
-    fun create(
-        request: dev.octri.showcase.openai.methods.Completions.CreateCompletionParams,
-        options: RequestOptions? = null,
-    ): CreateCompletionResponse {
-        return dev.octri.showcase.openai.methods.Completions.createCompletion(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.openai.methods.Completions.CreateCompletionParams, options: RequestOptions? = null): CreateCompletionResponse {
+        return dev.octri.showcase.openai.methods.Completions.createCompletion(clientConfig, request, options)
     }
 
     /**
-     * Creates a completion from a prompt using the specified model and generation parameters.
-     * Supply `model` and `prompt`; use `stream` to receive partial results as server-sent events
-     * instead of a single response. The response contains generated text choices and usage
-     * statistics.
+     * Creates a completion from a prompt using the specified model and generation parameters. Supply `model` and `prompt`; use `stream` to receive partial results as server-sent events instead of a single response. The response contains generated text choices and usage statistics.
      *
-     * Creates a completion for the provided prompt and parameters. Returns a completion object, or
-     * a sequence of completion objects if the request is streamed.
+     * Creates a completion for the provided prompt and parameters. Returns a completion object, or a sequence of completion objects if the request is streamed.
      */
-    fun createStream(
-        request: dev.octri.showcase.openai.methods.Completions.CreateCompletionStreamRequest,
-        options: RequestOptions? = null,
-    ): Sequence<CreateCompletionResponse> {
-        return dev.octri.showcase.openai.methods.Completions.createCompletionStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createStream(request: dev.octri.showcase.openai.methods.Completions.CreateCompletionStreamRequest, options: RequestOptions? = null): Sequence<CreateCompletionResponse> {
+        return dev.octri.showcase.openai.methods.Completions.createCompletionStream(clientConfig, request, options)
     }
+
 }

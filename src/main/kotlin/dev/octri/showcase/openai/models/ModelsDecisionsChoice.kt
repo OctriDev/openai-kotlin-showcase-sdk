@@ -3,26 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ChoiceOptionParam` API schema. */
+/**
+ * Typed representation of the `ChoiceOptionParam` API schema.
+ */
 data class ChoiceOptionParam(
-    /** Choice values are typed: a string and a boolean with the same text are distinct. */
+    /**
+     * Choice values are typed: a string and a boolean with the same text are distinct.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: ChoiceValueParam,
-    /** Optional `string` value serialized in the `description` wire field. */
-    val description: String? = null,
+    /**
+     * Optional `string` value serialized in the `description` wire field.
+     */
+    val description: String? = null
 )
 
-/** Typed representation of the `ChoiceProbabilityResource` API schema. */
+/**
+ * Typed representation of the `ChoiceProbabilityResource` API schema.
+ */
 data class ChoiceProbabilityResource(
-    /** Choice values are typed: a string and a boolean with the same text are distinct. */
+    /**
+     * Choice values are typed: a string and a boolean with the same text are distinct.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: ChoiceValueResource,
-    /** Required `number` value serialized in the `probability` wire field. */
-    val probability: Double,
+    /**
+     * Required `number` value serialized in the `probability` wire field.
+     */
+    val probability: Double
 )
 
-/** Choice values are typed: a string and a boolean with the same text are distinct. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ChoiceValueParam.Deserializer::class
-)
+/**
+ * Choice values are typed: a string and a boolean with the same text are distinct.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ChoiceValueParam.Deserializer::class)
 sealed interface ChoiceValueParam {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ChoiceValueParam>() {
@@ -33,55 +45,25 @@ sealed interface ChoiceValueParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual ->
-                    StringChoiceValueParam(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                node.isBoolean ->
-                    BooleanChoiceValueParam(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Boolean>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        ChoiceValueParam::class.java,
-                        "no ChoiceValueParam branch accepts this payload",
-                    )
+                node.isTextual -> StringChoiceValueParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                node.isBoolean -> BooleanChoiceValueParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Boolean>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, ChoiceValueParam::class.java, "no ChoiceValueParam branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringChoiceValueParam(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : ChoiceValueParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringChoiceValueParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ChoiceValueParam
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BooleanChoiceValueParam(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean
-) : ChoiceValueParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BooleanChoiceValueParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean) : ChoiceValueParam
 
-/** Choice values are typed: a string and a boolean with the same text are distinct. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ChoiceValueResource.Deserializer::class
-)
+/**
+ * Choice values are typed: a string and a boolean with the same text are distinct.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ChoiceValueResource.Deserializer::class)
 sealed interface ChoiceValueResource {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ChoiceValueResource>() {
@@ -92,47 +74,17 @@ sealed interface ChoiceValueResource {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual ->
-                    StringChoiceValueResource(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                node.isBoolean ->
-                    BooleanChoiceValueResource(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Boolean>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        ChoiceValueResource::class.java,
-                        "no ChoiceValueResource branch accepts this payload",
-                    )
+                node.isTextual -> StringChoiceValueResource(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                node.isBoolean -> BooleanChoiceValueResource(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Boolean>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, ChoiceValueResource::class.java, "no ChoiceValueResource branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringChoiceValueResource(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : ChoiceValueResource
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringChoiceValueResource(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ChoiceValueResource
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class BooleanChoiceValueResource(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean
-) : ChoiceValueResource
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class BooleanChoiceValueResource(@get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean) : ChoiceValueResource

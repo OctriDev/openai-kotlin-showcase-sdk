@@ -29,78 +29,41 @@ import dev.octri.showcase.openai.Validation
 
 internal object AgentsListAgentEnvironmentsOperation {
     /**
-     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the
-     * prewarming beta.
+     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the prewarming beta.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      * @param type The hosting type to list. Defaults to `openai_hosted`.
      */
-    fun listAgentEnvironments(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        type: EnvironmentTypeParam? = null,
-        options: RequestOptions? = null,
-    ): AgentEnvironmentListResource {
+    fun listAgentEnvironments(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null): AgentEnvironmentListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<AgentEnvironmentListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/environments",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "type" to SdkClient.queryValue(type, "form", true),
-                        ),
-                    operationId = "listAgentEnvironments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AgentEnvironmentListResource>(SdkClient.RequestSpec("GET", "/agents/environments", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "type" to SdkClient.queryValue(type, "form", true)), operationId = "listAgentEnvironments", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the
-     * prewarming beta.
+     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the prewarming beta.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      * @param type The hosting type to list. Defaults to `openai_hosted`.
      */
-    fun listAgentEnvironmentsPaginated(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        type: EnvironmentTypeParam? = null,
-        options: RequestOptions? = null,
-        yieldFn: (PublicEnvironmentResource) -> Boolean,
-    ) {
+    fun listAgentEnvironmentsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null, yieldFn: (PublicEnvironmentResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentEnvironments(clientConfig, limit, order, cursor, type, options)
@@ -115,15 +78,9 @@ internal object AgentsListAgentEnvironmentsOperation {
         }
     }
 
-    fun listAgentEnvironmentsPages(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        type: EnvironmentTypeParam? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentEnvironmentsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentEnvironmentsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentEnvironmentsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentEnvironments(clientConfig, limit, order, cursor, type, options)
@@ -140,247 +97,90 @@ internal object AgentsListAgentEnvironmentsOperation {
 
 internal object AgentsCreateAgentEnvironmentOperation {
     /**
-     * Creates an OpenAI-hosted environment before creating a session. Requires access to the
-     * prewarming beta.
+     * Creates an OpenAI-hosted environment before creating a session. Requires access to the prewarming beta.
      *
      * @param environment The required hosting type and its configuration.
-     * @param idempotencyKey Deduplicates creation for 24 hours within the authenticated
-     *   organization, project, and creator. Retry the same JSON parameters with the same key to
-     *   retrieve the original environment in its current state. Different parameters or an
-     *   incomplete hosted creation return
-     *     409. Deleted environments are not recreated. After retention expires, the key may create
-     *          a new environment. Without this header, each request creates a new environment.
-     *
-     * @param vaultIds The IDs of up to 10 vaults made available to an OpenAI-hosted environment.
+     * @param idempotencyKey Deduplicates creation for 24 hours within the
+     *   authenticated organization, project, and creator. Retry the same JSON
+     *   parameters with the same key to retrieve the original environment in its
+     *   current state. Different parameters or an incomplete hosted creation return
+     *   409. Deleted environments are not recreated. After retention expires, the key
+     *   may create a new environment. Without this header, each request creates a new
+     *   environment.
+     * @param vaultIds The IDs of up to 10 vaults made available to an OpenAI-hosted
+     *   environment.
      */
-    fun createAgentEnvironment(
-        clientConfig: ClientConfig,
-        environment: CreateEnvironmentParam,
-        idempotencyKey: String? = null,
-        vaultIds: SdkClient.SdkOptional<List<String>?>? = null,
-        options: RequestOptions? = null,
-    ): PublicEnvironmentResource {
+    fun createAgentEnvironment(clientConfig: ClientConfig, environment: CreateEnvironmentParam, idempotencyKey: String? = null, vaultIds: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): PublicEnvironmentResource {
         if (idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                idempotencyKey,
-                Validation.LengthOpts(min = 1, max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", idempotencyKey, Validation.LengthOpts(min = 1, max = 256))
+}
 
         val vaultIdsValue = vaultIds?.getOrNull()
-        if (vaultIdsValue != null) {
-            Validation.validateItems(
-                "vault_ids",
-                vaultIdsValue,
-                Validation.LengthOpts(min = 0, max = 10),
-            )
-        }
+if (vaultIdsValue != null) {
+            Validation.validateItems("vault_ids", vaultIdsValue, Validation.LengthOpts(min = 0, max = 10))
+}
 
-        return SdkClient.request<PublicEnvironmentResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/agents/environments",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "environment" to (environment),
-                            "vault_ids" to (vaultIds ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createAgentEnvironment",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to SdkClient.headerValue(idempotencyKey, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "429" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PublicEnvironmentResource>(SdkClient.RequestSpec("POST", "/agents/environments", config = clientConfig, body = SdkClient.bodyMap("environment" to (environment), "vault_ids" to (vaultIds ?: SdkClient.SdkOptional.Omitted)), operationId = "createAgentEnvironment", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(idempotencyKey, false)), options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "429" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
 internal object AgentsRetrieveAgentEnvironmentOperation {
     /**
-     * Retrieves an execution environment's connection status and safe installed metadata. See
-     * environment lifecycle.
+     * Retrieves an execution environment's connection status and safe installed metadata. See environment lifecycle.
      *
      * @param environmentId The ID of the environment.
      */
-    fun retrieveAgentEnvironment(
-        clientConfig: ClientConfig,
-        environmentId: String,
-        options: RequestOptions? = null,
-    ): PublicEnvironmentResource {
-        Validation.validateLength(
-            "environment_id",
-            environmentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun retrieveAgentEnvironment(clientConfig: ClientConfig, environmentId: String, options: RequestOptions? = null): PublicEnvironmentResource {
+        Validation.validateLength("environment_id", environmentId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<PublicEnvironmentResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/environments/${SdkClient.encodePathSegment(environmentId)}",
-                    config = clientConfig,
-                    operationId = "retrieveAgentEnvironment",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PublicEnvironmentResource>(SdkClient.RequestSpec("GET", "/agents/environments/${SdkClient.encodePathSegment(environmentId)}", config = clientConfig, operationId = "retrieveAgentEnvironment", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
 internal object AgentsListAgentEnvironmentFilesOperation {
     /**
-     * Lists live files on a connected execution environment with optional directory filtering and
-     * opaque cursor pagination. See environment files.
+     * Lists live files on a connected execution environment with optional directory filtering and opaque cursor pagination. See environment files.
      *
      * @param environmentId The ID of the environment.
      * @param path Restrict the listing to this absolute workspace directory.
      * @param limit The maximum number of files to return, between 1 and 100.
      * @param order Sort by case-sensitive path components. Defaults to descending.
-     * @param page The opaque token from the previous page. Keep the same path, order, and limit.
+     * @param page The opaque token from the previous page. Keep the same path,
+     *   order, and limit.
      */
-    fun listAgentEnvironmentFiles(
-        clientConfig: ClientConfig,
-        environmentId: String,
-        path: SdkClient.SdkOptional<String?>? = null,
-        limit: SdkClient.SdkOptional<Long?>? = null,
-        order: ListOrderParam? = null,
-        page: String? = null,
-        options: RequestOptions? = null,
-    ): EnvironmentFileListResource {
-        Validation.validateLength(
-            "environment_id",
-            environmentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentEnvironmentFiles(clientConfig: ClientConfig, environmentId: String, path: SdkClient.SdkOptional<String?>? = null, limit: SdkClient.SdkOptional<Long?>? = null, order: ListOrderParam? = null, page: String? = null, options: RequestOptions? = null): EnvironmentFileListResource {
+        Validation.validateLength("environment_id", environmentId, Validation.LengthOpts(min = 0, max = 1048576))
 
         val pathValue = path?.getOrNull()
-        if (pathValue != null) {
-            Validation.validateLength(
-                "path",
-                pathValue,
-                Validation.LengthOpts(min = 0, max = 1048576),
-            )
-        }
+if (pathValue != null) {
+            Validation.validateLength("path", pathValue, Validation.LengthOpts(min = 0, max = 1048576))
+}
 
         val limitValue = limit?.getOrNull()
-        if (limitValue != null) {
-            Validation.validateRange(
-                "limit",
-                limitValue,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+if (limitValue != null) {
+            Validation.validateRange("limit", limitValue, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
         if (page != null) {
             Validation.validateLength("page", page, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<EnvironmentFileListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/environments/${SdkClient.encodePathSegment(environmentId)}/files",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "path" to SdkClient.queryValue(path, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "listAgentEnvironmentFiles",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<EnvironmentFileListResource>(SdkClient.RequestSpec("GET", "/agents/environments/${SdkClient.encodePathSegment(environmentId)}/files", config = clientConfig, query = mapOf("path" to SdkClient.queryValue(path, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "listAgentEnvironmentFiles", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
 internal object AgentsCreateAgentEnvironmentFileOperation {
     /**
-     * Writes a file to a connected agent execution environment, using either inline base64 data or
-     * a file uploaded through the Files API. Choose the `inline` or `file_id` body variant and
-     * provide the absolute destination `path`; writing to an existing regular file at that path
-     * replaces it. Upload the file between turns and wait for success before starting the next
-     * turn.
+     * Writes a file to a connected agent execution environment, using either inline base64 data or a file uploaded through the Files API. Choose the `inline` or `file_id` body variant and provide the absolute destination `path`; writing to an existing regular file at that path replaces it. Upload the file between turns and wait for success before starting the next turn.
      *
-     * Copies inline bytes or a Files API file into a connected execution environment, replacing an
-     * existing regular file at the same path. Upload between turns and wait for success before
-     * starting the next turn. See environment files.
+     * Copies inline bytes or a Files API file into a connected execution environment, replacing an existing regular file at the same path. Upload between turns and wait for success before starting the next turn. See environment files.
      *
      * @param environmentId The ID of the environment.
      */
-    fun createAgentEnvironmentFile(
-        clientConfig: ClientConfig,
-        environmentId: String,
-        body: HostedEnvironmentFileParam? = null,
-        options: RequestOptions? = null,
-    ): EnvironmentFileResource {
-        Validation.validateLength(
-            "environment_id",
-            environmentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun createAgentEnvironmentFile(clientConfig: ClientConfig, environmentId: String, body: HostedEnvironmentFileParam? = null, options: RequestOptions? = null): EnvironmentFileResource {
+        Validation.validateLength("environment_id", environmentId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<EnvironmentFileResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/agents/environments/${SdkClient.encodePathSegment(environmentId)}/files",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "createAgentEnvironmentFile",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "429" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<EnvironmentFileResource>(SdkClient.RequestSpec("POST", "/agents/environments/${SdkClient.encodePathSegment(environmentId)}/files", config = clientConfig, body = body, operationId = "createAgentEnvironmentFile", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "429" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
@@ -389,82 +189,43 @@ internal object AgentsListAgentSessionSubagentsOperation {
      * Lists subagents in a session, including nested and closed subagents. See subagent workflows.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagents(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): Agents.ListAgentSessionSubagentsResponse {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionSubagents(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): Agents.ListAgentSessionSubagentsResponse {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<Agents.ListAgentSessionSubagentsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionSubagents",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Agents.ListAgentSessionSubagentsResponse>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionSubagents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
+
+
+
+
+
 
     /**
      * Lists subagents in a session, including nested and closed subagents. See subagent workflows.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentsPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SubagentResource) -> Boolean,
-    ) {
+    fun listAgentSessionSubagentsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SubagentResource) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
+            val page = listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -476,19 +237,12 @@ internal object AgentsListAgentSessionSubagentsOperation {
         }
     }
 
-    fun listAgentSessionSubagentsPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionSubagentsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionSubagentsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
+            val page = listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -507,45 +261,12 @@ internal object AgentsRetrieveAgentSessionSubagentOperation {
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
      */
-    fun retrieveAgentSessionSubagent(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        options: RequestOptions? = null,
-    ): SubagentResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun retrieveAgentSessionSubagent(clientConfig: ClientConfig, sessionId: String, subagentId: String, options: RequestOptions? = null): SubagentResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        Validation.validateLength(
-            "subagent_id",
-            subagentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<SubagentResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}",
-                    config = clientConfig,
-                    operationId = "retrieveAgentSessionSubagent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SubagentResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}", config = clientConfig, operationId = "retrieveAgentSessionSubagent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
@@ -555,99 +276,46 @@ internal object AgentsListAgentSessionSubagentItemsOperation {
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentItems(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SessionItemListResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionSubagentItems(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        Validation.validateLength(
-            "subagent_id",
-            subagentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<SessionItemListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionSubagentItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionItemListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionSubagentItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
+
+
+
+
+
 
     /**
      * Lists this subagent's own items across all of its turns. See subagent workflows.
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentItemsPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SessionTurnItemResource) -> Boolean,
-    ) {
+    fun listAgentSessionSubagentItemsPaginated(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionSubagentItems(
-                    clientConfig,
-                    sessionId,
-                    subagentId,
-                    limit,
-                    order,
-                    cursor,
-                    options,
-                )
+            val page = listAgentSessionSubagentItems(clientConfig, sessionId, subagentId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -659,28 +327,12 @@ internal object AgentsListAgentSessionSubagentItemsOperation {
         }
     }
 
-    fun listAgentSessionSubagentItemsPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionSubagentItemsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionSubagentItemsPages(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentItemsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionSubagentItems(
-                    clientConfig,
-                    sessionId,
-                    subagentId,
-                    limit,
-                    order,
-                    cursor,
-                    options,
-                )
+            val page = listAgentSessionSubagentItems(clientConfig, sessionId, subagentId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -698,99 +350,46 @@ internal object AgentsListAgentSessionSubagentTurnsOperation {
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurns(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SessionTurnListResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionSubagentTurns(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTurnListResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        Validation.validateLength(
-            "subagent_id",
-            subagentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<SessionTurnListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionSubagentTurns",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionTurnListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionSubagentTurns", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
+
+
+
+
+
 
     /**
      * Lists all turns of this subagent, including turns after a resume. See subagent workflows.
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurnsPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (TurnResource) -> Boolean,
-    ) {
+    fun listAgentSessionSubagentTurnsPaginated(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (TurnResource) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionSubagentTurns(
-                    clientConfig,
-                    sessionId,
-                    subagentId,
-                    limit,
-                    order,
-                    cursor,
-                    options,
-                )
+            val page = listAgentSessionSubagentTurns(clientConfig, sessionId, subagentId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -802,28 +401,12 @@ internal object AgentsListAgentSessionSubagentTurnsOperation {
         }
     }
 
-    fun listAgentSessionSubagentTurnsPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionSubagentTurnsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionSubagentTurnsPages(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentTurnsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionSubagentTurns(
-                    clientConfig,
-                    sessionId,
-                    subagentId,
-                    limit,
-                    order,
-                    cursor,
-                    options,
-                )
+            val page = listAgentSessionSubagentTurns(clientConfig, sessionId, subagentId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -843,48 +426,14 @@ internal object AgentsRetrieveAgentSessionSubagentTurnOperation {
      * @param subagentId The ID of the subagent in this session.
      * @param turnId The ID of a turn belonging to this subagent.
      */
-    fun retrieveAgentSessionSubagentTurn(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        subagentId: String,
-        turnId: String,
-        options: RequestOptions? = null,
-    ): TurnResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun retrieveAgentSessionSubagentTurn(clientConfig: ClientConfig, sessionId: String, subagentId: String, turnId: String, options: RequestOptions? = null): TurnResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        Validation.validateLength(
-            "subagent_id",
-            subagentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
 
         Validation.validateLength("turn_id", turnId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<TurnResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns/${SdkClient.encodePathSegment(turnId)}",
-                    config = clientConfig,
-                    operationId = "retrieveAgentSessionSubagentTurn",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<TurnResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns/${SdkClient.encodePathSegment(turnId)}", config = clientConfig, operationId = "retrieveAgentSessionSubagentTurn", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
@@ -895,83 +444,37 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
      * @param turnId The ID of a turn belonging to this subagent.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurnItems(
-        clientConfig: ClientConfig,
-        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
-        options: RequestOptions? = null,
-    ): SessionItemListResource {
+    fun listAgentSessionSubagentTurnItems(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null): SessionItemListResource {
         validateListAgentSessionSubagentTurnItemsRequest(request)
 
-        return SdkClient.request<SessionItemListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/subagents/${SdkClient.encodePathSegment(request.subagentId)}/turns/${SdkClient.encodePathSegment(request.turnId)}/items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "order" to SdkClient.queryValue(request.order, "form", true),
-                            "after" to SdkClient.queryValue(request.after, "form", true),
-                        ),
-                    operationId = "listAgentSessionSubagentTurnItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionItemListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/subagents/${SdkClient.encodePathSegment(request.subagentId)}/turns/${SdkClient.encodePathSegment(request.turnId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(request.limit, "form", true), "order" to SdkClient.queryValue(request.order, "form", true), "after" to SdkClient.queryValue(request.after, "form", true)), operationId = "listAgentSessionSubagentTurnItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
-    private fun validateListAgentSessionSubagentTurnItemsRequest(
-        request: Agents.ListAgentSessionSubagentTurnItemsRequest
-    ) {
-        Validation.validateLength(
-            "session_id",
-            request.sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
 
-        Validation.validateLength(
-            "subagent_id",
-            request.subagentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    private fun validateListAgentSessionSubagentTurnItemsRequest(request: Agents.ListAgentSessionSubagentTurnItemsRequest) {
+        Validation.validateLength("session_id", request.sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        Validation.validateLength(
-            "turn_id",
-            request.turnId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("subagent_id", request.subagentId, Validation.LengthOpts(min = 0, max = 1048576))
+
+        Validation.validateLength("turn_id", request.turnId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
 
         if (request.after != null) {
-            Validation.validateLength(
-                "after",
-                request.after,
-                Validation.LengthOpts(min = 0, max = 1048576),
-            )
-        }
+            Validation.validateLength("after", request.after, Validation.LengthOpts(min = 0, max = 1048576))
+}
     }
+
+
+
+
 
     /**
      * Lists items belonging to one turn of this subagent. See subagent workflows.
@@ -979,24 +482,15 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
      * @param turnId The ID of a turn belonging to this subagent.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurnItemsPaginated(
-        clientConfig: ClientConfig,
-        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (SessionTurnItemResource) -> Boolean,
-    ) {
+    fun listAgentSessionSubagentTurnItemsPaginated(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) {
         var cursor = request.after
         while (true) {
-            val page =
-                listAgentSessionSubagentTurnItems(
-                    clientConfig,
-                    request.copy(after = cursor),
-                    options,
-                )
+            val page = listAgentSessionSubagentTurnItems(clientConfig, request.copy(after = cursor), options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -1008,26 +502,17 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
         }
     }
 
-    fun listAgentSessionSubagentTurnItemsPages(
-        clientConfig: ClientConfig,
-        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionSubagentTurnItemsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionSubagentTurnItemsPages(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentTurnItemsPage) -> Boolean) {
         var cursor = request.after
         while (true) {
-            val page =
-                listAgentSessionSubagentTurnItems(
-                    clientConfig,
-                    request.copy(after = cursor),
-                    options,
-                )
+            val page = listAgentSessionSubagentTurnItems(clientConfig, request.copy(after = cursor), options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
             val hasMore = page.hasMore == true && nextCursor != null
-            if (!yieldPage(Agents.ListAgentSessionSubagentTurnItemsPage(page, items, hasMore)))
-                return
+            if (!yieldPage(Agents.ListAgentSessionSubagentTurnItemsPage(page, items, hasMore))) return
             if (!hasMore) return
             cursor = nextCursor
         }
@@ -1038,69 +523,37 @@ internal object AgentsListAgentsOperation {
     /**
      * Lists reusable agents in the current project. See agent configuration.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgents(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): AgentListResource {
+    fun listAgents(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): AgentListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<AgentListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgents",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AgentListResource>(SdkClient.RequestSpec("GET", "/agents", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
+
+
+
+
+
 
     /**
      * Lists reusable agents in the current project. See agent configuration.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentsPaginated(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (AgentResource) -> Boolean,
-    ) {
+    fun listAgentsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (AgentResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgents(clientConfig, limit, order, cursor, options)
@@ -1115,14 +568,9 @@ internal object AgentsListAgentsOperation {
         }
     }
 
-    fun listAgentsPages(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgents(clientConfig, limit, order, cursor, options)
@@ -1141,94 +589,54 @@ internal object AgentsCreateAgentOperation {
     /**
      * Creates a reusable agent without storing credentials. See agent configuration.
      *
-     * @param model The model to use for the agent. The requested model name is preserved.
-     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values up to 512
-     *   characters. Omission or null defaults to an empty map.
-     * @param name A human-readable name for the agent. Omission or null leaves the agent unnamed.
-     * @param reasoning Configuration for model reasoning. Omission uses the model's default effort.
-     * @param text Configuration for generated text. Defaults to the `text` format and medium
-     *   verbosity.
-     * @param serviceTier The service tier used for model requests. Defaults to `auto`.
-     * @param instructions Additional instructions appended to the agent's default base
-     *   instructions. Omit or set to null to add no custom instructions.
-     * @param tools Tools available to the agent. Defaults to an empty list. The tool list must fit
-     *   within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
-     * @param multiAgent Configuration for creating and coordinating subagents. Subagent tools are
-     *   disabled by default.
+     * @param model The model to use for the agent. The requested model name is
+     *   preserved.
+     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values
+     *   up to 512 characters. Omission or null defaults to an empty map.
+     * @param name A human-readable name for the agent. Omission or null leaves the
+     *   agent unnamed.
+     * @param reasoning Configuration for model reasoning. Omission uses the model's
+     *   default effort.
+     * @param text Configuration for generated text. Defaults to the `text` format
+     *   and medium verbosity.
+     * @param serviceTier The service tier used for model requests. Defaults to
+     *   `auto`.
+     * @param instructions Additional instructions appended to the agent's default
+     *   base instructions. Omit or set to null to add no custom instructions.
+     * @param tools Tools available to the agent. Defaults to an empty list. The tool
+     *   list must fit within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
+     * @param multiAgent Configuration for creating and coordinating subagents.
+     *   Subagent tools are disabled by default.
      */
-    fun createAgent(
-        clientConfig: ClientConfig,
-        request: Agents.CreateAgentRequest,
-        options: RequestOptions? = null,
-    ): AgentResource {
+    fun createAgent(clientConfig: ClientConfig, request: Agents.CreateAgentRequest, options: RequestOptions? = null): AgentResource {
         validateCreateAgentRequest(request)
 
-        return SdkClient.request<AgentResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/agents",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "model" to (request.model),
-                            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
-                            "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
-                            "reasoning" to (request.reasoning ?: SdkClient.SdkOptional.Omitted),
-                            "text" to (request.text ?: SdkClient.SdkOptional.Omitted),
-                            "service_tier" to
-                                (request.serviceTier ?: SdkClient.SdkOptional.Omitted),
-                            "instructions" to
-                                (request.instructions ?: SdkClient.SdkOptional.Omitted),
-                            "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
-                            "multi_agent" to (request.multiAgent ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createAgent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AgentResource>(SdkClient.RequestSpec("POST", "/agents", config = clientConfig, body = SdkClient.bodyMap("model" to (request.model), "metadata" to
+    (request.metadata ?: SdkClient.SdkOptional.Omitted), "name" to (request.name ?: SdkClient.SdkOptional.Omitted), "reasoning" to
+    (request.reasoning ?: SdkClient.SdkOptional.Omitted), "text" to (request.text ?: SdkClient.SdkOptional.Omitted), "service_tier" to
+    (request.serviceTier ?: SdkClient.SdkOptional.Omitted), "instructions" to
+    (request.instructions ?: SdkClient.SdkOptional.Omitted), "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted), "multi_agent" to
+    (request.multiAgent ?: SdkClient.SdkOptional.Omitted)), operationId = "createAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
     private fun validateCreateAgentRequest(request: Agents.CreateAgentRequest) {
-        Validation.validateLength(
-            "model",
-            request.model,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("model", request.model, Validation.LengthOpts(min = 0, max = 1048576))
 
         val nameValue = request.name?.getOrNull()
-        if (nameValue != null) {
+if (nameValue != null) {
             Validation.validateLength("name", nameValue, Validation.LengthOpts(min = 0, max = 128))
-        }
+}
 
         val instructionsValue = request.instructions?.getOrNull()
-        if (instructionsValue != null) {
-            Validation.validateLength(
-                "instructions",
-                instructionsValue,
-                Validation.LengthOpts(min = 0, max = 1048576),
-            )
-        }
+if (instructionsValue != null) {
+            Validation.validateLength("instructions", instructionsValue, Validation.LengthOpts(min = 0, max = 1048576))
+}
 
         val toolsValue = request.tools?.getOrNull()
-        if (toolsValue != null) {
-            Validation.validateItems(
-                "tools",
-                toolsValue,
-                Validation.LengthOpts(min = 0, max = 2000),
-            )
-        }
+if (toolsValue != null) {
+            Validation.validateItems("tools", toolsValue, Validation.LengthOpts(min = 0, max = 2000))
+}
     }
 }
 
@@ -1238,38 +646,10 @@ internal object AgentsRetrieveAgentOperation {
      *
      * @param agentId The ID of the reusable agent.
      */
-    fun retrieveAgent(
-        clientConfig: ClientConfig,
-        agentId: String,
-        options: RequestOptions? = null,
-    ): AgentResource {
-        Validation.validateLength(
-            "agent_id",
-            agentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun retrieveAgent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): AgentResource {
+        Validation.validateLength("agent_id", agentId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<AgentResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/${SdkClient.encodePathSegment(agentId)}",
-                    config = clientConfig,
-                    operationId = "retrieveAgent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AgentResource>(SdkClient.RequestSpec("GET", "/agents/${SdkClient.encodePathSegment(agentId)}", config = clientConfig, operationId = "retrieveAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
@@ -1278,101 +658,57 @@ internal object AgentsUpdateAgentOperation {
      * Updates a reusable agent. See agent configuration.
      *
      * @param agentId The ID of the reusable agent.
-     * @param model The model to use for the agent. The requested model name is preserved.
-     * @param reasoning Configuration for model reasoning. Omit to keep the current settings; pass
-     *   `null` to reset to the model's default effort.
+     * @param model The model to use for the agent. The requested model name is
+     *   preserved.
+     * @param reasoning Configuration for model reasoning. Omit to keep the current
+     *   settings; pass `null` to reset to the model's default effort.
      * @param text Configuration for text generated by the agent.
      * @param serviceTier The service tier used for model requests.
-     * @param instructions Additional instructions appended to the agent's default base
-     *   instructions. Omit to leave unchanged.
+     * @param instructions Additional instructions appended to the agent's default
+     *   base instructions. Omit to leave unchanged.
      * @param multiAgent Configuration for creating and coordinating subagents.
-     * @param metadata Replaces all metadata. Omit to leave unchanged, or pass null or {} to clear
-     *   it. Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters.
-     * @param name A replacement name. Omit to leave unchanged, or pass null to clear it.
-     * @param tools Replaces the tool list. Omit to leave it unchanged, or pass null to clear it.
-     *   The replacement must fit within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
+     * @param metadata Replaces all metadata. Omit to leave unchanged, or pass null
+     *   or {} to clear it. Up to 16 string key-value pairs, with keys up to 64 and
+     *   values up to 512 characters.
+     * @param name A replacement name. Omit to leave unchanged, or pass null to clear
+     *   it.
+     * @param tools Replaces the tool list. Omit to leave it unchanged, or pass null
+     *   to clear it. The replacement must fit within 3 MiB (3,145,728 bytes) of
+     *   compact UTF-8 JSON.
      */
-    fun updateAgent(
-        clientConfig: ClientConfig,
-        request: Agents.UpdateAgentRequest,
-        options: RequestOptions? = null,
-    ): AgentResource {
+    fun updateAgent(clientConfig: ClientConfig, request: Agents.UpdateAgentRequest, options: RequestOptions? = null): AgentResource {
         validateUpdateAgentRequest(request)
 
-        return SdkClient.request<AgentResource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/agents/${SdkClient.encodePathSegment(request.agentId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "model" to (SdkClient.omitIfNull(request.model)),
-                            "reasoning" to (request.reasoning ?: SdkClient.SdkOptional.Omitted),
-                            "text" to (request.text ?: SdkClient.SdkOptional.Omitted),
-                            "service_tier" to
-                                (request.serviceTier ?: SdkClient.SdkOptional.Omitted),
-                            "instructions" to
-                                (request.instructions ?: SdkClient.SdkOptional.Omitted),
-                            "multi_agent" to (request.multiAgent ?: SdkClient.SdkOptional.Omitted),
-                            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
-                            "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
-                            "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateAgent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<AgentResource>(SdkClient.RequestSpec("POST", "/agents/${SdkClient.encodePathSegment(request.agentId)}", config = clientConfig, body = SdkClient.bodyMap("model" to (SdkClient.omitIfNull(request.model)), "reasoning" to
+    (request.reasoning ?: SdkClient.SdkOptional.Omitted), "text" to (request.text ?: SdkClient.SdkOptional.Omitted), "service_tier" to
+    (request.serviceTier ?: SdkClient.SdkOptional.Omitted), "instructions" to
+    (request.instructions ?: SdkClient.SdkOptional.Omitted), "multi_agent" to
+    (request.multiAgent ?: SdkClient.SdkOptional.Omitted), "metadata" to
+    (request.metadata ?: SdkClient.SdkOptional.Omitted), "name" to (request.name ?: SdkClient.SdkOptional.Omitted), "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted)), operationId = "updateAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
     private fun validateUpdateAgentRequest(request: Agents.UpdateAgentRequest) {
-        Validation.validateLength(
-            "agent_id",
-            request.agentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+        Validation.validateLength("agent_id", request.agentId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (request.model != null) {
-            Validation.validateLength(
-                "model",
-                request.model,
-                Validation.LengthOpts(min = 0, max = 1048576),
-            )
-        }
+            Validation.validateLength("model", request.model, Validation.LengthOpts(min = 0, max = 1048576))
+}
 
         val instructionsValue = request.instructions?.getOrNull()
-        if (instructionsValue != null) {
-            Validation.validateLength(
-                "instructions",
-                instructionsValue,
-                Validation.LengthOpts(min = 0, max = 1048576),
-            )
-        }
+if (instructionsValue != null) {
+            Validation.validateLength("instructions", instructionsValue, Validation.LengthOpts(min = 0, max = 1048576))
+}
 
         val nameValue = request.name?.getOrNull()
-        if (nameValue != null) {
+if (nameValue != null) {
             Validation.validateLength("name", nameValue, Validation.LengthOpts(min = 0, max = 128))
-        }
+}
 
         val toolsValue = request.tools?.getOrNull()
-        if (toolsValue != null) {
-            Validation.validateItems(
-                "tools",
-                toolsValue,
-                Validation.LengthOpts(min = 0, max = 2000),
-            )
-        }
+if (toolsValue != null) {
+            Validation.validateItems("tools", toolsValue, Validation.LengthOpts(min = 0, max = 2000))
+}
     }
 }
 
@@ -1382,109 +718,48 @@ internal object AgentsDeleteAgentOperation {
      *
      * @param agentId The ID of the reusable agent.
      */
-    fun deleteAgent(
-        clientConfig: ClientConfig,
-        agentId: String,
-        options: RequestOptions? = null,
-    ): DeletedAgentResource {
-        Validation.validateLength(
-            "agent_id",
-            agentId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun deleteAgent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): DeletedAgentResource {
+        Validation.validateLength("agent_id", agentId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<DeletedAgentResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/agents/${SdkClient.encodePathSegment(agentId)}",
-                    config = clientConfig,
-                    operationId = "deleteAgent",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DeletedAgentResource>(SdkClient.RequestSpec("DELETE", "/agents/${SdkClient.encodePathSegment(agentId)}", config = clientConfig, operationId = "deleteAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
 internal object AgentsListAgentEnvironmentTemplatesOperation {
     /**
-     * Lists reusable environment templates without returning confidential values. See reusing a
-     * hosted setup.
+     * Lists reusable environment templates without returning confidential values. See reusing a hosted setup.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentEnvironmentTemplates(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): EnvironmentTemplateListResource {
+    fun listAgentEnvironmentTemplates(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): EnvironmentTemplateListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<EnvironmentTemplateListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/environments/templates",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentEnvironmentTemplates",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<EnvironmentTemplateListResource>(SdkClient.RequestSpec("GET", "/agents/environments/templates", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentEnvironmentTemplates", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists reusable environment templates without returning confidential values. See reusing a
-     * hosted setup.
+     * Lists reusable environment templates without returning confidential values. See reusing a hosted setup.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentEnvironmentTemplatesPaginated(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (EnvironmentTemplateResource) -> Boolean,
-    ) {
+    fun listAgentEnvironmentTemplatesPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (EnvironmentTemplateResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentEnvironmentTemplates(clientConfig, limit, order, cursor, options)
@@ -1499,14 +774,9 @@ internal object AgentsListAgentEnvironmentTemplatesOperation {
         }
     }
 
-    fun listAgentEnvironmentTemplatesPages(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentEnvironmentTemplatesPage) -> Boolean,
-    ) {
+
+
+    fun listAgentEnvironmentTemplatesPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentEnvironmentTemplatesPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentEnvironmentTemplates(clientConfig, limit, order, cursor, options)

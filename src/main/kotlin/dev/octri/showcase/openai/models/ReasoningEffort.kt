@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ReasoningEffort` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ReasoningEffort.Deserializer::class
-)
+/**
+ * Typed representation of the `ReasoningEffort` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ReasoningEffort.Deserializer::class)
 sealed interface ReasoningEffort {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ReasoningEffort>() {
@@ -17,40 +17,15 @@ sealed interface ReasoningEffort {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual ->
-                    StringReasoningEffort(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    ValueReasoningEffort(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
-                        )
-                    )
+                node.isTextual -> StringReasoningEffort(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> ValueReasoningEffort(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringReasoningEffort(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : ReasoningEffort
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringReasoningEffort(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ReasoningEffort
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ValueReasoningEffort(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
-    ReasoningEffort
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ValueReasoningEffort(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : ReasoningEffort

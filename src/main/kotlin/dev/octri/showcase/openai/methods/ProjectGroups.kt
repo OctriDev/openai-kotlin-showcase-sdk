@@ -17,77 +17,45 @@ import dev.octri.showcase.openai.Validation
 
 object ProjectGroups {
 
+
     /**
-     * Lists the groups that have access to a project. Use `after` to continue from the last group
-     * in a previous response, and set `limit` and `order` to control the page size and sort order.
+     * Lists the groups that have access to a project. Use `after` to continue from the last group in a previous response, and set `limit` and `order` to control the page size and sort order.
      *
      * Lists the groups that have access to a project.
      *
      * @param projectId The ID of the project to inspect.
-     * @param limit A limit on the number of project groups to return. Defaults to 20.
-     * @param after Cursor for pagination. Provide the ID of the last group from the previous
-     *   response to fetch the next page.
+     * @param limit A limit on the number of project groups to return. Defaults to
+     *   20.
+     * @param after Cursor for pagination. Provide the ID of the last group from the
+     *   previous response to fetch the next page.
      * @param order Sort order for the returned groups.
      */
-    fun listProjectGroups(
-        clientConfig: ClientConfig,
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListProjectGroupsParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): ProjectGroupListResource {
+    fun listProjectGroups(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupsParameterEnum? = null, options: RequestOptions? = null): ProjectGroupListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ProjectGroupListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listProjectGroups",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ProjectGroupListResource>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listProjectGroups", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists the groups that have access to a project. Use `after` to continue from the last group
-     * in a previous response, and set `limit` and `order` to control the page size and sort order.
+     * Lists the groups that have access to a project. Use `after` to continue from the last group in a previous response, and set `limit` and `order` to control the page size and sort order.
      *
      * Lists the groups that have access to a project.
      *
      * @param projectId The ID of the project to inspect.
-     * @param limit A limit on the number of project groups to return. Defaults to 20.
-     * @param after Cursor for pagination. Provide the ID of the last group from the previous
-     *   response to fetch the next page.
+     * @param limit A limit on the number of project groups to return. Defaults to
+     *   20.
+     * @param after Cursor for pagination. Provide the ID of the last group from the
+     *   previous response to fetch the next page.
      * @param order Sort order for the returned groups.
      */
-    fun listProjectGroupsPaginated(
-        clientConfig: ClientConfig,
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListProjectGroupsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ProjectGroup) -> Boolean,
-    ) {
+    fun listProjectGroupsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (ProjectGroup) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listProjectGroups(clientConfig, projectId, limit, cursor, order, options)
@@ -108,15 +76,7 @@ object ProjectGroups {
         val hasMore: Boolean,
     )
 
-    fun listProjectGroupsPages(
-        clientConfig: ClientConfig,
-        projectId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListProjectGroupsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListProjectGroupsPage) -> Boolean,
-    ) {
+    fun listProjectGroupsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupsParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListProjectGroupsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listProjectGroups(clientConfig, projectId, limit, cursor, order, options)
@@ -130,9 +90,10 @@ object ProjectGroups {
         }
     }
 
+
+
     /**
-     * Grants a group access to a project with a specified project role. Supply the group ID and
-     * role identifier to create the group’s project membership.
+     * Grants a group access to a project with a specified project role. Supply the group ID and role identifier to create the group’s project membership.
      *
      * Grants a group access to a project.
      *
@@ -140,39 +101,18 @@ object ProjectGroups {
      * @param groupId Identifier of the group to add to the project.
      * @param role Identifier of the project role to grant to the group.
      */
-    fun addProjectGroup(
-        clientConfig: ClientConfig,
-        projectId: String,
-        groupId: String,
-        role: String,
-        options: RequestOptions? = null,
-    ): ProjectGroup {
-        return SdkClient.request<ProjectGroup>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("group_id" to (groupId), "role" to (role)),
-                    operationId = "addProjectGroup",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun addProjectGroup(clientConfig: ClientConfig, projectId: String, groupId: String, role: String, options: RequestOptions? = null): ProjectGroup {
+        return SdkClient.request<ProjectGroup>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups", config = clientConfig, body = SdkClient.bodyMap("group_id" to (groupId), "role" to (role)), operationId = "addProjectGroup", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a group's membership details for a project. Use `project_id` and `group_id` to
-     * identify the project and group, and `group_type` to select a group type; it defaults to
-     * `group` when omitted.
+     * Retrieves a group's membership details for a project. Use `project_id` and `group_id` to identify the project and group, and `group_type` to select a group type; it defaults to `group` when omitted.
      *
      * Retrieves a project's group.
      *
@@ -180,66 +120,33 @@ object ProjectGroups {
      * @param groupId The ID of the group to retrieve.
      * @param groupType The type of group to retrieve.
      */
-    fun retrieveProjectGroup(
-        clientConfig: ClientConfig,
-        projectId: String,
-        groupId: String,
-        groupType: RetrieveProjectGroupParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): ProjectGroup {
-        return SdkClient.request<ProjectGroup>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}",
-                    config = clientConfig,
-                    query = mapOf("group_type" to SdkClient.queryValue(groupType, "form", true)),
-                    operationId = "retrieveProjectGroup",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveProjectGroup(clientConfig: ClientConfig, projectId: String, groupId: String, groupType: RetrieveProjectGroupParameterEnum? = null, options: RequestOptions? = null): ProjectGroup {
+        return SdkClient.request<ProjectGroup>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}", config = clientConfig, query = mapOf("group_type" to
+    SdkClient.queryValue(groupType, "form", true)), operationId = "retrieveProjectGroup", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Removes a group's access to a project. Use `project_id` and `group_id` to identify the
-     * project membership to revoke. The response confirms whether the membership was removed.
+     * Removes a group's access to a project. Use `project_id` and `group_id` to identify the project membership to revoke. The response confirms whether the membership was removed.
      *
      * Revokes a group's access to a project.
      *
      * @param projectId The ID of the project to update.
      * @param groupId The ID of the group to remove from the project.
      */
-    fun removeProjectGroup(
-        clientConfig: ClientConfig,
-        projectId: String,
-        groupId: String,
-        options: RequestOptions? = null,
-    ): ProjectGroupDeletedResource {
-        return SdkClient.request<ProjectGroupDeletedResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}",
-                    config = clientConfig,
-                    operationId = "removeProjectGroup",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun removeProjectGroup(clientConfig: ClientConfig, projectId: String, groupId: String, options: RequestOptions? = null): ProjectGroupDeletedResource {
+        return SdkClient.request<ProjectGroupDeletedResource>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}", config = clientConfig, operationId = "removeProjectGroup", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

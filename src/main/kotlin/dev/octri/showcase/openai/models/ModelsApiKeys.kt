@@ -3,30 +3,50 @@
 
 package dev.octri.showcase.openai.models
 
-/** The service account API key create request payload. */
+/**
+ * The service account API key create request payload.
+ */
 data class CreateProjectServiceAccountApiKeyBody(
-    /** API key name. */
+    /**
+     * API key name.
+     */
     val name: String? = null,
-    /** API key scopes. */
+    /**
+     * API key scopes.
+     */
     val scopes: List<String>? = null,
-    /** Optional API value serialized in the `expires_in_seconds` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds")
-    val expiresInSeconds: Long? = null,
+    /**
+     * Optional API value serialized in the `expires_in_seconds` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds") val expiresInSeconds: Long? = null
 )
 
-/** Typed representation of the `ServiceAccountApiKeyBody` API schema. */
+/**
+ * Typed representation of the `ServiceAccountApiKeyBody` API schema.
+ */
 data class ServiceAccountApiKeyBody(
-    /** The object type, which is always `organization.project.service_account.api_key` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ServiceAccountApiKeyBodyObjectEnum,
-    /** The unredacted API key value. */
+    /**
+     * The object type, which is always `organization.project.service_account.api_key`
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ServiceAccountApiKeyBodyObjectEnum,
+    /**
+     * The unredacted API key value.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /** The name of the API key. */
+    /**
+     * The name of the API key.
+     */
     val name: String,
-    /** The Unix timestamp (in seconds) when the API key was created. */
+    /**
+     * The Unix timestamp (in seconds) when the API key was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The identifier of the API key. */
+    /**
+     * The identifier of the API key.
+     */
     val id: String,
-    /** Optional API value serialized in the `expires_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
+    /**
+     * Optional API value serialized in the `expires_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
 )

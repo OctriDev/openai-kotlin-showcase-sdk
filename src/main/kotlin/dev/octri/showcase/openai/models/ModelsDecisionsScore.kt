@@ -3,20 +3,34 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ScoreLevelParam` API schema. */
+/**
+ * Typed representation of the `ScoreLevelParam` API schema.
+ */
 data class ScoreLevelParam(
-    /** Required `string` value serialized in the `label` wire field. */
+    /**
+     * Required `string` value serialized in the `label` wire field.
+     */
     val label: String,
-    /** Optional `string` value serialized in the `description` wire field. */
-    val description: String? = null,
+    /**
+     * Optional `string` value serialized in the `description` wire field.
+     */
+    val description: String? = null
 )
 
-/** Typed representation of the `ScoreProbabilityResource` API schema. */
+/**
+ * Typed representation of the `ScoreProbabilityResource` API schema.
+ */
 data class ScoreProbabilityResource(
-    /** Required `int64`-formatted value serialized in the `value` wire field. */
+    /**
+     * Required `int64`-formatted value serialized in the `value` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Long,
-    /** Required `string` value serialized in the `label` wire field. */
+    /**
+     * Required `string` value serialized in the `label` wire field.
+     */
     val label: String,
-    /** Required `number` value serialized in the `probability` wire field. */
-    val probability: Double,
+    /**
+     * Required `number` value serialized in the `probability` wire field.
+     */
+    val probability: Double
 )

@@ -13,22 +13,25 @@ import dev.octri.showcase.openai.SdkClient
 
 object AuditLogs {
 
-    data class ListAuditLogsParameter(
-        /** Return only events whose `effective_at` (Unix seconds) is greater than this value. */
-        val gt: Long? = null,
-        /**
-         * Return only events whose `effective_at` (Unix seconds) is greater than or equal to this
-         * value.
-         */
-        val gte: Long? = null,
-        /** Return only events whose `effective_at` (Unix seconds) is less than this value. */
-        val lt: Long? = null,
-        /**
-         * Return only events whose `effective_at` (Unix seconds) is less than or equal to this
-         * value.
-         */
-        val lte: Long? = null,
-    )
+data class ListAuditLogsParameter(
+    /**
+     * Return only events whose `effective_at` (Unix seconds) is greater than this value.
+     */
+    val gt: Long? = null,
+    /**
+     * Return only events whose `effective_at` (Unix seconds) is greater than or equal to this value.
+     */
+    val gte: Long? = null,
+    /**
+     * Return only events whose `effective_at` (Unix seconds) is less than this value.
+     */
+    val lt: Long? = null,
+    /**
+     * Return only events whose `effective_at` (Unix seconds) is less than or equal to this value.
+     */
+    val lte: Long? = null
+)
+
 
     /** Parameters for [listAuditLogs]. */
     data class ListAuditLogsRequest(
@@ -41,111 +44,89 @@ object AuditLogs {
         val tenantOnly: Boolean? = null,
         val limit: Long? = null,
         val after: String? = null,
-        val before: String? = null,
+        val before: String? = null
     )
 
     /**
      * List user actions and configuration changes within this organization.
      *
-     * @param effectiveAt Return only events whose `effective_at` (Unix seconds) is in this range.
+     * @param effectiveAt Return only events whose `effective_at` (Unix seconds) is
+     *   in this range.
      * @param projectIds Return only events for these projects.
-     * @param eventTypes Return only events with a `type` in one of these values. For example,
-     *   `project.created`. For all options, see the documentation for the audit log object.
-     * @param actorIds Return only events performed by these actors. Can be a user ID, a service
-     *   account ID, or an api key tracking ID.
+     * @param eventTypes Return only events with a `type` in one of these values. For
+     *   example, `project.created`. For all options, see the documentation for the
+     *   audit log object.
+     * @param actorIds Return only events performed by these actors. Can be a user
+     *   ID, a service account ID, or an api key tracking ID.
      * @param actorEmails Return only events performed by users with these emails.
-     * @param resourceIds Return only events performed on these targets. For example, a project ID
-     *   updated. For ChatGPT connector role events, use the workspace connector resource ID shown
-     *   in `details.id`, such as `<workspace_id>__<connector_id>`.
-     * @param tenantOnly Return only tenant-scoped events associated with this organization.
-     *   Required for tenant-scoped events such as `role.bound_to_resource` and
-     *   `role.unbound_from_resource`. When `true`, all supplied event types must be tenant-scoped.
-     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
-     *   100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
-     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
-     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
-     *   the list.
-     * @param before A cursor for use in pagination. `before` is an object ID that defines your
-     *   place in the list. For instance, if you make a list request and receive 100 objects,
-     *   starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch
-     *   the previous page of the list.
+     * @param resourceIds Return only events performed on these targets. For example,
+     *   a project ID updated. For ChatGPT connector role events, use the workspace
+     *   connector resource ID shown in `details.id`, such as
+     *   `<workspace_id>__<connector_id>`.
+     * @param tenantOnly Return only tenant-scoped events associated with this
+     *   organization. Required for tenant-scoped events such as
+     *   `role.bound_to_resource` and `role.unbound_from_resource`. When `true`, all
+     *   supplied event types must be tenant-scoped.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
      */
-    fun listAuditLogs(
-        clientConfig: ClientConfig,
-        request: ListAuditLogsRequest,
-        options: RequestOptions? = null,
-    ): ListAuditLogsResponse {
-        return SdkClient.request<ListAuditLogsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/audit_logs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "effective_at" to
-                                SdkClient.queryValue(request.effectiveAt, "form", true),
-                            "project_ids[]" to
-                                SdkClient.queryValue(request.projectIds, "form", true),
-                            "event_types[]" to
-                                SdkClient.queryValue(request.eventTypes, "form", true),
-                            "actor_ids[]" to SdkClient.queryValue(request.actorIds, "form", true),
-                            "actor_emails[]" to
-                                SdkClient.queryValue(request.actorEmails, "form", true),
-                            "resource_ids[]" to
-                                SdkClient.queryValue(request.resourceIds, "form", true),
-                            "tenant_only" to SdkClient.queryValue(request.tenantOnly, "form", true),
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "after" to SdkClient.queryValue(request.after, "form", true),
-                            "before" to SdkClient.queryValue(request.before, "form", true),
-                        ),
-                    operationId = "listAuditLogs",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun listAuditLogs(clientConfig: ClientConfig, request: ListAuditLogsRequest, options: RequestOptions? = null): ListAuditLogsResponse {
+        return SdkClient.request<ListAuditLogsResponse>(SdkClient.RequestSpec("GET", "/organization/audit_logs", config = clientConfig, query = mapOf("effective_at" to
+    SdkClient.queryValue(request.effectiveAt, "form", true), "project_ids[]" to
+    SdkClient.queryValue(request.projectIds, "form", true), "event_types[]" to
+    SdkClient.queryValue(request.eventTypes, "form", true), "actor_ids[]" to
+    SdkClient.queryValue(request.actorIds, "form", true), "actor_emails[]" to
+    SdkClient.queryValue(request.actorEmails, "form", true), "resource_ids[]" to
+    SdkClient.queryValue(request.resourceIds, "form", true), "tenant_only" to
+    SdkClient.queryValue(request.tenantOnly, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "after" to SdkClient.queryValue(request.after, "form", true), "before" to
+    SdkClient.queryValue(request.before, "form", true)), operationId = "listAuditLogs", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
 
     /**
      * List user actions and configuration changes within this organization.
      *
-     * @param effectiveAt Return only events whose `effective_at` (Unix seconds) is in this range.
+     * @param effectiveAt Return only events whose `effective_at` (Unix seconds) is
+     *   in this range.
      * @param projectIds Return only events for these projects.
-     * @param eventTypes Return only events with a `type` in one of these values. For example,
-     *   `project.created`. For all options, see the documentation for the audit log object.
-     * @param actorIds Return only events performed by these actors. Can be a user ID, a service
-     *   account ID, or an api key tracking ID.
+     * @param eventTypes Return only events with a `type` in one of these values. For
+     *   example, `project.created`. For all options, see the documentation for the
+     *   audit log object.
+     * @param actorIds Return only events performed by these actors. Can be a user
+     *   ID, a service account ID, or an api key tracking ID.
      * @param actorEmails Return only events performed by users with these emails.
-     * @param resourceIds Return only events performed on these targets. For example, a project ID
-     *   updated. For ChatGPT connector role events, use the workspace connector resource ID shown
-     *   in `details.id`, such as `<workspace_id>__<connector_id>`.
-     * @param tenantOnly Return only tenant-scoped events associated with this organization.
-     *   Required for tenant-scoped events such as `role.bound_to_resource` and
-     *   `role.unbound_from_resource`. When `true`, all supplied event types must be tenant-scoped.
-     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
-     *   100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
-     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
-     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
-     *   the list.
-     * @param before A cursor for use in pagination. `before` is an object ID that defines your
-     *   place in the list. For instance, if you make a list request and receive 100 objects,
-     *   starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch
-     *   the previous page of the list.
+     * @param resourceIds Return only events performed on these targets. For example,
+     *   a project ID updated. For ChatGPT connector role events, use the workspace
+     *   connector resource ID shown in `details.id`, such as
+     *   `<workspace_id>__<connector_id>`.
+     * @param tenantOnly Return only tenant-scoped events associated with this
+     *   organization. Required for tenant-scoped events such as
+     *   `role.bound_to_resource` and `role.unbound_from_resource`. When `true`, all
+     *   supplied event types must be tenant-scoped.
+     * @param limit A limit on the number of objects to be returned. Limit can range
+     *   between 1 and 100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, ending with obj_foo, your subsequent call can include
+     *   after=obj_foo in order to fetch the next page of the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that
+     *   defines your place in the list. For instance, if you make a list request and
+     *   receive 100 objects, starting with obj_foo, your subsequent call can include
+     *   before=obj_foo in order to fetch the previous page of the list.
      */
-    fun listAuditLogsPaginated(
-        clientConfig: ClientConfig,
-        request: ListAuditLogsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (AuditLog) -> Boolean,
-    ) {
+    fun listAuditLogsPaginated(clientConfig: ClientConfig, request: ListAuditLogsRequest, options: RequestOptions? = null, yieldFn: (AuditLog) -> Boolean) {
         var cursor = request.after
         while (true) {
             val page = listAuditLogs(clientConfig, request.copy(after = cursor), options)
@@ -166,12 +147,7 @@ object AuditLogs {
         val hasMore: Boolean,
     )
 
-    fun listAuditLogsPages(
-        clientConfig: ClientConfig,
-        request: ListAuditLogsRequest,
-        options: RequestOptions? = null,
-        yieldPage: (ListAuditLogsPage) -> Boolean,
-    ) {
+    fun listAuditLogsPages(clientConfig: ClientConfig, request: ListAuditLogsRequest, options: RequestOptions? = null, yieldPage: (ListAuditLogsPage) -> Boolean) {
         var cursor = request.after
         while (true) {
             val page = listAuditLogs(clientConfig, request.copy(after = cursor), options)
@@ -184,4 +160,7 @@ object AuditLogs {
             cursor = nextCursor
         }
     }
+
+
+
 }

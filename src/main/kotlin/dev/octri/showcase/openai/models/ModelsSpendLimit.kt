@@ -3,65 +3,95 @@
 
 package dev.octri.showcase.openai.models
 
-/** Confirmation payload returned after deleting an organization hard spend limit. */
+/**
+ * Confirmation payload returned after deleting an organization hard spend limit.
+ */
 data class OrganizationSpendLimitDeletedResource(
-    /** The object type, which is always `organization.spend_limit.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationSpendLimitDeletedResourceObjectEnum,
-    /** Whether the hard spend limit was deleted. */
-    val deleted: Boolean,
+    /**
+     * The object type, which is always `organization.spend_limit.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationSpendLimitDeletedResourceObjectEnum,
+    /**
+     * Whether the hard spend limit was deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Represents a hard spend limit configured at the organization level. */
+/**
+ * Represents a hard spend limit configured at the organization level.
+ */
 data class OrganizationSpendLimitResource(
-    /** The object type, which is always `organization.spend_limit`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationSpendLimitResourceObjectEnum,
-    /** The hard spend limit amount, in cents. */
+    /**
+     * The object type, which is always `organization.spend_limit`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationSpendLimitResourceObjectEnum,
+    /**
+     * The hard spend limit amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. Currently, only `USD` is supported. */
+    /**
+     * The currency for the threshold amount. Currently, only `USD` is supported.
+     */
     val currency: SpendLimitCurrency,
     /**
-     * The time interval for evaluating spend against the threshold. Currently, only `month` is
-     * supported.
+     * The time interval for evaluating spend against the threshold. Currently, only `month` is supported.
      */
     val interval: SpendLimitInterval,
-    /** The current enforcement state of the hard spend limit. */
-    val enforcement: SpendLimitEnforcement,
+    /**
+     * The current enforcement state of the hard spend limit.
+     */
+    val enforcement: SpendLimitEnforcement
 )
 
-/** Confirmation payload returned after deleting a project hard spend limit. */
+/**
+ * Confirmation payload returned after deleting a project hard spend limit.
+ */
 data class ProjectSpendLimitDeletedResource(
-    /** The object type, which is always `project.spend_limit.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectSpendLimitDeletedResourceObjectEnum,
-    /** Whether the hard spend limit was deleted. */
-    val deleted: Boolean,
+    /**
+     * The object type, which is always `project.spend_limit.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectSpendLimitDeletedResourceObjectEnum,
+    /**
+     * Whether the hard spend limit was deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Represents a hard spend limit configured at the project level. */
+/**
+ * Represents a hard spend limit configured at the project level.
+ */
 data class ProjectSpendLimitResource(
-    /** The object type, which is always `project.spend_limit`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectSpendLimitResourceObjectEnum,
-    /** The hard spend limit amount, in cents. */
+    /**
+     * The object type, which is always `project.spend_limit`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectSpendLimitResourceObjectEnum,
+    /**
+     * The hard spend limit amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. Currently, only `USD` is supported. */
+    /**
+     * The currency for the threshold amount. Currently, only `USD` is supported.
+     */
     val currency: SpendLimitCurrency,
     /**
-     * The time interval for evaluating spend against the threshold. Currently, only `month` is
-     * supported.
+     * The time interval for evaluating spend against the threshold. Currently, only `month` is supported.
      */
     val interval: SpendLimitInterval,
-    /** The current enforcement state of the hard spend limit. */
-    val enforcement: SpendLimitEnforcement,
+    /**
+     * The current enforcement state of the hard spend limit.
+     */
+    val enforcement: SpendLimitEnforcement
 )
 
 typealias SpendLimitCurrency = String
 
-/** The current enforcement state of a hard spend limit. */
+/**
+ * The current enforcement state of a hard spend limit.
+ */
 data class SpendLimitEnforcement(
-    /** Whether the hard spend limit is currently enforcing. */
+    /**
+     * Whether the hard spend limit is currently enforcing.
+     */
     val status: SpendLimitEnforcementStatus
 )
 
@@ -69,28 +99,38 @@ typealias SpendLimitEnforcementStatus = String
 
 typealias SpendLimitInterval = String
 
-/** Parameters for the hard spend limit you want to create or replace. */
+/**
+ * Parameters for the hard spend limit you want to create or replace.
+ */
 data class UpdateOrganizationSpendLimitBody(
-    /** The hard spend limit amount, in cents. */
+    /**
+     * The hard spend limit amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. Currently, only `USD` is supported. */
+    /**
+     * The currency for the threshold amount. Currently, only `USD` is supported.
+     */
     val currency: UpdateOrganizationSpendLimitBodyCurrencyEnum,
     /**
-     * The time interval for evaluating spend against the threshold. Currently, only `month` is
-     * supported.
+     * The time interval for evaluating spend against the threshold. Currently, only `month` is supported.
      */
-    val interval: UpdateOrganizationSpendLimitBodyIntervalEnum,
+    val interval: UpdateOrganizationSpendLimitBodyIntervalEnum
 )
 
-/** Parameters for the hard spend limit you want to create or replace. */
+/**
+ * Parameters for the hard spend limit you want to create or replace.
+ */
 data class UpdateProjectSpendLimitBody(
-    /** The hard spend limit amount, in cents. */
+    /**
+     * The hard spend limit amount, in cents.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("threshold_amount") val thresholdAmount: Long,
-    /** The currency for the threshold amount. Currently, only `USD` is supported. */
+    /**
+     * The currency for the threshold amount. Currently, only `USD` is supported.
+     */
     val currency: UpdateProjectSpendLimitBodyCurrencyEnum,
     /**
-     * The time interval for evaluating spend against the threshold. Currently, only `month` is
-     * supported.
+     * The time interval for evaluating spend against the threshold. Currently, only `month` is supported.
      */
-    val interval: UpdateProjectSpendLimitBodyIntervalEnum,
+    val interval: UpdateProjectSpendLimitBodyIntervalEnum
 )

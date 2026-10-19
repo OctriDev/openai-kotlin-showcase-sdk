@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/** The type of the object. Always `agent.session.environment.reset`. */
-enum class SessionEventAgentSessionEnvironmentResetTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.environment.reset`.
+ */
+enum class SessionEventAgentSessionEnvironmentResetTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_ENVIRONMENT_RESET("agent.session.environment.reset");
 
     override fun toString() = value
@@ -14,16 +14,15 @@ enum class SessionEventAgentSessionEnvironmentResetTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.environment.suspended`. */
-enum class SessionEventAgentSessionEnvironmentSuspendedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.environment.suspended`.
+ */
+enum class SessionEventAgentSessionEnvironmentSuspendedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_ENVIRONMENT_SUSPENDED("agent.session.environment.suspended");
 
     override fun toString() = value
@@ -31,16 +30,15 @@ enum class SessionEventAgentSessionEnvironmentSuspendedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.failed`. */
-enum class SessionEventAgentSessionFailedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.failed`.
+ */
+enum class SessionEventAgentSessionFailedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_FAILED("agent.session.failed");
 
     override fun toString() = value
@@ -48,16 +46,15 @@ enum class SessionEventAgentSessionFailedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.idle`. */
-enum class SessionEventAgentSessionIdleTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.idle`.
+ */
+enum class SessionEventAgentSessionIdleTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_IDLE("agent.session.idle");
 
     override fun toString() = value
@@ -65,16 +62,15 @@ enum class SessionEventAgentSessionIdleTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.in_progress`. */
-enum class SessionEventAgentSessionInProgressTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.in_progress`.
+ */
+enum class SessionEventAgentSessionInProgressTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_IN_PROGRESS("agent.session.in_progress");
 
     override fun toString() = value
@@ -82,16 +78,15 @@ enum class SessionEventAgentSessionInProgressTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.requires_action`. */
-enum class SessionEventAgentSessionRequiresActionTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.requires_action`.
+ */
+enum class SessionEventAgentSessionRequiresActionTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_REQUIRES_ACTION("agent.session.requires_action");
 
     override fun toString() = value
@@ -99,16 +94,15 @@ enum class SessionEventAgentSessionRequiresActionTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.subagent.active`. */
-enum class SessionEventAgentSessionSubagentActiveTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.subagent.active`.
+ */
+enum class SessionEventAgentSessionSubagentActiveTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_SUBAGENT_ACTIVE("agent.session.subagent.active");
 
     override fun toString() = value
@@ -116,16 +110,15 @@ enum class SessionEventAgentSessionSubagentActiveTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.subagent.closed`. */
-enum class SessionEventAgentSessionSubagentClosedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.subagent.closed`.
+ */
+enum class SessionEventAgentSessionSubagentClosedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_SUBAGENT_CLOSED("agent.session.subagent.closed");
 
     override fun toString() = value
@@ -133,16 +126,15 @@ enum class SessionEventAgentSessionSubagentClosedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.subagent.created`. */
-enum class SessionEventAgentSessionSubagentCreatedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.subagent.created`.
+ */
+enum class SessionEventAgentSessionSubagentCreatedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_SUBAGENT_CREATED("agent.session.subagent.created");
 
     override fun toString() = value
@@ -150,16 +142,15 @@ enum class SessionEventAgentSessionSubagentCreatedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.cancelled`. */
-enum class SessionEventAgentSessionTurnCancelledTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.cancelled`.
+ */
+enum class SessionEventAgentSessionTurnCancelledTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_CANCELLED("agent.session.turn.cancelled");
 
     override fun toString() = value
@@ -167,16 +158,15 @@ enum class SessionEventAgentSessionTurnCancelledTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.completed`. */
-enum class SessionEventAgentSessionTurnCompletedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.completed`.
+ */
+enum class SessionEventAgentSessionTurnCompletedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_COMPLETED("agent.session.turn.completed");
 
     override fun toString() = value
@@ -184,16 +174,15 @@ enum class SessionEventAgentSessionTurnCompletedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.content_part.added`. */
-enum class SessionEventAgentSessionTurnContentPartAddedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.content_part.added`.
+ */
+enum class SessionEventAgentSessionTurnContentPartAddedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_CONTENT_PART_ADDED("agent.session.turn.content_part.added");
 
     override fun toString() = value
@@ -201,16 +190,15 @@ enum class SessionEventAgentSessionTurnContentPartAddedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.content_part.done`. */
-enum class SessionEventAgentSessionTurnContentPartDoneTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.content_part.done`.
+ */
+enum class SessionEventAgentSessionTurnContentPartDoneTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_CONTENT_PART_DONE("agent.session.turn.content_part.done");
 
     override fun toString() = value
@@ -218,16 +206,15 @@ enum class SessionEventAgentSessionTurnContentPartDoneTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.created`. */
-enum class SessionEventAgentSessionTurnCreatedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.created`.
+ */
+enum class SessionEventAgentSessionTurnCreatedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_CREATED("agent.session.turn.created");
 
     override fun toString() = value
@@ -235,16 +222,15 @@ enum class SessionEventAgentSessionTurnCreatedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.failed`. */
-enum class SessionEventAgentSessionTurnFailedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.failed`.
+ */
+enum class SessionEventAgentSessionTurnFailedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_FAILED("agent.session.turn.failed");
 
     override fun toString() = value
@@ -252,16 +238,15 @@ enum class SessionEventAgentSessionTurnFailedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.in_progress`. */
-enum class SessionEventAgentSessionTurnInProgressTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.in_progress`.
+ */
+enum class SessionEventAgentSessionTurnInProgressTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_IN_PROGRESS("agent.session.turn.in_progress");
 
     override fun toString() = value
@@ -269,16 +254,15 @@ enum class SessionEventAgentSessionTurnInProgressTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.item.added`. */
-enum class SessionEventAgentSessionTurnItemAddedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.item.added`.
+ */
+enum class SessionEventAgentSessionTurnItemAddedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_ITEM_ADDED("agent.session.turn.item.added");
 
     override fun toString() = value
@@ -286,16 +270,15 @@ enum class SessionEventAgentSessionTurnItemAddedTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.item.done`. */
-enum class SessionEventAgentSessionTurnItemDoneTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.item.done`.
+ */
+enum class SessionEventAgentSessionTurnItemDoneTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_ITEM_DONE("agent.session.turn.item.done");
 
     override fun toString() = value
@@ -303,16 +286,15 @@ enum class SessionEventAgentSessionTurnItemDoneTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.output_text.delta`. */
-enum class SessionEventAgentSessionTurnOutputTextDeltaTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.output_text.delta`.
+ */
+enum class SessionEventAgentSessionTurnOutputTextDeltaTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_OUTPUT_TEXT_DELTA("agent.session.turn.output_text.delta");
 
     override fun toString() = value
@@ -320,16 +302,15 @@ enum class SessionEventAgentSessionTurnOutputTextDeltaTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.output_text.done`. */
-enum class SessionEventAgentSessionTurnOutputTextDoneTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.turn.output_text.done`.
+ */
+enum class SessionEventAgentSessionTurnOutputTextDoneTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_TURN_OUTPUT_TEXT_DONE("agent.session.turn.output_text.done");
 
     override fun toString() = value
@@ -337,118 +318,98 @@ enum class SessionEventAgentSessionTurnOutputTextDoneTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.reasoning_summary_part.added`. */
-enum class SessionEventAgentSessionTurnReasoningSummaryPartAddedTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    AGENT_SESSION_TURN_REASONING_SUMMARY_PART_ADDED(
-        "agent.session.turn.reasoning_summary_part.added"
-    );
+/**
+ * The type of the object. Always `agent.session.turn.reasoning_summary_part.added`.
+ */
+enum class SessionEventAgentSessionTurnReasoningSummaryPartAddedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    AGENT_SESSION_TURN_REASONING_SUMMARY_PART_ADDED("agent.session.turn.reasoning_summary_part.added");
 
     override fun toString() = value
 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Present as `incomplete` when summary generation was interrupted. */
-class SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum &&
-            value == other.value
-
+/**
+ * Present as `incomplete` when summary generation was interrupted.
+ */
+class SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val INCOMPLETE =
-            SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum("incomplete")
+        @JvmField val INCOMPLETE = SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum("incomplete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) =
-            SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SessionEventAgentSessionTurnReasoningSummaryPartDoneStatusEnum(value)
     }
 }
 
-/** The type of the object. Always `agent.session.turn.reasoning_summary_part.done`. */
-enum class SessionEventAgentSessionTurnReasoningSummaryPartDoneTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    AGENT_SESSION_TURN_REASONING_SUMMARY_PART_DONE(
-        "agent.session.turn.reasoning_summary_part.done"
-    );
+/**
+ * The type of the object. Always `agent.session.turn.reasoning_summary_part.done`.
+ */
+enum class SessionEventAgentSessionTurnReasoningSummaryPartDoneTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    AGENT_SESSION_TURN_REASONING_SUMMARY_PART_DONE("agent.session.turn.reasoning_summary_part.done");
 
     override fun toString() = value
 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.reasoning_summary_text.delta`. */
-enum class SessionEventAgentSessionTurnReasoningSummaryTextDeltaTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    AGENT_SESSION_TURN_REASONING_SUMMARY_TEXT_DELTA(
-        "agent.session.turn.reasoning_summary_text.delta"
-    );
+/**
+ * The type of the object. Always `agent.session.turn.reasoning_summary_text.delta`.
+ */
+enum class SessionEventAgentSessionTurnReasoningSummaryTextDeltaTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    AGENT_SESSION_TURN_REASONING_SUMMARY_TEXT_DELTA("agent.session.turn.reasoning_summary_text.delta");
 
     override fun toString() = value
 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.turn.reasoning_summary_text.done`. */
-enum class SessionEventAgentSessionTurnReasoningSummaryTextDoneTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    AGENT_SESSION_TURN_REASONING_SUMMARY_TEXT_DONE(
-        "agent.session.turn.reasoning_summary_text.done"
-    );
+/**
+ * The type of the object. Always `agent.session.turn.reasoning_summary_text.done`.
+ */
+enum class SessionEventAgentSessionTurnReasoningSummaryTextDoneTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    AGENT_SESSION_TURN_REASONING_SUMMARY_TEXT_DONE("agent.session.turn.reasoning_summary_text.done");
 
     override fun toString() = value
 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `error`. */
-enum class SessionEventErrorTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `error`.
+ */
+enum class SessionEventErrorTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     ERROR("error");
 
     override fun toString() = value
@@ -456,16 +417,15 @@ enum class SessionEventErrorTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.input.cancel`. */
-enum class SessionInputParamAgentSessionInputCancelTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.input.cancel`.
+ */
+enum class SessionInputParamAgentSessionInputCancelTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_INPUT_CANCEL("agent.session.input.cancel");
 
     override fun toString() = value
@@ -473,35 +433,31 @@ enum class SessionInputParamAgentSessionInputCancelTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.input.computer_use_approval_request_result`. */
-enum class SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    AGENT_SESSION_INPUT_COMPUTER_USE_APPROVAL_REQUEST_RESULT(
-        "agent.session.input.computer_use_approval_request_result"
-    );
+/**
+ * The type of the object. Always `agent.session.input.computer_use_approval_request_result`.
+ */
+enum class SessionInputParamAgentSessionInputComputerUseApprovalRequestRXc1edde7938(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    AGENT_SESSION_INPUT_COMPUTER_USE_APPROVAL_REQUEST_RESULT("agent.session.input.computer_use_approval_request_result");
 
     override fun toString() = value
 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.input.message`. */
-enum class SessionInputParamAgentSessionInputMessageTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.input.message`.
+ */
+enum class SessionInputParamAgentSessionInputMessageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_INPUT_MESSAGE("agent.session.input.message");
 
     override fun toString() = value
@@ -509,16 +465,15 @@ enum class SessionInputParamAgentSessionInputMessageTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `agent.session.input.tool_result`. */
-enum class SessionInputParamAgentSessionInputToolResultTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `agent.session.input.tool_result`.
+ */
+enum class SessionInputParamAgentSessionInputToolResultTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     AGENT_SESSION_INPUT_TOOL_RESULT("agent.session.input.tool_result");
 
     override fun toString() = value
@@ -526,64 +481,57 @@ enum class SessionInputParamAgentSessionInputToolResultTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The object type, which is always `list`. */
-class SessionItemListResourceObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is SessionItemListResourceObjectEnum && value == other.value
-
+/**
+ * The object type, which is always `list`.
+ */
+class SessionItemListResourceObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SessionItemListResourceObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val LIST = SessionItemListResourceObjectEnum("list")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = SessionItemListResourceObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SessionItemListResourceObjectEnum(value)
     }
 }
 
-/** The object type, which is always `list`. */
-class SessionListResourceObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is SessionListResourceObjectEnum && value == other.value
-
+/**
+ * The object type, which is always `list`.
+ */
+class SessionListResourceObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SessionListResourceObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val LIST = SessionListResourceObjectEnum("list")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = SessionListResourceObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SessionListResourceObjectEnum(value)
     }
 }
 
-/** The author of a session message. */
-class SessionMessageRoleResource
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is SessionMessageRoleResource && value == other.value
-
+/**
+ * The author of a session message.
+ */
+class SessionMessageRoleResource private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SessionMessageRoleResource && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -591,18 +539,15 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val USER = SessionMessageRoleResource("user")
         @JvmField val ASSISTANT = SessionMessageRoleResource("assistant")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = SessionMessageRoleResource(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SessionMessageRoleResource(value)
     }
 }
 
-/** The type of the object. Always `computer_use_approval_request`. */
-enum class SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `computer_use_approval_request`.
+ */
+enum class SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     COMPUTER_USE_APPROVAL_REQUEST("computer_use_approval_request");
 
     override fun toString() = value
@@ -610,16 +555,15 @@ enum class SessionRequiredActionResourceComputerUseApprovalRequestTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `environment_connection`. */
-enum class SessionRequiredActionResourceEnvironmentConnectionTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `environment_connection`.
+ */
+enum class SessionRequiredActionResourceEnvironmentConnectionTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     ENVIRONMENT_CONNECTION("environment_connection");
 
     override fun toString() = value
@@ -627,16 +571,15 @@ enum class SessionRequiredActionResourceEnvironmentConnectionTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `function_call`. */
-enum class SessionRequiredActionResourceFunctionCallTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `function_call`.
+ */
+enum class SessionRequiredActionResourceFunctionCallTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FUNCTION_CALL("function_call");
 
     override fun toString() = value
@@ -644,30 +587,26 @@ enum class SessionRequiredActionResourceFunctionCallTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The object type. Always `agent.session`. */
-class SessionResourceObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is SessionResourceObjectEnum && value == other.value
-
+/**
+ * The object type. Always `agent.session`.
+ */
+class SessionResourceObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SessionResourceObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val AGENT_SESSION = SessionResourceObjectEnum("agent.session")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = SessionResourceObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SessionResourceObjectEnum(value)
     }
 }

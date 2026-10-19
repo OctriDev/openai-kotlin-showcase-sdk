@@ -3,7 +3,9 @@
 
 package dev.octri.showcase.openai.models
 
-/** Multi-modal input and output contents. */
+/**
+ * Multi-modal input and output contents.
+ */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = Content.Deserializer::class)
 sealed interface Content {
     /** Chooses the branch this payload is shaped like. */
@@ -14,103 +16,52 @@ sealed interface Content {
         ): Content {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out Content>> =
-                listOf(InputContent::class.java, OutputContent::class.java)
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out Content>> = listOf(InputContent::class.java, OutputContent::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        Content::class.java,
-                        "no Content branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, Content::class.java, "no Content branch accepts this payload")
             }
         }
     }
 }
 
-/** Typed representation of the `InputContent` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownInputContent::class,
-)
+/**
+ * Typed representation of the `InputContent` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownInputContent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = InputTextContent::class,
-        name = "input_text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = InputImageContent::class,
-        name = "input_image",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = InputFileContent::class,
-        name = "input_file",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputTextContent::class, name = "input_text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputImageContent::class, name = "input_image"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = InputFileContent::class, name = "input_file")
 )
 sealed interface InputContent : Content
 
 /** A [InputContent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownInputContent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownInputContent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : InputContent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `OutputContent` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownOutputContent::class,
-)
+/**
+ * Typed representation of the `OutputContent` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownOutputContent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = OutputTextContent::class,
-        name = "output_text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RefusalContent::class,
-        name = "refusal",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ReasoningTextContent::class,
-        name = "reasoning_text",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OutputTextContent::class, name = "output_text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RefusalContent::class, name = "refusal"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ReasoningTextContent::class, name = "reasoning_text")
 )
 sealed interface OutputContent : Content
 
 /** A [OutputContent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownOutputContent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownOutputContent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : OutputContent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

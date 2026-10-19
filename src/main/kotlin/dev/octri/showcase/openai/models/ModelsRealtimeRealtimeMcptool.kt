@@ -3,90 +3,75 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `RealtimeMCPHTTPError` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `RealtimeMCPHTTPError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeMCPHTTPError(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: RealtimeMCPHTTPErrorTypeEnum,
-    /** Required `integer` value serialized in the `code` wire field. */
+    /**
+     * Required `integer` value serialized in the `code` wire field.
+     */
     val code: Long,
-    /** Required `string` value serialized in the `message` wire field. */
-    val message: String,
+    /**
+     * Required `string` value serialized in the `message` wire field.
+     */
+    val message: String
 ) : RealtimeMCPToolCallError
 
-/** Typed representation of the `RealtimeMCPProtocolError` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `RealtimeMCPProtocolError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeMCPProtocolError(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: RealtimeMCPProtocolErrorTypeEnum,
-    /** Required `integer` value serialized in the `code` wire field. */
+    /**
+     * Required `integer` value serialized in the `code` wire field.
+     */
     val code: Long,
-    /** Required `string` value serialized in the `message` wire field. */
-    val message: String,
+    /**
+     * Required `string` value serialized in the `message` wire field.
+     */
+    val message: String
 ) : RealtimeMCPToolCallError
 
-/** The error from the tool call, if any. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeMCPToolCallError::class,
-)
+/**
+ * The error from the tool call, if any.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeMCPToolCallError::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeMCPProtocolError::class,
-        name = "protocol_error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeMCPToolExecutionError::class,
-        name = "tool_execution_error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeMCPHTTPError::class,
-        name = "http_error",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeMCPProtocolError::class, name = "protocol_error"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeMCPToolExecutionError::class, name = "tool_execution_error"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeMCPHTTPError::class, name = "http_error")
 )
 sealed interface RealtimeMCPToolCallError
 
 /** A [RealtimeMCPToolCallError] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeMCPToolCallError
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeMCPToolCallError @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeMCPToolCallError {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `RealtimeMCPToolExecutionError` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `RealtimeMCPToolExecutionError` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeMCPToolExecutionError(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: RealtimeMCPToolExecutionErrorTypeEnum,
-    /** Required `string` value serialized in the `message` wire field. */
-    val message: String,
+    /**
+     * Required `string` value serialized in the `message` wire field.
+     */
+    val message: String
 ) : RealtimeMCPToolCallError

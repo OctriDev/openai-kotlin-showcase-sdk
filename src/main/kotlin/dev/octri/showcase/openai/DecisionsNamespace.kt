@@ -3,19 +3,13 @@
 
 package dev.octri.showcase.openai
 
+
 class DecisionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Use this endpoint to quickly answer classification or scoring questions about some input. You
-     * can ask multiple questions in one request.
+     * Use this endpoint to quickly answer classification or scoring questions about some input. You can ask multiple questions in one request.
      */
-    fun create(
-        request: dev.octri.showcase.openai.methods.Decisions.CreateDecisionRequest,
-        options: RequestOptions? = null,
-    ): DecisionResponse {
-        return dev.octri.showcase.openai.methods.Decisions.createDecision(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.openai.methods.Decisions.CreateDecisionRequest, options: RequestOptions? = null): DecisionResponse {
+        return dev.octri.showcase.openai.methods.Decisions.createDecision(clientConfig, request, options)
     }
+
 }
