@@ -3,38 +3,22 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `BetaError` API schema.
- */
+/** Typed representation of the `BetaError` API schema. */
 data class BetaError(
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
+    /** Required `string` value serialized in the `code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /**
-     * Required `string` value serialized in the `message` wire field.
-     */
+    /** Required `string` value serialized in the `message` wire field. */
     val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
+    /** Required `string` value serialized in the `param` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /**
-     * Required `string` value serialized in the `type` wire field.
-     */
+    /** Required `string` value serialized in the `type` wire field. */
     val type: String,
-    /**
-     * Optional object value serialized in the `misalignment` wire field.
-     */
-    val misalignment: BetaMisalignmentErrorDetailsResource? = null
+    /** Optional object value serialized in the `misalignment` wire field. */
+    val misalignment: BetaMisalignmentErrorDetailsResource? = null,
 )
 
-/**
- * Typed representation of the `BetaErrorResponse` API schema.
- */
+/** Typed representation of the `BetaErrorResponse` API schema. */
 data class BetaErrorResponse(
-    /**
-     * Required object value serialized in the `error` wire field.
-     */
+    /** Required object value serialized in the `error` wire field. */
     val error: BetaError
 ) : dev.octri.showcase.openai.ErrorBody

@@ -4,27 +4,19 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Sent when a prewarmed OpenAI-hosted environment finishes setup before being attached to a session.
+ * Sent when a prewarmed OpenAI-hosted environment finishes setup before being attached to a
+ * session.
  */
 data class WebhookAgentEnvironmentReady(
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * The object type. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookAgentSessionEnvelopeObjectEnum,
-    /**
-     * The Unix timestamp, in seconds, when the event was created.
-     */
+    /** The object type. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookAgentSessionEnvelopeObjectEnum,
+    /** The Unix timestamp, in seconds, when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The event type. Always `agent.environment.ready`.
-     */
+    /** The event type. Always `agent.environment.ready`. */
     val type: WebhookAgentEnvironmentReadyVariant1TypeEnum,
-    /**
-     * Identifies the environment whose lifecycle changed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentEnvironmentEvent
+    /** Identifies the environment whose lifecycle changed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentEnvironmentEvent,
 )

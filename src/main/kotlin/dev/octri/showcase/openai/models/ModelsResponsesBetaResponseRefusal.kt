@@ -3,72 +3,50 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when there is a partial refusal text.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when there is a partial refusal text. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseRefusalDeltaEvent(
-    /**
-     * The type of the event. Always `response.refusal.delta`.
-     */
+    /** The type of the event. Always `response.refusal.delta`. */
     val type: BetaResponseRefusalDeltaEventTypeEnum,
-    /**
-     * The ID of the output item that the refusal text is added to.
-     */
+    /** The ID of the output item that the refusal text is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the refusal text is added to.
-     */
+    /** The index of the output item that the refusal text is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part that the refusal text is added to.
-     */
+    /** The index of the content part that the refusal text is added to. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The refusal text that is added.
-     */
+    /** The refusal text that is added. */
     val delta: String,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * Emitted when refusal text is finalized.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when refusal text is finalized. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseRefusalDoneEvent(
-    /**
-     * The type of the event. Always `response.refusal.done`.
-     */
+    /** The type of the event. Always `response.refusal.done`. */
     val type: BetaResponseRefusalDoneEventTypeEnum,
-    /**
-     * The ID of the output item that the refusal text is finalized.
-     */
+    /** The ID of the output item that the refusal text is finalized. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that the refusal text is finalized.
-     */
+    /** The index of the output item that the refusal text is finalized. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The index of the content part that the refusal text is finalized.
-     */
+    /** The index of the content part that the refusal text is finalized. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /**
-     * The refusal text that is finalized.
-     */
+    /** The refusal text that is finalized. */
     val refusal: String,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent

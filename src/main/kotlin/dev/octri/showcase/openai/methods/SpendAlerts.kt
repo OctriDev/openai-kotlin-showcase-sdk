@@ -23,50 +23,97 @@ import dev.octri.showcase.openai.Validation
 
 object SpendAlerts {
 
-
     /**
-     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set the page size, `order` to choose the sort direction, and `after` or `before` to move through the results.
+     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set
+     * the page size, `order` to choose the sort direction, and `after` or `before` to move through
+     * the results.
      *
      * Lists project spend alerts.
      *
      * @param projectId The ID of the project to inspect.
      * @param limit A limit on the number of spend alerts to return. Defaults to 20.
      * @param order Sort order for the returned spend alerts.
-     * @param after Cursor for pagination. Provide the ID of the last spend alert
-     *   from the previous response to fetch the next page.
-     * @param before Cursor for pagination. Provide the ID of the first spend alert
-     *   from the previous response to fetch the previous page.
+     * @param after Cursor for pagination. Provide the ID of the last spend alert from the previous
+     *   response to fetch the next page.
+     * @param before Cursor for pagination. Provide the ID of the first spend alert from the
+     *   previous response to fetch the previous page.
      */
-    fun listProjectSpendAlerts(clientConfig: ClientConfig, projectId: String, limit: Long? = null, order: ListProjectSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ProjectSpendAlertListResource {
+    fun listProjectSpendAlerts(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        order: ListProjectSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlertListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ProjectSpendAlertListResource>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listProjectSpendAlerts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<ProjectSpendAlertListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "before" to SdkClient.queryValue(before, "form", true),
+                        ),
+                    operationId = "listProjectSpendAlerts",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set the page size, `order` to choose the sort direction, and `after` or `before` to move through the results.
+     * Lists spend alerts configured for a project, with cursor-based pagination. Use `limit` to set
+     * the page size, `order` to choose the sort direction, and `after` or `before` to move through
+     * the results.
      *
      * Lists project spend alerts.
      *
      * @param projectId The ID of the project to inspect.
      * @param limit A limit on the number of spend alerts to return. Defaults to 20.
      * @param order Sort order for the returned spend alerts.
-     * @param after Cursor for pagination. Provide the ID of the last spend alert
-     *   from the previous response to fetch the next page.
-     * @param before Cursor for pagination. Provide the ID of the first spend alert
-     *   from the previous response to fetch the previous page.
+     * @param after Cursor for pagination. Provide the ID of the last spend alert from the previous
+     *   response to fetch the next page.
+     * @param before Cursor for pagination. Provide the ID of the first spend alert from the
+     *   previous response to fetch the previous page.
      */
-    fun listProjectSpendAlertsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, order: ListProjectSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (ProjectSpendAlert) -> Boolean) {
+    fun listProjectSpendAlertsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        order: ListProjectSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectSpendAlert) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectSpendAlerts(clientConfig, projectId, limit, order, cursor, before, options)
+            val page =
+                listProjectSpendAlerts(
+                    clientConfig,
+                    projectId,
+                    limit,
+                    order,
+                    cursor,
+                    before,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -84,10 +131,28 @@ object SpendAlerts {
         val hasMore: Boolean,
     )
 
-    fun listProjectSpendAlertsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, order: ListProjectSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListProjectSpendAlertsPage) -> Boolean) {
+    fun listProjectSpendAlertsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        order: ListProjectSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectSpendAlertsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectSpendAlerts(clientConfig, projectId, limit, order, cursor, before, options)
+            val page =
+                listProjectSpendAlerts(
+                    clientConfig,
+                    projectId,
+                    limit,
+                    order,
+                    cursor,
+                    before,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -98,10 +163,10 @@ object SpendAlerts {
         }
     }
 
-
-
     /**
-     * Creates a spend alert for a project to notify recipients when spending reaches a threshold. Provide the threshold in cents, the currency and evaluation interval, and email notification settings.
+     * Creates a spend alert for a project to notify recipients when spending reaches a threshold.
+     * Provide the threshold in cents, the currency and evaluation interval, and email notification
+     * settings.
      *
      * Creates a project spend alert.
      *
@@ -111,35 +176,80 @@ object SpendAlerts {
      * @param interval The time interval for evaluating spend against the threshold.
      * @param notificationChannel Email notification settings for a spend alert.
      */
-    fun createProjectSpendAlert(clientConfig: ClientConfig, projectId: String, thresholdAmount: Long, currency: CreateSpendAlertBodyCurrencyEnum, interval: CreateSpendAlertBodyIntervalEnum, notificationChannel: SpendAlertNotificationChannel, options: RequestOptions? = null): ProjectSpendAlert {
-        Validation.validateRange("threshold_amount", thresholdAmount, Validation.RangeOpts(min = 0.0))
+    fun createProjectSpendAlert(
+        clientConfig: ClientConfig,
+        projectId: String,
+        thresholdAmount: Long,
+        currency: CreateSpendAlertBodyCurrencyEnum,
+        interval: CreateSpendAlertBodyIntervalEnum,
+        notificationChannel: SpendAlertNotificationChannel,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlert {
+        Validation.validateRange(
+            "threshold_amount",
+            thresholdAmount,
+            Validation.RangeOpts(min = 0.0),
+        )
 
-        return SdkClient.request<ProjectSpendAlert>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts", config = clientConfig, body = SdkClient.bodyMap("threshold_amount" to (thresholdAmount), "currency" to (currency), "interval" to (interval), "notification_channel" to (notificationChannel)), operationId = "createProjectSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<ProjectSpendAlert>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "threshold_amount" to (thresholdAmount),
+                            "currency" to (currency),
+                            "interval" to (interval),
+                            "notification_channel" to (notificationChannel),
+                        ),
+                    operationId = "createProjectSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a spend alert configured for a project. Use the project and alert identifiers to inspect its threshold, currency, evaluation interval, and notification channel.
+     * Retrieves a spend alert configured for a project. Use the project and alert identifiers to
+     * inspect its threshold, currency, evaluation interval, and notification channel.
      *
      * Retrieves a project spend alert.
      *
      * @param projectId The ID of the project.
      * @param alertId The ID of the spend alert to retrieve.
      */
-    fun retrieveProjectSpendAlert(clientConfig: ClientConfig, projectId: String, alertId: String, options: RequestOptions? = null): ProjectSpendAlert {
-        return SdkClient.request<ProjectSpendAlert>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, operationId = "retrieveProjectSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveProjectSpendAlert(
+        clientConfig: ClientConfig,
+        projectId: String,
+        alertId: String,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlert {
+        return SdkClient.request<ProjectSpendAlert>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts/${SdkClient.encodePathSegment(alertId)}",
+                    config = clientConfig,
+                    operationId = "retrieveProjectSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [updateProjectSpendAlert]. */
     data class UpdateProjectSpendAlertRequest(
@@ -148,11 +258,12 @@ object SpendAlerts {
         val thresholdAmount: Long,
         val currency: CreateSpendAlertBodyCurrencyEnum,
         val interval: CreateSpendAlertBodyIntervalEnum,
-        val notificationChannel: SpendAlertNotificationChannel
+        val notificationChannel: SpendAlertNotificationChannel,
     )
 
     /**
-     * Updates a spend alert configured for a project. Provide the alert's threshold, currency, evaluation interval, and notification channel in the request body.
+     * Updates a spend alert configured for a project. Provide the alert's threshold, currency,
+     * evaluation interval, and notification channel in the request body.
      *
      * Updates a project spend alert.
      *
@@ -163,81 +274,160 @@ object SpendAlerts {
      * @param interval The time interval for evaluating spend against the threshold.
      * @param notificationChannel Email notification settings for a spend alert.
      */
-    fun updateProjectSpendAlert(clientConfig: ClientConfig, request: UpdateProjectSpendAlertRequest, options: RequestOptions? = null): ProjectSpendAlert {
+    fun updateProjectSpendAlert(
+        clientConfig: ClientConfig,
+        request: UpdateProjectSpendAlertRequest,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlert {
         validateUpdateProjectSpendAlertRequest(request)
 
-        return SdkClient.request<ProjectSpendAlert>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(request.projectId)}/spend_alerts/${SdkClient.encodePathSegment(request.alertId)}", config = clientConfig, body = SdkClient.bodyMap("threshold_amount" to (request.thresholdAmount), "currency" to (request.currency), "interval" to (request.interval), "notification_channel" to (request.notificationChannel)), operationId = "updateProjectSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<ProjectSpendAlert>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(request.projectId)}/spend_alerts/${SdkClient.encodePathSegment(request.alertId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "threshold_amount" to (request.thresholdAmount),
+                            "currency" to (request.currency),
+                            "interval" to (request.interval),
+                            "notification_channel" to (request.notificationChannel),
+                        ),
+                    operationId = "updateProjectSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateUpdateProjectSpendAlertRequest(request: UpdateProjectSpendAlertRequest) {
-        Validation.validateRange("threshold_amount", request.thresholdAmount, Validation.RangeOpts(min = 0.0))
+        Validation.validateRange(
+            "threshold_amount",
+            request.thresholdAmount,
+            Validation.RangeOpts(min = 0.0),
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a spend alert from a project. Use the project and alert identifiers to select the alert to remove, then check the deletion confirmation in the response.
+     * Deletes a spend alert from a project. Use the project and alert identifiers to select the
+     * alert to remove, then check the deletion confirmation in the response.
      *
      * Deletes a project spend alert.
      *
      * @param projectId The ID of the project to update.
      * @param alertId The ID of the spend alert to delete.
      */
-    fun deleteProjectSpendAlert(clientConfig: ClientConfig, projectId: String, alertId: String, options: RequestOptions? = null): ProjectSpendAlertDeletedResource {
-        return SdkClient.request<ProjectSpendAlertDeletedResource>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, operationId = "deleteProjectSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun deleteProjectSpendAlert(
+        clientConfig: ClientConfig,
+        projectId: String,
+        alertId: String,
+        options: RequestOptions? = null,
+    ): ProjectSpendAlertDeletedResource {
+        return SdkClient.request<ProjectSpendAlertDeletedResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_alerts/${SdkClient.encodePathSegment(alertId)}",
+                    config = clientConfig,
+                    operationId = "deleteProjectSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the result page, and use `after` or `before` to navigate from a spend alert in a previous response. The response includes cursor IDs and a `has_more` flag for pagination.
+     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the
+     * result page, and use `after` or `before` to navigate from a spend alert in a previous
+     * response. The response includes cursor IDs and a `has_more` flag for pagination.
      *
      * Lists organization spend alerts.
      *
      * @param limit A limit on the number of spend alerts to return. Defaults to 20.
      * @param order Sort order for the returned spend alerts.
-     * @param after Cursor for pagination. Provide the ID of the last spend alert
-     *   from the previous response to fetch the next page.
-     * @param before Cursor for pagination. Provide the ID of the first spend alert
-     *   from the previous response to fetch the previous page.
+     * @param after Cursor for pagination. Provide the ID of the last spend alert from the previous
+     *   response to fetch the next page.
+     * @param before Cursor for pagination. Provide the ID of the first spend alert from the
+     *   previous response to fetch the previous page.
      */
-    fun listOrganizationSpendAlerts(clientConfig: ClientConfig, limit: Long? = null, order: ListOrganizationSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): OrganizationSpendAlertListResource {
+    fun listOrganizationSpendAlerts(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrganizationSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlertListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<OrganizationSpendAlertListResource>(SdkClient.RequestSpec("GET", "/organization/spend_alerts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listOrganizationSpendAlerts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<OrganizationSpendAlertListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/spend_alerts",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "before" to SdkClient.queryValue(before, "form", true),
+                        ),
+                    operationId = "listOrganizationSpendAlerts",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the result page, and use `after` or `before` to navigate from a spend alert in a previous response. The response includes cursor IDs and a `has_more` flag for pagination.
+     * Lists spend alerts configured for the organization. Use `limit` and `order` to control the
+     * result page, and use `after` or `before` to navigate from a spend alert in a previous
+     * response. The response includes cursor IDs and a `has_more` flag for pagination.
      *
      * Lists organization spend alerts.
      *
      * @param limit A limit on the number of spend alerts to return. Defaults to 20.
      * @param order Sort order for the returned spend alerts.
-     * @param after Cursor for pagination. Provide the ID of the last spend alert
-     *   from the previous response to fetch the next page.
-     * @param before Cursor for pagination. Provide the ID of the first spend alert
-     *   from the previous response to fetch the previous page.
+     * @param after Cursor for pagination. Provide the ID of the last spend alert from the previous
+     *   response to fetch the next page.
+     * @param before Cursor for pagination. Provide the ID of the first spend alert from the
+     *   previous response to fetch the previous page.
      */
-    fun listOrganizationSpendAlertsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrganizationSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (OrganizationSpendAlert) -> Boolean) {
+    fun listOrganizationSpendAlertsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrganizationSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (OrganizationSpendAlert) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listOrganizationSpendAlerts(clientConfig, limit, order, cursor, before, options)
+            val page =
+                listOrganizationSpendAlerts(clientConfig, limit, order, cursor, before, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -255,10 +445,19 @@ object SpendAlerts {
         val hasMore: Boolean,
     )
 
-    fun listOrganizationSpendAlertsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrganizationSpendAlertsParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (ListOrganizationSpendAlertsPage) -> Boolean) {
+    fun listOrganizationSpendAlertsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrganizationSpendAlertsParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListOrganizationSpendAlertsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listOrganizationSpendAlerts(clientConfig, limit, order, cursor, before, options)
+            val page =
+                listOrganizationSpendAlerts(clientConfig, limit, order, cursor, before, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -269,10 +468,10 @@ object SpendAlerts {
         }
     }
 
-
-
     /**
-     * Creates a spend alert at the organization level. Set `threshold_amount` in cents and configure the monthly evaluation interval and email notification recipients. The response includes the created alert and its identifier.
+     * Creates a spend alert at the organization level. Set `threshold_amount` in cents and
+     * configure the monthly evaluation interval and email notification recipients. The response
+     * includes the created alert and its identifier.
      *
      * Creates an organization spend alert.
      *
@@ -281,37 +480,80 @@ object SpendAlerts {
      * @param interval The time interval for evaluating spend against the threshold.
      * @param notificationChannel Email notification settings for a spend alert.
      */
-    fun createOrganizationSpendAlert(clientConfig: ClientConfig, thresholdAmount: Long, currency: CreateSpendAlertBodyCurrencyEnum, interval: CreateSpendAlertBodyIntervalEnum, notificationChannel: SpendAlertNotificationChannel, options: RequestOptions? = null): OrganizationSpendAlert {
-        Validation.validateRange("threshold_amount", thresholdAmount, Validation.RangeOpts(min = 0.0))
+    fun createOrganizationSpendAlert(
+        clientConfig: ClientConfig,
+        thresholdAmount: Long,
+        currency: CreateSpendAlertBodyCurrencyEnum,
+        interval: CreateSpendAlertBodyIntervalEnum,
+        notificationChannel: SpendAlertNotificationChannel,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlert {
+        Validation.validateRange(
+            "threshold_amount",
+            thresholdAmount,
+            Validation.RangeOpts(min = 0.0),
+        )
 
-        return SdkClient.request<OrganizationSpendAlert>(SdkClient.RequestSpec("POST", "/organization/spend_alerts", config = clientConfig, body = SdkClient.bodyMap("threshold_amount" to (thresholdAmount), "currency" to (currency), "interval" to (interval), "notification_channel" to (notificationChannel)), operationId = "createOrganizationSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java))).data
+        return SdkClient.request<OrganizationSpendAlert>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/spend_alerts",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "threshold_amount" to (thresholdAmount),
+                            "currency" to (currency),
+                            "interval" to (interval),
+                            "notification_channel" to (notificationChannel),
+                        ),
+                    operationId = "createOrganizationSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a spend alert configured at the organization level. Use `alert_id` to identify the alert whose threshold and notification settings you want to view.
+     * Retrieves a spend alert configured at the organization level. Use `alert_id` to identify the
+     * alert whose threshold and notification settings you want to view.
      *
      * Retrieves an organization spend alert.
      *
      * @param alertId The ID of the spend alert to retrieve.
      */
-    fun retrieveOrganizationSpendAlert(clientConfig: ClientConfig, alertId: String, options: RequestOptions? = null): OrganizationSpendAlert {
-        return SdkClient.request<OrganizationSpendAlert>(SdkClient.RequestSpec("GET", "/organization/spend_alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, operationId = "retrieveOrganizationSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveOrganizationSpendAlert(
+        clientConfig: ClientConfig,
+        alertId: String,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlert {
+        return SdkClient.request<OrganizationSpendAlert>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/spend_alerts/${SdkClient.encodePathSegment(alertId)}",
+                    config = clientConfig,
+                    operationId = "retrieveOrganizationSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates a spend alert configured at the organization level. Provide the threshold, currency, evaluation interval, and email notification settings for the alert. The response contains the updated alert configuration.
+     * Updates a spend alert configured at the organization level. Provide the threshold, currency,
+     * evaluation interval, and email notification settings for the alert. The response contains the
+     * updated alert configuration.
      *
      * Updates an organization spend alert.
      *
@@ -321,33 +563,75 @@ object SpendAlerts {
      * @param interval The time interval for evaluating spend against the threshold.
      * @param notificationChannel Email notification settings for a spend alert.
      */
-    fun updateOrganizationSpendAlert(clientConfig: ClientConfig, alertId: String, thresholdAmount: Long, currency: CreateSpendAlertBodyCurrencyEnum, interval: CreateSpendAlertBodyIntervalEnum, notificationChannel: SpendAlertNotificationChannel, options: RequestOptions? = null): OrganizationSpendAlert {
-        Validation.validateRange("threshold_amount", thresholdAmount, Validation.RangeOpts(min = 0.0))
+    fun updateOrganizationSpendAlert(
+        clientConfig: ClientConfig,
+        alertId: String,
+        thresholdAmount: Long,
+        currency: CreateSpendAlertBodyCurrencyEnum,
+        interval: CreateSpendAlertBodyIntervalEnum,
+        notificationChannel: SpendAlertNotificationChannel,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlert {
+        Validation.validateRange(
+            "threshold_amount",
+            thresholdAmount,
+            Validation.RangeOpts(min = 0.0),
+        )
 
-        return SdkClient.request<OrganizationSpendAlert>(SdkClient.RequestSpec("POST", "/organization/spend_alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, body = SdkClient.bodyMap("threshold_amount" to (thresholdAmount), "currency" to (currency), "interval" to (interval), "notification_channel" to (notificationChannel)), operationId = "updateOrganizationSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<OrganizationSpendAlert>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/spend_alerts/${SdkClient.encodePathSegment(alertId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "threshold_amount" to (thresholdAmount),
+                            "currency" to (currency),
+                            "interval" to (interval),
+                            "notification_channel" to (notificationChannel),
+                        ),
+                    operationId = "updateOrganizationSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes a spend alert configured at the organization level. Use `alert_id` to identify the alert to remove; the response confirms whether it was deleted.
+     * Deletes a spend alert configured at the organization level. Use `alert_id` to identify the
+     * alert to remove; the response confirms whether it was deleted.
      *
      * Deletes an organization spend alert.
      *
      * @param alertId The ID of the spend alert to delete.
      */
-    fun deleteOrganizationSpendAlert(clientConfig: ClientConfig, alertId: String, options: RequestOptions? = null): OrganizationSpendAlertDeletedResource {
-        return SdkClient.request<OrganizationSpendAlertDeletedResource>(SdkClient.RequestSpec("DELETE", "/organization/spend_alerts/${SdkClient.encodePathSegment(alertId)}", config = clientConfig, operationId = "deleteOrganizationSpendAlert", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun deleteOrganizationSpendAlert(
+        clientConfig: ClientConfig,
+        alertId: String,
+        options: RequestOptions? = null,
+    ): OrganizationSpendAlertDeletedResource {
+        return SdkClient.request<OrganizationSpendAlertDeletedResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/spend_alerts/${SdkClient.encodePathSegment(alertId)}",
+                    config = clientConfig,
+                    operationId = "deleteOrganizationSpendAlert",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A breakdown of output token usage for a session or turn.
- */
+/** A breakdown of output token usage for a session or turn. */
 data class OutputTokensDetailsResource2(
-    /**
-     * The number of output tokens used for reasoning.
-     */
+    /** The number of output tokens used for reasoning. */
     @com.fasterxml.jackson.annotation.JsonProperty("reasoning_tokens") val reasoningTokens: Long
 )

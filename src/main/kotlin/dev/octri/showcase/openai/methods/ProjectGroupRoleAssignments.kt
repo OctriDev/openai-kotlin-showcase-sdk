@@ -17,29 +17,54 @@ import dev.octri.showcase.openai.Validation
 
 object ProjectGroupRoleAssignments {
 
-
     /**
      * Lists the project roles assigned to a group within a project.
      *
      * @param projectId The ID of the project to inspect.
      * @param groupId The ID of the group to inspect.
      * @param limit A limit on the number of project role assignments to return.
-     * @param after Cursor for pagination. Provide the value from the previous
-     *   response's `next` field to continue listing project roles.
+     * @param after Cursor for pagination. Provide the value from the previous response's `next`
+     *   field to continue listing project roles.
      * @param order Sort order for the returned project roles.
      */
-    fun listProjectGroupRoleAssignments(clientConfig: ClientConfig, projectId: String, groupId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null): RoleListResource {
+    fun listProjectGroupRoleAssignments(
+        clientConfig: ClientConfig,
+        projectId: String,
+        groupId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListProjectGroupRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): RoleListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 1000.0))
-}
+        }
 
-        return SdkClient.request<RoleListResource>(SdkClient.RequestSpec("GET", "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listProjectGroupRoleAssignments", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+        return SdkClient.request<RoleListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                        ),
+                    operationId = "listProjectGroupRoleAssignments",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Lists the project roles assigned to a group within a project.
@@ -47,14 +72,32 @@ object ProjectGroupRoleAssignments {
      * @param projectId The ID of the project to inspect.
      * @param groupId The ID of the group to inspect.
      * @param limit A limit on the number of project role assignments to return.
-     * @param after Cursor for pagination. Provide the value from the previous
-     *   response's `next` field to continue listing project roles.
+     * @param after Cursor for pagination. Provide the value from the previous response's `next`
+     *   field to continue listing project roles.
      * @param order Sort order for the returned project roles.
      */
-    fun listProjectGroupRoleAssignmentsPaginated(clientConfig: ClientConfig, projectId: String, groupId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (AssignedRoleDetails) -> Boolean) {
+    fun listProjectGroupRoleAssignmentsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        groupId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListProjectGroupRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AssignedRoleDetails) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectGroupRoleAssignments(clientConfig, projectId, groupId, limit, cursor, order, options)
+            val page =
+                listProjectGroupRoleAssignments(
+                    clientConfig,
+                    projectId,
+                    groupId,
+                    limit,
+                    cursor,
+                    order,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -72,10 +115,28 @@ object ProjectGroupRoleAssignments {
         val hasMore: Boolean,
     )
 
-    fun listProjectGroupRoleAssignmentsPages(clientConfig: ClientConfig, projectId: String, groupId: String, limit: Long? = null, after: String? = null, order: ListProjectGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListProjectGroupRoleAssignmentsPage) -> Boolean) {
+    fun listProjectGroupRoleAssignmentsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        groupId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListProjectGroupRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListProjectGroupRoleAssignmentsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectGroupRoleAssignments(clientConfig, projectId, groupId, limit, cursor, order, options)
+            val page =
+                listProjectGroupRoleAssignments(
+                    clientConfig,
+                    projectId,
+                    groupId,
+                    limit,
+                    cursor,
+                    order,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.next
@@ -86,8 +147,6 @@ object ProjectGroupRoleAssignments {
         }
     }
 
-
-
     /**
      * Assigns a project role to a group within a project.
      *
@@ -95,18 +154,37 @@ object ProjectGroupRoleAssignments {
      * @param groupId The ID of the group that should receive the project role.
      * @param roleId Identifier of the role to assign.
      */
-    fun assignProjectGroupRole(clientConfig: ClientConfig, projectId: String, groupId: String, roleId: String, options: RequestOptions? = null): GroupRoleAssignment {
-        return SdkClient.request<GroupRoleAssignment>(SdkClient.RequestSpec("POST", "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles", config = clientConfig, body = SdkClient.bodyMap("role_id" to (roleId)), operationId = "assignProjectGroupRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun assignProjectGroupRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        groupId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): GroupRoleAssignment {
+        return SdkClient.request<GroupRoleAssignment>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("role_id" to (roleId)),
+                    operationId = "assignProjectGroupRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a role assigned to a group within a project. Use the project, group, and role identifiers to locate the assignment and inspect its permissions and assignment details.
+     * Retrieves a role assigned to a group within a project. Use the project, group, and role
+     * identifiers to locate the assignment and inspect its permissions and assignment details.
      *
      * Retrieves a project role assigned to a group.
      *
@@ -114,32 +192,64 @@ object ProjectGroupRoleAssignments {
      * @param groupId The ID of the group to inspect.
      * @param roleId The ID of the project role to retrieve for the group.
      */
-    fun retrieveProjectGroupRole(clientConfig: ClientConfig, projectId: String, groupId: String, roleId: String, options: RequestOptions? = null): AssignedRoleDetails {
-        return SdkClient.request<AssignedRoleDetails>(SdkClient.RequestSpec("GET", "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "retrieveProjectGroupRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveProjectGroupRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        groupId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): AssignedRoleDetails {
+        return SdkClient.request<AssignedRoleDetails>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    operationId = "retrieveProjectGroupRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Unassigns a project role from a group within a project.
      *
      * @param projectId The ID of the project to modify.
-     * @param groupId The ID of the group whose project role assignment should be
-     *   removed.
+     * @param groupId The ID of the group whose project role assignment should be removed.
      * @param roleId The ID of the project role to remove from the group.
      */
-    fun unassignProjectGroupRole(clientConfig: ClientConfig, projectId: String, groupId: String, roleId: String, options: RequestOptions? = null): DeletedRoleAssignmentResource {
-        return SdkClient.request<DeletedRoleAssignmentResource>(SdkClient.RequestSpec("DELETE", "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "unassignProjectGroupRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun unassignProjectGroupRole(
+        clientConfig: ClientConfig,
+        projectId: String,
+        groupId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): DeletedRoleAssignmentResource {
+        return SdkClient.request<DeletedRoleAssignmentResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/projects/${SdkClient.encodePathSegment(projectId)}/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}",
+                    config = clientConfig,
+                    operationId = "unassignProjectGroupRole",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

@@ -3,83 +3,62 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when the list of available MCP tools has been successfully retrieved.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when the list of available MCP tools has been successfully retrieved. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseMCPListToolsCompletedEvent(
-    /**
-     * The type of the event. Always 'response.mcp_list_tools.completed'.
-     */
+    /** The type of the event. Always 'response.mcp_list_tools.completed'. */
     val type: BetaResponseMCPListToolsCompletedEventTypeEnum,
-    /**
-     * The ID of the MCP tool call item that produced this output.
-     */
+    /** The ID of the MCP tool call item that produced this output. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that was processed.
-     */
+    /** The index of the output item that was processed. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * Emitted when the attempt to list available MCP tools has failed.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when the attempt to list available MCP tools has failed. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseMCPListToolsFailedEvent(
-    /**
-     * The type of the event. Always 'response.mcp_list_tools.failed'.
-     */
+    /** The type of the event. Always 'response.mcp_list_tools.failed'. */
     val type: BetaResponseMCPListToolsFailedEventTypeEnum,
-    /**
-     * The ID of the MCP tool call item that failed.
-     */
+    /** The ID of the MCP tool call item that failed. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that failed.
-     */
+    /** The index of the output item that failed. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * Emitted when the system is in the process of retrieving the list of available MCP tools.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when the system is in the process of retrieving the list of available MCP tools. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseMCPListToolsInProgressEvent(
-    /**
-     * The type of the event. Always 'response.mcp_list_tools.in_progress'.
-     */
+    /** The type of the event. Always 'response.mcp_list_tools.in_progress'. */
     val type: BetaResponseMCPListToolsInProgressEventTypeEnum,
-    /**
-     * The ID of the MCP tool call item that is being processed.
-     */
+    /** The ID of the MCP tool call item that is being processed. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The index of the output item that is being processed.
-     */
+    /** The index of the output item that is being processed. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent

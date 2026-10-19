@@ -3,83 +3,62 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Emitted when a file search call is completed (results found).
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a file search call is completed (results found). */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseFileSearchCallCompletedEvent(
-    /**
-     * The type of the event. Always `response.file_search_call.completed`.
-     */
+    /** The type of the event. Always `response.file_search_call.completed`. */
     val type: BetaResponseFileSearchCallCompletedEventTypeEnum,
-    /**
-     * The index of the output item that the file search call is initiated.
-     */
+    /** The index of the output item that the file search call is initiated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The ID of the output item that the file search call is initiated.
-     */
+    /** The ID of the output item that the file search call is initiated. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * Emitted when a file search call is initiated.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a file search call is initiated. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseFileSearchCallInProgressEvent(
-    /**
-     * The type of the event. Always `response.file_search_call.in_progress`.
-     */
+    /** The type of the event. Always `response.file_search_call.in_progress`. */
     val type: BetaResponseFileSearchCallInProgressEventTypeEnum,
-    /**
-     * The index of the output item that the file search call is initiated.
-     */
+    /** The index of the output item that the file search call is initiated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The ID of the output item that the file search call is initiated.
-     */
+    /** The ID of the output item that the file search call is initiated. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent
 
-/**
- * Emitted when a file search is currently searching.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when a file search is currently searching. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseFileSearchCallSearchingEvent(
-    /**
-     * The type of the event. Always `response.file_search_call.searching`.
-     */
+    /** The type of the event. Always `response.file_search_call.searching`. */
     val type: BetaResponseFileSearchCallSearchingEventTypeEnum,
-    /**
-     * The index of the output item that the file search call is searching.
-     */
+    /** The index of the output item that the file search call is searching. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * The ID of the output item that the file search call is initiated.
-     */
+    /** The ID of the output item that the file search call is initiated. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The agent that owns this multi-agent streaming event.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that owns this multi-agent streaming event. */
+    val agent: BetaAgentTag? = null,
 ) : BetaResponseStreamEvent

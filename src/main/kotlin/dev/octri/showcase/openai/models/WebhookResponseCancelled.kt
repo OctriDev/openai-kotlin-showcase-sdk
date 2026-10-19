@@ -3,38 +3,23 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event data payload.
- */
+/** Event data payload. */
 data class WebhookResponseCancelledData(
-    /**
-     * The unique ID of the model response.
-     */
+    /** The unique ID of the model response. */
     val id: String
 )
 
-/**
- * Sent when a background response has been cancelled.
- */
+/** Sent when a background response has been cancelled. */
 data class WebhookResponseCancelled(
-    /**
-     * The Unix timestamp (in seconds) of when the model response was cancelled.
-     */
+    /** The Unix timestamp (in seconds) of when the model response was cancelled. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * Event data payload.
-     */
+    /** Event data payload. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookResponseCancelledData,
-    /**
-     * The type of the event. Always `response.cancelled`.
-     */
+    /** The type of the event. Always `response.cancelled`. */
     val type: WebhookResponseCancelledTypeEnum,
-    /**
-     * The object of the event. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookResponseCancelledObjectEnum? = null
+    /** The object of the event. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookResponseCancelledObjectEnum? = null,
 )

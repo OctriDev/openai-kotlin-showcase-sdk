@@ -3,20 +3,13 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Inline skill payload
- */
+/** Inline skill payload */
 data class InlineSkillSourceParam(
-    /**
-     * The type of the inline skill source. Must be `base64`.
-     */
+    /** The type of the inline skill source. Must be `base64`. */
     val type: InlineSkillSourceParamTypeEnum,
-    /**
-     * The media type of the inline skill payload. Must be `application/zip`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("media_type") val mediaType: InlineSkillSourceParamMediaTypeEnum,
-    /**
-     * Base64-encoded skill zip bundle.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String
+    /** The media type of the inline skill payload. Must be `application/zip`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("media_type")
+    val mediaType: InlineSkillSourceParamMediaTypeEnum,
+    /** Base64-encoded skill zip bundle. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
 )

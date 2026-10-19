@@ -3,78 +3,70 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Properties of the custom tool.
- */
+/** Properties of the custom tool. */
 data class CustomToolChatCompletionsCustom(
-    /**
-     * The name of the custom tool, used to identify it in tool calls.
-     */
+    /** The name of the custom tool, used to identify it in tool calls. */
     val name: String,
-    /**
-     * Optional description of the custom tool, used to provide more context.
-     */
+    /** Optional description of the custom tool, used to provide more context. */
     val description: String? = null,
-    /**
-     * The input format for the custom tool. Default is unconstrained text.
-     */
-    val format: CustomToolChatCompletionsCustomFormat? = null
+    /** The input format for the custom tool. Default is unconstrained text. */
+    val format: CustomToolChatCompletionsCustomFormat? = null,
 )
 
-/**
- * A custom tool that processes input using a specified format.
- */
+/** A custom tool that processes input using a specified format. */
 data class CustomToolChatCompletions(
-    /**
-     * The type of the custom tool. Always `custom`.
-     */
+    /** The type of the custom tool. Always `custom`. */
     val type: CustomToolChatCompletionsTypeEnum,
-    /**
-     * Properties of the custom tool.
-     */
-    val custom: CustomToolChatCompletionsCustom
+    /** Properties of the custom tool. */
+    val custom: CustomToolChatCompletionsCustom,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CustomToolChatCompletionsCustomFormatVariant0(
-    /**
-     * Unconstrained text format. Always `text`.
-     */
+    /** Unconstrained text format. Always `text`. */
     val type: CustomToolChatCompletionsCustomFormatVariant0TypeEnum
 ) : CustomToolChatCompletionsCustomFormat
 
-/**
- * Your chosen grammar.
- */
+/** Your chosen grammar. */
 data class CustomToolChatCompletionsCustomFormatVariant1Grammar(
-    /**
-     * The grammar definition.
-     */
+    /** The grammar definition. */
     val definition: String,
-    /**
-     * The syntax of the grammar definition. One of `lark` or `regex`.
-     */
-    val syntax: CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum
+    /** The syntax of the grammar definition. One of `lark` or `regex`. */
+    val syntax: CustomToolChatCompletionsCustomFormatVariant1GrammarSyntaxEnum,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CustomToolChatCompletionsCustomFormatVariant1(
-    /**
-     * Grammar format. Always `grammar`.
-     */
+    /** Grammar format. Always `grammar`. */
     val type: CustomToolChatCompletionsCustomFormatVariant1TypeEnum,
-    /**
-     * Your chosen grammar.
-     */
-    val grammar: CustomToolChatCompletionsCustomFormatVariant1Grammar
+    /** Your chosen grammar. */
+    val grammar: CustomToolChatCompletionsCustomFormatVariant1Grammar,
 ) : CustomToolChatCompletionsCustomFormat
 
-/**
- * The input format for the custom tool. Default is unconstrained text.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+/** The input format for the custom tool. Default is unconstrained text. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolChatCompletionsCustomFormatVariant0::class, name = "text"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolChatCompletionsCustomFormatVariant1::class, name = "grammar")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolChatCompletionsCustomFormatVariant0::class,
+        name = "text",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolChatCompletionsCustomFormatVariant1::class,
+        name = "grammar",
+    ),
 )
 sealed interface CustomToolChatCompletionsCustomFormat

@@ -3,56 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event representing a delta (partial update) to the input of a custom tool call.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Event representing a delta (partial update) to the input of a custom tool call. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseCustomToolCallInputDeltaEvent(
-    /**
-     * The event type identifier.
-     */
+    /** The event type identifier. */
     val type: ResponseCustomToolCallInputDeltaEventTypeEnum,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the output this delta applies to.
-     */
+    /** The index of the output this delta applies to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * Unique identifier for the API item associated with this event.
-     */
+    /** Unique identifier for the API item associated with this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The incremental input data (delta) for the custom tool call.
-     */
-    val delta: String
+    /** The incremental input data (delta) for the custom tool call. */
+    val delta: String,
 ) : ResponseStreamEvent
 
-/**
- * Event indicating that input for a custom tool call is complete.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Event indicating that input for a custom tool call is complete. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseCustomToolCallInputDoneEvent(
-    /**
-     * The event type identifier.
-     */
+    /** The event type identifier. */
     val type: ResponseCustomToolCallInputDoneEventTypeEnum,
-    /**
-     * The sequence number of this event.
-     */
+    /** The sequence number of this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The index of the output this event applies to.
-     */
+    /** The index of the output this event applies to. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /**
-     * Unique identifier for the API item associated with this event.
-     */
+    /** Unique identifier for the API item associated with this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /**
-     * The complete input data for the custom tool call.
-     */
-    val input: String
+    /** The complete input data for the custom tool call. */
+    val input: String,
 ) : ResponseStreamEvent

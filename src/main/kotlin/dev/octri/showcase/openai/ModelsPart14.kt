@@ -23,7 +23,8 @@ typealias OutputTextResourceTypeEnum = dev.octri.showcase.openai.models.OutputTe
 
 typealias OutputTokensDetailsResource = dev.octri.showcase.openai.models.OutputTokensDetailsResource
 
-typealias OutputTokensDetailsResource2 = dev.octri.showcase.openai.models.OutputTokensDetailsResource2
+typealias OutputTokensDetailsResource2 =
+    dev.octri.showcase.openai.models.OutputTokensDetailsResource2
 
 typealias ParallelToolCalls = dev.octri.showcase.openai.models.ParallelToolCalls
 
@@ -31,79 +32,115 @@ typealias PartialImages = dev.octri.showcase.openai.models.PartialImages
 
 typealias PermissionErrorResponse = dev.octri.showcase.openai.models.PermissionErrorResponse
 
-typealias PermissionErrorResponseError = dev.octri.showcase.openai.models.PermissionErrorResponseError
+typealias PermissionErrorResponseError =
+    dev.octri.showcase.openai.models.PermissionErrorResponseError
 
-typealias PersistedAgentToolConfigParam = dev.octri.showcase.openai.models.PersistedAgentToolConfigParam
+typealias PersistedAgentToolConfigParam =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParam
 
-typealias PersistedAgentToolConfigParamComputerUse = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamComputerUse
+typealias PersistedAgentToolConfigParamComputerUse =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamComputerUse
 
-typealias PersistedAgentToolConfigParamComputerUseTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamComputerUseTypeEnum
+typealias PersistedAgentToolConfigParamComputerUseTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamComputerUseTypeEnum
 
-typealias PersistedAgentToolConfigParamFunction = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamFunction
+typealias PersistedAgentToolConfigParamFunction =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamFunction
 
-typealias PersistedAgentToolConfigParamFunctionTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamFunctionTypeEnum
+typealias PersistedAgentToolConfigParamFunctionTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamFunctionTypeEnum
 
-typealias PersistedAgentToolConfigParamMcp = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamMcp
+typealias PersistedAgentToolConfigParamMcp =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamMcp
 
-typealias PersistedAgentToolConfigParamMcpTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamMcpTypeEnum
+typealias PersistedAgentToolConfigParamMcpTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamMcpTypeEnum
 
-typealias PersistedAgentToolConfigParamProgrammaticToolCalling = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamProgrammaticToolCalling
+typealias PersistedAgentToolConfigParamProgrammaticToolCalling =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamProgrammaticToolCalling
 
-typealias PersistedAgentToolConfigParamProgrammaticToolCallingTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamProgrammaticToolCallingTypeEnum
+typealias PersistedAgentToolConfigParamProgrammaticToolCallingTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamProgrammaticToolCallingTypeEnum
 
-typealias PersistedAgentToolConfigParamToolSearch = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamToolSearch
+typealias PersistedAgentToolConfigParamToolSearch =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamToolSearch
 
-typealias PersistedAgentToolConfigParamToolSearchTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamToolSearchTypeEnum
+typealias PersistedAgentToolConfigParamToolSearchTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamToolSearchTypeEnum
 
-typealias PersistedAgentToolConfigParamWebSearch = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamWebSearch
+typealias PersistedAgentToolConfigParamWebSearch =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamWebSearch
 
-typealias PersistedAgentToolConfigParamWebSearchTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolConfigParamWebSearchTypeEnum
+typealias PersistedAgentToolConfigParamWebSearchTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolConfigParamWebSearchTypeEnum
 
 typealias PersistedAgentToolResource = dev.octri.showcase.openai.models.PersistedAgentToolResource
 
-typealias PersistedAgentToolResourceComputerUse = dev.octri.showcase.openai.models.PersistedAgentToolResourceComputerUse
+typealias PersistedAgentToolResourceComputerUse =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceComputerUse
 
-typealias PersistedAgentToolResourceComputerUseTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolResourceComputerUseTypeEnum
+typealias PersistedAgentToolResourceComputerUseTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceComputerUseTypeEnum
 
-typealias PersistedAgentToolResourceFunction = dev.octri.showcase.openai.models.PersistedAgentToolResourceFunction
+typealias PersistedAgentToolResourceFunction =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceFunction
 
-typealias PersistedAgentToolResourceFunctionTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolResourceFunctionTypeEnum
+typealias PersistedAgentToolResourceFunctionTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceFunctionTypeEnum
 
-typealias PersistedAgentToolResourceMcp = dev.octri.showcase.openai.models.PersistedAgentToolResourceMcp
+typealias PersistedAgentToolResourceMcp =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceMcp
 
-typealias PersistedAgentToolResourceMcpTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolResourceMcpTypeEnum
+typealias PersistedAgentToolResourceMcpTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceMcpTypeEnum
 
-typealias PersistedAgentToolResourceProgrammaticToolCalling = dev.octri.showcase.openai.models.PersistedAgentToolResourceProgrammaticToolCalling
+typealias PersistedAgentToolResourceProgrammaticToolCalling =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceProgrammaticToolCalling
 
-typealias PersistedAgentToolResourceProgrammaticToolCallingTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolResourceProgrammaticToolCallingTypeEnum
+typealias PersistedAgentToolResourceProgrammaticToolCallingTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceProgrammaticToolCallingTypeEnum
 
-typealias PersistedAgentToolResourceToolSearch = dev.octri.showcase.openai.models.PersistedAgentToolResourceToolSearch
+typealias PersistedAgentToolResourceToolSearch =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceToolSearch
 
-typealias PersistedAgentToolResourceToolSearchTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolResourceToolSearchTypeEnum
+typealias PersistedAgentToolResourceToolSearchTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceToolSearchTypeEnum
 
-typealias PersistedAgentToolResourceWebSearch = dev.octri.showcase.openai.models.PersistedAgentToolResourceWebSearch
+typealias PersistedAgentToolResourceWebSearch =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceWebSearch
 
-typealias PersistedAgentToolResourceWebSearchTypeEnum = dev.octri.showcase.openai.models.PersistedAgentToolResourceWebSearchTypeEnum
+typealias PersistedAgentToolResourceWebSearchTypeEnum =
+    dev.octri.showcase.openai.models.PersistedAgentToolResourceWebSearchTypeEnum
 
-typealias PersistedMcpTransportConfigParam = dev.octri.showcase.openai.models.PersistedMcpTransportConfigParam
+typealias PersistedMcpTransportConfigParam =
+    dev.octri.showcase.openai.models.PersistedMcpTransportConfigParam
 
-typealias PersistedMcpTransportConfigParamHttp = dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamHttp
+typealias PersistedMcpTransportConfigParamHttp =
+    dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamHttp
 
-typealias PersistedMcpTransportConfigParamHttpTypeEnum = dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamHttpTypeEnum
+typealias PersistedMcpTransportConfigParamHttpTypeEnum =
+    dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamHttpTypeEnum
 
-typealias PersistedMcpTransportConfigParamStdio = dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamStdio
+typealias PersistedMcpTransportConfigParamStdio =
+    dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamStdio
 
-typealias PersistedMcpTransportConfigParamStdioTypeEnum = dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamStdioTypeEnum
+typealias PersistedMcpTransportConfigParamStdioTypeEnum =
+    dev.octri.showcase.openai.models.PersistedMcpTransportConfigParamStdioTypeEnum
 
-typealias PersistedMcpTransportResource = dev.octri.showcase.openai.models.PersistedMcpTransportResource
+typealias PersistedMcpTransportResource =
+    dev.octri.showcase.openai.models.PersistedMcpTransportResource
 
-typealias PersistedMcpTransportResourceHttp = dev.octri.showcase.openai.models.PersistedMcpTransportResourceHttp
+typealias PersistedMcpTransportResourceHttp =
+    dev.octri.showcase.openai.models.PersistedMcpTransportResourceHttp
 
-typealias PersistedMcpTransportResourceHttpTypeEnum = dev.octri.showcase.openai.models.PersistedMcpTransportResourceHttpTypeEnum
+typealias PersistedMcpTransportResourceHttpTypeEnum =
+    dev.octri.showcase.openai.models.PersistedMcpTransportResourceHttpTypeEnum
 
-typealias PersistedMcpTransportResourceStdio = dev.octri.showcase.openai.models.PersistedMcpTransportResourceStdio
+typealias PersistedMcpTransportResourceStdio =
+    dev.octri.showcase.openai.models.PersistedMcpTransportResourceStdio
 
-typealias PersistedMcpTransportResourceStdioTypeEnum = dev.octri.showcase.openai.models.PersistedMcpTransportResourceStdioTypeEnum
+typealias PersistedMcpTransportResourceStdioTypeEnum =
+    dev.octri.showcase.openai.models.PersistedMcpTransportResourceStdioTypeEnum
 
 typealias PersonalityEnum = dev.octri.showcase.openai.models.PersonalityEnum
 
@@ -117,15 +154,18 @@ typealias ProgramItemParam = dev.octri.showcase.openai.models.ProgramItemParam
 
 typealias ProgramItemParamTypeEnum = dev.octri.showcase.openai.models.ProgramItemParamTypeEnum
 
-typealias ProgrammaticToolCallingParam = dev.octri.showcase.openai.models.ProgrammaticToolCallingParam
+typealias ProgrammaticToolCallingParam =
+    dev.octri.showcase.openai.models.ProgrammaticToolCallingParam
 
-typealias ProgrammaticToolCallingParamTypeEnum = dev.octri.showcase.openai.models.ProgrammaticToolCallingParamTypeEnum
+typealias ProgrammaticToolCallingParamTypeEnum =
+    dev.octri.showcase.openai.models.ProgrammaticToolCallingParamTypeEnum
 
 typealias ProgramOutput = dev.octri.showcase.openai.models.ProgramOutput
 
 typealias ProgramOutputItemParam = dev.octri.showcase.openai.models.ProgramOutputItemParam
 
-typealias ProgramOutputItemParamTypeEnum = dev.octri.showcase.openai.models.ProgramOutputItemParamTypeEnum
+typealias ProgramOutputItemParamTypeEnum =
+    dev.octri.showcase.openai.models.ProgramOutputItemParamTypeEnum
 
 typealias ProgramOutputItemStatus = dev.octri.showcase.openai.models.ProgramOutputItemStatus
 
@@ -137,9 +177,11 @@ typealias ProgramToolCallCaller = dev.octri.showcase.openai.models.ProgramToolCa
 
 typealias ProgramToolCallCallerParam = dev.octri.showcase.openai.models.ProgramToolCallCallerParam
 
-typealias ProgramToolCallCallerParamTypeEnum = dev.octri.showcase.openai.models.ProgramToolCallCallerParamTypeEnum
+typealias ProgramToolCallCallerParamTypeEnum =
+    dev.octri.showcase.openai.models.ProgramToolCallCallerParamTypeEnum
 
-typealias ProgramToolCallCallerTypeEnum = dev.octri.showcase.openai.models.ProgramToolCallCallerTypeEnum
+typealias ProgramToolCallCallerTypeEnum =
+    dev.octri.showcase.openai.models.ProgramToolCallCallerTypeEnum
 
 typealias ProgramTypeEnum = dev.octri.showcase.openai.models.ProgramTypeEnum
 
@@ -149,19 +191,23 @@ typealias ProjectApiKey = dev.octri.showcase.openai.models.ProjectApiKey
 
 typealias ProjectApiKeyDeleteResponse = dev.octri.showcase.openai.models.ProjectApiKeyDeleteResponse
 
-typealias ProjectApiKeyDeleteResponseObjectEnum = dev.octri.showcase.openai.models.ProjectApiKeyDeleteResponseObjectEnum
+typealias ProjectApiKeyDeleteResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectApiKeyDeleteResponseObjectEnum
 
 typealias ProjectApiKeyListResponse = dev.octri.showcase.openai.models.ProjectApiKeyListResponse
 
-typealias ProjectApiKeyListResponseObjectEnum = dev.octri.showcase.openai.models.ProjectApiKeyListResponseObjectEnum
+typealias ProjectApiKeyListResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectApiKeyListResponseObjectEnum
 
 typealias ProjectApiKeyObjectEnum = dev.octri.showcase.openai.models.ProjectApiKeyObjectEnum
 
 typealias ProjectApiKeyOwner = dev.octri.showcase.openai.models.ProjectApiKeyOwner
 
-typealias ProjectApiKeyOwnerProjectAccessEnum = dev.octri.showcase.openai.models.ProjectApiKeyOwnerProjectAccessEnum
+typealias ProjectApiKeyOwnerProjectAccessEnum =
+    dev.octri.showcase.openai.models.ProjectApiKeyOwnerProjectAccessEnum
 
-typealias ProjectApiKeyOwnerServiceAccount = dev.octri.showcase.openai.models.ProjectApiKeyOwnerServiceAccount
+typealias ProjectApiKeyOwnerServiceAccount =
+    dev.octri.showcase.openai.models.ProjectApiKeyOwnerServiceAccount
 
 typealias ProjectApiKeyOwnerTypeEnum = dev.octri.showcase.openai.models.ProjectApiKeyOwnerTypeEnum
 
@@ -171,9 +217,11 @@ typealias ProjectCreateRequest = dev.octri.showcase.openai.models.ProjectCreateR
 
 typealias ProjectDataRetention = dev.octri.showcase.openai.models.ProjectDataRetention
 
-typealias ProjectDataRetentionObjectEnum = dev.octri.showcase.openai.models.ProjectDataRetentionObjectEnum
+typealias ProjectDataRetentionObjectEnum =
+    dev.octri.showcase.openai.models.ProjectDataRetentionObjectEnum
 
-typealias ProjectDataRetentionTypeEnum = dev.octri.showcase.openai.models.ProjectDataRetentionTypeEnum
+typealias ProjectDataRetentionTypeEnum =
+    dev.octri.showcase.openai.models.ProjectDataRetentionTypeEnum
 
 typealias ProjectEventTypeEnum = dev.octri.showcase.openai.models.ProjectEventTypeEnum
 
@@ -181,99 +229,133 @@ typealias ProjectGroup = dev.octri.showcase.openai.models.ProjectGroup
 
 typealias ProjectGroupDeletedResource = dev.octri.showcase.openai.models.ProjectGroupDeletedResource
 
-typealias ProjectGroupDeletedResourceObjectEnum = dev.octri.showcase.openai.models.ProjectGroupDeletedResourceObjectEnum
+typealias ProjectGroupDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.ProjectGroupDeletedResourceObjectEnum
 
 typealias ProjectGroupGroupTypeEnum = dev.octri.showcase.openai.models.ProjectGroupGroupTypeEnum
 
 typealias ProjectGroupListResource = dev.octri.showcase.openai.models.ProjectGroupListResource
 
-typealias ProjectGroupListResourceObjectEnum = dev.octri.showcase.openai.models.ProjectGroupListResourceObjectEnum
+typealias ProjectGroupListResourceObjectEnum =
+    dev.octri.showcase.openai.models.ProjectGroupListResourceObjectEnum
 
 typealias ProjectGroupObjectEnum = dev.octri.showcase.openai.models.ProjectGroupObjectEnum
 
-typealias ProjectHostedToolPermissions = dev.octri.showcase.openai.models.ProjectHostedToolPermissions
+typealias ProjectHostedToolPermissions =
+    dev.octri.showcase.openai.models.ProjectHostedToolPermissions
 
-typealias ProjectHostedToolPermissionsUpdateRequest = dev.octri.showcase.openai.models.ProjectHostedToolPermissionsUpdateRequest
+typealias ProjectHostedToolPermissionsUpdateRequest =
+    dev.octri.showcase.openai.models.ProjectHostedToolPermissionsUpdateRequest
 
 typealias ProjectListResponse = dev.octri.showcase.openai.models.ProjectListResponse
 
-typealias ProjectListResponseObjectEnum = dev.octri.showcase.openai.models.ProjectListResponseObjectEnum
+typealias ProjectListResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectListResponseObjectEnum
 
 typealias ProjectModelPermissions = dev.octri.showcase.openai.models.ProjectModelPermissions
 
-typealias ProjectModelPermissionsDeleteResponse = dev.octri.showcase.openai.models.ProjectModelPermissionsDeleteResponse
+typealias ProjectModelPermissionsDeleteResponse =
+    dev.octri.showcase.openai.models.ProjectModelPermissionsDeleteResponse
 
-typealias ProjectModelPermissionsDeleteResponseObjectEnum = dev.octri.showcase.openai.models.ProjectModelPermissionsDeleteResponseObjectEnum
+typealias ProjectModelPermissionsDeleteResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectModelPermissionsDeleteResponseObjectEnum
 
-typealias ProjectModelPermissionsModeEnum = dev.octri.showcase.openai.models.ProjectModelPermissionsModeEnum
+typealias ProjectModelPermissionsModeEnum =
+    dev.octri.showcase.openai.models.ProjectModelPermissionsModeEnum
 
-typealias ProjectModelPermissionsObjectEnum = dev.octri.showcase.openai.models.ProjectModelPermissionsObjectEnum
+typealias ProjectModelPermissionsObjectEnum =
+    dev.octri.showcase.openai.models.ProjectModelPermissionsObjectEnum
 
-typealias ProjectModelPermissionsUpdateRequest = dev.octri.showcase.openai.models.ProjectModelPermissionsUpdateRequest
+typealias ProjectModelPermissionsUpdateRequest =
+    dev.octri.showcase.openai.models.ProjectModelPermissionsUpdateRequest
 
-typealias ProjectModelPermissionsUpdateRequestModeEnum = dev.octri.showcase.openai.models.ProjectModelPermissionsUpdateRequestModeEnum
+typealias ProjectModelPermissionsUpdateRequestModeEnum =
+    dev.octri.showcase.openai.models.ProjectModelPermissionsUpdateRequestModeEnum
 
 typealias ProjectObjectEnum = dev.octri.showcase.openai.models.ProjectObjectEnum
 
 typealias ProjectRateLimit = dev.octri.showcase.openai.models.ProjectRateLimit
 
-typealias ProjectRateLimitListResponse = dev.octri.showcase.openai.models.ProjectRateLimitListResponse
+typealias ProjectRateLimitListResponse =
+    dev.octri.showcase.openai.models.ProjectRateLimitListResponse
 
-typealias ProjectRateLimitListResponseObjectEnum = dev.octri.showcase.openai.models.ProjectRateLimitListResponseObjectEnum
+typealias ProjectRateLimitListResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectRateLimitListResponseObjectEnum
 
 typealias ProjectRateLimitObjectEnum = dev.octri.showcase.openai.models.ProjectRateLimitObjectEnum
 
-typealias ProjectRateLimitUpdateRequest = dev.octri.showcase.openai.models.ProjectRateLimitUpdateRequest
+typealias ProjectRateLimitUpdateRequest =
+    dev.octri.showcase.openai.models.ProjectRateLimitUpdateRequest
 
 typealias ProjectServiceAccount = dev.octri.showcase.openai.models.ProjectServiceAccount
 
 typealias ProjectServiceAccountApiKey = dev.octri.showcase.openai.models.ProjectServiceAccountApiKey
 
-typealias ProjectServiceAccountApiKeyObjectEnum = dev.octri.showcase.openai.models.ProjectServiceAccountApiKeyObjectEnum
+typealias ProjectServiceAccountApiKeyObjectEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountApiKeyObjectEnum
 
-typealias ProjectServiceAccountCreateRequest = dev.octri.showcase.openai.models.ProjectServiceAccountCreateRequest
+typealias ProjectServiceAccountCreateRequest =
+    dev.octri.showcase.openai.models.ProjectServiceAccountCreateRequest
 
-typealias ProjectServiceAccountCreateResponse = dev.octri.showcase.openai.models.ProjectServiceAccountCreateResponse
+typealias ProjectServiceAccountCreateResponse =
+    dev.octri.showcase.openai.models.ProjectServiceAccountCreateResponse
 
-typealias ProjectServiceAccountCreateResponseObjectEnum = dev.octri.showcase.openai.models.ProjectServiceAccountCreateResponseObjectEnum
+typealias ProjectServiceAccountCreateResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountCreateResponseObjectEnum
 
-typealias ProjectServiceAccountCreateResponseRoleEnum = dev.octri.showcase.openai.models.ProjectServiceAccountCreateResponseRoleEnum
+typealias ProjectServiceAccountCreateResponseRoleEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountCreateResponseRoleEnum
 
-typealias ProjectServiceAccountDeleteResponse = dev.octri.showcase.openai.models.ProjectServiceAccountDeleteResponse
+typealias ProjectServiceAccountDeleteResponse =
+    dev.octri.showcase.openai.models.ProjectServiceAccountDeleteResponse
 
-typealias ProjectServiceAccountDeleteResponseObjectEnum = dev.octri.showcase.openai.models.ProjectServiceAccountDeleteResponseObjectEnum
+typealias ProjectServiceAccountDeleteResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountDeleteResponseObjectEnum
 
-typealias ProjectServiceAccountListResponse = dev.octri.showcase.openai.models.ProjectServiceAccountListResponse
+typealias ProjectServiceAccountListResponse =
+    dev.octri.showcase.openai.models.ProjectServiceAccountListResponse
 
-typealias ProjectServiceAccountListResponseObjectEnum = dev.octri.showcase.openai.models.ProjectServiceAccountListResponseObjectEnum
+typealias ProjectServiceAccountListResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountListResponseObjectEnum
 
-typealias ProjectServiceAccountObjectEnum = dev.octri.showcase.openai.models.ProjectServiceAccountObjectEnum
+typealias ProjectServiceAccountObjectEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountObjectEnum
 
-typealias ProjectServiceAccountRoleEnum = dev.octri.showcase.openai.models.ProjectServiceAccountRoleEnum
+typealias ProjectServiceAccountRoleEnum =
+    dev.octri.showcase.openai.models.ProjectServiceAccountRoleEnum
 
 typealias ProjectSpendAlert = dev.octri.showcase.openai.models.ProjectSpendAlert
 
-typealias ProjectSpendAlertCurrencyEnum = dev.octri.showcase.openai.models.ProjectSpendAlertCurrencyEnum
+typealias ProjectSpendAlertCurrencyEnum =
+    dev.octri.showcase.openai.models.ProjectSpendAlertCurrencyEnum
 
-typealias ProjectSpendAlertDeletedResource = dev.octri.showcase.openai.models.ProjectSpendAlertDeletedResource
+typealias ProjectSpendAlertDeletedResource =
+    dev.octri.showcase.openai.models.ProjectSpendAlertDeletedResource
 
-typealias ProjectSpendAlertDeletedResourceObjectEnum = dev.octri.showcase.openai.models.ProjectSpendAlertDeletedResourceObjectEnum
+typealias ProjectSpendAlertDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.ProjectSpendAlertDeletedResourceObjectEnum
 
-typealias ProjectSpendAlertIntervalEnum = dev.octri.showcase.openai.models.ProjectSpendAlertIntervalEnum
+typealias ProjectSpendAlertIntervalEnum =
+    dev.octri.showcase.openai.models.ProjectSpendAlertIntervalEnum
 
-typealias ProjectSpendAlertListResource = dev.octri.showcase.openai.models.ProjectSpendAlertListResource
+typealias ProjectSpendAlertListResource =
+    dev.octri.showcase.openai.models.ProjectSpendAlertListResource
 
-typealias ProjectSpendAlertListResourceObjectEnum = dev.octri.showcase.openai.models.ProjectSpendAlertListResourceObjectEnum
+typealias ProjectSpendAlertListResourceObjectEnum =
+    dev.octri.showcase.openai.models.ProjectSpendAlertListResourceObjectEnum
 
 typealias ProjectSpendAlertObjectEnum = dev.octri.showcase.openai.models.ProjectSpendAlertObjectEnum
 
-typealias ProjectSpendLimitDeletedResource = dev.octri.showcase.openai.models.ProjectSpendLimitDeletedResource
+typealias ProjectSpendLimitDeletedResource =
+    dev.octri.showcase.openai.models.ProjectSpendLimitDeletedResource
 
-typealias ProjectSpendLimitDeletedResourceObjectEnum = dev.octri.showcase.openai.models.ProjectSpendLimitDeletedResourceObjectEnum
+typealias ProjectSpendLimitDeletedResourceObjectEnum =
+    dev.octri.showcase.openai.models.ProjectSpendLimitDeletedResourceObjectEnum
 
 typealias ProjectSpendLimitResource = dev.octri.showcase.openai.models.ProjectSpendLimitResource
 
-typealias ProjectSpendLimitResourceObjectEnum = dev.octri.showcase.openai.models.ProjectSpendLimitResourceObjectEnum
+typealias ProjectSpendLimitResourceObjectEnum =
+    dev.octri.showcase.openai.models.ProjectSpendLimitResourceObjectEnum
 
 typealias ProjectUpdateRequest = dev.octri.showcase.openai.models.ProjectUpdateRequest
 
@@ -283,7 +365,8 @@ typealias ProjectUserCreateRequest = dev.octri.showcase.openai.models.ProjectUse
 
 typealias ProjectUserDeleteResponse = dev.octri.showcase.openai.models.ProjectUserDeleteResponse
 
-typealias ProjectUserDeleteResponseObjectEnum = dev.octri.showcase.openai.models.ProjectUserDeleteResponseObjectEnum
+typealias ProjectUserDeleteResponseObjectEnum =
+    dev.octri.showcase.openai.models.ProjectUserDeleteResponseObjectEnum
 
 typealias ProjectUserListResponse = dev.octri.showcase.openai.models.ProjectUserListResponse
 
@@ -295,25 +378,33 @@ typealias Prompt = dev.octri.showcase.openai.models.Prompt
 
 typealias PromptCacheBreakpointConfig = dev.octri.showcase.openai.models.PromptCacheBreakpointConfig
 
-typealias PromptCacheBreakpointConfigModeEnum = dev.octri.showcase.openai.models.PromptCacheBreakpointConfigModeEnum
+typealias PromptCacheBreakpointConfigModeEnum =
+    dev.octri.showcase.openai.models.PromptCacheBreakpointConfigModeEnum
 
 typealias PromptCacheBreakpointParam = dev.octri.showcase.openai.models.PromptCacheBreakpointParam
 
-typealias PromptCacheBreakpointParamModeEnum = dev.octri.showcase.openai.models.PromptCacheBreakpointParamModeEnum
+typealias PromptCacheBreakpointParamModeEnum =
+    dev.octri.showcase.openai.models.PromptCacheBreakpointParamModeEnum
 
-typealias PromptCacheComparisonResponseNotFoundDiagnosticsBody = dev.octri.showcase.openai.models.PromptCacheComparisonResponseNotFoundDiagnosticsBody
+typealias PromptCacheComparisonResponseNotFoundDiagnosticsBody =
+    dev.octri.showcase.openai.models.PromptCacheComparisonResponseNotFoundDiagnosticsBody
 
-typealias PromptCacheComparisonResponseNotFoundDiagnosticsBodyTypeEnum = dev.octri.showcase.openai.models.PromptCacheComparisonResponseNotFoundDiagnosticsBodyTypeEnum
+typealias PromptCacheComparisonResponseNotFoundDiagnosticsBodyTypeEnum =
+    dev.octri.showcase.openai.models.PromptCacheComparisonResponseNotFoundDiagnosticsBodyTypeEnum
 
 typealias PromptCacheDiagnostics = dev.octri.showcase.openai.models.PromptCacheDiagnostics
 
-typealias PromptCacheHitDiagnosticsBody = dev.octri.showcase.openai.models.PromptCacheHitDiagnosticsBody
+typealias PromptCacheHitDiagnosticsBody =
+    dev.octri.showcase.openai.models.PromptCacheHitDiagnosticsBody
 
-typealias PromptCacheHitDiagnosticsBodyTypeEnum = dev.octri.showcase.openai.models.PromptCacheHitDiagnosticsBodyTypeEnum
+typealias PromptCacheHitDiagnosticsBodyTypeEnum =
+    dev.octri.showcase.openai.models.PromptCacheHitDiagnosticsBodyTypeEnum
 
-typealias PromptCacheMissDiagnosticsBody = dev.octri.showcase.openai.models.PromptCacheMissDiagnosticsBody
+typealias PromptCacheMissDiagnosticsBody =
+    dev.octri.showcase.openai.models.PromptCacheMissDiagnosticsBody
 
-typealias PromptCacheMissDiagnosticsBodyTypeEnum = dev.octri.showcase.openai.models.PromptCacheMissDiagnosticsBodyTypeEnum
+typealias PromptCacheMissDiagnosticsBodyTypeEnum =
+    dev.octri.showcase.openai.models.PromptCacheMissDiagnosticsBodyTypeEnum
 
 typealias PromptCacheModeEnum = dev.octri.showcase.openai.models.PromptCacheModeEnum
 
@@ -325,41 +416,51 @@ typealias PromptCacheRetentionEnum = dev.octri.showcase.openai.models.PromptCach
 
 typealias PromptCacheTTLEnum = dev.octri.showcase.openai.models.PromptCacheTTLEnum
 
-typealias PromptCacheUnavailableDiagnosticsBody = dev.octri.showcase.openai.models.PromptCacheUnavailableDiagnosticsBody
+typealias PromptCacheUnavailableDiagnosticsBody =
+    dev.octri.showcase.openai.models.PromptCacheUnavailableDiagnosticsBody
 
-typealias PromptCacheUnavailableDiagnosticsBodyTypeEnum = dev.octri.showcase.openai.models.PromptCacheUnavailableDiagnosticsBodyTypeEnum
+typealias PromptCacheUnavailableDiagnosticsBodyTypeEnum =
+    dev.octri.showcase.openai.models.PromptCacheUnavailableDiagnosticsBodyTypeEnum
 
 typealias PropertiesStore = dev.octri.showcase.openai.models.PropertiesStore
 
 typealias ProvenanceCheckObject = dev.octri.showcase.openai.models.ProvenanceCheckObject
 
-typealias ProvenanceDetectionResultApi = dev.octri.showcase.openai.models.ProvenanceDetectionResultApi
+typealias ProvenanceDetectionResultApi =
+    dev.octri.showcase.openai.models.ProvenanceDetectionResultApi
 
 typealias ProvenanceResource = dev.octri.showcase.openai.models.ProvenanceResource
 
-typealias ProvenanceResourceResultsItem = dev.octri.showcase.openai.models.ProvenanceResourceResultsItem
+typealias ProvenanceResourceResultsItem =
+    dev.octri.showcase.openai.models.ProvenanceResourceResultsItem
 
 typealias Provider = dev.octri.showcase.openai.models.Provider
 
-typealias PublicAssignOrganizationGroupRoleBody = dev.octri.showcase.openai.models.PublicAssignOrganizationGroupRoleBody
+typealias PublicAssignOrganizationGroupRoleBody =
+    dev.octri.showcase.openai.models.PublicAssignOrganizationGroupRoleBody
 
 typealias PublicCreateEndpointBody = dev.octri.showcase.openai.models.PublicCreateEndpointBody
 
-typealias PublicCreateOrganizationRoleBody = dev.octri.showcase.openai.models.PublicCreateOrganizationRoleBody
+typealias PublicCreateOrganizationRoleBody =
+    dev.octri.showcase.openai.models.PublicCreateOrganizationRoleBody
 
-typealias PublicDecisionsUsageResponseResource = dev.octri.showcase.openai.models.PublicDecisionsUsageResponseResource
+typealias PublicDecisionsUsageResponseResource =
+    dev.octri.showcase.openai.models.PublicDecisionsUsageResponseResource
 
-typealias PublicDecisionsUsageResponseResourceObjectEnum = dev.octri.showcase.openai.models.PublicDecisionsUsageResponseResourceObjectEnum
+typealias PublicDecisionsUsageResponseResourceObjectEnum =
+    dev.octri.showcase.openai.models.PublicDecisionsUsageResponseResourceObjectEnum
 
 typealias PublicEnvironmentResource = dev.octri.showcase.openai.models.PublicEnvironmentResource
 
-typealias PublicEnvironmentResourceObjectEnum = dev.octri.showcase.openai.models.PublicEnvironmentResourceObjectEnum
+typealias PublicEnvironmentResourceObjectEnum =
+    dev.octri.showcase.openai.models.PublicEnvironmentResourceObjectEnum
 
 typealias PublicProjectResidency = dev.octri.showcase.openai.models.PublicProjectResidency
 
 typealias PublicRoleListResource = dev.octri.showcase.openai.models.PublicRoleListResource
 
-typealias PublicRoleListResourceObjectEnum = dev.octri.showcase.openai.models.PublicRoleListResourceObjectEnum
+typealias PublicRoleListResourceObjectEnum =
+    dev.octri.showcase.openai.models.PublicRoleListResourceObjectEnum
 
 typealias PublicRotateSecretBody = dev.octri.showcase.openai.models.PublicRotateSecretBody
 
@@ -367,7 +468,8 @@ typealias PublicTestEndpointBody = dev.octri.showcase.openai.models.PublicTestEn
 
 typealias PublicUpdateEndpointBody = dev.octri.showcase.openai.models.PublicUpdateEndpointBody
 
-typealias PublicUpdateOrganizationRoleBody = dev.octri.showcase.openai.models.PublicUpdateOrganizationRoleBody
+typealias PublicUpdateOrganizationRoleBody =
+    dev.octri.showcase.openai.models.PublicUpdateOrganizationRoleBody
 
 typealias QuestionParam = dev.octri.showcase.openai.models.QuestionParam
 
@@ -377,7 +479,8 @@ typealias QuestionParamChoiceTypeEnum = dev.octri.showcase.openai.models.Questio
 
 typealias QuestionParamPredicate = dev.octri.showcase.openai.models.QuestionParamPredicate
 
-typealias QuestionParamPredicateTypeEnum = dev.octri.showcase.openai.models.QuestionParamPredicateTypeEnum
+typealias QuestionParamPredicateTypeEnum =
+    dev.octri.showcase.openai.models.QuestionParamPredicateTypeEnum
 
 typealias QuestionParamScore = dev.octri.showcase.openai.models.QuestionParamScore
 
@@ -391,48 +494,71 @@ typealias RateLimitsParam = dev.octri.showcase.openai.models.RateLimitsParam
 
 typealias RealtimeAudioFormats = dev.octri.showcase.openai.models.RealtimeAudioFormats
 
-typealias RealtimeAudioFormatsVariant0 = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant0
+typealias RealtimeAudioFormatsVariant0 =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant0
 
-typealias RealtimeAudioFormatsVariant0RateEnum = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant0RateEnum
+typealias RealtimeAudioFormatsVariant0RateEnum =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant0RateEnum
 
-typealias RealtimeAudioFormatsVariant0TypeEnum = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant0TypeEnum
+typealias RealtimeAudioFormatsVariant0TypeEnum =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant0TypeEnum
 
-typealias RealtimeAudioFormatsVariant1 = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant1
+typealias RealtimeAudioFormatsVariant1 =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant1
 
-typealias RealtimeAudioFormatsVariant1TypeEnum = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant1TypeEnum
+typealias RealtimeAudioFormatsVariant1TypeEnum =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant1TypeEnum
 
-typealias RealtimeAudioFormatsVariant2 = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant2
+typealias RealtimeAudioFormatsVariant2 =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant2
 
-typealias RealtimeAudioFormatsVariant2TypeEnum = dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant2TypeEnum
+typealias RealtimeAudioFormatsVariant2TypeEnum =
+    dev.octri.showcase.openai.models.RealtimeAudioFormatsVariant2TypeEnum
 
-typealias RealtimeBetaClientEventConversationItemCreate = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemCreate
+typealias RealtimeBetaClientEventConversationItemCreate =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemCreate
 
-typealias RealtimeBetaClientEventConversationItemCreateTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemCreateTypeEnum
+typealias RealtimeBetaClientEventConversationItemCreateTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemCreateTypeEnum
 
-typealias RealtimeBetaClientEventConversationItemDelete = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemDelete
+typealias RealtimeBetaClientEventConversationItemDelete =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemDelete
 
-typealias RealtimeBetaClientEventConversationItemDeleteTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemDeleteTypeEnum
+typealias RealtimeBetaClientEventConversationItemDeleteTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemDeleteTypeEnum
 
-typealias RealtimeBetaClientEventConversationItemRetrieve = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemRetrieve
+typealias RealtimeBetaClientEventConversationItemRetrieve =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemRetrieve
 
-typealias RealtimeBetaClientEventConversationItemRetrieveTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemRetrieveTypeEnum
+typealias RealtimeBetaClientEventConversationItemRetrieveTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemRetrieveTypeEnum
 
-typealias RealtimeBetaClientEventConversationItemTruncate = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemTruncate
+typealias RealtimeBetaClientEventConversationItemTruncate =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemTruncate
 
-typealias RealtimeBetaClientEventConversationItemTruncateTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemTruncateTypeEnum
+typealias RealtimeBetaClientEventConversationItemTruncateTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventConversationItemTruncateTypeEnum
 
-typealias RealtimeBetaClientEventInputAudioBufferAppend = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferAppend
+typealias RealtimeBetaClientEventInputAudioBufferAppend =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferAppend
 
-typealias RealtimeBetaClientEventInputAudioBufferAppendTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferAppendTypeEnum
+typealias RealtimeBetaClientEventInputAudioBufferAppendTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferAppendTypeEnum
 
-typealias RealtimeBetaClientEventInputAudioBufferClear = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferClear
+typealias RealtimeBetaClientEventInputAudioBufferClear =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferClear
 
-typealias RealtimeBetaClientEventInputAudioBufferClearTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferClearTypeEnum
+typealias RealtimeBetaClientEventInputAudioBufferClearTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferClearTypeEnum
 
-typealias RealtimeBetaClientEventInputAudioBufferCommit = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferCommit
+typealias RealtimeBetaClientEventInputAudioBufferCommit =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferCommit
 
-typealias RealtimeBetaClientEventInputAudioBufferCommitTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferCommitTypeEnum
+typealias RealtimeBetaClientEventInputAudioBufferCommitTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventInputAudioBufferCommitTypeEnum
 
-typealias RealtimeBetaClientEventOutputAudioBufferClear = dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClear
+typealias RealtimeBetaClientEventOutputAudioBufferClear =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClear
 
-typealias RealtimeBetaClientEventOutputAudioBufferClearTypeEnum = dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClearTypeEnum
+typealias RealtimeBetaClientEventOutputAudioBufferClearTypeEnum =
+    dev.octri.showcase.openai.models.RealtimeBetaClientEventOutputAudioBufferClearTypeEnum

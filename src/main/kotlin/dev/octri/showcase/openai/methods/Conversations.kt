@@ -19,85 +19,143 @@ import dev.octri.showcase.openai.Validation
 
 object Conversations {
 
-
     /**
-     * Adds items to a conversation. Supply up to 20 items in `items`; a compaction trigger, if included, must be the final item in the request.
+     * Adds items to a conversation. Supply up to 20 items in `items`; a compaction trigger, if
+     * included, must be the final item in the request.
      *
      * Create items in a conversation with the given ID.
      *
      * @param conversationId The ID of the conversation to add the item to.
-     * @param items The items to add to the conversation. You may add up to 20 items
-     *   at a time.
-     * @param include Additional fields to include in the response. See the `include`
-     *   parameter for listing Conversation items above for more information.
+     * @param items The items to add to the conversation. You may add up to 20 items at a time.
+     * @param include Additional fields to include in the response. See the `include` parameter for
+     *   listing Conversation items above for more information.
      */
-    fun createConversationItems(clientConfig: ClientConfig, conversationId: String, items: List<InputItem>, include: List<IncludeEnum>? = null, options: RequestOptions? = null): ConversationItemList {
+    fun createConversationItems(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        items: List<InputItem>,
+        include: List<IncludeEnum>? = null,
+        options: RequestOptions? = null,
+    ): ConversationItemList {
         Validation.validateItems("items", items, Validation.LengthOpts(max = 20))
 
-        return SdkClient.request<ConversationItemList>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}/items", config = clientConfig, query = mapOf("include" to SdkClient.queryValue(include, "form", true)), body = SdkClient.bodyMap("items" to (items)), operationId = "createConversationItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+        return SdkClient.request<ConversationItemList>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}/items",
+                    config = clientConfig,
+                    query = mapOf("include" to SdkClient.queryValue(include, "form", true)),
+                    body = SdkClient.bodyMap("items" to (items)),
+                    operationId = "createConversationItems",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists the items in a conversation. Use `after` to continue from an item ID, `limit` to control the number of results, and `order` to choose the direction of the results.
+     * Lists the items in a conversation. Use `after` to continue from an item ID, `limit` to
+     * control the number of results, and `order` to choose the direction of the results.
      *
      * List all items for a conversation with the given ID.
      *
      * @param conversationId The ID of the conversation to list items for.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param order The order to return the input items in. Default is `desc`. -
-     *   `asc`: Return the input items in ascending order. - `desc`: Return the input
-     *   items in descending order.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param order The order to return the input items in. Default is `desc`. - `asc`: Return the
+     *   input items in ascending order. - `desc`: Return the input items in descending order.
      * @param after An item ID to list items after, used in pagination.
-     * @param include Specify additional output data to include in the model
-     *   response. Currently supported values are: - `web_search_call.action.sources`:
-     *   Include the sources of the web search tool call. -
-     *   `code_interpreter_call.outputs`: Includes the outputs of python code execution
-     *   in code interpreter tool call items. -
-     *   `computer_call_output.output.image_url`: Include image urls from the computer
-     *   call output. - `file_search_call.results`: Include the search results of the
-     *   file search tool call.…
+     * @param include Specify additional output data to include in the model response. Currently
+     *   supported values are: - `web_search_call.action.sources`: Include the sources of the web
+     *   search tool call. - `code_interpreter_call.outputs`: Includes the outputs of python code
+     *   execution in code interpreter tool call items. - `computer_call_output.output.image_url`:
+     *   Include image urls from the computer call output. - `file_search_call.results`: Include the
+     *   search results of the file search tool call.…
      */
-    fun listConversationItems(clientConfig: ClientConfig, conversationId: String, limit: Long? = null, order: ListConversationItemsParameterEnum? = null, after: String? = null, include: List<IncludeEnum>? = null, options: RequestOptions? = null): ConversationItemList {
-        return SdkClient.request<ConversationItemList>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(conversationId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "include" to SdkClient.queryValue(include, "form", true)), operationId = "listConversationItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun listConversationItems(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        limit: Long? = null,
+        order: ListConversationItemsParameterEnum? = null,
+        after: String? = null,
+        include: List<IncludeEnum>? = null,
+        options: RequestOptions? = null,
+    ): ConversationItemList {
+        return SdkClient.request<ConversationItemList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}/items",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "include" to SdkClient.queryValue(include, "form", true),
+                        ),
+                    operationId = "listConversationItems",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists the items in a conversation. Use `after` to continue from an item ID, `limit` to control the number of results, and `order` to choose the direction of the results.
+     * Lists the items in a conversation. Use `after` to continue from an item ID, `limit` to
+     * control the number of results, and `order` to choose the direction of the results.
      *
      * List all items for a conversation with the given ID.
      *
      * @param conversationId The ID of the conversation to list items for.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param order The order to return the input items in. Default is `desc`. -
-     *   `asc`: Return the input items in ascending order. - `desc`: Return the input
-     *   items in descending order.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param order The order to return the input items in. Default is `desc`. - `asc`: Return the
+     *   input items in ascending order. - `desc`: Return the input items in descending order.
      * @param after An item ID to list items after, used in pagination.
-     * @param include Specify additional output data to include in the model
-     *   response. Currently supported values are: - `web_search_call.action.sources`:
-     *   Include the sources of the web search tool call. -
-     *   `code_interpreter_call.outputs`: Includes the outputs of python code execution
-     *   in code interpreter tool call items. -
-     *   `computer_call_output.output.image_url`: Include image urls from the computer
-     *   call output. - `file_search_call.results`: Include the search results of the
-     *   file search tool call.…
+     * @param include Specify additional output data to include in the model response. Currently
+     *   supported values are: - `web_search_call.action.sources`: Include the sources of the web
+     *   search tool call. - `code_interpreter_call.outputs`: Includes the outputs of python code
+     *   execution in code interpreter tool call items. - `computer_call_output.output.image_url`:
+     *   Include image urls from the computer call output. - `file_search_call.results`: Include the
+     *   search results of the file search tool call.…
      */
-    fun listConversationItemsPaginated(clientConfig: ClientConfig, conversationId: String, limit: Long? = null, order: ListConversationItemsParameterEnum? = null, after: String? = null, include: List<IncludeEnum>? = null, options: RequestOptions? = null, yieldFn: (ConversationItem) -> Boolean) {
+    fun listConversationItemsPaginated(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        limit: Long? = null,
+        order: ListConversationItemsParameterEnum? = null,
+        after: String? = null,
+        include: List<IncludeEnum>? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ConversationItem) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listConversationItems(clientConfig, conversationId, limit, order, cursor, include, options)
+            val page =
+                listConversationItems(
+                    clientConfig,
+                    conversationId,
+                    limit,
+                    order,
+                    cursor,
+                    include,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -115,10 +173,28 @@ object Conversations {
         val hasMore: Boolean,
     )
 
-    fun listConversationItemsPages(clientConfig: ClientConfig, conversationId: String, limit: Long? = null, order: ListConversationItemsParameterEnum? = null, after: String? = null, include: List<IncludeEnum>? = null, options: RequestOptions? = null, yieldPage: (ListConversationItemsPage) -> Boolean) {
+    fun listConversationItemsPages(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        limit: Long? = null,
+        order: ListConversationItemsParameterEnum? = null,
+        after: String? = null,
+        include: List<IncludeEnum>? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListConversationItemsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listConversationItems(clientConfig, conversationId, limit, order, cursor, include, options)
+            val page =
+                listConversationItems(
+                    clientConfig,
+                    conversationId,
+                    limit,
+                    order,
+                    cursor,
+                    include,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -129,122 +205,219 @@ object Conversations {
         }
     }
 
-
-
     /**
-     * Retrieves a single item from a conversation. Use `conversation_id` and `item_id` to identify the conversation and the item you want to inspect.
+     * Retrieves a single item from a conversation. Use `conversation_id` and `item_id` to identify
+     * the conversation and the item you want to inspect.
      *
      * Get a single item from a conversation with the given IDs.
      *
      * @param conversationId The ID of the conversation that contains the item.
      * @param itemId The ID of the item to retrieve.
-     * @param include Additional fields to include in the response. See the `include`
-     *   parameter for listing Conversation items above for more information.
+     * @param include Additional fields to include in the response. See the `include` parameter for
+     *   listing Conversation items above for more information.
      */
-    fun getConversationItem(clientConfig: ClientConfig, conversationId: String, itemId: String, include: List<IncludeEnum>? = null, options: RequestOptions? = null): ConversationItem {
-        return SdkClient.request<ConversationItem>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(conversationId)}/items/${SdkClient.encodePathSegment(itemId)}", config = clientConfig, query = mapOf("include" to SdkClient.queryValue(include, "form", true)), operationId = "getConversationItem", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun getConversationItem(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        itemId: String,
+        include: List<IncludeEnum>? = null,
+        options: RequestOptions? = null,
+    ): ConversationItem {
+        return SdkClient.request<ConversationItem>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}/items/${SdkClient.encodePathSegment(itemId)}",
+                    config = clientConfig,
+                    query = mapOf("include" to SdkClient.queryValue(include, "form", true)),
+                    operationId = "getConversationItem",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes an item from a conversation. Use `conversation_id` and `item_id` to identify the item to remove.
+     * Deletes an item from a conversation. Use `conversation_id` and `item_id` to identify the item
+     * to remove.
      *
      * Delete an item from a conversation with the given IDs.
      *
      * @param conversationId The ID of the conversation that contains the item.
      * @param itemId The ID of the item to delete.
      */
-    fun deleteConversationItem(clientConfig: ClientConfig, conversationId: String, itemId: String, options: RequestOptions? = null): ConversationResource {
-        return SdkClient.request<ConversationResource>(SdkClient.RequestSpec("DELETE", "/conversations/${SdkClient.encodePathSegment(conversationId)}/items/${SdkClient.encodePathSegment(itemId)}", config = clientConfig, operationId = "deleteConversationItem", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+    fun deleteConversationItem(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        itemId: String,
+        options: RequestOptions? = null,
+    ): ConversationResource {
+        return SdkClient.request<ConversationResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}/items/${SdkClient.encodePathSegment(itemId)}",
+                    config = clientConfig,
+                    operationId = "deleteConversationItem",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a conversation that can include metadata and initial context items. Use `items` to seed the conversation with up to 20 items; metadata can store additional key-value information.
+     * Creates a conversation that can include metadata and initial context items. Use `items` to
+     * seed the conversation with up to 20 items; metadata can store additional key-value
+     * information.
      *
      * Create a conversation.
      *
      * @param metadata Optional API value serialized in the `metadata` wire field.
-     * @param items Initial items to include in the conversation context. You may add
-     *   up to 20 items at a time.
+     * @param items Initial items to include in the conversation context. You may add up to 20 items
+     *   at a time.
      */
-    fun createConversation(clientConfig: ClientConfig, metadata: SdkClient.SdkOptional<Metadata?>? = null, items: SdkClient.SdkOptional<List<InputItem>?>? = null, options: RequestOptions? = null): ConversationResource {
+    fun createConversation(
+        clientConfig: ClientConfig,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        items: SdkClient.SdkOptional<List<InputItem>?>? = null,
+        options: RequestOptions? = null,
+    ): ConversationResource {
         val itemsValue = items?.getOrNull()
-if (itemsValue != null) {
+        if (itemsValue != null) {
             Validation.validateItems("items", itemsValue, Validation.LengthOpts(max = 20))
-}
+        }
 
-        return SdkClient.request<ConversationResource>(SdkClient.RequestSpec("POST", "/conversations", config = clientConfig, body = SdkClient.bodyMap("metadata" to (metadata ?: SdkClient.SdkOptional.Omitted), "items" to (items ?: SdkClient.SdkOptional.Omitted)), operationId = "createConversation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+        return SdkClient.request<ConversationResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/conversations",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted),
+                            "items" to (items ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createConversation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a conversation by its identifier. Use `conversation_id` to get the conversation's metadata and creation time.
+     * Retrieves a conversation by its identifier. Use `conversation_id` to get the conversation's
+     * metadata and creation time.
      *
      * Get a conversation
      *
      * @param conversationId The ID of the conversation to retrieve.
      */
-    fun getConversation(clientConfig: ClientConfig, conversationId: String, options: RequestOptions? = null): ConversationResource {
-        return SdkClient.request<ConversationResource>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(conversationId)}", config = clientConfig, operationId = "getConversation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun getConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        options: RequestOptions? = null,
+    ): ConversationResource {
+        return SdkClient.request<ConversationResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}",
+                    config = clientConfig,
+                    operationId = "getConversation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Delete a conversation. Items in the conversation will not be deleted.
      *
      * @param conversationId The ID of the conversation to delete.
      */
-    fun deleteConversation(clientConfig: ClientConfig, conversationId: String, options: RequestOptions? = null): DeletedConversationResource {
-        return SdkClient.request<DeletedConversationResource>(SdkClient.RequestSpec("DELETE", "/conversations/${SdkClient.encodePathSegment(conversationId)}", config = clientConfig, operationId = "deleteConversation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        options: RequestOptions? = null,
+    ): DeletedConversationResource {
+        return SdkClient.request<DeletedConversationResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}",
+                    config = clientConfig,
+                    operationId = "deleteConversation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the metadata associated with a conversation. Supply the complete `metadata` value to replace the conversation's existing metadata, or use `null` to clear it.
+     * Updates the metadata associated with a conversation. Supply the complete `metadata` value to
+     * replace the conversation's existing metadata, or use `null` to clear it.
      *
      * Update a conversation
      *
      * @param conversationId The ID of the conversation to update.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object.
-     *   This can be useful for storing additional information about the object in a
-     *   structured format, and querying for objects via API or the dashboard. Keys are
-     *   strings with a maximum length of 64 characters. Values are strings with a
-     *   maximum length of 512 characters.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
+     *   useful for storing additional information about the object in a structured format, and
+     *   querying for objects via API or the dashboard. Keys are strings with a maximum length of 64
+     *   characters. Values are strings with a maximum length of 512 characters.
      */
-    fun updateConversation(clientConfig: ClientConfig, conversationId: String, metadata: Metadata?, options: RequestOptions? = null): ConversationResource {
-        return SdkClient.request<ConversationResource>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}", config = clientConfig, body = SdkClient.bodyMap("metadata" to (metadata)), operationId = "updateConversation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+    fun updateConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        metadata: Metadata?,
+        options: RequestOptions? = null,
+    ): ConversationResource {
+        return SdkClient.request<ConversationResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/conversations/${SdkClient.encodePathSegment(conversationId)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("metadata" to (metadata)),
+                    operationId = "updateConversation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }
