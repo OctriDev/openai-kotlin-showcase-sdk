@@ -3,38 +3,24 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event data payload.
- */
+/** Event data payload. */
 data class WebhookResponseIncompleteData(
-    /**
-     * The unique ID of the model response.
-     */
+    /** The unique ID of the model response. */
     val id: String
 )
 
-/**
- * Sent when a background response has been interrupted.
- */
+/** Sent when a background response has been interrupted. */
 data class WebhookResponseIncomplete(
-    /**
-     * The Unix timestamp (in seconds) of when the model response was interrupted.
-     */
+    /** The Unix timestamp (in seconds) of when the model response was interrupted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * Event data payload.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookResponseIncompleteData,
-    /**
-     * The type of the event. Always `response.incomplete`.
-     */
+    /** Event data payload. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: WebhookResponseIncompleteData,
+    /** The type of the event. Always `response.incomplete`. */
     val type: WebhookResponseIncompleteTypeEnum,
-    /**
-     * The object of the event. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookResponseIncompleteObjectEnum? = null
+    /** The object of the event. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookResponseIncompleteObjectEnum? = null,
 )

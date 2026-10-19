@@ -4,111 +4,181 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Audio format for the new WebSocket connection to a forked Live session. The stored voice is preserved.
+ * Audio format for the new WebSocket connection to a forked Live session. The stored voice is
+ * preserved.
  */
 data class LiveForkAudioParam(
     /**
-     * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately.
+     * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection.
+     * WebRTC and SIP negotiate their media format separately.
      */
     val format: LiveAudioFormat? = null
 )
 
 /**
- * Client events for a Live fork WebSocket. First send session.start with an overrides object (which may be empty), then wait for session.started before sending other commands. The model and conversation are inherited from the stored session.
+ * Client events for a Live fork WebSocket. First send session.start with an overrides object (which
+ * may be empty), then wait for session.started before sending other commands. The model and
+ * conversation are inherited from the stored session.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveForkClientEvent::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveForkClientEvent::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveForkSessionStartEvent::class, name = "session.start"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSessionUpdateParam::class, name = "session.update"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInputAudioAppendEvent::class, name = "session.input_audio.append"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInputAudioMuteParam::class, name = "session.input_audio.mute"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInputAudioUnmuteParam::class, name = "session.input_audio.unmute"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveOutputAudioFixturePlayParam::class, name = "session.output_audio.fixture.play"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInstructionsAppendParam::class, name = "session.instructions.append"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveThinkingAppendParam::class, name = "session.thinking.append"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveCommentaryAppendParam::class, name = "session.commentary.append"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionCreateParam::class, name = "decision.create"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionItemCreateParam::class, name = "decision.item.create"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionItemDeleteParam::class, name = "decision.item.delete"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponseItemCreateParam::class, name = "response.item.create"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponseCreateParam::class, name = "response.create"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSessionCloseParam::class, name = "session.close")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveForkSessionStartEvent::class,
+        name = "session.start",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSessionUpdateParam::class,
+        name = "session.update",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveInputAudioAppendEvent::class,
+        name = "session.input_audio.append",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveInputAudioMuteParam::class,
+        name = "session.input_audio.mute",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveInputAudioUnmuteParam::class,
+        name = "session.input_audio.unmute",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveOutputAudioFixturePlayParam::class,
+        name = "session.output_audio.fixture.play",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveInstructionsAppendParam::class,
+        name = "session.instructions.append",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveThinkingAppendParam::class,
+        name = "session.thinking.append",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveCommentaryAppendParam::class,
+        name = "session.commentary.append",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionCreateParam::class,
+        name = "decision.create",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionItemCreateParam::class,
+        name = "decision.item.create",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionItemDeleteParam::class,
+        name = "decision.item.delete",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveResponseItemCreateParam::class,
+        name = "response.item.create",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveResponseCreateParam::class,
+        name = "response.create",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSessionCloseParam::class,
+        name = "session.close",
+    ),
 )
 sealed interface LiveForkClientEvent
 
 /** A [LiveForkClientEvent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveForkClientEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveForkClientEvent
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveForkClientEvent {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Identifies the stored Live session whose conversation and configuration are used to create a fork.
+ * Identifies the stored Live session whose conversation and configuration are used to create a
+ * fork.
  */
 data class LiveForkPathParams(
-    /**
-     * The ID of the stored Live session to fork.
-     */
+    /** The ID of the stored Live session to fork. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String
 )
 
 /**
- * Fork a stored Live session onto a new WebRTC connection. Omit session or send an empty object to inherit its configuration.
+ * Fork a stored Live session onto a new WebRTC connection. Omit session or send an empty object to
+ * inherit its configuration.
  */
 data class LiveForkRequest(
-    /**
-     * WebRTC transport with an SDP offer for the new connection to the forked session.
-     */
+    /** WebRTC transport with an SDP offer for the new connection to the forked session. */
     val transport: LiveWebRTCTransport,
     /**
-     * Optional configuration overrides for the new Live session. Omit this object or send an empty object to inherit the stored session's settings.
+     * Optional configuration overrides for the new Live session. Omit this object or send an empty
+     * object to inherit the stored session's settings.
      */
-    val session: LiveMediaSessionForkParams? = null
+    val session: LiveMediaSessionForkParams? = null,
 )
 
 // LiveForkServerEvent is an allOf type (properties unresolvable)
 typealias LiveForkServerEvent = LiveServerEvent2
 
 /**
- * Overrides for a stored session after connecting to the fork WebSocket. An empty object inherits the stored configuration; do not supply a new model. audio.format applies only to the new WebSocket connection. client overrides are only supported for WebRTC forks.
+ * Overrides for a stored session after connecting to the fork WebSocket. An empty object inherits
+ * the stored configuration; do not supply a new model. audio.format applies only to the new
+ * WebSocket connection. client overrides are only supported for WebRTC forks.
  */
 data class LiveForkSessionConfigParam(
     /**
-     * Audio format for a WebSocket fork. WebRTC forks negotiate their audio format and must omit this field.
+     * Audio format for a WebSocket fork. WebRTC forks negotiate their audio format and must omit
+     * this field.
      */
     val audio: LiveForkAudioParam? = null,
     /**
-     * Overrides for the stored session’s Responses backend. Only supported when the stored session already uses Responses delegation; the delegation type cannot change.
+     * Overrides for the stored session’s Responses backend. Only supported when the stored session
+     * already uses Responses delegation; the delegation type cannot change.
      */
     val delegation: LiveResponsesDelegationUpdateParam? = null,
-    /**
-     * Whether to store the forked session. Omission inherits the stored session's setting.
-     */
+    /** Whether to store the forked session. Omission inherits the stored session's setting. */
     val store: Boolean? = null,
     /**
-     * Frontend data-channel permissions for a WebRTC fork. Omitted permissions inherit the stored values. Not supported for WebSocket forks.
+     * Frontend data-channel permissions for a WebRTC fork. Omitted permissions inherit the stored
+     * values. Not supported for WebSocket forks.
      */
-    val client: LiveClientConfigParam? = null
+    val client: LiveClientConfigParam? = null,
 )
 
 /**
- * Start a Live session after connecting to a stored session’s fork WebSocket. Send an empty `session` object to use the stored configuration.
+ * Start a Live session after connecting to a stored session’s fork WebSocket. Send an empty
+ * `session` object to use the stored configuration.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveForkSessionStartEvent(
-    /**
-     * The Live client event type. Always `session.start`.
-     */
+    /** The Live client event type. Always `session.start`. */
     val type: LiveForkSessionStartEventTypeEnum,
     /**
-     * Overrides for a stored session after connecting to the fork WebSocket. An empty object inherits the stored configuration; do not supply a new model. audio.format applies only to the new WebSocket connection. client overrides are only supported for WebRTC forks.
+     * Overrides for a stored session after connecting to the fork WebSocket. An empty object
+     * inherits the stored configuration; do not supply a new model. audio.format applies only to
+     * the new WebSocket connection. client overrides are only supported for WebRTC forks.
      */
     val session: LiveForkSessionConfigParam,
-    /**
-     * Optional API value serialized in the `event_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
+    /** Optional API value serialized in the `event_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
 ) : LiveForkClientEvent

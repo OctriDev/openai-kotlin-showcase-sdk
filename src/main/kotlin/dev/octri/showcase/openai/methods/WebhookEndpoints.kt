@@ -17,25 +17,44 @@ import dev.octri.showcase.openai.WebhookEndpointWithSecretResource
 
 object WebhookEndpoints {
 
-
     /**
      * Returns webhook endpoints for the authenticated project in newest-first order.
      *
      * @param limit Maximum number of webhook endpoints to return. Defaults to 20.
      * @param after ID of the last webhook endpoint from the previous page.
      */
-    fun listWebhookEndpoints(clientConfig: ClientConfig, limit: Long? = null, after: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): WebhookEndpointListResource {
+    fun listWebhookEndpoints(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): WebhookEndpointListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<WebhookEndpointListResource>(SdkClient.RequestSpec("GET", "/webhook_endpoints", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listWebhookEndpoints", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<WebhookEndpointListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/webhook_endpoints",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                        ),
+                    operationId = "listWebhookEndpoints",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Returns webhook endpoints for the authenticated project in newest-first order.
@@ -43,7 +62,13 @@ object WebhookEndpoints {
      * @param limit Maximum number of webhook endpoints to return. Defaults to 20.
      * @param after ID of the last webhook endpoint from the previous page.
      */
-    fun listWebhookEndpointsPaginated(clientConfig: ClientConfig, limit: Long? = null, after: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null, yieldFn: (WebhookEndpointBody) -> Boolean) {
+    fun listWebhookEndpointsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+        yieldFn: (WebhookEndpointBody) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listWebhookEndpoints(clientConfig, limit, cursor, options)
@@ -64,7 +89,13 @@ object WebhookEndpoints {
         val hasMore: Boolean,
     )
 
-    fun listWebhookEndpointsPages(clientConfig: ClientConfig, limit: Long? = null, after: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null, yieldPage: (ListWebhookEndpointsPage) -> Boolean) {
+    fun listWebhookEndpointsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListWebhookEndpointsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listWebhookEndpoints(clientConfig, limit, cursor, options)
@@ -78,8 +109,6 @@ object WebhookEndpoints {
         }
     }
 
-
-
     /**
      * Creates a webhook endpoint for the authenticated project.
      *
@@ -87,7 +116,13 @@ object WebhookEndpoints {
      * @param url The HTTPS URL that receives webhook deliveries.
      * @param eventTypes The event types that trigger deliveries to this endpoint.
      */
-    fun createWebhookEndpoint(clientConfig: ClientConfig, name: String, url: String, eventTypes: List<ProjectEventTypeEnum>, options: RequestOptions? = null): WebhookEndpointWithSecretResource {
+    fun createWebhookEndpoint(
+        clientConfig: ClientConfig,
+        name: String,
+        url: String,
+        eventTypes: List<ProjectEventTypeEnum>,
+        options: RequestOptions? = null,
+    ): WebhookEndpointWithSecretResource {
         Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 256))
 
         Validation.validateLength("url", url, Validation.LengthOpts(max = 2048))
@@ -95,29 +130,53 @@ object WebhookEndpoints {
 
         Validation.validateItems("event_types", eventTypes, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<WebhookEndpointWithSecretResource>(SdkClient.RequestSpec("POST", "/webhook_endpoints", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "url" to (url), "event_types" to (eventTypes)), operationId = "createWebhookEndpoint", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java))).data
+        return SdkClient.request<WebhookEndpointWithSecretResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/webhook_endpoints",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "url" to (url),
+                            "event_types" to (eventTypes),
+                        ),
+                    operationId = "createWebhookEndpoint",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("400" to ErrorResponse::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Retrieves a webhook endpoint for the authenticated project.
      *
      * @param webhookEndpointId The ID of the webhook endpoint to retrieve.
      */
-    fun retrieveWebhookEndpoint(clientConfig: ClientConfig, webhookEndpointId: String, options: RequestOptions? = null): WebhookEndpointBody {
-        return SdkClient.request<WebhookEndpointBody>(SdkClient.RequestSpec("GET", "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}", config = clientConfig, operationId = "retrieveWebhookEndpoint", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun retrieveWebhookEndpoint(
+        clientConfig: ClientConfig,
+        webhookEndpointId: String,
+        options: RequestOptions? = null,
+    ): WebhookEndpointBody {
+        return SdkClient.request<WebhookEndpointBody>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}",
+                    config = clientConfig,
+                    operationId = "retrieveWebhookEndpoint",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Updates a webhook endpoint for the authenticated project.
@@ -125,66 +184,116 @@ object WebhookEndpoints {
      * @param webhookEndpointId The ID of the webhook endpoint to update.
      * @param name A new human-readable name for the webhook endpoint.
      * @param url A new HTTPS URL that receives webhook deliveries.
-     * @param eventTypes The complete set of event types that should trigger
-     *   deliveries.
+     * @param eventTypes The complete set of event types that should trigger deliveries.
      */
-    fun updateWebhookEndpoint(clientConfig: ClientConfig, webhookEndpointId: String, name: String? = null, url: String? = null, eventTypes: List<ProjectEventTypeEnum>? = null, options: RequestOptions? = null): WebhookEndpointBody {
+    fun updateWebhookEndpoint(
+        clientConfig: ClientConfig,
+        webhookEndpointId: String,
+        name: String? = null,
+        url: String? = null,
+        eventTypes: List<ProjectEventTypeEnum>? = null,
+        options: RequestOptions? = null,
+    ): WebhookEndpointBody {
         if (name != null) {
             Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 256))
-}
+        }
 
         if (url != null) {
             Validation.validateLength("url", url, Validation.LengthOpts(max = 2048))
             Validation.validatePattern("url", url, "^https://")
-}
+        }
 
         if (eventTypes != null) {
             Validation.validateItems("event_types", eventTypes, Validation.LengthOpts(min = 1))
-}
+        }
 
-        return SdkClient.request<WebhookEndpointBody>(SdkClient.RequestSpec("POST", "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "url" to (SdkClient.omitIfNull(url)), "event_types" to (SdkClient.omitIfNull(eventTypes))), operationId = "updateWebhookEndpoint", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<WebhookEndpointBody>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "url" to (SdkClient.omitIfNull(url)),
+                            "event_types" to (SdkClient.omitIfNull(eventTypes)),
+                        ),
+                    operationId = "updateWebhookEndpoint",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Deletes a webhook endpoint for the authenticated project.
      *
      * @param webhookEndpointId The ID of the webhook endpoint to delete.
      */
-    fun deleteWebhookEndpoint(clientConfig: ClientConfig, webhookEndpointId: String, options: RequestOptions? = null): DeletedWebhookEndpointResource {
-        return SdkClient.request<DeletedWebhookEndpointResource>(SdkClient.RequestSpec("DELETE", "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}", config = clientConfig, operationId = "deleteWebhookEndpoint", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun deleteWebhookEndpoint(
+        clientConfig: ClientConfig,
+        webhookEndpointId: String,
+        options: RequestOptions? = null,
+    ): DeletedWebhookEndpointResource {
+        return SdkClient.request<DeletedWebhookEndpointResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}",
+                    config = clientConfig,
+                    operationId = "deleteWebhookEndpoint",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Rotates the signing secret for a webhook endpoint in the authenticated project.
      *
-     * @param webhookEndpointId The ID of the webhook endpoint whose signing secret
-     *   will be rotated.
-     * @param keepOldSecretActiveFor24Hours Whether to keep the previous signing
-     *   secret valid for 24 hours after rotation. Defaults to false, which invalidates
-     *   the previous secret immediately.
+     * @param webhookEndpointId The ID of the webhook endpoint whose signing secret will be rotated.
+     * @param keepOldSecretActiveFor24Hours Whether to keep the previous signing secret valid for 24
+     *   hours after rotation. Defaults to false, which invalidates the previous secret immediately.
      */
-    fun rotateWebhookEndpointSigningSecret(clientConfig: ClientConfig, webhookEndpointId: String, keepOldSecretActiveFor24Hours: Boolean? = null, options: RequestOptions? = null): WebhookEndpointWithSecretResource {
-        return SdkClient.request<WebhookEndpointWithSecretResource>(SdkClient.RequestSpec("POST", "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}/rotate_secret", config = clientConfig, body = SdkClient.bodyMap("keep_old_secret_active_for_24_hours" to
-    (SdkClient.omitIfNull(keepOldSecretActiveFor24Hours))), operationId = "rotateWebhookEndpointSigningSecret", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun rotateWebhookEndpointSigningSecret(
+        clientConfig: ClientConfig,
+        webhookEndpointId: String,
+        keepOldSecretActiveFor24Hours: Boolean? = null,
+        options: RequestOptions? = null,
+    ): WebhookEndpointWithSecretResource {
+        return SdkClient.request<WebhookEndpointWithSecretResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}/rotate_secret",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "keep_old_secret_active_for_24_hours" to
+                                (SdkClient.omitIfNull(keepOldSecretActiveFor24Hours))
+                        ),
+                    operationId = "rotateWebhookEndpointSigningSecret",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Sends a sample event to a webhook endpoint for the authenticated project.
@@ -192,14 +301,29 @@ object WebhookEndpoints {
      * @param webhookEndpointId The ID of the webhook endpoint to test.
      * @param eventType The event type to send as a sample delivery.
      */
-    fun testWebhookEndpoint(clientConfig: ClientConfig, webhookEndpointId: String, eventType: ProjectEventTypeEnum, options: RequestOptions? = null): WebhookEndpointTestResultResource {
-        return SdkClient.request<WebhookEndpointTestResultResource>(SdkClient.RequestSpec("POST", "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}/test", config = clientConfig, body = SdkClient.bodyMap("event_type" to (eventType)), operationId = "testWebhookEndpoint", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+    fun testWebhookEndpoint(
+        clientConfig: ClientConfig,
+        webhookEndpointId: String,
+        eventType: ProjectEventTypeEnum,
+        options: RequestOptions? = null,
+    ): WebhookEndpointTestResultResource {
+        return SdkClient.request<WebhookEndpointTestResultResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/webhook_endpoints/${SdkClient.encodePathSegment(webhookEndpointId)}/test",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("event_type" to (eventType)),
+                    operationId = "testWebhookEndpoint",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

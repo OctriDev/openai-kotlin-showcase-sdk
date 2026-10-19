@@ -3,177 +3,385 @@
 
 package dev.octri.showcase.openai
 
-
 class VectorStoresNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists vector stores, which are collections of processed files that you can use with the `file_search` tool. Use the cursor parameters to move forward or backward through the results, and set `order` to control sorting by creation time.
+     * Lists vector stores, which are collections of processed files that you can use with the
+     * `file_search` tool. Use the cursor parameters to move forward or backward through the
+     * results, and set `order` to control sorting by creation time.
      *
      * Returns a list of vector stores.
      */
-    fun list(limit: Long? = null, order: ListVectorStoresParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListVectorStoresResponse {
-        return dev.octri.showcase.openai.methods.VectorStores.listVectorStores(clientConfig, limit, order, after, before, options)
+    fun list(
+        limit: Long? = null,
+        order: ListVectorStoresParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListVectorStoresResponse {
+        return dev.octri.showcase.openai.methods.VectorStores.listVectorStores(
+            clientConfig,
+            limit,
+            order,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Lists vector stores, which are collections of processed files that you can use with the `file_search` tool. Use the cursor parameters to move forward or backward through the results, and set `order` to control sorting by creation time.
+     * Lists vector stores, which are collections of processed files that you can use with the
+     * `file_search` tool. Use the cursor parameters to move forward or backward through the
+     * results, and set `order` to control sorting by creation time.
      *
      * Returns a list of vector stores.
      */
-    fun listPaginated(limit: Long? = null, order: ListVectorStoresParameterEnum? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (VectorStoreObject) -> Boolean) {
-        dev.octri.showcase.openai.methods.VectorStores.listVectorStoresPaginated(clientConfig, limit, order, after, before, options, yieldFn)
+    fun listPaginated(
+        limit: Long? = null,
+        order: ListVectorStoresParameterEnum? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (VectorStoreObject) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.VectorStores.listVectorStoresPaginated(
+            clientConfig,
+            limit,
+            order,
+            after,
+            before,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a vector store to collect processed files for use with the `file_search` tool. Supply `file_ids` to add files at creation, and optionally set a name, description, expiration policy, chunking strategy, or metadata.
+     * Creates a vector store to collect processed files for use with the `file_search` tool. Supply
+     * `file_ids` to add files at creation, and optionally set a name, description, expiration
+     * policy, chunking strategy, or metadata.
      *
      * Create a vector store.
      */
-    fun create(request: dev.octri.showcase.openai.methods.VectorStores.CreateVectorStoreParams, options: RequestOptions? = null): VectorStoreObject {
-        return dev.octri.showcase.openai.methods.VectorStores.createVectorStore(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.openai.methods.VectorStores.CreateVectorStoreParams,
+        options: RequestOptions? = null,
+    ): VectorStoreObject {
+        return dev.octri.showcase.openai.methods.VectorStores.createVectorStore(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a vector store by its ID. Use this operation to inspect the store's status, file counts, usage, expiration details, and metadata.
+     * Retrieves a vector store by its ID. Use this operation to inspect the store's status, file
+     * counts, usage, expiration details, and metadata.
      *
      * Retrieves a vector store.
      */
     fun get(vectorStoreId: String, options: RequestOptions? = null): VectorStoreObject {
-        return dev.octri.showcase.openai.methods.VectorStores.getVectorStore(clientConfig, vectorStoreId, options)
+        return dev.octri.showcase.openai.methods.VectorStores.getVectorStore(
+            clientConfig,
+            vectorStoreId,
+            options,
+        )
     }
 
     /**
-     * Updates a vector store's name, expiration policy, or metadata. Provide only the properties you want to change; omitted properties are not part of the update.
+     * Updates a vector store's name, expiration policy, or metadata. Provide only the properties
+     * you want to change; omitted properties are not part of the update.
      *
      * Modifies a vector store.
      */
-    fun modify(vectorStoreId: String, name: SdkClient.SdkOptional<String?>? = null, expiresAfter: VectorStoreExpirationAfter? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): VectorStoreObject {
-        return dev.octri.showcase.openai.methods.VectorStores.modifyVectorStore(clientConfig, vectorStoreId, name, expiresAfter, metadata, options)
+    fun modify(
+        vectorStoreId: String,
+        name: SdkClient.SdkOptional<String?>? = null,
+        expiresAfter: VectorStoreExpirationAfter? = null,
+        metadata: SdkClient.SdkOptional<Metadata?>? = null,
+        options: RequestOptions? = null,
+    ): VectorStoreObject {
+        return dev.octri.showcase.openai.methods.VectorStores.modifyVectorStore(
+            clientConfig,
+            vectorStoreId,
+            name,
+            expiresAfter,
+            metadata,
+            options,
+        )
     }
 
     /**
-     * Deletes a vector store. Use this operation when you no longer need the store or its associated collection of processed files.
+     * Deletes a vector store. Use this operation when you no longer need the store or its
+     * associated collection of processed files.
      *
      * Delete a vector store.
      */
     fun delete(vectorStoreId: String, options: RequestOptions? = null): DeleteVectorStoreResponse {
-        return dev.octri.showcase.openai.methods.VectorStores.deleteVectorStore(clientConfig, vectorStoreId, options)
+        return dev.octri.showcase.openai.methods.VectorStores.deleteVectorStore(
+            clientConfig,
+            vectorStoreId,
+            options,
+        )
     }
 
     /**
-     * Creates a batch to attach files to a vector store for processing. Provide `file_ids` or `files`, and optionally set a shared chunking strategy or shared attributes when using `file_ids`. Use per-file settings in `files` when different files need different attributes or chunking strategies.
+     * Creates a batch to attach files to a vector store for processing. Provide `file_ids` or
+     * `files`, and optionally set a shared chunking strategy or shared attributes when using
+     * `file_ids`. Use per-file settings in `files` when different files need different attributes
+     * or chunking strategies.
      *
      * Create a vector store file batch.
      */
-    fun createFileBatch(vectorStoreId: String, fileIds: List<String>? = null, files: List<CreateVectorStoreFileRequest>? = null, chunkingStrategy: ChunkingStrategyRequestParam? = null, attributes: SdkClient.SdkOptional<VectorStoreFileAttributes?>? = null, options: RequestOptions? = null): VectorStoreFileBatchObject {
-        return dev.octri.showcase.openai.methods.VectorStores.createVectorStoreFileBatch(clientConfig, vectorStoreId, fileIds, files, chunkingStrategy, attributes, options)
+    fun createFileBatch(
+        vectorStoreId: String,
+        fileIds: List<String>? = null,
+        files: List<CreateVectorStoreFileRequest>? = null,
+        chunkingStrategy: ChunkingStrategyRequestParam? = null,
+        attributes: SdkClient.SdkOptional<VectorStoreFileAttributes?>? = null,
+        options: RequestOptions? = null,
+    ): VectorStoreFileBatchObject {
+        return dev.octri.showcase.openai.methods.VectorStores.createVectorStoreFileBatch(
+            clientConfig,
+            vectorStoreId,
+            fileIds,
+            files,
+            chunkingStrategy,
+            attributes,
+            options,
+        )
     }
 
     /**
-     * Retrieves a file batch associated with a vector store. Use the batch status and file counts to check the progress and outcome of file processing.
+     * Retrieves a file batch associated with a vector store. Use the batch status and file counts
+     * to check the progress and outcome of file processing.
      *
      * Retrieves a vector store file batch.
      */
-    fun getFileBatch(vectorStoreId: String, batchId: String, options: RequestOptions? = null): VectorStoreFileBatchObject {
-        return dev.octri.showcase.openai.methods.VectorStores.getVectorStoreFileBatch(clientConfig, vectorStoreId, batchId, options)
+    fun getFileBatch(
+        vectorStoreId: String,
+        batchId: String,
+        options: RequestOptions? = null,
+    ): VectorStoreFileBatchObject {
+        return dev.octri.showcase.openai.methods.VectorStores.getVectorStoreFileBatch(
+            clientConfig,
+            vectorStoreId,
+            batchId,
+            options,
+        )
     }
 
     /**
-     * Attempts to stop processing files in a vector store file batch as soon as possible. Check the returned batch status to see whether processing has been cancelled.
+     * Attempts to stop processing files in a vector store file batch as soon as possible. Check the
+     * returned batch status to see whether processing has been cancelled.
      *
-     * Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+     * Cancel a vector store file batch. This attempts to cancel the processing of files in this
+     * batch as soon as possible.
      */
-    fun cancelFileBatch(vectorStoreId: String, batchId: String, options: RequestOptions? = null): VectorStoreFileBatchObject {
-        return dev.octri.showcase.openai.methods.VectorStores.cancelVectorStoreFileBatch(clientConfig, vectorStoreId, batchId, options)
+    fun cancelFileBatch(
+        vectorStoreId: String,
+        batchId: String,
+        options: RequestOptions? = null,
+    ): VectorStoreFileBatchObject {
+        return dev.octri.showcase.openai.methods.VectorStores.cancelVectorStoreFileBatch(
+            clientConfig,
+            vectorStoreId,
+            batchId,
+            options,
+        )
     }
 
     /**
-     * Lists the files in a vector store file batch. Use `filter` to limit results by processing status and the cursor parameters to navigate through the batch's files.
+     * Lists the files in a vector store file batch. Use `filter` to limit results by processing
+     * status and the cursor parameters to navigate through the batch's files.
      *
      * Returns a list of vector store files in a batch.
      */
-    fun listFilesInBatch(request: dev.octri.showcase.openai.methods.VectorStores.ListFilesInVectorStoreBatchRequest, options: RequestOptions? = null): ListVectorStoreFilesResponse {
-        return dev.octri.showcase.openai.methods.VectorStores.listFilesInVectorStoreBatch(clientConfig, request, options)
+    fun listFilesInBatch(
+        request: dev.octri.showcase.openai.methods.VectorStores.ListFilesInVectorStoreBatchRequest,
+        options: RequestOptions? = null,
+    ): ListVectorStoreFilesResponse {
+        return dev.octri.showcase.openai.methods.VectorStores.listFilesInVectorStoreBatch(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists the files in a vector store file batch. Use `filter` to limit results by processing status and the cursor parameters to navigate through the batch's files.
+     * Lists the files in a vector store file batch. Use `filter` to limit results by processing
+     * status and the cursor parameters to navigate through the batch's files.
      *
      * Returns a list of vector store files in a batch.
      */
-    fun listFilesInBatchPaginated(request: dev.octri.showcase.openai.methods.VectorStores.ListFilesInVectorStoreBatchRequest, options: RequestOptions? = null, yieldFn: (VectorStoreFileObject) -> Boolean) {
-        dev.octri.showcase.openai.methods.VectorStores.listFilesInVectorStoreBatchPaginated(clientConfig, request, options, yieldFn)
+    fun listFilesInBatchPaginated(
+        request: dev.octri.showcase.openai.methods.VectorStores.ListFilesInVectorStoreBatchRequest,
+        options: RequestOptions? = null,
+        yieldFn: (VectorStoreFileObject) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.VectorStores.listFilesInVectorStoreBatchPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Lists files attached to a vector store, with pagination and an optional status filter. Use `after` or `before` to navigate the list, and `filter` to select files by processing status.
+     * Lists files attached to a vector store, with pagination and an optional status filter. Use
+     * `after` or `before` to navigate the list, and `filter` to select files by processing status.
      *
      * Returns a list of vector store files.
      */
-    fun listFiles(request: dev.octri.showcase.openai.methods.VectorStores.ListVectorStoreFilesRequest, options: RequestOptions? = null): ListVectorStoreFilesResponse {
-        return dev.octri.showcase.openai.methods.VectorStores.listVectorStoreFiles(clientConfig, request, options)
+    fun listFiles(
+        request: dev.octri.showcase.openai.methods.VectorStores.ListVectorStoreFilesRequest,
+        options: RequestOptions? = null,
+    ): ListVectorStoreFilesResponse {
+        return dev.octri.showcase.openai.methods.VectorStores.listVectorStoreFiles(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists files attached to a vector store, with pagination and an optional status filter. Use `after` or `before` to navigate the list, and `filter` to select files by processing status.
+     * Lists files attached to a vector store, with pagination and an optional status filter. Use
+     * `after` or `before` to navigate the list, and `filter` to select files by processing status.
      *
      * Returns a list of vector store files.
      */
-    fun listFilesPaginated(request: dev.octri.showcase.openai.methods.VectorStores.ListVectorStoreFilesRequest, options: RequestOptions? = null, yieldFn: (VectorStoreFileObject) -> Boolean) {
-        dev.octri.showcase.openai.methods.VectorStores.listVectorStoreFilesPaginated(clientConfig, request, options, yieldFn)
+    fun listFilesPaginated(
+        request: dev.octri.showcase.openai.methods.VectorStores.ListVectorStoreFilesRequest,
+        options: RequestOptions? = null,
+        yieldFn: (VectorStoreFileObject) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.VectorStores.listVectorStoreFilesPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates an attachment between a file and a vector store. Supply the file's `file_id` and optionally configure `chunking_strategy` or attach `attributes`; use file batches for multi-file ingestion. The response includes the attached file's processing status.
+     * Creates an attachment between a file and a vector store. Supply the file's `file_id` and
+     * optionally configure `chunking_strategy` or attach `attributes`; use file batches for
+     * multi-file ingestion. The response includes the attached file's processing status.
      *
      * Create a vector store file by attaching a File to a vector store.
      */
-    fun createFile(vectorStoreId: String, fileId: String, chunkingStrategy: ChunkingStrategyRequestParam? = null, attributes: SdkClient.SdkOptional<VectorStoreFileAttributes?>? = null, options: RequestOptions? = null): VectorStoreFileObject {
-        return dev.octri.showcase.openai.methods.VectorStores.createVectorStoreFile(clientConfig, vectorStoreId, fileId, chunkingStrategy, attributes, options)
+    fun createFile(
+        vectorStoreId: String,
+        fileId: String,
+        chunkingStrategy: ChunkingStrategyRequestParam? = null,
+        attributes: SdkClient.SdkOptional<VectorStoreFileAttributes?>? = null,
+        options: RequestOptions? = null,
+    ): VectorStoreFileObject {
+        return dev.octri.showcase.openai.methods.VectorStores.createVectorStoreFile(
+            clientConfig,
+            vectorStoreId,
+            fileId,
+            chunkingStrategy,
+            attributes,
+            options,
+        )
     }
 
     /**
-     * Retrieves a file attachment and its processing details from a vector store. Use `vector_store_id` and `file_id` to identify the attachment whose status and configuration you need.
+     * Retrieves a file attachment and its processing details from a vector store. Use
+     * `vector_store_id` and `file_id` to identify the attachment whose status and configuration you
+     * need.
      *
      * Retrieves a vector store file.
      */
-    fun getFile(vectorStoreId: String, fileId: String, options: RequestOptions? = null): VectorStoreFileObject {
-        return dev.octri.showcase.openai.methods.VectorStores.getVectorStoreFile(clientConfig, vectorStoreId, fileId, options)
+    fun getFile(
+        vectorStoreId: String,
+        fileId: String,
+        options: RequestOptions? = null,
+    ): VectorStoreFileObject {
+        return dev.octri.showcase.openai.methods.VectorStores.getVectorStoreFile(
+            clientConfig,
+            vectorStoreId,
+            fileId,
+            options,
+        )
     }
 
     /**
-     * Deletes a file attachment from a vector store without deleting the underlying file. Use the file deletion operation separately if you also need to delete the file itself.
+     * Deletes a file attachment from a vector store without deleting the underlying file. Use the
+     * file deletion operation separately if you also need to delete the file itself.
      *
-     * Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the delete file endpoint.
+     * Delete a vector store file. This will remove the file from the vector store but the file
+     * itself will not be deleted. To delete the file, use the delete file endpoint.
      */
-    fun deleteFile(vectorStoreId: String, fileId: String, options: RequestOptions? = null): DeleteVectorStoreFileResponse {
-        return dev.octri.showcase.openai.methods.VectorStores.deleteVectorStoreFile(clientConfig, vectorStoreId, fileId, options)
+    fun deleteFile(
+        vectorStoreId: String,
+        fileId: String,
+        options: RequestOptions? = null,
+    ): DeleteVectorStoreFileResponse {
+        return dev.octri.showcase.openai.methods.VectorStores.deleteVectorStoreFile(
+            clientConfig,
+            vectorStoreId,
+            fileId,
+            options,
+        )
     }
 
     /**
-     * Updates the attributes attached to a file in a vector store. Supply `attributes` to replace the file's attribute set, or use `null` to clear it.
+     * Updates the attributes attached to a file in a vector store. Supply `attributes` to replace
+     * the file's attribute set, or use `null` to clear it.
      *
      * Update attributes on a vector store file.
      */
-    fun updateFileAttributes(vectorStoreId: String, fileId: String, attributes: VectorStoreFileAttributes?, options: RequestOptions? = null): VectorStoreFileObject {
-        return dev.octri.showcase.openai.methods.VectorStores.updateVectorStoreFileAttributes(clientConfig, vectorStoreId, fileId, attributes, options)
+    fun updateFileAttributes(
+        vectorStoreId: String,
+        fileId: String,
+        attributes: VectorStoreFileAttributes?,
+        options: RequestOptions? = null,
+    ): VectorStoreFileObject {
+        return dev.octri.showcase.openai.methods.VectorStores.updateVectorStoreFileAttributes(
+            clientConfig,
+            vectorStoreId,
+            fileId,
+            attributes,
+            options,
+        )
     }
 
     /**
-     * Retrieves parsed content from a file attached to a vector store. Use `vector_store_id` and `file_id` to identify the file, then follow `next_page` when `has_more` indicates that additional content pages are available.
+     * Retrieves parsed content from a file attached to a vector store. Use `vector_store_id` and
+     * `file_id` to identify the file, then follow `next_page` when `has_more` indicates that
+     * additional content pages are available.
      *
      * Retrieve the parsed contents of a vector store file.
      */
-    fun retrieveFileContent(vectorStoreId: String, fileId: String, options: RequestOptions? = null): VectorStoreFileContentResponse {
-        return dev.octri.showcase.openai.methods.VectorStores.retrieveVectorStoreFileContent(clientConfig, vectorStoreId, fileId, options)
+    fun retrieveFileContent(
+        vectorStoreId: String,
+        fileId: String,
+        options: RequestOptions? = null,
+    ): VectorStoreFileContentResponse {
+        return dev.octri.showcase.openai.methods.VectorStores.retrieveVectorStoreFileContent(
+            clientConfig,
+            vectorStoreId,
+            fileId,
+            options,
+        )
     }
 
     /**
-     * Searches a vector store for relevant file chunks using one or more queries and optional file-attribute filters. Set `max_num_results` to control the result count and `ranking_options` to configure ranking; use `next_page` to continue when more results are available.
+     * Searches a vector store for relevant file chunks using one or more queries and optional
+     * file-attribute filters. Set `max_num_results` to control the result count and
+     * `ranking_options` to configure ranking; use `next_page` to continue when more results are
+     * available.
      *
      * Search a vector store for relevant chunks based on a query and file attributes filter.
      */
-    fun search(request: dev.octri.showcase.openai.methods.VectorStores.SearchVectorStoreRequest, options: RequestOptions? = null): VectorStoreSearchResultsPage {
-        return dev.octri.showcase.openai.methods.VectorStores.searchVectorStore(clientConfig, request, options)
+    fun search(
+        request: dev.octri.showcase.openai.methods.VectorStores.SearchVectorStoreRequest,
+        options: RequestOptions? = null,
+    ): VectorStoreSearchResultsPage {
+        return dev.octri.showcase.openai.methods.VectorStores.searchVectorStore(
+            clientConfig,
+            request,
+            options,
+        )
     }
-
 }

@@ -3,134 +3,81 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required object value serialized in the `projects[]` wire field.
- */
+/** Required object value serialized in the `projects[]` wire field. */
 data class InviteProjectsItem(
-    /**
-     * Project's public ID
-     */
+    /** Project's public ID */
     val id: String,
-    /**
-     * Project membership role
-     */
-    val role: InviteProjectsItemRoleEnum
+    /** Project membership role */
+    val role: InviteProjectsItemRoleEnum,
 )
 
-/**
- * Represents an individual `invite` to the organization.
- */
+/** Represents an individual `invite` to the organization. */
 data class Invite(
-    /**
-     * The object type, which is always `organization.invite`
-     */
+    /** The object type, which is always `organization.invite` */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InviteObjectEnum,
-    /**
-     * The identifier, which can be referenced in API endpoints
-     */
+    /** The identifier, which can be referenced in API endpoints */
     val id: String,
-    /**
-     * The email address of the individual to whom the invite was sent
-     */
+    /** The email address of the individual to whom the invite was sent */
     val email: String,
-    /**
-     * `owner` or `reader`
-     */
+    /** `owner` or `reader` */
     val role: InviteRoleEnum,
-    /**
-     * `accepted`,`expired`, or `pending`
-     */
+    /** `accepted`,`expired`, or `pending` */
     val status: InviteStatusEnum,
-    /**
-     * The Unix timestamp (in seconds) of when the invite was sent.
-     */
+    /** The Unix timestamp (in seconds) of when the invite was sent. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The projects that were granted membership upon acceptance of the invite.
-     */
+    /** The projects that were granted membership upon acceptance of the invite. */
     val projects: List<InviteProjectsItem>,
-    /**
-     * The Unix timestamp (in seconds) of when the invite expires.
-     */
+    /** The Unix timestamp (in seconds) of when the invite expires. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
-    /**
-     * The Unix timestamp (in seconds) of when the invite was accepted.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("accepted_at") val acceptedAt: Long? = null
+    /** The Unix timestamp (in seconds) of when the invite was accepted. */
+    @com.fasterxml.jackson.annotation.JsonProperty("accepted_at") val acceptedAt: Long? = null,
 )
 
-/**
- * Typed representation of the `InviteDeleteResponse` API schema.
- */
+/** Typed representation of the `InviteDeleteResponse` API schema. */
 data class InviteDeleteResponse(
-    /**
-     * The object type, which is always `organization.invite.deleted`
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InviteDeleteResponseObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** The object type, which is always `organization.invite.deleted` */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: InviteDeleteResponseObjectEnum,
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
-    val deleted: Boolean
+    /** Required `boolean` value serialized in the `deleted` wire field. */
+    val deleted: Boolean,
 )
 
-/**
- * Typed representation of the `InviteListResponse` API schema.
- */
+/** Typed representation of the `InviteListResponse` API schema. */
 data class InviteListResponse(
-    /**
-     * The object type, which is always `list`
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InviteListResponseObjectEnum,
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** The object type, which is always `list` */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: InviteListResponseObjectEnum,
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Invite>,
-    /**
-     * The `has_more` property is used for pagination to indicate there are additional results.
-     */
+    /** The `has_more` property is used for pagination to indicate there are additional results. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * The first `invite_id` in the retrieved `list`
-     */
+    /** The first `invite_id` in the retrieved `list` */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /**
-     * The last `invite_id` in the retrieved `list`
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+    /** The last `invite_id` in the retrieved `list` */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
 )
 
-/**
- * Required object value serialized in the `projects[]` wire field.
- */
+/** Required object value serialized in the `projects[]` wire field. */
 data class InviteRequestProjectsItem(
-    /**
-     * Project's public ID
-     */
+    /** Project's public ID */
     val id: String,
-    /**
-     * Project membership role
-     */
-    val role: InviteRequestProjectsItemRoleEnum
+    /** Project membership role */
+    val role: InviteRequestProjectsItemRoleEnum,
 )
 
-/**
- * Typed representation of the `InviteRequest` API schema.
- */
+/** Typed representation of the `InviteRequest` API schema. */
 data class InviteRequest(
-    /**
-     * Send an email to this address
-     */
+    /** Send an email to this address */
     val email: String,
-    /**
-     * `owner` or `reader`
-     */
+    /** `owner` or `reader` */
     val role: InviteRequestRoleEnum,
     /**
-     * An array of projects to which membership is granted at the same time the org invite is accepted. If omitted, the user will be invited to the default project for compatibility with legacy behavior. If empty list is passed, the user will not be invited to any projects, including the default one.
+     * An array of projects to which membership is granted at the same time the org invite is
+     * accepted. If omitted, the user will be invited to the default project for compatibility with
+     * legacy behavior. If empty list is passed, the user will not be invited to any projects,
+     * including the default one.
      */
-    val projects: List<InviteRequestProjectsItem>? = null
+    val projects: List<InviteRequestProjectsItem>? = null,
 )

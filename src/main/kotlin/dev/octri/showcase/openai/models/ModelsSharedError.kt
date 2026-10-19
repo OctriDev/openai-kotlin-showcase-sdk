@@ -3,44 +3,26 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Details about an API error.
- */
+/** Details about an API error. */
 data class ErrorBodyResource(
-    /**
-     * The error type.
-     */
+    /** The error type. */
     val type: String,
-    /**
-     * A machine-readable error code.
-     */
+    /** A machine-readable error code. */
     val code: String,
-    /**
-     * A human-readable error message.
-     */
+    /** A human-readable error message. */
     val message: String,
-    /**
-     * The request parameter that caused the error, or null for a request-wide error.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?
+    /** The request parameter that caused the error, or null for a request-wide error. */
+    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
 )
 
-/**
- * Typed representation of the `ErrorResponse` API schema.
- */
+/** Typed representation of the `ErrorResponse` API schema. */
 data class ErrorResponse(
-    /**
-     * Required object value serialized in the `error` wire field.
-     */
+    /** Required object value serialized in the `error` wire field. */
     val error: Error3
 ) : dev.octri.showcase.openai.ErrorBody
 
-/**
- * An API error response.
- */
+/** An API error response. */
 data class ErrorResponse2(
-    /**
-     * The error returned by the API.
-     */
+    /** The error returned by the API. */
     val error: ErrorBodyResource
 ) : dev.octri.showcase.openai.ErrorBody

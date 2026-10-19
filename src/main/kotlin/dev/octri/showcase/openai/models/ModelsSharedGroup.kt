@@ -3,46 +3,27 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Summary information about a group returned in role assignment responses.
- */
+/** Summary information about a group returned in role assignment responses. */
 data class Group(
-    /**
-     * Always `group`.
-     */
+    /** Always `group`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: GroupObjectEnum,
-    /**
-     * Identifier for the group.
-     */
+    /** Identifier for the group. */
     val id: String,
-    /**
-     * Display name of the group.
-     */
+    /** Display name of the group. */
     val name: String,
-    /**
-     * Unix timestamp (in seconds) when the group was created.
-     */
+    /** Unix timestamp (in seconds) when the group was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Whether the group is managed through SCIM.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim_managed") val scimManaged: Boolean
+    /** Whether the group is managed through SCIM. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim_managed") val scimManaged: Boolean,
 )
 
-/**
- * Role assignment linking a group to a role.
- */
+/** Role assignment linking a group to a role. */
 data class GroupRoleAssignment(
-    /**
-     * Always `group.role`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: GroupRoleAssignmentObjectEnum,
-    /**
-     * Summary information about a group returned in role assignment responses.
-     */
+    /** Always `group.role`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: GroupRoleAssignmentObjectEnum,
+    /** Summary information about a group returned in role assignment responses. */
     val group: Group,
-    /**
-     * Details about a role that can be assigned through the public Roles API.
-     */
-    val role: Role
+    /** Details about a role that can be assigned through the public Roles API. */
+    val role: Role,
 )

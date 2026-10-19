@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ServiceTierResponses` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ServiceTierResponses.Deserializer::class)
+/** Typed representation of the `ServiceTierResponses` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ServiceTierResponses.Deserializer::class
+)
 sealed interface ServiceTierResponses {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ServiceTierResponses>() {
@@ -17,15 +17,41 @@ sealed interface ServiceTierResponses {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringServiceTierResponses(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> ValueServiceTierResponses(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringServiceTierResponses(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    ValueServiceTierResponses(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringServiceTierResponses(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ServiceTierResponses
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringServiceTierResponses(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : ServiceTierResponses
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueServiceTierResponses(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : ServiceTierResponses
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueServiceTierResponses(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
+) : ServiceTierResponses

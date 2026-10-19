@@ -4,19 +4,25 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration options for tracing. Set to null to disable tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto` will create a trace for the session with default values for the workflow name, group id, and metadata.
+ * Configuration options for tracing. Set to null to disable tracing. Once tracing is enabled for a
+ * session, the configuration cannot be modified. `auto` will create a trace for the session with
+ * default values for the workflow name, group id, and metadata.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = RealtimeSessionCreateResponseTracing.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = RealtimeSessionCreateResponseTracing.Deserializer::class
+)
 sealed interface RealtimeSessionCreateResponseTracing {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<RealtimeSessionCreateResponseTracing>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<RealtimeSessionCreateResponseTracing>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): RealtimeSessionCreateResponseTracing {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out RealtimeSessionCreateResponseTracing>> = listOf(RealtimeSessionCreateResponseTracingVariant1::class.java)
+            val objectTypes: List<Class<out RealtimeSessionCreateResponseTracing>> =
+                listOf(RealtimeSessionCreateResponseTracingVariant1::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -25,37 +31,66 @@ sealed interface RealtimeSessionCreateResponseTracing {
                 }
             }
             return when {
-                node.isTextual -> StringRealtimeSessionCreateResponseTracing(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, RealtimeSessionCreateResponseTracing::class.java, "no RealtimeSessionCreateResponseTracing branch accepts this payload")
+                node.isTextual ->
+                    StringRealtimeSessionCreateResponseTracing(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        RealtimeSessionCreateResponseTracing::class.java,
+                        "no RealtimeSessionCreateResponseTracing branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringRealtimeSessionCreateResponseTracing(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : RealtimeSessionCreateResponseTracing
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringRealtimeSessionCreateResponseTracing(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : RealtimeSessionCreateResponseTracing
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RealtimeSessionTracingVariant1(
     /**
-     * The name of the workflow to attach to this trace. This is used to name the trace in the traces dashboard.
+     * The name of the workflow to attach to this trace. This is used to name the trace in the
+     * traces dashboard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name") val workflowName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name")
+    val workflowName: String? = null,
     /**
-     * The group id to attach to this trace to enable filtering and grouping in the traces dashboard.
+     * The group id to attach to this trace to enable filtering and grouping in the traces
+     * dashboard.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("group_id") val groupId: String? = null,
     /**
      * The arbitrary metadata to attach to this trace to enable filtering in the traces dashboard.
      */
-    val metadata: Map<String, Any>? = null
+    val metadata: Map<String, Any>? = null,
 ) : RealtimeSessionTracing
 
 /**
- * Configuration options for tracing. Set to null to disable tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto` will create a trace for the session with default values for the workflow name, group id, and metadata.
+ * Configuration options for tracing. Set to null to disable tracing. Once tracing is enabled for a
+ * session, the configuration cannot be modified. `auto` will create a trace for the session with
+ * default values for the workflow name, group id, and metadata.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = RealtimeSessionTracing.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = RealtimeSessionTracing.Deserializer::class
+)
 sealed interface RealtimeSessionTracing {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<RealtimeSessionTracing>() {
@@ -65,7 +100,8 @@ sealed interface RealtimeSessionTracing {
         ): RealtimeSessionTracing {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out RealtimeSessionTracing>> = listOf(RealtimeSessionTracingVariant1::class.java)
+            val objectTypes: List<Class<out RealtimeSessionTracing>> =
+                listOf(RealtimeSessionTracingVariant1::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -74,13 +110,30 @@ sealed interface RealtimeSessionTracing {
                 }
             }
             return when {
-                node.isTextual -> StringRealtimeSessionTracing(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, RealtimeSessionTracing::class.java, "no RealtimeSessionTracing branch accepts this payload")
+                node.isTextual ->
+                    StringRealtimeSessionTracing(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        RealtimeSessionTracing::class.java,
+                        "no RealtimeSessionTracing branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringRealtimeSessionTracing(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : RealtimeSessionTracing
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringRealtimeSessionTracing(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : RealtimeSessionTracing

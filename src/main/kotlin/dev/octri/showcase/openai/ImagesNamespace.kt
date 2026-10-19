@@ -3,54 +3,103 @@
 
 package dev.octri.showcase.openai
 
-
 class ImagesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an edited image from one or more source images and a text prompt. Send multipart form data with uploaded image files, or JSON with image references; use `mask` to limit edits to designated areas. You can choose the output format, size, and quality, and optionally stream partial image results.
+     * Creates an edited image from one or more source images and a text prompt. Send multipart form
+     * data with uploaded image files, or JSON with image references; use `mask` to limit edits to
+     * designated areas. You can choose the output format, size, and quality, and optionally stream
+     * partial image results.
      *
-     * Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models.
+     * Creates an edited or extended image given one or more source images and a prompt. This
+     * endpoint supports GPT Image models.
      */
-    fun createEdit(body: dev.octri.showcase.openai.methods.Images.CreateImageEditBody, contentType: String? = null, options: RequestOptions? = null): ImagesResponse {
-        return dev.octri.showcase.openai.methods.Images.createImageEdit(clientConfig, body, contentType, options)
+    fun createEdit(
+        body: dev.octri.showcase.openai.methods.Images.CreateImageEditBody,
+        contentType: String? = null,
+        options: RequestOptions? = null,
+    ): ImagesResponse {
+        return dev.octri.showcase.openai.methods.Images.createImageEdit(
+            clientConfig,
+            body,
+            contentType,
+            options,
+        )
     }
 
     /**
-     * Creates an edited image from one or more source images and a text prompt. Send multipart form data with uploaded image files, or JSON with image references; use `mask` to limit edits to designated areas. You can choose the output format, size, and quality, and optionally stream partial image results.
+     * Creates an edited image from one or more source images and a text prompt. Send multipart form
+     * data with uploaded image files, or JSON with image references; use `mask` to limit edits to
+     * designated areas. You can choose the output format, size, and quality, and optionally stream
+     * partial image results.
      *
-     * Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models.
+     * Creates an edited or extended image given one or more source images and a prompt. This
+     * endpoint supports GPT Image models.
      */
-    fun createEditStream(body: dev.octri.showcase.openai.methods.Images.CreateImageEditStreamBody, contentType: String? = null, options: RequestOptions? = null): Sequence<ImageEditStreamEvent> {
-        return dev.octri.showcase.openai.methods.Images.createImageEditStream(clientConfig, body, contentType, options)
+    fun createEditStream(
+        body: dev.octri.showcase.openai.methods.Images.CreateImageEditStreamBody,
+        contentType: String? = null,
+        options: RequestOptions? = null,
+    ): Sequence<ImageEditStreamEvent> {
+        return dev.octri.showcase.openai.methods.Images.createImageEditStream(
+            clientConfig,
+            body,
+            contentType,
+            options,
+        )
     }
 
     /**
-     * Creates one or more images from a text prompt using the specified image model. Provide `model` and `prompt`; `n` defaults to 1, and you can enable streaming with `stream`. Use `size`, `quality`, and `output_format` to control the generated images.
+     * Creates one or more images from a text prompt using the specified image model. Provide
+     * `model` and `prompt`; `n` defaults to 1, and you can enable streaming with `stream`. Use
+     * `size`, `quality`, and `output_format` to control the generated images.
      *
      * Creates an image given a prompt using a GPT Image model. Learn more.
      */
-    fun create(request: dev.octri.showcase.openai.methods.Images.CreateImageParams, options: RequestOptions? = null): ImagesResponse {
+    fun create(
+        request: dev.octri.showcase.openai.methods.Images.CreateImageParams,
+        options: RequestOptions? = null,
+    ): ImagesResponse {
         return dev.octri.showcase.openai.methods.Images.createImage(clientConfig, request, options)
     }
 
     /**
-     * Creates one or more images from a text prompt using the specified image model. Provide `model` and `prompt`; `n` defaults to 1, and you can enable streaming with `stream`. Use `size`, `quality`, and `output_format` to control the generated images.
+     * Creates one or more images from a text prompt using the specified image model. Provide
+     * `model` and `prompt`; `n` defaults to 1, and you can enable streaming with `stream`. Use
+     * `size`, `quality`, and `output_format` to control the generated images.
      *
      * Creates an image given a prompt using a GPT Image model. Learn more.
      */
-    fun createStream(request: dev.octri.showcase.openai.methods.Images.CreateImageStreamRequest, options: RequestOptions? = null): Sequence<ImageGenStreamEvent> {
-        return dev.octri.showcase.openai.methods.Images.createImageStream(clientConfig, request, options)
+    fun createStream(
+        request: dev.octri.showcase.openai.methods.Images.CreateImageStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<ImageGenStreamEvent> {
+        return dev.octri.showcase.openai.methods.Images.createImageStream(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Creates image variations based on an uploaded image using the legacy image variations contract. This operation is retired and no longer available; use the image edits endpoint with a GPT Image model and a prompt to create a variation. The legacy request schema requires a square PNG image smaller than 4 MB.
+     * Creates image variations based on an uploaded image using the legacy image variations
+     * contract. This operation is retired and no longer available; use the image edits endpoint
+     * with a GPT Image model and a prompt to create a variation. The legacy request schema requires
+     * a square PNG image smaller than 4 MB.
      *
-     * This endpoint is retired and no longer available. Use the image edits endpoint with a GPT Image model and a prompt to create a variation of an image. The request and response schemas below describe the legacy contract.
+     * This endpoint is retired and no longer available. Use the image edits endpoint with a GPT
+     * Image model and a prompt to create a variation of an image. The request and response schemas
+     * below describe the legacy contract.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun createVariation(request: dev.octri.showcase.openai.methods.Images.CreateImageVariationParams, options: RequestOptions? = null): ImagesResponse {
-        return dev.octri.showcase.openai.methods.Images.createImageVariation(clientConfig, request, options)
+    fun createVariation(
+        request: dev.octri.showcase.openai.methods.Images.CreateImageVariationParams,
+        options: RequestOptions? = null,
+    ): ImagesResponse {
+        return dev.octri.showcase.openai.methods.Images.createImageVariation(
+            clientConfig,
+            request,
+            options,
+        )
     }
-
 }

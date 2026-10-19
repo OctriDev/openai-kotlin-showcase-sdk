@@ -3,379 +3,568 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveDecisionsDelegationParam2` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionsDelegationParam2` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionsDelegationParam2(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionsDelegationParam2TypeEnum,
-    /**
-     * Required object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsInputParam2
+    /** Required object value serialized in the `decisions` wire field. */
+    val decisions: LiveDecisionsSettingsInputParam2,
 ) : LiveSessionCreateParamsDelegation, LiveSessionResourceParamDelegation
 
-/**
- * Typed representation of the `LiveDecisionsDelegationUpdateParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveDecisionsDelegationUpdateParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveDecisionsDelegationUpdateParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveDecisionsDelegationUpdateParamTypeEnum,
-    /**
-     * Optional object value serialized in the `decisions` wire field.
-     */
-    val decisions: LiveDecisionsSettingsUpdateParam? = null
+    /** Optional object value serialized in the `decisions` wire field. */
+    val decisions: LiveDecisionsSettingsUpdateParam? = null,
 ) : LiveSessionUpdateParamsDelegation
 
 /**
  * Update the Responses backend for an existing Live session without changing delegation ownership.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveResponsesDelegationUpdateParam(
-    /**
-     * The delegation owner. Always `responses` for tasks handled by the Responses API.
-     */
+    /** The delegation owner. Always `responses` for tasks handled by the Responses API. */
     val type: LiveResponsesDelegationUpdateParamTypeEnum,
-    /**
-     * Responses backend settings to update. Omitted settings keep their existing values.
-     */
-    val responses: LiveResponsesDelegationSettingsUpdateInputParam? = null
+    /** Responses backend settings to update. Omitted settings keep their existing values. */
+    val responses: LiveResponsesDelegationSettingsUpdateInputParam? = null,
 ) : LiveSessionUpdateParamsDelegation
 
 /**
- * Initial configuration for a Live session, including its model, conversation instructions, audio, and delegated task handling.
+ * Initial configuration for a Live session, including its model, conversation instructions, audio,
+ * and delegated task handling.
  */
 data class LiveSessionCreateParams(
     /**
-     * The Live model. Required in the session configuration for every transport; do not pass it as a URL query parameter.
+     * The Live model. Required in the session configuration for every transport; do not pass it as
+     * a URL query parameter.
      */
     val model: ModelIdsLive,
-    /**
-     * Optional `string` value serialized in the `instructions` wire field.
-     */
+    /** Optional `string` value serialized in the `instructions` wire field. */
     val instructions: String? = null,
     /**
-     * Ordered text-only history supplied before startup. Supports developer, user, and assistant messages with one text part each; at most 128 messages and a configured rendered-token limit (8,192 by default).
+     * Ordered text-only history supplied before startup. Supports developer, user, and assistant
+     * messages with one text part each; at most 128 messages and a configured rendered-token limit
+     * (8,192 by default).
      */
     val input: List<LiveInitialItem>? = null,
     /**
-     * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP negotiate their media format. Voice and format are immutable after startup.
+     * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP
+     * negotiate their media format. Voice and format are immutable after startup.
      */
     val audio: LiveInitialSessionAudioParam? = null,
     /**
-     * Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` or `decisions` to delegate to the corresponding API.
+     * Who handles tasks delegated by the Live model. Omitted or null selects your application; use
+     * `responses` or `decisions` to delegate to the corresponding API.
      */
     val delegation: LiveSessionCreateParamsDelegation? = null,
     /**
-     * At most one Decisions trigger per transcript event type. Triggers run independently of delegation. On update, omit triggers to keep the current configuration, send a list to replace it, or send an empty list to disable triggers.
+     * At most one Decisions trigger per transcript event type. Triggers run independently of
+     * delegation. On update, omit triggers to keep the current configuration, send a list to
+     * replace it, or send an empty list to disable triggers.
      */
     val triggers: List<LiveDecisionTriggerInputParam2>? = null,
     /**
-     * Whether to store the session for later forking and recording download. Defaults to false for new sessions.
+     * Whether to store the session for later forking and recording download. Defaults to false for
+     * new sessions.
      */
     val store: Boolean? = null,
     /**
-     * Startup-only capabilities for an untrusted frontend attached to a unified WebRTC session. Trusted sideband connections are unaffected.
+     * Startup-only capabilities for an untrusted frontend attached to a unified WebRTC session.
+     * Trusted sideband connections are unaffected.
      */
-    val client: LiveClientConfigParam? = null
+    val client: LiveClientConfigParam? = null,
 )
 
 /**
- * Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` or `decisions` to delegate to the corresponding API.
+ * Who handles tasks delegated by the Live model. Omitted or null selects your application; use
+ * `responses` or `decisions` to delegate to the corresponding API.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveSessionCreateParamsDelegation::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveSessionCreateParamsDelegation::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveClientDelegationParam::class, name = "client"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponsesDelegationParam::class, name = "responses"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionsDelegationParam2::class, name = "decisions")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveClientDelegationParam::class,
+        name = "client",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveResponsesDelegationParam::class,
+        name = "responses",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionsDelegationParam2::class,
+        name = "decisions",
+    ),
 )
 sealed interface LiveSessionCreateParamsDelegation
 
-/** A [LiveSessionCreateParamsDelegation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveSessionCreateParamsDelegation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveSessionCreateParamsDelegation] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveSessionCreateParamsDelegation
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveSessionCreateParamsDelegation {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Create a Live session with a WebRTC SDP offer or place an outbound SIP call. Follow the Live prompting guide before choosing frontend and backend instructions. The request starts the session; do not send session.start again on the data channel or sideband.
+ * Create a Live session with a WebRTC SDP offer or place an outbound SIP call. Follow the Live
+ * prompting guide before choosing frontend and backend instructions. The request starts the
+ * session; do not send session.start again on the data channel or sideband.
  */
 data class LiveSessionCreateRequest(
-    /**
-     * Startup configuration for the Live session.
-     */
+    /** Startup configuration for the Live session. */
     val session: LiveMediaSessionCreateParams,
     /**
-     * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk credentials.
+     * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk
+     * credentials.
      */
-    val transport: LiveSessionCreateRequestTransport
+    val transport: LiveSessionCreateRequestTransport,
 )
 
 /**
- * Create a Live session with a WebRTC SDP offer or place an outbound SIP call. Follow the Live prompting guide before choosing frontend and backend instructions. The request starts the session; do not send session.start again on the data channel or sideband.
+ * Create a Live session with a WebRTC SDP offer or place an outbound SIP call. Follow the Live
+ * prompting guide before choosing frontend and backend instructions. The request starts the
+ * session; do not send session.start again on the data channel or sideband.
  */
 data class LiveSessionCreateRequestRequest(
-    /**
-     * Startup configuration for the Live session.
-     */
+    /** Startup configuration for the Live session. */
     val session: LiveMediaSessionCreateParams,
     /**
-     * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk credentials.
+     * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk
+     * credentials.
      */
-    val transport: LiveSessionCreateRequestTransportRequest
+    val transport: LiveSessionCreateRequestTransportRequest,
 )
 
 /**
- * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk credentials.
+ * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk
+ * credentials.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveSessionCreateRequestTransport::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveSessionCreateRequestTransport::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveWebRTCTransport::class, name = "webrtc"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSIPTransport::class, name = "sip")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveWebRTCTransport::class,
+        name = "webrtc",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSIPTransport::class,
+        name = "sip",
+    ),
 )
 sealed interface LiveSessionCreateRequestTransport
 
-/** A [LiveSessionCreateRequestTransport] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveSessionCreateRequestTransport @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveSessionCreateRequestTransport] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveSessionCreateRequestTransport
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveSessionCreateRequestTransport {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk credentials.
+ * WebRTC transport with an SDP offer, or SIP transport with a destination and per-call trunk
+ * credentials.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveSessionCreateRequestTransportRequest::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveSessionCreateRequestTransportRequest::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveWebRTCTransport::class, name = "webrtc"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSIPTransportRequest::class, name = "sip")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveWebRTCTransport::class,
+        name = "webrtc",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSIPTransportRequest::class,
+        name = "sip",
+    ),
 )
 sealed interface LiveSessionCreateRequestTransportRequest
 
-/** A [LiveSessionCreateRequestTransportRequest] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveSessionCreateRequestTransportRequest @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveSessionCreateRequestTransportRequest] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveSessionCreateRequestTransportRequest
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveSessionCreateRequestTransportRequest {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * The created Live session and its transport. WebRTC creation returns 201 Created with an SDP answer. Outbound SIP creation returns 201 Created after initialization, before the callee necessarily answers, without SDP or trunk credentials.
+ * The created Live session and its transport. WebRTC creation returns 201 Created with an SDP
+ * answer. Outbound SIP creation returns 201 Created after initialization, before the callee
+ * necessarily answers, without SDP or trunk credentials.
  */
 data class LiveSessionCreateResponse(
-    /**
-     * The newly created Live session. Use its ID for session controls and sideband connections.
-     */
+    /** The newly created Live session. Use its ID for session controls and sideband connections. */
     val session: Session,
     /**
-     * WebRTC transport with an SDP answer, or SIP transport without SDP or trunk credentials. For SIP, attach a sideband using session.id to receive transport.ringing, transport.answered, and transport.failed notifications.
+     * WebRTC transport with an SDP answer, or SIP transport without SDP or trunk credentials. For
+     * SIP, attach a sideband using session.id to receive transport.ringing, transport.answered, and
+     * transport.failed notifications.
      */
-    val transport: LiveSessionCreateResponseTransport
+    val transport: LiveSessionCreateResponseTransport,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveSessionCreateResponseTransportVariant1(
-    /**
-     * The transport used for the Live session. Always `sip`.
-     */
+    /** The transport used for the Live session. Always `sip`. */
     val type: LiveSessionCreateResponseTransportVariant1TypeEnum
 ) : LiveSessionCreateResponseTransport
 
 /**
- * WebRTC transport with an SDP answer, or SIP transport without SDP or trunk credentials. For SIP, attach a sideband using session.id to receive transport.ringing, transport.answered, and transport.failed notifications.
+ * WebRTC transport with an SDP answer, or SIP transport without SDP or trunk credentials. For SIP,
+ * attach a sideband using session.id to receive transport.ringing, transport.answered, and
+ * transport.failed notifications.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveSessionCreateResponseTransport::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveSessionCreateResponseTransport::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveWebRTCTransport::class, name = "webrtc"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveSessionCreateResponseTransportVariant1::class, name = "sip")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveWebRTCTransport::class,
+        name = "webrtc",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveSessionCreateResponseTransportVariant1::class,
+        name = "sip",
+    ),
 )
 sealed interface LiveSessionCreateResponseTransport
 
-/** A [LiveSessionCreateResponseTransport] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveSessionCreateResponseTransport @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveSessionCreateResponseTransport] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveSessionCreateResponseTransport
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveSessionCreateResponseTransport {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The resolved Live session configuration and server-assigned session metadata.
- */
+/** The resolved Live session configuration and server-assigned session metadata. */
 data class LiveSessionResourceParam(
     /**
-     * The Live model. Required in the session configuration for every transport; do not pass it as a URL query parameter.
+     * The Live model. Required in the session configuration for every transport; do not pass it as
+     * a URL query parameter.
      */
     val model: ModelIdsLive,
     /**
-     * The unique ID of the Live session. Use this ID for sideband connections, forking, and recording download.
+     * The unique ID of the Live session. Use this ID for sideband connections, forking, and
+     * recording download.
      */
     val id: String,
-    /**
-     * The Unix timestamp, in seconds, at which the Live session expires.
-     */
+    /** The Unix timestamp, in seconds, at which the Live session expires. */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
     /**
-     * The status of the session snapshot. Always `active`, including the final snapshot in session.closed; use the event type to determine that the session has closed.
+     * The status of the session snapshot. Always `active`, including the final snapshot in
+     * session.closed; use the event type to determine that the session has closed.
      */
     val status: LiveSessionResourceParamStatusEnum,
-    /**
-     * Optional `string` value serialized in the `instructions` wire field.
-     */
+    /** Optional `string` value serialized in the `instructions` wire field. */
     val instructions: String? = null,
     /**
-     * Ordered text-only history supplied before startup. Supports developer, user, and assistant messages with one text part each; at most 128 messages and a configured rendered-token limit (8,192 by default).
+     * Ordered text-only history supplied before startup. Supports developer, user, and assistant
+     * messages with one text part each; at most 128 messages and a configured rendered-token limit
+     * (8,192 by default).
      */
     val input: List<LiveInitialItem>? = null,
     /**
-     * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP negotiate their media format. Voice and format are immutable after startup.
+     * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP
+     * negotiate their media format. Voice and format are immutable after startup.
      */
     val audio: LiveInitialSessionAudioParam? = null,
     /**
-     * Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` or `decisions` to delegate to the corresponding API.
+     * Who handles tasks delegated by the Live model. Omitted or null selects your application; use
+     * `responses` or `decisions` to delegate to the corresponding API.
      */
     val delegation: LiveSessionResourceParamDelegation? = null,
     /**
-     * At most one Decisions trigger per transcript event type. Triggers run independently of delegation. On update, omit triggers to keep the current configuration, send a list to replace it, or send an empty list to disable triggers.
+     * At most one Decisions trigger per transcript event type. Triggers run independently of
+     * delegation. On update, omit triggers to keep the current configuration, send a list to
+     * replace it, or send an empty list to disable triggers.
      */
     val triggers: List<LiveDecisionTriggerInputParam2>? = null,
     /**
-     * Whether to store the session for later forking and recording download. Defaults to false for new sessions.
+     * Whether to store the session for later forking and recording download. Defaults to false for
+     * new sessions.
      */
     val store: Boolean? = null,
     /**
-     * Startup-only capabilities for an untrusted frontend attached to a unified WebRTC session. Trusted sideband connections are unaffected.
+     * Startup-only capabilities for an untrusted frontend attached to a unified WebRTC session.
+     * Trusted sideband connections are unaffected.
      */
-    val client: LiveClientConfigParam? = null
+    val client: LiveClientConfigParam? = null,
 )
 
 /**
- * Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` or `decisions` to delegate to the corresponding API.
+ * Who handles tasks delegated by the Live model. Omitted or null selects your application; use
+ * `responses` or `decisions` to delegate to the corresponding API.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveSessionResourceParamDelegation::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveSessionResourceParamDelegation::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveClientDelegationParam::class, name = "client"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponsesDelegationParam::class, name = "responses"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionsDelegationParam2::class, name = "decisions")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveClientDelegationParam::class,
+        name = "client",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveResponsesDelegationParam::class,
+        name = "responses",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionsDelegationParam2::class,
+        name = "decisions",
+    ),
 )
 sealed interface LiveSessionResourceParamDelegation
 
-/** A [LiveSessionResourceParamDelegation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveSessionResourceParamDelegation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveSessionResourceParamDelegation] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveSessionResourceParamDelegation
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveSessionResourceParamDelegation {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Changes to an active Live session's delegation settings and transcript triggers.
- */
+/** Changes to an active Live session's delegation settings and transcript triggers. */
 data class LiveSessionUpdateParams(
     /**
-     * Delegation settings to update. The delegation type must match the current session; omitted settings retain their values.
+     * Delegation settings to update. The delegation type must match the current session; omitted
+     * settings retain their values.
      */
     val delegation: LiveSessionUpdateParamsDelegation? = null,
     /**
-     * At most one Decisions trigger per transcript event type. Triggers run independently of delegation. On update, omit triggers to keep the current configuration, send a list to replace it, or send an empty list to disable triggers.
+     * At most one Decisions trigger per transcript event type. Triggers run independently of
+     * delegation. On update, omit triggers to keep the current configuration, send a list to
+     * replace it, or send an empty list to disable triggers.
      */
-    val triggers: List<LiveDecisionTriggerInputParam2>? = null
+    val triggers: List<LiveDecisionTriggerInputParam2>? = null,
 )
 
 /**
- * Delegation settings to update. The delegation type must match the current session; omitted settings retain their values.
+ * Delegation settings to update. The delegation type must match the current session; omitted
+ * settings retain their values.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveSessionUpdateParamsDelegation::class)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveSessionUpdateParamsDelegation::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveClientDelegationParam::class, name = "client"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveResponsesDelegationUpdateParam::class, name = "responses"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveDecisionsDelegationUpdateParam::class, name = "decisions")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveClientDelegationParam::class,
+        name = "client",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveResponsesDelegationUpdateParam::class,
+        name = "responses",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveDecisionsDelegationUpdateParam::class,
+        name = "decisions",
+    ),
 )
 sealed interface LiveSessionUpdateParamsDelegation
 
-/** A [LiveSessionUpdateParamsDelegation] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveSessionUpdateParamsDelegation @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveSessionUpdateParamsDelegation] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveSessionUpdateParamsDelegation
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveSessionUpdateParamsDelegation {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Cumulative audio duration for a Live session. Values are totals for the session, not increments to sum across usage events.
+ * Cumulative audio duration for a Live session. Values are totals for the session, not increments
+ * to sum across usage events.
  */
 data class LiveSessionUsage(
-    /**
-     * The cumulative Live audio duration in seconds. Do not sum this value across usage events.
-     */
+    /** The cumulative Live audio duration in seconds. Do not sum this value across usage events. */
     val seconds: Double
 )
 
 /**
- * Place an outbound SIP call using your provider's trunk. Outbound SIP calling must be enabled for your organization. The trunk must support TLS signaling, Opus audio, and SDES-SRTP media. See Telephony and SIP.
+ * Place an outbound SIP call using your provider's trunk. Outbound SIP calling must be enabled for
+ * your organization. The trunk must support TLS signaling, Opus audio, and SDES-SRTP media. See
+ * Telephony and SIP.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveSIPTransport(
-    /**
-     * The transport used for the Live session. Always `sip`.
-     */
+    /** The transport used for the Live session. Always `sip`. */
     val type: LiveSIPTransportTypeEnum,
-    /**
-     * Phone number to call in E.164 format. SIP URI destinations are not supported.
-     */
+    /** Phone number to call in E.164 format. SIP URI destinations are not supported. */
     val destination: String,
     /**
-     * SIP trunk configuration supplied for this call. Keep trunk credentials on your server. The creation response does not return this configuration.
+     * SIP trunk configuration supplied for this call. Keep trunk credentials on your server. The
+     * creation response does not return this configuration.
      */
-    val trunk: LiveSIPTrunk
+    val trunk: LiveSIPTrunk,
 ) : LiveSessionCreateRequestTransport
 
 /**
- * Place an outbound SIP call using your provider's trunk. Outbound SIP calling must be enabled for your organization. The trunk must support TLS signaling, Opus audio, and SDES-SRTP media. See Telephony and SIP.
+ * Place an outbound SIP call using your provider's trunk. Outbound SIP calling must be enabled for
+ * your organization. The trunk must support TLS signaling, Opus audio, and SDES-SRTP media. See
+ * Telephony and SIP.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveSIPTransportRequest(
-    /**
-     * The transport used for the Live session. Always `sip`.
-     */
+    /** The transport used for the Live session. Always `sip`. */
     val type: LiveSIPTransportRequestTypeEnum,
-    /**
-     * Phone number to call in E.164 format. SIP URI destinations are not supported.
-     */
+    /** Phone number to call in E.164 format. SIP URI destinations are not supported. */
     val destination: String,
     /**
-     * SIP trunk configuration supplied for this call. Keep trunk credentials on your server. The creation response does not return this configuration.
+     * SIP trunk configuration supplied for this call. Keep trunk credentials on your server. The
+     * creation response does not return this configuration.
      */
-    val trunk: LiveSIPTrunkRequest
+    val trunk: LiveSIPTrunkRequest,
 ) : LiveSessionCreateRequestTransportRequest
 
-/**
- * WebRTC transport carrying the offer SDP in a creation request or answer SDP in its response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** WebRTC transport carrying the offer SDP in a creation request or answer SDP in its response. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveWebRTCTransport(
-    /**
-     * The transport used for the Live session. Always `webrtc`.
-     */
+    /** The transport used for the Live session. Always `webrtc`. */
     val type: LiveWebRTCTransportTypeEnum,
-    /**
-     * Session Description Protocol message for the WebRTC connection.
-     */
-    val sdp: String
-) : LiveSessionCreateRequestTransport, LiveSessionCreateResponseTransport, LiveSessionCreateRequestTransportRequest
+    /** Session Description Protocol message for the WebRTC connection. */
+    val sdp: String,
+) :
+    LiveSessionCreateRequestTransport,
+    LiveSessionCreateResponseTransport,
+    LiveSessionCreateRequestTransportRequest
