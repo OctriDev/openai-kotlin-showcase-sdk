@@ -4786,7 +4786,9 @@
             ],
             "client": {
               "data_channel": {
-                "allowed_client_events": "all",
+                "allowed_client_events": [
+                  "error"
+                ],
                 "allowed_server_events": "all"
               }
             }
@@ -4812,7 +4814,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"session\":{\"model\":\"gpt-live-1\",\"instructions\":\"instructions\",\"audio\":{\"output\":{\"voice\":{\"id\":\"id-1\"}}},\"delegation\":{\"type\":\"client\"},\"triggers\":[{\"type\":\"decisions\",\"event_type\":\"session.input_transcript.delta\",\"decisions\":{\"questions\":[{\"type\":\"choice\",\"name\":\"Example Name\",\"instructions\":\"instructions\",\"choices\":[{\"value\":\"value\",\"description\":\"string\"},{\"value\":\"value\",\"description\":\"string\"}]}]}}],\"store\":false,\"input\":[{\"id\":\"id-1\",\"type\":\"message\",\"status\":\"incomplete\",\"role\":\"developer\",\"content\":[{\"type\":\"input_text\",\"text\":\"text\"}]}],\"client\":{\"data_channel\":{\"allowed_client_events\":\"all\",\"allowed_server_events\":\"all\"}}},\"transport\":{\"type\":\"webrtc\",\"sdp\":\"x\"}}",
+        "bodyText": "{\"session\":{\"model\":\"gpt-live-1\",\"instructions\":\"instructions\",\"audio\":{\"output\":{\"voice\":{\"id\":\"id-1\"}}},\"delegation\":{\"type\":\"client\"},\"triggers\":[{\"type\":\"decisions\",\"event_type\":\"session.input_transcript.delta\",\"decisions\":{\"questions\":[{\"type\":\"choice\",\"name\":\"Example Name\",\"instructions\":\"instructions\",\"choices\":[{\"value\":\"value\",\"description\":\"string\"},{\"value\":\"value\",\"description\":\"string\"}]}]}}],\"store\":false,\"input\":[{\"id\":\"id-1\",\"type\":\"message\",\"status\":\"incomplete\",\"role\":\"developer\",\"content\":[{\"type\":\"input_text\",\"text\":\"text\"}]}],\"client\":{\"data_channel\":{\"allowed_client_events\":[\"error\"],\"allowed_server_events\":\"all\"}}},\"transport\":{\"type\":\"webrtc\",\"sdp\":\"x\"}}",
         "multipartFields": null
       },
       "response": {
@@ -4983,7 +4985,9 @@
             },
             "client": {
               "data_channel": {
-                "allowed_client_events": "all",
+                "allowed_client_events": [
+                  "error"
+                ],
                 "allowed_server_events": "all"
               }
             }
@@ -5009,7 +5013,7 @@
         "headers": {
           "content-type": "application/json"
         },
-        "bodyText": "{\"session\":{\"store\":false,\"delegation\":{\"type\":\"responses\",\"responses\":{\"model\":\"model\",\"instructions\":\"instructions\",\"max_output_tokens\":16,\"service_tier\":\"auto\",\"reasoning\":{\"effort\":\"none\",\"summary\":\"concise\"},\"text\":{\"verbosity\":\"low\"},\"tools\":[{\"type\":\"function\",\"name\":\"Example Name\",\"description\":\"example text\",\"parameters\":{},\"strict\":false}],\"tool_choice\":\"auto\",\"parallel_tool_calls\":false}},\"client\":{\"data_channel\":{\"allowed_client_events\":\"all\",\"allowed_server_events\":\"all\"}}},\"transport\":{\"type\":\"webrtc\",\"sdp\":\"x\"}}",
+        "bodyText": "{\"session\":{\"store\":false,\"delegation\":{\"type\":\"responses\",\"responses\":{\"model\":\"model\",\"instructions\":\"instructions\",\"max_output_tokens\":16,\"service_tier\":\"auto\",\"reasoning\":{\"effort\":\"none\",\"summary\":\"concise\"},\"text\":{\"verbosity\":\"low\"},\"tools\":[{\"type\":\"function\",\"name\":\"Example Name\",\"description\":\"example text\",\"parameters\":{},\"strict\":false}],\"tool_choice\":\"auto\",\"parallel_tool_calls\":false}},\"client\":{\"data_channel\":{\"allowed_client_events\":[\"error\"],\"allowed_server_events\":\"all\"}}},\"transport\":{\"type\":\"webrtc\",\"sdp\":\"x\"}}",
         "multipartFields": null
       },
       "response": {

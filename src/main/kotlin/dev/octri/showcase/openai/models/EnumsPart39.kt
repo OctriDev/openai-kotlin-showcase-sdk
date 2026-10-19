@@ -3,30 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** The event type, must be `output_audio_buffer.clear`. */
-class RealtimeBetaClientEventOutputAudioBufferClearTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is RealtimeBetaClientEventOutputAudioBufferClearTypeEnum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField
-        val OUTPUT_AUDIO_BUFFER_CLEAR =
-            RealtimeBetaClientEventOutputAudioBufferClearTypeEnum("output_audio_buffer.clear")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = RealtimeBetaClientEventOutputAudioBufferClearTypeEnum(value)
-    }
-}
-
 /** The event type, must be `response.cancel`. */
 class RealtimeBetaClientEventResponseCancelTypeEnum
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -753,5 +729,29 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmStatic
         fun fromValue(value: String) =
             RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum(value)
+    }
+}
+
+/** The event type, must be `mcp_list_tools.completed`. */
+class RealtimeBetaServerEventMCPListToolsCompletedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventMCPListToolsCompletedTypeEnum && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField
+        val MCP_LIST_TOOLS_COMPLETED =
+            RealtimeBetaServerEventMCPListToolsCompletedTypeEnum("mcp_list_tools.completed")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaServerEventMCPListToolsCompletedTypeEnum(value)
     }
 }

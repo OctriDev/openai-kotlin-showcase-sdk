@@ -3,23 +3,6 @@
 
 package dev.octri.showcase.openai.models
 
-/** The tool type. Always `function`. */
-enum class LiveFunctionToolInputParamTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
-    FUNCTION("function");
-
-    override fun toString() = value
-
-    companion object {
-        @com.fasterxml.jackson.annotation.JsonCreator
-        @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
 /** Automatically creates a container for this request */
 enum class LiveHostedShellContainerAutoParamTypeEnum(
     @com.fasterxml.jackson.annotation.JsonValue val value: String
@@ -638,6 +621,23 @@ enum class LiveOutputAudioDeltaTypeEnum(
     @com.fasterxml.jackson.annotation.JsonValue val value: String
 ) {
     SESSION_OUTPUT_AUDIO_DELTA("session.output_audio.delta");
+
+    override fun toString() = value
+
+    companion object {
+        @com.fasterxml.jackson.annotation.JsonCreator
+        @JvmStatic
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/** Required enumerated value serialized in the `type` wire field. */
+enum class LiveOutputAudioFixturePlayedTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
+    SESSION_OUTPUT_AUDIO_FIXTURE_PLAYED("session.output_audio.fixture.played");
 
     override fun toString() = value
 

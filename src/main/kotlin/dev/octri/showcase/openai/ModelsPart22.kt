@@ -3,9 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias UpdateProjectServiceAccountBody =
-    dev.octri.showcase.openai.models.UpdateProjectServiceAccountBody
-
 typealias UpdateProjectServiceAccountBodyRoleEnum =
     dev.octri.showcase.openai.models.UpdateProjectServiceAccountBodyRoleEnum
 
@@ -536,3 +533,6 @@ typealias WebhookAgentEnvironmentFailedVariant1TypeEnum =
 
 typealias WebhookAgentEnvironmentReady =
     dev.octri.showcase.openai.models.WebhookAgentEnvironmentReady
+
+typealias WebhookAgentEnvironmentReadyVariant1TypeEnum =
+    dev.octri.showcase.openai.models.WebhookAgentEnvironmentReadyVariant1TypeEnum

@@ -3,9 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias RealtimeTranslationClientEventSessionUpdateTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationClientEventSessionUpdateTypeEnum
-
 typealias RealtimeTranslationClientSecretCreateRequest =
     dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequest
 
@@ -595,3 +592,6 @@ typealias ResponseShellCallCommandDeltaStreamingEventTypeEnum =
 
 typealias ResponseShellCallCommandDoneStreamingEvent =
     dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEvent
+
+typealias ResponseShellCallCommandDoneStreamingEventTypeEnum =
+    dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum

@@ -3,9 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias LiveInitialDeveloperMessageItemParamRoleEnum =
-    dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamRoleEnum
-
 typealias LiveInitialDeveloperMessageItemParamTypeEnum =
     dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamTypeEnum
 
@@ -549,3 +546,5 @@ typealias MCPApprovalResponseTypeEnum = dev.octri.showcase.openai.models.MCPAppr
 typealias McpCallItemResource = dev.octri.showcase.openai.models.McpCallItemResource
 
 typealias McpCallItemResourceTypeEnum = dev.octri.showcase.openai.models.McpCallItemResourceTypeEnum
+
+typealias McpConnectionOriginParam = dev.octri.showcase.openai.models.McpConnectionOriginParam

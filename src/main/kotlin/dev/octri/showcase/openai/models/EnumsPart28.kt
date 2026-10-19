@@ -597,29 +597,6 @@ enum class LiveCustomToolInputParamTypeEnum(
     }
 }
 
-/** Optional enumerated value serialized in the `allowed_client_events` wire field. */
-class LiveDataChannelConfigParamAllowedClientEventsVariant0Enum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is LiveDataChannelConfigParamAllowedClientEventsVariant0Enum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val ALL = LiveDataChannelConfigParamAllowedClientEventsVariant0Enum("all")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) =
-            LiveDataChannelConfigParamAllowedClientEventsVariant0Enum(value)
-    }
-}
-
 /** Optional enumerated value serialized in the `allowed_server_events` wire field. */
 class LiveDataChannelConfigParamAllowedServerEventsVariant0Enum
 private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
@@ -657,5 +634,27 @@ enum class LiveDecisionChoiceQuestionParamTypeEnum(
         fun fromValue(v: String) =
             values().find { it.value == v }
                 ?: throw IllegalArgumentException("Unknown enum value: $v")
+    }
+}
+
+/** Required enumerated value serialized in the `type` wire field. */
+class LiveDecisionCompletedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is LiveDecisionCompletedTypeEnum && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val DECISION_COMPLETED = LiveDecisionCompletedTypeEnum("decision.completed")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = LiveDecisionCompletedTypeEnum(value)
     }
 }

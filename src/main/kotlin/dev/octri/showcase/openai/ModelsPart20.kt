@@ -3,9 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias StaticChunkingStrategyResponseParamTypeEnum =
-    dev.octri.showcase.openai.models.StaticChunkingStrategyResponseParamTypeEnum
-
 typealias StopConfiguration = dev.octri.showcase.openai.models.StopConfiguration
 
 typealias Store = dev.octri.showcase.openai.models.Store
@@ -523,3 +520,6 @@ typealias UnknownBetaPromptCacheDiagnostics =
 
 typealias UnknownBetaResponsesClientEvent =
     dev.octri.showcase.openai.models.UnknownBetaResponsesClientEvent
+
+typealias UnknownBetaResponsesServerEvent =
+    dev.octri.showcase.openai.models.UnknownBetaResponsesServerEvent

@@ -3,9 +3,6 @@
 
 package dev.octri.showcase.openai
 
-typealias WebhookAgentEnvironmentReadyVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentEnvironmentReadyVariant1TypeEnum
-
 typealias WebhookAgentEnvironmentSuspended =
     dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspended
 

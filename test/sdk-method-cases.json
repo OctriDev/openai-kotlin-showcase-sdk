@@ -9221,7 +9221,9 @@
           ],
           "client": {
             "data_channel": {
-              "allowed_client_events": "all",
+              "allowed_client_events": [
+                "error"
+              ],
               "allowed_server_events": "all"
             }
           }
@@ -9318,7 +9320,9 @@
           ],
           "client": {
             "data_channel": {
-              "allowed_client_events": "all",
+              "allowed_client_events": [
+                "error"
+              ],
               "allowed_server_events": "all"
             }
           }
@@ -18318,7 +18322,9 @@
           },
           "client": {
             "data_channel": {
-              "allowed_client_events": "all",
+              "allowed_client_events": [
+                "error"
+              ],
               "allowed_server_events": "all"
             }
           }
@@ -18396,7 +18402,9 @@
           },
           "client": {
             "data_channel": {
-              "allowed_client_events": "all",
+              "allowed_client_events": [
+                "error"
+              ],
               "allowed_server_events": "all"
             }
           }
@@ -34428,7 +34436,9 @@
       "owner": "dev.octri.showcase.openai.methods.VectorStores",
       "arguments": {
         "vectorStoreId": "vs_abc123",
-        "query": "query",
+        "query": [
+          "query"
+        ],
         "rewriteQuery": false,
         "maxNumResults": 10,
         "filters": {
@@ -34497,7 +34507,9 @@
       "owner": "dev.octri.showcase.openai.methods.VectorStores",
       "arguments": {
         "vectorStoreId": "vs_abc123",
-        "query": "query",
+        "query": [
+          "query"
+        ],
         "rewriteQuery": false,
         "maxNumResults": 10,
         "filters": {
