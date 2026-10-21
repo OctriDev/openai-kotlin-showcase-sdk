@@ -3,38 +3,25 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required object value serialized in the `data[]` wire field.
- */
+/** Required object value serialized in the `data[]` wire field. */
 data class VectorStoreFileContentResponseDataItem(
-    /**
-     * The content type (currently only `"text"`)
-     */
+    /** The content type (currently only `"text"`) */
     val type: String? = null,
-    /**
-     * The text content
-     */
-    val text: String? = null
+    /** The text content */
+    val text: String? = null,
 )
 
-/**
- * Represents the parsed content of a vector store file.
- */
+/** Represents the parsed content of a vector store file. */
 data class VectorStoreFileContentResponse(
-    /**
-     * The object type, which is always `vector_store.file_content.page`
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VectorStoreFileContentResponseObjectEnum,
-    /**
-     * Parsed content of the file.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreFileContentResponseDataItem>,
-    /**
-     * Indicates if there are more content pages to fetch.
-     */
+    /** The object type, which is always `vector_store.file_content.page` */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VectorStoreFileContentResponseObjectEnum,
+    /** Parsed content of the file. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<VectorStoreFileContentResponseDataItem>,
+    /** Indicates if there are more content pages to fetch. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Required `string` value serialized in the `next_page` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true) val nextPage: String?
+    /** Required `string` value serialized in the `next_page` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true)
+    val nextPage: String?,
 )

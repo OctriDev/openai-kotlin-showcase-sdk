@@ -3,20 +3,13 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `VoiceConsentDeletedResource` API schema.
- */
+/** Typed representation of the `VoiceConsentDeletedResource` API schema. */
 data class VoiceConsentDeletedResource(
-    /**
-     * The consent recording identifier.
-     */
+    /** The consent recording identifier. */
     val id: String,
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VoiceConsentDeletedResourceObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
-    val deleted: Boolean
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VoiceConsentDeletedResourceObjectEnum,
+    /** Required `boolean` value serialized in the `deleted` wire field. */
+    val deleted: Boolean,
 )

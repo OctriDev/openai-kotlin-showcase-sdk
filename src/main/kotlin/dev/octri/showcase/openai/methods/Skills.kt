@@ -18,60 +18,109 @@ import dev.octri.showcase.openai.Validation
 
 object Skills {
 
-
     /**
-     * Creates a new skill from uploaded files or a ZIP archive. Include `files` with the skill contents, either as a directory upload or a single ZIP file. The response includes the created skill and its version identifiers.
+     * Creates a new skill from uploaded files or a ZIP archive. Include `files` with the skill
+     * contents, either as a directory upload or a single ZIP file. The response includes the
+     * created skill and its version identifiers.
      *
      * Create a new skill.
      *
      * @param files Skill files to upload (directory upload) or a single zip file.
      */
-    fun createSkill(clientConfig: ClientConfig, files: List<ByteArray>, contentType: String? = null, options: RequestOptions? = null): SkillResource {
+    fun createSkill(
+        clientConfig: ClientConfig,
+        files: List<ByteArray>,
+        contentType: String? = null,
+        options: RequestOptions? = null,
+    ): SkillResource {
         Validation.validateItems("files", files, Validation.LengthOpts(max = 500))
 
-        return SdkClient.request<SkillResource>(SdkClient.RequestSpec("POST", "/skills", config = clientConfig, body = SdkClient.bodyMap("files" to (files)), contentType = contentType ?: "application/json", operationId = "createSkill", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+        return SdkClient.request<SkillResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/skills",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("files" to (files)),
+                    contentType = contentType ?: "application/json",
+                    operationId = "createSkill",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists skills available in the current project. Use `limit` to control the number of results, `order` to sort them, and `after` to continue from a previous result.
+     * Lists skills available in the current project. Use `limit` to control the number of results,
+     * `order` to sort them, and `after` to continue from a previous result.
      *
      * List all skills for the current project.
      *
      * @param limit Number of items to retrieve
-     * @param order Sort order of results by timestamp. Use `asc` for ascending order
-     *   or `desc` for descending order.
+     * @param order Sort order of results by timestamp. Use `asc` for ascending order or `desc` for
+     *   descending order.
      * @param after Identifier for the last item from the previous pagination request
      */
-    fun listSkills(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null): SkillListResource {
+    fun listSkills(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: OrderEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SkillListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<SkillListResource>(SdkClient.RequestSpec("GET", "/skills", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listSkills", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+        return SdkClient.request<SkillListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/skills",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                        ),
+                    operationId = "listSkills",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists skills available in the current project. Use `limit` to control the number of results, `order` to sort them, and `after` to continue from a previous result.
+     * Lists skills available in the current project. Use `limit` to control the number of results,
+     * `order` to sort them, and `after` to continue from a previous result.
      *
      * List all skills for the current project.
      *
      * @param limit Number of items to retrieve
-     * @param order Sort order of results by timestamp. Use `asc` for ascending order
-     *   or `desc` for descending order.
+     * @param order Sort order of results by timestamp. Use `asc` for ascending order or `desc` for
+     *   descending order.
      * @param after Identifier for the last item from the previous pagination request
      */
-    fun listSkillsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SkillResource) -> Boolean) {
+    fun listSkillsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: OrderEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SkillResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listSkills(clientConfig, limit, order, cursor, options)
@@ -92,7 +141,14 @@ object Skills {
         val hasMore: Boolean,
     )
 
-    fun listSkillsPages(clientConfig: ClientConfig, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListSkillsPage) -> Boolean) {
+    fun listSkillsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: OrderEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListSkillsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listSkills(clientConfig, limit, order, cursor, options)
@@ -106,79 +162,138 @@ object Skills {
         }
     }
 
-
-
     /**
-     * Deletes a skill by its identifier. Use `skill_id` to select the skill to remove. The response confirms whether the skill was deleted and includes its identifier.
+     * Deletes a skill by its identifier. Use `skill_id` to select the skill to remove. The response
+     * confirms whether the skill was deleted and includes its identifier.
      *
      * Delete a skill by its ID.
      *
      * @param skillId The identifier of the skill to delete.
      */
-    fun deleteSkill(clientConfig: ClientConfig, skillId: String, options: RequestOptions? = null): DeletedSkillResource {
-        return SdkClient.request<DeletedSkillResource>(SdkClient.RequestSpec("DELETE", "/skills/${SdkClient.encodePathSegment(skillId)}", config = clientConfig, operationId = "deleteSkill", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteSkill(
+        clientConfig: ClientConfig,
+        skillId: String,
+        options: RequestOptions? = null,
+    ): DeletedSkillResource {
+        return SdkClient.request<DeletedSkillResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}",
+                    config = clientConfig,
+                    operationId = "deleteSkill",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a skill by its identifier. Use `skill_id` to select the skill whose details you need.
+     * Retrieves a skill by its identifier. Use `skill_id` to select the skill whose details you
+     * need.
      *
      * Get a skill by its ID.
      *
      * @param skillId The identifier of the skill to retrieve.
      */
-    fun getSkill(clientConfig: ClientConfig, skillId: String, options: RequestOptions? = null): SkillResource {
-        return SdkClient.request<SkillResource>(SdkClient.RequestSpec("GET", "/skills/${SdkClient.encodePathSegment(skillId)}", config = clientConfig, operationId = "getSkill", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun getSkill(
+        clientConfig: ClientConfig,
+        skillId: String,
+        options: RequestOptions? = null,
+    ): SkillResource {
+        return SdkClient.request<SkillResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}",
+                    config = clientConfig,
+                    operationId = "getSkill",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the default version pointer for a skill. Provide `default_version` to select the version that should be the skill's default. The response contains the updated skill details.
+     * Updates the default version pointer for a skill. Provide `default_version` to select the
+     * version that should be the skill's default. The response contains the updated skill details.
      *
      * Update the default version pointer for a skill.
      *
      * @param skillId The identifier of the skill.
      * @param defaultVersion The skill version number to set as default.
      */
-    fun updateSkillDefaultVersion(clientConfig: ClientConfig, skillId: String, defaultVersion: String, options: RequestOptions? = null): SkillResource {
-        return SdkClient.request<SkillResource>(SdkClient.RequestSpec("POST", "/skills/${SdkClient.encodePathSegment(skillId)}", config = clientConfig, body = SdkClient.bodyMap("default_version" to (defaultVersion)), operationId = "updateSkillDefaultVersion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun updateSkillDefaultVersion(
+        clientConfig: ClientConfig,
+        skillId: String,
+        defaultVersion: String,
+        options: RequestOptions? = null,
+    ): SkillResource {
+        return SdkClient.request<SkillResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("default_version" to (defaultVersion)),
+                    operationId = "updateSkillDefaultVersion",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves the ZIP bundle for a skill. Use `skill_id` to select the skill whose files you want to download.
+     * Retrieves the ZIP bundle for a skill. Use `skill_id` to select the skill whose files you want
+     * to download.
      *
      * Download a skill zip bundle by its ID.
      *
      * @param skillId The identifier of the skill to download.
      */
-    fun getSkillContent(clientConfig: ClientConfig, skillId: String, options: RequestOptions? = null): ByteArray {
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/skills/${SdkClient.encodePathSegment(skillId)}/content", config = clientConfig, operationId = "getSkillContent", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun getSkillContent(
+        clientConfig: ClientConfig,
+        skillId: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
+        return SdkClient.request<ByteArray>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}/content",
+                    config = clientConfig,
+                    operationId = "getSkillContent",
+                    decoder = SdkClient.ResponseDecoder.BYTES,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Creates a new immutable version of a skill from uploaded files or a ZIP archive. Include `files` with the version contents and optionally set `default` to make the new version the default. The response contains the created version details.
+     * Creates a new immutable version of a skill from uploaded files or a ZIP archive. Include
+     * `files` with the version contents and optionally set `default` to make the new version the
+     * default. The response contains the created version details.
      *
      * Create a new immutable skill version.
      *
@@ -186,20 +301,45 @@ object Skills {
      * @param files Skill files to upload (directory upload) or a single zip file.
      * @param default Whether to set this version as the default.
      */
-    fun createSkillVersion(clientConfig: ClientConfig, skillId: String, files: List<ByteArray>, default: Boolean? = null, contentType: String? = null, options: RequestOptions? = null): SkillVersionResource {
+    fun createSkillVersion(
+        clientConfig: ClientConfig,
+        skillId: String,
+        files: List<ByteArray>,
+        default: Boolean? = null,
+        contentType: String? = null,
+        options: RequestOptions? = null,
+    ): SkillVersionResource {
         Validation.validateItems("files", files, Validation.LengthOpts(max = 500))
 
-        return SdkClient.request<SkillVersionResource>(SdkClient.RequestSpec("POST", "/skills/${SdkClient.encodePathSegment(skillId)}/versions", config = clientConfig, body = SdkClient.bodyMap("files" to (files), "default" to (SdkClient.omitIfNull(default))), contentType = contentType ?: "application/json", operationId = "createSkillVersion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+        return SdkClient.request<SkillVersionResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}/versions",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "files" to (files),
+                            "default" to (SdkClient.omitIfNull(default)),
+                        ),
+                    contentType = contentType ?: "application/json",
+                    operationId = "createSkillVersion",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to control the number of results, and `order` to sort by version number.
+     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to
+     * control the number of results, and `order` to sort by version number.
      *
      * List skill versions for a skill.
      *
@@ -208,21 +348,46 @@ object Skills {
      * @param order Sort order of results by version number.
      * @param after The skill version ID to start after.
      */
-    fun listSkillVersions(clientConfig: ClientConfig, skillId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null): SkillVersionListResource {
+    fun listSkillVersions(
+        clientConfig: ClientConfig,
+        skillId: String,
+        limit: Long? = null,
+        order: OrderEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SkillVersionListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<SkillVersionListResource>(SdkClient.RequestSpec("GET", "/skills/${SdkClient.encodePathSegment(skillId)}/versions", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listSkillVersions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+        return SdkClient.request<SkillVersionListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}/versions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                        ),
+                    operationId = "listSkillVersions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to control the number of results, and `order` to sort by version number.
+     * Lists versions for a skill. Use `after` to continue from a skill version ID, `limit` to
+     * control the number of results, and `order` to sort by version number.
      *
      * List skill versions for a skill.
      *
@@ -231,7 +396,15 @@ object Skills {
      * @param order Sort order of results by version number.
      * @param after The skill version ID to start after.
      */
-    fun listSkillVersionsPaginated(clientConfig: ClientConfig, skillId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SkillVersionResource) -> Boolean) {
+    fun listSkillVersionsPaginated(
+        clientConfig: ClientConfig,
+        skillId: String,
+        limit: Long? = null,
+        order: OrderEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SkillVersionResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listSkillVersions(clientConfig, skillId, limit, order, cursor, options)
@@ -252,7 +425,15 @@ object Skills {
         val hasMore: Boolean,
     )
 
-    fun listSkillVersionsPages(clientConfig: ClientConfig, skillId: String, limit: Long? = null, order: OrderEnum? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListSkillVersionsPage) -> Boolean) {
+    fun listSkillVersionsPages(
+        clientConfig: ClientConfig,
+        skillId: String,
+        limit: Long? = null,
+        order: OrderEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListSkillVersionsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listSkillVersions(clientConfig, skillId, limit, order, cursor, options)
@@ -266,60 +447,106 @@ object Skills {
         }
     }
 
-
-
     /**
-     * Retrieves a specific version of a skill. Provide `skill_id` to identify the skill and `version` to select the version to retrieve.
+     * Retrieves a specific version of a skill. Provide `skill_id` to identify the skill and
+     * `version` to select the version to retrieve.
      *
      * Get a specific skill version.
      *
      * @param skillId The identifier of the skill.
      * @param version The version number to retrieve.
      */
-    fun getSkillVersion(clientConfig: ClientConfig, skillId: String, version: String, options: RequestOptions? = null): SkillVersionResource {
-        return SdkClient.request<SkillVersionResource>(SdkClient.RequestSpec("GET", "/skills/${SdkClient.encodePathSegment(skillId)}/versions/${SdkClient.encodePathSegment(version)}", config = clientConfig, operationId = "getSkillVersion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun getSkillVersion(
+        clientConfig: ClientConfig,
+        skillId: String,
+        version: String,
+        options: RequestOptions? = null,
+    ): SkillVersionResource {
+        return SdkClient.request<SkillVersionResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}/versions/${SdkClient.encodePathSegment(version)}",
+                    config = clientConfig,
+                    operationId = "getSkillVersion",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes a version of a skill. Use `skill_id` and `version` to select the version to remove. You cannot delete the default version while other versions remain.
+     * Deletes a version of a skill. Use `skill_id` and `version` to select the version to remove.
+     * You cannot delete the default version while other versions remain.
      *
      * Delete a skill version.
      *
      * @param skillId The identifier of the skill.
      * @param version The skill version number.
      */
-    fun deleteSkillVersion(clientConfig: ClientConfig, skillId: String, version: String, options: RequestOptions? = null): DeletedSkillVersionResource {
-        return SdkClient.request<DeletedSkillVersionResource>(SdkClient.RequestSpec("DELETE", "/skills/${SdkClient.encodePathSegment(skillId)}/versions/${SdkClient.encodePathSegment(version)}", config = clientConfig, operationId = "deleteSkillVersion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteSkillVersion(
+        clientConfig: ClientConfig,
+        skillId: String,
+        version: String,
+        options: RequestOptions? = null,
+    ): DeletedSkillVersionResource {
+        return SdkClient.request<DeletedSkillVersionResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}/versions/${SdkClient.encodePathSegment(version)}",
+                    config = clientConfig,
+                    operationId = "deleteSkillVersion",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves the ZIP bundle for a specific skill version. Use `skill_id` and `version` to identify the skill and version whose content you need. The response provides the bundle as a downloadable binary file.
+     * Retrieves the ZIP bundle for a specific skill version. Use `skill_id` and `version` to
+     * identify the skill and version whose content you need. The response provides the bundle as a
+     * downloadable binary file.
      *
      * Download a skill version zip bundle.
      *
      * @param skillId The identifier of the skill.
      * @param version The skill version number.
      */
-    fun getSkillVersionContent(clientConfig: ClientConfig, skillId: String, version: String, options: RequestOptions? = null): ByteArray {
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/skills/${SdkClient.encodePathSegment(skillId)}/versions/${SdkClient.encodePathSegment(version)}/content", config = clientConfig, operationId = "getSkillVersionContent", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun getSkillVersionContent(
+        clientConfig: ClientConfig,
+        skillId: String,
+        version: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
+        return SdkClient.request<ByteArray>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/skills/${SdkClient.encodePathSegment(skillId)}/versions/${SdkClient.encodePathSegment(version)}/content",
+                    config = clientConfig,
+                    operationId = "getSkillVersionContent",
+                    decoder = SdkClient.ResponseDecoder.BYTES,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

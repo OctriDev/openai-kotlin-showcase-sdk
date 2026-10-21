@@ -3,16 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ProjectModelPermissionsUpdateRequest` API schema.
- */
+/** Typed representation of the `ProjectModelPermissionsUpdateRequest` API schema. */
 data class ProjectModelPermissionsUpdateRequest(
-    /**
-     * The model permissions mode to apply.
-     */
+    /** The model permissions mode to apply. */
     val mode: ProjectModelPermissionsUpdateRequestModeEnum,
-    /**
-     * The model IDs included in this permissions policy.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_ids") val modelIds: List<String>
+    /** The model IDs included in this permissions policy. */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_ids") val modelIds: List<String>,
 )

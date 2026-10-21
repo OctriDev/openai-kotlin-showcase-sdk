@@ -3,41 +3,79 @@
 
 package dev.octri.showcase.openai
 
-
 class GroupOrganizationRoleAssignmentsNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Lists the organization roles assigned to a group within the organization.
-     */
-    fun listGroupRoleAssignments(groupId: String, limit: Long? = null, after: String? = null, order: ListGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null): RoleListResource {
-        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.listGroupRoleAssignments(clientConfig, groupId, limit, after, order, options)
+    /** Lists the organization roles assigned to a group within the organization. */
+    fun listGroupRoleAssignments(
+        groupId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListGroupRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): RoleListResource {
+        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments
+            .listGroupRoleAssignments(clientConfig, groupId, limit, after, order, options)
     }
 
-    /**
-     * Lists the organization roles assigned to a group within the organization.
-     */
-    fun listGroupRoleAssignmentsPaginated(groupId: String, limit: Long? = null, after: String? = null, order: ListGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (AssignedRoleDetails) -> Boolean) {
-        dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.listGroupRoleAssignmentsPaginated(clientConfig, groupId, limit, after, order, options, yieldFn)
+    /** Lists the organization roles assigned to a group within the organization. */
+    fun listGroupRoleAssignmentsPaginated(
+        groupId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListGroupRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AssignedRoleDetails) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments
+            .listGroupRoleAssignmentsPaginated(
+                clientConfig,
+                groupId,
+                limit,
+                after,
+                order,
+                options,
+                yieldFn,
+            )
     }
 
-    /**
-     * Assigns an organization role to a group within the organization.
-     */
-    fun assignGroupRole(groupId: String, roleId: String, options: RequestOptions? = null): GroupRoleAssignment {
-        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.assignGroupRole(clientConfig, groupId, roleId, options)
+    /** Assigns an organization role to a group within the organization. */
+    fun assignGroupRole(
+        groupId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): GroupRoleAssignment {
+        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.assignGroupRole(
+            clientConfig,
+            groupId,
+            roleId,
+            options,
+        )
     }
 
-    /**
-     * Retrieves an organization role assigned to a group.
-     */
-    fun retrieveGroupRole(groupId: String, roleId: String, options: RequestOptions? = null): AssignedRoleDetails {
-        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.retrieveGroupRole(clientConfig, groupId, roleId, options)
+    /** Retrieves an organization role assigned to a group. */
+    fun retrieveGroupRole(
+        groupId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): AssignedRoleDetails {
+        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.retrieveGroupRole(
+            clientConfig,
+            groupId,
+            roleId,
+            options,
+        )
     }
 
-    /**
-     * Unassigns an organization role from a group within the organization.
-     */
-    fun unassignGroupRole(groupId: String, roleId: String, options: RequestOptions? = null): DeletedRoleAssignmentResource {
-        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.unassignGroupRole(clientConfig, groupId, roleId, options)
+    /** Unassigns an organization role from a group within the organization. */
+    fun unassignGroupRole(
+        groupId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): DeletedRoleAssignmentResource {
+        return dev.octri.showcase.openai.methods.GroupOrganizationRoleAssignments.unassignGroupRole(
+            clientConfig,
+            groupId,
+            roleId,
+            options,
+        )
     }
-
 }

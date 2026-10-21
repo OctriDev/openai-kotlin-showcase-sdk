@@ -3,127 +3,116 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Ranking options for search.
- */
+/** Ranking options for search. */
 data class VectorStoreSearchRequestRankingOptions(
-    /**
-     * Enable re-ranking; set to `none` to disable, which can help reduce latency.
-     */
+    /** Enable re-ranking; set to `none` to disable, which can help reduce latency. */
     val ranker: VectorStoreSearchRequestRankingOptionsRankerEnum? = null,
-    /**
-     * Optional `number` value serialized in the `score_threshold` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold") val scoreThreshold: Double? = null
+    /** Optional `number` value serialized in the `score_threshold` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold")
+    val scoreThreshold: Double? = null,
 )
 
-/**
- * Typed representation of the `VectorStoreSearchRequest` API schema.
- */
+/** Typed representation of the `VectorStoreSearchRequest` API schema. */
 data class VectorStoreSearchRequest(
-    /**
-     * A query string for a search
-     */
+    /** A query string for a search */
     val query: List<String>,
-    /**
-     * Whether to rewrite the natural language query for vector search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("rewrite_query") val rewriteQuery: Boolean? = null,
+    /** Whether to rewrite the natural language query for vector search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("rewrite_query")
+    val rewriteQuery: Boolean? = null,
     /**
      * The maximum number of results to return. This number should be between 1 and 50 inclusive.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results") val maxNumResults: Long? = null,
-    /**
-     * A filter to apply based on file attributes.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_num_results")
+    val maxNumResults: Long? = null,
+    /** A filter to apply based on file attributes. */
     val filters: VectorStoreSearchRequestFilters? = null,
-    /**
-     * Ranking options for search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options") val rankingOptions: VectorStoreSearchRequestRankingOptions? = null
+    /** Ranking options for search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ranking_options")
+    val rankingOptions: VectorStoreSearchRequestRankingOptions? = null,
 )
 
-/**
- * A filter to apply based on file attributes.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownVectorStoreSearchRequestFilters::class)
+/** A filter to apply based on file attributes. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownVectorStoreSearchRequestFilters::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CompoundFilter::class, names = ["and", "or"])
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ComparisonFilter::class,
+        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CompoundFilter::class,
+        names = ["and", "or"],
+    ),
 )
 sealed interface VectorStoreSearchRequestFilters
 
-/** A [VectorStoreSearchRequestFilters] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownVectorStoreSearchRequestFilters @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [VectorStoreSearchRequestFilters] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownVectorStoreSearchRequestFilters
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : VectorStoreSearchRequestFilters {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `VectorStoreSearchResultContentObject` API schema.
- */
+/** Typed representation of the `VectorStoreSearchResultContentObject` API schema. */
 data class VectorStoreSearchResultContentObject(
-    /**
-     * The type of content.
-     */
+    /** The type of content. */
     val type: VectorStoreSearchResultContentObjectTypeEnum,
-    /**
-     * The text content returned from search.
-     */
-    val text: String
+    /** The text content returned from search. */
+    val text: String,
 )
 
-/**
- * Typed representation of the `VectorStoreSearchResultItem` API schema.
- */
+/** Typed representation of the `VectorStoreSearchResultItem` API schema. */
 data class VectorStoreSearchResultItem(
-    /**
-     * The ID of the vector store file.
-     */
+    /** The ID of the vector store file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The name of the vector store file.
-     */
+    /** The name of the vector store file. */
     val filename: String,
-    /**
-     * The similarity score for the result.
-     */
+    /** The similarity score for the result. */
     val score: Double,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters, booleans, or numbers.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("attributes", required = true) val attributes: VectorStoreFileAttributes?,
-    /**
-     * Content chunks from the file.
-     */
-    val content: List<VectorStoreSearchResultContentObject>
+    @com.fasterxml.jackson.annotation.JsonProperty("attributes", required = true)
+    val attributes: VectorStoreFileAttributes?,
+    /** Content chunks from the file. */
+    val content: List<VectorStoreSearchResultContentObject>,
 )
 
-/**
- * Typed representation of the `VectorStoreSearchResultsPage` API schema.
- */
+/** Typed representation of the `VectorStoreSearchResultsPage` API schema. */
 data class VectorStoreSearchResultsPage(
-    /**
-     * The object type, which is always `vector_store.search_results.page`
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VectorStoreSearchResultsPageObjectEnum,
-    /**
-     * Required array value serialized in the `search_query` wire field.
-     */
+    /** The object type, which is always `vector_store.search_results.page` */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VectorStoreSearchResultsPageObjectEnum,
+    /** Required array value serialized in the `search_query` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("search_query") val searchQuery: List<String>,
-    /**
-     * The list of search result items.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreSearchResultItem>,
-    /**
-     * Indicates if there are more results to fetch.
-     */
+    /** The list of search result items. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<VectorStoreSearchResultItem>,
+    /** Indicates if there are more results to fetch. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Required `string` value serialized in the `next_page` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true) val nextPage: String?
+    /** Required `string` value serialized in the `next_page` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true)
+    val nextPage: String?,
 )

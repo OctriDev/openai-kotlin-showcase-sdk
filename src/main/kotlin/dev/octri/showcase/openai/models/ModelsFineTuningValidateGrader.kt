@@ -3,66 +3,112 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ValidateGraderRequest` API schema.
- */
+/** Typed representation of the `ValidateGraderRequest` API schema. */
 data class ValidateGraderRequest(
-    /**
-     * The grader used for the fine-tuning job.
-     */
+    /** The grader used for the fine-tuning job. */
     val grader: ValidateGraderRequestGrader
 )
 
-/**
- * The grader used for the fine-tuning job.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownValidateGraderRequestGrader::class)
+/** The grader used for the fine-tuning job. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownValidateGraderRequestGrader::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderStringCheck::class, name = "string_check"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderTextSimilarity::class, name = "text_similarity"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderPython::class, name = "python"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderScoreModel::class, name = "score_model"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderStringCheck::class,
+        name = "string_check",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderTextSimilarity::class,
+        name = "text_similarity",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderPython::class,
+        name = "python",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderScoreModel::class,
+        name = "score_model",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi"),
 )
 sealed interface ValidateGraderRequestGrader
 
-/** A [ValidateGraderRequestGrader] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownValidateGraderRequestGrader @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [ValidateGraderRequestGrader] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownValidateGraderRequestGrader
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ValidateGraderRequestGrader {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `ValidateGraderResponse` API schema.
- */
+/** Typed representation of the `ValidateGraderResponse` API schema. */
 data class ValidateGraderResponse(
-    /**
-     * The grader used for the fine-tuning job.
-     */
+    /** The grader used for the fine-tuning job. */
     val grader: ValidateGraderResponseGrader? = null
 )
 
-/**
- * The grader used for the fine-tuning job.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownValidateGraderResponseGrader::class)
+/** The grader used for the fine-tuning job. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownValidateGraderResponseGrader::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderStringCheck::class, name = "string_check"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderTextSimilarity::class, name = "text_similarity"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderPython::class, name = "python"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderScoreModel::class, name = "score_model"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderStringCheck::class,
+        name = "string_check",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderTextSimilarity::class,
+        name = "text_similarity",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderPython::class,
+        name = "python",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderScoreModel::class,
+        name = "score_model",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi"),
 )
 sealed interface ValidateGraderResponseGrader
 
-/** A [ValidateGraderResponseGrader] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownValidateGraderResponseGrader @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [ValidateGraderResponseGrader] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownValidateGraderResponseGrader
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : ValidateGraderResponseGrader {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

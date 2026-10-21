@@ -3,16 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Parameters for updating a project service account.
- */
+/** Parameters for updating a project service account. */
 data class UpdateProjectServiceAccountBody(
-    /**
-     * The updated service account name.
-     */
+    /** The updated service account name. */
     val name: String? = null,
-    /**
-     * The updated service account role.
-     */
-    val role: UpdateProjectServiceAccountBodyRoleEnum? = null
+    /** The updated service account role. */
+    val role: UpdateProjectServiceAccountBodyRoleEnum? = null,
 )

@@ -3,138 +3,76 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required object value serialized in the `owner` wire field.
- */
+/** Required object value serialized in the `owner` wire field. */
 data class AdminApiKeyOwner(
-    /**
-     * Always `user`
-     */
+    /** Always `user` */
     val type: String? = null,
-    /**
-     * The object type, which is always organization.user
-     */
+    /** The object type, which is always organization.user */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The identifier, which can be referenced in API endpoints
-     */
+    /** The identifier, which can be referenced in API endpoints */
     val id: String? = null,
-    /**
-     * The name of the user
-     */
+    /** The name of the user */
     val name: String? = null,
-    /**
-     * The Unix timestamp (in seconds) of when the user was created
-     */
+    /** The Unix timestamp (in seconds) of when the user was created */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * Always `owner`
-     */
-    val role: String? = null
+    /** Always `owner` */
+    val role: String? = null,
 )
 
-/**
- * Represents an individual Admin API key in an org.
- */
+/** Represents an individual Admin API key in an org. */
 data class AdminApiKey(
-    /**
-     * The object type, which is always `organization.admin_api_key`
-     */
+    /** The object type, which is always `organization.admin_api_key` */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: AdminApiKeyObjectEnum,
-    /**
-     * The identifier, which can be referenced in API endpoints
-     */
+    /** The identifier, which can be referenced in API endpoints */
     val id: String,
-    /**
-     * The redacted value of the API key
-     */
+    /** The redacted value of the API key */
     @com.fasterxml.jackson.annotation.JsonProperty("redacted_value") val redactedValue: String,
-    /**
-     * The Unix timestamp (in seconds) of when the API key was created
-     */
+    /** The Unix timestamp (in seconds) of when the API key was created */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Required API value serialized in the `expires_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true) val expiresAt: Long?,
-    /**
-     * Required object value serialized in the `owner` wire field.
-     */
+    /** Required API value serialized in the `expires_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true)
+    val expiresAt: Long?,
+    /** Required object value serialized in the `owner` wire field. */
     val owner: AdminApiKeyOwner,
-    /**
-     * The name of the API key
-     */
+    /** The name of the API key */
     val name: String? = null,
-    /**
-     * Optional API value serialized in the `last_used_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at") val lastUsedAt: Long? = null
+    /** Optional API value serialized in the `last_used_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at") val lastUsedAt: Long? = null,
 )
 
-/**
- * Typed representation of the `AdminApiKeyCreateResponse` API schema.
- */
+/** Typed representation of the `AdminApiKeyCreateResponse` API schema. */
 data class AdminApiKeyCreateResponse(
-    /**
-     * The object type, which is always `organization.admin_api_key`
-     */
+    /** The object type, which is always `organization.admin_api_key` */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: AdminApiKeyObjectEnum,
-    /**
-     * The identifier, which can be referenced in API endpoints
-     */
+    /** The identifier, which can be referenced in API endpoints */
     val id: String,
-    /**
-     * The redacted value of the API key
-     */
+    /** The redacted value of the API key */
     @com.fasterxml.jackson.annotation.JsonProperty("redacted_value") val redactedValue: String,
-    /**
-     * The Unix timestamp (in seconds) of when the API key was created
-     */
+    /** The Unix timestamp (in seconds) of when the API key was created */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Required API value serialized in the `expires_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true) val expiresAt: Long?,
-    /**
-     * Required object value serialized in the `owner` wire field.
-     */
+    /** Required API value serialized in the `expires_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true)
+    val expiresAt: Long?,
+    /** Required object value serialized in the `owner` wire field. */
     val owner: AdminApiKeyOwner,
-    /**
-     * The value of the API key. Only shown on create.
-     */
+    /** The value of the API key. Only shown on create. */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /**
-     * The name of the API key
-     */
+    /** The name of the API key */
     val name: String? = null,
-    /**
-     * Optional API value serialized in the `last_used_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at") val lastUsedAt: Long? = null
+    /** Optional API value serialized in the `last_used_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at") val lastUsedAt: Long? = null,
 )
 
-/**
- * Typed representation of the `ApiKeyList` API schema.
- */
+/** Typed representation of the `ApiKeyList` API schema. */
 data class ApiKeyList(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ApiKeyListObjectEnum,
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<AdminApiKey>,
-    /**
-     * Required `boolean` value serialized in the `has_more` wire field.
-     */
+    /** Required `boolean` value serialized in the `has_more` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Optional `string` value serialized in the `first_id` wire field.
-     */
+    /** Optional `string` value serialized in the `first_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /**
-     * Optional `string` value serialized in the `last_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+    /** Optional `string` value serialized in the `last_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
 )

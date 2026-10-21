@@ -3,38 +3,23 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event data payload.
- */
+/** Event data payload. */
 data class WebhookBatchExpiredData(
-    /**
-     * The unique ID of the batch API request.
-     */
+    /** The unique ID of the batch API request. */
     val id: String
 )
 
-/**
- * Sent when a batch API request has expired.
- */
+/** Sent when a batch API request has expired. */
 data class WebhookBatchExpired(
-    /**
-     * The Unix timestamp (in seconds) of when the batch API request expired.
-     */
+    /** The Unix timestamp (in seconds) of when the batch API request expired. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * Event data payload.
-     */
+    /** Event data payload. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookBatchExpiredData,
-    /**
-     * The type of the event. Always `batch.expired`.
-     */
+    /** The type of the event. Always `batch.expired`. */
     val type: WebhookBatchExpiredTypeEnum,
-    /**
-     * The object of the event. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookBatchExpiredObjectEnum? = null
+    /** The object of the event. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookBatchExpiredObjectEnum? = null,
 )

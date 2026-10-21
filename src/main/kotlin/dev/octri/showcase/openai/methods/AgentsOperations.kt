@@ -17,37 +17,69 @@ internal object AgentsListAgentsOperation {
     /**
      * Lists reusable agents in the current project. See agent configuration.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgents(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): AgentListResource {
+    fun listAgents(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): AgentListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        }
 
-        return SdkClient.request<AgentListResource>(SdkClient.RequestSpec("GET", "/agents", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
+        return SdkClient.request<AgentListResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/agents",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "order" to SdkClient.queryValue(order, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                        ),
+                    operationId = "listAgents",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse2::class.java,
+                            "401" to ErrorResponse2::class.java,
+                            "403" to ErrorResponse2::class.java,
+                            "404" to ErrorResponse2::class.java,
+                            "409" to ErrorResponse2::class.java,
+                            "500" to ErrorResponse2::class.java,
+                            "503" to ErrorResponse2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Lists reusable agents in the current project. See agent configuration.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (AgentResource) -> Boolean) {
+    fun listAgentsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AgentResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listAgents(clientConfig, limit, order, cursor, options)
@@ -62,9 +94,14 @@ internal object AgentsListAgentsOperation {
         }
     }
 
-
-
-    fun listAgentsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentsPage) -> Boolean) {
+    fun listAgentsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listAgents(clientConfig, limit, order, cursor, options)
@@ -83,54 +120,94 @@ internal object AgentsCreateAgentOperation {
     /**
      * Creates a reusable agent without storing credentials. See agent configuration.
      *
-     * @param model The model to use for the agent. The requested model name is
-     *   preserved.
-     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values
-     *   up to 512 characters. Omission or null defaults to an empty map.
-     * @param name A human-readable name for the agent. Omission or null leaves the
-     *   agent unnamed.
-     * @param reasoning Configuration for model reasoning. Omission uses the model's
-     *   default effort.
-     * @param text Configuration for generated text. Defaults to the `text` format
-     *   and medium verbosity.
-     * @param serviceTier The service tier used for model requests. Defaults to
-     *   `auto`.
-     * @param instructions Additional instructions appended to the agent's default
-     *   base instructions. Omit or set to null to add no custom instructions.
-     * @param tools Tools available to the agent. Defaults to an empty list. The tool
-     *   list must fit within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
-     * @param multiAgent Configuration for creating and coordinating subagents.
-     *   Subagent tools are disabled by default.
+     * @param model The model to use for the agent. The requested model name is preserved.
+     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values up to 512
+     *   characters. Omission or null defaults to an empty map.
+     * @param name A human-readable name for the agent. Omission or null leaves the agent unnamed.
+     * @param reasoning Configuration for model reasoning. Omission uses the model's default effort.
+     * @param text Configuration for generated text. Defaults to the `text` format and medium
+     *   verbosity.
+     * @param serviceTier The service tier used for model requests. Defaults to `auto`.
+     * @param instructions Additional instructions appended to the agent's default base
+     *   instructions. Omit or set to null to add no custom instructions.
+     * @param tools Tools available to the agent. Defaults to an empty list. The tool list must fit
+     *   within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
+     * @param multiAgent Configuration for creating and coordinating subagents. Subagent tools are
+     *   disabled by default.
      */
-    fun createAgent(clientConfig: ClientConfig, request: Agents.CreateAgentRequest, options: RequestOptions? = null): AgentResource {
+    fun createAgent(
+        clientConfig: ClientConfig,
+        request: Agents.CreateAgentRequest,
+        options: RequestOptions? = null,
+    ): AgentResource {
         validateCreateAgentRequest(request)
 
-        return SdkClient.request<AgentResource>(SdkClient.RequestSpec("POST", "/agents", config = clientConfig, body = SdkClient.bodyMap("model" to (request.model), "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted), "name" to (request.name ?: SdkClient.SdkOptional.Omitted), "reasoning" to
-    (request.reasoning ?: SdkClient.SdkOptional.Omitted), "text" to (request.text ?: SdkClient.SdkOptional.Omitted), "service_tier" to
-    (request.serviceTier ?: SdkClient.SdkOptional.Omitted), "instructions" to
-    (request.instructions ?: SdkClient.SdkOptional.Omitted), "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted), "multi_agent" to
-    (request.multiAgent ?: SdkClient.SdkOptional.Omitted)), operationId = "createAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
+        return SdkClient.request<AgentResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/agents",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (request.model),
+                            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
+                            "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
+                            "reasoning" to (request.reasoning ?: SdkClient.SdkOptional.Omitted),
+                            "text" to (request.text ?: SdkClient.SdkOptional.Omitted),
+                            "service_tier" to
+                                (request.serviceTier ?: SdkClient.SdkOptional.Omitted),
+                            "instructions" to
+                                (request.instructions ?: SdkClient.SdkOptional.Omitted),
+                            "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
+                            "multi_agent" to (request.multiAgent ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createAgent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse2::class.java,
+                            "401" to ErrorResponse2::class.java,
+                            "403" to ErrorResponse2::class.java,
+                            "404" to ErrorResponse2::class.java,
+                            "409" to ErrorResponse2::class.java,
+                            "500" to ErrorResponse2::class.java,
+                            "503" to ErrorResponse2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
     private fun validateCreateAgentRequest(request: Agents.CreateAgentRequest) {
-        Validation.validateLength("model", request.model, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "model",
+            request.model,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         val nameValue = request.name?.getOrNull()
-if (nameValue != null) {
+        if (nameValue != null) {
             Validation.validateLength("name", nameValue, Validation.LengthOpts(min = 0, max = 128))
-}
+        }
 
         val instructionsValue = request.instructions?.getOrNull()
-if (instructionsValue != null) {
-            Validation.validateLength("instructions", instructionsValue, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        if (instructionsValue != null) {
+            Validation.validateLength(
+                "instructions",
+                instructionsValue,
+                Validation.LengthOpts(min = 0, max = 1048576),
+            )
+        }
 
         val toolsValue = request.tools?.getOrNull()
-if (toolsValue != null) {
-            Validation.validateItems("tools", toolsValue, Validation.LengthOpts(min = 0, max = 2000))
-}
+        if (toolsValue != null) {
+            Validation.validateItems(
+                "tools",
+                toolsValue,
+                Validation.LengthOpts(min = 0, max = 2000),
+            )
+        }
     }
 }
 
@@ -140,10 +217,38 @@ internal object AgentsRetrieveAgentOperation {
      *
      * @param agentId The ID of the reusable agent.
      */
-    fun retrieveAgent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): AgentResource {
-        Validation.validateLength("agent_id", agentId, Validation.LengthOpts(min = 0, max = 1048576))
+    fun retrieveAgent(
+        clientConfig: ClientConfig,
+        agentId: String,
+        options: RequestOptions? = null,
+    ): AgentResource {
+        Validation.validateLength(
+            "agent_id",
+            agentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        return SdkClient.request<AgentResource>(SdkClient.RequestSpec("GET", "/agents/${SdkClient.encodePathSegment(agentId)}", config = clientConfig, operationId = "retrieveAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
+        return SdkClient.request<AgentResource>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/agents/${SdkClient.encodePathSegment(agentId)}",
+                    config = clientConfig,
+                    operationId = "retrieveAgent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse2::class.java,
+                            "401" to ErrorResponse2::class.java,
+                            "403" to ErrorResponse2::class.java,
+                            "404" to ErrorResponse2::class.java,
+                            "409" to ErrorResponse2::class.java,
+                            "500" to ErrorResponse2::class.java,
+                            "503" to ErrorResponse2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -152,57 +257,101 @@ internal object AgentsUpdateAgentOperation {
      * Updates a reusable agent. See agent configuration.
      *
      * @param agentId The ID of the reusable agent.
-     * @param model The model to use for the agent. The requested model name is
-     *   preserved.
-     * @param reasoning Configuration for model reasoning. Omit to keep the current
-     *   settings; pass `null` to reset to the model's default effort.
+     * @param model The model to use for the agent. The requested model name is preserved.
+     * @param reasoning Configuration for model reasoning. Omit to keep the current settings; pass
+     *   `null` to reset to the model's default effort.
      * @param text Configuration for text generated by the agent.
      * @param serviceTier The service tier used for model requests.
-     * @param instructions Additional instructions appended to the agent's default
-     *   base instructions. Omit to leave unchanged.
+     * @param instructions Additional instructions appended to the agent's default base
+     *   instructions. Omit to leave unchanged.
      * @param multiAgent Configuration for creating and coordinating subagents.
-     * @param metadata Replaces all metadata. Omit to leave unchanged, or pass null
-     *   or {} to clear it. Up to 16 string key-value pairs, with keys up to 64 and
-     *   values up to 512 characters.
-     * @param name A replacement name. Omit to leave unchanged, or pass null to clear
-     *   it.
-     * @param tools Replaces the tool list. Omit to leave it unchanged, or pass null
-     *   to clear it. The replacement must fit within 3 MiB (3,145,728 bytes) of
-     *   compact UTF-8 JSON.
+     * @param metadata Replaces all metadata. Omit to leave unchanged, or pass null or {} to clear
+     *   it. Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters.
+     * @param name A replacement name. Omit to leave unchanged, or pass null to clear it.
+     * @param tools Replaces the tool list. Omit to leave it unchanged, or pass null to clear it.
+     *   The replacement must fit within 3 MiB (3,145,728 bytes) of compact UTF-8 JSON.
      */
-    fun updateAgent(clientConfig: ClientConfig, request: Agents.UpdateAgentRequest, options: RequestOptions? = null): AgentResource {
+    fun updateAgent(
+        clientConfig: ClientConfig,
+        request: Agents.UpdateAgentRequest,
+        options: RequestOptions? = null,
+    ): AgentResource {
         validateUpdateAgentRequest(request)
 
-        return SdkClient.request<AgentResource>(SdkClient.RequestSpec("POST", "/agents/${SdkClient.encodePathSegment(request.agentId)}", config = clientConfig, body = SdkClient.bodyMap("model" to (SdkClient.omitIfNull(request.model)), "reasoning" to
-    (request.reasoning ?: SdkClient.SdkOptional.Omitted), "text" to (request.text ?: SdkClient.SdkOptional.Omitted), "service_tier" to
-    (request.serviceTier ?: SdkClient.SdkOptional.Omitted), "instructions" to
-    (request.instructions ?: SdkClient.SdkOptional.Omitted), "multi_agent" to
-    (request.multiAgent ?: SdkClient.SdkOptional.Omitted), "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted), "name" to (request.name ?: SdkClient.SdkOptional.Omitted), "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted)), operationId = "updateAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
+        return SdkClient.request<AgentResource>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/agents/${SdkClient.encodePathSegment(request.agentId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "model" to (SdkClient.omitIfNull(request.model)),
+                            "reasoning" to (request.reasoning ?: SdkClient.SdkOptional.Omitted),
+                            "text" to (request.text ?: SdkClient.SdkOptional.Omitted),
+                            "service_tier" to
+                                (request.serviceTier ?: SdkClient.SdkOptional.Omitted),
+                            "instructions" to
+                                (request.instructions ?: SdkClient.SdkOptional.Omitted),
+                            "multi_agent" to (request.multiAgent ?: SdkClient.SdkOptional.Omitted),
+                            "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
+                            "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
+                            "tools" to (request.tools ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateAgent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse2::class.java,
+                            "401" to ErrorResponse2::class.java,
+                            "403" to ErrorResponse2::class.java,
+                            "404" to ErrorResponse2::class.java,
+                            "409" to ErrorResponse2::class.java,
+                            "500" to ErrorResponse2::class.java,
+                            "503" to ErrorResponse2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
     private fun validateUpdateAgentRequest(request: Agents.UpdateAgentRequest) {
-        Validation.validateLength("agent_id", request.agentId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "agent_id",
+            request.agentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         if (request.model != null) {
-            Validation.validateLength("model", request.model, Validation.LengthOpts(min = 0, max = 1048576))
-}
+            Validation.validateLength(
+                "model",
+                request.model,
+                Validation.LengthOpts(min = 0, max = 1048576),
+            )
+        }
 
         val instructionsValue = request.instructions?.getOrNull()
-if (instructionsValue != null) {
-            Validation.validateLength("instructions", instructionsValue, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        if (instructionsValue != null) {
+            Validation.validateLength(
+                "instructions",
+                instructionsValue,
+                Validation.LengthOpts(min = 0, max = 1048576),
+            )
+        }
 
         val nameValue = request.name?.getOrNull()
-if (nameValue != null) {
+        if (nameValue != null) {
             Validation.validateLength("name", nameValue, Validation.LengthOpts(min = 0, max = 128))
-}
+        }
 
         val toolsValue = request.tools?.getOrNull()
-if (toolsValue != null) {
-            Validation.validateItems("tools", toolsValue, Validation.LengthOpts(min = 0, max = 2000))
-}
+        if (toolsValue != null) {
+            Validation.validateItems(
+                "tools",
+                toolsValue,
+                Validation.LengthOpts(min = 0, max = 2000),
+            )
+        }
     }
 }
 
@@ -212,9 +361,37 @@ internal object AgentsDeleteAgentOperation {
      *
      * @param agentId The ID of the reusable agent.
      */
-    fun deleteAgent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): DeletedAgentResource {
-        Validation.validateLength("agent_id", agentId, Validation.LengthOpts(min = 0, max = 1048576))
+    fun deleteAgent(
+        clientConfig: ClientConfig,
+        agentId: String,
+        options: RequestOptions? = null,
+    ): DeletedAgentResource {
+        Validation.validateLength(
+            "agent_id",
+            agentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        return SdkClient.request<DeletedAgentResource>(SdkClient.RequestSpec("DELETE", "/agents/${SdkClient.encodePathSegment(agentId)}", config = clientConfig, operationId = "deleteAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
+        return SdkClient.request<DeletedAgentResource>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/agents/${SdkClient.encodePathSegment(agentId)}",
+                    config = clientConfig,
+                    operationId = "deleteAgent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse2::class.java,
+                            "401" to ErrorResponse2::class.java,
+                            "403" to ErrorResponse2::class.java,
+                            "404" to ErrorResponse2::class.java,
+                            "409" to ErrorResponse2::class.java,
+                            "500" to ErrorResponse2::class.java,
+                            "503" to ErrorResponse2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

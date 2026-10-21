@@ -3,99 +3,112 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A custom tool that processes input using a specified format. Learn more about custom tools
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A custom tool that processes input using a specified format. Learn more about custom tools */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CustomToolParam(
-    /**
-     * The type of the custom tool. Always `custom`.
-     */
+    /** The type of the custom tool. Always `custom`. */
     val type: CustomToolParamTypeEnum,
-    /**
-     * The name of the custom tool, used to identify it in tool calls.
-     */
+    /** The name of the custom tool, used to identify it in tool calls. */
     val name: String,
     /**
-     * Whether the tool response can be returned asynchronously versus immediately returned on next response creation.
+     * Whether the tool response can be returned asynchronously versus immediately returned on next
+     * response creation.
      */
     val async: Boolean? = null,
-    /**
-     * Optional description of the custom tool, used to provide more context.
-     */
+    /** Optional description of the custom tool, used to provide more context. */
     val description: String? = null,
-    /**
-     * The input format for the custom tool. Default is unconstrained text.
-     */
+    /** The input format for the custom tool. Default is unconstrained text. */
     val format: CustomToolParamFormat? = null,
-    /**
-     * Whether this tool should be deferred and discovered via tool search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null
-) : Tool, ToolSearchOutputTool, NamespaceToolParamToolsItem, ToolSearchOutputNamespaceToolParamToolsItem
+    /** Whether this tool should be deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
+) :
+    Tool,
+    ToolSearchOutputTool,
+    NamespaceToolParamToolsItem,
+    ToolSearchOutputNamespaceToolParamToolsItem
 
-/**
- * Typed representation of the `FunctionToolParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `FunctionToolParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FunctionToolParam(
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: FunctionToolParamTypeEnum,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional API value serialized in the `parameters` wire field.
-     */
+    /** Optional API value serialized in the `parameters` wire field. */
     val parameters: EmptyModelParam? = null,
-    /**
-     * Optional `boolean` value serialized in the `strict` wire field.
-     */
+    /** Optional `boolean` value serialized in the `strict` wire field. */
     val strict: Boolean? = null,
     /**
-     * Whether the tool response can be returned asynchronously versus immediately returned on next response creation.
+     * Whether the tool response can be returned asynchronously versus immediately returned on next
+     * response creation.
      */
     val async: Boolean? = null,
     /**
-     * A JSON Schema describing the JSON value encoded in string outputs for this function tool. This does not describe content-array outputs.
+     * A JSON Schema describing the JSON value encoded in string outputs for this function tool.
+     * This does not describe content-array outputs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_schema") val outputSchema: Map<String, Any>? = null,
-    /**
-     * Whether this function should be deferred and discovered via tool search.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null,
-    /**
-     * The tool invocation context(s).
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers") val allowedCallers: List<CallableToolAllowedCaller>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("output_schema")
+    val outputSchema: Map<String, Any>? = null,
+    /** Whether this function should be deferred and discovered via tool search. */
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
+    val deferLoading: Boolean? = null,
+    /** The tool invocation context(s). */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_callers")
+    val allowedCallers: List<CallableToolAllowedCaller>? = null,
 ) : NamespaceToolParamToolsItem
 
-/**
- * A function or custom tool that belongs to a namespace.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownNamespaceToolParamToolsItem::class)
+/** A function or custom tool that belongs to a namespace. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownNamespaceToolParamToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FunctionToolParam::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomToolParam::class, name = "custom")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FunctionToolParam::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CustomToolParam::class,
+        name = "custom",
+    ),
 )
 sealed interface NamespaceToolParamToolsItem
 
-/** A [NamespaceToolParamToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownNamespaceToolParamToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [NamespaceToolParamToolsItem] whose `type` names no branch this SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownNamespaceToolParamToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : NamespaceToolParamToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

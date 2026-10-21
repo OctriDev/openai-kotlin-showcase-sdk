@@ -3,120 +3,76 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `DeletedWebhookEndpointResource` API schema.
- */
+/** Typed representation of the `DeletedWebhookEndpointResource` API schema. */
 data class DeletedWebhookEndpointResource(
-    /**
-     * The ID of the deleted webhook endpoint.
-     */
+    /** The ID of the deleted webhook endpoint. */
     val id: String,
-    /**
-     * The object type, which is always webhook_endpoint.deleted.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedWebhookEndpointResourceObjectEnum,
-    /**
-     * Whether the endpoint was deleted.
-     */
-    val deleted: Boolean
+    /** The object type, which is always webhook_endpoint.deleted. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedWebhookEndpointResourceObjectEnum,
+    /** Whether the endpoint was deleted. */
+    val deleted: Boolean,
 )
 
-/**
- * Typed representation of the `PublicCreateEndpointBody` API schema.
- */
+/** Typed representation of the `PublicCreateEndpointBody` API schema. */
 data class PublicCreateEndpointBody(
-    /**
-     * A human-readable name for the webhook endpoint.
-     */
+    /** A human-readable name for the webhook endpoint. */
     val name: String,
-    /**
-     * The HTTPS URL that receives webhook deliveries.
-     */
+    /** The HTTPS URL that receives webhook deliveries. */
     val url: String,
-    /**
-     * The event types that trigger deliveries to this endpoint.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_types") val eventTypes: List<ProjectEventTypeEnum>
+    /** The event types that trigger deliveries to this endpoint. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_types")
+    val eventTypes: List<ProjectEventTypeEnum>,
 )
 
-/**
- * Typed representation of the `PublicUpdateEndpointBody` API schema.
- */
+/** Typed representation of the `PublicUpdateEndpointBody` API schema. */
 data class PublicUpdateEndpointBody(
-    /**
-     * A new human-readable name for the webhook endpoint.
-     */
+    /** A new human-readable name for the webhook endpoint. */
     val name: String? = null,
-    /**
-     * A new HTTPS URL that receives webhook deliveries.
-     */
+    /** A new HTTPS URL that receives webhook deliveries. */
     val url: String? = null,
-    /**
-     * The complete set of event types that should trigger deliveries.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_types") val eventTypes: List<ProjectEventTypeEnum>? = null
+    /** The complete set of event types that should trigger deliveries. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_types")
+    val eventTypes: List<ProjectEventTypeEnum>? = null,
 )
 
-/**
- * Typed representation of the `WebhookEndpointBody` API schema.
- */
+/** Typed representation of the `WebhookEndpointBody` API schema. */
 data class WebhookEndpointBody(
-    /**
-     * The unique ID of the webhook endpoint.
-     */
+    /** The unique ID of the webhook endpoint. */
     val id: String,
-    /**
-     * The object type, which is always webhook_endpoint.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookEndpointBodyObjectEnum,
-    /**
-     * The Unix timestamp when the endpoint was created.
-     */
+    /** The object type, which is always webhook_endpoint. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookEndpointBodyObjectEnum,
+    /** The Unix timestamp when the endpoint was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The human-readable name of the endpoint.
-     */
+    /** The human-readable name of the endpoint. */
     val name: String,
-    /**
-     * The HTTPS URL that receives webhook deliveries.
-     */
+    /** The HTTPS URL that receives webhook deliveries. */
     val url: String,
-    /**
-     * The event types that trigger deliveries to this endpoint.
-     */
+    /** The event types that trigger deliveries to this endpoint. */
     @com.fasterxml.jackson.annotation.JsonProperty("event_types") val eventTypes: List<String>,
+    /** Required `string` value serialized in the `signing_secret_hint` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret_hint", required = true)
+    val signingSecretHint: String?,
     /**
-     * Required `string` value serialized in the `signing_secret_hint` wire field.
+     * The Unix timestamp of the last endpoint configuration or signing-secret change. Initialized
+     * at creation; tests and unchanged updates do not advance it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret_hint", required = true) val signingSecretHint: String?,
-    /**
-     * The Unix timestamp of the last endpoint configuration or signing-secret change. Initialized at creation; tests and unchanged updates do not advance it.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
 )
 
-/**
- * Typed representation of the `WebhookEndpointListResource` API schema.
- */
+/** Typed representation of the `WebhookEndpointListResource` API schema. */
 data class WebhookEndpointListResource(
-    /**
-     * The object type, which is always list.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookEndpointListResourceObjectEnum,
-    /**
-     * The webhook endpoints in this page.
-     */
+    /** The object type, which is always list. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookEndpointListResourceObjectEnum,
+    /** The webhook endpoints in this page. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<WebhookEndpointBody>,
-    /**
-     * Required `string` value serialized in the `first_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
-    /**
-     * Required `string` value serialized in the `last_id` wire field.
-     */
+    /** Required `string` value serialized in the `first_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
+    val firstId: String?,
+    /** Required `string` value serialized in the `last_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /**
-     * Whether more webhook endpoints are available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
+    /** Whether more webhook endpoints are available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
 )

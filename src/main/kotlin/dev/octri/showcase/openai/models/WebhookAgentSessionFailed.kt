@@ -3,25 +3,17 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Sent when an agent session fails.
- */
+/** Sent when an agent session fails. */
 data class WebhookAgentSessionFailed(
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * The object type. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookAgentSessionEnvelopeObjectEnum,
-    /**
-     * The Unix timestamp, in seconds, when the event was created.
-     */
+    /** The object type. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookAgentSessionEnvelopeObjectEnum,
+    /** The Unix timestamp, in seconds, when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The event type. Always `agent.session.failed`.
-     */
+    /** The event type. Always `agent.session.failed`. */
     val type: WebhookAgentSessionFailedVariant1TypeEnum,
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentSessionEnvironmentPayloadResource
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: AgentSessionEnvironmentPayloadResource,
 )

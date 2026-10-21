@@ -3,499 +3,436 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * An annotation that applies to a span of output text.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownAnnotationModel::class)
+/** An annotation that applies to a span of output text. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownAnnotationModel::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FileCitationBody::class, name = "file_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UrlCitationBody::class, name = "url_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContainerFileCitationBody::class, name = "container_file_citation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FilePath::class, name = "file_path")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = FileCitationBody::class,
+        name = "file_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = UrlCitationBody::class,
+        name = "url_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ContainerFileCitationBody::class,
+        name = "container_file_citation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = FilePath::class, name = "file_path"),
 )
 sealed interface AnnotationModel
 
 /** A [AnnotationModel] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownAnnotationModel @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownAnnotationModel
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : AnnotationModel {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `ApproximateLocation` API schema.
- */
+/** Typed representation of the `ApproximateLocation` API schema. */
 data class ApproximateLocation(
-    /**
-     * The type of location approximation. Always `approximate`.
-     */
+    /** The type of location approximation. Always `approximate`. */
     val type: ApproximateLocationTypeEnum,
-    /**
-     * Optional `string` value serialized in the `country` wire field.
-     */
+    /** Optional `string` value serialized in the `country` wire field. */
     val country: String? = null,
-    /**
-     * Optional `string` value serialized in the `region` wire field.
-     */
+    /** Optional `string` value serialized in the `region` wire field. */
     val region: String? = null,
-    /**
-     * Optional `string` value serialized in the `city` wire field.
-     */
+    /** Optional `string` value serialized in the `city` wire field. */
     val city: String? = null,
-    /**
-     * Optional `string` value serialized in the `timezone` wire field.
-     */
-    val timezone: String? = null
+    /** Optional `string` value serialized in the `timezone` wire field. */
+    val timezone: String? = null,
 )
 
-/**
- * Required object value serialized in the `assignment_sources[]` wire field.
- */
+/** Required object value serialized in the `assignment_sources[]` wire field. */
 data class AssignedRoleDetailsAssignmentSourcesItem(
-    /**
-     * Required `string` value serialized in the `principal_id` wire field.
-     */
+    /** Required `string` value serialized in the `principal_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("principal_id") val principalId: String,
-    /**
-     * Required `string` value serialized in the `principal_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("principal_type") val principalType: String
+    /** Required `string` value serialized in the `principal_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("principal_type") val principalType: String,
 )
 
-/**
- * Detailed information about a role assignment entry returned when listing assignments.
- */
+/** Detailed information about a role assignment entry returned when listing assignments. */
 data class AssignedRoleDetails(
-    /**
-     * Identifier for the role.
-     */
+    /** Identifier for the role. */
     val id: String,
-    /**
-     * Name of the role.
-     */
+    /** Name of the role. */
     val name: String,
-    /**
-     * Permissions associated with the role.
-     */
+    /** Permissions associated with the role. */
     val permissions: List<String>,
-    /**
-     * Resource type the role applies to.
-     */
+    /** Resource type the role applies to. */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String,
-    /**
-     * Whether the role is predefined by OpenAI.
-     */
+    /** Whether the role is predefined by OpenAI. */
     @com.fasterxml.jackson.annotation.JsonProperty("predefined_role") val predefinedRole: Boolean,
-    /**
-     * Description of the role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true) val description: String?,
-    /**
-     * When the role was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at", required = true) val createdAt: Long?,
-    /**
-     * When the role was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at", required = true) val updatedAt: Long?,
-    /**
-     * Identifier of the actor who created the role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * User details for the actor that created the role, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_obj", required = true) val createdByUserObj: Map<String, Any>?,
-    /**
-     * Arbitrary metadata stored on the role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true) val metadata: Map<String, Any>?,
-    /**
-     * Principals from which the role assignment is inherited, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("assignment_sources", required = true) val assignmentSources: List<AssignedRoleDetailsAssignmentSourcesItem>?
+    /** Description of the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true)
+    val description: String?,
+    /** When the role was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at", required = true)
+    val createdAt: Long?,
+    /** When the role was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at", required = true)
+    val updatedAt: Long?,
+    /** Identifier of the actor who created the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+    val createdBy: String?,
+    /** User details for the actor that created the role, when available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_user_obj", required = true)
+    val createdByUserObj: Map<String, Any>?,
+    /** Arbitrary metadata stored on the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true)
+    val metadata: Map<String, Any>?,
+    /** Principals from which the role assignment is inherited, when available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("assignment_sources", required = true)
+    val assignmentSources: List<AssignedRoleDetailsAssignmentSourcesItem>?,
 )
 
-/**
- * Breakdown of tokens used in a completion.
- */
+/** Breakdown of tokens used in a completion. */
 data class CompletionUsageCompletionTokensDetails(
     /**
-     * When using Predicted Outputs, the number of tokens in the prediction that appeared in the completion.
+     * When using Predicted Outputs, the number of tokens in the prediction that appeared in the
+     * completion.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("accepted_prediction_tokens") val acceptedPredictionTokens: Long? = null,
-    /**
-     * Audio input tokens generated by the model.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("accepted_prediction_tokens")
+    val acceptedPredictionTokens: Long? = null,
+    /** Audio input tokens generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
-    /**
-     * Tokens generated by the model for reasoning.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_tokens") val reasoningTokens: Long? = null,
-    /**
-     * Text output tokens generated by the model.
-     */
+    /** Tokens generated by the model for reasoning. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_tokens")
+    val reasoningTokens: Long? = null,
+    /** Text output tokens generated by the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
     /**
-     * When using Predicted Outputs, the number of tokens in the prediction that did not appear in the completion. However, like reasoning tokens, these tokens are still counted in the total completion tokens for purposes of billing, output, and context window limits.
+     * When using Predicted Outputs, the number of tokens in the prediction that did not appear in
+     * the completion. However, like reasoning tokens, these tokens are still counted in the total
+     * completion tokens for purposes of billing, output, and context window limits.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("rejected_prediction_tokens") val rejectedPredictionTokens: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("rejected_prediction_tokens")
+    val rejectedPredictionTokens: Long? = null,
 )
 
-/**
- * Breakdown of tokens used in the prompt.
- */
+/** Breakdown of tokens used in the prompt. */
 data class CompletionUsagePromptTokensDetails(
-    /**
-     * Audio input tokens present in the prompt.
-     */
+    /** Audio input tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
-    /**
-     * Cached tokens present in the prompt.
-     */
+    /** Cached tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long? = null,
-    /**
-     * Text input tokens present in the prompt.
-     */
+    /** Text input tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /**
-     * Image input tokens present in the prompt.
-     */
+    /** Image input tokens present in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_tokens") val imageTokens: Long? = null,
-    /**
-     * The unadjusted number of prompt tokens written to cache.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_tokens") val cacheWriteTokens: Long? = null
+    /** The unadjusted number of prompt tokens written to cache. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cache_write_tokens")
+    val cacheWriteTokens: Long? = null,
 )
 
-/**
- * Usage statistics for the completion request.
- */
+/** Usage statistics for the completion request. */
 data class CompletionUsage(
-    /**
-     * Number of tokens in the generated completion.
-     */
+    /** Number of tokens in the generated completion. */
     @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens") val completionTokens: Long,
-    /**
-     * Number of tokens in the prompt.
-     */
+    /** Number of tokens in the prompt. */
     @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens") val promptTokens: Long,
-    /**
-     * Total number of tokens used in the request (prompt + completion).
-     */
+    /** Total number of tokens used in the request (prompt + completion). */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /**
-     * Breakdown of tokens used in a completion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens_details") val completionTokensDetails: CompletionUsageCompletionTokensDetails? = null,
-    /**
-     * Breakdown of tokens used in the prompt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens_details") val promptTokensDetails: CompletionUsagePromptTokensDetails? = null
+    /** Breakdown of tokens used in a completion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens_details")
+    val completionTokensDetails: CompletionUsageCompletionTokensDetails? = null,
+    /** Breakdown of tokens used in the prompt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens_details")
+    val promptTokensDetails: CompletionUsagePromptTokensDetails? = null,
 )
 
-/**
- * Combine multiple filters using `and` or `or`.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Combine multiple filters using `and` or `or`. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CompoundFilter(
-    /**
-     * Type of operation: `and` or `or`.
-     */
+    /** Type of operation: `and` or `or`. */
     val type: CompoundFilterTypeEnum,
-    /**
-     * Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`.
-     */
-    val filters: List<CompoundFilterFiltersItem>
+    /** Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`. */
+    val filters: List<CompoundFilterFiltersItem>,
 ) : Filters, CompoundFilterFiltersItem, VectorStoreSearchRequestFilters
 
-/**
- * A citation for a container file used to generate a model response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A citation for a container file used to generate a model response. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ContainerFileCitationBody(
-    /**
-     * The type of the container file citation. Always `container_file_citation`.
-     */
+    /** The type of the container file citation. Always `container_file_citation`. */
     val type: ContainerFileCitationBodyTypeEnum,
-    /**
-     * The ID of the container file.
-     */
+    /** The ID of the container file. */
     @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /**
-     * The ID of the file.
-     */
+    /** The ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The index of the first character of the container file citation in the message.
-     */
+    /** The index of the first character of the container file citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /**
-     * The index of the last character of the container file citation in the message.
-     */
+    /** The index of the last character of the container file citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /**
-     * The filename of the container file cited.
-     */
-    val filename: String
+    /** The filename of the container file cited. */
+    val filename: String,
 ) : AnnotationModel
 
-/**
- * An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.
- */
+/** An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`. */
 data class CoordParam(
-    /**
-     * The x-coordinate.
-     */
+    /** The x-coordinate. */
     val x: Long,
-    /**
-     * The y-coordinate.
-     */
-    val y: Long
+    /** The y-coordinate. */
+    val y: Long,
 )
 
-/**
- * Typed representation of the `CreateModelResponseProperties` API schema.
- */
+/** Typed representation of the `CreateModelResponseProperties` API schema. */
 data class CreateModelResponseProperties(
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
     /**
-     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at each token position, each with an associated log probability. In some cases, the number of returned tokens may be fewer than requested.
+     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at
+     * each token position, each with an associated log probability. In some cases, the number of
+     * returned tokens may be fewer than requested.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: Long? = null,
-    /**
-     * Optional API value serialized in the `temperature` wire field.
-     */
+    /** Optional API value serialized in the `temperature` wire field. */
     val temperature: Double? = null,
-    /**
-     * Optional API value serialized in the `top_p` wire field.
-     */
+    /** Optional API value serialized in the `top_p` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates by better bucketing similar requests and to help OpenAI detect and prevent abuse. Learn more.
+     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
+     * `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your
+     * end-users. Used to boost cache hit rates by better bucketing similar requests and to help
+     * OpenAI detect and prevent abuse. Learn more.
      */
     val user: String? = null,
+    /** Optional API value serialized in the `safety_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
+    val safetyIdentifier: String? = null,
+    /** Optional `string` value serialized in the `prompt_cache_key` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
+    val promptCacheKey: String? = null,
+    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
+    val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
     /**
-     * Optional API value serialized in the `safety_identifier` wire field.
+     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI
+     * automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to
+     * content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints.
+     * For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation,
+     * without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit
+     * breakpoint. The `ttl`…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
-    /**
-     * Optional `string` value serialized in the `prompt_cache_key` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
-    /**
-     * Optional API value serialized in the `prompt_cache_retention` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
-    /**
-     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl`…
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options") val promptCacheOptions: PromptCacheOptionsParam? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options")
+    val promptCacheOptions: PromptCacheOptionsParam? = null,
 )
 
-/**
- * Confirmation payload returned after unassigning a role.
- */
+/** Confirmation payload returned after unassigning a role. */
 data class DeletedRoleAssignmentResource(
     /**
      * Identifier for the deleted assignment, such as `group.role.deleted` or `user.role.deleted`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Whether the assignment was removed.
-     */
-    val deleted: Boolean
+    /** Whether the assignment was removed. */
+    val deleted: Boolean,
 )
 
-/**
- * Typed representation of the `EmptyModelParam` API schema.
- */
+/** Typed representation of the `EmptyModelParam` API schema. */
 class EmptyModelParam {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/**
- * A citation to a file.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A citation to a file. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FileCitationBody(
-    /**
-     * The type of the file citation. Always `file_citation`.
-     */
+    /** The type of the file citation. Always `file_citation`. */
     val type: FileCitationBodyTypeEnum,
-    /**
-     * The ID of the file.
-     */
+    /** The ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The index in the output text at which to insert the file citation.
-     */
+    /** The index in the output text at which to insert the file citation. */
     val index: Long,
-    /**
-     * The filename of the file cited.
-     */
-    val filename: String
+    /** The filename of the file cited. */
+    val filename: String,
 ) : AnnotationModel
 
-/**
- * A path to a file.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A path to a file. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class FilePath(
-    /**
-     * The type of the file path. Always `file_path`.
-     */
+    /** The type of the file path. Always `file_path`. */
     val type: FilePathTypeEnum,
-    /**
-     * The ID of the file.
-     */
+    /** The ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The index of the file in the list of files.
-     */
-    val index: Long
+    /** The index of the file in the list of files. */
+    val index: Long,
 ) : AnnotationModel
 
-/**
- * Typed representation of the `Filters` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFilters::class)
+/** Typed representation of the `Filters` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFilters::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ComparisonFilter::class, names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"]),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CompoundFilter::class, names = ["and", "or"])
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = ComparisonFilter::class,
+        names = ["eq", "ne", "gt", "gte", "lt", "lte", "in", "nin"],
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CompoundFilter::class,
+        names = ["and", "or"],
+    ),
 )
 sealed interface Filters
 
 /** A [Filters] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFilters @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFilters
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : Filters {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `HybridSearchOptions` API schema.
- */
+/** Typed representation of the `HybridSearchOptions` API schema. */
 data class HybridSearchOptions(
-    /**
-     * The weight of the embedding in the reciprocal ranking fusion.
-     */
+    /** The weight of the embedding in the reciprocal ranking fusion. */
     @com.fasterxml.jackson.annotation.JsonProperty("embedding_weight") val embeddingWeight: Double,
-    /**
-     * The weight of the text in the reciprocal ranking fusion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("text_weight") val textWeight: Double
+    /** The weight of the text in the reciprocal ranking fusion. */
+    @com.fasterxml.jackson.annotation.JsonProperty("text_weight") val textWeight: Double,
 )
 
-/**
- * The log probability of a token.
- */
+/** The log probability of a token. */
 data class LogProb(
-    /**
-     * Required `string` value serialized in the `token` wire field.
-     */
+    /** Required `string` value serialized in the `token` wire field. */
     val token: String,
-    /**
-     * Required `number` value serialized in the `logprob` wire field.
-     */
+    /** Required `number` value serialized in the `logprob` wire field. */
     val logprob: Double,
-    /**
-     * Required array value serialized in the `bytes` wire field.
-     */
+    /** Required array value serialized in the `bytes` wire field. */
     val bytes: List<Long>,
-    /**
-     * Required array value serialized in the `top_logprobs` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: List<TopLogProb>
+    /** Required array value serialized in the `top_logprobs` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs")
+    val topLogprobs: List<TopLogProb>,
 )
 
 typealias Metadata = Map<String, String>
 
-/**
- * The `File` object represents a document that has been uploaded to OpenAI.
- */
+/** The `File` object represents a document that has been uploaded to OpenAI. */
 data class OpenAIFile(
-    /**
-     * The file identifier, which can be referenced in the API endpoints.
-     */
+    /** The file identifier, which can be referenced in the API endpoints. */
     val id: String,
     /**
-     * The size of the file, in bytes. In a completed file upload response, this can be null when the file size is not yet available.
+     * The size of the file, in bytes. In a completed file upload response, this can be null when
+     * the file size is not yet available.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("bytes", required = true) val bytes: Long?,
-    /**
-     * The Unix timestamp (in seconds) for when the file was created.
-     */
+    /** The Unix timestamp (in seconds) for when the file was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The name of the file.
-     */
+    /** The name of the file. */
     val filename: String,
-    /**
-     * The object type, which is always `file`.
-     */
+    /** The object type, which is always `file`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OpenAIFileObjectEnum,
     /**
-     * The intended purpose of the file. Supported values are `assistants`, `assistants_output`, `batch`, `batch_output`, `fine-tune`, `fine-tune-results`, `vision`, and `user_data`.
+     * The intended purpose of the file. Supported values are `assistants`, `assistants_output`,
+     * `batch`, `batch_output`, `fine-tune`, `fine-tune-results`, `vision`, and `user_data`.
      */
     val purpose: OpenAIFilePurposeEnum,
     /**
-     * Deprecated. The current status of the file, which can be either `uploaded`, `processed`, or `error`.
+     * Deprecated. The current status of the file, which can be either `uploaded`, `processed`, or
+     * `error`.
      */
     val status: OpenAIFileStatusEnum,
     /**
-     * The Unix timestamp (in seconds) for when the file will expire. In a completed file upload response, this can be null when no expiry is set.
+     * The Unix timestamp (in seconds) for when the file will expire. In a completed file upload
+     * response, this can be null when no expiry is set.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
     /**
-     * Deprecated. For details on why a fine-tuning training file failed validation, see the `error` field on `fine_tuning.job`. Completed file upload responses can return null when these details are unset.
+     * Deprecated. For details on why a fine-tuning training file failed validation, see the `error`
+     * field on `fine_tuning.job`. Completed file upload responses can return null when these
+     * details are unset.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("status_details") val statusDetails: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("status_details")
+    val statusDetails: String? = null,
 )
 
 typealias ParallelToolCalls = Boolean
 
-/**
- * Request payload for assigning a role to a group or user.
- */
+/** Request payload for assigning a role to a group or user. */
 data class PublicAssignOrganizationGroupRoleBody(
-    /**
-     * Identifier of the role to assign.
-     */
+    /** Identifier of the role to assign. */
     @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String
 )
 
-/**
- * Typed representation of the `RankingOptions` API schema.
- */
+/** Typed representation of the `RankingOptions` API schema. */
 data class RankingOptions(
-    /**
-     * The ranker to use for the file search.
-     */
+    /** The ranker to use for the file search. */
     val ranker: RankerVersionType? = null,
     /**
-     * The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results.
+     * The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will
+     * attempt to return only the most relevant results, but may return fewer results.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold") val scoreThreshold: Double? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("score_threshold")
+    val scoreThreshold: Double? = null,
     /**
-     * Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled.
+     * Weights that control how reciprocal rank fusion balances semantic embedding matches versus
+     * sparse keyword matches when hybrid search is enabled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("hybrid_search") val hybridSearch: HybridSearchOptions? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("hybrid_search")
+    val hybridSearch: HybridSearchOptions? = null,
 )
 
 /**
- * Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
+ * Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API
+ * will stop generating further tokens. The returned text will not contain the stop sequence.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = StopConfiguration.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = StopConfiguration.Deserializer::class
+)
 sealed interface StopConfiguration {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<StopConfiguration>() {
@@ -506,73 +443,95 @@ sealed interface StopConfiguration {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringStopConfiguration(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                node.isArray -> ListStopConfiguration(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<List<String>>() {}))
-                else -> ValueStopConfiguration(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringStopConfiguration(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                node.isArray ->
+                    ListStopConfiguration(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<List<String>>() {},
+                        )
+                    )
+                else ->
+                    ValueStopConfiguration(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringStopConfiguration(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : StopConfiguration
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringStopConfiguration(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : StopConfiguration
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ListStopConfiguration(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<String>) : StopConfiguration
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ListStopConfiguration(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: List<String>
+) : StopConfiguration
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueStopConfiguration(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : StopConfiguration
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueStopConfiguration(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    StopConfiguration
 
-/**
- * The top log probability of a token.
- */
+/** The top log probability of a token. */
 data class TopLogProb(
-    /**
-     * Required `string` value serialized in the `token` wire field.
-     */
+    /** Required `string` value serialized in the `token` wire field. */
     val token: String,
-    /**
-     * Required `number` value serialized in the `logprob` wire field.
-     */
+    /** Required `number` value serialized in the `logprob` wire field. */
     val logprob: Double,
-    /**
-     * Required array value serialized in the `bytes` wire field.
-     */
-    val bytes: List<Long>
+    /** Required array value serialized in the `bytes` wire field. */
+    val bytes: List<Long>,
 )
 
-/**
- * A citation for a web resource used to generate a model response.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A citation for a web resource used to generate a model response. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class UrlCitationBody(
-    /**
-     * The type of the URL citation. Always `url_citation`.
-     */
+    /** The type of the URL citation. Always `url_citation`. */
     val type: UrlCitationBodyTypeEnum,
-    /**
-     * The URL of the web resource.
-     */
+    /** The URL of the web resource. */
     val url: String,
-    /**
-     * The index of the first character of the URL citation in the message.
-     */
+    /** The index of the first character of the URL citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /**
-     * The index of the last character of the URL citation in the message.
-     */
+    /** The index of the last character of the URL citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /**
-     * The title of the web resource.
-     */
-    val title: String
+    /** The title of the web resource. */
+    val title: String,
 ) : AnnotationModel
 
 typealias VectorStoreFileAttributes = Map<String, Any>
 
-/**
- * Typed representation of the `Verbosity` API schema.
- */
+/** Typed representation of the `Verbosity` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = Verbosity.Deserializer::class)
 sealed interface Verbosity {
     /** Chooses the branch this payload is shaped like. */
@@ -584,15 +543,39 @@ sealed interface Verbosity {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringVerbosity(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> ValueVerbosity(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                node.isTextual ->
+                    StringVerbosity(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    ValueVerbosity(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : Verbosity
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    Verbosity
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : Verbosity
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueVerbosity(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    Verbosity

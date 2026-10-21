@@ -3,38 +3,24 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event data payload.
- */
+/** Event data payload. */
 data class WebhookFineTuningJobFailedData(
-    /**
-     * The unique ID of the fine-tuning job.
-     */
+    /** The unique ID of the fine-tuning job. */
     val id: String
 )
 
-/**
- * Sent when a fine-tuning job has failed.
- */
+/** Sent when a fine-tuning job has failed. */
 data class WebhookFineTuningJobFailed(
-    /**
-     * The Unix timestamp (in seconds) of when the fine-tuning job failed.
-     */
+    /** The Unix timestamp (in seconds) of when the fine-tuning job failed. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * Event data payload.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookFineTuningJobFailedData,
-    /**
-     * The type of the event. Always `fine_tuning.job.failed`.
-     */
+    /** Event data payload. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: WebhookFineTuningJobFailedData,
+    /** The type of the event. Always `fine_tuning.job.failed`. */
     val type: WebhookFineTuningJobFailedTypeEnum,
-    /**
-     * The object of the event. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookFineTuningJobFailedObjectEnum? = null
+    /** The object of the event. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookFineTuningJobFailedObjectEnum? = null,
 )

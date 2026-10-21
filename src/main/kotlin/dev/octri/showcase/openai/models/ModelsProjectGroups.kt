@@ -3,82 +3,49 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Request payload for granting a group access to a project.
- */
+/** Request payload for granting a group access to a project. */
 data class InviteProjectGroupBody(
-    /**
-     * Identifier of the group to add to the project.
-     */
+    /** Identifier of the group to add to the project. */
     @com.fasterxml.jackson.annotation.JsonProperty("group_id") val groupId: String,
-    /**
-     * Identifier of the project role to grant to the group.
-     */
-    val role: String
+    /** Identifier of the project role to grant to the group. */
+    val role: String,
 )
 
-/**
- * Details about a group's membership in a project.
- */
+/** Details about a group's membership in a project. */
 data class ProjectGroup(
-    /**
-     * Always `project.group`.
-     */
+    /** Always `project.group`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectGroupObjectEnum,
-    /**
-     * Identifier of the project.
-     */
+    /** Identifier of the project. */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String,
-    /**
-     * Identifier of the group that has access to the project.
-     */
+    /** Identifier of the group that has access to the project. */
     @com.fasterxml.jackson.annotation.JsonProperty("group_id") val groupId: String,
-    /**
-     * Display name of the group.
-     */
+    /** Display name of the group. */
     @com.fasterxml.jackson.annotation.JsonProperty("group_name") val groupName: String,
-    /**
-     * The type of the group.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("group_type") val groupType: ProjectGroupGroupTypeEnum,
-    /**
-     * Unix timestamp (in seconds) when the group was granted project access.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** The type of the group. */
+    @com.fasterxml.jackson.annotation.JsonProperty("group_type")
+    val groupType: ProjectGroupGroupTypeEnum,
+    /** Unix timestamp (in seconds) when the group was granted project access. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
 
-/**
- * Confirmation payload returned after removing a group from a project.
- */
+/** Confirmation payload returned after removing a group from a project. */
 data class ProjectGroupDeletedResource(
-    /**
-     * Always `project.group.deleted`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectGroupDeletedResourceObjectEnum,
-    /**
-     * Whether the group membership in the project was removed.
-     */
-    val deleted: Boolean
+    /** Always `project.group.deleted`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ProjectGroupDeletedResourceObjectEnum,
+    /** Whether the group membership in the project was removed. */
+    val deleted: Boolean,
 )
 
-/**
- * Paginated list of groups that have access to a project.
- */
+/** Paginated list of groups that have access to a project. */
 data class ProjectGroupListResource(
-    /**
-     * Always `list`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectGroupListResourceObjectEnum,
-    /**
-     * Project group memberships returned in the current page.
-     */
+    /** Always `list`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ProjectGroupListResourceObjectEnum,
+    /** Project group memberships returned in the current page. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ProjectGroup>,
-    /**
-     * Whether additional project group memberships are available.
-     */
+    /** Whether additional project group memberships are available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Cursor to fetch the next page of results, or `null` when there are no more results.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next", required = true) val next: String?
+    /** Cursor to fetch the next page of results, or `null` when there are no more results. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next", required = true) val next: String?,
 )

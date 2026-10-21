@@ -17,69 +17,92 @@ internal object UsageCompletionsOperation {
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
      * @param projectIds Return only usage for these projects.
      * @param userIds Return only usage for these users.
      * @param apiKeyIds Return only usage for these API keys.
      * @param models Return only usage for these models.
-     * @param batch If `true`, return batch jobs only. If `false`, return non-batch
-     *   jobs only. By default, return both.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`, `user_id`, `api_key_id`, `model`, `batch`,
-     *   `service_tier`, `api_source` or any combination of them. When grouped by
-     *   `api_source`, results use `agents_api` for attributed Agents API activity and
-     *   `unlabeled` for all other activity. Without source grouping, `api_source` is
-     *   null.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param batch If `true`, return batch jobs only. If `false`, return non-batch jobs only. By
+     *   default, return both.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`, `user_id`, `api_key_id`, `model`, `batch`, `service_tier`, `api_source` or
+     *   any combination of them. When grouped by `api_source`, results use `agents_api` for
+     *   attributed Agents API activity and `unlabeled` for all other activity. Without source
+     *   grouping, `api_source` is null.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageCompletions(clientConfig: ClientConfig, request: Usage.UsageCompletionsRequest, options: RequestOptions? = null): UsageResponse {
-        return SdkClient.request<UsageResponse>(SdkClient.RequestSpec("GET", "/organization/usage/completions", config = clientConfig, query = mapOf("start_time" to
-    SdkClient.queryValue(request.startTime, "form", true), "end_time" to
-    SdkClient.queryValue(request.endTime, "form", true), "bucket_width" to
-    SdkClient.queryValue(request.bucketWidth, "form", true), "project_ids" to
-    SdkClient.queryValue(request.projectIds, "form", true), "user_ids" to
-    SdkClient.queryValue(request.userIds, "form", true), "api_key_ids" to
-    SdkClient.queryValue(request.apiKeyIds, "form", true), "models" to
-    SdkClient.queryValue(request.models, "form", true), "batch" to SdkClient.queryValue(request.batch, "form", true), "group_by" to
-    SdkClient.queryValue(request.groupBy, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "page" to SdkClient.queryValue(request.page, "form", true)), operationId = "usageCompletions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun usageCompletions(
+        clientConfig: ClientConfig,
+        request: Usage.UsageCompletionsRequest,
+        options: RequestOptions? = null,
+    ): UsageResponse {
+        return SdkClient.request<UsageResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/usage/completions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "start_time" to SdkClient.queryValue(request.startTime, "form", true),
+                            "end_time" to SdkClient.queryValue(request.endTime, "form", true),
+                            "bucket_width" to
+                                SdkClient.queryValue(request.bucketWidth, "form", true),
+                            "project_ids" to SdkClient.queryValue(request.projectIds, "form", true),
+                            "user_ids" to SdkClient.queryValue(request.userIds, "form", true),
+                            "api_key_ids" to SdkClient.queryValue(request.apiKeyIds, "form", true),
+                            "models" to SdkClient.queryValue(request.models, "form", true),
+                            "batch" to SdkClient.queryValue(request.batch, "form", true),
+                            "group_by" to SdkClient.queryValue(request.groupBy, "form", true),
+                            "limit" to SdkClient.queryValue(request.limit, "form", true),
+                            "page" to SdkClient.queryValue(request.page, "form", true),
+                        ),
+                    operationId = "usageCompletions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Get completions usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
      * @param projectIds Return only usage for these projects.
      * @param userIds Return only usage for these users.
      * @param apiKeyIds Return only usage for these API keys.
      * @param models Return only usage for these models.
-     * @param batch If `true`, return batch jobs only. If `false`, return non-batch
-     *   jobs only. By default, return both.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`, `user_id`, `api_key_id`, `model`, `batch`,
-     *   `service_tier`, `api_source` or any combination of them. When grouped by
-     *   `api_source`, results use `agents_api` for attributed Agents API activity and
-     *   `unlabeled` for all other activity. Without source grouping, `api_source` is
-     *   null.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param batch If `true`, return batch jobs only. If `false`, return non-batch jobs only. By
+     *   default, return both.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`, `user_id`, `api_key_id`, `model`, `batch`, `service_tier`, `api_source` or
+     *   any combination of them. When grouped by `api_source`, results use `agents_api` for
+     *   attributed Agents API activity and `unlabeled` for all other activity. Without source
+     *   grouping, `api_source` is null.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageCompletionsPaginated(clientConfig: ClientConfig, request: Usage.UsageCompletionsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+    fun usageCompletionsPaginated(
+        clientConfig: ClientConfig,
+        request: Usage.UsageCompletionsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (UsageTimeBucket) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
             val page = usageCompletions(clientConfig, request.copy(page = cursor), options)
@@ -94,9 +117,12 @@ internal object UsageCompletionsOperation {
         }
     }
 
-
-
-    fun usageCompletionsPages(clientConfig: ClientConfig, request: Usage.UsageCompletionsRequest, options: RequestOptions? = null, yieldPage: (Usage.UsageCompletionsPage) -> Boolean) {
+    fun usageCompletionsPages(
+        clientConfig: ClientConfig,
+        request: Usage.UsageCompletionsRequest,
+        options: RequestOptions? = null,
+        yieldPage: (Usage.UsageCompletionsPage) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
             val page = usageCompletions(clientConfig, request.copy(page = cursor), options)

@@ -13,38 +13,56 @@ import dev.octri.showcase.openai.UsageTimeBucket
 
 internal object UsageImagesOperation {
     /**
-     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive start of the range, and filter by sources, image sizes, projects, users, API keys, or models as needed. Use the `next_page` value to retrieve the next page of results.
+     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive
+     * start of the range, and filter by sources, image sizes, projects, users, API keys, or models
+     * as needed. Use the `next_page` value to retrieve the next page of results.
      *
      * Get images usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
-     * @param sources Return only usages for these sources. Possible values are
-     *   `image.generation`, `image.edit`, `image.variation` or any combination of
-     *   them.
-     * @param sizes Return only usages for these image sizes. Possible values are
-     *   `256x256`, `512x512`, `1024x1024`, `1792x1792`, `1024x1792` or any combination
-     *   of them.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
+     * @param sources Return only usages for these sources. Possible values are `image.generation`,
+     *   `image.edit`, `image.variation` or any combination of them.
+     * @param sizes Return only usages for these image sizes. Possible values are `256x256`,
+     *   `512x512`, `1024x1024`, `1792x1792`, `1024x1792` or any combination of them.
      * @param projectIds Return only usage for these projects.
      * @param userIds Return only usage for these users.
      * @param apiKeyIds Return only usage for these API keys.
      * @param models Return only usage for these models.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`, `user_id`, `api_key_id`, `model`, `size`, `source` or
-     *   any combination of them.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`, `user_id`, `api_key_id`, `model`, `size`, `source` or any combination of
+     *   them.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageImages(clientConfig: ClientConfig, request: Usage.UsageImagesRequest, options: RequestOptions? = null): UsageResponse {
-        return SdkClient.request<UsageResponse>(SdkClient.RequestSpec("GET", "/organization/usage/images", config = clientConfig, query = buildUsageImagesQuery(request), operationId = "usageImages", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun usageImages(
+        clientConfig: ClientConfig,
+        request: Usage.UsageImagesRequest,
+        options: RequestOptions? = null,
+    ): UsageResponse {
+        return SdkClient.request<UsageResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/usage/images",
+                    config = clientConfig,
+                    query = buildUsageImagesQuery(request),
+                    operationId = "usageImages",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
 
     private fun buildUsageImagesQuery(request: Usage.UsageImagesRequest): Map<String, Any?> =
         buildMap {
@@ -53,61 +71,53 @@ internal object UsageImagesOperation {
 
     private fun buildUsageImagesQueryPart1(request: Usage.UsageImagesRequest): Map<String, Any?> =
         mapOf(
-            "start_time" to
-    SdkClient.queryValue(request.startTime, "form", true),
-            "end_time" to
-    SdkClient.queryValue(request.endTime, "form", true),
-            "bucket_width" to
-    SdkClient.queryValue(request.bucketWidth, "form", true),
-            "sources" to
-    SdkClient.queryValue(request.sources, "form", true),
+            "start_time" to SdkClient.queryValue(request.startTime, "form", true),
+            "end_time" to SdkClient.queryValue(request.endTime, "form", true),
+            "bucket_width" to SdkClient.queryValue(request.bucketWidth, "form", true),
+            "sources" to SdkClient.queryValue(request.sources, "form", true),
             "sizes" to SdkClient.queryValue(request.sizes, "form", true),
-            "project_ids" to
-    SdkClient.queryValue(request.projectIds, "form", true),
-            "user_ids" to
-    SdkClient.queryValue(request.userIds, "form", true),
-            "api_key_ids" to
-    SdkClient.queryValue(request.apiKeyIds, "form", true),
-            "models" to
-    SdkClient.queryValue(request.models, "form", true),
-            "group_by" to
-    SdkClient.queryValue(request.groupBy, "form", true),
+            "project_ids" to SdkClient.queryValue(request.projectIds, "form", true),
+            "user_ids" to SdkClient.queryValue(request.userIds, "form", true),
+            "api_key_ids" to SdkClient.queryValue(request.apiKeyIds, "form", true),
+            "models" to SdkClient.queryValue(request.models, "form", true),
+            "group_by" to SdkClient.queryValue(request.groupBy, "form", true),
             "limit" to SdkClient.queryValue(request.limit, "form", true),
             "page" to SdkClient.queryValue(request.page, "form", true),
         )
 
-
-
-
     /**
-     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive start of the range, and filter by sources, image sizes, projects, users, API keys, or models as needed. Use the `next_page` value to retrieve the next page of results.
+     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive
+     * start of the range, and filter by sources, image sizes, projects, users, API keys, or models
+     * as needed. Use the `next_page` value to retrieve the next page of results.
      *
      * Get images usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
-     * @param sources Return only usages for these sources. Possible values are
-     *   `image.generation`, `image.edit`, `image.variation` or any combination of
-     *   them.
-     * @param sizes Return only usages for these image sizes. Possible values are
-     *   `256x256`, `512x512`, `1024x1024`, `1792x1792`, `1024x1792` or any combination
-     *   of them.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
+     * @param sources Return only usages for these sources. Possible values are `image.generation`,
+     *   `image.edit`, `image.variation` or any combination of them.
+     * @param sizes Return only usages for these image sizes. Possible values are `256x256`,
+     *   `512x512`, `1024x1024`, `1792x1792`, `1024x1792` or any combination of them.
      * @param projectIds Return only usage for these projects.
      * @param userIds Return only usage for these users.
      * @param apiKeyIds Return only usage for these API keys.
      * @param models Return only usage for these models.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`, `user_id`, `api_key_id`, `model`, `size`, `source` or
-     *   any combination of them.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`, `user_id`, `api_key_id`, `model`, `size`, `source` or any combination of
+     *   them.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageImagesPaginated(clientConfig: ClientConfig, request: Usage.UsageImagesRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+    fun usageImagesPaginated(
+        clientConfig: ClientConfig,
+        request: Usage.UsageImagesRequest,
+        options: RequestOptions? = null,
+        yieldFn: (UsageTimeBucket) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
             val page = usageImages(clientConfig, request.copy(page = cursor), options)
@@ -122,9 +132,12 @@ internal object UsageImagesOperation {
         }
     }
 
-
-
-    fun usageImagesPages(clientConfig: ClientConfig, request: Usage.UsageImagesRequest, options: RequestOptions? = null, yieldPage: (Usage.UsageImagesPage) -> Boolean) {
+    fun usageImagesPages(
+        clientConfig: ClientConfig,
+        request: Usage.UsageImagesRequest,
+        options: RequestOptions? = null,
+        yieldPage: (Usage.UsageImagesPage) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
             val page = usageImages(clientConfig, request.copy(page = cursor), options)

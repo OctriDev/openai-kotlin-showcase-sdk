@@ -3,20 +3,16 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ProjectUpdateRequest` API schema.
- */
+/** Typed representation of the `ProjectUpdateRequest` API schema. */
 data class ProjectUpdateRequest(
-    /**
-     * The updated name of the project, this name appears in reports.
-     */
+    /** The updated name of the project, this name appears in reports. */
     val name: String? = null,
+    /** External key ID to associate with the project. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id")
+    val externalKeyId: String? = null,
     /**
-     * External key ID to associate with the project.
+     * Geography for the project. Deprecated: use `residency` when creating a project to configure
+     * data residency. This field is retained for backward compatibility.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id") val externalKeyId: String? = null,
-    /**
-     * Geography for the project. Deprecated: use `residency` when creating a project to configure data residency. This field is retained for backward compatibility.
-     */
-    val geography: String? = null
+    val geography: String? = null,
 )

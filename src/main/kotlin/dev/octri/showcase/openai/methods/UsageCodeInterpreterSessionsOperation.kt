@@ -17,51 +17,76 @@ internal object UsageCodeInterpreterSessionsOperation {
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
      * @param projectIds Return only usage for these projects.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageCodeInterpreterSessions(clientConfig: ClientConfig, request: Usage.UsageCodeInterpreterSessionsRequest, options: RequestOptions? = null): UsageResponse {
-        return SdkClient.request<UsageResponse>(SdkClient.RequestSpec("GET", "/organization/usage/code_interpreter_sessions", config = clientConfig, query = mapOf("start_time" to
-    SdkClient.queryValue(request.startTime, "form", true), "end_time" to
-    SdkClient.queryValue(request.endTime, "form", true), "bucket_width" to
-    SdkClient.queryValue(request.bucketWidth, "form", true), "project_ids" to
-    SdkClient.queryValue(request.projectIds, "form", true), "group_by" to
-    SdkClient.queryValue(request.groupBy, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "page" to SdkClient.queryValue(request.page, "form", true)), operationId = "usageCodeInterpreterSessions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun usageCodeInterpreterSessions(
+        clientConfig: ClientConfig,
+        request: Usage.UsageCodeInterpreterSessionsRequest,
+        options: RequestOptions? = null,
+    ): UsageResponse {
+        return SdkClient.request<UsageResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/usage/code_interpreter_sessions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "start_time" to SdkClient.queryValue(request.startTime, "form", true),
+                            "end_time" to SdkClient.queryValue(request.endTime, "form", true),
+                            "bucket_width" to
+                                SdkClient.queryValue(request.bucketWidth, "form", true),
+                            "project_ids" to SdkClient.queryValue(request.projectIds, "form", true),
+                            "group_by" to SdkClient.queryValue(request.groupBy, "form", true),
+                            "limit" to SdkClient.queryValue(request.limit, "form", true),
+                            "page" to SdkClient.queryValue(request.page, "form", true),
+                        ),
+                    operationId = "usageCodeInterpreterSessions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Get code interpreter sessions usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
      * @param projectIds Return only usage for these projects.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageCodeInterpreterSessionsPaginated(clientConfig: ClientConfig, request: Usage.UsageCodeInterpreterSessionsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+    fun usageCodeInterpreterSessionsPaginated(
+        clientConfig: ClientConfig,
+        request: Usage.UsageCodeInterpreterSessionsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (UsageTimeBucket) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
-            val page = usageCodeInterpreterSessions(clientConfig, request.copy(page = cursor), options)
+            val page =
+                usageCodeInterpreterSessions(clientConfig, request.copy(page = cursor), options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -73,12 +98,16 @@ internal object UsageCodeInterpreterSessionsOperation {
         }
     }
 
-
-
-    fun usageCodeInterpreterSessionsPages(clientConfig: ClientConfig, request: Usage.UsageCodeInterpreterSessionsRequest, options: RequestOptions? = null, yieldPage: (Usage.UsageCodeInterpreterSessionsPage) -> Boolean) {
+    fun usageCodeInterpreterSessionsPages(
+        clientConfig: ClientConfig,
+        request: Usage.UsageCodeInterpreterSessionsRequest,
+        options: RequestOptions? = null,
+        yieldPage: (Usage.UsageCodeInterpreterSessionsPage) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
-            val page = usageCodeInterpreterSessions(clientConfig, request.copy(page = cursor), options)
+            val page =
+                usageCodeInterpreterSessions(clientConfig, request.copy(page = cursor), options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.nextPage

@@ -3,77 +3,62 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `TranscriptionSegment` API schema.
- */
+/** Typed representation of the `TranscriptionSegment` API schema. */
 data class TranscriptionSegment(
-    /**
-     * Unique identifier of the segment.
-     */
+    /** Unique identifier of the segment. */
     val id: Long,
-    /**
-     * Seek offset of the segment.
-     */
+    /** Seek offset of the segment. */
     val seek: Long,
-    /**
-     * Start time of the segment in seconds.
-     */
+    /** Start time of the segment in seconds. */
     val start: Double,
-    /**
-     * End time of the segment in seconds.
-     */
+    /** End time of the segment in seconds. */
     val end: Double,
-    /**
-     * Text content of the segment.
-     */
+    /** Text content of the segment. */
     val text: String,
-    /**
-     * Array of token IDs for the text content.
-     */
+    /** Array of token IDs for the text content. */
     val tokens: List<Long>,
-    /**
-     * Temperature parameter used for generating the segment.
-     */
+    /** Temperature parameter used for generating the segment. */
     val temperature: Float,
     /**
      * Average logprob of the segment. If the value is lower than -1, consider the logprobs failed.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("avg_logprob") val avgLogprob: Float,
     /**
-     * Compression ratio of the segment. If the value is greater than 2.4, consider the compression failed.
+     * Compression ratio of the segment. If the value is greater than 2.4, consider the compression
+     * failed.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("compression_ratio") val compressionRatio: Float,
     /**
-     * Probability of no speech in the segment. If the value is higher than 1.0 and the `avg_logprob` is below -1, consider this segment silent.
+     * Probability of no speech in the segment. If the value is higher than 1.0 and the
+     * `avg_logprob` is below -1, consider this segment silent.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("no_speech_prob") val noSpeechProb: Float
+    @com.fasterxml.jackson.annotation.JsonProperty("no_speech_prob") val noSpeechProb: Float,
 )
 
-/**
- * A consent recording used to authorize creation of a custom voice.
- */
+/** A consent recording used to authorize creation of a custom voice. */
 data class VoiceConsentResource(
-    /**
-     * The object type, which is always `audio.voice_consent`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VoiceConsentResourceObjectEnum,
-    /**
-     * The consent recording identifier.
-     */
+    /** The object type, which is always `audio.voice_consent`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: VoiceConsentResourceObjectEnum,
+    /** The consent recording identifier. */
     val id: String,
-    /**
-     * The label provided when the consent recording was uploaded.
-     */
+    /** The label provided when the consent recording was uploaded. */
     val name: String,
-    /**
-     * The BCP 47 language tag for the consent phrase (for example, `en-US`).
-     */
+    /** The BCP 47 language tag for the consent phrase (for example, `en-US`). */
     val language: String,
-    /**
-     * The Unix timestamp (in seconds) for when the consent recording was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** The Unix timestamp (in seconds) for when the consent recording was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class VoiceIdsShared @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CreateSpeechRequestVoice, VoiceIdsOrCustomVoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class VoiceIdsShared
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    CreateSpeechRequestVoice, VoiceIdsOrCustomVoice

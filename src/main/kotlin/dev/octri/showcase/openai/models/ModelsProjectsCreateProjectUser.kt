@@ -3,20 +3,12 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ProjectUserCreateRequest` API schema.
- */
+/** Typed representation of the `ProjectUserCreateRequest` API schema. */
 data class ProjectUserCreateRequest(
-    /**
-     * `owner` or `member`
-     */
+    /** `owner` or `member` */
     val role: String,
-    /**
-     * The ID of the user.
-     */
+    /** The ID of the user. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * Email of the user to add.
-     */
-    val email: String? = null
+    /** Email of the user to add. */
+    val email: String? = null,
 )

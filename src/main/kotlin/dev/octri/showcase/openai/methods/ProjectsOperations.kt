@@ -33,44 +33,79 @@ import dev.octri.showcase.openai.Validation
 
 internal object ProjectsListProjectsOperation {
     /**
-     * Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * Lists projects in the organization. Use `include_archived` to include archived projects and
+     * `limit` and `after` to control and continue through the results. The response includes a
+     * `has_more` flag and cursor IDs for pagination.
      *
      * Returns a list of projects.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param includeArchived If `true` returns all projects including those that
-     *   have been `archived`. Archived projects are not included by default.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param includeArchived If `true` returns all projects including those that have been
+     *   `archived`. Archived projects are not included by default.
      */
-    fun listProjects(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null): ProjectListResponse {
-        return SdkClient.request<ProjectListResponse>(SdkClient.RequestSpec("GET", "/organization/projects", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "include_archived" to
-    SdkClient.queryValue(includeArchived, "form", true)), operationId = "listProjects", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun listProjects(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ProjectListResponse {
+        return SdkClient.request<ProjectListResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "include_archived" to
+                                SdkClient.queryValue(includeArchived, "form", true),
+                        ),
+                    operationId = "listProjects",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * Lists projects in the organization. Use `include_archived` to include archived projects and
+     * `limit` and `after` to control and continue through the results. The response includes a
+     * `has_more` flag and cursor IDs for pagination.
      *
      * Returns a list of projects.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param includeArchived If `true` returns all projects including those that
-     *   have been `archived`. Archived projects are not included by default.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param includeArchived If `true` returns all projects including those that have been
+     *   `archived`. Archived projects are not included by default.
      */
-    fun listProjectsPaginated(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null, yieldFn: (Project) -> Boolean) {
+    fun listProjectsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Project) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjects(clientConfig, limit, cursor, includeArchived, options)
@@ -85,9 +120,14 @@ internal object ProjectsListProjectsOperation {
         }
     }
 
-
-
-    fun listProjectsPages(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectsPage) -> Boolean) {
+    fun listProjectsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjects(clientConfig, limit, cursor, includeArchived, options)
@@ -104,109 +144,235 @@ internal object ProjectsListProjectsOperation {
 
 internal object ProjectsCreateProjectOperation {
     /**
-     * Create a new project in the organization. Projects can be created and archived, but cannot be deleted.
+     * Create a new project in the organization. Projects can be created and archived, but cannot be
+     * deleted.
      *
      * @param name The friendly name of the project, this name appears in reports.
-     * @param geography Create the project with the specified data residency region.
-     *   Your organization must have access to Data residency functionality in order to
-     *   use. See data residency controls to review the functionality and limitations
-     *   of setting this field. Deprecated: use `residency` instead. Do not provide
-     *   both `geography` and `residency`.
-     * @param residency Create the project with the specified residency
-     *   configuration. Your organization must have access to the requested residency
-     *   configuration in order to use it. See data residency controls to review the
-     *   functionality and limitations of setting this field.
+     * @param geography Create the project with the specified data residency region. Your
+     *   organization must have access to Data residency functionality in order to use. See data
+     *   residency controls to review the functionality and limitations of setting this field.
+     *   Deprecated: use `residency` instead. Do not provide both `geography` and `residency`.
+     * @param residency Create the project with the specified residency configuration. Your
+     *   organization must have access to the requested residency configuration in order to use it.
+     *   See data residency controls to review the functionality and limitations of setting this
+     *   field.
      * @param externalKeyId External key ID to associate with the project.
      */
-    fun createProject(clientConfig: ClientConfig, name: String, geography: SdkClient.SdkOptional<String?>? = null, residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Project {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("POST", "/organization/projects", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "geography" to (geography ?: SdkClient.SdkOptional.Omitted), "residency" to (residency ?: SdkClient.SdkOptional.Omitted), "external_key_id" to
-    (externalKeyId ?: SdkClient.SdkOptional.Omitted)), operationId = "createProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun createProject(
+        clientConfig: ClientConfig,
+        name: String,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Project {
+        return SdkClient.request<Project>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "geography" to (geography ?: SdkClient.SdkOptional.Omitted),
+                            "residency" to (residency ?: SdkClient.SdkOptional.Omitted),
+                            "external_key_id" to (externalKeyId ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createProject",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsRetrieveProjectOperation {
     /**
-     * Retrieves a project in the organization by its identifier. Use `project_id` to select the project whose name, status, and residency configuration you need to inspect.
+     * Retrieves a project in the organization by its identifier. Use `project_id` to select the
+     * project whose name, status, and residency configuration you need to inspect.
      *
      * Retrieves a project.
      *
      * @param projectId The ID of the project.
      */
-    fun retrieveProject(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): Project {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}", config = clientConfig, operationId = "retrieveProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): Project {
+        return SdkClient.request<Project>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}",
+                    config = clientConfig,
+                    operationId = "retrieveProject",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsModifyProjectOperation {
     /**
-     * Updates a project in the organization. Supply any of `name`, `external_key_id`, or `geography` to change the corresponding project value; omitted fields are not specified for update. The `geography` field is retained for backward compatibility, while data residency is configured with `residency` when creating a project.
+     * Updates a project in the organization. Supply any of `name`, `external_key_id`, or
+     * `geography` to change the corresponding project value; omitted fields are not specified for
+     * update. The `geography` field is retained for backward compatibility, while data residency is
+     * configured with `residency` when creating a project.
      *
      * Modifies a project in the organization.
      *
      * @param projectId The ID of the project.
      * @param name The updated name of the project, this name appears in reports.
      * @param externalKeyId External key ID to associate with the project.
-     * @param geography Geography for the project. Deprecated: use `residency` when
-     *   creating a project to configure data residency. This field is retained for
-     *   backward compatibility.
+     * @param geography Geography for the project. Deprecated: use `residency` when creating a
+     *   project to configure data residency. This field is retained for backward compatibility.
      */
-    fun modifyProject(clientConfig: ClientConfig, projectId: String, name: SdkClient.SdkOptional<String?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, geography: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Project {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name ?: SdkClient.SdkOptional.Omitted), "external_key_id" to
-    (externalKeyId ?: SdkClient.SdkOptional.Omitted), "geography" to (geography ?: SdkClient.SdkOptional.Omitted)), operationId = "modifyProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun modifyProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: SdkClient.SdkOptional<String?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Project {
+        return SdkClient.request<Project>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name ?: SdkClient.SdkOptional.Omitted),
+                            "external_key_id" to (externalKeyId ?: SdkClient.SdkOptional.Omitted),
+                            "geography" to (geography ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "modifyProject",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsListProjectApiKeysOperation {
     /**
-     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their owner's effective project access, and `limit` and `after` to control and continue through the results. The response includes redacted key values, owner details, and a `has_more` flag for pagination.
+     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their
+     * owner's effective project access, and `limit` and `after` to control and continue through the
+     * results. The response includes redacted key values, owner details, and a `has_more` flag for
+     * pagination.
      *
      * Returns a list of API keys in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param ownerProjectAccess Filter API keys by whether the owner currently has
-     *   effective access to the project. Use `active` for owners with access,
-     *   `inactive` for owners without access, or `any` for all enabled project API
-     *   keys. If omitted, the endpoint applies its existing membership-based
-     *   visibility rules, which may exclude some enabled keys.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param ownerProjectAccess Filter API keys by whether the owner currently has effective access
+     *   to the project. Use `active` for owners with access, `inactive` for owners without access,
+     *   or `any` for all enabled project API keys. If omitted, the endpoint applies its existing
+     *   membership-based visibility rules, which may exclude some enabled keys.
      */
-    fun listProjectApiKeys(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, ownerProjectAccess: ListProjectApiKeysParameterEnum? = null, options: RequestOptions? = null): ProjectApiKeyListResponse {
-        return SdkClient.request<ProjectApiKeyListResponse>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "owner_project_access" to
-    SdkClient.queryValue(ownerProjectAccess, "form", true)), operationId = "listProjectApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun listProjectApiKeys(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        ownerProjectAccess: ListProjectApiKeysParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): ProjectApiKeyListResponse {
+        return SdkClient.request<ProjectApiKeyListResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "owner_project_access" to
+                                SdkClient.queryValue(ownerProjectAccess, "form", true),
+                        ),
+                    operationId = "listProjectApiKeys",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their owner's effective project access, and `limit` and `after` to control and continue through the results. The response includes redacted key values, owner details, and a `has_more` flag for pagination.
+     * Lists API keys in an organization project. Use `owner_project_access` to filter keys by their
+     * owner's effective project access, and `limit` and `after` to control and continue through the
+     * results. The response includes redacted key values, owner details, and a `has_more` flag for
+     * pagination.
      *
      * Returns a list of API keys in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param ownerProjectAccess Filter API keys by whether the owner currently has
-     *   effective access to the project. Use `active` for owners with access,
-     *   `inactive` for owners without access, or `any` for all enabled project API
-     *   keys. If omitted, the endpoint applies its existing membership-based
-     *   visibility rules, which may exclude some enabled keys.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param ownerProjectAccess Filter API keys by whether the owner currently has effective access
+     *   to the project. Use `active` for owners with access, `inactive` for owners without access,
+     *   or `any` for all enabled project API keys. If omitted, the endpoint applies its existing
+     *   membership-based visibility rules, which may exclude some enabled keys.
      */
-    fun listProjectApiKeysPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, ownerProjectAccess: ListProjectApiKeysParameterEnum? = null, options: RequestOptions? = null, yieldFn: (ProjectApiKey) -> Boolean) {
+    fun listProjectApiKeysPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        ownerProjectAccess: ListProjectApiKeysParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectApiKey) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectApiKeys(clientConfig, projectId, limit, cursor, ownerProjectAccess, options)
+            val page =
+                listProjectApiKeys(
+                    clientConfig,
+                    projectId,
+                    limit,
+                    cursor,
+                    ownerProjectAccess,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -218,12 +384,26 @@ internal object ProjectsListProjectApiKeysOperation {
         }
     }
 
-
-
-    fun listProjectApiKeysPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, ownerProjectAccess: ListProjectApiKeysParameterEnum? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectApiKeysPage) -> Boolean) {
+    fun listProjectApiKeysPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        ownerProjectAccess: ListProjectApiKeysParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectApiKeysPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectApiKeys(clientConfig, projectId, limit, cursor, ownerProjectAccess, options)
+            val page =
+                listProjectApiKeys(
+                    clientConfig,
+                    projectId,
+                    limit,
+                    cursor,
+                    ownerProjectAccess,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -237,53 +417,136 @@ internal object ProjectsListProjectApiKeysOperation {
 
 internal object ProjectsRetrieveProjectApiKeyOperation {
     /**
-     * Retrieves an API key in an organization project by its identifier. Use `project_id` and `api_key_id` to select the project and key whose redacted value, owner access, and usage timestamps you need to inspect.
+     * Retrieves an API key in an organization project by its identifier. Use `project_id` and
+     * `api_key_id` to select the project and key whose redacted value, owner access, and usage
+     * timestamps you need to inspect.
      *
      * Retrieves an API key in the project.
      *
      * @param projectId The ID of the project.
      * @param apiKeyId The ID of the API key.
      */
-    fun retrieveProjectApiKey(clientConfig: ClientConfig, projectId: String, apiKeyId: String, options: RequestOptions? = null): ProjectApiKey {
-        return SdkClient.request<ProjectApiKey>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, operationId = "retrieveProjectApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveProjectApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): ProjectApiKey {
+        return SdkClient.request<ProjectApiKey>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                    config = clientConfig,
+                    operationId = "retrieveProjectApiKey",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsDeleteProjectApiKeyOperation {
     /**
-     * Deletes an API key from the project. Returns confirmation of the key deletion, or an error if the key belonged to a service account.
+     * Deletes an API key from the project. Returns confirmation of the key deletion, or an error if
+     * the key belonged to a service account.
      *
      * @param projectId The ID of the project.
      * @param apiKeyId The ID of the API key.
      */
-    fun deleteProjectApiKey(clientConfig: ClientConfig, projectId: String, apiKeyId: String, options: RequestOptions? = null): ProjectApiKeyDeleteResponse {
-        return SdkClient.request<ProjectApiKeyDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, operationId = "deleteProjectApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteProjectApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): ProjectApiKeyDeleteResponse {
+        return SdkClient.request<ProjectApiKeyDeleteResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                    config = clientConfig,
+                    operationId = "deleteProjectApiKey",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsUpdateProjectApiKeyOperation {
     /**
-     * Updates the scopes and/or expiration of an existing API key in the project, including a service-account-owned key. Requires permission to write project API keys. Provide at least one of `scopes` or `expires_in_seconds`. Omitted fields stay unchanged; neither field accepts `null`. Both changes are saved together. `scopes` replaces the key's scope restrictions using the same scope identifiers as the dashboard. An empty array means All permissions, subject to the owner's…
+     * Updates the scopes and/or expiration of an existing API key in the project, including a
+     * service-account-owned key. Requires permission to write project API keys. Provide at least
+     * one of `scopes` or `expires_in_seconds`. Omitted fields stay unchanged; neither field accepts
+     * `null`. Both changes are saved together. `scopes` replaces the key's scope restrictions using
+     * the same scope identifiers as the dashboard. An empty array means All permissions, subject to
+     * the owner's…
      *
      * @param projectId The ID of the project.
      * @param apiKeyId The ID of the API key.
-     * @param expiresInSeconds Number of seconds from this request until the API key
-     *   expires. Must comply with the organization and project expiry policies.
-     *   Expired keys cannot be updated. Retrying resets the expiry relative to the new
-     *   request. Omit to keep the current expiration.
-     * @param scopes Replace the API key scope restrictions. Omit to leave scopes
-     *   unchanged. An empty array removes key restrictions (All permissions), subject
-     *   to the owner's effective permissions. Use \["api.all.read"\] for read-only
-     *   access. Scopes do not change the owner's roles or grant administrative
-     *   permissions.
+     * @param expiresInSeconds Number of seconds from this request until the API key expires. Must
+     *   comply with the organization and project expiry policies. Expired keys cannot be updated.
+     *   Retrying resets the expiry relative to the new request. Omit to keep the current
+     *   expiration.
+     * @param scopes Replace the API key scope restrictions. Omit to leave scopes unchanged. An
+     *   empty array removes key restrictions (All permissions), subject to the owner's effective
+     *   permissions. Use \["api.all.read"\] for read-only access. Scopes do not change the owner's
+     *   roles or grant administrative permissions.
      */
-    fun updateProjectApiKey(clientConfig: ClientConfig, projectId: String, apiKeyId: String, expiresInSeconds: Long? = null, scopes: List<String>? = null, options: RequestOptions? = null): ProjectApiKey {
+    fun updateProjectApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        apiKeyId: String,
+        expiresInSeconds: Long? = null,
+        scopes: List<String>? = null,
+        options: RequestOptions? = null,
+    ): ProjectApiKey {
         if (expiresInSeconds != null) {
-            Validation.validateRange("expires_in_seconds", expiresInSeconds, Validation.RangeOpts(min = 1.0, max = 31536000.0))
-}
+            Validation.validateRange(
+                "expires_in_seconds",
+                expiresInSeconds,
+                Validation.RangeOpts(min = 1.0, max = 31536000.0),
+            )
+        }
 
-        return SdkClient.request<ProjectApiKey>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, body = SdkClient.bodyMap("expires_in_seconds" to
-    (SdkClient.omitIfNull(expiresInSeconds)), "scopes" to (SdkClient.omitIfNull(scopes))), operationId = "updateProjectApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+        return SdkClient.request<ProjectApiKey>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/api_keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "expires_in_seconds" to (SdkClient.omitIfNull(expiresInSeconds)),
+                            "scopes" to (SdkClient.omitIfNull(scopes)),
+                        ),
+                    operationId = "updateProjectApiKey",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -293,27 +556,72 @@ internal object ProjectsArchiveProjectOperation {
      *
      * @param projectId The ID of the project.
      */
-    fun archiveProject(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): Project {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/archive", config = clientConfig, operationId = "archiveProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun archiveProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): Project {
+        return SdkClient.request<Project>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/archive",
+                    config = clientConfig,
+                    operationId = "archiveProject",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsRetrieveProjectModelPermissionsOperation {
     /**
-     * Retrieves the model permission policy for a project. Use `project_id` to identify the project whose model access policy you want to inspect. The response includes the policy mode and the model IDs it applies to.
+     * Retrieves the model permission policy for a project. Use `project_id` to identify the project
+     * whose model access policy you want to inspect. The response includes the policy mode and the
+     * model IDs it applies to.
      *
      * Returns model permissions for a project.
      *
      * @param projectId The ID of the project.
      */
-    fun retrieveProjectModelPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectModelPermissions {
-        return SdkClient.request<ProjectModelPermissions>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions", config = clientConfig, operationId = "retrieveProjectModelPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissions {
+        return SdkClient.request<ProjectModelPermissions>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions",
+                    config = clientConfig,
+                    operationId = "retrieveProjectModelPermissions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsUpdateProjectModelPermissionsOperation {
     /**
-     * Updates a project's model permission policy. Provide `mode` and `model_ids` to specify whether the listed models are allowed or denied. The response returns the updated policy.
+     * Updates a project's model permission policy. Provide `mode` and `model_ids` to specify
+     * whether the listed models are allowed or denied. The response returns the updated policy.
      *
      * Updates model permissions for a project.
      *
@@ -321,72 +629,153 @@ internal object ProjectsUpdateProjectModelPermissionsOperation {
      * @param mode The model permissions mode to apply.
      * @param modelIds The model IDs included in this permissions policy.
      */
-    fun updateProjectModelPermissions(clientConfig: ClientConfig, projectId: String, mode: ProjectModelPermissionsUpdateRequestModeEnum, modelIds: List<String>, options: RequestOptions? = null): ProjectModelPermissions {
-        return SdkClient.request<ProjectModelPermissions>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions", config = clientConfig, body = SdkClient.bodyMap("mode" to (mode), "model_ids" to (modelIds)), operationId = "updateProjectModelPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun updateProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        mode: ProjectModelPermissionsUpdateRequestModeEnum,
+        modelIds: List<String>,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissions {
+        return SdkClient.request<ProjectModelPermissions>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("mode" to (mode), "model_ids" to (modelIds)),
+                    operationId = "updateProjectModelPermissions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsDeleteProjectModelPermissionsOperation {
     /**
-     * Deletes the model permission policy for a project. Use `project_id` to identify the project whose policy you want to remove. The response confirms whether the permissions were deleted.
+     * Deletes the model permission policy for a project. Use `project_id` to identify the project
+     * whose policy you want to remove. The response confirms whether the permissions were deleted.
      *
      * Deletes model permissions for a project.
      *
      * @param projectId The ID of the project.
      */
-    fun deleteProjectModelPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectModelPermissionsDeleteResponse {
-        return SdkClient.request<ProjectModelPermissionsDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions", config = clientConfig, operationId = "deleteProjectModelPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissionsDeleteResponse {
+        return SdkClient.request<ProjectModelPermissionsDeleteResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions",
+                    config = clientConfig,
+                    operationId = "deleteProjectModelPermissions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsListProjectRateLimitsOperation {
     /**
-     * Lists the rate limits configured for a project, with each result describing limits for a model. Use `limit` to set the number of results and `after` or `before` to navigate the list using cursors.
+     * Lists the rate limits configured for a project, with each result describing limits for a
+     * model. Use `limit` to set the number of results and `after` or `before` to navigate the list
+     * using cursors.
      *
      * Returns the rate limits per model for a project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. The default is
-     *   100.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param before A cursor for use in pagination. `before` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, beginning with obj_foo, your subsequent call can include
-     *   before=obj_foo in order to fetch the previous page of the list.
+     * @param limit A limit on the number of objects to be returned. The default is 100.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that defines your
+     *   place in the list. For instance, if you make a list request and receive 100 objects,
+     *   beginning with obj_foo, your subsequent call can include before=obj_foo in order to fetch
+     *   the previous page of the list.
      */
-    fun listProjectRateLimits(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ProjectRateLimitListResponse {
-        return SdkClient.request<ProjectRateLimitListResponse>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/rate_limits", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listProjectRateLimits", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun listProjectRateLimits(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectRateLimitListResponse {
+        return SdkClient.request<ProjectRateLimitListResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/rate_limits",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "before" to SdkClient.queryValue(before, "form", true),
+                        ),
+                    operationId = "listProjectRateLimits",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists the rate limits configured for a project, with each result describing limits for a model. Use `limit` to set the number of results and `after` or `before` to navigate the list using cursors.
+     * Lists the rate limits configured for a project, with each result describing limits for a
+     * model. Use `limit` to set the number of results and `after` or `before` to navigate the list
+     * using cursors.
      *
      * Returns the rate limits per model for a project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. The default is
-     *   100.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param before A cursor for use in pagination. `before` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, beginning with obj_foo, your subsequent call can include
-     *   before=obj_foo in order to fetch the previous page of the list.
+     * @param limit A limit on the number of objects to be returned. The default is 100.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param before A cursor for use in pagination. `before` is an object ID that defines your
+     *   place in the list. For instance, if you make a list request and receive 100 objects,
+     *   beginning with obj_foo, your subsequent call can include before=obj_foo in order to fetch
+     *   the previous page of the list.
      */
-    fun listProjectRateLimitsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldFn: (ProjectRateLimit) -> Boolean) {
+    fun listProjectRateLimitsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectRateLimit) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectRateLimits(clientConfig, projectId, limit, cursor, before, options)
+            val page =
+                listProjectRateLimits(clientConfig, projectId, limit, cursor, before, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -398,12 +787,19 @@ internal object ProjectsListProjectRateLimitsOperation {
         }
     }
 
-
-
-    fun listProjectRateLimitsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectRateLimitsPage) -> Boolean) {
+    fun listProjectRateLimitsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectRateLimitsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listProjectRateLimits(clientConfig, projectId, limit, cursor, before, options)
+            val page =
+                listProjectRateLimits(clientConfig, projectId, limit, cursor, before, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -417,7 +813,9 @@ internal object ProjectsListProjectRateLimitsOperation {
 
 internal object ProjectsUpdateProjectRateLimitsOperation {
     /**
-     * Updates a rate limit configuration for a project. Use `project_id` and `rate_limit_id` to identify the project and rate limit, then provide the limit values to change. The response returns the updated rate limit configuration.
+     * Updates a rate limit configuration for a project. Use `project_id` and `rate_limit_id` to
+     * identify the project and rate limit, then provide the limit values to change. The response
+     * returns the updated rate limit configuration.
      *
      * Updates a project rate limit.
      *
@@ -425,23 +823,50 @@ internal object ProjectsUpdateProjectRateLimitsOperation {
      * @param rateLimitId The ID of the rate limit.
      * @param maxRequestsPer1Minute The maximum requests per minute.
      * @param maxTokensPer1Minute The maximum tokens per minute.
-     * @param maxImagesPer1Minute The maximum images per minute. Only relevant for
+     * @param maxImagesPer1Minute The maximum images per minute. Only relevant for certain models.
+     * @param maxAudioMegabytesPer1Minute The maximum audio megabytes per minute. Only relevant for
      *   certain models.
-     * @param maxAudioMegabytesPer1Minute The maximum audio megabytes per minute.
-     *   Only relevant for certain models.
-     * @param maxRequestsPer1Day The maximum requests per day. Only relevant for
+     * @param maxRequestsPer1Day The maximum requests per day. Only relevant for certain models.
+     * @param batch1DayMaxInputTokens The maximum batch input tokens per day. Only relevant for
      *   certain models.
-     * @param batch1DayMaxInputTokens The maximum batch input tokens per day. Only
-     *   relevant for certain models.
      */
-    fun updateProjectRateLimits(clientConfig: ClientConfig, request: Projects.UpdateProjectRateLimitsRequest, options: RequestOptions? = null): ProjectRateLimit {
-        return SdkClient.request<ProjectRateLimit>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(request.projectId)}/rate_limits/${SdkClient.encodePathSegment(request.rateLimitId)}", config = clientConfig, body = SdkClient.bodyMap("max_requests_per_1_minute" to
-    (SdkClient.omitIfNull(request.maxRequestsPer1Minute)), "max_tokens_per_1_minute" to
-    (SdkClient.omitIfNull(request.maxTokensPer1Minute)), "max_images_per_1_minute" to
-    (SdkClient.omitIfNull(request.maxImagesPer1Minute)), "max_audio_megabytes_per_1_minute" to
-    (SdkClient.omitIfNull(request.maxAudioMegabytesPer1Minute)), "max_requests_per_1_day" to
-    (SdkClient.omitIfNull(request.maxRequestsPer1Day)), "batch_1_day_max_input_tokens" to
-    (SdkClient.omitIfNull(request.batch1DayMaxInputTokens))), operationId = "updateProjectRateLimits", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+    fun updateProjectRateLimits(
+        clientConfig: ClientConfig,
+        request: Projects.UpdateProjectRateLimitsRequest,
+        options: RequestOptions? = null,
+    ): ProjectRateLimit {
+        return SdkClient.request<ProjectRateLimit>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(request.projectId)}/rate_limits/${SdkClient.encodePathSegment(request.rateLimitId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "max_requests_per_1_minute" to
+                                (SdkClient.omitIfNull(request.maxRequestsPer1Minute)),
+                            "max_tokens_per_1_minute" to
+                                (SdkClient.omitIfNull(request.maxTokensPer1Minute)),
+                            "max_images_per_1_minute" to
+                                (SdkClient.omitIfNull(request.maxImagesPer1Minute)),
+                            "max_audio_megabytes_per_1_minute" to
+                                (SdkClient.omitIfNull(request.maxAudioMegabytesPer1Minute)),
+                            "max_requests_per_1_day" to
+                                (SdkClient.omitIfNull(request.maxRequestsPer1Day)),
+                            "batch_1_day_max_input_tokens" to
+                                (SdkClient.omitIfNull(request.batch1DayMaxInputTokens)),
+                        ),
+                    operationId = "updateProjectRateLimits",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -450,34 +875,64 @@ internal object ProjectsListProjectServiceAccountsOperation {
      * Returns a list of service accounts in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectServiceAccounts(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ProjectServiceAccountListResponse {
-        return SdkClient.request<ProjectServiceAccountListResponse>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listProjectServiceAccounts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun listProjectServiceAccounts(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountListResponse {
+        return SdkClient.request<ProjectServiceAccountListResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                        ),
+                    operationId = "listProjectServiceAccounts",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Returns a list of service accounts in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectServiceAccountsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ProjectServiceAccount) -> Boolean) {
+    fun listProjectServiceAccountsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectServiceAccount) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectServiceAccounts(clientConfig, projectId, limit, cursor, options)
@@ -492,9 +947,14 @@ internal object ProjectsListProjectServiceAccountsOperation {
         }
     }
 
-
-
-    fun listProjectServiceAccountsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectServiceAccountsPage) -> Boolean) {
+    fun listProjectServiceAccountsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectServiceAccountsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectServiceAccounts(clientConfig, projectId, limit, cursor, options)
@@ -511,44 +971,101 @@ internal object ProjectsListProjectServiceAccountsOperation {
 
 internal object ProjectsCreateProjectServiceAccountOperation {
     /**
-     * Creates a service account in a project and, by default, returns an unredacted API key for it. Supply a `name`; set `create_service_account_only` to create the account without default roles or an API key, and use `expires_in_seconds` to configure the initial key's lifetime.
+     * Creates a service account in a project and, by default, returns an unredacted API key for it.
+     * Supply a `name`; set `create_service_account_only` to create the account without default
+     * roles or an API key, and use `expires_in_seconds` to configure the initial key's lifetime.
      *
-     * Creates a new service account in the project. By default, this also returns an unredacted API key for the service account.
+     * Creates a new service account in the project. By default, this also returns an unredacted API
+     * key for the service account.
      *
      * @param projectId The ID of the project.
      * @param name The name of the service account being created.
      * @param createServiceAccountOnly Optional `boolean` value serialized in the
      *   `create_service_account_only` wire field.
-     * @param expiresInSeconds Number of seconds until the initial API key expires.
-     *   If omitted or null, the key does not expire unless the effective organization
-     *   or project policy requires an expiration. When a policy sets a maximum
-     *   lifetime, this value must be provided and must not exceed that limit. A
-     *   non-null value cannot be used when `create_service_account_only` is true.
+     * @param expiresInSeconds Number of seconds until the initial API key expires. If omitted or
+     *   null, the key does not expire unless the effective organization or project policy requires
+     *   an expiration. When a policy sets a maximum lifetime, this value must be provided and must
+     *   not exceed that limit. A non-null value cannot be used when `create_service_account_only`
+     *   is true.
      */
-    fun createProjectServiceAccount(clientConfig: ClientConfig, projectId: String, name: String, createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): ProjectServiceAccountCreateResponse {
-        return SdkClient.request<ProjectServiceAccountCreateResponse>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "create_service_account_only" to
-    (createServiceAccountOnly ?: SdkClient.SdkOptional.Omitted), "expires_in_seconds" to
-    (expiresInSeconds ?: SdkClient.SdkOptional.Omitted)), operationId = "createProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun createProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: String,
+        createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountCreateResponse {
+        return SdkClient.request<ProjectServiceAccountCreateResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "create_service_account_only" to
+                                (createServiceAccountOnly ?: SdkClient.SdkOptional.Omitted),
+                            "expires_in_seconds" to
+                                (expiresInSeconds ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createProjectServiceAccount",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsRetrieveProjectServiceAccountOperation {
     /**
-     * Retrieves a service account in a project. Use the project and service account identifiers to inspect the account's name, role, and creation timestamp.
+     * Retrieves a service account in a project. Use the project and service account identifiers to
+     * inspect the account's name, role, and creation timestamp.
      *
      * Retrieves a service account in the project.
      *
      * @param projectId The ID of the project.
      * @param serviceAccountId The ID of the service account.
      */
-    fun retrieveProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): ProjectServiceAccount {
-        return SdkClient.request<ProjectServiceAccount>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}", config = clientConfig, operationId = "retrieveProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccount {
+        return SdkClient.request<ProjectServiceAccount>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}",
+                    config = clientConfig,
+                    operationId = "retrieveProjectServiceAccount",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsUpdateProjectServiceAccountOperation {
     /**
-     * Updates a service account in a project. Supply `name` or `role` to change the corresponding account property; the role must be `member` or `owner`.
+     * Updates a service account in a project. Supply `name` or `role` to change the corresponding
+     * account property; the role must be `member` or `owner`.
      *
      * Updates a service account in the project.
      *
@@ -557,60 +1074,144 @@ internal object ProjectsUpdateProjectServiceAccountOperation {
      * @param name The updated service account name.
      * @param role The updated service account role.
      */
-    fun updateProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, role: UpdateProjectServiceAccountBodyRoleEnum? = null, options: RequestOptions? = null): ProjectServiceAccount {
-        return SdkClient.request<ProjectServiceAccount>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "role" to (SdkClient.omitIfNull(role))), operationId = "updateProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun updateProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        role: UpdateProjectServiceAccountBodyRoleEnum? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccount {
+        return SdkClient.request<ProjectServiceAccount>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "role" to (SdkClient.omitIfNull(role)),
+                        ),
+                    operationId = "updateProjectServiceAccount",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsDeleteProjectServiceAccountOperation {
     /**
-     * Deletes a service account from the project. Returns confirmation of service account deletion, or an error if the project is archived (archived projects have no service accounts).
+     * Deletes a service account from the project. Returns confirmation of service account deletion,
+     * or an error if the project is archived (archived projects have no service accounts).
      *
      * @param projectId The ID of the project.
      * @param serviceAccountId The ID of the service account.
      */
-    fun deleteProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): ProjectServiceAccountDeleteResponse {
-        return SdkClient.request<ProjectServiceAccountDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}", config = clientConfig, operationId = "deleteProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountDeleteResponse {
+        return SdkClient.request<ProjectServiceAccountDeleteResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}",
+                    config = clientConfig,
+                    operationId = "deleteProjectServiceAccount",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsListProjectUsersOperation {
     /**
-     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
+     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of
+     * results and pass an `after` cursor from a previous response to continue through the list.
      *
      * Returns a list of users in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectUsers(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ProjectUserListResponse {
-        return SdkClient.request<ProjectUserListResponse>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listProjectUsers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun listProjectUsers(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectUserListResponse {
+        return SdkClient.request<ProjectUserListResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                        ),
+                    operationId = "listProjectUsers",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
+     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of
+     * results and pass an `after` cursor from a previous response to continue through the list.
      *
      * Returns a list of users in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectUsersPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ProjectUser) -> Boolean) {
+    fun listProjectUsersPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectUser) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectUsers(clientConfig, projectId, limit, cursor, options)
@@ -625,9 +1226,14 @@ internal object ProjectsListProjectUsersOperation {
         }
     }
 
-
-
-    fun listProjectUsersPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectUsersPage) -> Boolean) {
+    fun listProjectUsersPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectUsersPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectUsers(clientConfig, projectId, limit, cursor, options)
@@ -644,35 +1250,91 @@ internal object ProjectsListProjectUsersOperation {
 
 internal object ProjectsCreateProjectUserOperation {
     /**
-     * Adds a user to the project. Users must already be members of the organization to be added to a project.
+     * Adds a user to the project. Users must already be members of the organization to be added to
+     * a project.
      *
      * @param projectId The ID of the project.
      * @param role `owner` or `member`
      * @param userId The ID of the user.
      * @param email Email of the user to add.
      */
-    fun createProjectUser(clientConfig: ClientConfig, projectId: String, role: String, userId: SdkClient.SdkOptional<String?>? = null, email: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): ProjectUser {
-        return SdkClient.request<ProjectUser>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users", config = clientConfig, body = SdkClient.bodyMap("role" to (role), "user_id" to (userId ?: SdkClient.SdkOptional.Omitted), "email" to (email ?: SdkClient.SdkOptional.Omitted)), operationId = "createProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun createProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        role: String,
+        userId: SdkClient.SdkOptional<String?>? = null,
+        email: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectUser {
+        return SdkClient.request<ProjectUser>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "role" to (role),
+                            "user_id" to (userId ?: SdkClient.SdkOptional.Omitted),
+                            "email" to (email ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createProjectUser",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "409" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsRetrieveProjectUserOperation {
     /**
-     * Retrieves a user's membership details for a project. Use `project_id` and `user_id` to identify the project and user, and review the returned role and membership timestamp.
+     * Retrieves a user's membership details for a project. Use `project_id` and `user_id` to
+     * identify the project and user, and review the returned role and membership timestamp.
      *
      * Retrieves a user in the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
      */
-    fun retrieveProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): ProjectUser {
-        return SdkClient.request<ProjectUser>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "retrieveProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun retrieveProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): ProjectUser {
+        return SdkClient.request<ProjectUser>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}",
+                    config = clientConfig,
+                    operationId = "retrieveProjectUser",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsModifyProjectUserOperation {
     /**
-     * Updates a user's role in a project. Use `project_id` and `user_id` to identify the project membership, and set `role` to `owner` or `member` when changing the role.
+     * Updates a user's role in a project. Use `project_id` and `user_id` to identify the project
+     * membership, and set `role` to `owner` or `member` when changing the role.
      *
      * Modifies a user's role in the project.
      *
@@ -680,26 +1342,75 @@ internal object ProjectsModifyProjectUserOperation {
      * @param userId The ID of the user.
      * @param role `owner` or `member`
      */
-    fun modifyProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, role: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): ProjectUser {
-        return SdkClient.request<ProjectUser>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, body = SdkClient.bodyMap("role" to (role ?: SdkClient.SdkOptional.Omitted)), operationId = "modifyProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun modifyProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        role: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectUser {
+        return SdkClient.request<ProjectUser>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("role" to (role ?: SdkClient.SdkOptional.Omitted)),
+                    operationId = "modifyProjectUser",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsDeleteProjectUserOperation {
     /**
-     * Deletes a user from the project. Returns confirmation of project user deletion, or an error if the project is archived (archived projects have no users).
+     * Deletes a user from the project. Returns confirmation of project user deletion, or an error
+     * if the project is archived (archived projects have no users).
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
      */
-    fun deleteProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): ProjectUserDeleteResponse {
-        return SdkClient.request<ProjectUserDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "deleteProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun deleteProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): ProjectUserDeleteResponse {
+        return SdkClient.request<ProjectUserDeleteResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}",
+                    config = clientConfig,
+                    operationId = "deleteProjectUser",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object ProjectsCreateProjectsServiceAccountApiKeyOperation {
     /**
-     * Creates an API key for a service account in a project. Use `name` and `scopes` to set the key's label and scopes, and `expires_in_seconds` to configure its lifetime. The response includes the unredacted key value and its identifier.
+     * Creates an API key for a service account in a project. Use `name` and `scopes` to set the
+     * key's label and scopes, and `expires_in_seconds` to configure its lifetime. The response
+     * includes the unredacted key value and its identifier.
      *
      * Creates an API key for a service account in the project.
      *
@@ -707,11 +1418,42 @@ internal object ProjectsCreateProjectsServiceAccountApiKeyOperation {
      * @param serviceAccountId The ID of the service account.
      * @param name API key name.
      * @param scopes API key scopes.
-     * @param expiresInSeconds Optional API value serialized in the
-     *   `expires_in_seconds` wire field.
+     * @param expiresInSeconds Optional API value serialized in the `expires_in_seconds` wire field.
      */
-    fun createProjectsServiceAccountApiKey(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, scopes: List<String>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): ServiceAccountApiKeyBody {
-        return SdkClient.request<ServiceAccountApiKeyBody>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}/api_keys", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "scopes" to (SdkClient.omitIfNull(scopes)), "expires_in_seconds" to
-    (expiresInSeconds ?: SdkClient.SdkOptional.Omitted)), operationId = "createProjectsServiceAccountApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun createProjectsServiceAccountApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        scopes: List<String>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): ServiceAccountApiKeyBody {
+        return SdkClient.request<ServiceAccountApiKeyBody>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}/api_keys",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "scopes" to (SdkClient.omitIfNull(scopes)),
+                            "expires_in_seconds" to
+                                (expiresInSeconds ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createProjectsServiceAccountApiKey",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "404" to ErrorResponse::class.java,
+                            "409" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

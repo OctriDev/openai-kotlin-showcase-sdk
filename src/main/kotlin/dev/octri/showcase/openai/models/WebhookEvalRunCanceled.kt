@@ -3,38 +3,23 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Event data payload.
- */
+/** Event data payload. */
 data class WebhookEvalRunCanceledData(
-    /**
-     * The unique ID of the eval run.
-     */
+    /** The unique ID of the eval run. */
     val id: String
 )
 
-/**
- * Sent when an eval run has been canceled.
- */
+/** Sent when an eval run has been canceled. */
 data class WebhookEvalRunCanceled(
-    /**
-     * The Unix timestamp (in seconds) of when the eval run was canceled.
-     */
+    /** The Unix timestamp (in seconds) of when the eval run was canceled. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * Event data payload.
-     */
+    /** Event data payload. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookEvalRunCanceledData,
-    /**
-     * The type of the event. Always `eval.run.canceled`.
-     */
+    /** The type of the event. Always `eval.run.canceled`. */
     val type: WebhookEvalRunCanceledTypeEnum,
-    /**
-     * The object of the event. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookEvalRunCanceledObjectEnum? = null
+    /** The object of the event. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookEvalRunCanceledObjectEnum? = null,
 )

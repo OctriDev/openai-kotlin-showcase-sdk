@@ -3,122 +3,142 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Optional object value serialized in the `code_interpreter` wire field.
- */
+/** Optional object value serialized in the `code_interpreter` wire field. */
 data class AssistantObjectToolResourcesCodeInterpreter(
     /**
-     * A list of file IDs made available to the `code_interpreter`` tool. There can be a maximum of 20 files associated with the tool.
+     * A list of file IDs made available to the `code_interpreter`` tool. There can be a maximum of
+     * 20 files associated with the tool.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
 )
 
-/**
- * Optional object value serialized in the `file_search` wire field.
- */
+/** Optional object value serialized in the `file_search` wire field. */
 data class AssistantObjectToolResourcesFileSearch(
     /**
-     * The ID of the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
+     * The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
+     * store attached to the assistant.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
+    val vectorStoreIds: List<String>? = null
 )
 
 /**
- * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+ * A set of resources that are used by the assistant's tools. The resources are specific to the type
+ * of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the
+ * `file_search` tool requires a list of vector store IDs.
  */
 data class AssistantObjectToolResources(
-    /**
-     * Optional object value serialized in the `code_interpreter` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: AssistantObjectToolResourcesCodeInterpreter? = null,
-    /**
-     * Optional object value serialized in the `file_search` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: AssistantObjectToolResourcesFileSearch? = null
+    /** Optional object value serialized in the `code_interpreter` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
+    val codeInterpreter: AssistantObjectToolResourcesCodeInterpreter? = null,
+    /** Optional object value serialized in the `file_search` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_search")
+    val fileSearch: AssistantObjectToolResourcesFileSearch? = null,
 )
 
-/**
- * Represents an `assistant` that can call the model and use tools.
- */
+/** Represents an `assistant` that can call the model and use tools. */
 data class AssistantObject(
-    /**
-     * The identifier, which can be referenced in API endpoints.
-     */
+    /** The identifier, which can be referenced in API endpoints. */
     val id: String,
-    /**
-     * The object type, which is always `assistant`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: AssistantObjectObjectEnum,
-    /**
-     * The Unix timestamp (in seconds) for when the assistant was created.
-     */
+    /** The object type, which is always `assistant`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: AssistantObjectObjectEnum,
+    /** The Unix timestamp (in seconds) for when the assistant was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Required API value serialized in the `name` wire field.
-     */
+    /** Required API value serialized in the `name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
+    /** Required API value serialized in the `description` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true)
+    val description: String?,
     /**
-     * Required API value serialized in the `description` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true) val description: String?,
-    /**
-     * ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them.
+     * ID of the model to use. You can use the List models API to see all of your available models,
+     * or see our Model overview for descriptions of them.
      */
     val model: String,
+    /** Required API value serialized in the `instructions` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("instructions", required = true)
+    val instructions: String?,
     /**
-     * Required API value serialized in the `instructions` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("instructions", required = true) val instructions: String?,
-    /**
-     * A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant. Tools can be of types `code_interpreter`, `file_search`, or `function`.
+     * A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant.
+     * Tools can be of types `code_interpreter`, `file_search`, or `function`.
      */
     val tools: List<AssistantObjectToolsItem>,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true) val metadata: Metadata?,
+    @com.fasterxml.jackson.annotation.JsonProperty("metadata", required = true)
+    val metadata: Metadata?,
     /**
-     * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+     * A set of resources that are used by the assistant's tools. The resources are specific to the
+     * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the
+     * `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources") val toolResources: AssistantObjectToolResources? = null,
-    /**
-     * Optional API value serialized in the `temperature` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources")
+    val toolResources: AssistantObjectToolResources? = null,
+    /** Optional API value serialized in the `temperature` wire field. */
     val temperature: Double? = null,
-    /**
-     * Optional API value serialized in the `top_p` wire field.
-     */
+    /** Optional API value serialized in the `top_p` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /**
-     * Optional API value serialized in the `response_format` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: AssistantsApiResponseFormatOption? = null
+    /** Optional API value serialized in the `response_format` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
+    val responseFormat: AssistantsApiResponseFormatOption? = null,
 )
 
-/**
- * Required API value serialized in the `tools[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownAssistantObjectToolsItem::class)
+/** Required API value serialized in the `tools[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownAssistantObjectToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsCode::class, name = "code_interpreter"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsFileSearch::class, name = "file_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsFunction::class, name = "function")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AssistantToolsCode::class,
+        name = "code_interpreter",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AssistantToolsFileSearch::class,
+        name = "file_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AssistantToolsFunction::class,
+        name = "function",
+    ),
 )
 sealed interface AssistantObjectToolsItem
 
 /** A [AssistantObjectToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownAssistantObjectToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownAssistantObjectToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : AssistantObjectToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Represents an event emitted when streaming a Run. Each event in a server-sent events stream has an `event` and `data` property: ``` event: thread.created data: {"id": "thread_123", "object": "thread", ...} ``` We emit events whenever a new object is created, transitions to a new state, or is being streamed in parts (deltas). For example, we emit `thread.run.created` when a new run is created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses…
+ * Represents an event emitted when streaming a Run. Each event in a server-sent events stream has
+ * an `event` and `data` property: ``` event: thread.created data: {"id": "thread_123", "object":
+ * "thread", ...} ``` We emit events whenever a new object is created, transitions to a new state,
+ * or is being streamed in parts (deltas). For example, we emit `thread.run.created` when a new run
+ * is created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = AssistantStreamEvent.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = AssistantStreamEvent.Deserializer::class
+)
 sealed interface AssistantStreamEvent {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<AssistantStreamEvent>() {
@@ -128,14 +148,25 @@ sealed interface AssistantStreamEvent {
         ): AssistantStreamEvent {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val taggedType: Class<out AssistantStreamEvent>? = when (node.get("event")?.takeIf { it.isTextual }?.asText()) {
-                "error" -> ErrorEvent::class.java
-                "done" -> DoneEvent::class.java
-                else -> null
-            }
+            val taggedType: Class<out AssistantStreamEvent>? =
+                when (node.get("event")?.takeIf { it.isTextual }?.asText()) {
+                    "error" -> ErrorEvent::class.java
+                    "done" -> DoneEvent::class.java
+                    else -> null
+                }
             if (taggedType != null) return mapper.convertValue(node, taggedType)
-            val objectTypes: List<Class<out AssistantStreamEvent>> = listOf(ThreadStreamEvent::class.java, ErrorEvent::class.java, DoneEvent::class.java, RunStreamEvent::class.java, RunStepStreamEvent::class.java, MessageStreamEvent::class.java)
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out AssistantStreamEvent>> =
+                listOf(
+                    ThreadStreamEvent::class.java,
+                    ErrorEvent::class.java,
+                    DoneEvent::class.java,
+                    RunStreamEvent::class.java,
+                    RunStepStreamEvent::class.java,
+                    MessageStreamEvent::class.java,
+                )
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
                 else -> UnknownAssistantStreamEvent(node)
             }
@@ -144,303 +175,446 @@ sealed interface AssistantStreamEvent {
 }
 
 /** A [AssistantStreamEvent] whose `event` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownAssistantStreamEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownAssistantStreamEvent
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : AssistantStreamEvent {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("event").asText()
+    val tag: String
+        get() = raw.path("event").asText()
 }
 
-/**
- * Occurs when a stream ends.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Occurs when a stream ends. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class DoneEvent(
-    /**
-     * Required enumerated value serialized in the `event` wire field.
-     */
+    /** Required enumerated value serialized in the `event` wire field. */
     val event: DoneEventEventEnum,
-    /**
-     * Required enumerated value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DoneEventDataEnum
+    /** Required enumerated value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DoneEventDataEnum,
 ) : AssistantStreamEvent
 
-/**
- * Occurs when an error occurs. This can happen due to an internal server error or a timeout.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Occurs when an error occurs. This can happen due to an internal server error or a timeout. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ErrorEvent(
-    /**
-     * Required enumerated value serialized in the `event` wire field.
-     */
+    /** Required enumerated value serialized in the `event` wire field. */
     val event: ErrorEventEventEnum,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Error3
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Error3,
 ) : AssistantStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageStreamEventVariant0(
     val event: MessageStreamEventVariant0EventEnum,
-    /**
-     * Represents a message within a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject
+    /** Represents a message within a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject,
 ) : MessageStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageStreamEventVariant1(
     val event: MessageStreamEventVariant1EventEnum,
-    /**
-     * Represents a message within a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject
+    /** Represents a message within a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject,
 ) : MessageStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageStreamEventVariant2(
     val event: MessageStreamEventVariant2EventEnum,
-    /**
-     * Represents a message delta i.e. any changed fields on a message during streaming.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageDeltaObject
+    /** Represents a message delta i.e. any changed fields on a message during streaming. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageDeltaObject,
 ) : MessageStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageStreamEventVariant3(
     val event: MessageStreamEventVariant3EventEnum,
-    /**
-     * Represents a message within a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject
+    /** Represents a message within a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject,
 ) : MessageStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageStreamEventVariant4(
     val event: MessageStreamEventVariant4EventEnum,
-    /**
-     * Represents a message within a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject
+    /** Represents a message within a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: MessageObject,
 ) : MessageStreamEvent
 
-/**
- * Typed representation of the `MessageStreamEvent` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "event", visible = true)
+/** Typed representation of the `MessageStreamEvent` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "event",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageStreamEventVariant0::class, name = "thread.message.created"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageStreamEventVariant1::class, name = "thread.message.in_progress"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageStreamEventVariant2::class, name = "thread.message.delta"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageStreamEventVariant3::class, name = "thread.message.completed"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MessageStreamEventVariant4::class, name = "thread.message.incomplete")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageStreamEventVariant0::class,
+        name = "thread.message.created",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageStreamEventVariant1::class,
+        name = "thread.message.in_progress",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageStreamEventVariant2::class,
+        name = "thread.message.delta",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageStreamEventVariant3::class,
+        name = "thread.message.completed",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = MessageStreamEventVariant4::class,
+        name = "thread.message.incomplete",
+    ),
 )
 sealed interface MessageStreamEvent : AssistantStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant0(
     val event: RunStepStreamEventVariant0EventEnum,
-    /**
-     * Represents a step in execution of a run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject
+    /** Represents a step in execution of a run. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject,
 ) : RunStepStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant1(
     val event: RunStepStreamEventVariant1EventEnum,
-    /**
-     * Represents a step in execution of a run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject
+    /** Represents a step in execution of a run. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject,
 ) : RunStepStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant2(
     val event: RunStepStreamEventVariant2EventEnum,
-    /**
-     * Represents a run step delta i.e. any changed fields on a run step during streaming.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepDeltaObject
+    /** Represents a run step delta i.e. any changed fields on a run step during streaming. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepDeltaObject,
 ) : RunStepStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant3(
     val event: RunStepStreamEventVariant3EventEnum,
-    /**
-     * Represents a step in execution of a run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject
+    /** Represents a step in execution of a run. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject,
 ) : RunStepStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant4(
     val event: RunStepStreamEventVariant4EventEnum,
-    /**
-     * Represents a step in execution of a run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject
+    /** Represents a step in execution of a run. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject,
 ) : RunStepStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant5(
     val event: RunStepStreamEventVariant5EventEnum,
-    /**
-     * Represents a step in execution of a run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject
+    /** Represents a step in execution of a run. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject,
 ) : RunStepStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStepStreamEventVariant6(
     val event: RunStepStreamEventVariant6EventEnum,
-    /**
-     * Represents a step in execution of a run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject
+    /** Represents a step in execution of a run. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunStepObject,
 ) : RunStepStreamEvent
 
-/**
- * Typed representation of the `RunStepStreamEvent` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "event", visible = true)
+/** Typed representation of the `RunStepStreamEvent` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "event",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant0::class, name = "thread.run.step.created"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant1::class, name = "thread.run.step.in_progress"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant2::class, name = "thread.run.step.delta"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant3::class, name = "thread.run.step.completed"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant4::class, name = "thread.run.step.failed"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant5::class, name = "thread.run.step.cancelled"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStepStreamEventVariant6::class, name = "thread.run.step.expired")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant0::class,
+        name = "thread.run.step.created",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant1::class,
+        name = "thread.run.step.in_progress",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant2::class,
+        name = "thread.run.step.delta",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant3::class,
+        name = "thread.run.step.completed",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant4::class,
+        name = "thread.run.step.failed",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant5::class,
+        name = "thread.run.step.cancelled",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStepStreamEventVariant6::class,
+        name = "thread.run.step.expired",
+    ),
 )
 sealed interface RunStepStreamEvent : AssistantStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant0(
     val event: RunStreamEventVariant0EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant1(
     val event: RunStreamEventVariant1EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant2(
     val event: RunStreamEventVariant2EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant3(
     val event: RunStreamEventVariant3EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant4(
     val event: RunStreamEventVariant4EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant5(
     val event: RunStreamEventVariant5EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant6(
     val event: RunStreamEventVariant6EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant7(
     val event: RunStreamEventVariant7EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant8(
     val event: RunStreamEventVariant8EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RunStreamEventVariant9(
     val event: RunStreamEventVariant9EventEnum,
-    /**
-     * Represents an execution run on a thread.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject
+    /** Represents an execution run on a thread. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: RunObject,
 ) : RunStreamEvent
 
-/**
- * Typed representation of the `RunStreamEvent` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "event", visible = true)
+/** Typed representation of the `RunStreamEvent` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "event",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant0::class, name = "thread.run.created"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant1::class, name = "thread.run.queued"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant2::class, name = "thread.run.in_progress"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant3::class, name = "thread.run.requires_action"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant4::class, name = "thread.run.completed"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant5::class, name = "thread.run.incomplete"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant6::class, name = "thread.run.failed"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant7::class, name = "thread.run.cancelling"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant8::class, name = "thread.run.cancelled"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RunStreamEventVariant9::class, name = "thread.run.expired")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant0::class,
+        name = "thread.run.created",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant1::class,
+        name = "thread.run.queued",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant2::class,
+        name = "thread.run.in_progress",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant3::class,
+        name = "thread.run.requires_action",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant4::class,
+        name = "thread.run.completed",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant5::class,
+        name = "thread.run.incomplete",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant6::class,
+        name = "thread.run.failed",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant7::class,
+        name = "thread.run.cancelling",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant8::class,
+        name = "thread.run.cancelled",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RunStreamEventVariant9::class,
+        name = "thread.run.expired",
+    ),
 )
 sealed interface RunStreamEvent : AssistantStreamEvent
 
-/**
- * Occurs when a new thread is created.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Occurs when a new thread is created. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ThreadStreamEvent(
-    /**
-     * Required enumerated value serialized in the `event` wire field.
-     */
+    /** Required enumerated value serialized in the `event` wire field. */
     val event: ThreadStreamEventEventEnum,
-    /**
-     * Represents a thread that contains messages.
-     */
+    /** Represents a thread that contains messages. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ThreadObject,
-    /**
-     * Whether to enable input audio transcription.
-     */
-    val enabled: Boolean? = null
+    /** Whether to enable input audio transcription. */
+    val enabled: Boolean? = null,
 ) : AssistantStreamEvent

@@ -3,179 +3,111 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ContainerFileCitationParam` API schema.
- */
+/** Typed representation of the `ContainerFileCitationParam` API schema. */
 data class ContainerFileCitationParam(
-    /**
-     * The citation type. Always `container_file_citation`.
-     */
+    /** The citation type. Always `container_file_citation`. */
     val type: ContainerFileCitationParamTypeEnum,
-    /**
-     * The index of the first character of the citation in the message.
-     */
+    /** The index of the first character of the citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /**
-     * The index of the last character of the citation in the message.
-     */
+    /** The index of the last character of the citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /**
-     * The ID of the container.
-     */
+    /** The ID of the container. */
     @com.fasterxml.jackson.annotation.JsonProperty("container_id") val containerId: String,
-    /**
-     * The ID of the container file.
-     */
+    /** The ID of the container file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The filename of the container file cited.
-     */
-    val filename: String
+    /** The filename of the container file cited. */
+    val filename: String,
 )
 
-/**
- * Typed representation of the `DeletedConversation` API schema.
- */
+/** Typed representation of the `DeletedConversation` API schema. */
 data class DeletedConversation(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedConversationResourceObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedConversationResourceObjectEnum,
+    /** Required `boolean` value serialized in the `deleted` wire field. */
     val deleted: Boolean,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
-    val id: String
+    /** Required `string` value serialized in the `id` wire field. */
+    val id: String,
 )
 
-/**
- * An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.
- */
+/** An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`. */
 data class DragPoint(
-    /**
-     * The x-coordinate.
-     */
+    /** The x-coordinate. */
     val x: Long,
-    /**
-     * The y-coordinate.
-     */
-    val y: Long
+    /** The y-coordinate. */
+    val y: Long,
 )
 
-/**
- * An error payload that was emitted for a streaming error event.
- */
+/** An error payload that was emitted for a streaming error event. */
 data class ErrorPayload(
-    /**
-     * The error type that was emitted.
-     */
+    /** The error type that was emitted. */
     val type: String,
-    /**
-     * Required `string` value serialized in the `code` wire field.
-     */
+    /** Required `string` value serialized in the `code` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /**
-     * The human-readable error message that was emitted.
-     */
+    /** The human-readable error message that was emitted. */
     val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
+    /** Required `string` value serialized in the `param` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /**
-     * The response headers that were emitted with the error, if any.
-     */
+    /** The response headers that were emitted with the error, if any. */
     val headers: Map<String, String>? = null,
-    /**
-     * Optional object value serialized in the `misalignment` wire field.
-     */
-    val misalignment: MisalignmentErrorDetailsResource? = null
+    /** Optional object value serialized in the `misalignment` wire field. */
+    val misalignment: MisalignmentErrorDetailsResource? = null,
 )
 
-/**
- * Typed representation of the `FileCitationParam` API schema.
- */
+/** Typed representation of the `FileCitationParam` API schema. */
 data class FileCitationParam(
-    /**
-     * The citation type. Always `file_citation`.
-     */
+    /** The citation type. Always `file_citation`. */
     val type: FileCitationParamTypeEnum,
-    /**
-     * The index of the file in the list of files.
-     */
+    /** The index of the file in the list of files. */
     val index: Long,
-    /**
-     * The ID of the file.
-     */
+    /** The ID of the file. */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
-    /**
-     * The filename of the file cited.
-     */
-    val filename: String
+    /** The filename of the file cited. */
+    val filename: String,
 )
 
-/**
- * Typed representation of the `FineTuneChatCompletionRequestAssistantMessage` API schema.
- */
+/** Typed representation of the `FineTuneChatCompletionRequestAssistantMessage` API schema. */
 data class FineTuneChatCompletionRequestAssistantMessage(
-    /**
-     * The role of the messages author, in this case `assistant`.
-     */
+    /** The role of the messages author, in this case `assistant`. */
     val role: ChatCompletionRequestAssistantMessageRoleEnum,
-    /**
-     * Controls whether the assistant message is trained against (0 or 1)
-     */
+    /** Controls whether the assistant message is trained against (0 or 1) */
     val weight: Long? = null,
     /**
-     * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+     * The contents of the assistant message. Required unless `tool_calls` or `function_call` is
+     * specified.
      */
     val content: Any? = null,
-    /**
-     * Optional `string` value serialized in the `refusal` wire field.
-     */
+    /** Optional `string` value serialized in the `refusal` wire field. */
     val refusal: String? = null,
     /**
-     * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+     * An optional name for the participant. Provides the model information to differentiate between
+     * participants of the same role.
      */
     val name: String? = null,
-    /**
-     * Data about a previous audio response from the model. Learn more.
-     */
+    /** Data about a previous audio response from the model. Learn more. */
     val audio: ChatCompletionRequestAssistantMessageAudio? = null,
+    /** The tool calls generated by the model, such as function calls. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls")
+    val toolCalls: ChatCompletionMessageToolCalls? = null,
     /**
-     * The tool calls generated by the model, such as function calls.
+     * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be
+     * called, as generated by the model.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_calls") val toolCalls: ChatCompletionMessageToolCalls? = null,
-    /**
-     * Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("function_call") val functionCall: ChatCompletionRequestAssistantMessageFunctionCall? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("function_call")
+    val functionCall: ChatCompletionRequestAssistantMessageFunctionCall? = null,
 )
 
-/**
- * A log probability object.
- */
+/** A log probability object. */
 data class LogProbProperties(
-    /**
-     * The token that was used to generate the log probability.
-     */
+    /** The token that was used to generate the log probability. */
     val token: String,
-    /**
-     * The log probability of the token.
-     */
+    /** The log probability of the token. */
     val logprob: Double,
-    /**
-     * The bytes that were used to generate the log probability.
-     */
-    val bytes: List<Long>
+    /** The bytes that were used to generate the log probability. */
+    val bytes: List<Long>,
 )
 
-/**
- * Typed representation of the `ModelIds` API schema.
- */
+/** Typed representation of the `ModelIds` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ModelIds.Deserializer::class)
 sealed interface ModelIds {
     /** Chooses the branch this payload is shaped like. */
@@ -186,20 +118,27 @@ sealed interface ModelIds {
         ): ModelIds {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out ModelIds>> = listOf(ModelIdsShared::class.java, ModelIdsResponses::class.java)
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out ModelIds>> =
+                listOf(ModelIdsShared::class.java, ModelIdsResponses::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ModelIds::class.java, "no ModelIds branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ModelIds::class.java,
+                        "no ModelIds branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-/**
- * Typed representation of the `ModelIdsResponses` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ModelIdsResponses.Deserializer::class)
+/** Typed representation of the `ModelIdsResponses` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ModelIdsResponses.Deserializer::class
+)
 sealed interface ModelIdsResponses : ModelIds, ModelIdsCompaction {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ModelIdsResponses>() {
@@ -218,52 +157,78 @@ sealed interface ModelIdsResponses : ModelIds, ModelIdsCompaction {
                 }
             }
             return when {
-                node.isTextual -> StringModelIdsResponses(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ModelIdsResponses::class.java, "no ModelIdsResponses branch accepts this payload")
+                node.isTextual ->
+                    StringModelIdsResponses(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ModelIdsResponses::class.java,
+                        "no ModelIdsResponses branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringModelIdsResponses(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ModelIdsResponses
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringModelIdsResponses(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : ModelIdsResponses
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ModelIdsShared @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : ModelIds, ModelIdsResponses
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ModelIdsShared
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    ModelIds, ModelIdsResponses
 
-/**
- * An audio output from the model.
- */
+/** An audio output from the model. */
 data class OutputAudio(
-    /**
-     * The type of the output audio. Always `output_audio`.
-     */
+    /** The type of the output audio. Always `output_audio`. */
     val type: OutputAudioTypeEnum,
-    /**
-     * Base64-encoded audio data from the model.
-     */
+    /** Base64-encoded audio data from the model. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String,
-    /**
-     * The transcript of the audio data from the model.
-     */
-    val transcript: String
+    /** The transcript of the audio data from the model. */
+    val transcript: String,
 )
 
 /**
- * Controls how the audio is cut into chunks. When set to `"auto"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
+ * Controls how the audio is cut into chunks. When set to `"auto"`, the server first normalizes
+ * loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object
+ * can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as
+ * a single block.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = TranscriptionChunkingStrategy.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = TranscriptionChunkingStrategy.Deserializer::class
+)
 sealed interface TranscriptionChunkingStrategy {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<TranscriptionChunkingStrategy>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<TranscriptionChunkingStrategy>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): TranscriptionChunkingStrategy {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out TranscriptionChunkingStrategy>> = listOf(VadConfig::class.java)
+            val objectTypes: List<Class<out TranscriptionChunkingStrategy>> =
+                listOf(VadConfig::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -272,62 +237,71 @@ sealed interface TranscriptionChunkingStrategy {
                 }
             }
             return when {
-                node.isTextual -> StringTranscriptionChunkingStrategy(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, TranscriptionChunkingStrategy::class.java, "no TranscriptionChunkingStrategy branch accepts this payload")
+                node.isTextual ->
+                    StringTranscriptionChunkingStrategy(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        TranscriptionChunkingStrategy::class.java,
+                        "no TranscriptionChunkingStrategy branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringTranscriptionChunkingStrategy(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : TranscriptionChunkingStrategy
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringTranscriptionChunkingStrategy(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
+) : TranscriptionChunkingStrategy
 
-/**
- * Typed representation of the `UrlCitationParam` API schema.
- */
+/** Typed representation of the `UrlCitationParam` API schema. */
 data class UrlCitationParam(
-    /**
-     * The citation type. Always `url_citation`.
-     */
+    /** The citation type. Always `url_citation`. */
     val type: UrlCitationParamTypeEnum,
-    /**
-     * The index of the first character of the citation in the message.
-     */
+    /** The index of the first character of the citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("start_index") val startIndex: Long,
-    /**
-     * The index of the last character of the citation in the message.
-     */
+    /** The index of the last character of the citation in the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("end_index") val endIndex: Long,
-    /**
-     * The URL of the cited resource.
-     */
+    /** The URL of the cited resource. */
     val url: String,
-    /**
-     * The title of the cited resource.
-     */
-    val title: String
+    /** The title of the cited resource. */
+    val title: String,
 )
 
-/**
- * Typed representation of the `VadConfig` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `VadConfig` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class VadConfig(
-    /**
-     * Must be set to `server_vad` to enable manual chunking using server side VAD.
-     */
+    /** Must be set to `server_vad` to enable manual chunking using server side VAD. */
     val type: VadConfigTypeEnum,
+    /** Amount of audio to include before the VAD detected speech (in milliseconds). */
+    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms")
+    val prefixPaddingMs: Long? = null,
     /**
-     * Amount of audio to include before the VAD detected speech (in milliseconds).
+     * Duration of silence to detect speech stop (in milliseconds). With shorter values the model
+     * will respond more quickly, but may jump in on short pauses from the user.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prefix_padding_ms") val prefixPaddingMs: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms")
+    val silenceDurationMs: Long? = null,
     /**
-     * Duration of silence to detect speech stop (in milliseconds). With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
+     * Sensitivity threshold (0.0 to 1.0) for voice activity detection. A higher threshold will
+     * require louder audio to activate the model, and thus might perform better in noisy
+     * environments.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("silence_duration_ms") val silenceDurationMs: Long? = null,
-    /**
-     * Sensitivity threshold (0.0 to 1.0) for voice activity detection. A higher threshold will require louder audio to activate the model, and thus might perform better in noisy environments.
-     */
-    val threshold: Double? = null
+    val threshold: Double? = null,
 ) : TranscriptionChunkingStrategy, CreateTranscriptionRequestChunkingStrategy

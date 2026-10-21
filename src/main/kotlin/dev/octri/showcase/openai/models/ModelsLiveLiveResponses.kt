@@ -3,378 +3,548 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveAllowedToolsChoiceParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveAllowedToolsChoiceParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveAllowedToolsChoiceParam(
-    /**
-     * The tool choice type. Always `allowed_tools`.
-     */
+    /** The tool choice type. Always `allowed_tools`. */
     val type: LiveAllowedToolsChoiceParamTypeEnum,
-    /**
-     * The tools that the delegated Responses model may call.
-     */
+    /** The tools that the delegated Responses model may call. */
     val tools: List<LiveAllowedToolsChoiceParamToolsItem>,
-    /**
-     * Optional API value serialized in the `mode` wire field.
-     */
-    val mode: LiveToolChoiceValueEnum? = null
-) : LiveResponsesDelegationSettingsInputParamToolChoice, LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+    /** Optional API value serialized in the `mode` wire field. */
+    val mode: LiveToolChoiceValueEnum? = null,
+) :
+    LiveResponsesDelegationSettingsInputParamToolChoice,
+    LiveResponsesDelegationSettingsUpdateInputParamToolChoice
 
-/**
- * Typed representation of the `LiveApplyPatchToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveApplyPatchToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveApplyPatchToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveApplyPatchToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveCodeInterpreterToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveCodeInterpreterToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveCodeInterpreterToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveCodeInterpreterToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveComputerToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveComputerToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveComputerToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveComputerToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveCustomToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveCustomToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveCustomToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveCustomToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveFileSearchToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveFileSearchToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveFileSearchToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveFileSearchToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * A function tool available to the Responses backend when the Live model delegates a task.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A function tool available to the Responses backend when the Live model delegates a task. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveFunctionToolInputParam(
-    /**
-     * The tool type. Always `function`.
-     */
+    /** The tool type. Always `function`. */
     val type: LiveFunctionToolInputParamTypeEnum,
-    /**
-     * The name the delegated Responses model uses when calling this function.
-     */
+    /** The name the delegated Responses model uses when calling this function. */
     val name: String,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * A JSON Schema object describing the arguments accepted by the function.
-     */
+    /** A JSON Schema object describing the arguments accepted by the function. */
     val parameters: Map<String, Any>? = null,
-    /**
-     * Optional `boolean` value serialized in the `strict` wire field.
-     */
-    val strict: Boolean? = null
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+    /** Optional `boolean` value serialized in the `strict` wire field. */
+    val strict: Boolean? = null,
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
 /**
- * A Responses shell tool. Use a hosted container or return local shell results with response.item.create. Domain secrets are not supported.
+ * A Responses shell tool. Use a hosted container or return local shell results with
+ * response.item.create. Domain secrets are not supported.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveHostedShellToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveHostedShellToolInputParamTypeEnum,
-    /**
-     * Optional API value serialized in the `environment` wire field.
-     */
-    val environment: LiveHostedShellToolInputParamEnvironment? = null
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+    /** Optional API value serialized in the `environment` wire field. */
+    val environment: LiveHostedShellToolInputParamEnvironment? = null,
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveImageGenerationToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveImageGenerationToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveImageGenerationToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveImageGenerationToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveMCPToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveMCPToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveMCPToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveMCPToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveNamespaceToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveNamespaceToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveNamespaceToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveNamespaceToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * Typed representation of the `LiveProgrammaticToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveProgrammaticToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveProgrammaticToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveProgrammaticToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
 /**
  * Model, prompt, and tool settings for tasks delegated by the Live session to a Responses backend.
  */
 data class LiveResponsesDelegationSettingsInputParam(
-    /**
-     * The model used for server-owned Responses delegations.
-     */
+    /** The model used for server-owned Responses delegations. */
     val model: String,
-    /**
-     * Optional `string` value serialized in the `instructions` wire field.
-     */
+    /** Optional `string` value serialized in the `instructions` wire field. */
     val instructions: String? = null,
-    /**
-     * Optional API value serialized in the `max_output_tokens` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Long? = null,
-    /**
-     * Optional API value serialized in the `service_tier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: LiveResponsesServiceTier? = null,
-    /**
-     * Optional API value serialized in the `reasoning` wire field.
-     */
+    /** Optional API value serialized in the `max_output_tokens` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
+    val maxOutputTokens: Long? = null,
+    /** Optional API value serialized in the `service_tier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
+    val serviceTier: LiveResponsesServiceTier? = null,
+    /** Optional API value serialized in the `reasoning` wire field. */
     val reasoning: LiveDelegationReasoningInputParam? = null,
-    /**
-     * Optional API value serialized in the `text` wire field.
-     */
+    /** Optional API value serialized in the `text` wire field. */
     val text: LiveDelegationTextInputParam? = null,
     /**
      * Tools available to the Responses backend while it handles tasks delegated by the Live model.
      */
     val tools: List<LiveResponsesDelegationSettingsInputParamToolsItem>? = null,
     /**
-     * Controls which tool the Responses backend uses when handling a task delegated by the Live model.
+     * Controls which tool the Responses backend uses when handling a task delegated by the Live
+     * model.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: LiveResponsesDelegationSettingsInputParamToolChoice? = null,
-    /**
-     * Optional `boolean` value serialized in the `parallel_tool_calls` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
+    val toolChoice: LiveResponsesDelegationSettingsInputParamToolChoice? = null,
+    /** Optional `boolean` value serialized in the `parallel_tool_calls` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
+    val parallelToolCalls: Boolean? = null,
 )
 
 /**
  * Controls which tool the Responses backend uses when handling a task delegated by the Live model.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = LiveResponsesDelegationSettingsInputParamToolChoice.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = LiveResponsesDelegationSettingsInputParamToolChoice.Deserializer::class
+)
 sealed interface LiveResponsesDelegationSettingsInputParamToolChoice {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<LiveResponsesDelegationSettingsInputParamToolChoice>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<
+            LiveResponsesDelegationSettingsInputParamToolChoice
+        >() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): LiveResponsesDelegationSettingsInputParamToolChoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out LiveResponsesDelegationSettingsInputParamToolChoice>> = listOf(LiveToolChoiceEnum::class.java, LiveAllowedToolsChoiceParam::class.java)
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out LiveResponsesDelegationSettingsInputParamToolChoice>> =
+                listOf(LiveToolChoiceEnum::class.java, LiveAllowedToolsChoiceParam::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> ValueLiveResponsesDelegationSettingsInputParamToolChoice(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                else ->
+                    ValueLiveResponsesDelegationSettingsInputParamToolChoice(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueLiveResponsesDelegationSettingsInputParamToolChoice(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : LiveResponsesDelegationSettingsInputParamToolChoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueLiveResponsesDelegationSettingsInputParamToolChoice(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
+) : LiveResponsesDelegationSettingsInputParamToolChoice
 
-/**
- * Required API value serialized in the `tools[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveResponsesDelegationSettingsInputParamToolsItem::class)
+/** Required API value serialized in the `tools[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveResponsesDelegationSettingsInputParamToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveFunctionToolInputParam::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveWebSearchToolInputParam::class, name = "web_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveFileSearchToolInputParam::class, name = "file_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveCodeInterpreterToolInputParam::class, name = "code_interpreter"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveHostedShellToolInputParam::class, name = "shell"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveImageGenerationToolInputParam::class, name = "image_generation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveMCPToolInputParam::class, name = "mcp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveCustomToolInputParam::class, name = "custom"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveNamespaceToolInputParam::class, name = "namespace"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveToolSearchToolInputParam::class, name = "tool_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveProgrammaticToolInputParam::class, name = "programmatic_tool_calling"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveComputerToolInputParam::class, name = "computer"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveApplyPatchToolInputParam::class, name = "apply_patch")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveFunctionToolInputParam::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveWebSearchToolInputParam::class,
+        name = "web_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveFileSearchToolInputParam::class,
+        name = "file_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveCodeInterpreterToolInputParam::class,
+        name = "code_interpreter",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveHostedShellToolInputParam::class,
+        name = "shell",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveImageGenerationToolInputParam::class,
+        name = "image_generation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveMCPToolInputParam::class,
+        name = "mcp",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveCustomToolInputParam::class,
+        name = "custom",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveNamespaceToolInputParam::class,
+        name = "namespace",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveToolSearchToolInputParam::class,
+        name = "tool_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveProgrammaticToolInputParam::class,
+        name = "programmatic_tool_calling",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveComputerToolInputParam::class,
+        name = "computer",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveApplyPatchToolInputParam::class,
+        name = "apply_patch",
+    ),
 )
 sealed interface LiveResponsesDelegationSettingsInputParamToolsItem
 
-/** A [LiveResponsesDelegationSettingsInputParamToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveResponsesDelegationSettingsInputParamToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveResponsesDelegationSettingsInputParamToolsItem] whose `type` names no branch this SDK
+ * knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveResponsesDelegationSettingsInputParamToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveResponsesDelegationSettingsInputParamToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
 /**
- * Updates to the Responses backend of an existing Live session. Omitted settings retain their current values.
+ * Updates to the Responses backend of an existing Live session. Omitted settings retain their
+ * current values.
  */
 data class LiveResponsesDelegationSettingsUpdateInputParam(
     /**
-     * The Responses backend model to use for subsequent delegated requests. Omit to keep the current backend model.
+     * The Responses backend model to use for subsequent delegated requests. Omit to keep the
+     * current backend model.
      */
     val model: String? = null,
-    /**
-     * Optional `string` value serialized in the `instructions` wire field.
-     */
+    /** Optional `string` value serialized in the `instructions` wire field. */
     val instructions: String? = null,
-    /**
-     * Optional API value serialized in the `max_output_tokens` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Long? = null,
-    /**
-     * Optional API value serialized in the `service_tier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: LiveResponsesServiceTier? = null,
-    /**
-     * Optional API value serialized in the `reasoning` wire field.
-     */
+    /** Optional API value serialized in the `max_output_tokens` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
+    val maxOutputTokens: Long? = null,
+    /** Optional API value serialized in the `service_tier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
+    val serviceTier: LiveResponsesServiceTier? = null,
+    /** Optional API value serialized in the `reasoning` wire field. */
     val reasoning: LiveDelegationReasoningInputParam? = null,
-    /**
-     * Optional API value serialized in the `text` wire field.
-     */
+    /** Optional API value serialized in the `text` wire field. */
     val text: LiveDelegationTextInputParam? = null,
     /**
      * Tools available to the Responses backend while it handles tasks delegated by the Live model.
      */
     val tools: List<LiveResponsesDelegationSettingsUpdateInputParamToolsItem>? = null,
     /**
-     * Controls which tool the Responses backend uses when handling a task delegated by the Live model.
+     * Controls which tool the Responses backend uses when handling a task delegated by the Live
+     * model.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: LiveResponsesDelegationSettingsUpdateInputParamToolChoice? = null,
-    /**
-     * Optional `boolean` value serialized in the `parallel_tool_calls` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
+    val toolChoice: LiveResponsesDelegationSettingsUpdateInputParamToolChoice? = null,
+    /** Optional `boolean` value serialized in the `parallel_tool_calls` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
+    val parallelToolCalls: Boolean? = null,
 )
 
 /**
  * Controls which tool the Responses backend uses when handling a task delegated by the Live model.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = LiveResponsesDelegationSettingsUpdateInputParamToolChoice.Deserializer::class)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = LiveResponsesDelegationSettingsUpdateInputParamToolChoice.Deserializer::class
+)
 sealed interface LiveResponsesDelegationSettingsUpdateInputParamToolChoice {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<LiveResponsesDelegationSettingsUpdateInputParamToolChoice>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<
+            LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+        >() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): LiveResponsesDelegationSettingsUpdateInputParamToolChoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out LiveResponsesDelegationSettingsUpdateInputParamToolChoice>> = listOf(LiveToolChoiceEnum::class.java, LiveAllowedToolsChoiceParam::class.java)
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes:
+                List<Class<out LiveResponsesDelegationSettingsUpdateInputParamToolChoice>> =
+                listOf(LiveToolChoiceEnum::class.java, LiveAllowedToolsChoiceParam::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> ValueLiveResponsesDelegationSettingsUpdateInputParamToolChoice(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                else ->
+                    ValueLiveResponsesDelegationSettingsUpdateInputParamToolChoice(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueLiveResponsesDelegationSettingsUpdateInputParamToolChoice(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueLiveResponsesDelegationSettingsUpdateInputParamToolChoice(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
+) : LiveResponsesDelegationSettingsUpdateInputParamToolChoice
 
-/**
- * Required API value serialized in the `tools[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveResponsesDelegationSettingsUpdateInputParamToolsItem::class)
+/** Required API value serialized in the `tools[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownLiveResponsesDelegationSettingsUpdateInputParamToolsItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveFunctionToolInputParam::class, name = "function"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveWebSearchToolInputParam::class, name = "web_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveFileSearchToolInputParam::class, name = "file_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveCodeInterpreterToolInputParam::class, name = "code_interpreter"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveHostedShellToolInputParam::class, name = "shell"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveImageGenerationToolInputParam::class, name = "image_generation"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveMCPToolInputParam::class, name = "mcp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveCustomToolInputParam::class, name = "custom"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveNamespaceToolInputParam::class, name = "namespace"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveToolSearchToolInputParam::class, name = "tool_search"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveProgrammaticToolInputParam::class, name = "programmatic_tool_calling"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveComputerToolInputParam::class, name = "computer"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveApplyPatchToolInputParam::class, name = "apply_patch")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveFunctionToolInputParam::class,
+        name = "function",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveWebSearchToolInputParam::class,
+        name = "web_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveFileSearchToolInputParam::class,
+        name = "file_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveCodeInterpreterToolInputParam::class,
+        name = "code_interpreter",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveHostedShellToolInputParam::class,
+        name = "shell",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveImageGenerationToolInputParam::class,
+        name = "image_generation",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveMCPToolInputParam::class,
+        name = "mcp",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveCustomToolInputParam::class,
+        name = "custom",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveNamespaceToolInputParam::class,
+        name = "namespace",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveToolSearchToolInputParam::class,
+        name = "tool_search",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveProgrammaticToolInputParam::class,
+        name = "programmatic_tool_calling",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveComputerToolInputParam::class,
+        name = "computer",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = LiveApplyPatchToolInputParam::class,
+        name = "apply_patch",
+    ),
 )
 sealed interface LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/** A [LiveResponsesDelegationSettingsUpdateInputParamToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownLiveResponsesDelegationSettingsUpdateInputParamToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [LiveResponsesDelegationSettingsUpdateInputParamToolsItem] whose `type` names no branch this
+ * SDK knows, kept as received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownLiveResponsesDelegationSettingsUpdateInputParamToolsItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : LiveResponsesDelegationSettingsUpdateInputParamToolsItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * Typed representation of the `LiveToolSearchToolInputParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveToolSearchToolInputParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveToolSearchToolInputParam(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: LiveToolSearchToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-/**
- * A web search tool available to the Live session’s Responses backend.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A web search tool available to the Live session’s Responses backend. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveWebSearchToolInputParam(
-    /**
-     * The tool type. Always `web_search`.
-     */
+    /** The tool type. Always `web_search`. */
     val type: LiveWebSearchToolInputParamTypeEnum
-) : LiveResponsesDelegationSettingsInputParamToolsItem, LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+) :
+    LiveResponsesDelegationSettingsInputParamToolsItem,
+    LiveResponsesDelegationSettingsUpdateInputParamToolsItem

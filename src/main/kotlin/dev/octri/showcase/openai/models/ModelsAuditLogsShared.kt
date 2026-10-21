@@ -3,126 +3,93 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `AwsExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `AwsExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class AwsExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: AwsExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `account_id` wire field.
-     */
+    /** Required `string` value serialized in the `account_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("account_id") val accountId: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
+    /** Required `string` value serialized in the `region` wire field. */
     val region: String,
-    /**
-     * Required `string` value serialized in the `bucket` wire field.
-     */
+    /** Required `string` value serialized in the `bucket` wire field. */
     val bucket: String,
-    /**
-     * Required `string` value serialized in the `role_arn` wire field.
-     */
+    /** Required `string` value serialized in the `role_arn` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("role_arn") val roleArn: String,
-    /**
-     * Required `string` value serialized in the `external_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String
+    /** Required `string` value serialized in the `external_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String,
 ) : Provider, ExternalStorageResponseProvider
 
-/**
- * Typed representation of the `AzureExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `AzureExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class AzureExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: AzureExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `tenant_id` wire field.
-     */
+    /** Required `string` value serialized in the `tenant_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("tenant_id") val tenantId: String,
-    /**
-     * Required `string` value serialized in the `subscription_id` wire field.
-     */
+    /** Required `string` value serialized in the `subscription_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("subscription_id") val subscriptionId: String,
-    /**
-     * Required `string` value serialized in the `resource_group` wire field.
-     */
+    /** Required `string` value serialized in the `resource_group` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_group") val resourceGroup: String,
-    /**
-     * Required `string` value serialized in the `account_name` wire field.
-     */
+    /** Required `string` value serialized in the `account_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("account_name") val accountName: String,
-    /**
-     * Required `string` value serialized in the `container` wire field.
-     */
+    /** Required `string` value serialized in the `container` wire field. */
     val container: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
-    val region: String
+    /** Required `string` value serialized in the `region` wire field. */
+    val region: String,
 ) : Provider, ExternalStorageResponseProvider
 
-/**
- * Typed representation of the `GcpExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `GcpExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GcpExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: GcpExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `bucket` wire field.
-     */
+    /** Required `string` value serialized in the `bucket` wire field. */
     val bucket: String,
-    /**
-     * Required `string` value serialized in the `workload_identity_project_number` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_project_number") val workloadIdentityProjectNumber: String,
-    /**
-     * Required `string` value serialized in the `workload_identity_pool_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_pool_id") val workloadIdentityPoolId: String,
-    /**
-     * Required `string` value serialized in the `workload_identity_provider_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_id") val workloadIdentityProviderId: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
+    /** Required `string` value serialized in the `workload_identity_project_number` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_project_number")
+    val workloadIdentityProjectNumber: String,
+    /** Required `string` value serialized in the `workload_identity_pool_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_pool_id")
+    val workloadIdentityPoolId: String,
+    /** Required `string` value serialized in the `workload_identity_provider_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_id")
+    val workloadIdentityProviderId: String,
+    /** Required `string` value serialized in the `region` wire field. */
     val region: String,
-    /**
-     * Required `string` value serialized in the `audience` wire field.
-     */
-    val audience: String
+    /** Required `string` value serialized in the `audience` wire field. */
+    val audience: String,
 ) : Provider, ExternalStorageResponseProvider
 
-/**
- * Typed representation of the `OciExternalStorageProviderResponse` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `OciExternalStorageProviderResponse` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class OciExternalStorageProviderResponse(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
+    /** Required enumerated value serialized in the `type` wire field. */
     val type: OciExternalStorageProviderResponseTypeEnum,
-    /**
-     * Required `string` value serialized in the `tenancy_ocid` wire field.
-     */
+    /** Required `string` value serialized in the `tenancy_ocid` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("tenancy_ocid") val tenancyOcid: String,
-    /**
-     * Required `string` value serialized in the `region` wire field.
-     */
+    /** Required `string` value serialized in the `region` wire field. */
     val region: String,
-    /**
-     * Required `string` value serialized in the `bucket` wire field.
-     */
-    val bucket: String
+    /** Required `string` value serialized in the `bucket` wire field. */
+    val bucket: String,
 ) : Provider, ExternalStorageResponseProvider

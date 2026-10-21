@@ -3,58 +3,53 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Usage statistics for models billed by audio input duration.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Usage statistics for models billed by audio input duration. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TranscriptTextUsageDuration(
-    /**
-     * The type of the usage object. Always `duration` for this variant.
-     */
+    /** The type of the usage object. Always `duration` for this variant. */
     val type: TranscriptTextUsageDurationTypeEnum,
-    /**
-     * Duration of the input audio in seconds.
-     */
-    val seconds: Double
-) : CreateTranscriptionResponseDiarizedJsonUsage, CreateTranscriptionResponseJsonUsage, RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6aec14c56b, RealtimeServerEventConversationItemInputAudioTranscriptionCompletedUsage
+    /** Duration of the input audio in seconds. */
+    val seconds: Double,
+) :
+    CreateTranscriptionResponseDiarizedJsonUsage,
+    CreateTranscriptionResponseJsonUsage,
+    RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6aec14c56b,
+    RealtimeServerEventConversationItemInputAudioTranscriptionCompletedUsage
 
-/**
- * Details about the input tokens billed for this request.
- */
+/** Details about the input tokens billed for this request. */
 data class TranscriptTextUsageTokensInputTokenDetails(
-    /**
-     * Number of text tokens billed for this request.
-     */
+    /** Number of text tokens billed for this request. */
     @com.fasterxml.jackson.annotation.JsonProperty("text_tokens") val textTokens: Long? = null,
-    /**
-     * Number of audio tokens billed for this request.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null
+    /** Number of audio tokens billed for this request. */
+    @com.fasterxml.jackson.annotation.JsonProperty("audio_tokens") val audioTokens: Long? = null,
 )
 
-/**
- * Usage statistics for models billed by token usage.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Usage statistics for models billed by token usage. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class TranscriptTextUsageTokens(
-    /**
-     * The type of the usage object. Always `tokens` for this variant.
-     */
+    /** The type of the usage object. Always `tokens` for this variant. */
     val type: TranscriptTextUsageTokensTypeEnum,
-    /**
-     * Number of input tokens billed for this request.
-     */
+    /** Number of input tokens billed for this request. */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /**
-     * Number of output tokens generated.
-     */
+    /** Number of output tokens generated. */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /**
-     * Total number of tokens used (input + output).
-     */
+    /** Total number of tokens used (input + output). */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /**
-     * Details about the input tokens billed for this request.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_token_details") val inputTokenDetails: TranscriptTextUsageTokensInputTokenDetails? = null
-) : CreateTranscriptionResponseDiarizedJsonUsage, CreateTranscriptionResponseJsonUsage, RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6aec14c56b, RealtimeServerEventConversationItemInputAudioTranscriptionCompletedUsage
+    /** Details about the input tokens billed for this request. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_token_details")
+    val inputTokenDetails: TranscriptTextUsageTokensInputTokenDetails? = null,
+) :
+    CreateTranscriptionResponseDiarizedJsonUsage,
+    CreateTranscriptionResponseJsonUsage,
+    RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6aec14c56b,
+    RealtimeServerEventConversationItemInputAudioTranscriptionCompletedUsage
