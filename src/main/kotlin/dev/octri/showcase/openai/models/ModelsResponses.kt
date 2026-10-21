@@ -3,141 +3,138 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ContextManagementParam` API schema. */
+/**
+ * Typed representation of the `ContextManagementParam` API schema.
+ */
 data class ContextManagementParam(
-    /** The context management entry type. Currently only 'compaction' is supported. */
+    /**
+     * The context management entry type. Currently only 'compaction' is supported.
+     */
     val type: String,
-    /** Optional API value serialized in the `compact_threshold` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("compact_threshold")
-    val compactThreshold: Long? = null,
+    /**
+     * Optional API value serialized in the `compact_threshold` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("compact_threshold") val compactThreshold: Long? = null
 )
 
-/** Typed representation of the `CreateResponse` API schema. */
+/**
+ * Typed representation of the `CreateResponse` API schema.
+ */
 data class CreateResponse(
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
     /**
-     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at
-     * each token position, each with an associated log probability. In some cases, the number of
-     * returned tokens may be fewer than requested.
+     * An integer between 0 and 20 specifying the maximum number of most likely tokens to return at each token position, each with an associated log probability. In some cases, the number of returned tokens may be fewer than requested.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_logprobs") val topLogprobs: Long? = null,
-    /** Optional API value serialized in the `temperature` wire field. */
+    /**
+     * Optional API value serialized in the `temperature` wire field.
+     */
     val temperature: Double? = null,
-    /** Optional API value serialized in the `top_p` wire field. */
+    /**
+     * Optional API value serialized in the `top_p` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
-     * `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your
-     * end-users. Used to boost cache hit rates by better bucketing similar requests and to help
-     * OpenAI detect and prevent abuse. Learn more.
+     * This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates by better bucketing similar requests and to help OpenAI detect and prevent abuse. Learn more.
      */
     val user: String? = null,
-    /** Optional API value serialized in the `safety_identifier` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier")
-    val safetyIdentifier: String? = null,
-    /** Optional `string` value serialized in the `prompt_cache_key` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key")
-    val promptCacheKey: String? = null,
-    /** Optional API value serialized in the `prompt_cache_retention` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention")
-    val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
     /**
-     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI
-     * automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to
-     * content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints.
-     * For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation,
-     * without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit
-     * breakpoint. The `ttl`…
+     * Optional API value serialized in the `safety_identifier` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options")
-    val promptCacheOptions: ResponsePromptCacheOptionsParam? = null,
-    /** Optional `string` value serialized in the `previous_response_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
-    val previousResponseId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("safety_identifier") val safetyIdentifier: String? = null,
     /**
-     * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of
-     * models with different capabilities, performance characteristics, and price points. Refer to
-     * the model guide to browse and compare available models.
+     * Optional `string` value serialized in the `prompt_cache_key` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_key") val promptCacheKey: String? = null,
+    /**
+     * Optional API value serialized in the `prompt_cache_retention` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_retention") val promptCacheRetention: ModelResponsePropertiesPromptCacheRetentionVariant0Enum? = null,
+    /**
+     * Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl`…
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("prompt_cache_options") val promptCacheOptions: ResponsePromptCacheOptionsParam? = null,
+    /**
+     * Optional `string` value serialized in the `previous_response_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String? = null,
+    /**
+     * Model ID used to generate the response, like `gpt-6-astra`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the model guide to browse and compare available models.
      */
     val model: ModelIdsResponses? = null,
-    /** Optional `boolean` value serialized in the `background` wire field. */
+    /**
+     * Optional `boolean` value serialized in the `background` wire field.
+     */
     val background: Boolean? = null,
-    /** Optional `integer` value serialized in the `max_tool_calls` wire field. */
+    /**
+     * Optional `integer` value serialized in the `max_tool_calls` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("max_tool_calls") val maxToolCalls: Long? = null,
     /**
-     * Configuration options for a text response from the model. Can be plain text or structured
-     * JSON data. Learn more: - Text inputs and outputs - Structured Outputs
+     * Configuration options for a text response from the model. Can be plain text or structured JSON data. Learn more: - Text inputs and outputs - Structured Outputs
      */
     val text: ResponseTextParam? = null,
     /**
-     * An array of tools the model may call while generating a response. You can specify which tool
-     * to use by setting the `tool_choice` parameter. We support the following categories of
-     * tools: - **Built-in tools**: Tools that are provided by OpenAI that extend the model's
-     * capabilities, like web search or file search. Learn more about built-in tools. - **MCP
-     * Tools**: Integrations with third-party systems via custom MCP servers or predefined
-     * connectors such as Google Drive and…
+     * An array of tools the model may call while generating a response. You can specify which tool to use by setting the `tool_choice` parameter. We support the following categories of tools: - **Built-in tools**: Tools that are provided by OpenAI that extend the model's capabilities, like web search or file search. Learn more about built-in tools. - **MCP Tools**: Integrations with third-party systems via custom MCP servers or predefined connectors such as Google Drive and…
      */
     val tools: ToolsArray? = null,
     /**
-     * How the model should select which tool (or tools) to use when generating a response. See the
-     * `tools` parameter to see how to specify which tools the model can call.
+     * How the model should select which tool (or tools) to use when generating a response. See the `tools` parameter to see how to specify which tools the model can call.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
-    val toolChoice: ToolChoiceParam? = null,
-    /** Reference to a prompt template and its variables. Learn more. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: ToolChoiceParam? = null,
+    /**
+     * Reference to a prompt template and its variables. Learn more.
+     */
     val prompt: Prompt? = null,
-    /** Domain-specific access programs to use for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("access_programs")
-    val accessPrograms: AccessProgramsParam? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier")
-    val serviceTier: ServiceTierResponses? = null,
+    /**
+     * Domain-specific access programs to use for this request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("access_programs") val accessPrograms: AccessProgramsParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: ServiceTierResponses? = null,
     val truncation: CreateResponseVariant2TruncationVariant0Enum? = null,
     val reasoning: Reasoning? = null,
     /**
-     * Text, image, or file inputs to the model, used to generate a response. Learn more: - Text
-     * inputs and outputs - Image inputs - File inputs - Conversation state - Function calling
+     * Text, image, or file inputs to the model, used to generate a response. Learn more: - Text inputs and outputs - Image inputs - File inputs - Conversation state - Function calling
      */
     val input: InputParam? = null,
     /**
-     * Specify additional output data to include in the model response. Currently supported values
-     * are: - `web_search_call.action.sources`: Include the sources of the web search tool call. -
-     * `code_interpreter_call.outputs`: Includes the outputs of python code execution in code
-     * interpreter tool call items. - `computer_call_output.output.image_url`: Include image urls
-     * from the computer call output. - `file_search_call.results`: Include the search results of
-     * the file search tool call.…
+     * Specify additional output data to include in the model response. Currently supported values are: - `web_search_call.action.sources`: Include the sources of the web search tool call. - `code_interpreter_call.outputs`: Includes the outputs of python code execution in code interpreter tool call items. - `computer_call_output.output.image_url`: Include image urls from the computer call output. - `file_search_call.results`: Include the search results of the file search tool call.…
      */
     val include: List<IncludeEnum>? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
-    val parallelToolCalls: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null,
     val store: Boolean? = null,
     val instructions: String? = null,
     val moderation: ModerationParam? = null,
     val stream: Boolean? = null,
-    /** Options for streaming responses. Only set this when you set `stream: true`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_options")
-    val streamOptions: ResponseStreamOptions? = null,
+    /**
+     * Options for streaming responses. Only set this when you set `stream: true`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_options") val streamOptions: ResponseStreamOptions? = null,
     val conversation: ConversationParam? = null,
-    /** Context management configuration for this request. */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_management")
-    val contextManagement: List<ContextManagementParam>? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Long? = null,
+    /**
+     * Context management configuration for this request.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_management") val contextManagement: List<ContextManagementParam>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Long? = null
 )
 
 typealias PersonalityEnum = String
 
-/** A delta of stdout/stderr emitted while a shell call was running. */
+/**
+ * A delta of stdout/stderr emitted while a shell call was running.
+ */
 data class ShellCallOutputDelta(
-    /** The stdout delta that was emitted. */
+    /**
+     * The stdout delta that was emitted.
+     */
     val stdout: String? = null,
-    /** The stderr delta that was emitted. */
-    val stderr: String? = null,
+    /**
+     * The stderr delta that was emitted.
+     */
+    val stderr: String? = null
 )
 
 typealias ToolsArray = List<Tool>

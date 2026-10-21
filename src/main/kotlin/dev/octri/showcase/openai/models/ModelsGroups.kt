@@ -3,65 +3,110 @@
 
 package dev.octri.showcase.openai.models
 
-/** Request payload for creating a new group in the organization. */
+/**
+ * Request payload for creating a new group in the organization.
+ */
 data class CreateGroupBody(
-    /** Human readable name for the group. */
+    /**
+     * Human readable name for the group.
+     */
     val name: String
 )
 
-/** Confirmation payload returned after deleting a group. */
+/**
+ * Confirmation payload returned after deleting a group.
+ */
 data class GroupDeletedResource(
-    /** Always `group.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: GroupDeletedResourceObjectEnum,
-    /** Identifier of the deleted group. */
+    /**
+     * Always `group.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: GroupDeletedResourceObjectEnum,
+    /**
+     * Identifier of the deleted group.
+     */
     val id: String,
-    /** Whether the group was deleted. */
-    val deleted: Boolean,
+    /**
+     * Whether the group was deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Paginated list of organization groups. */
+/**
+ * Paginated list of organization groups.
+ */
 data class GroupListResource(
-    /** Always `list`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: GroupListResourceObjectEnum,
-    /** Groups returned in the current page. */
+    /**
+     * Always `list`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: GroupListResourceObjectEnum,
+    /**
+     * Groups returned in the current page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<GroupResponse>,
-    /** Whether additional groups are available when paginating. */
+    /**
+     * Whether additional groups are available when paginating.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Cursor to fetch the next page of results, or `null` if there are no more results. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next", required = true) val next: String?,
+    /**
+     * Cursor to fetch the next page of results, or `null` if there are no more results.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next", required = true) val next: String?
 )
 
-/** Response returned after updating a group. */
+/**
+ * Response returned after updating a group.
+ */
 data class GroupResourceWithSuccess(
-    /** Identifier for the group. */
+    /**
+     * Identifier for the group.
+     */
     val id: String,
-    /** Updated display name for the group. */
+    /**
+     * Updated display name for the group.
+     */
     val name: String,
-    /** Unix timestamp (in seconds) when the group was created. */
+    /**
+     * Unix timestamp (in seconds) when the group was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Whether the group is managed through SCIM and controlled by your identity provider. */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_scim_managed") val isScimManaged: Boolean,
+    /**
+     * Whether the group is managed through SCIM and controlled by your identity provider.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_scim_managed") val isScimManaged: Boolean
 )
 
-/** Details about an organization group. */
+/**
+ * Details about an organization group.
+ */
 data class GroupResponse(
-    /** Identifier for the group. */
+    /**
+     * Identifier for the group.
+     */
     val id: String,
-    /** Display name of the group. */
+    /**
+     * Display name of the group.
+     */
     val name: String,
-    /** Unix timestamp (in seconds) when the group was created. */
+    /**
+     * Unix timestamp (in seconds) when the group was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Whether the group is managed through SCIM and controlled by your identity provider. */
+    /**
+     * Whether the group is managed through SCIM and controlled by your identity provider.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("is_scim_managed") val isScimManaged: Boolean,
-    /** The type of the group. */
-    @com.fasterxml.jackson.annotation.JsonProperty("group_type")
-    val groupType: GroupResponseGroupTypeEnum,
+    /**
+     * The type of the group.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("group_type") val groupType: GroupResponseGroupTypeEnum
 )
 
-/** Request payload for updating the details of an existing group. */
+/**
+ * Request payload for updating the details of an existing group.
+ */
 data class UpdateGroupBody(
-    /** New display name for the group. */
+    /**
+     * New display name for the group.
+     */
     val name: String
 )

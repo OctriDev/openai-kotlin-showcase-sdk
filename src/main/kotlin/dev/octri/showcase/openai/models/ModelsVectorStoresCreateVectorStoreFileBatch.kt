@@ -3,35 +3,24 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `CreateVectorStoreFileBatchRequest` API schema. */
+/**
+ * Typed representation of the `CreateVectorStoreFileBatchRequest` API schema.
+ */
 data class CreateVectorStoreFileBatchRequest(
     /**
-     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that
-     * can access files. If `attributes` or `chunking_strategy` are provided, they will be applied
-     * to all files in the batch. The maximum batch size is 2000 files. This endpoint is recommended
-     * for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually
-     * exclusive with `files`.
+     * A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files. If `attributes` or `chunking_strategy` are provided, they will be applied to all files in the batch. The maximum batch size is 2000 files. This endpoint is recommended for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with `files`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
     /**
-     * A list of objects that each include a `file_id` plus optional `attributes` or
-     * `chunking_strategy`. Use this when you need to override metadata for specific files. The
-     * global `attributes` or `chunking_strategy` will be ignored and must be specified for each
-     * file. The maximum batch size is 2000 files. This endpoint is recommended for multi-file
-     * ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with
-     * `file_ids`.
+     * A list of objects that each include a `file_id` plus optional `attributes` or `chunking_strategy`. Use this when you need to override metadata for specific files. The global `attributes` or `chunking_strategy` will be ignored and must be specified for each file. The maximum batch size is 2000 files. This endpoint is recommended for multi-file ingestion and helps reduce per-vector-store write request pressure. Mutually exclusive with `file_ids`.
      */
     val files: List<CreateVectorStoreFileRequest>? = null,
     /**
      * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
-    val chunkingStrategy: ChunkingStrategyRequestParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: ChunkingStrategyRequestParam? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters, booleans, or numbers.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters, booleans, or numbers.
      */
-    val attributes: VectorStoreFileAttributes? = null,
+    val attributes: VectorStoreFileAttributes? = null
 )

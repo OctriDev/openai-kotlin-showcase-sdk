@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.openai.models
 
-/** The type of the event. Always `response.in_progress`. */
-enum class BetaResponseInProgressEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.in_progress`.
+ */
+enum class BetaResponseInProgressEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_IN_PROGRESS("response.in_progress");
 
     override fun toString() = value
@@ -14,38 +14,34 @@ enum class BetaResponseInProgressEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of object returned, must be `list`. */
-class BetaResponseItemListObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaResponseItemListObjectEnum && value == other.value
-
+/**
+ * The type of object returned, must be `list`.
+ */
+class BetaResponseItemListObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaResponseItemListObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val LIST = BetaResponseItemListObjectEnum("list")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaResponseItemListObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaResponseItemListObjectEnum(value)
     }
 }
 
-/** The type of the event. Always 'response.mcp_call_arguments.delta'. */
-enum class BetaResponseMCPCallArgumentsDeltaEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_call_arguments.delta'.
+ */
+enum class BetaResponseMCPCallArgumentsDeltaEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_CALL_ARGUMENTS_DELTA("response.mcp_call_arguments.delta");
 
     override fun toString() = value
@@ -53,16 +49,15 @@ enum class BetaResponseMCPCallArgumentsDeltaEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_call_arguments.done'. */
-enum class BetaResponseMCPCallArgumentsDoneEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_call_arguments.done'.
+ */
+enum class BetaResponseMCPCallArgumentsDoneEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_CALL_ARGUMENTS_DONE("response.mcp_call_arguments.done");
 
     override fun toString() = value
@@ -70,16 +65,15 @@ enum class BetaResponseMCPCallArgumentsDoneEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_call.completed'. */
-enum class BetaResponseMCPCallCompletedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_call.completed'.
+ */
+enum class BetaResponseMCPCallCompletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_CALL_COMPLETED("response.mcp_call.completed");
 
     override fun toString() = value
@@ -87,16 +81,15 @@ enum class BetaResponseMCPCallCompletedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_call.failed'. */
-enum class BetaResponseMCPCallFailedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_call.failed'.
+ */
+enum class BetaResponseMCPCallFailedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_CALL_FAILED("response.mcp_call.failed");
 
     override fun toString() = value
@@ -104,16 +97,15 @@ enum class BetaResponseMCPCallFailedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_call.in_progress'. */
-enum class BetaResponseMCPCallInProgressEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_call.in_progress'.
+ */
+enum class BetaResponseMCPCallInProgressEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_CALL_IN_PROGRESS("response.mcp_call.in_progress");
 
     override fun toString() = value
@@ -121,16 +113,15 @@ enum class BetaResponseMCPCallInProgressEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_list_tools.completed'. */
-enum class BetaResponseMCPListToolsCompletedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_list_tools.completed'.
+ */
+enum class BetaResponseMCPListToolsCompletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_LIST_TOOLS_COMPLETED("response.mcp_list_tools.completed");
 
     override fun toString() = value
@@ -138,16 +129,15 @@ enum class BetaResponseMCPListToolsCompletedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_list_tools.failed'. */
-enum class BetaResponseMCPListToolsFailedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_list_tools.failed'.
+ */
+enum class BetaResponseMCPListToolsFailedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_LIST_TOOLS_FAILED("response.mcp_list_tools.failed");
 
     override fun toString() = value
@@ -155,16 +145,15 @@ enum class BetaResponseMCPListToolsFailedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.mcp_list_tools.in_progress'. */
-enum class BetaResponseMCPListToolsInProgressEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.mcp_list_tools.in_progress'.
+ */
+enum class BetaResponseMCPListToolsInProgressEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_MCP_LIST_TOOLS_IN_PROGRESS("response.mcp_list_tools.in_progress");
 
     override fun toString() = value
@@ -172,16 +161,15 @@ enum class BetaResponseMCPListToolsInProgressEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.output_item.added`. */
-enum class BetaResponseOutputItemAddedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.output_item.added`.
+ */
+enum class BetaResponseOutputItemAddedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_OUTPUT_ITEM_ADDED("response.output_item.added");
 
     override fun toString() = value
@@ -189,16 +177,15 @@ enum class BetaResponseOutputItemAddedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.output_item.done`. */
-enum class BetaResponseOutputItemDoneEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.output_item.done`.
+ */
+enum class BetaResponseOutputItemDoneEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_OUTPUT_ITEM_DONE("response.output_item.done");
 
     override fun toString() = value
@@ -206,16 +193,15 @@ enum class BetaResponseOutputItemDoneEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.output_text.annotation.added'. */
-enum class BetaResponseOutputTextAnnotationAddedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.output_text.annotation.added'.
+ */
+enum class BetaResponseOutputTextAnnotationAddedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_OUTPUT_TEXT_ANNOTATION_ADDED("response.output_text.annotation.added");
 
     override fun toString() = value
@@ -223,16 +209,15 @@ enum class BetaResponseOutputTextAnnotationAddedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always 'response.queued'. */
-enum class BetaResponseQueuedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always 'response.queued'.
+ */
+enum class BetaResponseQueuedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_QUEUED("response.queued");
 
     override fun toString() = value
@@ -240,39 +225,34 @@ enum class BetaResponseQueuedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the summary part. Always `summary_text`. */
-class BetaResponseReasoningSummaryPartAddedEventPartTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaResponseReasoningSummaryPartAddedEventPartTypeEnum && value == other.value
-
+/**
+ * The type of the summary part. Always `summary_text`.
+ */
+class BetaResponseReasoningSummaryPartAddedEventPartTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaResponseReasoningSummaryPartAddedEventPartTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SUMMARY_TEXT = BetaResponseReasoningSummaryPartAddedEventPartTypeEnum("summary_text")
+        @JvmField val SUMMARY_TEXT = BetaResponseReasoningSummaryPartAddedEventPartTypeEnum("summary_text")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaResponseReasoningSummaryPartAddedEventPartTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaResponseReasoningSummaryPartAddedEventPartTypeEnum(value)
     }
 }
 
-/** The type of the event. Always `response.reasoning_summary_part.added`. */
-enum class BetaResponseReasoningSummaryPartAddedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.reasoning_summary_part.added`.
+ */
+enum class BetaResponseReasoningSummaryPartAddedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REASONING_SUMMARY_PART_ADDED("response.reasoning_summary_part.added");
 
     override fun toString() = value
@@ -280,64 +260,53 @@ enum class BetaResponseReasoningSummaryPartAddedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
-    }
-}
-
-/** The type of the summary part. Always `summary_text`. */
-class BetaResponseReasoningSummaryPartDoneEventPartTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaResponseReasoningSummaryPartDoneEventPartTypeEnum && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField
-        val SUMMARY_TEXT = BetaResponseReasoningSummaryPartDoneEventPartTypeEnum("summary_text")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaResponseReasoningSummaryPartDoneEventPartTypeEnum(value)
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * The completion status of the summary part. Omitted when the part completed normally and set to
- * `incomplete` when generation was interrupted.
+ * The type of the summary part. Always `summary_text`.
  */
-class BetaResponseReasoningSummaryPartDoneEventStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaResponseReasoningSummaryPartDoneEventStatusEnum && value == other.value
-
+class BetaResponseReasoningSummaryPartDoneEventPartTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaResponseReasoningSummaryPartDoneEventPartTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
 
+    companion object {
+
+        @JvmField val SUMMARY_TEXT = BetaResponseReasoningSummaryPartDoneEventPartTypeEnum("summary_text")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaResponseReasoningSummaryPartDoneEventPartTypeEnum(value)
+    }
+}
+
+/**
+ * The completion status of the summary part. Omitted when the part completed normally and set to `incomplete` when generation was interrupted.
+ */
+class BetaResponseReasoningSummaryPartDoneEventStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaResponseReasoningSummaryPartDoneEventStatusEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INCOMPLETE = BetaResponseReasoningSummaryPartDoneEventStatusEnum("incomplete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaResponseReasoningSummaryPartDoneEventStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaResponseReasoningSummaryPartDoneEventStatusEnum(value)
     }
 }
 
-/** The type of the event. Always `response.reasoning_summary_part.done`. */
-enum class BetaResponseReasoningSummaryPartDoneEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.reasoning_summary_part.done`.
+ */
+enum class BetaResponseReasoningSummaryPartDoneEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REASONING_SUMMARY_PART_DONE("response.reasoning_summary_part.done");
 
     override fun toString() = value
@@ -345,16 +314,15 @@ enum class BetaResponseReasoningSummaryPartDoneEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.reasoning_summary_text.delta`. */
-enum class BetaResponseReasoningSummaryTextDeltaEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.reasoning_summary_text.delta`.
+ */
+enum class BetaResponseReasoningSummaryTextDeltaEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REASONING_SUMMARY_TEXT_DELTA("response.reasoning_summary_text.delta");
 
     override fun toString() = value
@@ -362,16 +330,15 @@ enum class BetaResponseReasoningSummaryTextDeltaEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.reasoning_summary_text.done`. */
-enum class BetaResponseReasoningSummaryTextDoneEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.reasoning_summary_text.done`.
+ */
+enum class BetaResponseReasoningSummaryTextDoneEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REASONING_SUMMARY_TEXT_DONE("response.reasoning_summary_text.done");
 
     override fun toString() = value
@@ -379,16 +346,15 @@ enum class BetaResponseReasoningSummaryTextDoneEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.reasoning_text.delta`. */
-enum class BetaResponseReasoningTextDeltaEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.reasoning_text.delta`.
+ */
+enum class BetaResponseReasoningTextDeltaEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REASONING_TEXT_DELTA("response.reasoning_text.delta");
 
     override fun toString() = value
@@ -396,16 +362,15 @@ enum class BetaResponseReasoningTextDeltaEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.reasoning_text.done`. */
-enum class BetaResponseReasoningTextDoneEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.reasoning_text.done`.
+ */
+enum class BetaResponseReasoningTextDoneEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REASONING_TEXT_DONE("response.reasoning_text.done");
 
     override fun toString() = value
@@ -413,16 +378,15 @@ enum class BetaResponseReasoningTextDoneEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.refusal.delta`. */
-enum class BetaResponseRefusalDeltaEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.refusal.delta`.
+ */
+enum class BetaResponseRefusalDeltaEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REFUSAL_DELTA("response.refusal.delta");
 
     override fun toString() = value
@@ -430,16 +394,15 @@ enum class BetaResponseRefusalDeltaEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event. Always `response.refusal.done`. */
-enum class BetaResponseRefusalDoneEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event. Always `response.refusal.done`.
+ */
+enum class BetaResponseRefusalDoneEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_REFUSAL_DONE("response.refusal.done");
 
     override fun toString() = value
@@ -447,16 +410,15 @@ enum class BetaResponseRefusalDoneEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the client event. Always `response.create`. */
-enum class BetaResponsesClientEventResponseCreateVariant0TypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the client event. Always `response.create`.
+ */
+enum class BetaResponsesClientEventResponseCreateVariant0TypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_CREATE("response.create");
 
     override fun toString() = value
@@ -464,16 +426,15 @@ enum class BetaResponsesClientEventResponseCreateVariant0TypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event, always `response.shell_call_command.added`. */
-enum class BetaResponseShellCallCommandAddedStreamingEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event, always `response.shell_call_command.added`.
+ */
+enum class BetaResponseShellCallCommandAddedStreamingEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_SHELL_CALL_COMMAND_ADDED("response.shell_call_command.added");
 
     override fun toString() = value
@@ -481,16 +442,15 @@ enum class BetaResponseShellCallCommandAddedStreamingEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event, always `response.shell_call_command.delta`. */
-enum class BetaResponseShellCallCommandDeltaStreamingEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event, always `response.shell_call_command.delta`.
+ */
+enum class BetaResponseShellCallCommandDeltaStreamingEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_SHELL_CALL_COMMAND_DELTA("response.shell_call_command.delta");
 
     override fun toString() = value
@@ -498,16 +458,15 @@ enum class BetaResponseShellCallCommandDeltaStreamingEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event, always `response.shell_call_command.done`. */
-enum class BetaResponseShellCallCommandDoneStreamingEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event, always `response.shell_call_command.done`.
+ */
+enum class BetaResponseShellCallCommandDoneStreamingEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_SHELL_CALL_COMMAND_DONE("response.shell_call_command.done");
 
     override fun toString() = value
@@ -515,16 +474,15 @@ enum class BetaResponseShellCallCommandDoneStreamingEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event, always `response.shell_call_output_content.delta`. */
-enum class BetaResponseShellCallOutputContentDeltaStreamingEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event, always `response.shell_call_output_content.delta`.
+ */
+enum class BetaResponseShellCallOutputContentDeltaStreamingEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_SHELL_CALL_OUTPUT_CONTENT_DELTA("response.shell_call_output_content.delta");
 
     override fun toString() = value
@@ -532,16 +490,15 @@ enum class BetaResponseShellCallOutputContentDeltaStreamingEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the event, always `response.shell_call_output_content.done`. */
-enum class BetaResponseShellCallOutputContentDoneStreamingEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the event, always `response.shell_call_output_content.done`.
+ */
+enum class BetaResponseShellCallOutputContentDoneStreamingEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_SHELL_CALL_OUTPUT_CONTENT_DONE("response.shell_call_output_content.done");
 
     override fun toString() = value
@@ -549,16 +506,15 @@ enum class BetaResponseShellCallOutputContentDoneStreamingEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event discriminator. Always `response.steer.accepted`. */
-enum class BetaResponseSteerAcceptedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event discriminator. Always `response.steer.accepted`.
+ */
+enum class BetaResponseSteerAcceptedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_STEER_ACCEPTED("response.steer.accepted");
 
     override fun toString() = value
@@ -566,16 +522,15 @@ enum class BetaResponseSteerAcceptedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event discriminator. Always `response.steer`. */
-enum class BetaResponseSteerEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event discriminator. Always `response.steer`.
+ */
+enum class BetaResponseSteerEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_STEER("response.steer");
 
     override fun toString() = value
@@ -583,40 +538,34 @@ enum class BetaResponseSteerEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The error type. Always `invalid_request_error`. */
-class BetaResponseSteerFailedEventErrorTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is BetaResponseSteerFailedEventErrorTypeEnum && value == other.value
-
+/**
+ * The error type. Always `invalid_request_error`.
+ */
+class BetaResponseSteerFailedEventErrorTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is BetaResponseSteerFailedEventErrorTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val INVALID_REQUEST_ERROR =
-            BetaResponseSteerFailedEventErrorTypeEnum("invalid_request_error")
+        @JvmField val INVALID_REQUEST_ERROR = BetaResponseSteerFailedEventErrorTypeEnum("invalid_request_error")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = BetaResponseSteerFailedEventErrorTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = BetaResponseSteerFailedEventErrorTypeEnum(value)
     }
 }
 
-/** The event discriminator. Always `response.steer.failed`. */
-enum class BetaResponseSteerFailedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event discriminator. Always `response.steer.failed`.
+ */
+enum class BetaResponseSteerFailedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_STEER_FAILED("response.steer.failed");
 
     override fun toString() = value
@@ -624,16 +573,15 @@ enum class BetaResponseSteerFailedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event discriminator. Always `response.steer.pending`. */
-enum class BetaResponseSteerPendingEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event discriminator. Always `response.steer.pending`.
+ */
+enum class BetaResponseSteerPendingEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     RESPONSE_STEER_PENDING("response.steer.pending");
 
     override fun toString() = value
@@ -641,16 +589,15 @@ enum class BetaResponseSteerPendingEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Required enumerated value serialized in the `type` wire field. */
-enum class BetaResponseSteerRequiredInputVariant0TypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * Required enumerated value serialized in the `type` wire field.
+ */
+enum class BetaResponseSteerRequiredInputVariant0TypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FUNCTION_CALL_OUTPUT("function_call_output");
 
     override fun toString() = value
@@ -658,8 +605,7 @@ enum class BetaResponseSteerRequiredInputVariant0TypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

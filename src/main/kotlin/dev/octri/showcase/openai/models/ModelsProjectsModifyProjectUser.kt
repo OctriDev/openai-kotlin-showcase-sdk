@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ProjectUserUpdateRequest` API schema. */
+/**
+ * Typed representation of the `ProjectUserUpdateRequest` API schema.
+ */
 data class ProjectUserUpdateRequest(
-    /** `owner` or `member` */
+    /**
+     * `owner` or `member`
+     */
     val role: String? = null
 )

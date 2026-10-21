@@ -3,27 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `PublicTestEndpointBody` API schema. */
+/**
+ * Typed representation of the `PublicTestEndpointBody` API schema.
+ */
 data class PublicTestEndpointBody(
-    /** The event type to send as a sample delivery. */
+    /**
+     * The event type to send as a sample delivery.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_type") val eventType: ProjectEventTypeEnum
 )
 
-/** Typed representation of the `WebhookEndpointTestResultResource` API schema. */
+/**
+ * Typed representation of the `WebhookEndpointTestResultResource` API schema.
+ */
 data class WebhookEndpointTestResultResource(
-    /** The object type, which is always webhook_endpoint.test. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookEndpointTestResultResourceObjectEnum,
-    /** The ID of the webhook endpoint that received the test. */
-    @com.fasterxml.jackson.annotation.JsonProperty("webhook_endpoint_id")
-    val webhookEndpointId: String,
-    /** The event type sent in the test. */
+    /**
+     * The object type, which is always webhook_endpoint.test.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookEndpointTestResultResourceObjectEnum,
+    /**
+     * The ID of the webhook endpoint that received the test.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("webhook_endpoint_id") val webhookEndpointId: String,
+    /**
+     * The event type sent in the test.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_type") val eventType: String,
-    /** The HTTP status code returned by the endpoint. */
+    /**
+     * The HTTP status code returned by the endpoint.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("status_code") val statusCode: Long,
     /**
-     * Whether the test request completed. Always true for returned results; use status_code to
-     * determine the endpoint response.
+     * Whether the test request completed. Always true for returned results; use status_code to determine the endpoint response.
      */
-    val success: Boolean,
+    val success: Boolean
 )

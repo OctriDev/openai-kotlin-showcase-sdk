@@ -3,14 +3,11 @@
 
 package dev.octri.showcase.openai
 
-typealias FunctionToolCallOutputResource =
-    dev.octri.showcase.openai.models.FunctionToolCallOutputResource
+typealias FunctionToolCallOutputResource = dev.octri.showcase.openai.models.FunctionToolCallOutputResource
 
-typealias FunctionToolCallOutputStatusEnum =
-    dev.octri.showcase.openai.models.FunctionToolCallOutputStatusEnum
+typealias FunctionToolCallOutputStatusEnum = dev.octri.showcase.openai.models.FunctionToolCallOutputStatusEnum
 
-typealias FunctionToolCallOutputTypeEnum =
-    dev.octri.showcase.openai.models.FunctionToolCallOutputTypeEnum
+typealias FunctionToolCallOutputTypeEnum = dev.octri.showcase.openai.models.FunctionToolCallOutputTypeEnum
 
 typealias FunctionToolCallResource = dev.octri.showcase.openai.models.FunctionToolCallResource
 
@@ -24,34 +21,25 @@ typealias FunctionToolParamTypeEnum = dev.octri.showcase.openai.models.FunctionT
 
 typealias FunctionToolTypeEnum = dev.octri.showcase.openai.models.FunctionToolTypeEnum
 
-typealias GcpExternalStorageProviderParams =
-    dev.octri.showcase.openai.models.GcpExternalStorageProviderParams
+typealias GcpExternalStorageProviderParams = dev.octri.showcase.openai.models.GcpExternalStorageProviderParams
 
-typealias GcpExternalStorageProviderParamsTypeEnum =
-    dev.octri.showcase.openai.models.GcpExternalStorageProviderParamsTypeEnum
+typealias GcpExternalStorageProviderParamsTypeEnum = dev.octri.showcase.openai.models.GcpExternalStorageProviderParamsTypeEnum
 
-typealias GcpExternalStorageProviderResponse =
-    dev.octri.showcase.openai.models.GcpExternalStorageProviderResponse
+typealias GcpExternalStorageProviderResponse = dev.octri.showcase.openai.models.GcpExternalStorageProviderResponse
 
-typealias GcpExternalStorageProviderResponseTypeEnum =
-    dev.octri.showcase.openai.models.GcpExternalStorageProviderResponseTypeEnum
+typealias GcpExternalStorageProviderResponseTypeEnum = dev.octri.showcase.openai.models.GcpExternalStorageProviderResponseTypeEnum
 
-typealias GetCertificateParameterItemEnum =
-    dev.octri.showcase.openai.models.GetCertificateParameterItemEnum
+typealias GetCertificateParameterItemEnum = dev.octri.showcase.openai.models.GetCertificateParameterItemEnum
 
-typealias GetChatCompletionMessagesParameterEnum =
-    dev.octri.showcase.openai.models.GetChatCompletionMessagesParameterEnum
+typealias GetChatCompletionMessagesParameterEnum = dev.octri.showcase.openai.models.GetChatCompletionMessagesParameterEnum
 
-typealias GetEvalRunOutputItemsParameterEnum =
-    dev.octri.showcase.openai.models.GetEvalRunOutputItemsParameterEnum
+typealias GetEvalRunOutputItemsParameterEnum = dev.octri.showcase.openai.models.GetEvalRunOutputItemsParameterEnum
 
-typealias GetEvalRunOutputItemsParameterEnum10b7ed83 =
-    dev.octri.showcase.openai.models.GetEvalRunOutputItemsParameterEnum10b7ed83
+typealias GetEvalRunOutputItemsParameterEnum10b7ed83 = dev.octri.showcase.openai.models.GetEvalRunOutputItemsParameterEnum10b7ed83
 
 typealias GetEvalRunsParameterEnum = dev.octri.showcase.openai.models.GetEvalRunsParameterEnum
 
-typealias GetEvalRunsParameterEnum9a5a0254 =
-    dev.octri.showcase.openai.models.GetEvalRunsParameterEnum9a5a0254
+typealias GetEvalRunsParameterEnum9a5a0254 = dev.octri.showcase.openai.models.GetEvalRunsParameterEnum9a5a0254
 
 typealias GetRunStepParameterItemEnum = dev.octri.showcase.openai.models.GetRunStepParameterItemEnum
 
@@ -69,25 +57,21 @@ typealias GraderPythonTypeEnum = dev.octri.showcase.openai.models.GraderPythonTy
 
 typealias GraderScoreModel = dev.octri.showcase.openai.models.GraderScoreModel
 
-typealias GraderScoreModelSamplingParams =
-    dev.octri.showcase.openai.models.GraderScoreModelSamplingParams
+typealias GraderScoreModelSamplingParams = dev.octri.showcase.openai.models.GraderScoreModelSamplingParams
 
 typealias GraderScoreModelTypeEnum = dev.octri.showcase.openai.models.GraderScoreModelTypeEnum
 
 typealias GraderStringCheck = dev.octri.showcase.openai.models.GraderStringCheck
 
-typealias GraderStringCheckOperationEnum =
-    dev.octri.showcase.openai.models.GraderStringCheckOperationEnum
+typealias GraderStringCheckOperationEnum = dev.octri.showcase.openai.models.GraderStringCheckOperationEnum
 
 typealias GraderStringCheckTypeEnum = dev.octri.showcase.openai.models.GraderStringCheckTypeEnum
 
 typealias GraderTextSimilarity = dev.octri.showcase.openai.models.GraderTextSimilarity
 
-typealias GraderTextSimilarityEvaluationMetricEnum =
-    dev.octri.showcase.openai.models.GraderTextSimilarityEvaluationMetricEnum
+typealias GraderTextSimilarityEvaluationMetricEnum = dev.octri.showcase.openai.models.GraderTextSimilarityEvaluationMetricEnum
 
-typealias GraderTextSimilarityTypeEnum =
-    dev.octri.showcase.openai.models.GraderTextSimilarityTypeEnum
+typealias GraderTextSimilarityTypeEnum = dev.octri.showcase.openai.models.GraderTextSimilarityTypeEnum
 
 typealias GrammarSyntax1 = dev.octri.showcase.openai.models.GrammarSyntax1
 
@@ -95,8 +79,7 @@ typealias Group = dev.octri.showcase.openai.models.Group
 
 typealias GroupDeletedResource = dev.octri.showcase.openai.models.GroupDeletedResource
 
-typealias GroupDeletedResourceObjectEnum =
-    dev.octri.showcase.openai.models.GroupDeletedResourceObjectEnum
+typealias GroupDeletedResourceObjectEnum = dev.octri.showcase.openai.models.GroupDeletedResourceObjectEnum
 
 typealias GroupListResource = dev.octri.showcase.openai.models.GroupListResource
 
@@ -116,119 +99,91 @@ typealias GroupResponseGroupTypeEnum = dev.octri.showcase.openai.models.GroupRes
 
 typealias GroupRoleAssignment = dev.octri.showcase.openai.models.GroupRoleAssignment
 
-typealias GroupRoleAssignmentObjectEnum =
-    dev.octri.showcase.openai.models.GroupRoleAssignmentObjectEnum
+typealias GroupRoleAssignmentObjectEnum = dev.octri.showcase.openai.models.GroupRoleAssignmentObjectEnum
 
 typealias GroupUser = dev.octri.showcase.openai.models.GroupUser
 
 typealias GroupUserAssignment = dev.octri.showcase.openai.models.GroupUserAssignment
 
-typealias GroupUserAssignmentObjectEnum =
-    dev.octri.showcase.openai.models.GroupUserAssignmentObjectEnum
+typealias GroupUserAssignmentObjectEnum = dev.octri.showcase.openai.models.GroupUserAssignmentObjectEnum
 
 typealias GroupUserDeletedResource = dev.octri.showcase.openai.models.GroupUserDeletedResource
 
-typealias GroupUserDeletedResourceObjectEnum =
-    dev.octri.showcase.openai.models.GroupUserDeletedResourceObjectEnum
+typealias GroupUserDeletedResourceObjectEnum = dev.octri.showcase.openai.models.GroupUserDeletedResourceObjectEnum
 
 typealias HistoryParam = dev.octri.showcase.openai.models.HistoryParam
 
 typealias HostedEnvironmentFileParam = dev.octri.showcase.openai.models.HostedEnvironmentFileParam
 
-typealias HostedEnvironmentFileParamFileId =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileParamFileId
+typealias HostedEnvironmentFileParamFileId = dev.octri.showcase.openai.models.HostedEnvironmentFileParamFileId
 
-typealias HostedEnvironmentFileParamFileIdTypeEnum =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileParamFileIdTypeEnum
+typealias HostedEnvironmentFileParamFileIdTypeEnum = dev.octri.showcase.openai.models.HostedEnvironmentFileParamFileIdTypeEnum
 
-typealias HostedEnvironmentFileParamInline =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileParamInline
+typealias HostedEnvironmentFileParamInline = dev.octri.showcase.openai.models.HostedEnvironmentFileParamInline
 
-typealias HostedEnvironmentFileParamInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileParamInlineTypeEnum
+typealias HostedEnvironmentFileParamInlineTypeEnum = dev.octri.showcase.openai.models.HostedEnvironmentFileParamInlineTypeEnum
 
-typealias HostedEnvironmentFileResource =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileResource
+typealias HostedEnvironmentFileResource = dev.octri.showcase.openai.models.HostedEnvironmentFileResource
 
-typealias HostedEnvironmentFileResourceFileId =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileResourceFileId
+typealias HostedEnvironmentFileResourceFileId = dev.octri.showcase.openai.models.HostedEnvironmentFileResourceFileId
 
-typealias HostedEnvironmentFileResourceFileIdTypeEnum =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileResourceFileIdTypeEnum
+typealias HostedEnvironmentFileResourceFileIdTypeEnum = dev.octri.showcase.openai.models.HostedEnvironmentFileResourceFileIdTypeEnum
 
-typealias HostedEnvironmentFileResourceInline =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileResourceInline
+typealias HostedEnvironmentFileResourceInline = dev.octri.showcase.openai.models.HostedEnvironmentFileResourceInline
 
-typealias HostedEnvironmentFileResourceInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedEnvironmentFileResourceInlineTypeEnum
+typealias HostedEnvironmentFileResourceInlineTypeEnum = dev.octri.showcase.openai.models.HostedEnvironmentFileResourceInlineTypeEnum
 
 typealias HostedPluginParam = dev.octri.showcase.openai.models.HostedPluginParam
 
 typealias HostedPluginParamInline = dev.octri.showcase.openai.models.HostedPluginParamInline
 
-typealias HostedPluginParamInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedPluginParamInlineTypeEnum
+typealias HostedPluginParamInlineTypeEnum = dev.octri.showcase.openai.models.HostedPluginParamInlineTypeEnum
 
 typealias HostedPluginResource = dev.octri.showcase.openai.models.HostedPluginResource
 
 typealias HostedPluginResourceInline = dev.octri.showcase.openai.models.HostedPluginResourceInline
 
-typealias HostedPluginResourceInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedPluginResourceInlineTypeEnum
+typealias HostedPluginResourceInlineTypeEnum = dev.octri.showcase.openai.models.HostedPluginResourceInlineTypeEnum
 
 typealias HostedSkillParam = dev.octri.showcase.openai.models.HostedSkillParam
 
 typealias HostedSkillParamInline = dev.octri.showcase.openai.models.HostedSkillParamInline
 
-typealias HostedSkillParamInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedSkillParamInlineTypeEnum
+typealias HostedSkillParamInlineTypeEnum = dev.octri.showcase.openai.models.HostedSkillParamInlineTypeEnum
 
-typealias HostedSkillParamSkillReference =
-    dev.octri.showcase.openai.models.HostedSkillParamSkillReference
+typealias HostedSkillParamSkillReference = dev.octri.showcase.openai.models.HostedSkillParamSkillReference
 
-typealias HostedSkillParamSkillReferenceTypeEnum =
-    dev.octri.showcase.openai.models.HostedSkillParamSkillReferenceTypeEnum
+typealias HostedSkillParamSkillReferenceTypeEnum = dev.octri.showcase.openai.models.HostedSkillParamSkillReferenceTypeEnum
 
 typealias HostedSkillResource = dev.octri.showcase.openai.models.HostedSkillResource
 
 typealias HostedSkillResourceInline = dev.octri.showcase.openai.models.HostedSkillResourceInline
 
-typealias HostedSkillResourceInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedSkillResourceInlineTypeEnum
+typealias HostedSkillResourceInlineTypeEnum = dev.octri.showcase.openai.models.HostedSkillResourceInlineTypeEnum
 
-typealias HostedSkillResourceSkillReference =
-    dev.octri.showcase.openai.models.HostedSkillResourceSkillReference
+typealias HostedSkillResourceSkillReference = dev.octri.showcase.openai.models.HostedSkillResourceSkillReference
 
-typealias HostedSkillResourceSkillReferenceTypeEnum =
-    dev.octri.showcase.openai.models.HostedSkillResourceSkillReferenceTypeEnum
+typealias HostedSkillResourceSkillReferenceTypeEnum = dev.octri.showcase.openai.models.HostedSkillResourceSkillReferenceTypeEnum
 
 typealias HostedTemplateFileResource = dev.octri.showcase.openai.models.HostedTemplateFileResource
 
-typealias HostedTemplateFileResourceFileId =
-    dev.octri.showcase.openai.models.HostedTemplateFileResourceFileId
+typealias HostedTemplateFileResourceFileId = dev.octri.showcase.openai.models.HostedTemplateFileResourceFileId
 
-typealias HostedTemplateFileResourceFileIdTypeEnum =
-    dev.octri.showcase.openai.models.HostedTemplateFileResourceFileIdTypeEnum
+typealias HostedTemplateFileResourceFileIdTypeEnum = dev.octri.showcase.openai.models.HostedTemplateFileResourceFileIdTypeEnum
 
-typealias HostedTemplateFileResourceInline =
-    dev.octri.showcase.openai.models.HostedTemplateFileResourceInline
+typealias HostedTemplateFileResourceInline = dev.octri.showcase.openai.models.HostedTemplateFileResourceInline
 
-typealias HostedTemplateFileResourceInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedTemplateFileResourceInlineTypeEnum
+typealias HostedTemplateFileResourceInlineTypeEnum = dev.octri.showcase.openai.models.HostedTemplateFileResourceInlineTypeEnum
 
 typealias HostedTemplateSkillResource = dev.octri.showcase.openai.models.HostedTemplateSkillResource
 
-typealias HostedTemplateSkillResourceInline =
-    dev.octri.showcase.openai.models.HostedTemplateSkillResourceInline
+typealias HostedTemplateSkillResourceInline = dev.octri.showcase.openai.models.HostedTemplateSkillResourceInline
 
-typealias HostedTemplateSkillResourceInlineTypeEnum =
-    dev.octri.showcase.openai.models.HostedTemplateSkillResourceInlineTypeEnum
+typealias HostedTemplateSkillResourceInlineTypeEnum = dev.octri.showcase.openai.models.HostedTemplateSkillResourceInlineTypeEnum
 
-typealias HostedTemplateSkillResourceSkillReference =
-    dev.octri.showcase.openai.models.HostedTemplateSkillResourceSkillReference
+typealias HostedTemplateSkillResourceSkillReference = dev.octri.showcase.openai.models.HostedTemplateSkillResourceSkillReference
 
-typealias HostedTemplateSkillResourceSkillReferenceTypeEnum =
-    dev.octri.showcase.openai.models.HostedTemplateSkillResourceSkillReferenceTypeEnum
+typealias HostedTemplateSkillResourceSkillReferenceTypeEnum = dev.octri.showcase.openai.models.HostedTemplateSkillResourceSkillReferenceTypeEnum
 
 typealias HostedToolPermission = dev.octri.showcase.openai.models.HostedToolPermission
 
@@ -250,31 +205,23 @@ typealias ImageDetailParam = dev.octri.showcase.openai.models.ImageDetailParam
 
 typealias ImageEditCompletedEvent = dev.octri.showcase.openai.models.ImageEditCompletedEvent
 
-typealias ImageEditCompletedEventBackgroundEnum =
-    dev.octri.showcase.openai.models.ImageEditCompletedEventBackgroundEnum
+typealias ImageEditCompletedEventBackgroundEnum = dev.octri.showcase.openai.models.ImageEditCompletedEventBackgroundEnum
 
-typealias ImageEditCompletedEventOutputFormatEnum =
-    dev.octri.showcase.openai.models.ImageEditCompletedEventOutputFormatEnum
+typealias ImageEditCompletedEventOutputFormatEnum = dev.octri.showcase.openai.models.ImageEditCompletedEventOutputFormatEnum
 
-typealias ImageEditCompletedEventQualityEnum =
-    dev.octri.showcase.openai.models.ImageEditCompletedEventQualityEnum
+typealias ImageEditCompletedEventQualityEnum = dev.octri.showcase.openai.models.ImageEditCompletedEventQualityEnum
 
-typealias ImageEditCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ImageEditCompletedEventTypeEnum
+typealias ImageEditCompletedEventTypeEnum = dev.octri.showcase.openai.models.ImageEditCompletedEventTypeEnum
 
 typealias ImageEditPartialImageEvent = dev.octri.showcase.openai.models.ImageEditPartialImageEvent
 
-typealias ImageEditPartialImageEventBackgroundEnum =
-    dev.octri.showcase.openai.models.ImageEditPartialImageEventBackgroundEnum
+typealias ImageEditPartialImageEventBackgroundEnum = dev.octri.showcase.openai.models.ImageEditPartialImageEventBackgroundEnum
 
-typealias ImageEditPartialImageEventOutputFormatEnum =
-    dev.octri.showcase.openai.models.ImageEditPartialImageEventOutputFormatEnum
+typealias ImageEditPartialImageEventOutputFormatEnum = dev.octri.showcase.openai.models.ImageEditPartialImageEventOutputFormatEnum
 
-typealias ImageEditPartialImageEventQualityEnum =
-    dev.octri.showcase.openai.models.ImageEditPartialImageEventQualityEnum
+typealias ImageEditPartialImageEventQualityEnum = dev.octri.showcase.openai.models.ImageEditPartialImageEventQualityEnum
 
-typealias ImageEditPartialImageEventTypeEnum =
-    dev.octri.showcase.openai.models.ImageEditPartialImageEventTypeEnum
+typealias ImageEditPartialImageEventTypeEnum = dev.octri.showcase.openai.models.ImageEditPartialImageEventTypeEnum
 
 typealias ImageEditStreamEvent = dev.octri.showcase.openai.models.ImageEditStreamEvent
 
@@ -282,17 +229,13 @@ typealias ImageGenActionEnum = dev.octri.showcase.openai.models.ImageGenActionEn
 
 typealias ImageGenCompletedEvent = dev.octri.showcase.openai.models.ImageGenCompletedEvent
 
-typealias ImageGenCompletedEventBackgroundEnum =
-    dev.octri.showcase.openai.models.ImageGenCompletedEventBackgroundEnum
+typealias ImageGenCompletedEventBackgroundEnum = dev.octri.showcase.openai.models.ImageGenCompletedEventBackgroundEnum
 
-typealias ImageGenCompletedEventOutputFormatEnum =
-    dev.octri.showcase.openai.models.ImageGenCompletedEventOutputFormatEnum
+typealias ImageGenCompletedEventOutputFormatEnum = dev.octri.showcase.openai.models.ImageGenCompletedEventOutputFormatEnum
 
-typealias ImageGenCompletedEventQualityEnum =
-    dev.octri.showcase.openai.models.ImageGenCompletedEventQualityEnum
+typealias ImageGenCompletedEventQualityEnum = dev.octri.showcase.openai.models.ImageGenCompletedEventQualityEnum
 
-typealias ImageGenCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ImageGenCompletedEventTypeEnum
+typealias ImageGenCompletedEventTypeEnum = dev.octri.showcase.openai.models.ImageGenCompletedEventTypeEnum
 
 typealias ImageGenInputUsageDetails = dev.octri.showcase.openai.models.ImageGenInputUsageDetails
 
@@ -300,17 +243,13 @@ typealias ImageGenOutputTokensDetails = dev.octri.showcase.openai.models.ImageGe
 
 typealias ImageGenPartialImageEvent = dev.octri.showcase.openai.models.ImageGenPartialImageEvent
 
-typealias ImageGenPartialImageEventBackgroundEnum =
-    dev.octri.showcase.openai.models.ImageGenPartialImageEventBackgroundEnum
+typealias ImageGenPartialImageEventBackgroundEnum = dev.octri.showcase.openai.models.ImageGenPartialImageEventBackgroundEnum
 
-typealias ImageGenPartialImageEventOutputFormatEnum =
-    dev.octri.showcase.openai.models.ImageGenPartialImageEventOutputFormatEnum
+typealias ImageGenPartialImageEventOutputFormatEnum = dev.octri.showcase.openai.models.ImageGenPartialImageEventOutputFormatEnum
 
-typealias ImageGenPartialImageEventQualityEnum =
-    dev.octri.showcase.openai.models.ImageGenPartialImageEventQualityEnum
+typealias ImageGenPartialImageEventQualityEnum = dev.octri.showcase.openai.models.ImageGenPartialImageEventQualityEnum
 
-typealias ImageGenPartialImageEventTypeEnum =
-    dev.octri.showcase.openai.models.ImageGenPartialImageEventTypeEnum
+typealias ImageGenPartialImageEventTypeEnum = dev.octri.showcase.openai.models.ImageGenPartialImageEventTypeEnum
 
 typealias ImageGenStreamEvent = dev.octri.showcase.openai.models.ImageGenStreamEvent
 
@@ -322,14 +261,11 @@ typealias ImageGenToolCall = dev.octri.showcase.openai.models.ImageGenToolCall
 
 typealias ImageGenToolCallError = dev.octri.showcase.openai.models.ImageGenToolCallError
 
-typealias ImageGenToolCallModerationDetails =
-    dev.octri.showcase.openai.models.ImageGenToolCallModerationDetails
+typealias ImageGenToolCallModerationDetails = dev.octri.showcase.openai.models.ImageGenToolCallModerationDetails
 
-typealias ImageGenToolCallModerationDetailsModerationStageEnum =
-    dev.octri.showcase.openai.models.ImageGenToolCallModerationDetailsModerationStageEnum
+typealias ImageGenToolCallModerationDetailsModerationStageEnum = dev.octri.showcase.openai.models.ImageGenToolCallModerationDetailsModerationStageEnum
 
-typealias ImageGenToolCallQualityVariant0Enum =
-    dev.octri.showcase.openai.models.ImageGenToolCallQualityVariant0Enum
+typealias ImageGenToolCallQualityVariant0Enum = dev.octri.showcase.openai.models.ImageGenToolCallQualityVariant0Enum
 
 typealias ImageGenToolCallStatusEnum = dev.octri.showcase.openai.models.ImageGenToolCallStatusEnum
 
@@ -339,8 +275,7 @@ typealias ImageGenToolInputImageMask = dev.octri.showcase.openai.models.ImageGen
 
 typealias ImageGenToolModerationEnum = dev.octri.showcase.openai.models.ImageGenToolModerationEnum
 
-typealias ImageGenToolOutputFormatEnum =
-    dev.octri.showcase.openai.models.ImageGenToolOutputFormatEnum
+typealias ImageGenToolOutputFormatEnum = dev.octri.showcase.openai.models.ImageGenToolOutputFormatEnum
 
 typealias ImageGenToolQualityEnum = dev.octri.showcase.openai.models.ImageGenToolQualityEnum
 
@@ -356,18 +291,15 @@ typealias ImageRefParam2 = dev.octri.showcase.openai.models.ImageRefParam2
 
 typealias ImagesResponse = dev.octri.showcase.openai.models.ImagesResponse
 
-typealias ImagesResponseBackgroundEnum =
-    dev.octri.showcase.openai.models.ImagesResponseBackgroundEnum
+typealias ImagesResponseBackgroundEnum = dev.octri.showcase.openai.models.ImagesResponseBackgroundEnum
 
-typealias ImagesResponseOutputFormatEnum =
-    dev.octri.showcase.openai.models.ImagesResponseOutputFormatEnum
+typealias ImagesResponseOutputFormatEnum = dev.octri.showcase.openai.models.ImagesResponseOutputFormatEnum
 
 typealias ImagesResponseQualityEnum = dev.octri.showcase.openai.models.ImagesResponseQualityEnum
 
 typealias ImagesUsage = dev.octri.showcase.openai.models.ImagesUsage
 
-typealias ImagesUsageInputTokensDetails =
-    dev.octri.showcase.openai.models.ImagesUsageInputTokensDetails
+typealias ImagesUsageInputTokensDetails = dev.octri.showcase.openai.models.ImagesUsageInputTokensDetails
 
 typealias IncludeEnum = dev.octri.showcase.openai.models.IncludeEnum
 
@@ -375,14 +307,11 @@ typealias InferenceOptions = dev.octri.showcase.openai.models.InferenceOptions
 
 typealias InlineCapabilitySourceParam = dev.octri.showcase.openai.models.InlineCapabilitySourceParam
 
-typealias InlineCapabilitySourceParamBase64 =
-    dev.octri.showcase.openai.models.InlineCapabilitySourceParamBase64
+typealias InlineCapabilitySourceParamBase64 = dev.octri.showcase.openai.models.InlineCapabilitySourceParamBase64
 
-typealias InlineCapabilitySourceParamBase64MediaTypeEnum =
-    dev.octri.showcase.openai.models.InlineCapabilitySourceParamBase64MediaTypeEnum
+typealias InlineCapabilitySourceParamBase64MediaTypeEnum = dev.octri.showcase.openai.models.InlineCapabilitySourceParamBase64MediaTypeEnum
 
-typealias InlineCapabilitySourceParamBase64TypeEnum =
-    dev.octri.showcase.openai.models.InlineCapabilitySourceParamBase64TypeEnum
+typealias InlineCapabilitySourceParamBase64TypeEnum = dev.octri.showcase.openai.models.InlineCapabilitySourceParamBase64TypeEnum
 
 typealias InlineSkillParam = dev.octri.showcase.openai.models.InlineSkillParam
 
@@ -390,11 +319,9 @@ typealias InlineSkillParamTypeEnum = dev.octri.showcase.openai.models.InlineSkil
 
 typealias InlineSkillSourceParam = dev.octri.showcase.openai.models.InlineSkillSourceParam
 
-typealias InlineSkillSourceParamMediaTypeEnum =
-    dev.octri.showcase.openai.models.InlineSkillSourceParamMediaTypeEnum
+typealias InlineSkillSourceParamMediaTypeEnum = dev.octri.showcase.openai.models.InlineSkillSourceParamMediaTypeEnum
 
-typealias InlineSkillSourceParamTypeEnum =
-    dev.octri.showcase.openai.models.InlineSkillSourceParamTypeEnum
+typealias InlineSkillSourceParamTypeEnum = dev.octri.showcase.openai.models.InlineSkillSourceParamTypeEnum
 
 typealias Input = dev.octri.showcase.openai.models.Input
 
@@ -402,8 +329,7 @@ typealias InputAudio = dev.octri.showcase.openai.models.InputAudio
 
 typealias InputAudioInputAudio = dev.octri.showcase.openai.models.InputAudioInputAudio
 
-typealias InputAudioInputAudioFormatEnum =
-    dev.octri.showcase.openai.models.InputAudioInputAudioFormatEnum
+typealias InputAudioInputAudioFormatEnum = dev.octri.showcase.openai.models.InputAudioInputAudioFormatEnum
 
 typealias InputAudioTypeEnum = dev.octri.showcase.openai.models.InputAudioTypeEnum
 
@@ -413,27 +339,21 @@ typealias InputContentParam = dev.octri.showcase.openai.models.InputContentParam
 
 typealias InputContentParamInputImage = dev.octri.showcase.openai.models.InputContentParamInputImage
 
-typealias InputContentParamInputImageTypeEnum =
-    dev.octri.showcase.openai.models.InputContentParamInputImageTypeEnum
+typealias InputContentParamInputImageTypeEnum = dev.octri.showcase.openai.models.InputContentParamInputImageTypeEnum
 
 typealias InputContentParamInputText = dev.octri.showcase.openai.models.InputContentParamInputText
 
-typealias InputContentParamInputTextTypeEnum =
-    dev.octri.showcase.openai.models.InputContentParamInputTextTypeEnum
+typealias InputContentParamInputTextTypeEnum = dev.octri.showcase.openai.models.InputContentParamInputTextTypeEnum
 
 typealias InputContentResource = dev.octri.showcase.openai.models.InputContentResource
 
-typealias InputContentResourceInputImage =
-    dev.octri.showcase.openai.models.InputContentResourceInputImage
+typealias InputContentResourceInputImage = dev.octri.showcase.openai.models.InputContentResourceInputImage
 
-typealias InputContentResourceInputImageTypeEnum =
-    dev.octri.showcase.openai.models.InputContentResourceInputImageTypeEnum
+typealias InputContentResourceInputImageTypeEnum = dev.octri.showcase.openai.models.InputContentResourceInputImageTypeEnum
 
-typealias InputContentResourceInputText =
-    dev.octri.showcase.openai.models.InputContentResourceInputText
+typealias InputContentResourceInputText = dev.octri.showcase.openai.models.InputContentResourceInputText
 
-typealias InputContentResourceInputTextTypeEnum =
-    dev.octri.showcase.openai.models.InputContentResourceInputTextTypeEnum
+typealias InputContentResourceInputTextTypeEnum = dev.octri.showcase.openai.models.InputContentResourceInputTextTypeEnum
 
 typealias InputFidelity = dev.octri.showcase.openai.models.InputFidelity
 
@@ -441,18 +361,15 @@ typealias InputFileContent = dev.octri.showcase.openai.models.InputFileContent
 
 typealias InputFileContentParam = dev.octri.showcase.openai.models.InputFileContentParam
 
-typealias InputFileContentParamTypeEnum =
-    dev.octri.showcase.openai.models.InputFileContentParamTypeEnum
+typealias InputFileContentParamTypeEnum = dev.octri.showcase.openai.models.InputFileContentParamTypeEnum
 
 typealias InputFileContentTypeEnum = dev.octri.showcase.openai.models.InputFileContentTypeEnum
 
 typealias InputImageContent = dev.octri.showcase.openai.models.InputImageContent
 
-typealias InputImageContentParamAutoParam =
-    dev.octri.showcase.openai.models.InputImageContentParamAutoParam
+typealias InputImageContentParamAutoParam = dev.octri.showcase.openai.models.InputImageContentParamAutoParam
 
-typealias InputImageContentParamAutoParamTypeEnum =
-    dev.octri.showcase.openai.models.InputImageContentParamAutoParamTypeEnum
+typealias InputImageContentParamAutoParamTypeEnum = dev.octri.showcase.openai.models.InputImageContentParamAutoParamTypeEnum
 
 typealias InputImageContentTypeEnum = dev.octri.showcase.openai.models.InputImageContentTypeEnum
 
@@ -482,8 +399,7 @@ typealias InputTextContent = dev.octri.showcase.openai.models.InputTextContent
 
 typealias InputTextContentParam = dev.octri.showcase.openai.models.InputTextContentParam
 
-typealias InputTextContentParamTypeEnum =
-    dev.octri.showcase.openai.models.InputTextContentParamTypeEnum
+typealias InputTextContentParamTypeEnum = dev.octri.showcase.openai.models.InputTextContentParamTypeEnum
 
 typealias InputTextContentTypeEnum = dev.octri.showcase.openai.models.InputTextContentTypeEnum
 
@@ -493,23 +409,19 @@ typealias InputTokensDetailsResource2 = dev.octri.showcase.openai.models.InputTo
 
 typealias Instructions = dev.octri.showcase.openai.models.Instructions
 
-typealias InterruptSubagentCallItemResource =
-    dev.octri.showcase.openai.models.InterruptSubagentCallItemResource
+typealias InterruptSubagentCallItemResource = dev.octri.showcase.openai.models.InterruptSubagentCallItemResource
 
-typealias InterruptSubagentCallItemResourceTypeEnum =
-    dev.octri.showcase.openai.models.InterruptSubagentCallItemResourceTypeEnum
+typealias InterruptSubagentCallItemResourceTypeEnum = dev.octri.showcase.openai.models.InterruptSubagentCallItemResourceTypeEnum
 
 typealias Invite = dev.octri.showcase.openai.models.Invite
 
 typealias InviteDeleteResponse = dev.octri.showcase.openai.models.InviteDeleteResponse
 
-typealias InviteDeleteResponseObjectEnum =
-    dev.octri.showcase.openai.models.InviteDeleteResponseObjectEnum
+typealias InviteDeleteResponseObjectEnum = dev.octri.showcase.openai.models.InviteDeleteResponseObjectEnum
 
 typealias InviteListResponse = dev.octri.showcase.openai.models.InviteListResponse
 
-typealias InviteListResponseObjectEnum =
-    dev.octri.showcase.openai.models.InviteListResponseObjectEnum
+typealias InviteListResponseObjectEnum = dev.octri.showcase.openai.models.InviteListResponseObjectEnum
 
 typealias InviteObjectEnum = dev.octri.showcase.openai.models.InviteObjectEnum
 
@@ -523,5 +435,4 @@ typealias InviteRequest = dev.octri.showcase.openai.models.InviteRequest
 
 typealias InviteRequestProjectsItem = dev.octri.showcase.openai.models.InviteRequestProjectsItem
 
-typealias InviteRequestProjectsItemRoleEnum =
-    dev.octri.showcase.openai.models.InviteRequestProjectsItemRoleEnum
+typealias InviteRequestProjectsItemRoleEnum = dev.octri.showcase.openai.models.InviteRequestProjectsItemRoleEnum

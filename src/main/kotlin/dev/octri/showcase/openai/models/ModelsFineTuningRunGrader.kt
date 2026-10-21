@@ -3,168 +3,182 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `RunGraderRequest` API schema. */
+/**
+ * Typed representation of the `RunGraderRequest` API schema.
+ */
 data class RunGraderRequest(
-    /** The grader used for the fine-tuning job. */
+    /**
+     * The grader used for the fine-tuning job.
+     */
     val grader: RunGraderRequestGrader,
     /**
-     * The model sample to be evaluated. This value will be used to populate the `sample` namespace.
-     * See the guide for more details. The `output_json` variable will be populated if the model
-     * sample is a valid JSON string.
+     * The model sample to be evaluated. This value will be used to populate the `sample` namespace. See the guide for more details. The `output_json` variable will be populated if the model sample is a valid JSON string.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("model_sample") val modelSample: String,
     /**
-     * The dataset item provided to the grader. This will be used to populate the `item` namespace.
-     * See the guide for more details.
+     * The dataset item provided to the grader. This will be used to populate the `item` namespace. See the guide for more details.
      */
-    val item: Map<String, Any>? = null,
+    val item: Map<String, Any>? = null
 )
 
-/** The grader used for the fine-tuning job. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRunGraderRequestGrader::class,
-)
+/**
+ * The grader used for the fine-tuning job.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRunGraderRequestGrader::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = GraderStringCheck::class,
-        name = "string_check",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = GraderTextSimilarity::class,
-        name = "text_similarity",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = GraderPython::class,
-        name = "python",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = GraderScoreModel::class,
-        name = "score_model",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderStringCheck::class, name = "string_check"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderTextSimilarity::class, name = "text_similarity"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderPython::class, name = "python"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderScoreModel::class, name = "score_model"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi")
 )
 sealed interface RunGraderRequestGrader
 
 /** A [RunGraderRequestGrader] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRunGraderRequestGrader
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRunGraderRequestGrader @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RunGraderRequestGrader {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Required object value serialized in the `errors` wire field. */
+/**
+ * Required object value serialized in the `errors` wire field.
+ */
 data class RunGraderResponseMetadataErrors(
-    /** Required `boolean` value serialized in the `formula_parse_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("formula_parse_error")
-    val formulaParseError: Boolean,
-    /** Required `boolean` value serialized in the `sample_parse_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sample_parse_error")
-    val sampleParseError: Boolean,
-    /** Required `boolean` value serialized in the `truncated_observation_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("truncated_observation_error")
-    val truncatedObservationError: Boolean,
-    /** Required `boolean` value serialized in the `unresponsive_reward_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("unresponsive_reward_error")
-    val unresponsiveRewardError: Boolean,
-    /** Required `boolean` value serialized in the `invalid_variable_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("invalid_variable_error")
-    val invalidVariableError: Boolean,
-    /** Required `boolean` value serialized in the `other_error` wire field. */
+    /**
+     * Required `boolean` value serialized in the `formula_parse_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("formula_parse_error") val formulaParseError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `sample_parse_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sample_parse_error") val sampleParseError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `truncated_observation_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("truncated_observation_error") val truncatedObservationError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `unresponsive_reward_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unresponsive_reward_error") val unresponsiveRewardError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `invalid_variable_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("invalid_variable_error") val invalidVariableError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `other_error` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("other_error") val otherError: Boolean,
-    /** Required `boolean` value serialized in the `python_grader_server_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("python_grader_server_error")
-    val pythonGraderServerError: Boolean,
-    /** Required `string` value serialized in the `python_grader_server_error_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty(
-        "python_grader_server_error_type",
-        required = true,
-    )
-    val pythonGraderServerErrorType: String?,
-    /** Required `boolean` value serialized in the `python_grader_runtime_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("python_grader_runtime_error")
-    val pythonGraderRuntimeError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `python_grader_server_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("python_grader_server_error") val pythonGraderServerError: Boolean,
+    /**
+     * Required `string` value serialized in the `python_grader_server_error_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("python_grader_server_error_type", required = true) val pythonGraderServerErrorType: String?,
+    /**
+     * Required `boolean` value serialized in the `python_grader_runtime_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("python_grader_runtime_error") val pythonGraderRuntimeError: Boolean,
     /**
      * Required `string` value serialized in the `python_grader_runtime_error_details` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty(
-        "python_grader_runtime_error_details",
-        required = true,
-    )
-    val pythonGraderRuntimeErrorDetails: String?,
-    /** Required `boolean` value serialized in the `model_grader_server_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_server_error")
-    val modelGraderServerError: Boolean,
-    /** Required `boolean` value serialized in the `model_grader_refusal_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_refusal_error")
-    val modelGraderRefusalError: Boolean,
-    /** Required `boolean` value serialized in the `model_grader_parse_error` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_parse_error")
-    val modelGraderParseError: Boolean,
-    /** Required `string` value serialized in the `model_grader_server_error_details` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty(
-        "model_grader_server_error_details",
-        required = true,
-    )
-    val modelGraderServerErrorDetails: String?,
+    @com.fasterxml.jackson.annotation.JsonProperty("python_grader_runtime_error_details", required = true) val pythonGraderRuntimeErrorDetails: String?,
+    /**
+     * Required `boolean` value serialized in the `model_grader_server_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_server_error") val modelGraderServerError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `model_grader_refusal_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_refusal_error") val modelGraderRefusalError: Boolean,
+    /**
+     * Required `boolean` value serialized in the `model_grader_parse_error` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_parse_error") val modelGraderParseError: Boolean,
+    /**
+     * Required `string` value serialized in the `model_grader_server_error_details` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_server_error_details", required = true) val modelGraderServerErrorDetails: String?
 )
 
-/** Required object value serialized in the `token_usage` wire field. */
+/**
+ * Required object value serialized in the `token_usage` wire field.
+ */
 data class RunGraderResponseMetadataTokenUsage(
-    /** Required `integer` value serialized in the `prompt_tokens` wire field. */
+    /**
+     * Required `integer` value serialized in the `prompt_tokens` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("prompt_tokens") val promptTokens: Long,
-    /** Required `integer` value serialized in the `total_tokens` wire field. */
+    /**
+     * Required `integer` value serialized in the `total_tokens` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_tokens") val totalTokens: Long,
-    /** Optional `integer` value serialized in the `completion_tokens` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens")
-    val completionTokens: Long? = null,
-    /** Optional `integer` value serialized in the `cached_tokens` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `completion_tokens` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completion_tokens") val completionTokens: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `cached_tokens` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cached_tokens") val cachedTokens: Long? = null
 )
 
-/** Required object value serialized in the `metadata` wire field. */
+/**
+ * Required object value serialized in the `metadata` wire field.
+ */
 data class RunGraderResponseMetadata(
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
-    /** Required `string` value serialized in the `type` wire field. */
+    /**
+     * Required `string` value serialized in the `type` wire field.
+     */
     val type: String,
-    /** Required object value serialized in the `errors` wire field. */
+    /**
+     * Required object value serialized in the `errors` wire field.
+     */
     val errors: RunGraderResponseMetadataErrors,
-    /** Required `number` value serialized in the `execution_time` wire field. */
+    /**
+     * Required `number` value serialized in the `execution_time` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("execution_time") val executionTime: Double,
-    /** Required object value serialized in the `scores` wire field. */
+    /**
+     * Required object value serialized in the `scores` wire field.
+     */
     val scores: Map<String, Any>,
-    /** Required object value serialized in the `token_usage` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("token_usage", required = true)
-    val tokenUsage: RunGraderResponseMetadataTokenUsage?,
-    /** Required `string` value serialized in the `sampled_model_name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sampled_model_name", required = true)
-    val sampledModelName: String?,
+    /**
+     * Required object value serialized in the `token_usage` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("token_usage", required = true) val tokenUsage: RunGraderResponseMetadataTokenUsage?,
+    /**
+     * Required `string` value serialized in the `sampled_model_name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampled_model_name", required = true) val sampledModelName: String?
 )
 
-/** Typed representation of the `RunGraderResponse` API schema. */
+/**
+ * Typed representation of the `RunGraderResponse` API schema.
+ */
 data class RunGraderResponse(
-    /** Required `number` value serialized in the `reward` wire field. */
+    /**
+     * Required `number` value serialized in the `reward` wire field.
+     */
     val reward: Double,
-    /** Required object value serialized in the `metadata` wire field. */
+    /**
+     * Required object value serialized in the `metadata` wire field.
+     */
     val metadata: RunGraderResponseMetadata,
-    /** Required object value serialized in the `sub_rewards` wire field. */
+    /**
+     * Required object value serialized in the `sub_rewards` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sub_rewards") val subRewards: Map<String, Any>,
-    /** Required object value serialized in the `model_grader_token_usage_per_model` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_token_usage_per_model")
-    val modelGraderTokenUsagePerModel: Map<String, Any>,
+    /**
+     * Required object value serialized in the `model_grader_token_usage_per_model` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("model_grader_token_usage_per_model") val modelGraderTokenUsagePerModel: Map<String, Any>
 )

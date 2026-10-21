@@ -3,599 +3,626 @@
 
 package dev.octri.showcase.openai.models
 
-/** An event emitted by a Managed Agents session. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownSessionEvent::class,
-)
+/**
+ * An event emitted by a Managed Agents session.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownSessionEvent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventError::class,
-        name = "error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentReady::class,
-        name = "agent.session.environment.ready",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentSuspended::class,
-        name = "agent.session.environment.suspended",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentExpired::class,
-        name = "agent.session.environment.expired",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentReset::class,
-        name = "agent.session.environment.reset",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentOutputCommandExecutionOutputDelta::class,
-        name = "agent.output.command_execution_output.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionCreated::class,
-        name = "agent.session.created",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnCreated::class,
-        name = "agent.session.turn.created",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnInProgress::class,
-        name = "agent.session.turn.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnCompleted::class,
-        name = "agent.session.turn.completed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnFailed::class,
-        name = "agent.session.turn.failed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnCancelled::class,
-        name = "agent.session.turn.cancelled",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnItemAdded::class,
-        name = "agent.session.turn.item.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionIdle::class,
-        name = "agent.session.idle",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionInProgress::class,
-        name = "agent.session.in_progress",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionRequiresAction::class,
-        name = "agent.session.requires_action",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionFailed::class,
-        name = "agent.session.failed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentPending::class,
-        name = "agent.session.environment.pending",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentConnected::class,
-        name = "agent.session.environment.connected",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentDisconnected::class,
-        name = "agent.session.environment.disconnected",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionEnvironmentFailed::class,
-        name = "agent.session.environment.failed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionSubagentCreated::class,
-        name = "agent.session.subagent.created",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionSubagentActive::class,
-        name = "agent.session.subagent.active",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionSubagentClosed::class,
-        name = "agent.session.subagent.closed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnItemDone::class,
-        name = "agent.session.turn.item.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnContentPartAdded::class,
-        name = "agent.session.turn.content_part.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnContentPartDone::class,
-        name = "agent.session.turn.content_part.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnOutputTextDelta::class,
-        name = "agent.session.turn.output_text.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnOutputTextDone::class,
-        name = "agent.session.turn.output_text.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnReasoningSummaryPartAdded::class,
-        name = "agent.session.turn.reasoning_summary_part.added",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnReasoningSummaryPartDone::class,
-        name = "agent.session.turn.reasoning_summary_part.done",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnReasoningSummaryTextDelta::class,
-        name = "agent.session.turn.reasoning_summary_text.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = SessionEventAgentSessionTurnReasoningSummaryTextDone::class,
-        name = "agent.session.turn.reasoning_summary_text.done",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventError::class, name = "error"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentReady::class, name = "agent.session.environment.ready"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentSuspended::class, name = "agent.session.environment.suspended"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentExpired::class, name = "agent.session.environment.expired"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentReset::class, name = "agent.session.environment.reset"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentOutputCommandExecutionOutputDelta::class, name = "agent.output.command_execution_output.delta"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionCreated::class, name = "agent.session.created"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnCreated::class, name = "agent.session.turn.created"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnInProgress::class, name = "agent.session.turn.in_progress"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnCompleted::class, name = "agent.session.turn.completed"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnFailed::class, name = "agent.session.turn.failed"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnCancelled::class, name = "agent.session.turn.cancelled"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnItemAdded::class, name = "agent.session.turn.item.added"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionIdle::class, name = "agent.session.idle"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionInProgress::class, name = "agent.session.in_progress"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionRequiresAction::class, name = "agent.session.requires_action"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionFailed::class, name = "agent.session.failed"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentPending::class, name = "agent.session.environment.pending"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentConnected::class, name = "agent.session.environment.connected"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentDisconnected::class, name = "agent.session.environment.disconnected"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionEnvironmentFailed::class, name = "agent.session.environment.failed"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionSubagentCreated::class, name = "agent.session.subagent.created"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionSubagentActive::class, name = "agent.session.subagent.active"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionSubagentClosed::class, name = "agent.session.subagent.closed"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnItemDone::class, name = "agent.session.turn.item.done"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnContentPartAdded::class, name = "agent.session.turn.content_part.added"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnContentPartDone::class, name = "agent.session.turn.content_part.done"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnOutputTextDelta::class, name = "agent.session.turn.output_text.delta"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnOutputTextDone::class, name = "agent.session.turn.output_text.done"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnReasoningSummaryPartAdded::class, name = "agent.session.turn.reasoning_summary_part.added"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnReasoningSummaryPartDone::class, name = "agent.session.turn.reasoning_summary_part.done"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnReasoningSummaryTextDelta::class, name = "agent.session.turn.reasoning_summary_text.delta"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = SessionEventAgentSessionTurnReasoningSummaryTextDone::class, name = "agent.session.turn.reasoning_summary_text.done")
 )
 sealed interface SessionEvent
 
 /** A [SessionEvent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownSessionEvent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownSessionEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : SessionEvent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Emitted when command execution produces an output delta. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when command execution produces an output delta.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentOutputCommandExecutionOutputDelta(
-    /** The type of the object. Always `agent.output.command_execution_output.delta`. */
+    /**
+     * The type of the object. Always `agent.output.command_execution_output.delta`.
+     */
     val type: SessionEventAgentOutputCommandExecutionOutputDeltaTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The ID of the command execution item. */
+    /**
+     * The ID of the command execution item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the item in the turn output. */
+    /**
+     * The index of the item in the turn output.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The output text that was appended. */
-    val delta: String,
-) : SessionEvent
-
-/** Emitted when a session is created. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionCreated(
-    /** The type of the object. Always `agent.session.created`. */
-    val type: SessionEventAgentSessionCreatedTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The session that was created. */
-    val session: SessionResource,
-) : SessionEvent
-
-/** Emitted when a session environment connects. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionEnvironmentConnected(
-    /** The type of the object. Always `agent.session.environment.connected`. */
-    val type: SessionEventAgentSessionEnvironmentConnectedTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
-) : SessionEvent
-
-/** Emitted when a session environment disconnects. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionEnvironmentDisconnected(
-    /** The type of the object. Always `agent.session.environment.disconnected`. */
-    val type: SessionEventAgentSessionEnvironmentDisconnectedTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
-) : SessionEvent
-
-/** Emitted after a suspended hosted session environment and its checkpoint expire. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionEnvironmentExpired(
-    /** The type of the object. Always `agent.session.environment.expired`. */
-    val type: SessionEventAgentSessionEnvironmentExpiredTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
-) : SessionEvent
-
-/** Emitted when a session environment fails. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionEnvironmentFailed(
-    /** The type of the object. Always `agent.session.environment.failed`. */
-    val type: SessionEventAgentSessionEnvironmentFailedTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
-) : SessionEvent
-
-/** Emitted while a session environment is being prepared. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionEnvironmentPending(
-    /** The type of the object. Always `agent.session.environment.pending`. */
-    val type: SessionEventAgentSessionEnvironmentPendingTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
-) : SessionEvent
-
-/** Emitted when a hosted session environment is ready to connect. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class SessionEventAgentSessionEnvironmentReady(
-    /** The type of the object. Always `agent.session.environment.ready`. */
-    val type: SessionEventAgentSessionEnvironmentReadyTypeEnum,
-    /** The unique ID of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
+    /**
+     * The output text that was appended.
+     */
+    val delta: String
 ) : SessionEvent
 
 /**
- * Emitted after a hosted sandbox is replaced. Conversation history survives; changes to the
- * previous sandbox's files and processes do not.
+ * Emitted when a session is created.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionCreated(
+    /**
+     * The type of the object. Always `agent.session.created`.
+     */
+    val type: SessionEventAgentSessionCreatedTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The session that was created.
+     */
+    val session: SessionResource
+) : SessionEvent
+
+/**
+ * Emitted when a session environment connects.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionEnvironmentConnected(
+    /**
+     * The type of the object. Always `agent.session.environment.connected`.
+     */
+    val type: SessionEventAgentSessionEnvironmentConnectedTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The ID of the session associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
+) : SessionEvent
+
+/**
+ * Emitted when a session environment disconnects.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionEnvironmentDisconnected(
+    /**
+     * The type of the object. Always `agent.session.environment.disconnected`.
+     */
+    val type: SessionEventAgentSessionEnvironmentDisconnectedTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The ID of the session associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
+) : SessionEvent
+
+/**
+ * Emitted after a suspended hosted session environment and its checkpoint expire.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionEnvironmentExpired(
+    /**
+     * The type of the object. Always `agent.session.environment.expired`.
+     */
+    val type: SessionEventAgentSessionEnvironmentExpiredTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The ID of the session associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
+) : SessionEvent
+
+/**
+ * Emitted when a session environment fails.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionEnvironmentFailed(
+    /**
+     * The type of the object. Always `agent.session.environment.failed`.
+     */
+    val type: SessionEventAgentSessionEnvironmentFailedTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The ID of the session associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
+) : SessionEvent
+
+/**
+ * Emitted while a session environment is being prepared.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionEnvironmentPending(
+    /**
+     * The type of the object. Always `agent.session.environment.pending`.
+     */
+    val type: SessionEventAgentSessionEnvironmentPendingTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The ID of the session associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
+) : SessionEvent
+
+/**
+ * Emitted when a hosted session environment is ready to connect.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class SessionEventAgentSessionEnvironmentReady(
+    /**
+     * The type of the object. Always `agent.session.environment.ready`.
+     */
+    val type: SessionEventAgentSessionEnvironmentReadyTypeEnum,
+    /**
+     * The unique ID of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
+    /**
+     * The ID of the session associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
+) : SessionEvent
+
+/**
+ * Emitted after a hosted sandbox is replaced. Conversation history survives; changes to the previous sandbox's files and processes do not.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionEnvironmentReset(
-    /** The type of the object. Always `agent.session.environment.reset`. */
+    /**
+     * The type of the object. Always `agent.session.environment.reset`.
+     */
     val type: SessionEventAgentSessionEnvironmentResetTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The associated turn, when applicable. */
+    /**
+     * The associated turn, when applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The stable environment ID, retained across sandbox replacements. */
+    /**
+     * The stable environment ID, retained across sandbox replacements.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("environment_id") val environmentId: String,
-    /** Monotonically increasing reset number. Repeated notifications share this number. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reset_count") val resetCount: Long,
+    /**
+     * Monotonically increasing reset number. Repeated notifications share this number.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reset_count") val resetCount: Long
 ) : SessionEvent
 
-/** Emitted after an idle hosted session environment is checkpointed and stopped. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted after an idle hosted session environment is checkpointed and stopped.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionEnvironmentSuspended(
-    /** The type of the object. Always `agent.session.environment.suspended`. */
+    /**
+     * The type of the object. Always `agent.session.environment.suspended`.
+     */
     val type: SessionEventAgentSessionEnvironmentSuspendedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The current environment state. */
-    val environment: SessionEnvironmentStateResource,
+    /**
+     * The current environment state.
+     */
+    val environment: SessionEnvironmentStateResource
 ) : SessionEvent
 
-/** Emitted when a session fails. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a session fails.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionFailed(
-    /** The type of the object. Always `agent.session.failed`. */
+    /**
+     * The type of the object. Always `agent.session.failed`.
+     */
     val type: SessionEventAgentSessionFailedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The failed session. */
-    val session: SessionResource,
+    /**
+     * The failed session.
+     */
+    val session: SessionResource
 ) : SessionEvent
 
-/** Emitted when a session becomes idle. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a session becomes idle.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionIdle(
-    /** The type of the object. Always `agent.session.idle`. */
+    /**
+     * The type of the object. Always `agent.session.idle`.
+     */
     val type: SessionEventAgentSessionIdleTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The session that became idle. */
-    val session: SessionResource,
+    /**
+     * The session that became idle.
+     */
+    val session: SessionResource
 ) : SessionEvent
 
-/** Emitted when a session starts processing a turn. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a session starts processing a turn.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionInProgress(
-    /** The type of the object. Always `agent.session.in_progress`. */
+    /**
+     * The type of the object. Always `agent.session.in_progress`.
+     */
     val type: SessionEventAgentSessionInProgressTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The session that started processing. */
-    val session: SessionResource,
+    /**
+     * The session that started processing.
+     */
+    val session: SessionResource
 ) : SessionEvent
 
-/** Emitted when a session is waiting for one or more required actions. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a session is waiting for one or more required actions.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionRequiresAction(
-    /** The type of the object. Always `agent.session.requires_action`. */
+    /**
+     * The type of the object. Always `agent.session.requires_action`.
+     */
     val type: SessionEventAgentSessionRequiresActionTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The session and its current required actions. */
-    val session: SessionResource,
+    /**
+     * The session and its current required actions.
+     */
+    val session: SessionResource
 ) : SessionEvent
 
-/** Emitted when a closed subagent successfully resumes. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a closed subagent successfully resumes.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionSubagentActive(
-    /** The type of the object. Always `agent.session.subagent.active`. */
+    /**
+     * The type of the object. Always `agent.session.subagent.active`.
+     */
     val type: SessionEventAgentSessionSubagentActiveTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The subagent that resumed. */
-    val subagent: SubagentResource,
+    /**
+     * The subagent that resumed.
+     */
+    val subagent: SubagentResource
 ) : SessionEvent
 
-/** Emitted when a subagent is closed. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a subagent is closed.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionSubagentClosed(
-    /** The type of the object. Always `agent.session.subagent.closed`. */
+    /**
+     * The type of the object. Always `agent.session.subagent.closed`.
+     */
     val type: SessionEventAgentSessionSubagentClosedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The subagent that was closed. */
-    val subagent: SubagentResource,
+    /**
+     * The subagent that was closed.
+     */
+    val subagent: SubagentResource
 ) : SessionEvent
 
-/** Emitted when a subagent is created. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a subagent is created.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionSubagentCreated(
-    /** The type of the object. Always `agent.session.subagent.created`. */
+    /**
+     * The type of the object. Always `agent.session.subagent.created`.
+     */
     val type: SessionEventAgentSessionSubagentCreatedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The subagent that was created. */
-    val subagent: SubagentResource,
+    /**
+     * The subagent that was created.
+     */
+    val subagent: SubagentResource
 ) : SessionEvent
 
-/** Emitted when a turn is cancelled. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a turn is cancelled.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionTurnCancelled(
-    /** The type of the object. Always `agent.session.turn.cancelled`. */
+    /**
+     * The type of the object. Always `agent.session.turn.cancelled`.
+     */
     val type: SessionEventAgentSessionTurnCancelledTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event. */
+    /**
+     * The ID of the turn associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /** The cancelled turn. */
+    /**
+     * The cancelled turn.
+     */
     val turn: TurnResource,
-    /** Token usage by the root agent during the turn, when available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("usage", required = true)
-    val usage: TokenUsageResource?,
+    /**
+     * Token usage by the root agent during the turn, when available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("usage", required = true) val usage: TokenUsageResource?
 ) : SessionEvent
 
-/** Emitted when a turn completes. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a turn completes.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionTurnCompleted(
-    /** The type of the object. Always `agent.session.turn.completed`. */
+    /**
+     * The type of the object. Always `agent.session.turn.completed`.
+     */
     val type: SessionEventAgentSessionTurnCompletedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event. */
+    /**
+     * The ID of the turn associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /** The completed turn. */
+    /**
+     * The completed turn.
+     */
     val turn: TurnResource,
-    /** Token usage by the root agent during the turn, when available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("usage", required = true)
-    val usage: TokenUsageResource?,
+    /**
+     * Token usage by the root agent during the turn, when available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("usage", required = true) val usage: TokenUsageResource?
 ) : SessionEvent
 
-/** Emitted when an output text content part is added. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when an output text content part is added.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionTurnContentPartAdded(
-    /** The type of the object. Always `agent.session.turn.content_part.added`. */
+    /**
+     * The type of the object. Always `agent.session.turn.content_part.added`.
+     */
     val type: SessionEventAgentSessionTurnContentPartAddedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The ID of the message item. */
+    /**
+     * The ID of the message item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the item in the turn output. */
+    /**
+     * The index of the item in the turn output.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the content part in the message. */
+    /**
+     * The index of the content part in the message.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /** The initial content part. */
-    val part: OutputTextResource,
+    /**
+     * The initial content part.
+     */
+    val part: OutputTextResource
 ) : SessionEvent
 
-/** Emitted when an output content part is complete. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when an output content part is complete.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionTurnContentPartDone(
-    /** The type of the object. Always `agent.session.turn.content_part.done`. */
+    /**
+     * The type of the object. Always `agent.session.turn.content_part.done`.
+     */
     val type: SessionEventAgentSessionTurnContentPartDoneTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event, when applicable. */
+    /**
+     * The ID of the turn associated with the event, when applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id", required = true) val turnId: String?,
-    /** The ID of the message item. */
+    /**
+     * The ID of the message item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the item in the turn output. */
+    /**
+     * The index of the item in the turn output.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("output_index") val outputIndex: Long,
-    /** The index of the content part in the message. */
+    /**
+     * The index of the content part in the message.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
-    /** The completed content part. */
-    val part: OutputTextResource,
+    /**
+     * The completed content part.
+     */
+    val part: OutputTextResource
 ) : SessionEvent
 
-/** Emitted when a turn is created. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Emitted when a turn is created.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class SessionEventAgentSessionTurnCreated(
-    /** The type of the object. Always `agent.session.turn.created`. */
+    /**
+     * The type of the object. Always `agent.session.turn.created`.
+     */
     val type: SessionEventAgentSessionTurnCreatedTypeEnum,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The ID of the session associated with the event. */
+    /**
+     * The ID of the session associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("session_id") val sessionId: String,
-    /** The ID of the turn associated with the event. */
+    /**
+     * The ID of the turn associated with the event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("turn_id") val turnId: String,
-    /** The turn at the time it was created. */
-    val turn: TurnResource,
+    /**
+     * The turn at the time it was created.
+     */
+    val turn: TurnResource
 ) : SessionEvent

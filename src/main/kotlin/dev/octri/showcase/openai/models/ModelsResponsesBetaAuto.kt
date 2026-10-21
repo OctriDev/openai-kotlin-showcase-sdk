@@ -3,73 +3,51 @@
 
 package dev.octri.showcase.openai.models
 
-/** Network access policy for the container. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy::class,
-)
+/**
+ * Network access policy for the container.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaContainerNetworkPolicyDisabledParam::class,
-        name = "disabled",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaContainerNetworkPolicyAllowlistParam::class,
-        name = "allowlist",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerNetworkPolicyDisabledParam::class, name = "disabled"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaContainerNetworkPolicyAllowlistParam::class, name = "allowlist")
 )
 sealed interface BetaAutoCodeInterpreterToolParamNetworkPolicy
 
-/**
- * A [BetaAutoCodeInterpreterToolParamNetworkPolicy] whose `type` names no branch this SDK knows,
- * kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [BetaAutoCodeInterpreterToolParamNetworkPolicy] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownBetaAutoCodeInterpreterToolParamNetworkPolicy @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : BetaAutoCodeInterpreterToolParamNetworkPolicy {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Typed representation of the `BetaContainerNetworkPolicyAllowlistParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `BetaContainerNetworkPolicyAllowlistParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaContainerNetworkPolicyAllowlistParam(
-    /** Allow outbound network access only to specified domains. Always `allowlist`. */
+    /**
+     * Allow outbound network access only to specified domains. Always `allowlist`.
+     */
     val type: BetaContainerNetworkPolicyAllowlistParamTypeEnum,
-    /** A list of allowed domains when type is `allowlist`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
-    val allowedDomains: List<String>,
-    /** Optional domain-scoped secrets for allowlisted domains. */
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_secrets")
-    val domainSecrets: List<BetaContainerNetworkPolicyDomainSecretParam>? = null,
+    /**
+     * A list of allowed domains when type is `allowlist`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>,
+    /**
+     * Optional domain-scoped secrets for allowlisted domains.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_secrets") val domainSecrets: List<BetaContainerNetworkPolicyDomainSecretParam>? = null
 ) : BetaAutoCodeInterpreterToolParamNetworkPolicy, BetaContainerAutoParamNetworkPolicy
 
-/** Typed representation of the `BetaContainerNetworkPolicyDisabledParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `BetaContainerNetworkPolicyDisabledParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaContainerNetworkPolicyDisabledParam(
-    /** Disable outbound network access. Always `disabled`. */
+    /**
+     * Disable outbound network access. Always `disabled`.
+     */
     val type: BetaContainerNetworkPolicyDisabledParamTypeEnum
 ) : BetaAutoCodeInterpreterToolParamNetworkPolicy, BetaContainerAutoParamNetworkPolicy

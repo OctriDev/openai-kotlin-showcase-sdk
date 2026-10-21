@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ProjectUserDeleteResponse` API schema. */
+/**
+ * Typed representation of the `ProjectUserDeleteResponse` API schema.
+ */
 data class ProjectUserDeleteResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectUserDeleteResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectUserDeleteResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `boolean` value serialized in the `deleted` wire field. */
-    val deleted: Boolean,
+    /**
+     * Required `boolean` value serialized in the `deleted` wire field.
+     */
+    val deleted: Boolean
 )

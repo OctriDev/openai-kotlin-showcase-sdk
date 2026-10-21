@@ -14,186 +14,86 @@ import dev.octri.showcase.openai.UploadPart
 
 object Uploads {
 
-    /**
-     * Creates an upload that accepts file parts before they are assembled into a usable file.
-     * Provide the filename, purpose, byte count, and MIME type; uploads can contain up to 8 GB and
-     * expire after one hour. Add parts to the upload, then complete it to create the file.
-     *
-     * Creates an intermediate Upload object that you can add Parts to. Currently, an Upload can
-     * accept at most 8 GB in total and expires after an hour after you create it. Once you complete
-     * the Upload, we will create a File object that contains all the parts you uploaded. This File
-     * is usable in the rest of our platform as a regular File object. For certain `purpose` values,
-     * the correct `mime_type` must be specified. Please refer to documentation for the supported
-     * MIME types for…
-     *
-     * @param filename The name of the file to upload.
-     * @param purpose The intended purpose of the uploaded file. See the documentation on File
-     *   purposes.
-     * @param bytes The number of bytes in the file you are uploading.
-     * @param mimeType The MIME type of the file. This must fall within the supported MIME types for
-     *   your file purpose. See the supported MIME types for assistants and vision.
-     * @param expiresAfter The expiration policy for a file. By default, files with `purpose=batch`
-     *   expire after 30 days and all other files are persisted until they are manually deleted.
-     */
-    fun createUpload(
-        clientConfig: ClientConfig,
-        filename: String,
-        purpose: CreateUploadRequestPurposeEnum,
-        bytes: Long,
-        mimeType: String,
-        expiresAfter: FileExpirationAfter? = null,
-        options: RequestOptions? = null,
-    ): Upload {
-        return SdkClient.request<Upload>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/uploads",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "filename" to (filename),
-                            "purpose" to (purpose),
-                            "bytes" to (bytes),
-                            "mime_type" to (mimeType),
-                            "expires_after" to (SdkClient.omitIfNull(expiresAfter)),
-                        ),
-                    operationId = "createUpload",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
-    }
 
     /**
-     * Cancels a pending upload so that no more parts can be added. Use this operation when you no
-     * longer intend to complete the upload; the returned upload object has status `cancelled`.
+     * Creates an upload that accepts file parts before they are assembled into a usable file. Provide the filename, purpose, byte count, and MIME type; uploads can contain up to 8 GB and expire after one hour. Add parts to the upload, then complete it to create the file.
      *
-     * Cancels the Upload. No Parts may be added after an Upload is cancelled. Returns the Upload
-     * object with status `cancelled`.
+     * Creates an intermediate Upload object that you can add Parts to. Currently, an Upload can accept at most 8 GB in total and expires after an hour after you create it. Once you complete the Upload, we will create a File object that contains all the parts you uploaded. This File is usable in the rest of our platform as a regular File object. For certain `purpose` values, the correct `mime_type` must be specified. Please refer to documentation for the supported MIME types for…
+     *
+     * @param filename The name of the file to upload.
+     * @param purpose The intended purpose of the uploaded file. See the
+     *   documentation on File purposes.
+     * @param bytes The number of bytes in the file you are uploading.
+     * @param mimeType The MIME type of the file. This must fall within the supported
+     *   MIME types for your file purpose. See the supported MIME types for assistants
+     *   and vision.
+     * @param expiresAfter The expiration policy for a file. By default, files with
+     *   `purpose=batch` expire after 30 days and all other files are persisted until
+     *   they are manually deleted.
+     */
+    fun createUpload(clientConfig: ClientConfig, filename: String, purpose: CreateUploadRequestPurposeEnum, bytes: Long, mimeType: String, expiresAfter: FileExpirationAfter? = null, options: RequestOptions? = null): Upload {
+        return SdkClient.request<Upload>(SdkClient.RequestSpec("POST", "/uploads", config = clientConfig, body = SdkClient.bodyMap("filename" to (filename), "purpose" to (purpose), "bytes" to (bytes), "mime_type" to (mimeType), "expires_after" to (SdkClient.omitIfNull(expiresAfter))), operationId = "createUpload", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Cancels a pending upload so that no more parts can be added. Use this operation when you no longer intend to complete the upload; the returned upload object has status `cancelled`.
+     *
+     * Cancels the Upload. No Parts may be added after an Upload is cancelled. Returns the Upload object with status `cancelled`.
      *
      * @param uploadId The ID of the Upload.
      */
-    fun cancelUpload(
-        clientConfig: ClientConfig,
-        uploadId: String,
-        options: RequestOptions? = null,
-    ): Upload {
-        return SdkClient.request<Upload>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/uploads/${SdkClient.encodePathSegment(uploadId)}/cancel",
-                    config = clientConfig,
-                    operationId = "cancelUpload",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "410" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun cancelUpload(clientConfig: ClientConfig, uploadId: String, options: RequestOptions? = null): Upload {
+        return SdkClient.request<Upload>(SdkClient.RequestSpec("POST", "/uploads/${SdkClient.encodePathSegment(uploadId)}/cancel", config = clientConfig, operationId = "cancelUpload", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "410" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Completes an upload by assembling its parts into a file that can be used on the platform.
-     * Supply the ordered part IDs and optionally an MD5 checksum; the total uploaded bytes must
-     * match the byte count specified when creating the upload. No more parts can be added after
-     * completion.
+     * Completes an upload by assembling its parts into a file that can be used on the platform. Supply the ordered part IDs and optionally an MD5 checksum; the total uploaded bytes must match the byte count specified when creating the upload. No more parts can be added after completion.
      *
-     * Completes the Upload. Within the returned Upload object, there is a nested File object that
-     * is ready to use in the rest of the platform. You can specify the order of the Parts by
-     * passing in an ordered list of the Part IDs. The number of bytes uploaded upon completion must
-     * match the number of bytes initially specified when creating the Upload object. No Parts may
-     * be added after an Upload is completed. Returns the Upload object with status `completed`,
-     * including an additional…
+     * Completes the Upload. Within the returned Upload object, there is a nested File object that is ready to use in the rest of the platform. You can specify the order of the Parts by passing in an ordered list of the Part IDs. The number of bytes uploaded upon completion must match the number of bytes initially specified when creating the Upload object. No Parts may be added after an Upload is completed. Returns the Upload object with status `completed`, including an additional…
      *
      * @param uploadId The ID of the Upload.
      * @param partIds The ordered list of Part IDs.
-     * @param md5 The optional md5 checksum for the file contents to verify if the bytes uploaded
-     *   matches what you expect.
+     * @param md5 The optional md5 checksum for the file contents to verify if the
+     *   bytes uploaded matches what you expect.
      */
-    fun completeUpload(
-        clientConfig: ClientConfig,
-        uploadId: String,
-        partIds: List<String>,
-        md5: String? = null,
-        options: RequestOptions? = null,
-    ): Upload {
-        return SdkClient.request<Upload>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/uploads/${SdkClient.encodePathSegment(uploadId)}/complete",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "part_ids" to (partIds),
-                            "md5" to (SdkClient.omitIfNull(md5)),
-                        ),
-                    operationId = "completeUpload",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "410" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun completeUpload(clientConfig: ClientConfig, uploadId: String, partIds: List<String>, md5: String? = null, options: RequestOptions? = null): Upload {
+        return SdkClient.request<Upload>(SdkClient.RequestSpec("POST", "/uploads/${SdkClient.encodePathSegment(uploadId)}/complete", config = clientConfig, body = SdkClient.bodyMap("part_ids" to (partIds), "md5" to (SdkClient.omitIfNull(md5))), operationId = "completeUpload", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "410" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Adds a chunk of file bytes as a part of an existing upload. Send the chunk in the `data`
-     * field; each part can be at most 64 MB, and the upload can contain up to 8 GB in total. You
-     * can add parts in parallel and specify their order when you complete the upload.
+     * Adds a chunk of file bytes as a part of an existing upload. Send the chunk in the `data` field; each part can be at most 64 MB, and the upload can contain up to 8 GB in total. You can add parts in parallel and specify their order when you complete the upload.
      *
-     * Adds a Part to an Upload object. A Part represents a chunk of bytes from the file you are
-     * trying to upload. Each Part can be at most 64 MB, and you can add Parts until you hit the
-     * Upload maximum of 8 GB. It is possible to add multiple Parts in parallel. You can decide the
-     * intended order of the Parts when you complete the Upload.
+     * Adds a Part to an Upload object. A Part represents a chunk of bytes from the file you are trying to upload. Each Part can be at most 64 MB, and you can add Parts until you hit the Upload maximum of 8 GB. It is possible to add multiple Parts in parallel. You can decide the intended order of the Parts when you complete the Upload.
      *
      * @param uploadId The ID of the Upload.
      * @param data The chunk of bytes for this Part.
      */
-    fun addUploadPart(
-        clientConfig: ClientConfig,
-        uploadId: String,
-        data: SdkClient.UploadFile,
-        options: RequestOptions? = null,
-    ): UploadPart {
-        return SdkClient.request<UploadPart>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/uploads/${SdkClient.encodePathSegment(uploadId)}/parts",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("data" to (data)),
-                    contentType = "multipart/form-data",
-                    operationId = "addUploadPart",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "410" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun addUploadPart(clientConfig: ClientConfig, uploadId: String, data: SdkClient.UploadFile, options: RequestOptions? = null): UploadPart {
+        return SdkClient.request<UploadPart>(SdkClient.RequestSpec("POST", "/uploads/${SdkClient.encodePathSegment(uploadId)}/parts", config = clientConfig, body = SdkClient.bodyMap("data" to (data)), contentType = "multipart/form-data", operationId = "addUploadPart", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "410" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

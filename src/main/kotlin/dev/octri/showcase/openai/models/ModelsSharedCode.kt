@@ -4,116 +4,91 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Configuration for a code interpreter container. Optionally specify the IDs of the files to run
- * the code on.
+ * Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AutoCodeInterpreterToolParam(
-    /** Always `auto`. */
+    /**
+     * Always `auto`.
+     */
     val type: AutoCodeInterpreterToolParamTypeEnum,
-    /** An optional list of uploaded files to make available to your code. */
+    /**
+     * An optional list of uploaded files to make available to your code.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
-    /** Optional API value serialized in the `memory_limit` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit")
-    val memoryLimit: ContainerMemoryLimit? = null,
-    /** Network access policy for the container. */
-    @com.fasterxml.jackson.annotation.JsonProperty("network_policy")
-    val networkPolicy: AutoCodeInterpreterToolParamNetworkPolicy? = null,
+    /**
+     * Optional API value serialized in the `memory_limit` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("memory_limit") val memoryLimit: ContainerMemoryLimit? = null,
+    /**
+     * Network access policy for the container.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("network_policy") val networkPolicy: AutoCodeInterpreterToolParamNetworkPolicy? = null
 ) : CodeInterpreterToolContainer
 
-/** The image output from the code interpreter. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The image output from the code interpreter.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CodeInterpreterOutputImage(
-    /** The type of the output. Always `image`. */
+    /**
+     * The type of the output. Always `image`.
+     */
     val type: CodeInterpreterOutputImageTypeEnum,
-    /** The URL of the image output from the code interpreter. */
-    val url: String,
+    /**
+     * The URL of the image output from the code interpreter.
+     */
+    val url: String
 ) : CodeInterpreterToolCallOutputsItem
 
-/** The logs output from the code interpreter. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The logs output from the code interpreter.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CodeInterpreterOutputLogs(
-    /** The type of the output. Always `logs`. */
+    /**
+     * The type of the output. Always `logs`.
+     */
     val type: CodeInterpreterOutputLogsTypeEnum,
-    /** The logs output from the code interpreter. */
-    val logs: String,
+    /**
+     * The logs output from the code interpreter.
+     */
+    val logs: String
 ) : CodeInterpreterToolCallOutputsItem
 
-/** Required API value serialized in the `outputs[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownCodeInterpreterToolCallOutputsItem::class,
-)
+/**
+ * Required API value serialized in the `outputs[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCodeInterpreterToolCallOutputsItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CodeInterpreterOutputLogs::class,
-        name = "logs",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CodeInterpreterOutputImage::class,
-        name = "image",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CodeInterpreterOutputLogs::class, name = "logs"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CodeInterpreterOutputImage::class, name = "image")
 )
 sealed interface CodeInterpreterToolCallOutputsItem
 
-/**
- * A [CodeInterpreterToolCallOutputsItem] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownCodeInterpreterToolCallOutputsItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [CodeInterpreterToolCallOutputsItem] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownCodeInterpreterToolCallOutputsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : CodeInterpreterToolCallOutputsItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * The code interpreter container. Can be a container ID or an object that specifies uploaded file
- * IDs to make available to your code, along with an optional `memory_limit` setting.
+ * The code interpreter container. Can be a container ID or an object that specifies uploaded file IDs to make available to your code, along with an optional `memory_limit` setting.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = CodeInterpreterToolContainer.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CodeInterpreterToolContainer.Deserializer::class)
 sealed interface CodeInterpreterToolContainer {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<CodeInterpreterToolContainer>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CodeInterpreterToolContainer>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): CodeInterpreterToolContainer {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out CodeInterpreterToolContainer>> =
-                listOf(AutoCodeInterpreterToolParam::class.java)
+            val objectTypes: List<Class<out CodeInterpreterToolContainer>> = listOf(AutoCodeInterpreterToolParam::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -122,30 +97,13 @@ sealed interface CodeInterpreterToolContainer {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringCodeInterpreterToolContainer(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        CodeInterpreterToolContainer::class.java,
-                        "no CodeInterpreterToolContainer branch accepts this payload",
-                    )
+                node.isTextual -> StringCodeInterpreterToolContainer(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CodeInterpreterToolContainer::class.java, "no CodeInterpreterToolContainer branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringCodeInterpreterToolContainer(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : CodeInterpreterToolContainer
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringCodeInterpreterToolContainer(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : CodeInterpreterToolContainer

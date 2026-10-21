@@ -3,23 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Event data payload. */
+/**
+ * Event data payload.
+ */
 data class WebhookBatchCompletedData(
-    /** The unique ID of the batch API request. */
+    /**
+     * The unique ID of the batch API request.
+     */
     val id: String
 )
 
-/** Sent when a batch API request has been completed. */
+/**
+ * Sent when a batch API request has been completed.
+ */
 data class WebhookBatchCompleted(
-    /** The Unix timestamp (in seconds) of when the batch API request was completed. */
+    /**
+     * The Unix timestamp (in seconds) of when the batch API request was completed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The unique ID of the event. */
+    /**
+     * The unique ID of the event.
+     */
     val id: String,
-    /** Event data payload. */
+    /**
+     * Event data payload.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: WebhookBatchCompletedData,
-    /** The type of the event. Always `batch.completed`. */
+    /**
+     * The type of the event. Always `batch.completed`.
+     */
     val type: WebhookBatchCompletedTypeEnum,
-    /** The object of the event. Always `event`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookBatchCompletedObjectEnum? = null,
+    /**
+     * The object of the event. Always `event`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookBatchCompletedObjectEnum? = null
 )

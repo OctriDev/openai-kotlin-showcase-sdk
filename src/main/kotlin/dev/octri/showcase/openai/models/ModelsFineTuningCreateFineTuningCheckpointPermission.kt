@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `CreateFineTuningCheckpointPermissionRequest` API schema. */
+/**
+ * Typed representation of the `CreateFineTuningCheckpointPermissionRequest` API schema.
+ */
 data class CreateFineTuningCheckpointPermissionRequest(
-    /** The project identifiers to grant access to. */
+    /**
+     * The project identifiers to grant access to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_ids") val projectIds: List<String>
 )

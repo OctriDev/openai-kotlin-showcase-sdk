@@ -3,468 +3,529 @@
 
 package dev.octri.showcase.openai.models
 
-/** The monetary value in its associated currency. */
+/**
+ * The monetary value in its associated currency.
+ */
 data class CostsResultAmount(
-    /** The numeric value of the cost. */
+    /**
+     * The numeric value of the cost.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Double? = null,
-    /** Lowercase ISO-4217 currency e.g. "usd" */
-    val currency: String? = null,
+    /**
+     * Lowercase ISO-4217 currency e.g. "usd"
+     */
+    val currency: String? = null
 )
 
-/** The aggregated costs details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated costs details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CostsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CostsResultObjectEnum,
     /**
-     * When grouped by `api_source`, `agents_api` identifies attributed Agents API activity and
-     * `unlabeled` includes all records without published source attribution, including historical
-     * and unknown origins. Unlabeled does not imply direct API usage. Without source grouping, this
-     * field is null.
+     * When grouped by `api_source`, `agents_api` identifies attributed Agents API activity and `unlabeled` includes all records without published source attribution, including historical and unknown origins. Unlabeled does not imply direct API usage. Without source grouping, this field is null.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_source")
-    val apiSource: CostsResultApiSourceVariant0Enum? = null,
-    /** The monetary value in its associated currency. */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_source") val apiSource: CostsResultApiSourceVariant0Enum? = null,
+    /**
+     * The monetary value in its associated currency.
+     */
     val amount: CostsResultAmount? = null,
-    /** Optional `string` value serialized in the `line_item` wire field. */
+    /**
+     * Optional `string` value serialized in the `line_item` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("line_item") val lineItem: String? = null,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `number` value serialized in the `quantity` wire field. */
+    /**
+     * Optional `number` value serialized in the `quantity` wire field.
+     */
     val quantity: Double? = null,
     /**
-     * The unit of the `quantity` value. If no single supported unit applies to the result, this
-     * field is `null`.
+     * The unit of the `quantity` value. If no single supported unit applies to the result, this field is `null`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("quantity_unit")
-    val quantityUnit: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("quantity_unit") val quantityUnit: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** The aggregated audio speeches usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated audio speeches usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageAudioSpeechesResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageAudioSpeechesResultObjectEnum,
-    /** The number of characters processed. */
-    val characters: Long,
-    /** The count of requests made to the model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
-    val model: String? = null,
-) : UsageTimeBucketResultsItem
-
-/** The aggregated audio transcriptions usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UsageAudioTranscriptionsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageAudioTranscriptionsResultObjectEnum,
-    /** The number of seconds processed. */
-    val seconds: Long,
-    /** The count of requests made to the model. */
-    @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
-    val model: String? = null,
-) : UsageTimeBucketResultsItem
-
-/** The aggregated code interpreter sessions usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UsageCodeInterpreterSessionsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageCodeInterpreterSessionsResultObjectEnum,
-    /** The number of code interpreter sessions. */
-    @com.fasterxml.jackson.annotation.JsonProperty("num_sessions") val numSessions: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-) : UsageTimeBucketResultsItem
-
-/** The aggregated completions usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UsageCompletionsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageCompletionsResultObjectEnum,
     /**
-     * The aggregated number of input tokens used, including cached and cache-write tokens. This
-     * includes text, audio, and image tokens. For customers subscribed to Scale Tier, this includes
-     * Scale Tier tokens.
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageAudioSpeechesResultObjectEnum,
+    /**
+     * The number of characters processed.
+     */
+    val characters: Long,
+    /**
+     * The count of requests made to the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
+    val model: String? = null
+) : UsageTimeBucketResultsItem
+
+/**
+ * The aggregated audio transcriptions usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UsageAudioTranscriptionsResult(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageAudioTranscriptionsResultObjectEnum,
+    /**
+     * The number of seconds processed.
+     */
+    val seconds: Long,
+    /**
+     * The count of requests made to the model.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
+    val model: String? = null
+) : UsageTimeBucketResultsItem
+
+/**
+ * The aggregated code interpreter sessions usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UsageCodeInterpreterSessionsResult(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageCodeInterpreterSessionsResultObjectEnum,
+    /**
+     * The number of code interpreter sessions.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("num_sessions") val numSessions: Long,
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
+) : UsageTimeBucketResultsItem
+
+/**
+ * The aggregated completions usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UsageCompletionsResult(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageCompletionsResultObjectEnum,
+    /**
+     * The aggregated number of input tokens used, including cached and cache-write tokens. This includes text, audio, and image tokens. For customers subscribed to Scale Tier, this includes Scale Tier tokens.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
     /**
-     * The aggregated number of output tokens used across text, audio, and image outputs. For
-     * customers subscribed to Scale Tier, this includes Scale Tier tokens.
+     * The aggregated number of output tokens used across text, audio, and image outputs. For customers subscribed to Scale Tier, this includes Scale Tier tokens.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("output_tokens") val outputTokens: Long,
-    /** The count of requests made to the model. */
+    /**
+     * The count of requests made to the model.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
     /**
-     * When grouped by `api_source`, `agents_api` identifies attributed Agents API activity and
-     * `unlabeled` includes all records without published source attribution, including historical
-     * and unknown origins. Unlabeled does not imply direct API usage. Without source grouping, this
-     * field is null.
+     * When grouped by `api_source`, `agents_api` identifies attributed Agents API activity and `unlabeled` includes all records without published source attribution, including historical and unknown origins. Unlabeled does not imply direct API usage. Without source grouping, this field is null.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_source")
-    val apiSource: UsageCompletionsResultApiSourceVariant0Enum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("api_source") val apiSource: UsageCompletionsResultApiSourceVariant0Enum? = null,
     /**
-     * The aggregated number of cached input tokens used across text, audio, and image inputs. For
-     * customers subscribed to Scale Tier, this includes Scale Tier tokens.
+     * The aggregated number of cached input tokens used across text, audio, and image inputs. For customers subscribed to Scale Tier, this includes Scale Tier tokens.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_tokens")
-    val inputCachedTokens: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_tokens") val inputCachedTokens: Long? = null,
     /**
      * The aggregated number of input tokens written to the cache with a 30-minute retention period.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cache_write_tokens")
-    val inputCacheWriteTokens: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cache_write_tokens") val inputCacheWriteTokens: Long? = null,
     /**
      * The aggregated number of input tokens written to the cache with a 12-hour retention period.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cache_write_12h_tokens")
-    val inputCacheWrite12hTokens: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cache_write_12h_tokens") val inputCacheWrite12hTokens: Long? = null,
     /**
-     * The aggregated number of uncached input tokens used across text, audio, and image inputs,
-     * excluding cache-write tokens.
+     * The aggregated number of uncached input tokens used across text, audio, and image inputs, excluding cache-write tokens.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_uncached_tokens")
-    val inputUncachedTokens: Long? = null,
-    /** The aggregated number of uncached text input tokens used, excluding cache-write tokens. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_text_tokens")
-    val inputTextTokens: Long? = null,
-    /** The aggregated number of text output tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_text_tokens")
-    val outputTextTokens: Long? = null,
-    /** The aggregated number of cached text input tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_text_tokens")
-    val inputCachedTextTokens: Long? = null,
-    /** The aggregated number of uncached audio input tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_tokens")
-    val inputAudioTokens: Long? = null,
-    /** The aggregated number of cached audio input tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_audio_tokens")
-    val inputCachedAudioTokens: Long? = null,
-    /** The aggregated number of audio output tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_audio_tokens")
-    val outputAudioTokens: Long? = null,
-    /** The aggregated number of uncached image input tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_image_tokens")
-    val inputImageTokens: Long? = null,
-    /** The aggregated number of cached image input tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_image_tokens")
-    val inputCachedImageTokens: Long? = null,
-    /** The aggregated number of image output tokens used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_image_tokens")
-    val outputImageTokens: Long? = null,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_uncached_tokens") val inputUncachedTokens: Long? = null,
+    /**
+     * The aggregated number of uncached text input tokens used, excluding cache-write tokens.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_text_tokens") val inputTextTokens: Long? = null,
+    /**
+     * The aggregated number of text output tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_text_tokens") val outputTextTokens: Long? = null,
+    /**
+     * The aggregated number of cached text input tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_text_tokens") val inputCachedTextTokens: Long? = null,
+    /**
+     * The aggregated number of uncached audio input tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_audio_tokens") val inputAudioTokens: Long? = null,
+    /**
+     * The aggregated number of cached audio input tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_audio_tokens") val inputCachedAudioTokens: Long? = null,
+    /**
+     * The aggregated number of audio output tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_audio_tokens") val outputAudioTokens: Long? = null,
+    /**
+     * The aggregated number of uncached image input tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_image_tokens") val inputImageTokens: Long? = null,
+    /**
+     * The aggregated number of cached image input tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_cached_image_tokens") val inputCachedImageTokens: Long? = null,
+    /**
+     * The aggregated number of image output tokens used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_image_tokens") val outputImageTokens: Long? = null,
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
     val model: String? = null,
-    /** Optional `boolean` value serialized in the `batch` wire field. */
+    /**
+     * Optional `boolean` value serialized in the `batch` wire field.
+     */
     val batch: Boolean? = null,
-    /** Optional `string` value serialized in the `service_tier` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: String? = null,
+    /**
+     * Optional `string` value serialized in the `service_tier` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_tier") val serviceTier: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** The aggregated embeddings usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated embeddings usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageEmbeddingsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageEmbeddingsResultObjectEnum,
-    /** The aggregated number of input tokens used. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageEmbeddingsResultObjectEnum,
+    /**
+     * The aggregated number of input tokens used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /** The count of requests made to the model. */
+    /**
+     * The count of requests made to the model.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
-    val model: String? = null,
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
+    val model: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** The aggregated file search calls usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated file search calls usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageFileSearchCallsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageFileSearchCallsResultObjectEnum,
-    /** The count of file search calls. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageFileSearchCallsResultObjectEnum,
+    /**
+     * The count of file search calls.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_requests") val numRequests: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `vector_store_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_id")
-    val vectorStoreId: String? = null,
+    /**
+     * Optional `string` value serialized in the `vector_store_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_id") val vectorStoreId: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** The aggregated images usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated images usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageImagesResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageImagesResultObjectEnum,
-    /** The number of images processed. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageImagesResultObjectEnum,
+    /**
+     * The number of images processed.
+     */
     val images: Long,
-    /** The count of requests made to the model. */
+    /**
+     * The count of requests made to the model.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
-    /** Optional `string` value serialized in the `source` wire field. */
+    /**
+     * Optional `string` value serialized in the `source` wire field.
+     */
     val source: String? = null,
-    /** Optional `string` value serialized in the `size` wire field. */
+    /**
+     * Optional `string` value serialized in the `size` wire field.
+     */
     val size: String? = null,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
-    val model: String? = null,
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
+    val model: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** The aggregated moderations usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated moderations usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageModerationsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageModerationsResultObjectEnum,
-    /** The aggregated number of input tokens used. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageModerationsResultObjectEnum,
+    /**
+     * The aggregated number of input tokens used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("input_tokens") val inputTokens: Long,
-    /** The count of requests made to the model. */
+    /**
+     * The count of requests made to the model.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
-    val model: String? = null,
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
+    val model: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** Typed representation of the `UsageResponse` API schema. */
+/**
+ * Typed representation of the `UsageResponse` API schema.
+ */
 data class UsageResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<UsageTimeBucket>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Required `string` value serialized in the `next_page` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true)
-    val nextPage: String?,
+    /**
+     * Required `string` value serialized in the `next_page` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_page", required = true) val nextPage: String?
 )
 
-/** Typed representation of the `UsageTimeBucket` API schema. */
+/**
+ * Typed representation of the `UsageTimeBucket` API schema.
+ */
 data class UsageTimeBucket(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageTimeBucketObjectEnum,
-    /** Required `integer` value serialized in the `start_time` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageTimeBucketObjectEnum,
+    /**
+     * Required `integer` value serialized in the `start_time` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("start_time") val startTime: Long,
-    /** Required `integer` value serialized in the `end_time` wire field. */
+    /**
+     * Required `integer` value serialized in the `end_time` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("end_time") val endTime: Long,
-    /** Required array value serialized in the `results` wire field. */
-    val results: List<UsageTimeBucketResultsItem>,
+    /**
+     * Required array value serialized in the `results` wire field.
+     */
+    val results: List<UsageTimeBucketResultsItem>
 )
 
-/** Required API value serialized in the `results[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "object",
-    visible = true,
-    defaultImpl = UnknownUsageTimeBucketResultsItem::class,
-)
+/**
+ * Required API value serialized in the `results[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "object", visible = true, defaultImpl = UnknownUsageTimeBucketResultsItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageCompletionsResult::class,
-        name = "organization.usage.completions.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageEmbeddingsResult::class,
-        name = "organization.usage.embeddings.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageModerationsResult::class,
-        name = "organization.usage.moderations.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageImagesResult::class,
-        name = "organization.usage.images.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageAudioSpeechesResult::class,
-        name = "organization.usage.audio_speeches.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageAudioTranscriptionsResult::class,
-        name = "organization.usage.audio_transcriptions.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageVectorStoresResult::class,
-        name = "organization.usage.vector_stores.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageCodeInterpreterSessionsResult::class,
-        name = "organization.usage.code_interpreter_sessions.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageFileSearchCallsResult::class,
-        name = "organization.usage.file_searches.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = UsageWebSearchCallsResult::class,
-        name = "organization.usage.web_searches.result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CostsResult::class,
-        name = "organization.costs.result",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageCompletionsResult::class, name = "organization.usage.completions.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageEmbeddingsResult::class, name = "organization.usage.embeddings.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageModerationsResult::class, name = "organization.usage.moderations.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageImagesResult::class, name = "organization.usage.images.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageAudioSpeechesResult::class, name = "organization.usage.audio_speeches.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageAudioTranscriptionsResult::class, name = "organization.usage.audio_transcriptions.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageVectorStoresResult::class, name = "organization.usage.vector_stores.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageCodeInterpreterSessionsResult::class, name = "organization.usage.code_interpreter_sessions.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageFileSearchCallsResult::class, name = "organization.usage.file_searches.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = UsageWebSearchCallsResult::class, name = "organization.usage.web_searches.result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CostsResult::class, name = "organization.costs.result")
 )
 sealed interface UsageTimeBucketResultsItem
 
-/**
- * A [UsageTimeBucketResultsItem] whose `object` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownUsageTimeBucketResultsItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [UsageTimeBucketResultsItem] whose `object` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownUsageTimeBucketResultsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : UsageTimeBucketResultsItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("object").asText()
+    val tag: String get() = raw.path("object").asText()
 }
 
-/** The aggregated vector stores usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated vector stores usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageVectorStoresResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageVectorStoresResultObjectEnum,
-    /** The vector stores usage in bytes. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageVectorStoresResultObjectEnum,
+    /**
+     * The vector stores usage in bytes.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("usage_bytes") val usageBytes: Long,
-    /** Optional `string` value serialized in the `project_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null
 ) : UsageTimeBucketResultsItem
 
-/** The aggregated web search calls usage details of the specific time bucket. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * The aggregated web search calls usage details of the specific time bucket.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class UsageWebSearchCallsResult(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: UsageWebSearchCallsResultObjectEnum,
-    /** The count of model requests. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UsageWebSearchCallsResultObjectEnum,
+    /**
+     * The count of model requests.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_model_requests") val numModelRequests: Long,
-    /** The count of web search calls. */
+    /**
+     * The count of web search calls.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("num_requests") val numRequests: Long,
     /**
-     * When grouped by `api_source`, `agents_api` identifies attributed Agents API activity and
-     * `unlabeled` includes all records without published source attribution, including historical
-     * and unknown origins. Unlabeled does not imply direct API usage. Without source grouping, this
-     * field is null.
+     * When grouped by `api_source`, `agents_api` identifies attributed Agents API activity and `unlabeled` includes all records without published source attribution, including historical and unknown origins. Unlabeled does not imply direct API usage. Without source grouping, this field is null.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_source")
-    val apiSource: UsageWebSearchCallsResultApiSourceVariant0Enum? = null,
-    /** Optional `string` value serialized in the `project_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_source") val apiSource: UsageWebSearchCallsResultApiSourceVariant0Enum? = null,
+    /**
+     * Optional `string` value serialized in the `project_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** Optional `string` value serialized in the `user_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `user_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Optional `string` value serialized in the `api_key_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `api_key_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("api_key_id") val apiKeyId: String? = null,
-    /** Optional `string` value serialized in the `model` wire field. */
+    /**
+     * Optional `string` value serialized in the `model` wire field.
+     */
     val model: String? = null,
-    /** Optional `string` value serialized in the `context_level` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_level")
-    val contextLevel: String? = null,
+    /**
+     * Optional `string` value serialized in the `context_level` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_level") val contextLevel: String? = null
 ) : UsageTimeBucketResultsItem

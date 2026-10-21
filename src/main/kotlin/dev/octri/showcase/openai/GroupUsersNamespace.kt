@@ -3,111 +3,51 @@
 
 package dev.octri.showcase.openai
 
+
 class GroupUsersNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier
-     * in a previous response, and use `limit` and `order` to control the page size and sort order.
-     * The response indicates whether more users are available and provides the cursor for the next
-     * page.
+     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier in a previous response, and use `limit` and `order` to control the page size and sort order. The response indicates whether more users are available and provides the cursor for the next page.
      *
      * Lists the users assigned to a group.
      */
-    fun list(
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupUsersParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): UserListResource {
-        return dev.octri.showcase.openai.methods.GroupUsers.listGroupUsers(
-            clientConfig,
-            groupId,
-            limit,
-            after,
-            order,
-            options,
-        )
+    fun list(groupId: String, limit: Long? = null, after: String? = null, order: ListGroupUsersParameterEnum? = null, options: RequestOptions? = null): UserListResource {
+        return dev.octri.showcase.openai.methods.GroupUsers.listGroupUsers(clientConfig, groupId, limit, after, order, options)
     }
 
     /**
-     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier
-     * in a previous response, and use `limit` and `order` to control the page size and sort order.
-     * The response indicates whether more users are available and provides the cursor for the next
-     * page.
+     * Lists the users assigned to a group. Use `after` to continue from the last user's identifier in a previous response, and use `limit` and `order` to control the page size and sort order. The response indicates whether more users are available and provides the cursor for the next page.
      *
      * Lists the users assigned to a group.
      */
-    fun listPaginated(
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupUsersParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (GroupUser) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.GroupUsers.listGroupUsersPaginated(
-            clientConfig,
-            groupId,
-            limit,
-            after,
-            order,
-            options,
-            yieldFn,
-        )
+    fun listPaginated(groupId: String, limit: Long? = null, after: String? = null, order: ListGroupUsersParameterEnum? = null, options: RequestOptions? = null, yieldFn: (GroupUser) -> Boolean) {
+        dev.octri.showcase.openai.methods.GroupUsers.listGroupUsersPaginated(clientConfig, groupId, limit, after, order, options, yieldFn)
     }
 
     /**
-     * Adds a user to a group in the organization. Supply the user's identifier in `user_id` to
-     * specify the membership to create. The response confirms the added user and the group they
-     * were added to.
+     * Adds a user to a group in the organization. Supply the user's identifier in `user_id` to specify the membership to create. The response confirms the added user and the group they were added to.
      *
      * Adds a user to a group.
      */
     fun add(groupId: String, userId: String, options: RequestOptions? = null): GroupUserAssignment {
-        return dev.octri.showcase.openai.methods.GroupUsers.addGroupUser(
-            clientConfig,
-            groupId,
-            userId,
-            options,
-        )
+        return dev.octri.showcase.openai.methods.GroupUsers.addGroupUser(clientConfig, groupId, userId, options)
     }
 
     /**
-     * Retrieves a user's membership details for a group. Provide both `group_id` and `user_id` to
-     * identify the membership to inspect. The response includes the user's name, email, profile
-     * picture, account type, and service-account status.
+     * Retrieves a user's membership details for a group. Provide both `group_id` and `user_id` to identify the membership to inspect. The response includes the user's name, email, profile picture, account type, and service-account status.
      *
      * Retrieves a user in a group.
      */
-    fun retrieve(
-        groupId: String,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GroupMemberUser {
-        return dev.octri.showcase.openai.methods.GroupUsers.retrieveGroupUser(
-            clientConfig,
-            groupId,
-            userId,
-            options,
-        )
+    fun retrieve(groupId: String, userId: String, options: RequestOptions? = null): GroupMemberUser {
+        return dev.octri.showcase.openai.methods.GroupUsers.retrieveGroupUser(clientConfig, groupId, userId, options)
     }
 
     /**
-     * Removes a user's membership from a group. Supply `group_id` and `user_id` to identify the
-     * group membership to remove. The response confirms whether the membership was deleted.
+     * Removes a user's membership from a group. Supply `group_id` and `user_id` to identify the group membership to remove. The response confirms whether the membership was deleted.
      *
      * Removes a user from a group.
      */
-    fun remove(
-        groupId: String,
-        userId: String,
-        options: RequestOptions? = null,
-    ): GroupUserDeletedResource {
-        return dev.octri.showcase.openai.methods.GroupUsers.removeGroupUser(
-            clientConfig,
-            groupId,
-            userId,
-            options,
-        )
+    fun remove(groupId: String, userId: String, options: RequestOptions? = null): GroupUserDeletedResource {
+        return dev.octri.showcase.openai.methods.GroupUsers.removeGroupUser(clientConfig, groupId, userId, options)
     }
+
 }

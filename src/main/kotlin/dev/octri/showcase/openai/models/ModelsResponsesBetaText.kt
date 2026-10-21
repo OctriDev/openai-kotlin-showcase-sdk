@@ -4,113 +4,70 @@
 package dev.octri.showcase.openai.models
 
 /**
- * JSON object response format. An older method of generating JSON responses. Using `json_schema` is
- * recommended for models that support it. Note that the model will not generate JSON without a
- * system or user message instructing it to do so.
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaResponseFormatJsonObject(
-    /** The type of response format being defined. Always `json_object`. */
+    /**
+     * The type of response format being defined. Always `json_object`.
+     */
     val type: BetaResponseFormatJsonObjectTypeEnum
 ) : BetaTextResponseFormatConfiguration
 
-/** Default response format. Used to generate text responses. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Default response format. Used to generate text responses.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaResponseFormatText(
-    /** The type of response format being defined. Always `text`. */
+    /**
+     * The type of response format being defined. Always `text`.
+     */
     val type: BetaResponseFormatTextTypeEnum
 ) : BetaTextResponseFormatConfiguration
 
 /**
- * An object specifying the format that the model must output. Configuring `{ "type": "json_schema"
- * }` enables Structured Outputs, which ensures the model will match your supplied JSON schema.
- * Learn more in the Structured Outputs guide. The default format is `{ "type": "text" }` with no
- * additional options. **Not recommended for gpt-4o and newer models:** Setting to `{ "type":
- * "json_object" }` enables the older JSON mode, which ensures the message the model generates is
- * valid…
+ * An object specifying the format that the model must output. Configuring `{ "type": "json_schema" }` enables Structured Outputs, which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. The default format is `{ "type": "text" }` with no additional options. **Not recommended for gpt-4o and newer models:** Setting to `{ "type": "json_object" }` enables the older JSON mode, which ensures the message the model generates is valid…
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownBetaTextResponseFormatConfiguration::class,
-)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownBetaTextResponseFormatConfiguration::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFormatText::class,
-        name = "text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaTextResponseFormatJsonSchema::class,
-        name = "json_schema",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = BetaResponseFormatJsonObject::class,
-        name = "json_object",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaResponseFormatText::class, name = "text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaTextResponseFormatJsonSchema::class, name = "json_schema"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = BetaResponseFormatJsonObject::class, name = "json_object")
 )
 sealed interface BetaTextResponseFormatConfiguration
 
-/**
- * A [BetaTextResponseFormatConfiguration] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownBetaTextResponseFormatConfiguration
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [BetaTextResponseFormatConfiguration] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownBetaTextResponseFormatConfiguration @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : BetaTextResponseFormatConfiguration {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * JSON Schema response format. Used to generate structured JSON responses. Learn more about
- * Structured Outputs.
+ * JSON Schema response format. Used to generate structured JSON responses. Learn more about Structured Outputs.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class BetaTextResponseFormatJsonSchema(
-    /** The type of response format being defined. Always `json_schema`. */
+    /**
+     * The type of response format being defined. Always `json_schema`.
+     */
     val type: BetaTextResponseFormatJsonSchemaTypeEnum,
     /**
-     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes,
-     * with a maximum length of 64.
+     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
      */
     val name: String,
     /**
-     * The schema for the response format, described as a JSON Schema object. Learn how to build
-     * JSON schemas here.
+     * The schema for the response format, described as a JSON Schema object. Learn how to build JSON schemas here.
      */
     val schema: BetaResponseFormatJsonSchemaSchema,
     /**
-     * A description of what the response format is for, used by the model to determine how to
-     * respond in the format.
+     * A description of what the response format is for, used by the model to determine how to respond in the format.
      */
     val description: String? = null,
-    /** Optional `boolean` value serialized in the `strict` wire field. */
-    val strict: Boolean? = null,
+    /**
+     * Optional `boolean` value serialized in the `strict` wire field.
+     */
+    val strict: Boolean? = null
 ) : BetaTextResponseFormatConfiguration

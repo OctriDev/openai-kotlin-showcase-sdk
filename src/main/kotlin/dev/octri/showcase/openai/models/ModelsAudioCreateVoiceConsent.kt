@@ -3,16 +3,20 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `CreateVoiceConsentRequest` API schema. */
+/**
+ * Typed representation of the `CreateVoiceConsentRequest` API schema.
+ */
 data class CreateVoiceConsentRequest(
-    /** The label to use for this consent recording. */
+    /**
+     * The label to use for this consent recording.
+     */
     val name: String,
     /**
-     * The consent audio recording file. Maximum size is 10 MiB. Supported MIME types: `audio/mpeg`,
-     * `audio/wav`, `audio/x-wav`, `audio/ogg`, `audio/aac`, `audio/flac`, `audio/webm`,
-     * `audio/mp4`.
+     * The consent audio recording file. Maximum size is 10 MiB. Supported MIME types: `audio/mpeg`, `audio/wav`, `audio/x-wav`, `audio/ogg`, `audio/aac`, `audio/flac`, `audio/webm`, `audio/mp4`.
      */
     val recording: ByteArray,
-    /** The BCP 47 language tag for the consent phrase (for example, `en-US`). */
-    val language: String,
+    /**
+     * The BCP 47 language tag for the consent phrase (for example, `en-US`).
+     */
+    val language: String
 )

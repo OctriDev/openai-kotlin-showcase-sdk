@@ -3,96 +3,87 @@
 
 package dev.octri.showcase.openai.models
 
-/** A question about the request's input, with an optional correlation name. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownQuestionParam::class,
-)
+/**
+ * A question about the request's input, with an optional correlation name.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownQuestionParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = QuestionParamPredicate::class,
-        name = "predicate",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = QuestionParamChoice::class,
-        name = "choice",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = QuestionParamScore::class,
-        name = "score",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = QuestionParamPredicate::class, name = "predicate"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = QuestionParamChoice::class, name = "choice"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = QuestionParamScore::class, name = "score")
 )
 sealed interface QuestionParam
 
 /** A [QuestionParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownQuestionParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownQuestionParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : QuestionParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Choose from the supplied options based on the input. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Choose from the supplied options based on the input.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class QuestionParamChoice(
-    /** The type of the object. Always `choice`. */
+    /**
+     * The type of the object. Always `choice`.
+     */
     val type: QuestionParamChoiceTypeEnum,
-    /** Required `string` value serialized in the `instructions` wire field. */
+    /**
+     * Required `string` value serialized in the `instructions` wire field.
+     */
     val instructions: String,
-    /** Provide between 2 and 255 choices. Each choice must be unique. */
+    /**
+     * Provide between 2 and 255 choices. Each choice must be unique.
+     */
     val choices: List<ChoiceOptionParam>,
-    /** Optional `string` value serialized in the `name` wire field. */
-    val name: String? = null,
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
+    val name: String? = null
 ) : QuestionParam
 
-/** Estimate how likely it is that a statement about the input is true. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Estimate how likely it is that a statement about the input is true.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class QuestionParamPredicate(
-    /** The type of the object. Always `predicate`. */
+    /**
+     * The type of the object. Always `predicate`.
+     */
     val type: QuestionParamPredicateTypeEnum,
-    /** Required `string` value serialized in the `instructions` wire field. */
+    /**
+     * Required `string` value serialized in the `instructions` wire field.
+     */
     val instructions: String,
-    /** Optional `string` value serialized in the `name` wire field. */
-    val name: String? = null,
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
+    val name: String? = null
 ) : QuestionParam
 
-/** Rate the input against the supplied ordered levels. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Rate the input against the supplied ordered levels.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class QuestionParamScore(
-    /** The type of the object. Always `score`. */
+    /**
+     * The type of the object. Always `score`.
+     */
     val type: QuestionParamScoreTypeEnum,
-    /** Required `string` value serialized in the `instructions` wire field. */
+    /**
+     * Required `string` value serialized in the `instructions` wire field.
+     */
     val instructions: String,
-    /** Required array value serialized in the `levels` wire field. */
+    /**
+     * Required array value serialized in the `levels` wire field.
+     */
     val levels: List<ScoreLevelParam>,
-    /** Optional `string` value serialized in the `name` wire field. */
-    val name: String? = null,
+    /**
+     * Optional `string` value serialized in the `name` wire field.
+     */
+    val name: String? = null
 ) : QuestionParam

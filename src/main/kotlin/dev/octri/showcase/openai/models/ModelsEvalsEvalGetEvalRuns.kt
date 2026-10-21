@@ -3,16 +3,28 @@
 
 package dev.octri.showcase.openai.models
 
-/** An object representing a list of runs for an evaluation. */
+/**
+ * An object representing a list of runs for an evaluation.
+ */
 data class EvalRunList(
-    /** The type of this object. It is always set to "list". */
+    /**
+     * The type of this object. It is always set to "list".
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: EvalRunListObjectEnum,
-    /** An array of eval run objects. */
+    /**
+     * An array of eval run objects.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<EvalRun>,
-    /** The identifier of the first eval run in the data array. */
+    /**
+     * The identifier of the first eval run in the data array.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /** The identifier of the last eval run in the data array. */
+    /**
+     * The identifier of the last eval run in the data array.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /** Indicates whether there are more evals available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Indicates whether there are more evals available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )

@@ -3,70 +3,55 @@
 
 package dev.octri.showcase.openai
 
-typealias WebhookAgentEnvironmentSuspended =
-    dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspended
+typealias WebhookAgentEnvironmentSuspended = dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspended
 
-typealias WebhookAgentEnvironmentSuspendedVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspendedVariant1TypeEnum
+typealias WebhookAgentEnvironmentSuspendedVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentEnvironmentSuspendedVariant1TypeEnum
 
-typealias WebhookAgentSessionActionRequired =
-    dev.octri.showcase.openai.models.WebhookAgentSessionActionRequired
+typealias WebhookAgentSessionActionRequired = dev.octri.showcase.openai.models.WebhookAgentSessionActionRequired
 
-typealias WebhookAgentSessionActionRequiredVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentSessionActionRequiredVariant1TypeEnum
+typealias WebhookAgentSessionActionRequiredVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionActionRequiredVariant1TypeEnum
 
 typealias WebhookAgentSessionCreated = dev.octri.showcase.openai.models.WebhookAgentSessionCreated
 
-typealias WebhookAgentSessionCreatedVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentSessionCreatedVariant1TypeEnum
+typealias WebhookAgentSessionCreatedVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionCreatedVariant1TypeEnum
 
 typealias WebhookAgentSessionEnvelope = dev.octri.showcase.openai.models.WebhookAgentSessionEnvelope
 
-typealias WebhookAgentSessionEnvelopeObjectEnum =
-    dev.octri.showcase.openai.models.WebhookAgentSessionEnvelopeObjectEnum
+typealias WebhookAgentSessionEnvelopeObjectEnum = dev.octri.showcase.openai.models.WebhookAgentSessionEnvelopeObjectEnum
 
 typealias WebhookAgentSessionFailed = dev.octri.showcase.openai.models.WebhookAgentSessionFailed
 
-typealias WebhookAgentSessionFailedVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentSessionFailedVariant1TypeEnum
+typealias WebhookAgentSessionFailedVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionFailedVariant1TypeEnum
 
 typealias WebhookAgentSessionIdle = dev.octri.showcase.openai.models.WebhookAgentSessionIdle
 
-typealias WebhookAgentSessionIdleVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentSessionIdleVariant1TypeEnum
+typealias WebhookAgentSessionIdleVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionIdleVariant1TypeEnum
 
-typealias WebhookAgentSessionInProgress =
-    dev.octri.showcase.openai.models.WebhookAgentSessionInProgress
+typealias WebhookAgentSessionInProgress = dev.octri.showcase.openai.models.WebhookAgentSessionInProgress
 
-typealias WebhookAgentSessionInProgressVariant1TypeEnum =
-    dev.octri.showcase.openai.models.WebhookAgentSessionInProgressVariant1TypeEnum
+typealias WebhookAgentSessionInProgressVariant1TypeEnum = dev.octri.showcase.openai.models.WebhookAgentSessionInProgressVariant1TypeEnum
 
 typealias WebhookBatchCancelled = dev.octri.showcase.openai.models.WebhookBatchCancelled
 
 typealias WebhookBatchCancelledData = dev.octri.showcase.openai.models.WebhookBatchCancelledData
 
-typealias WebhookBatchCancelledObjectEnum =
-    dev.octri.showcase.openai.models.WebhookBatchCancelledObjectEnum
+typealias WebhookBatchCancelledObjectEnum = dev.octri.showcase.openai.models.WebhookBatchCancelledObjectEnum
 
-typealias WebhookBatchCancelledTypeEnum =
-    dev.octri.showcase.openai.models.WebhookBatchCancelledTypeEnum
+typealias WebhookBatchCancelledTypeEnum = dev.octri.showcase.openai.models.WebhookBatchCancelledTypeEnum
 
 typealias WebhookBatchCompleted = dev.octri.showcase.openai.models.WebhookBatchCompleted
 
 typealias WebhookBatchCompletedData = dev.octri.showcase.openai.models.WebhookBatchCompletedData
 
-typealias WebhookBatchCompletedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookBatchCompletedObjectEnum
+typealias WebhookBatchCompletedObjectEnum = dev.octri.showcase.openai.models.WebhookBatchCompletedObjectEnum
 
-typealias WebhookBatchCompletedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookBatchCompletedTypeEnum
+typealias WebhookBatchCompletedTypeEnum = dev.octri.showcase.openai.models.WebhookBatchCompletedTypeEnum
 
 typealias WebhookBatchExpired = dev.octri.showcase.openai.models.WebhookBatchExpired
 
 typealias WebhookBatchExpiredData = dev.octri.showcase.openai.models.WebhookBatchExpiredData
 
-typealias WebhookBatchExpiredObjectEnum =
-    dev.octri.showcase.openai.models.WebhookBatchExpiredObjectEnum
+typealias WebhookBatchExpiredObjectEnum = dev.octri.showcase.openai.models.WebhookBatchExpiredObjectEnum
 
 typealias WebhookBatchExpiredTypeEnum = dev.octri.showcase.openai.models.WebhookBatchExpiredTypeEnum
 
@@ -74,240 +59,175 @@ typealias WebhookBatchFailed = dev.octri.showcase.openai.models.WebhookBatchFail
 
 typealias WebhookBatchFailedData = dev.octri.showcase.openai.models.WebhookBatchFailedData
 
-typealias WebhookBatchFailedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookBatchFailedObjectEnum
+typealias WebhookBatchFailedObjectEnum = dev.octri.showcase.openai.models.WebhookBatchFailedObjectEnum
 
 typealias WebhookBatchFailedTypeEnum = dev.octri.showcase.openai.models.WebhookBatchFailedTypeEnum
 
 typealias WebhookEndpointBody = dev.octri.showcase.openai.models.WebhookEndpointBody
 
-typealias WebhookEndpointBodyObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEndpointBodyObjectEnum
+typealias WebhookEndpointBodyObjectEnum = dev.octri.showcase.openai.models.WebhookEndpointBodyObjectEnum
 
 typealias WebhookEndpointListResource = dev.octri.showcase.openai.models.WebhookEndpointListResource
 
-typealias WebhookEndpointListResourceObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEndpointListResourceObjectEnum
+typealias WebhookEndpointListResourceObjectEnum = dev.octri.showcase.openai.models.WebhookEndpointListResourceObjectEnum
 
-typealias WebhookEndpointTestResultResource =
-    dev.octri.showcase.openai.models.WebhookEndpointTestResultResource
+typealias WebhookEndpointTestResultResource = dev.octri.showcase.openai.models.WebhookEndpointTestResultResource
 
-typealias WebhookEndpointTestResultResourceObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEndpointTestResultResourceObjectEnum
+typealias WebhookEndpointTestResultResourceObjectEnum = dev.octri.showcase.openai.models.WebhookEndpointTestResultResourceObjectEnum
 
-typealias WebhookEndpointTestResultResourceSuccessEnum =
-    dev.octri.showcase.openai.models.WebhookEndpointTestResultResourceSuccessEnum
+typealias WebhookEndpointTestResultResourceSuccessEnum = dev.octri.showcase.openai.models.WebhookEndpointTestResultResourceSuccessEnum
 
-typealias WebhookEndpointWithSecretResource =
-    dev.octri.showcase.openai.models.WebhookEndpointWithSecretResource
+typealias WebhookEndpointWithSecretResource = dev.octri.showcase.openai.models.WebhookEndpointWithSecretResource
 
-typealias WebhookEndpointWithSecretResourceObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEndpointWithSecretResourceObjectEnum
+typealias WebhookEndpointWithSecretResourceObjectEnum = dev.octri.showcase.openai.models.WebhookEndpointWithSecretResourceObjectEnum
 
 typealias WebhookEvalRunCanceled = dev.octri.showcase.openai.models.WebhookEvalRunCanceled
 
 typealias WebhookEvalRunCanceledData = dev.octri.showcase.openai.models.WebhookEvalRunCanceledData
 
-typealias WebhookEvalRunCanceledObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEvalRunCanceledObjectEnum
+typealias WebhookEvalRunCanceledObjectEnum = dev.octri.showcase.openai.models.WebhookEvalRunCanceledObjectEnum
 
-typealias WebhookEvalRunCanceledTypeEnum =
-    dev.octri.showcase.openai.models.WebhookEvalRunCanceledTypeEnum
+typealias WebhookEvalRunCanceledTypeEnum = dev.octri.showcase.openai.models.WebhookEvalRunCanceledTypeEnum
 
 typealias WebhookEvalRunFailed = dev.octri.showcase.openai.models.WebhookEvalRunFailed
 
 typealias WebhookEvalRunFailedData = dev.octri.showcase.openai.models.WebhookEvalRunFailedData
 
-typealias WebhookEvalRunFailedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEvalRunFailedObjectEnum
+typealias WebhookEvalRunFailedObjectEnum = dev.octri.showcase.openai.models.WebhookEvalRunFailedObjectEnum
 
-typealias WebhookEvalRunFailedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookEvalRunFailedTypeEnum
+typealias WebhookEvalRunFailedTypeEnum = dev.octri.showcase.openai.models.WebhookEvalRunFailedTypeEnum
 
 typealias WebhookEvalRunSucceeded = dev.octri.showcase.openai.models.WebhookEvalRunSucceeded
 
 typealias WebhookEvalRunSucceededData = dev.octri.showcase.openai.models.WebhookEvalRunSucceededData
 
-typealias WebhookEvalRunSucceededObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEvalRunSucceededObjectEnum
+typealias WebhookEvalRunSucceededObjectEnum = dev.octri.showcase.openai.models.WebhookEvalRunSucceededObjectEnum
 
-typealias WebhookEvalRunSucceededTypeEnum =
-    dev.octri.showcase.openai.models.WebhookEvalRunSucceededTypeEnum
+typealias WebhookEvalRunSucceededTypeEnum = dev.octri.showcase.openai.models.WebhookEvalRunSucceededTypeEnum
 
-typealias WebhookEventTypeListResource =
-    dev.octri.showcase.openai.models.WebhookEventTypeListResource
+typealias WebhookEventTypeListResource = dev.octri.showcase.openai.models.WebhookEventTypeListResource
 
-typealias WebhookEventTypeListResourceObjectEnum =
-    dev.octri.showcase.openai.models.WebhookEventTypeListResourceObjectEnum
+typealias WebhookEventTypeListResourceObjectEnum = dev.octri.showcase.openai.models.WebhookEventTypeListResourceObjectEnum
 
-typealias WebhookFineTuningJobCancelled =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobCancelled
+typealias WebhookFineTuningJobCancelled = dev.octri.showcase.openai.models.WebhookFineTuningJobCancelled
 
-typealias WebhookFineTuningJobCancelledData =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobCancelledData
+typealias WebhookFineTuningJobCancelledData = dev.octri.showcase.openai.models.WebhookFineTuningJobCancelledData
 
-typealias WebhookFineTuningJobCancelledObjectEnum =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobCancelledObjectEnum
+typealias WebhookFineTuningJobCancelledObjectEnum = dev.octri.showcase.openai.models.WebhookFineTuningJobCancelledObjectEnum
 
-typealias WebhookFineTuningJobCancelledTypeEnum =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobCancelledTypeEnum
+typealias WebhookFineTuningJobCancelledTypeEnum = dev.octri.showcase.openai.models.WebhookFineTuningJobCancelledTypeEnum
 
 typealias WebhookFineTuningJobFailed = dev.octri.showcase.openai.models.WebhookFineTuningJobFailed
 
-typealias WebhookFineTuningJobFailedData =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobFailedData
+typealias WebhookFineTuningJobFailedData = dev.octri.showcase.openai.models.WebhookFineTuningJobFailedData
 
-typealias WebhookFineTuningJobFailedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobFailedObjectEnum
+typealias WebhookFineTuningJobFailedObjectEnum = dev.octri.showcase.openai.models.WebhookFineTuningJobFailedObjectEnum
 
-typealias WebhookFineTuningJobFailedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobFailedTypeEnum
+typealias WebhookFineTuningJobFailedTypeEnum = dev.octri.showcase.openai.models.WebhookFineTuningJobFailedTypeEnum
 
-typealias WebhookFineTuningJobSucceeded =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobSucceeded
+typealias WebhookFineTuningJobSucceeded = dev.octri.showcase.openai.models.WebhookFineTuningJobSucceeded
 
-typealias WebhookFineTuningJobSucceededData =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobSucceededData
+typealias WebhookFineTuningJobSucceededData = dev.octri.showcase.openai.models.WebhookFineTuningJobSucceededData
 
-typealias WebhookFineTuningJobSucceededObjectEnum =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobSucceededObjectEnum
+typealias WebhookFineTuningJobSucceededObjectEnum = dev.octri.showcase.openai.models.WebhookFineTuningJobSucceededObjectEnum
 
-typealias WebhookFineTuningJobSucceededTypeEnum =
-    dev.octri.showcase.openai.models.WebhookFineTuningJobSucceededTypeEnum
+typealias WebhookFineTuningJobSucceededTypeEnum = dev.octri.showcase.openai.models.WebhookFineTuningJobSucceededTypeEnum
 
 typealias WebhookLiveCallIncoming = dev.octri.showcase.openai.models.WebhookLiveCallIncoming
 
 typealias WebhookLiveCallIncomingData = dev.octri.showcase.openai.models.WebhookLiveCallIncomingData
 
-typealias WebhookLiveCallIncomingDataSipHeadersItem =
-    dev.octri.showcase.openai.models.WebhookLiveCallIncomingDataSipHeadersItem
+typealias WebhookLiveCallIncomingDataSipHeadersItem = dev.octri.showcase.openai.models.WebhookLiveCallIncomingDataSipHeadersItem
 
-typealias WebhookLiveCallIncomingObjectEnum =
-    dev.octri.showcase.openai.models.WebhookLiveCallIncomingObjectEnum
+typealias WebhookLiveCallIncomingObjectEnum = dev.octri.showcase.openai.models.WebhookLiveCallIncomingObjectEnum
 
-typealias WebhookLiveCallIncomingTypeEnum =
-    dev.octri.showcase.openai.models.WebhookLiveCallIncomingTypeEnum
+typealias WebhookLiveCallIncomingTypeEnum = dev.octri.showcase.openai.models.WebhookLiveCallIncomingTypeEnum
 
-typealias WebhookLiveTransportIncoming =
-    dev.octri.showcase.openai.models.WebhookLiveTransportIncoming
+typealias WebhookLiveTransportIncoming = dev.octri.showcase.openai.models.WebhookLiveTransportIncoming
 
-typealias WebhookLiveTransportIncomingData =
-    dev.octri.showcase.openai.models.WebhookLiveTransportIncomingData
+typealias WebhookLiveTransportIncomingData = dev.octri.showcase.openai.models.WebhookLiveTransportIncomingData
 
-typealias WebhookLiveTransportIncomingDataSipHeadersItem =
-    dev.octri.showcase.openai.models.WebhookLiveTransportIncomingDataSipHeadersItem
+typealias WebhookLiveTransportIncomingDataSipHeadersItem = dev.octri.showcase.openai.models.WebhookLiveTransportIncomingDataSipHeadersItem
 
-typealias WebhookLiveTransportIncomingDataTypeEnum =
-    dev.octri.showcase.openai.models.WebhookLiveTransportIncomingDataTypeEnum
+typealias WebhookLiveTransportIncomingDataTypeEnum = dev.octri.showcase.openai.models.WebhookLiveTransportIncomingDataTypeEnum
 
-typealias WebhookLiveTransportIncomingObjectEnum =
-    dev.octri.showcase.openai.models.WebhookLiveTransportIncomingObjectEnum
+typealias WebhookLiveTransportIncomingObjectEnum = dev.octri.showcase.openai.models.WebhookLiveTransportIncomingObjectEnum
 
-typealias WebhookLiveTransportIncomingTypeEnum =
-    dev.octri.showcase.openai.models.WebhookLiveTransportIncomingTypeEnum
+typealias WebhookLiveTransportIncomingTypeEnum = dev.octri.showcase.openai.models.WebhookLiveTransportIncomingTypeEnum
 
 typealias WebhookRealtimeCallIncoming = dev.octri.showcase.openai.models.WebhookRealtimeCallIncoming
 
-typealias WebhookRealtimeCallIncomingData =
-    dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingData
+typealias WebhookRealtimeCallIncomingData = dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingData
 
-typealias WebhookRealtimeCallIncomingDataSipHeadersItem =
-    dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingDataSipHeadersItem
+typealias WebhookRealtimeCallIncomingDataSipHeadersItem = dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingDataSipHeadersItem
 
-typealias WebhookRealtimeCallIncomingObjectEnum =
-    dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingObjectEnum
+typealias WebhookRealtimeCallIncomingObjectEnum = dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingObjectEnum
 
-typealias WebhookRealtimeCallIncomingTypeEnum =
-    dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingTypeEnum
+typealias WebhookRealtimeCallIncomingTypeEnum = dev.octri.showcase.openai.models.WebhookRealtimeCallIncomingTypeEnum
 
 typealias WebhookResponseCancelled = dev.octri.showcase.openai.models.WebhookResponseCancelled
 
-typealias WebhookResponseCancelledData =
-    dev.octri.showcase.openai.models.WebhookResponseCancelledData
+typealias WebhookResponseCancelledData = dev.octri.showcase.openai.models.WebhookResponseCancelledData
 
-typealias WebhookResponseCancelledObjectEnum =
-    dev.octri.showcase.openai.models.WebhookResponseCancelledObjectEnum
+typealias WebhookResponseCancelledObjectEnum = dev.octri.showcase.openai.models.WebhookResponseCancelledObjectEnum
 
-typealias WebhookResponseCancelledTypeEnum =
-    dev.octri.showcase.openai.models.WebhookResponseCancelledTypeEnum
+typealias WebhookResponseCancelledTypeEnum = dev.octri.showcase.openai.models.WebhookResponseCancelledTypeEnum
 
 typealias WebhookResponseCompleted = dev.octri.showcase.openai.models.WebhookResponseCompleted
 
-typealias WebhookResponseCompletedData =
-    dev.octri.showcase.openai.models.WebhookResponseCompletedData
+typealias WebhookResponseCompletedData = dev.octri.showcase.openai.models.WebhookResponseCompletedData
 
-typealias WebhookResponseCompletedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookResponseCompletedObjectEnum
+typealias WebhookResponseCompletedObjectEnum = dev.octri.showcase.openai.models.WebhookResponseCompletedObjectEnum
 
-typealias WebhookResponseCompletedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookResponseCompletedTypeEnum
+typealias WebhookResponseCompletedTypeEnum = dev.octri.showcase.openai.models.WebhookResponseCompletedTypeEnum
 
 typealias WebhookResponseFailed = dev.octri.showcase.openai.models.WebhookResponseFailed
 
 typealias WebhookResponseFailedData = dev.octri.showcase.openai.models.WebhookResponseFailedData
 
-typealias WebhookResponseFailedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookResponseFailedObjectEnum
+typealias WebhookResponseFailedObjectEnum = dev.octri.showcase.openai.models.WebhookResponseFailedObjectEnum
 
-typealias WebhookResponseFailedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookResponseFailedTypeEnum
+typealias WebhookResponseFailedTypeEnum = dev.octri.showcase.openai.models.WebhookResponseFailedTypeEnum
 
 typealias WebhookResponseIncomplete = dev.octri.showcase.openai.models.WebhookResponseIncomplete
 
-typealias WebhookResponseIncompleteData =
-    dev.octri.showcase.openai.models.WebhookResponseIncompleteData
+typealias WebhookResponseIncompleteData = dev.octri.showcase.openai.models.WebhookResponseIncompleteData
 
-typealias WebhookResponseIncompleteObjectEnum =
-    dev.octri.showcase.openai.models.WebhookResponseIncompleteObjectEnum
+typealias WebhookResponseIncompleteObjectEnum = dev.octri.showcase.openai.models.WebhookResponseIncompleteObjectEnum
 
-typealias WebhookResponseIncompleteTypeEnum =
-    dev.octri.showcase.openai.models.WebhookResponseIncompleteTypeEnum
+typealias WebhookResponseIncompleteTypeEnum = dev.octri.showcase.openai.models.WebhookResponseIncompleteTypeEnum
 
 typealias WebhookSafetyAlertCreated = dev.octri.showcase.openai.models.WebhookSafetyAlertCreated
 
-typealias WebhookSafetyAlertCreatedData =
-    dev.octri.showcase.openai.models.WebhookSafetyAlertCreatedData
+typealias WebhookSafetyAlertCreatedData = dev.octri.showcase.openai.models.WebhookSafetyAlertCreatedData
 
-typealias WebhookSafetyAlertCreatedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyAlertCreatedObjectEnum
+typealias WebhookSafetyAlertCreatedObjectEnum = dev.octri.showcase.openai.models.WebhookSafetyAlertCreatedObjectEnum
 
-typealias WebhookSafetyAlertCreatedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyAlertCreatedTypeEnum
+typealias WebhookSafetyAlertCreatedTypeEnum = dev.octri.showcase.openai.models.WebhookSafetyAlertCreatedTypeEnum
 
-typealias WebhookSafetyDeactivationIssued =
-    dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssued
+typealias WebhookSafetyDeactivationIssued = dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssued
 
-typealias WebhookSafetyDeactivationIssuedData =
-    dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssuedData
+typealias WebhookSafetyDeactivationIssuedData = dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssuedData
 
-typealias WebhookSafetyDeactivationIssuedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssuedObjectEnum
+typealias WebhookSafetyDeactivationIssuedObjectEnum = dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssuedObjectEnum
 
-typealias WebhookSafetyDeactivationIssuedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssuedTypeEnum
+typealias WebhookSafetyDeactivationIssuedTypeEnum = dev.octri.showcase.openai.models.WebhookSafetyDeactivationIssuedTypeEnum
 
-typealias WebhookSafetyOrgAlertCreated =
-    dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreated
+typealias WebhookSafetyOrgAlertCreated = dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreated
 
-typealias WebhookSafetyOrgAlertCreatedData =
-    dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreatedData
+typealias WebhookSafetyOrgAlertCreatedData = dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreatedData
 
-typealias WebhookSafetyOrgAlertCreatedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreatedObjectEnum
+typealias WebhookSafetyOrgAlertCreatedObjectEnum = dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreatedObjectEnum
 
-typealias WebhookSafetyOrgAlertCreatedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreatedTypeEnum
+typealias WebhookSafetyOrgAlertCreatedTypeEnum = dev.octri.showcase.openai.models.WebhookSafetyOrgAlertCreatedTypeEnum
 
 typealias WebhookSafetyWarningIssued = dev.octri.showcase.openai.models.WebhookSafetyWarningIssued
 
-typealias WebhookSafetyWarningIssuedData =
-    dev.octri.showcase.openai.models.WebhookSafetyWarningIssuedData
+typealias WebhookSafetyWarningIssuedData = dev.octri.showcase.openai.models.WebhookSafetyWarningIssuedData
 
-typealias WebhookSafetyWarningIssuedObjectEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyWarningIssuedObjectEnum
+typealias WebhookSafetyWarningIssuedObjectEnum = dev.octri.showcase.openai.models.WebhookSafetyWarningIssuedObjectEnum
 
-typealias WebhookSafetyWarningIssuedTypeEnum =
-    dev.octri.showcase.openai.models.WebhookSafetyWarningIssuedTypeEnum
+typealias WebhookSafetyWarningIssuedTypeEnum = dev.octri.showcase.openai.models.WebhookSafetyWarningIssuedTypeEnum
 
 typealias WebSearchActionFind = dev.octri.showcase.openai.models.WebSearchActionFind
 
@@ -315,56 +235,41 @@ typealias WebSearchActionFindTypeEnum = dev.octri.showcase.openai.models.WebSear
 
 typealias WebSearchActionOpenPage = dev.octri.showcase.openai.models.WebSearchActionOpenPage
 
-typealias WebSearchActionOpenPageTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionOpenPageTypeEnum
+typealias WebSearchActionOpenPageTypeEnum = dev.octri.showcase.openai.models.WebSearchActionOpenPageTypeEnum
 
 typealias WebSearchActionResource = dev.octri.showcase.openai.models.WebSearchActionResource
 
-typealias WebSearchActionResourceFindInPage =
-    dev.octri.showcase.openai.models.WebSearchActionResourceFindInPage
+typealias WebSearchActionResourceFindInPage = dev.octri.showcase.openai.models.WebSearchActionResourceFindInPage
 
-typealias WebSearchActionResourceFindInPageTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionResourceFindInPageTypeEnum
+typealias WebSearchActionResourceFindInPageTypeEnum = dev.octri.showcase.openai.models.WebSearchActionResourceFindInPageTypeEnum
 
-typealias WebSearchActionResourceOpenPage =
-    dev.octri.showcase.openai.models.WebSearchActionResourceOpenPage
+typealias WebSearchActionResourceOpenPage = dev.octri.showcase.openai.models.WebSearchActionResourceOpenPage
 
-typealias WebSearchActionResourceOpenPageTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionResourceOpenPageTypeEnum
+typealias WebSearchActionResourceOpenPageTypeEnum = dev.octri.showcase.openai.models.WebSearchActionResourceOpenPageTypeEnum
 
-typealias WebSearchActionResourceOther =
-    dev.octri.showcase.openai.models.WebSearchActionResourceOther
+typealias WebSearchActionResourceOther = dev.octri.showcase.openai.models.WebSearchActionResourceOther
 
-typealias WebSearchActionResourceOtherTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionResourceOtherTypeEnum
+typealias WebSearchActionResourceOtherTypeEnum = dev.octri.showcase.openai.models.WebSearchActionResourceOtherTypeEnum
 
-typealias WebSearchActionResourceSearch =
-    dev.octri.showcase.openai.models.WebSearchActionResourceSearch
+typealias WebSearchActionResourceSearch = dev.octri.showcase.openai.models.WebSearchActionResourceSearch
 
-typealias WebSearchActionResourceSearchTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionResourceSearchTypeEnum
+typealias WebSearchActionResourceSearchTypeEnum = dev.octri.showcase.openai.models.WebSearchActionResourceSearchTypeEnum
 
 typealias WebSearchActionSearch = dev.octri.showcase.openai.models.WebSearchActionSearch
 
-typealias WebSearchActionSearchSourcesItem =
-    dev.octri.showcase.openai.models.WebSearchActionSearchSourcesItem
+typealias WebSearchActionSearchSourcesItem = dev.octri.showcase.openai.models.WebSearchActionSearchSourcesItem
 
-typealias WebSearchActionSearchSourcesItemTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionSearchSourcesItemTypeEnum
+typealias WebSearchActionSearchSourcesItemTypeEnum = dev.octri.showcase.openai.models.WebSearchActionSearchSourcesItemTypeEnum
 
-typealias WebSearchActionSearchTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchActionSearchTypeEnum
+typealias WebSearchActionSearchTypeEnum = dev.octri.showcase.openai.models.WebSearchActionSearchTypeEnum
 
-typealias WebSearchApproximateLocation =
-    dev.octri.showcase.openai.models.WebSearchApproximateLocation
+typealias WebSearchApproximateLocation = dev.octri.showcase.openai.models.WebSearchApproximateLocation
 
-typealias WebSearchApproximateLocationTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchApproximateLocationTypeEnum
+typealias WebSearchApproximateLocationTypeEnum = dev.octri.showcase.openai.models.WebSearchApproximateLocationTypeEnum
 
 typealias WebSearchCallItemResource = dev.octri.showcase.openai.models.WebSearchCallItemResource
 
-typealias WebSearchCallItemResourceTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchCallItemResourceTypeEnum
+typealias WebSearchCallItemResourceTypeEnum = dev.octri.showcase.openai.models.WebSearchCallItemResourceTypeEnum
 
 typealias WebSearchCallStatus = dev.octri.showcase.openai.models.WebSearchCallStatus
 
@@ -372,8 +277,7 @@ typealias WebSearchContextSize = dev.octri.showcase.openai.models.WebSearchConte
 
 typealias WebSearchContextSizeParam = dev.octri.showcase.openai.models.WebSearchContextSizeParam
 
-typealias WebSearchContextSizeResource =
-    dev.octri.showcase.openai.models.WebSearchContextSizeResource
+typealias WebSearchContextSizeResource = dev.octri.showcase.openai.models.WebSearchContextSizeResource
 
 typealias WebSearchLocation = dev.octri.showcase.openai.models.WebSearchLocation
 
@@ -387,8 +291,7 @@ typealias WebSearchModeResource = dev.octri.showcase.openai.models.WebSearchMode
 
 typealias WebSearchPreviewTool = dev.octri.showcase.openai.models.WebSearchPreviewTool
 
-typealias WebSearchPreviewToolTypeEnum =
-    dev.octri.showcase.openai.models.WebSearchPreviewToolTypeEnum
+typealias WebSearchPreviewToolTypeEnum = dev.octri.showcase.openai.models.WebSearchPreviewToolTypeEnum
 
 typealias WebSearchTool = dev.octri.showcase.openai.models.WebSearchTool
 
@@ -400,8 +303,7 @@ typealias WebSearchToolCallTypeEnum = dev.octri.showcase.openai.models.WebSearch
 
 typealias WebSearchToolFilters = dev.octri.showcase.openai.models.WebSearchToolFilters
 
-typealias WebSearchToolSearchContextSizeEnum =
-    dev.octri.showcase.openai.models.WebSearchToolSearchContextSizeEnum
+typealias WebSearchToolSearchContextSizeEnum = dev.octri.showcase.openai.models.WebSearchToolSearchContextSizeEnum
 
 typealias WebSearchToolTypeEnum = dev.octri.showcase.openai.models.WebSearchToolTypeEnum
 

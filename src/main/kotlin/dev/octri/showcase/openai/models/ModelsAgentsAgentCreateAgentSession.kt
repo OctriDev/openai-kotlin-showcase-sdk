@@ -3,178 +3,159 @@
 
 package dev.octri.showcase.openai.models
 
-/** A tool available to the agent. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownAgentToolConfigParam::class,
-)
+/**
+ * A tool available to the agent.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownAgentToolConfigParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AgentToolConfigParamFunction::class,
-        name = "function",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AgentToolConfigParamToolSearch::class,
-        name = "tool_search",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AgentToolConfigParamProgrammaticToolCalling::class,
-        name = "programmatic_tool_calling",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AgentToolConfigParamMcp::class,
-        name = "mcp",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AgentToolConfigParamWebSearch::class,
-        name = "web_search",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AgentToolConfigParamComputerUse::class,
-        name = "computer_use",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AgentToolConfigParamFunction::class, name = "function"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AgentToolConfigParamToolSearch::class, name = "tool_search"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AgentToolConfigParamProgrammaticToolCalling::class, name = "programmatic_tool_calling"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AgentToolConfigParamMcp::class, name = "mcp"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AgentToolConfigParamWebSearch::class, name = "web_search"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AgentToolConfigParamComputerUse::class, name = "computer_use")
 )
 sealed interface AgentToolConfigParam
 
 /** A [AgentToolConfigParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownAgentToolConfigParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownAgentToolConfigParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : AgentToolConfigParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Browser use in an OpenAI-hosted session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Browser use in an OpenAI-hosted session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AgentToolConfigParamComputerUse(
-    /** The type of the object. Always `computer_use`. */
+    /**
+     * The type of the object. Always `computer_use`.
+     */
     val type: AgentToolConfigParamComputerUseTypeEnum,
-    /** Whether computer tool outputs include screenshots. Defaults to `false`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("include_screenshots")
-    val includeScreenshots: Boolean? = null,
+    /**
+     * Whether computer tool outputs include screenshots. Defaults to `false`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("include_screenshots") val includeScreenshots: Boolean? = null
 ) : AgentToolConfigParam
 
-/** A function defined by the application. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A function defined by the application.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AgentToolConfigParamFunction(
-    /** The type of the object. Always `function`. */
+    /**
+     * The type of the object. Always `function`.
+     */
     val type: AgentToolConfigParamFunctionTypeEnum,
-    /** The name of the function. */
+    /**
+     * The name of the function.
+     */
     val name: String,
-    /** A description of what the function does. */
+    /**
+     * A description of what the function does.
+     */
     val description: String,
-    /** A JSON Schema object describing the function's arguments. */
+    /**
+     * A JSON Schema object describing the function's arguments.
+     */
     val parameters: Map<String, Any>,
     /**
      * Whether this function is deferred and discovered through tool search. Defaults to `false`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading")
-    val deferLoading: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("defer_loading") val deferLoading: Boolean? = null
 ) : AgentToolConfigParam
 
-/** Tools provided by a remote MCP server. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Tools provided by a remote MCP server.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AgentToolConfigParamMcp(
-    /** The type of the object. Always `mcp`. */
+    /**
+     * The type of the object. Always `mcp`.
+     */
     val type: AgentToolConfigParamMcpTypeEnum,
-    /** A label used to identify the MCP server in tool calls. */
+    /**
+     * A label used to identify the MCP server in tool calls.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /** The transport used to connect to the MCP server. */
+    /**
+     * The transport used to connect to the MCP server.
+     */
     val transport: McpTransportConfigParam,
     /**
-     * The attached vault credential used to authenticate this MCP server. Optional when exactly one
-     * attached credential matches the server URL.
+     * The attached vault credential used to authenticate this MCP server. Optional when exactly one attached credential matches the server URL.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("credential_id")
-    val credentialId: String? = null,
-    /** Metadata included with requests to this MCP server. */
-    @com.fasterxml.jackson.annotation.JsonProperty("request_metadata")
-    val requestMetadata: Map<String, Any>? = null,
-    /** The MCP tools the agent may call. All server tools are allowed when omitted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools")
-    val allowedTools: List<String>? = null,
-    /** Whether this MCP server must initialize before the first turn. Defaults to `false`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("credential_id") val credentialId: String? = null,
+    /**
+     * Metadata included with requests to this MCP server.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("request_metadata") val requestMetadata: Map<String, Any>? = null,
+    /**
+     * The MCP tools the agent may call. All server tools are allowed when omitted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_tools") val allowedTools: List<String>? = null,
+    /**
+     * Whether this MCP server must initialize before the first turn. Defaults to `false`.
+     */
     val required: Boolean? = null,
     /**
-     * Selects where outbound MCP HTTP connections originate. Omitted or `service` uses the Managed
-     * Agents service network; `environment` uses the session's selected environment.
+     * Selects where outbound MCP HTTP connections originate. Omitted or `service` uses the Managed Agents service network; `environment` uses the session's selected environment.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("connection_origin")
-    val connectionOrigin: McpConnectionOriginParam? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("connection_origin") val connectionOrigin: McpConnectionOriginParam? = null
 ) : AgentToolConfigParam
 
-/** Enables calling tools from model-generated code. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Enables calling tools from model-generated code.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AgentToolConfigParamProgrammaticToolCalling(
-    /** The type of the object. Always `programmatic_tool_calling`. */
+    /**
+     * The type of the object. Always `programmatic_tool_calling`.
+     */
     val type: AgentToolConfigParamProgrammaticToolCallingTypeEnum,
-    /** Whether tools can be called from model-generated code. Defaults to `true`. */
-    val enabled: Boolean? = null,
+    /**
+     * Whether tools can be called from model-generated code. Defaults to `true`.
+     */
+    val enabled: Boolean? = null
 ) : AgentToolConfigParam
 
-/** Discovers deferred function tools and loads them into the model context. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Discovers deferred function tools and loads them into the model context.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AgentToolConfigParamToolSearch(
-    /** The type of the object. Always `tool_search`. */
+    /**
+     * The type of the object. Always `tool_search`.
+     */
     val type: AgentToolConfigParamToolSearchTypeEnum
 ) : AgentToolConfigParam
 
-/** Web search. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Web search.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AgentToolConfigParamWebSearch(
-    /** The type of the object. Always `web_search`. */
+    /**
+     * The type of the object. Always `web_search`.
+     */
     val type: AgentToolConfigParamWebSearchTypeEnum,
-    /** The source used for web search results. Defaults to `live`. */
+    /**
+     * The source used for web search results. Defaults to `live`.
+     */
     val mode: WebSearchModeParam? = null,
-    /** The amount of search context made available to the model. Defaults to `medium`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("context_size")
-    val contextSize: WebSearchContextSizeParam? = null,
-    /** Domains the search may include. */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains")
-    val allowedDomains: List<String>? = null,
-    /** Approximate location used to localize search results. */
-    val location: WebSearchLocationParam? = null,
+    /**
+     * The amount of search context made available to the model. Defaults to `medium`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("context_size") val contextSize: WebSearchContextSizeParam? = null,
+    /**
+     * Domains the search may include.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_domains") val allowedDomains: List<String>? = null,
+    /**
+     * Approximate location used to localize search results.
+     */
+    val location: WebSearchLocationParam? = null
 ) : AgentToolConfigParam

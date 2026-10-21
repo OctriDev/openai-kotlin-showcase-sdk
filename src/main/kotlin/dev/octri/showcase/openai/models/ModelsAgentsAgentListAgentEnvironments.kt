@@ -3,22 +3,28 @@
 
 package dev.octri.showcase.openai.models
 
-/** A page of Agents API resources, with IDs for retrieving additional pages. */
+/**
+ * A page of Agents API resources, with IDs for retrieving additional pages.
+ */
 data class AgentEnvironmentListResource(
-    /** The object type, which is always `list`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: AgentEnvironmentListResourceObjectEnum,
-    /** The resources returned in this page, in the requested sort order. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<PublicEnvironmentResource>,
-    /** The ID of the first resource in `data`, or `null` if the page is empty. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
     /**
-     * The ID of the last resource in `data`, or `null` if the page is empty. Pass this as `after`
-     * with the same order and filters.
+     * The object type, which is always `list`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: AgentEnvironmentListResourceObjectEnum,
+    /**
+     * The resources returned in this page, in the requested sort order.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<PublicEnvironmentResource>,
+    /**
+     * The ID of the first resource in `data`, or `null` if the page is empty.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * The ID of the last resource in `data`, or `null` if the page is empty. Pass this as `after` with the same order and filters.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Whether there are more resources to retrieve after this page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Whether there are more resources to retrieve after this page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )

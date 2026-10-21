@@ -3,150 +3,110 @@
 
 package dev.octri.showcase.openai.models
 
-/** Optional API value serialized in the `truncation_strategy` wire field. */
+/**
+ * Optional API value serialized in the `truncation_strategy` wire field.
+ */
 data class CreateRunRequestTruncationStrategy(
     /**
-     * The truncation strategy to use for the thread. The default is `auto`. If set to
-     * `last_messages`, the thread will be truncated to the n most recent messages in the thread.
-     * When set to `auto`, messages in the middle of the thread will be dropped to fit the context
-     * length of the model, `max_prompt_tokens`.
+     * The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will be truncated to the n most recent messages in the thread. When set to `auto`, messages in the middle of the thread will be dropped to fit the context length of the model, `max_prompt_tokens`.
      */
     val type: TruncationObjectTypeEnum,
-    /** Optional API value serialized in the `last_messages` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_messages") val lastMessages: Long? = null,
+    /**
+     * Optional API value serialized in the `last_messages` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_messages") val lastMessages: Long? = null
 )
 
-/** Typed representation of the `CreateRunRequest` API schema. */
+/**
+ * Typed representation of the `CreateRunRequest` API schema.
+ */
 data class CreateRunRequest(
-    /** The ID of the assistant to use to execute this run. */
+    /**
+     * The ID of the assistant to use to execute this run.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("assistant_id") val assistantId: String,
     /**
-     * The ID of the Model to be used to execute this run. If a value is provided here, it will
-     * override the model associated with the assistant. If not, the model associated with the
-     * assistant will be used.
+     * The ID of the Model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
      */
     val model: String? = null,
-    /** Optional API value serialized in the `reasoning_effort` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
-    val reasoningEffort: ReasoningEffort? = null,
     /**
-     * Overrides the instructions of the assistant. This is useful for modifying the behavior on a
-     * per-run basis.
+     * Optional API value serialized in the `reasoning_effort` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
+    /**
+     * Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.
      */
     val instructions: String? = null,
     /**
-     * Appends additional instructions at the end of the instructions for the run. This is useful
-     * for modifying the behavior on a per-run basis without overriding other instructions.
+     * Appends additional instructions at the end of the instructions for the run. This is useful for modifying the behavior on a per-run basis without overriding other instructions.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("additional_instructions")
-    val additionalInstructions: String? = null,
-    /** Adds additional messages to the thread before creating the run. */
-    @com.fasterxml.jackson.annotation.JsonProperty("additional_messages")
-    val additionalMessages: List<CreateMessageRequest>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("additional_instructions") val additionalInstructions: String? = null,
     /**
-     * Override the tools the assistant can use for this run. This is useful for modifying the
-     * behavior on a per-run basis.
+     * Adds additional messages to the thread before creating the run.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("additional_messages") val additionalMessages: List<CreateMessageRequest>? = null,
+    /**
+     * Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
      */
     val tools: List<CreateRunRequestToolsItem>? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
     /**
-     * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the
-     * output more random, while lower values like 0.2 will make it more focused and deterministic.
+     * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
      */
     val temperature: Double? = null,
     /**
-     * An alternative to sampling with temperature, called nucleus sampling, where the model
-     * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
-     * comprising the top 10% probability mass are considered. We generally recommend altering this
-     * or temperature but not both.
+     * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
     /**
-     * If `true`, returns a stream of events that happen during the Run as server-sent events,
-     * terminating when the Run enters a terminal state with a `data: [DONE]` message.
+     * If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.
      */
     val stream: Boolean? = null,
     /**
-     * The maximum number of prompt tokens that may be used over the course of the run. The run will
-     * make a best effort to use only the number of prompt tokens specified, across multiple turns
-     * of the run. If the run exceeds the number of prompt tokens specified, the run will end with
-     * status `incomplete`. See `incomplete_details` for more info.
+     * The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_prompt_tokens")
-    val maxPromptTokens: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_prompt_tokens") val maxPromptTokens: Long? = null,
     /**
-     * The maximum number of completion tokens that may be used over the course of the run. The run
-     * will make a best effort to use only the number of completion tokens specified, across
-     * multiple turns of the run. If the run exceeds the number of completion tokens specified, the
-     * run will end with status `incomplete`. See `incomplete_details` for more info.
+     * The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens")
-    val maxCompletionTokens: Long? = null,
-    /** Optional API value serialized in the `truncation_strategy` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("truncation_strategy")
-    val truncationStrategy: CreateRunRequestTruncationStrategy? = null,
-    /** Optional API value serialized in the `tool_choice` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
-    val toolChoice: AssistantsApiToolChoiceOption? = null,
-    /** Whether to enable parallel function calling during tool use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
-    val parallelToolCalls: ParallelToolCalls? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_completion_tokens") val maxCompletionTokens: Long? = null,
     /**
-     * Specifies the format that the model must output. Compatible with GPT-4o, GPT-4 Turbo, and all
-     * GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`. Setting to `{ "type": "json_schema",
-     * "json_schema": {...} }` enables Structured Outputs which ensures the model will match your
-     * supplied JSON schema. Learn more in the Structured Outputs guide. Setting to `{ "type":
-     * "json_object" }` enables JSON mode, which ensures the message the model generates is valid
-     * JSON. **Important:** when…
+     * Optional API value serialized in the `truncation_strategy` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
-    val responseFormat: AssistantsApiResponseFormatOption? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("truncation_strategy") val truncationStrategy: CreateRunRequestTruncationStrategy? = null,
+    /**
+     * Optional API value serialized in the `tool_choice` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: AssistantsApiToolChoiceOption? = null,
+    /**
+     * Whether to enable parallel function calling during tool use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: ParallelToolCalls? = null,
+    /**
+     * Specifies the format that the model must output. Compatible with GPT-4o, GPT-4 Turbo, and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`. Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema. Learn more in the Structured Outputs guide. Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON. **Important:** when…
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: AssistantsApiResponseFormatOption? = null
 )
 
-/** Required API value serialized in the `tools[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownCreateRunRequestToolsItem::class,
-)
+/**
+ * Required API value serialized in the `tools[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateRunRequestToolsItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AssistantToolsCode::class,
-        name = "code_interpreter",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AssistantToolsFileSearch::class,
-        name = "file_search",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AssistantToolsFunction::class,
-        name = "function",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsCode::class, name = "code_interpreter"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsFileSearch::class, name = "file_search"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsFunction::class, name = "function")
 )
 sealed interface CreateRunRequestToolsItem
 
 /** A [CreateRunRequestToolsItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownCreateRunRequestToolsItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownCreateRunRequestToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : CreateRunRequestToolsItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

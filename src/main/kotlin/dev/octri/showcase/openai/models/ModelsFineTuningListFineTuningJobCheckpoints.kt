@@ -3,64 +3,96 @@
 
 package dev.octri.showcase.openai.models
 
-/** Metrics at the step number during the fine-tuning job. */
+/**
+ * Metrics at the step number during the fine-tuning job.
+ */
 data class FineTuningJobCheckpointMetrics(
-    /** Optional `number` value serialized in the `step` wire field. */
+    /**
+     * Optional `number` value serialized in the `step` wire field.
+     */
     val step: Double? = null,
-    /** Optional `number` value serialized in the `train_loss` wire field. */
+    /**
+     * Optional `number` value serialized in the `train_loss` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("train_loss") val trainLoss: Double? = null,
-    /** Optional `number` value serialized in the `train_mean_token_accuracy` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("train_mean_token_accuracy")
-    val trainMeanTokenAccuracy: Double? = null,
-    /** Optional `number` value serialized in the `valid_loss` wire field. */
+    /**
+     * Optional `number` value serialized in the `train_mean_token_accuracy` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("train_mean_token_accuracy") val trainMeanTokenAccuracy: Double? = null,
+    /**
+     * Optional `number` value serialized in the `valid_loss` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("valid_loss") val validLoss: Double? = null,
-    /** Optional `number` value serialized in the `valid_mean_token_accuracy` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("valid_mean_token_accuracy")
-    val validMeanTokenAccuracy: Double? = null,
-    /** Optional `number` value serialized in the `full_valid_loss` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("full_valid_loss")
-    val fullValidLoss: Double? = null,
-    /** Optional `number` value serialized in the `full_valid_mean_token_accuracy` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("full_valid_mean_token_accuracy")
-    val fullValidMeanTokenAccuracy: Double? = null,
+    /**
+     * Optional `number` value serialized in the `valid_mean_token_accuracy` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("valid_mean_token_accuracy") val validMeanTokenAccuracy: Double? = null,
+    /**
+     * Optional `number` value serialized in the `full_valid_loss` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("full_valid_loss") val fullValidLoss: Double? = null,
+    /**
+     * Optional `number` value serialized in the `full_valid_mean_token_accuracy` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("full_valid_mean_token_accuracy") val fullValidMeanTokenAccuracy: Double? = null
 )
 
 /**
- * The `fine_tuning.job.checkpoint` object represents a model checkpoint for a fine-tuning job that
- * is ready to use.
+ * The `fine_tuning.job.checkpoint` object represents a model checkpoint for a fine-tuning job that is ready to use.
  */
 data class FineTuningJobCheckpoint(
-    /** The checkpoint identifier, which can be referenced in the API endpoints. */
+    /**
+     * The checkpoint identifier, which can be referenced in the API endpoints.
+     */
     val id: String,
-    /** The Unix timestamp (in seconds) for when the checkpoint was created. */
+    /**
+     * The Unix timestamp (in seconds) for when the checkpoint was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The name of the fine-tuned checkpoint model that is created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("fine_tuned_model_checkpoint")
-    val fineTunedModelCheckpoint: String,
-    /** The step number that the checkpoint was created at. */
+    /**
+     * The name of the fine-tuned checkpoint model that is created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fine_tuned_model_checkpoint") val fineTunedModelCheckpoint: String,
+    /**
+     * The step number that the checkpoint was created at.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("step_number") val stepNumber: Long,
-    /** Metrics at the step number during the fine-tuning job. */
+    /**
+     * Metrics at the step number during the fine-tuning job.
+     */
     val metrics: FineTuningJobCheckpointMetrics,
-    /** The name of the fine-tuning job that this checkpoint was created from. */
-    @com.fasterxml.jackson.annotation.JsonProperty("fine_tuning_job_id")
-    val fineTuningJobId: String,
-    /** The object type, which is always "fine_tuning.job.checkpoint". */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: FineTuningJobCheckpointObjectEnum,
+    /**
+     * The name of the fine-tuning job that this checkpoint was created from.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fine_tuning_job_id") val fineTuningJobId: String,
+    /**
+     * The object type, which is always "fine_tuning.job.checkpoint".
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: FineTuningJobCheckpointObjectEnum
 )
 
-/** Typed representation of the `ListFineTuningJobCheckpointsResponse` API schema. */
+/**
+ * Typed representation of the `ListFineTuningJobCheckpointsResponse` API schema.
+ */
 data class ListFineTuningJobCheckpointsResponse(
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<FineTuningJobCheckpoint>,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ListFineTuningJobCheckpointsResponseObjectEnum,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<FineTuningJobCheckpoint>,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListFineTuningJobCheckpointsResponseObjectEnum,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Optional `string` value serialized in the `first_id` wire field. */
+    /**
+     * Optional `string` value serialized in the `first_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /** Optional `string` value serialized in the `last_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
+    /**
+     * Optional `string` value serialized in the `last_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
 )

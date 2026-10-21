@@ -3,23 +3,30 @@
 
 package dev.octri.showcase.openai.models
 
-/** Explicit configuration for creating and coordinating subagents. */
+/**
+ * Explicit configuration for creating and coordinating subagents.
+ */
 data class MultiAgentConfigCurrentParam(
-    /** Whether subagent tools are enabled. */
-    val enabled: Boolean,
-    /** Maximum number of subagents that may run concurrently. Defaults to 6. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_concurrent_subagents")
-    val maxConcurrentSubagents: Long? = null,
-)
-
-/** The resolved configuration for creating and coordinating subagents. */
-data class MultiAgentConfigResource(
-    /** Whether subagent tools are enabled. Defaults to false. */
+    /**
+     * Whether subagent tools are enabled.
+     */
     val enabled: Boolean,
     /**
-     * Maximum number of subagents that may run concurrently, or null when disabled. Defaults to 6
-     * when enabled.
+     * Maximum number of subagents that may run concurrently. Defaults to 6.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_concurrent_subagents", required = true)
-    val maxConcurrentSubagents: Long?,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_concurrent_subagents") val maxConcurrentSubagents: Long? = null
+)
+
+/**
+ * The resolved configuration for creating and coordinating subagents.
+ */
+data class MultiAgentConfigResource(
+    /**
+     * Whether subagent tools are enabled. Defaults to false.
+     */
+    val enabled: Boolean,
+    /**
+     * Maximum number of subagents that may run concurrently, or null when disabled. Defaults to 6 when enabled.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_concurrent_subagents", required = true) val maxConcurrentSubagents: Long?
 )

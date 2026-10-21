@@ -3,26 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `SafetyCaseNotice` API schema. */
+/**
+ * Typed representation of the `SafetyCaseNotice` API schema.
+ */
 data class SafetyCaseNotice(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: SafetyCaseNoticeType
 )
 
-/** Typed representation of the `SafetyCaseResource` API schema. */
+/**
+ * Typed representation of the `SafetyCaseResource` API schema.
+ */
 data class SafetyCaseResource(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: SafetyCaseResourceObjectEnum,
-    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SafetyCaseResourceObjectEnum,
+    /**
+     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required `string` value serialized in the `entity_identifier` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("entity_identifier")
-    val entityIdentifier: String,
-    /** Required `string` value serialized in the `reason` wire field. */
+    /**
+     * Required `string` value serialized in the `entity_identifier` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("entity_identifier") val entityIdentifier: String,
+    /**
+     * Required `string` value serialized in the `reason` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("reason", required = true) val reason: String?,
-    /** Required object value serialized in the `notice` wire field. */
-    val notice: SafetyCaseNotice,
+    /**
+     * Required object value serialized in the `notice` wire field.
+     */
+    val notice: SafetyCaseNotice
 )

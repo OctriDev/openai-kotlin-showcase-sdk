@@ -3,19 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/** A LabelModelGrader object which uses a model to assign labels to each item in the evaluation. */
+/**
+ * A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.
+ */
 data class GraderLabelModel(
-    /** The object type, which is always `label_model`. */
+    /**
+     * The object type, which is always `label_model`.
+     */
     val type: GraderLabelModelTypeEnum,
-    /** The name of the grader. */
+    /**
+     * The name of the grader.
+     */
     val name: String,
-    /** The model to use for the evaluation. Must support structured outputs. */
+    /**
+     * The model to use for the evaluation. Must support structured outputs.
+     */
     val model: String,
-    /** Required array value serialized in the `input` wire field. */
+    /**
+     * Required array value serialized in the `input` wire field.
+     */
     val input: List<EvalItem>,
-    /** The labels to assign to each item in the evaluation. */
+    /**
+     * The labels to assign to each item in the evaluation.
+     */
     val labels: List<String>,
-    /** The labels that indicate a passing result. Must be a subset of labels. */
-    @com.fasterxml.jackson.annotation.JsonProperty("passing_labels")
-    val passingLabels: List<String>,
+    /**
+     * The labels that indicate a passing result. Must be a subset of labels.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("passing_labels") val passingLabels: List<String>
 )

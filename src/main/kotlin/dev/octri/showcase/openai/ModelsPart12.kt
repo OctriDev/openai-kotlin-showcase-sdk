@@ -3,74 +3,55 @@
 
 package dev.octri.showcase.openai
 
-typealias LiveInitialDeveloperMessageItemParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamTypeEnum
+typealias LiveInitialDeveloperMessageItemParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialDeveloperMessageItemParamTypeEnum
 
-typealias LiveInitialInputTextContentPartParam =
-    dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParam
+typealias LiveInitialInputTextContentPartParam = dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParam
 
-typealias LiveInitialInputTextContentPartParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParamTypeEnum
+typealias LiveInitialInputTextContentPartParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialInputTextContentPartParamTypeEnum
 
 typealias LiveInitialItem = dev.octri.showcase.openai.models.LiveInitialItem
 
 typealias LiveInitialMessageStatus = dev.octri.showcase.openai.models.LiveInitialMessageStatus
 
-typealias LiveInitialOutputTextContentPartParam =
-    dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParam
+typealias LiveInitialOutputTextContentPartParam = dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParam
 
-typealias LiveInitialOutputTextContentPartParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParamTypeEnum
+typealias LiveInitialOutputTextContentPartParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialOutputTextContentPartParamTypeEnum
 
-typealias LiveInitialSessionAudioOutputParam =
-    dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParam
+typealias LiveInitialSessionAudioOutputParam = dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParam
 
-typealias LiveInitialSessionAudioOutputParamVoice =
-    dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParamVoice
+typealias LiveInitialSessionAudioOutputParamVoice = dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParamVoice
 
-typealias LiveInitialSessionAudioOutputParamVoiceVariant1Enum =
-    dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParamVoiceVariant1Enum
+typealias LiveInitialSessionAudioOutputParamVoiceVariant1Enum = dev.octri.showcase.openai.models.LiveInitialSessionAudioOutputParamVoiceVariant1Enum
 
-typealias LiveInitialSessionAudioParam =
-    dev.octri.showcase.openai.models.LiveInitialSessionAudioParam
+typealias LiveInitialSessionAudioParam = dev.octri.showcase.openai.models.LiveInitialSessionAudioParam
 
-typealias LiveInitialTextContentPartParam =
-    dev.octri.showcase.openai.models.LiveInitialTextContentPartParam
+typealias LiveInitialTextContentPartParam = dev.octri.showcase.openai.models.LiveInitialTextContentPartParam
 
-typealias LiveInitialTextContentPartParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInitialTextContentPartParamTypeEnum
+typealias LiveInitialTextContentPartParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialTextContentPartParamTypeEnum
 
-typealias LiveInitialUserMessageItemParam =
-    dev.octri.showcase.openai.models.LiveInitialUserMessageItemParam
+typealias LiveInitialUserMessageItemParam = dev.octri.showcase.openai.models.LiveInitialUserMessageItemParam
 
-typealias LiveInitialUserMessageItemParamRoleEnum =
-    dev.octri.showcase.openai.models.LiveInitialUserMessageItemParamRoleEnum
+typealias LiveInitialUserMessageItemParamRoleEnum = dev.octri.showcase.openai.models.LiveInitialUserMessageItemParamRoleEnum
 
-typealias LiveInitialUserMessageItemParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInitialUserMessageItemParamTypeEnum
+typealias LiveInitialUserMessageItemParamTypeEnum = dev.octri.showcase.openai.models.LiveInitialUserMessageItemParamTypeEnum
 
 typealias LiveInlineSkillParam = dev.octri.showcase.openai.models.LiveInlineSkillParam
 
-typealias LiveInlineSkillParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInlineSkillParamTypeEnum
+typealias LiveInlineSkillParamTypeEnum = dev.octri.showcase.openai.models.LiveInlineSkillParamTypeEnum
 
 typealias LiveInlineSkillSourceParam = dev.octri.showcase.openai.models.LiveInlineSkillSourceParam
 
-typealias LiveInlineSkillSourceParamMediaTypeEnum =
-    dev.octri.showcase.openai.models.LiveInlineSkillSourceParamMediaTypeEnum
+typealias LiveInlineSkillSourceParamMediaTypeEnum = dev.octri.showcase.openai.models.LiveInlineSkillSourceParamMediaTypeEnum
 
-typealias LiveInlineSkillSourceParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInlineSkillSourceParamTypeEnum
+typealias LiveInlineSkillSourceParamTypeEnum = dev.octri.showcase.openai.models.LiveInlineSkillSourceParamTypeEnum
 
 typealias LiveInputAudioAppend = dev.octri.showcase.openai.models.LiveInputAudioAppend
 
 typealias LiveInputAudioAppendEvent = dev.octri.showcase.openai.models.LiveInputAudioAppendEvent
 
-typealias LiveInputAudioAppendEventTypeEnum =
-    dev.octri.showcase.openai.models.LiveInputAudioAppendEventTypeEnum
+typealias LiveInputAudioAppendEventTypeEnum = dev.octri.showcase.openai.models.LiveInputAudioAppendEventTypeEnum
 
-typealias LiveInputAudioAppendTypeEnum =
-    dev.octri.showcase.openai.models.LiveInputAudioAppendTypeEnum
+typealias LiveInputAudioAppendTypeEnum = dev.octri.showcase.openai.models.LiveInputAudioAppendTypeEnum
 
 typealias LiveInputAudioMuted = dev.octri.showcase.openai.models.LiveInputAudioMuted
 
@@ -78,98 +59,77 @@ typealias LiveInputAudioMutedTypeEnum = dev.octri.showcase.openai.models.LiveInp
 
 typealias LiveInputAudioMuteParam = dev.octri.showcase.openai.models.LiveInputAudioMuteParam
 
-typealias LiveInputAudioMuteParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInputAudioMuteParamTypeEnum
+typealias LiveInputAudioMuteParamTypeEnum = dev.octri.showcase.openai.models.LiveInputAudioMuteParamTypeEnum
 
 typealias LiveInputAudioUnmuted = dev.octri.showcase.openai.models.LiveInputAudioUnmuted
 
-typealias LiveInputAudioUnmutedTypeEnum =
-    dev.octri.showcase.openai.models.LiveInputAudioUnmutedTypeEnum
+typealias LiveInputAudioUnmutedTypeEnum = dev.octri.showcase.openai.models.LiveInputAudioUnmutedTypeEnum
 
 typealias LiveInputAudioUnmuteParam = dev.octri.showcase.openai.models.LiveInputAudioUnmuteParam
 
-typealias LiveInputAudioUnmuteParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInputAudioUnmuteParamTypeEnum
+typealias LiveInputAudioUnmuteParamTypeEnum = dev.octri.showcase.openai.models.LiveInputAudioUnmuteParamTypeEnum
 
 typealias LiveInputTranscriptDelta = dev.octri.showcase.openai.models.LiveInputTranscriptDelta
 
-typealias LiveInputTranscriptDeltaTypeEnum =
-    dev.octri.showcase.openai.models.LiveInputTranscriptDeltaTypeEnum
+typealias LiveInputTranscriptDeltaTypeEnum = dev.octri.showcase.openai.models.LiveInputTranscriptDeltaTypeEnum
 
 typealias LiveInstructionsAppended = dev.octri.showcase.openai.models.LiveInstructionsAppended
 
-typealias LiveInstructionsAppendedTypeEnum =
-    dev.octri.showcase.openai.models.LiveInstructionsAppendedTypeEnum
+typealias LiveInstructionsAppendedTypeEnum = dev.octri.showcase.openai.models.LiveInstructionsAppendedTypeEnum
 
 typealias LiveInstructionsAppendParam = dev.octri.showcase.openai.models.LiveInstructionsAppendParam
 
-typealias LiveInstructionsAppendParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveInstructionsAppendParamTypeEnum
+typealias LiveInstructionsAppendParamTypeEnum = dev.octri.showcase.openai.models.LiveInstructionsAppendParamTypeEnum
 
 typealias LiveLiveError = dev.octri.showcase.openai.models.LiveLiveError
 
 typealias LiveLocalEnvironmentParam = dev.octri.showcase.openai.models.LiveLocalEnvironmentParam
 
-typealias LiveLocalEnvironmentParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveLocalEnvironmentParamTypeEnum
+typealias LiveLocalEnvironmentParamTypeEnum = dev.octri.showcase.openai.models.LiveLocalEnvironmentParamTypeEnum
 
 typealias LiveLocalSkillParam = dev.octri.showcase.openai.models.LiveLocalSkillParam
 
 typealias LiveMCPToolChoiceParam = dev.octri.showcase.openai.models.LiveMCPToolChoiceParam
 
-typealias LiveMCPToolChoiceParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveMCPToolChoiceParamTypeEnum
+typealias LiveMCPToolChoiceParamTypeEnum = dev.octri.showcase.openai.models.LiveMCPToolChoiceParamTypeEnum
 
 typealias LiveMCPToolInputParam = dev.octri.showcase.openai.models.LiveMCPToolInputParam
 
-typealias LiveMCPToolInputParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveMCPToolInputParamTypeEnum
+typealias LiveMCPToolInputParamTypeEnum = dev.octri.showcase.openai.models.LiveMCPToolInputParamTypeEnum
 
 typealias LiveMediaSessionAudioParam = dev.octri.showcase.openai.models.LiveMediaSessionAudioParam
 
-typealias LiveMediaSessionCreateParams =
-    dev.octri.showcase.openai.models.LiveMediaSessionCreateParams
+typealias LiveMediaSessionCreateParams = dev.octri.showcase.openai.models.LiveMediaSessionCreateParams
 
 typealias LiveMediaSessionForkParams = dev.octri.showcase.openai.models.LiveMediaSessionForkParams
 
 typealias LiveNamespaceToolInputParam = dev.octri.showcase.openai.models.LiveNamespaceToolInputParam
 
-typealias LiveNamespaceToolInputParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveNamespaceToolInputParamTypeEnum
+typealias LiveNamespaceToolInputParamTypeEnum = dev.octri.showcase.openai.models.LiveNamespaceToolInputParamTypeEnum
 
 typealias LiveOutputAudioDelta = dev.octri.showcase.openai.models.LiveOutputAudioDelta
 
-typealias LiveOutputAudioDeltaTypeEnum =
-    dev.octri.showcase.openai.models.LiveOutputAudioDeltaTypeEnum
+typealias LiveOutputAudioDeltaTypeEnum = dev.octri.showcase.openai.models.LiveOutputAudioDeltaTypeEnum
 
-typealias LiveOutputAudioFixturePlayed =
-    dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayed
+typealias LiveOutputAudioFixturePlayed = dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayed
 
-typealias LiveOutputAudioFixturePlayedTypeEnum =
-    dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayedTypeEnum
+typealias LiveOutputAudioFixturePlayedTypeEnum = dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayedTypeEnum
 
-typealias LiveOutputAudioFixturePlaying =
-    dev.octri.showcase.openai.models.LiveOutputAudioFixturePlaying
+typealias LiveOutputAudioFixturePlaying = dev.octri.showcase.openai.models.LiveOutputAudioFixturePlaying
 
-typealias LiveOutputAudioFixturePlayingTypeEnum =
-    dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayingTypeEnum
+typealias LiveOutputAudioFixturePlayingTypeEnum = dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayingTypeEnum
 
-typealias LiveOutputAudioFixturePlayParam =
-    dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayParam
+typealias LiveOutputAudioFixturePlayParam = dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayParam
 
-typealias LiveOutputAudioFixturePlayParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayParamTypeEnum
+typealias LiveOutputAudioFixturePlayParamTypeEnum = dev.octri.showcase.openai.models.LiveOutputAudioFixturePlayParamTypeEnum
 
 typealias LiveOutputTranscriptDelta = dev.octri.showcase.openai.models.LiveOutputTranscriptDelta
 
-typealias LiveOutputTranscriptDeltaTypeEnum =
-    dev.octri.showcase.openai.models.LiveOutputTranscriptDeltaTypeEnum
+typealias LiveOutputTranscriptDeltaTypeEnum = dev.octri.showcase.openai.models.LiveOutputTranscriptDeltaTypeEnum
 
-typealias LiveProgrammaticToolInputParam =
-    dev.octri.showcase.openai.models.LiveProgrammaticToolInputParam
+typealias LiveProgrammaticToolInputParam = dev.octri.showcase.openai.models.LiveProgrammaticToolInputParam
 
-typealias LiveProgrammaticToolInputParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveProgrammaticToolInputParamTypeEnum
+typealias LiveProgrammaticToolInputParamTypeEnum = dev.octri.showcase.openai.models.LiveProgrammaticToolInputParamTypeEnum
 
 typealias LiveReasoningEffort = dev.octri.showcase.openai.models.LiveReasoningEffort
 
@@ -177,8 +137,7 @@ typealias LiveReasoningSummary = dev.octri.showcase.openai.models.LiveReasoningS
 
 typealias LiveResponseCreateParam = dev.octri.showcase.openai.models.LiveResponseCreateParam
 
-typealias LiveResponseCreateParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveResponseCreateParamTypeEnum
+typealias LiveResponseCreateParamTypeEnum = dev.octri.showcase.openai.models.LiveResponseCreateParamTypeEnum
 
 typealias LiveResponseEvent = dev.octri.showcase.openai.models.LiveResponseEvent
 
@@ -186,38 +145,27 @@ typealias LiveResponseEventTypeEnum = dev.octri.showcase.openai.models.LiveRespo
 
 typealias LiveResponseItemCreateParam = dev.octri.showcase.openai.models.LiveResponseItemCreateParam
 
-typealias LiveResponseItemCreateParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveResponseItemCreateParamTypeEnum
+typealias LiveResponseItemCreateParamTypeEnum = dev.octri.showcase.openai.models.LiveResponseItemCreateParamTypeEnum
 
-typealias LiveResponsesDelegationParam =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationParam
+typealias LiveResponsesDelegationParam = dev.octri.showcase.openai.models.LiveResponsesDelegationParam
 
-typealias LiveResponsesDelegationParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationParamTypeEnum
+typealias LiveResponsesDelegationParamTypeEnum = dev.octri.showcase.openai.models.LiveResponsesDelegationParamTypeEnum
 
-typealias LiveResponsesDelegationSettingsInputParam =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParam
+typealias LiveResponsesDelegationSettingsInputParam = dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParam
 
-typealias LiveResponsesDelegationSettingsInputParamToolChoice =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParamToolChoice
+typealias LiveResponsesDelegationSettingsInputParamToolChoice = dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParamToolChoice
 
-typealias LiveResponsesDelegationSettingsInputParamToolsItem =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParamToolsItem
+typealias LiveResponsesDelegationSettingsInputParamToolsItem = dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsInputParamToolsItem
 
-typealias LiveResponsesDelegationSettingsUpdateInputParam =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParam
+typealias LiveResponsesDelegationSettingsUpdateInputParam = dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParam
 
-typealias LiveResponsesDelegationSettingsUpdateInputParamToolChoice =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParamToolChoice
+typealias LiveResponsesDelegationSettingsUpdateInputParamToolChoice = dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParamToolChoice
 
-typealias LiveResponsesDelegationSettingsUpdateInputParamToolsItem =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParamToolsItem
+typealias LiveResponsesDelegationSettingsUpdateInputParamToolsItem = dev.octri.showcase.openai.models.LiveResponsesDelegationSettingsUpdateInputParamToolsItem
 
-typealias LiveResponsesDelegationUpdateParam =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationUpdateParam
+typealias LiveResponsesDelegationUpdateParam = dev.octri.showcase.openai.models.LiveResponsesDelegationUpdateParam
 
-typealias LiveResponsesDelegationUpdateParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveResponsesDelegationUpdateParamTypeEnum
+typealias LiveResponsesDelegationUpdateParamTypeEnum = dev.octri.showcase.openai.models.LiveResponsesDelegationUpdateParamTypeEnum
 
 typealias LiveResponsesServiceTier = dev.octri.showcase.openai.models.LiveResponsesServiceTier
 
@@ -225,85 +173,63 @@ typealias LiveServerEvent = dev.octri.showcase.openai.models.LiveServerEvent
 
 typealias LiveServerEvent2 = dev.octri.showcase.openai.models.LiveServerEvent2
 
-typealias LiveSessionAudioFormatPCMAParam =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMAParam
+typealias LiveSessionAudioFormatPCMAParam = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMAParam
 
-typealias LiveSessionAudioFormatPCMAParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMAParamTypeEnum
+typealias LiveSessionAudioFormatPCMAParamTypeEnum = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMAParamTypeEnum
 
-typealias LiveSessionAudioFormatPCMParam =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMParam
+typealias LiveSessionAudioFormatPCMParam = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMParam
 
-typealias LiveSessionAudioFormatPCMParamRateEnum =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMParamRateEnum
+typealias LiveSessionAudioFormatPCMParamRateEnum = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMParamRateEnum
 
-typealias LiveSessionAudioFormatPCMParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMParamTypeEnum
+typealias LiveSessionAudioFormatPCMParamTypeEnum = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMParamTypeEnum
 
-typealias LiveSessionAudioFormatPCMUParam =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMUParam
+typealias LiveSessionAudioFormatPCMUParam = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMUParam
 
-typealias LiveSessionAudioFormatPCMUParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMUParamTypeEnum
+typealias LiveSessionAudioFormatPCMUParamTypeEnum = dev.octri.showcase.openai.models.LiveSessionAudioFormatPCMUParamTypeEnum
 
 typealias LiveSessionClosed = dev.octri.showcase.openai.models.LiveSessionClosed
 
-typealias LiveSessionClosedReasonVariant0Enum =
-    dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant0Enum
+typealias LiveSessionClosedReasonVariant0Enum = dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant0Enum
 
-typealias LiveSessionClosedReasonVariant1Enum =
-    dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant1Enum
+typealias LiveSessionClosedReasonVariant1Enum = dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant1Enum
 
-typealias LiveSessionClosedReasonVariant2Enum =
-    dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant2Enum
+typealias LiveSessionClosedReasonVariant2Enum = dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant2Enum
 
-typealias LiveSessionClosedReasonVariant3Enum =
-    dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant3Enum
+typealias LiveSessionClosedReasonVariant3Enum = dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant3Enum
 
-typealias LiveSessionClosedReasonVariant4Enum =
-    dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant4Enum
+typealias LiveSessionClosedReasonVariant4Enum = dev.octri.showcase.openai.models.LiveSessionClosedReasonVariant4Enum
 
 typealias LiveSessionClosedTypeEnum = dev.octri.showcase.openai.models.LiveSessionClosedTypeEnum
 
 typealias LiveSessionCloseParam = dev.octri.showcase.openai.models.LiveSessionCloseParam
 
-typealias LiveSessionCloseParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionCloseParamTypeEnum
+typealias LiveSessionCloseParamTypeEnum = dev.octri.showcase.openai.models.LiveSessionCloseParamTypeEnum
 
 typealias LiveSessionCreateParams = dev.octri.showcase.openai.models.LiveSessionCreateParams
 
-typealias LiveSessionCreateParamsDelegation =
-    dev.octri.showcase.openai.models.LiveSessionCreateParamsDelegation
+typealias LiveSessionCreateParamsDelegation = dev.octri.showcase.openai.models.LiveSessionCreateParamsDelegation
 
 typealias LiveSessionCreateRequest = dev.octri.showcase.openai.models.LiveSessionCreateRequest
 
-typealias LiveSessionCreateRequestRequest =
-    dev.octri.showcase.openai.models.LiveSessionCreateRequestRequest
+typealias LiveSessionCreateRequestRequest = dev.octri.showcase.openai.models.LiveSessionCreateRequestRequest
 
-typealias LiveSessionCreateRequestTransport =
-    dev.octri.showcase.openai.models.LiveSessionCreateRequestTransport
+typealias LiveSessionCreateRequestTransport = dev.octri.showcase.openai.models.LiveSessionCreateRequestTransport
 
-typealias LiveSessionCreateRequestTransportRequest =
-    dev.octri.showcase.openai.models.LiveSessionCreateRequestTransportRequest
+typealias LiveSessionCreateRequestTransportRequest = dev.octri.showcase.openai.models.LiveSessionCreateRequestTransportRequest
 
 typealias LiveSessionCreateResponse = dev.octri.showcase.openai.models.LiveSessionCreateResponse
 
-typealias LiveSessionCreateResponseTransport =
-    dev.octri.showcase.openai.models.LiveSessionCreateResponseTransport
+typealias LiveSessionCreateResponseTransport = dev.octri.showcase.openai.models.LiveSessionCreateResponseTransport
 
-typealias LiveSessionCreateResponseTransportVariant1 =
-    dev.octri.showcase.openai.models.LiveSessionCreateResponseTransportVariant1
+typealias LiveSessionCreateResponseTransportVariant1 = dev.octri.showcase.openai.models.LiveSessionCreateResponseTransportVariant1
 
-typealias LiveSessionCreateResponseTransportVariant1TypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionCreateResponseTransportVariant1TypeEnum
+typealias LiveSessionCreateResponseTransportVariant1TypeEnum = dev.octri.showcase.openai.models.LiveSessionCreateResponseTransportVariant1TypeEnum
 
 typealias LiveSessionResourceParam = dev.octri.showcase.openai.models.LiveSessionResourceParam
 
-typealias LiveSessionResourceParamDelegation =
-    dev.octri.showcase.openai.models.LiveSessionResourceParamDelegation
+typealias LiveSessionResourceParamDelegation = dev.octri.showcase.openai.models.LiveSessionResourceParamDelegation
 
-typealias LiveSessionResourceParamStatusEnum =
-    dev.octri.showcase.openai.models.LiveSessionResourceParamStatusEnum
+typealias LiveSessionResourceParamStatusEnum = dev.octri.showcase.openai.models.LiveSessionResourceParamStatusEnum
 
 typealias LiveSessionStarted = dev.octri.showcase.openai.models.LiveSessionStarted
 
@@ -311,8 +237,7 @@ typealias LiveSessionStartedTypeEnum = dev.octri.showcase.openai.models.LiveSess
 
 typealias LiveSessionStartEvent = dev.octri.showcase.openai.models.LiveSessionStartEvent
 
-typealias LiveSessionStartEventTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionStartEventTypeEnum
+typealias LiveSessionStartEventTypeEnum = dev.octri.showcase.openai.models.LiveSessionStartEventTypeEnum
 
 typealias LiveSessionUpdated = dev.octri.showcase.openai.models.LiveSessionUpdated
 
@@ -322,18 +247,15 @@ typealias LiveSessionUpdateParam = dev.octri.showcase.openai.models.LiveSessionU
 
 typealias LiveSessionUpdateParams = dev.octri.showcase.openai.models.LiveSessionUpdateParams
 
-typealias LiveSessionUpdateParamsDelegation =
-    dev.octri.showcase.openai.models.LiveSessionUpdateParamsDelegation
+typealias LiveSessionUpdateParamsDelegation = dev.octri.showcase.openai.models.LiveSessionUpdateParamsDelegation
 
-typealias LiveSessionUpdateParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionUpdateParamTypeEnum
+typealias LiveSessionUpdateParamTypeEnum = dev.octri.showcase.openai.models.LiveSessionUpdateParamTypeEnum
 
 typealias LiveSessionUsage = dev.octri.showcase.openai.models.LiveSessionUsage
 
 typealias LiveSessionUsageUpdated = dev.octri.showcase.openai.models.LiveSessionUsageUpdated
 
-typealias LiveSessionUsageUpdatedTypeEnum =
-    dev.octri.showcase.openai.models.LiveSessionUsageUpdatedTypeEnum
+typealias LiveSessionUsageUpdatedTypeEnum = dev.octri.showcase.openai.models.LiveSessionUsageUpdatedTypeEnum
 
 typealias LiveSidebandClientEvent = dev.octri.showcase.openai.models.LiveSidebandClientEvent
 
@@ -347,8 +269,7 @@ typealias LiveSIPTransport = dev.octri.showcase.openai.models.LiveSIPTransport
 
 typealias LiveSIPTransportRequest = dev.octri.showcase.openai.models.LiveSIPTransportRequest
 
-typealias LiveSIPTransportRequestTypeEnum =
-    dev.octri.showcase.openai.models.LiveSIPTransportRequestTypeEnum
+typealias LiveSIPTransportRequestTypeEnum = dev.octri.showcase.openai.models.LiveSIPTransportRequestTypeEnum
 
 typealias LiveSIPTransportTypeEnum = dev.octri.showcase.openai.models.LiveSIPTransportTypeEnum
 
@@ -358,8 +279,7 @@ typealias LiveSIPTrunkAuth = dev.octri.showcase.openai.models.LiveSIPTrunkAuth
 
 typealias LiveSIPTrunkAuthRequest = dev.octri.showcase.openai.models.LiveSIPTrunkAuthRequest
 
-typealias LiveSIPTrunkAuthRequestTypeEnum =
-    dev.octri.showcase.openai.models.LiveSIPTrunkAuthRequestTypeEnum
+typealias LiveSIPTrunkAuthRequestTypeEnum = dev.octri.showcase.openai.models.LiveSIPTrunkAuthRequestTypeEnum
 
 typealias LiveSIPTrunkAuthTypeEnum = dev.octri.showcase.openai.models.LiveSIPTrunkAuthTypeEnum
 
@@ -367,104 +287,81 @@ typealias LiveSIPTrunkRequest = dev.octri.showcase.openai.models.LiveSIPTrunkReq
 
 typealias LiveSkillReferenceParam = dev.octri.showcase.openai.models.LiveSkillReferenceParam
 
-typealias LiveSkillReferenceParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSkillReferenceParamTypeEnum
+typealias LiveSkillReferenceParamTypeEnum = dev.octri.showcase.openai.models.LiveSkillReferenceParamTypeEnum
 
 typealias LiveSpecificApplyPatchParam = dev.octri.showcase.openai.models.LiveSpecificApplyPatchParam
 
-typealias LiveSpecificApplyPatchParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificApplyPatchParamTypeEnum
+typealias LiveSpecificApplyPatchParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificApplyPatchParamTypeEnum
 
-typealias LiveSpecificCodeInterpreterParam =
-    dev.octri.showcase.openai.models.LiveSpecificCodeInterpreterParam
+typealias LiveSpecificCodeInterpreterParam = dev.octri.showcase.openai.models.LiveSpecificCodeInterpreterParam
 
-typealias LiveSpecificCodeInterpreterParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificCodeInterpreterParamTypeEnum
+typealias LiveSpecificCodeInterpreterParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificCodeInterpreterParamTypeEnum
 
 typealias LiveSpecificComputerParam = dev.octri.showcase.openai.models.LiveSpecificComputerParam
 
-typealias LiveSpecificComputerParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificComputerParamTypeEnum
+typealias LiveSpecificComputerParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificComputerParamTypeEnum
 
 typealias LiveSpecificCustomToolParam = dev.octri.showcase.openai.models.LiveSpecificCustomToolParam
 
-typealias LiveSpecificCustomToolParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificCustomToolParamTypeEnum
+typealias LiveSpecificCustomToolParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificCustomToolParamTypeEnum
 
 typealias LiveSpecificFileSearchParam = dev.octri.showcase.openai.models.LiveSpecificFileSearchParam
 
-typealias LiveSpecificFileSearchParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificFileSearchParamTypeEnum
+typealias LiveSpecificFileSearchParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificFileSearchParamTypeEnum
 
-typealias LiveSpecificFunctionShellParam =
-    dev.octri.showcase.openai.models.LiveSpecificFunctionShellParam
+typealias LiveSpecificFunctionShellParam = dev.octri.showcase.openai.models.LiveSpecificFunctionShellParam
 
-typealias LiveSpecificFunctionShellParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificFunctionShellParamTypeEnum
+typealias LiveSpecificFunctionShellParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificFunctionShellParamTypeEnum
 
 typealias LiveSpecificImageGenParam = dev.octri.showcase.openai.models.LiveSpecificImageGenParam
 
-typealias LiveSpecificImageGenParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificImageGenParamTypeEnum
+typealias LiveSpecificImageGenParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificImageGenParamTypeEnum
 
-typealias LiveSpecificProgrammaticToolCallingParam =
-    dev.octri.showcase.openai.models.LiveSpecificProgrammaticToolCallingParam
+typealias LiveSpecificProgrammaticToolCallingParam = dev.octri.showcase.openai.models.LiveSpecificProgrammaticToolCallingParam
 
-typealias LiveSpecificProgrammaticToolCallingParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificProgrammaticToolCallingParamTypeEnum
+typealias LiveSpecificProgrammaticToolCallingParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificProgrammaticToolCallingParamTypeEnum
 
 typealias LiveSpecificWebSearchParam = dev.octri.showcase.openai.models.LiveSpecificWebSearchParam
 
-typealias LiveSpecificWebSearchParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificWebSearchParamTypeEnum
+typealias LiveSpecificWebSearchParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificWebSearchParamTypeEnum
 
-typealias LiveSpecificWebSearchPreviewParam =
-    dev.octri.showcase.openai.models.LiveSpecificWebSearchPreviewParam
+typealias LiveSpecificWebSearchPreviewParam = dev.octri.showcase.openai.models.LiveSpecificWebSearchPreviewParam
 
-typealias LiveSpecificWebSearchPreviewParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveSpecificWebSearchPreviewParamTypeEnum
+typealias LiveSpecificWebSearchPreviewParamTypeEnum = dev.octri.showcase.openai.models.LiveSpecificWebSearchPreviewParamTypeEnum
 
 typealias LiveTextVerbosity = dev.octri.showcase.openai.models.LiveTextVerbosity
 
 typealias LiveThinkingAppended = dev.octri.showcase.openai.models.LiveThinkingAppended
 
-typealias LiveThinkingAppendedTypeEnum =
-    dev.octri.showcase.openai.models.LiveThinkingAppendedTypeEnum
+typealias LiveThinkingAppendedTypeEnum = dev.octri.showcase.openai.models.LiveThinkingAppendedTypeEnum
 
 typealias LiveThinkingAppendParam = dev.octri.showcase.openai.models.LiveThinkingAppendParam
 
-typealias LiveThinkingAppendParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveThinkingAppendParamTypeEnum
+typealias LiveThinkingAppendParamTypeEnum = dev.octri.showcase.openai.models.LiveThinkingAppendParamTypeEnum
 
 typealias LiveToolChoiceEnum = dev.octri.showcase.openai.models.LiveToolChoiceEnum
 
 typealias LiveToolChoiceValueEnum = dev.octri.showcase.openai.models.LiveToolChoiceValueEnum
 
-typealias LiveToolSearchToolInputParam =
-    dev.octri.showcase.openai.models.LiveToolSearchToolInputParam
+typealias LiveToolSearchToolInputParam = dev.octri.showcase.openai.models.LiveToolSearchToolInputParam
 
-typealias LiveToolSearchToolInputParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveToolSearchToolInputParamTypeEnum
+typealias LiveToolSearchToolInputParamTypeEnum = dev.octri.showcase.openai.models.LiveToolSearchToolInputParamTypeEnum
 
 typealias LiveTransportAnswered = dev.octri.showcase.openai.models.LiveTransportAnswered
 
-typealias LiveTransportAnsweredTypeEnum =
-    dev.octri.showcase.openai.models.LiveTransportAnsweredTypeEnum
+typealias LiveTransportAnsweredTypeEnum = dev.octri.showcase.openai.models.LiveTransportAnsweredTypeEnum
 
 typealias LiveTransportCallError = dev.octri.showcase.openai.models.LiveTransportCallError
 
-typealias LiveTransportCallErrorTypeEnum =
-    dev.octri.showcase.openai.models.LiveTransportCallErrorTypeEnum
+typealias LiveTransportCallErrorTypeEnum = dev.octri.showcase.openai.models.LiveTransportCallErrorTypeEnum
 
 typealias LiveTransportDTMFReceived = dev.octri.showcase.openai.models.LiveTransportDTMFReceived
 
-typealias LiveTransportDTMFReceivedTypeEnum =
-    dev.octri.showcase.openai.models.LiveTransportDTMFReceivedTypeEnum
+typealias LiveTransportDTMFReceivedTypeEnum = dev.octri.showcase.openai.models.LiveTransportDTMFReceivedTypeEnum
 
 typealias LiveTransportDTMFSend = dev.octri.showcase.openai.models.LiveTransportDTMFSend
 
-typealias LiveTransportDTMFSendTypeEnum =
-    dev.octri.showcase.openai.models.LiveTransportDTMFSendTypeEnum
+typealias LiveTransportDTMFSendTypeEnum = dev.octri.showcase.openai.models.LiveTransportDTMFSendTypeEnum
 
 typealias LiveTransportFailed = dev.octri.showcase.openai.models.LiveTransportFailed
 
@@ -472,8 +369,7 @@ typealias LiveTransportFailedTypeEnum = dev.octri.showcase.openai.models.LiveTra
 
 typealias LiveTransportRinging = dev.octri.showcase.openai.models.LiveTransportRinging
 
-typealias LiveTransportRingingTypeEnum =
-    dev.octri.showcase.openai.models.LiveTransportRingingTypeEnum
+typealias LiveTransportRingingTypeEnum = dev.octri.showcase.openai.models.LiveTransportRingingTypeEnum
 
 typealias LiveWebRTCTransport = dev.octri.showcase.openai.models.LiveWebRTCTransport
 
@@ -481,36 +377,29 @@ typealias LiveWebRTCTransportTypeEnum = dev.octri.showcase.openai.models.LiveWeb
 
 typealias LiveWebSearchToolInputParam = dev.octri.showcase.openai.models.LiveWebSearchToolInputParam
 
-typealias LiveWebSearchToolInputParamTypeEnum =
-    dev.octri.showcase.openai.models.LiveWebSearchToolInputParamTypeEnum
+typealias LiveWebSearchToolInputParamTypeEnum = dev.octri.showcase.openai.models.LiveWebSearchToolInputParamTypeEnum
 
 typealias LocalEnvironmentParam = dev.octri.showcase.openai.models.LocalEnvironmentParam
 
-typealias LocalEnvironmentParamTypeEnum =
-    dev.octri.showcase.openai.models.LocalEnvironmentParamTypeEnum
+typealias LocalEnvironmentParamTypeEnum = dev.octri.showcase.openai.models.LocalEnvironmentParamTypeEnum
 
 typealias LocalEnvironmentResource = dev.octri.showcase.openai.models.LocalEnvironmentResource
 
-typealias LocalEnvironmentResourceTypeEnum =
-    dev.octri.showcase.openai.models.LocalEnvironmentResourceTypeEnum
+typealias LocalEnvironmentResourceTypeEnum = dev.octri.showcase.openai.models.LocalEnvironmentResourceTypeEnum
 
 typealias LocalShellExecAction = dev.octri.showcase.openai.models.LocalShellExecAction
 
-typealias LocalShellExecActionTypeEnum =
-    dev.octri.showcase.openai.models.LocalShellExecActionTypeEnum
+typealias LocalShellExecActionTypeEnum = dev.octri.showcase.openai.models.LocalShellExecActionTypeEnum
 
 typealias LocalShellToolCall = dev.octri.showcase.openai.models.LocalShellToolCall
 
 typealias LocalShellToolCallOutput = dev.octri.showcase.openai.models.LocalShellToolCallOutput
 
-typealias LocalShellToolCallOutputStatusVariant0Enum =
-    dev.octri.showcase.openai.models.LocalShellToolCallOutputStatusVariant0Enum
+typealias LocalShellToolCallOutputStatusVariant0Enum = dev.octri.showcase.openai.models.LocalShellToolCallOutputStatusVariant0Enum
 
-typealias LocalShellToolCallOutputTypeEnum =
-    dev.octri.showcase.openai.models.LocalShellToolCallOutputTypeEnum
+typealias LocalShellToolCallOutputTypeEnum = dev.octri.showcase.openai.models.LocalShellToolCallOutputTypeEnum
 
-typealias LocalShellToolCallStatusEnum =
-    dev.octri.showcase.openai.models.LocalShellToolCallStatusEnum
+typealias LocalShellToolCallStatusEnum = dev.octri.showcase.openai.models.LocalShellToolCallStatusEnum
 
 typealias LocalShellToolCallTypeEnum = dev.octri.showcase.openai.models.LocalShellToolCallTypeEnum
 
@@ -538,8 +427,7 @@ typealias MCPApprovalResponse = dev.octri.showcase.openai.models.MCPApprovalResp
 
 typealias MCPApprovalResponseResource = dev.octri.showcase.openai.models.MCPApprovalResponseResource
 
-typealias MCPApprovalResponseResourceTypeEnum =
-    dev.octri.showcase.openai.models.MCPApprovalResponseResourceTypeEnum
+typealias MCPApprovalResponseResourceTypeEnum = dev.octri.showcase.openai.models.MCPApprovalResponseResourceTypeEnum
 
 typealias MCPApprovalResponseTypeEnum = dev.octri.showcase.openai.models.MCPApprovalResponseTypeEnum
 

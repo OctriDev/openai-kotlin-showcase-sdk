@@ -3,16 +3,28 @@
 
 package dev.octri.showcase.openai.models
 
-/** An error object returned when the model fails to generate a Response. */
+/**
+ * An error object returned when the model fails to generate a Response.
+ */
 data class ResponseError(
-    /** The error code for the response. */
+    /**
+     * The error code for the response.
+     */
     val code: ResponseErrorCode,
-    /** A human-readable description of the error. */
+    /**
+     * A human-readable description of the error.
+     */
     val message: String,
-    /** The original error type, or null if it was not recorded. */
+    /**
+     * The original error type, or null if it was not recorded.
+     */
     val type: String? = null,
-    /** The request parameter associated with the error, or null if none was recorded. */
+    /**
+     * The request parameter associated with the error, or null if none was recorded.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
-    /** Optional object value serialized in the `misalignment` wire field. */
-    val misalignment: MisalignmentErrorDetailsResource? = null,
+    /**
+     * Optional object value serialized in the `misalignment` wire field.
+     */
+    val misalignment: MisalignmentErrorDetailsResource? = null
 )

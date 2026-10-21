@@ -3,16 +3,28 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ListVectorStoresResponse` API schema. */
+/**
+ * Typed representation of the `ListVectorStoresResponse` API schema.
+ */
 data class ListVectorStoresResponse(
-    /** Required `string` value serialized in the `object` wire field. */
+    /**
+     * Required `string` value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<VectorStoreObject>,
-    /** Required `string` value serialized in the `first_id` wire field. */
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String,
-    /** Required `string` value serialized in the `last_id` wire field. */
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )

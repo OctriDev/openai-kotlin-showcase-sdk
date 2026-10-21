@@ -18,83 +18,43 @@ import dev.octri.showcase.openai.Validation
 
 internal object AgentsListAgentSessionItemsOperation {
     /**
-     * Lists items produced by the session's root agent, including its interactions with subagents.
-     * Each subagent has its own item history. See inspecting agent output.
+     * Lists items produced by the session's root agent, including its interactions with subagents. Each subagent has its own item history. See inspecting agent output.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionItems(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SessionItemListResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionItems(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<SessionItemListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionItemListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists items produced by the session's root agent, including its interactions with subagents.
-     * Each subagent has its own item history. See inspecting agent output.
+     * Lists items produced by the session's root agent, including its interactions with subagents. Each subagent has its own item history. See inspecting agent output.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionItemsPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SessionTurnItemResource) -> Boolean,
-    ) {
+    fun listAgentSessionItemsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentSessionItems(clientConfig, sessionId, limit, order, cursor, options)
@@ -109,15 +69,9 @@ internal object AgentsListAgentSessionItemsOperation {
         }
     }
 
-    fun listAgentSessionItemsPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionItemsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionItemsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionItemsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentSessionItems(clientConfig, sessionId, limit, order, cursor, options)
@@ -134,91 +88,46 @@ internal object AgentsListAgentSessionItemsOperation {
 
 internal object AgentsListAgentSessionTracesOperation {
     /**
-     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID.
-     * Unpublished traces are skipped. Each page returns data available when read; it does not wait
-     * for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the
-     * limit is exceeded, request fewer traces.
+     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID. Unpublished traces are skipped. Each page returns data available when read; it does not wait for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the limit is exceeded, request fewer traces.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionTraces(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SessionTraceListResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionTraces(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTraceListResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<SessionTraceListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/traces",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionTraces",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionTraceListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/traces", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionTraces", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID.
-     * Unpublished traces are skipped. Each page returns data available when read; it does not wait
-     * for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the
-     * limit is exceeded, request fewer traces.
+     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID. Unpublished traces are skipped. Each page returns data available when read; it does not wait for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the limit is exceeded, request fewer traces.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionTracesPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SessionTurnTraceResource) -> Boolean,
-    ) {
+    fun listAgentSessionTracesPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnTraceResource) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionTraces(clientConfig, sessionId, limit, order, cursor, options)
+            val page = listAgentSessionTraces(clientConfig, sessionId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -230,19 +139,12 @@ internal object AgentsListAgentSessionTracesOperation {
         }
     }
 
-    fun listAgentSessionTracesPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionTracesPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionTracesPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionTracesPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionTraces(clientConfig, sessionId, limit, order, cursor, options)
+            val page = listAgentSessionTraces(clientConfig, sessionId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -256,83 +158,43 @@ internal object AgentsListAgentSessionTracesOperation {
 
 internal object AgentsListAgentSessionTurnsOperation {
     /**
-     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected
-     * order. See session turns.
+     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected order. See session turns.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionTurns(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SessionTurnListResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionTurns(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTurnListResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<SessionTurnListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/turns",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionTurns",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionTurnListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/turns", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionTurns", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected
-     * order. See session turns.
+     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected order. See session turns.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionTurnsPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (TurnResource) -> Boolean,
-    ) {
+    fun listAgentSessionTurnsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (TurnResource) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentSessionTurns(clientConfig, sessionId, limit, order, cursor, options)
@@ -347,15 +209,9 @@ internal object AgentsListAgentSessionTurnsOperation {
         }
     }
 
-    fun listAgentSessionTurnsPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionTurnsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionTurnsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionTurnsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listAgentSessionTurns(clientConfig, sessionId, limit, order, cursor, options)
@@ -372,147 +228,66 @@ internal object AgentsListAgentSessionTurnsOperation {
 
 internal object AgentsRetrieveAgentSessionTurnOperation {
     /**
-     * Retrieves a turn's current status, timestamps, usage, and error. Returns 404 if the turn does
-     * not belong to the session. See session turns.
+     * Retrieves a turn's current status, timestamps, usage, and error. Returns 404 if the turn does not belong to the session. See session turns.
      *
      * @param sessionId The ID of the session that owns the turn.
      * @param turnId The ID of the turn.
      */
-    fun retrieveAgentSessionTurn(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        turnId: String,
-        options: RequestOptions? = null,
-    ): TurnResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun retrieveAgentSessionTurn(clientConfig: ClientConfig, sessionId: String, turnId: String, options: RequestOptions? = null): TurnResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
         Validation.validateLength("turn_id", turnId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<TurnResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/turns/${SdkClient.encodePathSegment(turnId)}",
-                    config = clientConfig,
-                    operationId = "retrieveAgentSessionTurn",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<TurnResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/turns/${SdkClient.encodePathSegment(turnId)}", config = clientConfig, operationId = "retrieveAgentSessionTurn", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 }
 
 internal object AgentsListAgentSessionTurnItemsOperation {
     /**
-     * Lists items belonging to one root-agent turn, including its interactions with subagents. See
-     * inspecting agent output.
+     * Lists items belonging to one root-agent turn, including its interactions with subagents. See inspecting agent output.
      *
      * @param sessionId The ID of the session that owns the turn.
      * @param turnId The ID of the turn.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionTurnItems(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        turnId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-    ): SessionItemListResource {
-        Validation.validateLength(
-            "session_id",
-            sessionId,
-            Validation.LengthOpts(min = 0, max = 1048576),
-        )
+    fun listAgentSessionTurnItems(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource {
+        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
 
         Validation.validateLength("turn_id", turnId, Validation.LengthOpts(min = 0, max = 1048576))
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-        }
+}
 
-        return SdkClient.request<SessionItemListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/turns/${SdkClient.encodePathSegment(turnId)}/items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                        ),
-                    operationId = "listAgentSessionTurnItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse2::class.java,
-                            "401" to ErrorResponse2::class.java,
-                            "403" to ErrorResponse2::class.java,
-                            "404" to ErrorResponse2::class.java,
-                            "409" to ErrorResponse2::class.java,
-                            "500" to ErrorResponse2::class.java,
-                            "503" to ErrorResponse2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SessionItemListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/turns/${SdkClient.encodePathSegment(turnId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionTurnItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists items belonging to one root-agent turn, including its interactions with subagents. See
-     * inspecting agent output.
+     * Lists items belonging to one root-agent turn, including its interactions with subagents. See inspecting agent output.
      *
      * @param sessionId The ID of the session that owns the turn.
      * @param turnId The ID of the turn.
-     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100.
+     *   Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionTurnItemsPaginated(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        turnId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldFn: (SessionTurnItemResource) -> Boolean,
-    ) {
+    fun listAgentSessionTurnItemsPaginated(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionTurnItems(
-                    clientConfig,
-                    sessionId,
-                    turnId,
-                    limit,
-                    order,
-                    cursor,
-                    options,
-                )
+            val page = listAgentSessionTurnItems(clientConfig, sessionId, turnId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -524,28 +299,12 @@ internal object AgentsListAgentSessionTurnItemsOperation {
         }
     }
 
-    fun listAgentSessionTurnItemsPages(
-        clientConfig: ClientConfig,
-        sessionId: String,
-        turnId: String,
-        limit: Long? = null,
-        order: ListOrderParam? = null,
-        after: String? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Agents.ListAgentSessionTurnItemsPage) -> Boolean,
-    ) {
+
+
+    fun listAgentSessionTurnItemsPages(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionTurnItemsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listAgentSessionTurnItems(
-                    clientConfig,
-                    sessionId,
-                    turnId,
-                    limit,
-                    order,
-                    cursor,
-                    options,
-                )
+            val page = listAgentSessionTurnItems(clientConfig, sessionId, turnId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId

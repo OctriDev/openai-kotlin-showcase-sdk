@@ -3,633 +3,482 @@
 
 package dev.octri.showcase.openai.models
 
-/** A realtime client event. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeClientEvent::class,
-)
+/**
+ * A realtime client event.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeClientEvent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventConversationItemCreate::class,
-        name = "conversation.item.create",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventConversationItemDelete::class,
-        name = "conversation.item.delete",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventConversationItemRetrieve::class,
-        name = "conversation.item.retrieve",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventConversationItemTruncate::class,
-        name = "conversation.item.truncate",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventInputAudioBufferAppend::class,
-        name = "input_audio_buffer.append",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventInputAudioBufferClear::class,
-        name = "input_audio_buffer.clear",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventOutputAudioBufferClear::class,
-        name = "output_audio_buffer.clear",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventInputAudioBufferCommit::class,
-        name = "input_audio_buffer.commit",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventResponseCancel::class,
-        name = "response.cancel",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventResponseCreate::class,
-        name = "response.create",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeClientEventSessionUpdate::class,
-        name = "session.update",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventConversationItemCreate::class, name = "conversation.item.create"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventConversationItemDelete::class, name = "conversation.item.delete"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventConversationItemRetrieve::class, name = "conversation.item.retrieve"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventConversationItemTruncate::class, name = "conversation.item.truncate"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventInputAudioBufferAppend::class, name = "input_audio_buffer.append"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventInputAudioBufferClear::class, name = "input_audio_buffer.clear"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventOutputAudioBufferClear::class, name = "output_audio_buffer.clear"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventInputAudioBufferCommit::class, name = "input_audio_buffer.commit"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventResponseCancel::class, name = "response.cancel"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventResponseCreate::class, name = "response.create"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeClientEventSessionUpdate::class, name = "session.update")
 )
 sealed interface RealtimeClientEvent
 
 /** A [RealtimeClientEvent] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeClientEvent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeClientEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeClientEvent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * Add a new Item to the Conversation's context, including messages, function calls, and function
- * call responses. This event can be used both to populate a "history" of the conversation and to
- * add new items mid-stream, but has the current limitation that it cannot populate assistant audio
- * messages. If successful, the server will emit a `conversation.item.added` event and, when the
- * item is finalized, a `conversation.item.done` event. Otherwise, an `error` event will be sent.
+ * Add a new Item to the Conversation's context, including messages, function calls, and function call responses. This event can be used both to populate a "history" of the conversation and to add new items mid-stream, but has the current limitation that it cannot populate assistant audio messages. If successful, the server will emit a `conversation.item.added` event and, when the item is finalized, a `conversation.item.done` event. Otherwise, an `error` event will be sent.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventConversationItemCreate(
-    /** The event type, must be `conversation.item.create`. */
+    /**
+     * The event type, must be `conversation.item.create`.
+     */
     val type: RealtimeClientEventConversationItemCreateTypeEnum,
-    /** A single item within a Realtime conversation. */
+    /**
+     * A single item within a Realtime conversation.
+     */
     val item: RealtimeConversationItem,
-    /** Optional client-generated ID used to identify this event. */
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
     /**
-     * The ID of the preceding item after which the new item will be inserted. If not set, the new
-     * item will be appended to the end of the conversation. If set to `root`, the new item will be
-     * added to the beginning of the conversation. If set to an existing ID, it allows an item to be
-     * inserted mid-conversation. If the ID cannot be found, an error will be returned and the item
-     * will not be added.
+     * The ID of the preceding item after which the new item will be inserted. If not set, the new item will be appended to the end of the conversation. If set to `root`, the new item will be added to the beginning of the conversation. If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_item_id")
-    val previousItemId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_item_id") val previousItemId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event when you want to remove any item from the conversation history. The server will
- * respond with a `conversation.item.deleted` event, unless the item does not exist in the
- * conversation history, in which case the server will respond with an error.
+ * Send this event when you want to remove any item from the conversation history. The server will respond with a `conversation.item.deleted` event, unless the item does not exist in the conversation history, in which case the server will respond with an error.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventConversationItemDelete(
-    /** The event type, must be `conversation.item.delete`. */
+    /**
+     * The event type, must be `conversation.item.delete`.
+     */
     val type: RealtimeClientEventConversationItemDeleteTypeEnum,
-    /** The ID of the item to delete. */
+    /**
+     * The ID of the item to delete.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event when you want to retrieve the server's representation of a specific item in the
- * conversation history. This is useful, for example, to inspect user audio after noise cancellation
- * and VAD. The server will respond with a `conversation.item.retrieved` event, unless the item does
- * not exist in the conversation history, in which case the server will respond with an error.
+ * Send this event when you want to retrieve the server's representation of a specific item in the conversation history. This is useful, for example, to inspect user audio after noise cancellation and VAD. The server will respond with a `conversation.item.retrieved` event, unless the item does not exist in the conversation history, in which case the server will respond with an error.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventConversationItemRetrieve(
-    /** The event type, must be `conversation.item.retrieve`. */
+    /**
+     * The event type, must be `conversation.item.retrieve`.
+     */
     val type: RealtimeClientEventConversationItemRetrieveTypeEnum,
-    /** The ID of the item to retrieve. */
+    /**
+     * The ID of the item to retrieve.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event to truncate a previous assistant message’s audio. The server will produce audio
- * faster than realtime, so this event is useful when the user interrupts to truncate audio that has
- * already been sent to the client but not yet played. This will synchronize the server's
- * understanding of the audio with the client's playback. Truncating audio will delete the
- * server-side text transcript to ensure there is not text in the context that hasn't been heard by
- * the user. If…
+ * Send this event to truncate a previous assistant message’s audio. The server will produce audio faster than realtime, so this event is useful when the user interrupts to truncate audio that has already been sent to the client but not yet played. This will synchronize the server's understanding of the audio with the client's playback. Truncating audio will delete the server-side text transcript to ensure there is not text in the context that hasn't been heard by the user. If…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventConversationItemTruncate(
-    /** The event type, must be `conversation.item.truncate`. */
+    /**
+     * The event type, must be `conversation.item.truncate`.
+     */
     val type: RealtimeClientEventConversationItemTruncateTypeEnum,
     /**
-     * The ID of the assistant message item to truncate. Only assistant message items can be
-     * truncated.
+     * The ID of the assistant message item to truncate. Only assistant message items can be truncated.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("item_id") val itemId: String,
-    /** The index of the content part to truncate. Set this to `0`. */
+    /**
+     * The index of the content part to truncate. Set this to `0`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_index") val contentIndex: Long,
     /**
-     * Inclusive duration up to which audio is truncated, in milliseconds. If the audio_end_ms is
-     * greater than the actual audio duration, the server will respond with an error.
+     * Inclusive duration up to which audio is truncated, in milliseconds. If the audio_end_ms is greater than the actual audio duration, the server will respond with an error.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("audio_end_ms") val audioEndMs: Long,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event to append audio bytes to the input audio buffer. The audio buffer is temporary
- * storage you can write to and later commit. A "commit" will create a new user message item in the
- * conversation history from the buffer content and clear the buffer. Input audio transcription (if
- * enabled) will be generated when the buffer is committed. If VAD is enabled the audio buffer is
- * used to detect speech and the server will decide when to commit. When Server VAD is disabled,…
+ * Send this event to append audio bytes to the input audio buffer. The audio buffer is temporary storage you can write to and later commit. A "commit" will create a new user message item in the conversation history from the buffer content and clear the buffer. Input audio transcription (if enabled) will be generated when the buffer is committed. If VAD is enabled the audio buffer is used to detect speech and the server will decide when to commit. When Server VAD is disabled,…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventInputAudioBufferAppend(
-    /** The event type, must be `input_audio_buffer.append`. */
+    /**
+     * The event type, must be `input_audio_buffer.append`.
+     */
     val type: RealtimeClientEventInputAudioBufferAppendTypeEnum,
     /**
-     * Base64-encoded audio bytes. This must be in the format specified by the `input_audio_format`
-     * field in the session configuration.
+     * Base64-encoded audio bytes. This must be in the format specified by the `input_audio_format` field in the session configuration.
      */
     val audio: String,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event to clear the audio bytes in the buffer. The server will respond with an
- * `input_audio_buffer.cleared` event.
+ * Send this event to clear the audio bytes in the buffer. The server will respond with an `input_audio_buffer.cleared` event.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventInputAudioBufferClear(
-    /** The event type, must be `input_audio_buffer.clear`. */
+    /**
+     * The event type, must be `input_audio_buffer.clear`.
+     */
     val type: RealtimeClientEventInputAudioBufferClearTypeEnum,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event to commit the user input audio buffer, which will create a new user message item
- * in the conversation. This event will produce an error if the input audio buffer is empty. When in
- * Server VAD mode, the client does not need to send this event, the server will commit the audio
- * buffer automatically. Committing the input audio buffer will trigger input audio transcription
- * (if enabled in session configuration), but it will not create a response from the model. The…
+ * Send this event to commit the user input audio buffer, which will create a new user message item in the conversation. This event will produce an error if the input audio buffer is empty. When in Server VAD mode, the client does not need to send this event, the server will commit the audio buffer automatically. Committing the input audio buffer will trigger input audio transcription (if enabled in session configuration), but it will not create a response from the model. The…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventInputAudioBufferCommit(
-    /** The event type, must be `input_audio_buffer.commit`. */
+    /**
+     * The event type, must be `input_audio_buffer.commit`.
+     */
     val type: RealtimeClientEventInputAudioBufferCommitTypeEnum,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * **WebRTC/SIP Only:** Emit to cut off the current audio response. This will trigger the server to
- * stop generating audio and emit a `output_audio_buffer.cleared` event. This event should be
- * preceded by a `response.cancel` client event to stop the generation of the current response.
- * Learn more.
+ * **WebRTC/SIP Only:** Emit to cut off the current audio response. This will trigger the server to stop generating audio and emit a `output_audio_buffer.cleared` event. This event should be preceded by a `response.cancel` client event to stop the generation of the current response. Learn more.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventOutputAudioBufferClear(
-    /** The event type, must be `output_audio_buffer.clear`. */
+    /**
+     * The event type, must be `output_audio_buffer.clear`.
+     */
     val type: RealtimeClientEventOutputAudioBufferClearTypeEnum,
-    /** The unique ID of the client event used for error handling. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * The unique ID of the client event used for error handling.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event to cancel an in-progress response. The server will respond with a `response.done`
- * event with a status of `response.status=cancelled`. If there is no response to cancel, the server
- * will respond with an error. It's safe to call `response.cancel` even if no response is in
- * progress, an error will be returned the session will remain unaffected.
+ * Send this event to cancel an in-progress response. The server will respond with a `response.done` event with a status of `response.status=cancelled`. If there is no response to cancel, the server will respond with an error. It's safe to call `response.cancel` even if no response is in progress, an error will be returned the session will remain unaffected.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventResponseCancel(
-    /** The event type, must be `response.cancel`. */
+    /**
+     * The event type, must be `response.cancel`.
+     */
     val type: RealtimeClientEventResponseCancelTypeEnum,
-    /** Optional client-generated ID used to identify this event. */
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
     /**
-     * A specific response ID to cancel - if not provided, will cancel an in-progress response in
-     * the default conversation.
+     * A specific response ID to cancel - if not provided, will cancel an in-progress response in the default conversation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String? = null
 ) : RealtimeClientEvent
 
 /**
- * This event instructs the server to create a Response, which means triggering model inference.
- * When in Server VAD mode, the server will create Responses automatically. A Response will include
- * at least one Item, and may have two, in which case the second will be a function call. These
- * Items will be appended to the conversation history by default. The server will respond with a
- * `response.created` event, events for Items and content created, and finally a `response.done`
- * event…
+ * This event instructs the server to create a Response, which means triggering model inference. When in Server VAD mode, the server will create Responses automatically. A Response will include at least one Item, and may have two, in which case the second will be a function call. These Items will be appended to the conversation history by default. The server will respond with a `response.created` event, events for Items and content created, and finally a `response.done` event…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventResponseCreate(
-    /** The event type, must be `response.create`. */
+    /**
+     * The event type, must be `response.create`.
+     */
     val type: RealtimeClientEventResponseCreateTypeEnum,
-    /** Optional client-generated ID used to identify this event. */
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
-    /** Create a new Realtime response with these parameters */
-    val response: RealtimeResponseCreateParams? = null,
+    /**
+     * Create a new Realtime response with these parameters
+     */
+    val response: RealtimeResponseCreateParams? = null
 ) : RealtimeClientEvent
 
 /**
- * Send this event to update the session’s configuration. The client may send this event at any time
- * to update any field except for `voice` and `model`. `voice` can be updated only if there have
- * been no other audio outputs yet. When the server receives a `session.update`, it will respond
- * with a `session.updated` event showing the full, effective configuration. Only the fields that
- * are present in the `session.update` are updated. To clear a field like `instructions`, pass an…
+ * Send this event to update the session’s configuration. The client may send this event at any time to update any field except for `voice` and `model`. `voice` can be updated only if there have been no other audio outputs yet. When the server receives a `session.update`, it will respond with a `session.updated` event showing the full, effective configuration. Only the fields that are present in the `session.update` are updated. To clear a field like `instructions`, pass an…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeClientEventSessionUpdate(
-    /** The event type, must be `session.update`. */
+    /**
+     * The event type, must be `session.update`.
+     */
     val type: RealtimeClientEventSessionUpdateTypeEnum,
-    /** Update the Realtime session. Choose either a realtime session or a transcription session. */
+    /**
+     * Update the Realtime session. Choose either a realtime session or a transcription session.
+     */
     val session: RealtimeClientEventSessionUpdateSession,
     /**
-     * Optional client-generated ID used to identify this event. This is an arbitrary string that a
-     * client may assign. It will be passed back if there is an error with the event, but the
-     * corresponding `session.updated` event will not include it.
+     * Optional client-generated ID used to identify this event. This is an arbitrary string that a client may assign. It will be passed back if there is an error with the event, but the corresponding `session.updated` event will not include it.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeClientEvent
 
-/** Update the Realtime session. Choose either a realtime session or a transcription session. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeClientEventSessionUpdateSession::class,
-)
+/**
+ * Update the Realtime session. Choose either a realtime session or a transcription session.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeClientEventSessionUpdateSession::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeSessionCreateRequestGA::class,
-        name = "realtime",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranscriptionSessionCreateRequestGA::class,
-        name = "transcription",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeSessionCreateRequestGA::class, name = "realtime"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranscriptionSessionCreateRequestGA::class, name = "transcription")
 )
 sealed interface RealtimeClientEventSessionUpdateSession
 
-/**
- * A [RealtimeClientEventSessionUpdateSession] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeClientEventSessionUpdateSession
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [RealtimeClientEventSessionUpdateSession] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeClientEventSessionUpdateSession @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeClientEventSessionUpdateSession {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Send this event to update a transcription session. */
+/**
+ * Send this event to update a transcription session.
+ */
 data class RealtimeClientEventTranscriptionSessionUpdate(
-    /** The event type, must be `transcription_session.update`. */
+    /**
+     * The event type, must be `transcription_session.update`.
+     */
     val type: RealtimeClientEventTranscriptionSessionUpdateTypeEnum,
-    /** Realtime transcription session object configuration. */
+    /**
+     * Realtime transcription session object configuration.
+     */
     val session: RealtimeTranscriptionSessionCreateRequest,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 )
 
 /**
- * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
- * reduction filters audio added to the input audio buffer before it is sent to VAD and the model.
- * Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and
- * model performance by improving perception of the input audio.
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
  */
 data class RealtimeSessionCreateRequestGAAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
-     * `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType? = null
 )
 
-/** Optional object value serialized in the `input` wire field. */
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
 data class RealtimeSessionCreateRequestGAAudioInput(
-    /** The format of the input audio. */
+    /**
+     * The format of the input audio.
+     */
     val format: RealtimeAudioFormats? = null,
     /**
-     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn
-     * off once on. Input audio transcription is not native to the model, since the model consumes
-     * audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint
-     * and should be treated as guidance of input audio content rather than precisely what the model
-     * heard. The client can optionally set the language and prompt for transcription, these offer
-     * additional…
+     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn off once on. Input audio transcription is not native to the model, since the model consumes audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint and should be treated as guidance of input audio content rather than precisely what the model heard. The client can optionally set the language and prompt for transcription, these offer additional…
      */
     val transcription: AudioTranscription? = null,
     /**
-     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
-     * reduction filters audio added to the input audio buffer before it is sent to VAD and the
-     * model. Filtering the audio can improve VAD and turn detection accuracy (reducing false
-     * positives) and model performance by improving perception of the input audio.
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
-    val noiseReduction: RealtimeSessionCreateRequestGAAudioInputNoiseReduction? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeSessionCreateRequestGAAudioInputNoiseReduction? = null,
     /**
-     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null`
-     * to turn off, in which case the client must manually trigger model response. Server VAD means
-     * that the model will detect the start and end of speech based on audio volume and respond at
-     * the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in
-     * conjunction with VAD) to semantically estimate whether the user has finished speaking, then
-     * dynamically sets a…
+     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
-    val turnDetection: RealtimeTurnDetection? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTurnDetection? = null
 )
 
-/** Optional object value serialized in the `output` wire field. */
+/**
+ * Optional object value serialized in the `output` wire field.
+ */
 data class RealtimeSessionCreateRequestGAAudioOutput(
-    /** The format of the output audio. */
+    /**
+     * The format of the output audio.
+     */
     val format: RealtimeAudioFormats? = null,
     /**
-     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`,
-     * `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a
-     * custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Voice cannot be
-     * changed during the session once the model has responded with audio at least once. Custom
-     * voices must be created from audio samples. We recommend `marin` and `cedar` for best quality.
+     * The voice the model uses to respond. Supported built-in voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`. You may also provide a custom voice object with an `id`, for example `{ "id": "voice_1234" }`. Voice cannot be changed during the session once the model has responded with audio at least once. Custom voices must be created from audio samples. We recommend `marin` and `cedar` for best quality.
      */
     val voice: VoiceIdsOrCustomVoice? = null,
     /**
-     * The speed of the model's spoken response as a multiple of the original speed. 1.0 is the
-     * default speed. 0.25 is the minimum speed. 1.5 is the maximum speed. This value can only be
-     * changed in between model turns, not while a response is in progress. This parameter is a
-     * post-processing adjustment to the audio after it is generated, it's also possible to prompt
-     * the model to speak faster or slower.
+     * The speed of the model's spoken response as a multiple of the original speed. 1.0 is the default speed. 0.25 is the minimum speed. 1.5 is the maximum speed. This value can only be changed in between model turns, not while a response is in progress. This parameter is a post-processing adjustment to the audio after it is generated, it's also possible to prompt the model to speak faster or slower.
      */
-    val speed: Double? = null,
+    val speed: Double? = null
 )
 
-/** Configuration for input and output audio. */
+/**
+ * Configuration for input and output audio.
+ */
 data class RealtimeSessionCreateRequestGAAudio(
-    /** Optional object value serialized in the `input` wire field. */
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
     val input: RealtimeSessionCreateRequestGAAudioInput? = null,
-    /** Optional object value serialized in the `output` wire field. */
-    val output: RealtimeSessionCreateRequestGAAudioOutput? = null,
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
+    val output: RealtimeSessionCreateRequestGAAudioOutput? = null
 )
 
-/** Granular configuration for tracing. */
+/**
+ * Granular configuration for tracing.
+ */
 data class RealtimeSessionCreateRequestGATracingVariant1(
     /**
-     * The name of the workflow to attach to this trace. This is used to name the trace in the
-     * Traces Dashboard.
+     * The name of the workflow to attach to this trace. This is used to name the trace in the Traces Dashboard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name")
-    val workflowName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("workflow_name") val workflowName: String? = null,
     /**
-     * The group id to attach to this trace to enable filtering and grouping in the Traces
-     * Dashboard.
+     * The group id to attach to this trace to enable filtering and grouping in the Traces Dashboard.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("group_id") val groupId: String? = null,
     /**
      * The arbitrary metadata to attach to this trace to enable filtering in the Traces Dashboard.
      */
-    val metadata: Map<String, Any>? = null,
+    val metadata: Map<String, Any>? = null
 )
 
-/** Realtime session object configuration. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Realtime session object configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeSessionCreateRequestGA(
-    /** The type of session to create. Always `realtime` for the Realtime API. */
+    /**
+     * The type of session to create. Always `realtime` for the Realtime API.
+     */
     val type: RealtimeSessionCreateRequestGATypeEnum,
     /**
-     * The set of modalities the model can respond with. It defaults to `["audio"]`, indicating that
-     * the model will respond with audio plus a transcript. `["text"]` can be used to make the model
-     * respond with text only. It is not possible to request both `text` and `audio` at the same
-     * time.
+     * The set of modalities the model can respond with. It defaults to `["audio"]`, indicating that the model will respond with audio plus a transcript. `["text"]` can be used to make the model respond with text only. It is not possible to request both `text` and `audio` at the same time.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities")
-    val outputModalities: List<RealtimeSessionCreateRequestGAOutputModalitiesItemEnum>? = null,
-    /** The Realtime model used for this session. */
+    @com.fasterxml.jackson.annotation.JsonProperty("output_modalities") val outputModalities: List<RealtimeSessionCreateRequestGAOutputModalitiesItemEnum>? = null,
+    /**
+     * The Realtime model used for this session.
+     */
     val model: String? = null,
     /**
-     * The default system instructions (i.e. system message) prepended to model calls. This field
-     * allows the client to guide the model on desired responses. The model can be instructed on
-     * response content and format, (e.g. "be extremely succinct", "act friendly", "here are
-     * examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into
-     * your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the
-     * model, but they provide…
+     * The default system instructions (i.e. system message) prepended to model calls. This field allows the client to guide the model on desired responses. The model can be instructed on response content and format, (e.g. "be extremely succinct", "act friendly", "here are examples of good responses") and on audio behavior (e.g. "talk quickly", "inject emotion into your voice", "laugh frequently"). The instructions are not guaranteed to be followed by the model, but they provide…
      */
     val instructions: String? = null,
-    /** Configuration for input and output audio. */
+    /**
+     * Configuration for input and output audio.
+     */
     val audio: RealtimeSessionCreateRequestGAAudio? = null,
     /**
-     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`:
-     * Include logprobs for input audio transcription.
+     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
      */
     val include: List<RealtimeSessionCreateRequestGAIncludeItemEnum>? = null,
     /**
-     * Realtime API can write session traces to the Traces Dashboard. Set to null to disable
-     * tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto`
-     * will create a trace for the session with default values for the workflow name, group id, and
-     * metadata.
+     * Realtime API can write session traces to the Traces Dashboard. Set to null to disable tracing. Once tracing is enabled for a session, the configuration cannot be modified. `auto` will create a trace for the session with default values for the workflow name, group id, and metadata.
      */
     val tracing: Any? = null,
-    /** Tools available to the model. */
+    /**
+     * Tools available to the model.
+     */
     val tools: List<RealtimeSessionCreateRequestGAToolsItem>? = null,
     /**
-     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP
-     * tool.
+     * How the model chooses tools. Provide one of the string modes or force a specific function/MCP tool.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice")
-    val toolChoice: RealtimeSessionCreateRequestGAToolChoice? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_choice") val toolChoice: RealtimeSessionCreateRequestGAToolChoice? = null,
     /**
-     * Whether the model may call multiple tools in parallel. Only supported by reasoning Realtime
-     * models such as `gpt-realtime-2`.
+     * Whether the model may call multiple tools in parallel. Only supported by reasoning Realtime models such as `gpt-realtime-2`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls")
-    val parallelToolCalls: Boolean? = null,
-    /** Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("parallel_tool_calls") val parallelToolCalls: Boolean? = null,
+    /**
+     * Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.
+     */
     val reasoning: RealtimeReasoning? = null,
     /**
-     * Maximum number of output tokens for a single assistant response, inclusive of tool calls.
-     * Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum
-     * available tokens for a given model. Defaults to `inf`.
+     * Maximum number of output tokens for a single assistant response, inclusive of tool calls. Provide an integer between 1 and 4096 to limit output tokens, or `inf` for the maximum available tokens for a given model. Defaults to `inf`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens")
-    val maxOutputTokens: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_output_tokens") val maxOutputTokens: Any? = null,
     /**
-     * When the number of tokens in a conversation exceeds the model's input token limit, the
-     * conversation be truncated, meaning messages (starting from the oldest) will not be included
-     * in the model's context. A 32k context model with 4,096 max output tokens can only include
-     * 28,224 tokens in the context before truncation occurs. Clients can configure truncation
-     * behavior to truncate with a lower max token limit, which is an effective way to control token
-     * usage and cost. Truncation…
+     * When the number of tokens in a conversation exceeds the model's input token limit, the conversation be truncated, meaning messages (starting from the oldest) will not be included in the model's context. A 32k context model with 4,096 max output tokens can only include 28,224 tokens in the context before truncation occurs. Clients can configure truncation behavior to truncate with a lower max token limit, which is an effective way to control token usage and cost. Truncation…
      */
     val truncation: RealtimeTruncation? = null,
-    /** Reference to a prompt template and its variables. Learn more. */
-    val prompt: Prompt? = null,
+    /**
+     * Reference to a prompt template and its variables. Learn more.
+     */
+    val prompt: Prompt? = null
 ) : RealtimeClientEventSessionUpdateSession, RealtimeCreateClientSecretRequestSession
 
 /**
- * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
- * reduction filters audio added to the input audio buffer before it is sent to VAD and the model.
- * Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and
- * model performance by improving perception of the input audio.
+ * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
  */
 data class RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
-     * `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType? = null
 )
 
-/** Optional object value serialized in the `input` wire field. */
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
 data class RealtimeTranscriptionSessionCreateRequestGAAudioInput(
-    /** Optional API value serialized in the `format` wire field. */
+    /**
+     * Optional API value serialized in the `format` wire field.
+     */
     val format: RealtimeAudioFormats? = null,
     /**
-     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn
-     * off once on. Input audio transcription is not native to the model, since the model consumes
-     * audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint
-     * and should be treated as guidance of input audio content rather than precisely what the model
-     * heard. The client can optionally set the language and prompt for transcription, these offer
-     * additional…
+     * Configuration for input audio transcription, defaults to off and can be set to `null` to turn off once on. Input audio transcription is not native to the model, since the model consumes audio directly. Transcription runs asynchronously through the /audio/transcriptions endpoint and should be treated as guidance of input audio content rather than precisely what the model heard. The client can optionally set the language and prompt for transcription, these offer additional…
      */
     val transcription: AudioTranscription? = null,
     /**
-     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise
-     * reduction filters audio added to the input audio buffer before it is sent to VAD and the
-     * model. Filtering the audio can improve VAD and turn detection accuracy (reducing false
-     * positives) and model performance by improving perception of the input audio.
+     * Configuration for input audio noise reduction. This can be set to `null` to turn off. Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model. Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
-    val noiseReduction: RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction? = null,
     /**
-     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null`
-     * to turn off, in which case the client must manually trigger model response. Server VAD means
-     * that the model will detect the start and end of speech based on audio volume and respond at
-     * the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in
-     * conjunction with VAD) to semantically estimate whether the user has finished speaking, then
-     * dynamically sets a…
+     * Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response. Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech. Semantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection")
-    val turnDetection: RealtimeTurnDetection? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("turn_detection") val turnDetection: RealtimeTurnDetection? = null
 )
 
-/** Configuration for input and output audio. */
+/**
+ * Configuration for input and output audio.
+ */
 data class RealtimeTranscriptionSessionCreateRequestGAAudio(
-    /** Optional object value serialized in the `input` wire field. */
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
     val input: RealtimeTranscriptionSessionCreateRequestGAAudioInput? = null
 )
 
-/** Realtime transcription session object configuration. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Realtime transcription session object configuration.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranscriptionSessionCreateRequestGA(
-    /** The type of session to create. Always `transcription` for transcription sessions. */
+    /**
+     * The type of session to create. Always `transcription` for transcription sessions.
+     */
     val type: RealtimeTranscriptionSessionCreateRequestGATypeEnum,
-    /** Configuration for input and output audio. */
+    /**
+     * Configuration for input and output audio.
+     */
     val audio: RealtimeTranscriptionSessionCreateRequestGAAudio? = null,
     /**
-     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`:
-     * Include logprobs for input audio transcription.
+     * Additional fields to include in server outputs. `item.input_audio_transcription.logprobs`: Include logprobs for input audio transcription.
      */
-    val include: List<RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum>? = null,
+    val include: List<RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum>? = null
 ) : RealtimeClientEventSessionUpdateSession, RealtimeCreateClientSecretRequestSession

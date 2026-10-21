@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `DeleteFineTuningCheckpointPermissionResponse` API schema. */
+/**
+ * Typed representation of the `DeleteFineTuningCheckpointPermissionResponse` API schema.
+ */
 data class DeleteFineTuningCheckpointPermissionResponse(
-    /** The ID of the fine-tuned model checkpoint permission that was deleted. */
+    /**
+     * The ID of the fine-tuned model checkpoint permission that was deleted.
+     */
     val id: String,
-    /** The object type, which is always "checkpoint.permission". */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteFineTuningCheckpointPermissionResponseObjectEnum,
-    /** Whether the fine-tuned model checkpoint permission was successfully deleted. */
-    val deleted: Boolean,
+    /**
+     * The object type, which is always "checkpoint.permission".
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteFineTuningCheckpointPermissionResponseObjectEnum,
+    /**
+     * Whether the fine-tuned model checkpoint permission was successfully deleted.
+     */
+    val deleted: Boolean
 )

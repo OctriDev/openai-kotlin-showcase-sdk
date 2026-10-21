@@ -3,337 +3,540 @@
 
 package dev.octri.showcase.openai.models
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleCreated(
-    /** The role ID. */
+    /**
+     * The role ID.
+     */
     val id: String? = null,
-    /** The name of the role. */
+    /**
+     * The name of the role.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_name") val roleName: String? = null,
-    /** The permissions granted by the role. */
+    /**
+     * The permissions granted by the role.
+     */
     val permissions: List<String>? = null,
-    /** The type of resource the role belongs to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
-    val resourceType: String? = null,
-    /** The resource the role is scoped to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
+    /**
+     * The type of resource the role belongs to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
+    /**
+     * The resource the role is scoped to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null
 )
 
-/** The payload used to update the role. */
+/**
+ * The payload used to update the role.
+ */
 data class AuditLogRoleUpdatedChangesRequested(
-    /** The updated role name, when provided. */
+    /**
+     * The updated role name, when provided.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_name") val roleName: String? = null,
-    /** The resource the role is scoped to. */
+    /**
+     * The resource the role is scoped to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
-    /** The type of resource the role belongs to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
-    val resourceType: String? = null,
-    /** The permissions added to the role. */
-    @com.fasterxml.jackson.annotation.JsonProperty("permissions_added")
-    val permissionsAdded: List<String>? = null,
-    /** The permissions removed from the role. */
-    @com.fasterxml.jackson.annotation.JsonProperty("permissions_removed")
-    val permissionsRemoved: List<String>? = null,
-    /** The updated role description, when provided. */
+    /**
+     * The type of resource the role belongs to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
+    /**
+     * The permissions added to the role.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("permissions_added") val permissionsAdded: List<String>? = null,
+    /**
+     * The permissions removed from the role.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("permissions_removed") val permissionsRemoved: List<String>? = null,
+    /**
+     * The updated role description, when provided.
+     */
     val description: String? = null,
-    /** Additional metadata stored on the role. */
-    val metadata: Map<String, Any>? = null,
+    /**
+     * Additional metadata stored on the role.
+     */
+    val metadata: Map<String, Any>? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleUpdated(
-    /** The role ID. */
+    /**
+     * The role ID.
+     */
     val id: String? = null,
-    /** The payload used to update the role. */
-    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested")
-    val changesRequested: AuditLogRoleUpdatedChangesRequested? = null,
+    /**
+     * The payload used to update the role.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested") val changesRequested: AuditLogRoleUpdatedChangesRequested? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleDeleted(
-    /** The role ID. */
+    /**
+     * The role ID.
+     */
     val id: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleAssignmentCreated(
-    /** The identifier of the role assignment. */
+    /**
+     * The identifier of the role assignment.
+     */
     val id: String? = null,
-    /** The principal (user or group) that received the role. */
+    /**
+     * The principal (user or group) that received the role.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("principal_id") val principalId: String? = null,
-    /** The type of principal (user or group) that received the role. */
-    @com.fasterxml.jackson.annotation.JsonProperty("principal_type")
-    val principalType: String? = null,
-    /** The resource the role assignment is scoped to. */
+    /**
+     * The type of principal (user or group) that received the role.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("principal_type") val principalType: String? = null,
+    /**
+     * The resource the role assignment is scoped to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
-    /** The type of resource the role assignment is scoped to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
-    val resourceType: String? = null,
+    /**
+     * The type of resource the role assignment is scoped to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleAssignmentDeleted(
-    /** The identifier of the role assignment. */
+    /**
+     * The identifier of the role assignment.
+     */
     val id: String? = null,
-    /** The principal (user or group) that had the role removed. */
+    /**
+     * The principal (user or group) that had the role removed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("principal_id") val principalId: String? = null,
-    /** The type of principal (user or group) that had the role removed. */
-    @com.fasterxml.jackson.annotation.JsonProperty("principal_type")
-    val principalType: String? = null,
-    /** The resource the role assignment was scoped to. */
+    /**
+     * The type of principal (user or group) that had the role removed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("principal_type") val principalType: String? = null,
+    /**
+     * The resource the role assignment was scoped to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
-    /** The type of resource the role assignment was scoped to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
-    val resourceType: String? = null,
+    /**
+     * The type of resource the role assignment was scoped to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleBoundToResource(
     /**
-     * The ID of the resource the role was bound to. ChatGPT workspace connector resources use
-     * `<workspace_id>__<connector_id>`.
+     * The ID of the resource the role was bound to. ChatGPT workspace connector resources use `<workspace_id>__<connector_id>`.
      */
     val id: String? = null,
-    /** The ID of the role that was bound to the resource. */
+    /**
+     * The ID of the role that was bound to the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String? = null,
-    /** The ID of the resource the role was bound to. */
+    /**
+     * The ID of the resource the role was bound to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
-    /** The type of resource the role was bound to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
-    val resourceType: String? = null,
-    /** The permissions granted to the role for the resource. */
+    /**
+     * The type of resource the role was bound to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
+    /**
+     * The permissions granted to the role for the resource.
+     */
     val permissions: List<String>? = null,
-    /** The workspace ID for a ChatGPT workspace connector resource. */
+    /**
+     * The workspace ID for a ChatGPT workspace connector resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("workspace_id") val workspaceId: String? = null,
-    /** The connector ID for a ChatGPT workspace connector resource. */
+    /**
+     * The connector ID for a ChatGPT workspace connector resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("connector_id") val connectorId: String? = null,
     /**
-     * The connector display name for a ChatGPT workspace connector resource, or the connector ID
-     * when the display name could not be resolved.
+     * The connector display name for a ChatGPT workspace connector resource, or the connector ID when the display name could not be resolved.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("connector_name")
-    val connectorName: String? = null,
-    /** Whether the connector is enabled for the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("connector_name") val connectorName: String? = null,
+    /**
+     * Whether the connector is enabled for the role.
+     */
     val enabled: Boolean? = null,
-    /** The connector role mutation path that produced the event. */
-    val source: AuditLogRoleBoundToResourceSourceEnum? = null,
+    /**
+     * The connector role mutation path that produced the event.
+     */
+    val source: AuditLogRoleBoundToResourceSourceEnum? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogRoleUnboundFromResource(
     /**
-     * The ID of the resource the role was unbound from. ChatGPT workspace connector resources use
-     * `<workspace_id>__<connector_id>`.
+     * The ID of the resource the role was unbound from. ChatGPT workspace connector resources use `<workspace_id>__<connector_id>`.
      */
     val id: String? = null,
-    /** The ID of the role that was unbound from the resource. */
+    /**
+     * The ID of the role that was unbound from the resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String? = null,
-    /** The ID of the resource the role was unbound from. */
+    /**
+     * The ID of the resource the role was unbound from.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
-    /** The type of resource the role was unbound from. */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
-    val resourceType: String? = null,
-    /** The permissions remaining for the role after the change. */
+    /**
+     * The type of resource the role was unbound from.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
+    /**
+     * The permissions remaining for the role after the change.
+     */
     val permissions: List<String>? = null,
-    /** The workspace ID for a ChatGPT workspace connector resource. */
+    /**
+     * The workspace ID for a ChatGPT workspace connector resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("workspace_id") val workspaceId: String? = null,
-    /** The connector ID for a ChatGPT workspace connector resource. */
+    /**
+     * The connector ID for a ChatGPT workspace connector resource.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("connector_id") val connectorId: String? = null,
     /**
-     * The connector display name for a ChatGPT workspace connector resource, or the connector ID
-     * when the display name could not be resolved.
+     * The connector display name for a ChatGPT workspace connector resource, or the connector ID when the display name could not be resolved.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("connector_name")
-    val connectorName: String? = null,
-    /** Whether the connector is enabled for the role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("connector_name") val connectorName: String? = null,
+    /**
+     * Whether the connector is enabled for the role.
+     */
     val enabled: Boolean? = null,
-    /** The connector role mutation path that produced the event. */
-    val source: AuditLogRoleUnboundFromResourceSourceEnum? = null,
+    /**
+     * The connector role mutation path that produced the event.
+     */
+    val source: AuditLogRoleUnboundFromResourceSourceEnum? = null
 )
 
-/** The payload used to create the service account. */
+/**
+ * The payload used to create the service account.
+ */
 data class AuditLogServiceAccountCreatedData(
-    /** The role of the service account. Is either `owner` or `member`. */
+    /**
+     * The role of the service account. Is either `owner` or `member`.
+     */
     val role: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogServiceAccountCreated(
-    /** The service account ID. */
+    /**
+     * The service account ID.
+     */
     val id: String? = null,
-    /** The payload used to create the service account. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: AuditLogServiceAccountCreatedData? = null,
+    /**
+     * The payload used to create the service account.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AuditLogServiceAccountCreatedData? = null
 )
 
-/** The payload used to updated the service account. */
+/**
+ * The payload used to updated the service account.
+ */
 data class AuditLogServiceAccountUpdatedChangesRequested(
-    /** The role of the service account. Is either `owner` or `member`. */
+    /**
+     * The role of the service account. Is either `owner` or `member`.
+     */
     val role: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogServiceAccountUpdated(
-    /** The service account ID. */
+    /**
+     * The service account ID.
+     */
     val id: String? = null,
-    /** The payload used to updated the service account. */
-    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested")
-    val changesRequested: AuditLogServiceAccountUpdatedChangesRequested? = null,
+    /**
+     * The payload used to updated the service account.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested") val changesRequested: AuditLogServiceAccountUpdatedChangesRequested? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogServiceAccountDeleted(
-    /** The service account ID. */
+    /**
+     * The service account ID.
+     */
     val id: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogWorkloadIdentityProviderCreated(
-    /** The workload identity provider ID. */
+    /**
+     * The workload identity provider ID.
+     */
     val id: String? = null,
-    /** The payload used to create the workload identity provider. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null,
+    /**
+     * The payload used to create the workload identity provider.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogWorkloadIdentityProviderUpdated(
-    /** The workload identity provider ID. */
+    /**
+     * The workload identity provider ID.
+     */
     val id: String? = null,
-    /** The payload used to update the workload identity provider. */
-    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested")
-    val changesRequested: Map<String, Any>? = null,
+    /**
+     * The payload used to update the workload identity provider.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested") val changesRequested: Map<String, Any>? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogWorkloadIdentityProviderDeleted(
-    /** The workload identity provider ID. */
+    /**
+     * The workload identity provider ID.
+     */
     val id: String? = null,
-    /** The workload identity provider name. */
-    val name: String? = null,
+    /**
+     * The workload identity provider name.
+     */
+    val name: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogWorkloadIdentityProviderMappingCreated(
-    /** The workload identity provider mapping ID. */
+    /**
+     * The workload identity provider mapping ID.
+     */
     val id: String? = null,
-    /** The workload identity provider ID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("identity_provider_id")
-    val identityProviderId: String? = null,
-    /** The payload used to create the workload identity provider mapping. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null,
+    /**
+     * The workload identity provider ID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("identity_provider_id") val identityProviderId: String? = null,
+    /**
+     * The payload used to create the workload identity provider mapping.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogWorkloadIdentityProviderMappingUpdated(
-    /** The workload identity provider mapping ID. */
+    /**
+     * The workload identity provider mapping ID.
+     */
     val id: String? = null,
-    /** The workload identity provider ID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("identity_provider_id")
-    val identityProviderId: String? = null,
-    /** The payload used to update the workload identity provider mapping. */
-    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested")
-    val changesRequested: Map<String, Any>? = null,
+    /**
+     * The workload identity provider ID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("identity_provider_id") val identityProviderId: String? = null,
+    /**
+     * The payload used to update the workload identity provider mapping.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested") val changesRequested: Map<String, Any>? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogWorkloadIdentityProviderMappingDeleted(
-    /** The workload identity provider mapping ID. */
+    /**
+     * The workload identity provider mapping ID.
+     */
     val id: String? = null,
-    /** The workload identity provider ID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("identity_provider_id")
-    val identityProviderId: String? = null,
-    /** The project ID. */
+    /**
+     * The workload identity provider ID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("identity_provider_id") val identityProviderId: String? = null,
+    /**
+     * The project ID.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String? = null,
-    /** The mapped service account ID. */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_account_id")
-    val serviceAccountId: String? = null,
+    /**
+     * The mapped service account ID.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_account_id") val serviceAccountId: String? = null
 )
 
-/** The payload used to add the user to the project. */
+/**
+ * The payload used to add the user to the project.
+ */
 data class AuditLogUserAddedData(
-    /** The role of the user. Is either `owner` or `member`. */
+    /**
+     * The role of the user. Is either `owner` or `member`.
+     */
     val role: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogUserAdded(
-    /** The user ID. */
+    /**
+     * The user ID.
+     */
     val id: String? = null,
-    /** The payload used to add the user to the project. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: AuditLogUserAddedData? = null,
+    /**
+     * The payload used to add the user to the project.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AuditLogUserAddedData? = null
 )
 
-/** The payload used to update the user. */
+/**
+ * The payload used to update the user.
+ */
 data class AuditLogUserUpdatedChangesRequested(
-    /** The role of the user. Is either `owner` or `member`. */
+    /**
+     * The role of the user. Is either `owner` or `member`.
+     */
     val role: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogUserUpdated(
-    /** The project ID. */
+    /**
+     * The project ID.
+     */
     val id: String? = null,
-    /** The payload used to update the user. */
-    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested")
-    val changesRequested: AuditLogUserUpdatedChangesRequested? = null,
+    /**
+     * The payload used to update the user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("changes_requested") val changesRequested: AuditLogUserUpdatedChangesRequested? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogUserDeleted(
-    /** The user ID. */
+    /**
+     * The user ID.
+     */
     val id: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogCertificateCreated(
-    /** The certificate ID. */
+    /**
+     * The certificate ID.
+     */
     val id: String? = null,
-    /** The name of the certificate. */
-    val name: String? = null,
+    /**
+     * The name of the certificate.
+     */
+    val name: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogCertificateUpdated(
-    /** The certificate ID. */
+    /**
+     * The certificate ID.
+     */
     val id: String? = null,
-    /** The name of the certificate. */
-    val name: String? = null,
+    /**
+     * The name of the certificate.
+     */
+    val name: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogCertificateDeleted(
-    /** The certificate ID. */
+    /**
+     * The certificate ID.
+     */
     val id: String? = null,
-    /** The name of the certificate. */
+    /**
+     * The name of the certificate.
+     */
     val name: String? = null,
-    /** The certificate content in PEM format. */
-    val certificate: String? = null,
+    /**
+     * The certificate content in PEM format.
+     */
+    val certificate: String? = null
 )
 
-/** Required object value serialized in the `certificates[]` wire field. */
+/**
+ * Required object value serialized in the `certificates[]` wire field.
+ */
 data class AuditLogCertificatesActivatedCertificatesItem(
-    /** The certificate ID. */
+    /**
+     * The certificate ID.
+     */
     val id: String? = null,
-    /** The name of the certificate. */
-    val name: String? = null,
+    /**
+     * The name of the certificate.
+     */
+    val name: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogCertificatesActivated(
-    /** Optional array value serialized in the `certificates` wire field. */
+    /**
+     * Optional array value serialized in the `certificates` wire field.
+     */
     val certificates: List<AuditLogCertificatesActivatedCertificatesItem>? = null
 )
 
-/** Required object value serialized in the `certificates[]` wire field. */
+/**
+ * Required object value serialized in the `certificates[]` wire field.
+ */
 data class AuditLogCertificatesDeactivatedCertificatesItem(
-    /** The certificate ID. */
+    /**
+     * The certificate ID.
+     */
     val id: String? = null,
-    /** The name of the certificate. */
-    val name: String? = null,
+    /**
+     * The name of the certificate.
+     */
+    val name: String? = null
 )
 
-/** The details for events with this `type`. */
+/**
+ * The details for events with this `type`.
+ */
 data class AuditLogCertificatesDeactivated(
-    /** Optional array value serialized in the `certificates` wire field. */
+    /**
+     * Optional array value serialized in the `certificates` wire field.
+     */
     val certificates: List<AuditLogCertificatesDeactivatedCertificatesItem>? = null
 )

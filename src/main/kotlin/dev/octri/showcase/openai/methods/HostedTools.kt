@@ -13,39 +13,23 @@ import dev.octri.showcase.openai.SdkClient
 
 object HostedTools {
 
+
     /**
-     * Retrieves the hosted tool permission settings for a project. Use `project_id` to identify the
-     * project whose permissions you want to inspect. The response includes an enabled state for
-     * each hosted tool.
+     * Retrieves the hosted tool permission settings for a project. Use `project_id` to identify the project whose permissions you want to inspect. The response includes an enabled state for each hosted tool.
      *
      * Returns hosted tool permissions for a project.
      *
      * @param projectId The ID of the project.
      */
-    fun retrieveProjectHostedToolPermissions(
-        clientConfig: ClientConfig,
-        projectId: String,
-        options: RequestOptions? = null,
-    ): ProjectHostedToolPermissions {
-        return SdkClient.request<ProjectHostedToolPermissions>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/projects/${SdkClient.encodePathSegment(projectId)}/hosted_tool_permissions",
-                    config = clientConfig,
-                    operationId = "retrieveProjectHostedToolPermissions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveProjectHostedToolPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectHostedToolPermissions {
+        return SdkClient.request<ProjectHostedToolPermissions>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/hosted_tool_permissions", config = clientConfig, operationId = "retrieveProjectHostedToolPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateProjectHostedToolPermissions]. */
     data class UpdateProjectHostedToolPermissionsRequest(
@@ -54,13 +38,11 @@ object HostedTools {
         val webSearch: SdkClient.SdkOptional<HostedToolPermissionUpdate?>? = null,
         val imageGeneration: SdkClient.SdkOptional<HostedToolPermissionUpdate?>? = null,
         val mcp: SdkClient.SdkOptional<HostedToolPermissionUpdate?>? = null,
-        val codeInterpreter: SdkClient.SdkOptional<HostedToolPermissionUpdate?>? = null,
+        val codeInterpreter: SdkClient.SdkOptional<HostedToolPermissionUpdate?>? = null
     )
 
     /**
-     * Updates the hosted tool permissions for a project. Supply settings for the tools you want to
-     * change using `file_search`, `web_search`, `image_generation`, `mcp`, or `code_interpreter`.
-     * The response returns the project's resulting permission states.
+     * Updates the hosted tool permissions for a project. Supply settings for the tools you want to change using `file_search`, `web_search`, `image_generation`, `mcp`, or `code_interpreter`. The response returns the project's resulting permission states.
      *
      * Updates hosted tool permissions for a project.
      *
@@ -71,39 +53,18 @@ object HostedTools {
      * @param mcp The MCP permission update.
      * @param codeInterpreter The code interpreter permission update.
      */
-    fun updateProjectHostedToolPermissions(
-        clientConfig: ClientConfig,
-        request: UpdateProjectHostedToolPermissionsRequest,
-        options: RequestOptions? = null,
-    ): ProjectHostedToolPermissions {
-        return SdkClient.request<ProjectHostedToolPermissions>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization/projects/${SdkClient.encodePathSegment(request.projectId)}/hosted_tool_permissions",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "file_search" to (request.fileSearch ?: SdkClient.SdkOptional.Omitted),
-                            "web_search" to (request.webSearch ?: SdkClient.SdkOptional.Omitted),
-                            "image_generation" to
-                                (request.imageGeneration ?: SdkClient.SdkOptional.Omitted),
-                            "mcp" to (request.mcp ?: SdkClient.SdkOptional.Omitted),
-                            "code_interpreter" to
-                                (request.codeInterpreter ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateProjectHostedToolPermissions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "409" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateProjectHostedToolPermissions(clientConfig: ClientConfig, request: UpdateProjectHostedToolPermissionsRequest, options: RequestOptions? = null): ProjectHostedToolPermissions {
+        return SdkClient.request<ProjectHostedToolPermissions>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(request.projectId)}/hosted_tool_permissions", config = clientConfig, body = SdkClient.bodyMap("file_search" to
+    (request.fileSearch ?: SdkClient.SdkOptional.Omitted), "web_search" to
+    (request.webSearch ?: SdkClient.SdkOptional.Omitted), "image_generation" to
+    (request.imageGeneration ?: SdkClient.SdkOptional.Omitted), "mcp" to (request.mcp ?: SdkClient.SdkOptional.Omitted), "code_interpreter" to
+    (request.codeInterpreter ?: SdkClient.SdkOptional.Omitted)), operationId = "updateProjectHostedToolPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

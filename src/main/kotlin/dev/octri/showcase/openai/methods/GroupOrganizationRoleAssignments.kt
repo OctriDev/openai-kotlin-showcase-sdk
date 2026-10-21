@@ -17,75 +17,44 @@ import dev.octri.showcase.openai.Validation
 
 object GroupOrganizationRoleAssignments {
 
+
     /**
      * Lists the organization roles assigned to a group within the organization.
      *
-     * @param groupId The ID of the group whose organization role assignments you want to list.
+     * @param groupId The ID of the group whose organization role assignments you
+     *   want to list.
      * @param limit A limit on the number of organization role assignments to return.
-     * @param after Cursor for pagination. Provide the value from the previous response's `next`
-     *   field to continue listing organization roles.
+     * @param after Cursor for pagination. Provide the value from the previous
+     *   response's `next` field to continue listing organization roles.
      * @param order Sort order for the returned organization roles.
      */
-    fun listGroupRoleAssignments(
-        clientConfig: ClientConfig,
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupRoleAssignmentsParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): RoleListResource {
+    fun listGroupRoleAssignments(clientConfig: ClientConfig, groupId: String, limit: Long? = null, after: String? = null, order: ListGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null): RoleListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 1000.0))
-        }
+}
 
-        return SdkClient.request<RoleListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listGroupRoleAssignments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<RoleListResource>(SdkClient.RequestSpec("GET", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listGroupRoleAssignments", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
 
     /**
      * Lists the organization roles assigned to a group within the organization.
      *
-     * @param groupId The ID of the group whose organization role assignments you want to list.
+     * @param groupId The ID of the group whose organization role assignments you
+     *   want to list.
      * @param limit A limit on the number of organization role assignments to return.
-     * @param after Cursor for pagination. Provide the value from the previous response's `next`
-     *   field to continue listing organization roles.
+     * @param after Cursor for pagination. Provide the value from the previous
+     *   response's `next` field to continue listing organization roles.
      * @param order Sort order for the returned organization roles.
      */
-    fun listGroupRoleAssignmentsPaginated(
-        clientConfig: ClientConfig,
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupRoleAssignmentsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (AssignedRoleDetails) -> Boolean,
-    ) {
+    fun listGroupRoleAssignmentsPaginated(clientConfig: ClientConfig, groupId: String, limit: Long? = null, after: String? = null, order: ListGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (AssignedRoleDetails) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listGroupRoleAssignments(clientConfig, groupId, limit, cursor, order, options)
+            val page = listGroupRoleAssignments(clientConfig, groupId, limit, cursor, order, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -103,19 +72,10 @@ object GroupOrganizationRoleAssignments {
         val hasMore: Boolean,
     )
 
-    fun listGroupRoleAssignmentsPages(
-        clientConfig: ClientConfig,
-        groupId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListGroupRoleAssignmentsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListGroupRoleAssignmentsPage) -> Boolean,
-    ) {
+    fun listGroupRoleAssignmentsPages(clientConfig: ClientConfig, groupId: String, limit: Long? = null, after: String? = null, order: ListGroupRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListGroupRoleAssignmentsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listGroupRoleAssignments(clientConfig, groupId, limit, cursor, order, options)
+            val page = listGroupRoleAssignments(clientConfig, groupId, limit, cursor, order, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.next
@@ -126,38 +86,23 @@ object GroupOrganizationRoleAssignments {
         }
     }
 
+
+
     /**
      * Assigns an organization role to a group within the organization.
      *
      * @param groupId The ID of the group that should receive the organization role.
      * @param roleId Identifier of the role to assign.
      */
-    fun assignGroupRole(
-        clientConfig: ClientConfig,
-        groupId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): GroupRoleAssignment {
-        return SdkClient.request<GroupRoleAssignment>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("role_id" to (roleId)),
-                    operationId = "assignGroupRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun assignGroupRole(clientConfig: ClientConfig, groupId: String, roleId: String, options: RequestOptions? = null): GroupRoleAssignment {
+        return SdkClient.request<GroupRoleAssignment>(SdkClient.RequestSpec("POST", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles", config = clientConfig, body = SdkClient.bodyMap("role_id" to (roleId)), operationId = "assignGroupRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Retrieves an organization role assigned to a group.
@@ -165,31 +110,15 @@ object GroupOrganizationRoleAssignments {
      * @param groupId The ID of the group to inspect.
      * @param roleId The ID of the organization role to retrieve for the group.
      */
-    fun retrieveGroupRole(
-        clientConfig: ClientConfig,
-        groupId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): AssignedRoleDetails {
-        return SdkClient.request<AssignedRoleDetails>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}",
-                    config = clientConfig,
-                    operationId = "retrieveGroupRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveGroupRole(clientConfig: ClientConfig, groupId: String, roleId: String, options: RequestOptions? = null): AssignedRoleDetails {
+        return SdkClient.request<AssignedRoleDetails>(SdkClient.RequestSpec("GET", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "retrieveGroupRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Unassigns an organization role from a group within the organization.
@@ -197,29 +126,14 @@ object GroupOrganizationRoleAssignments {
      * @param groupId The ID of the group to modify.
      * @param roleId The ID of the organization role to remove from the group.
      */
-    fun unassignGroupRole(
-        clientConfig: ClientConfig,
-        groupId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): DeletedRoleAssignmentResource {
-        return SdkClient.request<DeletedRoleAssignmentResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}",
-                    config = clientConfig,
-                    operationId = "unassignGroupRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun unassignGroupRole(clientConfig: ClientConfig, groupId: String, roleId: String, options: RequestOptions? = null): DeletedRoleAssignmentResource {
+        return SdkClient.request<DeletedRoleAssignmentResource>(SdkClient.RequestSpec("DELETE", "/organization/groups/${SdkClient.encodePathSegment(groupId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "unassignGroupRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `UpdateVoiceConsentRequest` API schema. */
+/**
+ * Typed representation of the `UpdateVoiceConsentRequest` API schema.
+ */
 data class UpdateVoiceConsentRequest(
-    /** The updated label for this consent recording. */
+    /**
+     * The updated label for this consent recording.
+     */
     val name: String
 )

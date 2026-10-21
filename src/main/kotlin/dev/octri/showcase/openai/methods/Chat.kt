@@ -20,80 +20,44 @@ import dev.octri.showcase.openai.SdkClient
 
 object Chat {
 
-    /**
-     * List stored Chat Completions. Only Chat Completions that have been stored with the `store`
-     * parameter set to `true` will be returned.
-     *
-     * @param model The model used to generate the Chat Completions.
-     * @param metadata A list of metadata keys to filter the Chat Completions by. Example:
-     *   `metadata[key1]=value1&metadata[key2]=value2`
-     * @param after Identifier for the last chat completion from the previous pagination request.
-     * @param limit Number of Chat Completions to retrieve.
-     * @param order Sort order for Chat Completions by timestamp. Use `asc` for ascending order or
-     *   `desc` for descending order. Defaults to `asc`.
-     */
-    fun listChatCompletions(
-        clientConfig: ClientConfig,
-        model: String? = null,
-        metadata: SdkClient.SdkOptional<Metadata?>? = null,
-        after: String? = null,
-        limit: Long? = null,
-        order: ListChatCompletionsParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): ChatCompletionList {
-        return SdkClient.request<ChatCompletionList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/chat/completions",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "model" to SdkClient.queryValue(model, "form", true),
-                            "metadata" to SdkClient.queryValue(metadata, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listChatCompletions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
-    }
 
     /**
-     * List stored Chat Completions. Only Chat Completions that have been stored with the `store`
-     * parameter set to `true` will be returned.
+     * List stored Chat Completions. Only Chat Completions that have been stored with the `store` parameter set to `true` will be returned.
      *
      * @param model The model used to generate the Chat Completions.
-     * @param metadata A list of metadata keys to filter the Chat Completions by. Example:
-     *   `metadata[key1]=value1&metadata[key2]=value2`
-     * @param after Identifier for the last chat completion from the previous pagination request.
+     * @param metadata A list of metadata keys to filter the Chat Completions by.
+     *   Example: `metadata[key1]=value1&metadata[key2]=value2`
+     * @param after Identifier for the last chat completion from the previous
+     *   pagination request.
      * @param limit Number of Chat Completions to retrieve.
-     * @param order Sort order for Chat Completions by timestamp. Use `asc` for ascending order or
-     *   `desc` for descending order. Defaults to `asc`.
+     * @param order Sort order for Chat Completions by timestamp. Use `asc` for
+     *   ascending order or `desc` for descending order. Defaults to `asc`.
      */
-    fun listChatCompletionsPaginated(
-        clientConfig: ClientConfig,
-        model: String? = null,
-        metadata: SdkClient.SdkOptional<Metadata?>? = null,
-        after: String? = null,
-        limit: Long? = null,
-        order: ListChatCompletionsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (CreateChatCompletionResponse) -> Boolean,
-    ) {
+    fun listChatCompletions(clientConfig: ClientConfig, model: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, after: String? = null, limit: Long? = null, order: ListChatCompletionsParameterEnum? = null, options: RequestOptions? = null): ChatCompletionList {
+        return SdkClient.request<ChatCompletionList>(SdkClient.RequestSpec("GET", "/chat/completions", config = clientConfig, query = mapOf("model" to SdkClient.queryValue(model, "form", true), "metadata" to SdkClient.queryValue(metadata, "form", true), "after" to SdkClient.queryValue(after, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listChatCompletions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+    /**
+     * List stored Chat Completions. Only Chat Completions that have been stored with the `store` parameter set to `true` will be returned.
+     *
+     * @param model The model used to generate the Chat Completions.
+     * @param metadata A list of metadata keys to filter the Chat Completions by.
+     *   Example: `metadata[key1]=value1&metadata[key2]=value2`
+     * @param after Identifier for the last chat completion from the previous
+     *   pagination request.
+     * @param limit Number of Chat Completions to retrieve.
+     * @param order Sort order for Chat Completions by timestamp. Use `asc` for
+     *   ascending order or `desc` for descending order. Defaults to `asc`.
+     */
+    fun listChatCompletionsPaginated(clientConfig: ClientConfig, model: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, after: String? = null, limit: Long? = null, order: ListChatCompletionsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (CreateChatCompletionResponse) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listChatCompletions(clientConfig, model, metadata, cursor, limit, order, options)
+            val page = listChatCompletions(clientConfig, model, metadata, cursor, limit, order, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -111,20 +75,10 @@ object Chat {
         val hasMore: Boolean,
     )
 
-    fun listChatCompletionsPages(
-        clientConfig: ClientConfig,
-        model: String? = null,
-        metadata: SdkClient.SdkOptional<Metadata?>? = null,
-        after: String? = null,
-        limit: Long? = null,
-        order: ListChatCompletionsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListChatCompletionsPage) -> Boolean,
-    ) {
+    fun listChatCompletionsPages(clientConfig: ClientConfig, model: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, after: String? = null, limit: Long? = null, order: ListChatCompletionsParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListChatCompletionsPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                listChatCompletions(clientConfig, model, metadata, cursor, limit, order, options)
+            val page = listChatCompletions(clientConfig, model, metadata, cursor, limit, order, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -135,272 +89,141 @@ object Chat {
         }
     }
 
-    /**
-     * Creates a model response for a chat conversation. Supply `model` and at least one item in
-     * `messages`; set `stream` to receive server-sent events instead of a single response object.
-     * The response contains completion choices and usage information when available.
-     *
-     * **Starting a new project?** We recommend trying Responses to take advantage of the latest
-     * OpenAI platform features. Compare Chat Completions with Responses. --- Creates a model
-     * response for the given chat conversation. Learn more in the text generation, vision, and
-     * audio guides. Parameter support can differ depending on the model used to generate the
-     * response, particularly for newer reasoning models. Parameters that are only supported for
-     * reasoning models are noted below.…
-     */
-    fun createChatCompletion(
-        clientConfig: ClientConfig,
-        body: CreateChatCompletionRequest,
-        options: RequestOptions? = null,
-    ): CreateChatCompletionResponse {
-        return SdkClient.request<CreateChatCompletionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/chat/completions",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "createChatCompletion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "401" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                            "503" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
-    }
+
 
     /**
-     * Creates a model response for a chat conversation. Supply `model` and at least one item in
-     * `messages`; set `stream` to receive server-sent events instead of a single response object.
-     * The response contains completion choices and usage information when available.
+     * Creates a model response for a chat conversation. Supply `model` and at least one item in `messages`; set `stream` to receive server-sent events instead of a single response object. The response contains completion choices and usage information when available.
      *
-     * **Starting a new project?** We recommend trying Responses to take advantage of the latest
-     * OpenAI platform features. Compare Chat Completions with Responses. --- Creates a model
-     * response for the given chat conversation. Learn more in the text generation, vision, and
-     * audio guides. Parameter support can differ depending on the model used to generate the
-     * response, particularly for newer reasoning models. Parameters that are only supported for
-     * reasoning models are noted below.…
+     * **Starting a new project?** We recommend trying Responses to take advantage of the latest OpenAI platform features. Compare Chat Completions with Responses. --- Creates a model response for the given chat conversation. Learn more in the text generation, vision, and audio guides. Parameter support can differ depending on the model used to generate the response, particularly for newer reasoning models. Parameters that are only supported for reasoning models are noted below.…
      */
-    fun createChatCompletionStream(
-        clientConfig: ClientConfig,
-        body: CreateChatCompletionRequest,
-        options: RequestOptions? = null,
-    ): Sequence<CreateChatCompletionStreamResponse> {
+    fun createChatCompletion(clientConfig: ClientConfig, body: CreateChatCompletionRequest, options: RequestOptions? = null): CreateChatCompletionResponse {
+        return SdkClient.request<CreateChatCompletionResponse>(SdkClient.RequestSpec("POST", "/chat/completions", config = clientConfig, body = body, operationId = "createChatCompletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+    /**
+     * Creates a model response for a chat conversation. Supply `model` and at least one item in `messages`; set `stream` to receive server-sent events instead of a single response object. The response contains completion choices and usage information when available.
+     *
+     * **Starting a new project?** We recommend trying Responses to take advantage of the latest OpenAI platform features. Compare Chat Completions with Responses. --- Creates a model response for the given chat conversation. Learn more in the text generation, vision, and audio guides. Parameter support can differ depending on the model used to generate the response, particularly for newer reasoning models. Parameters that are only supported for reasoning models are noted below.…
+     */
+    fun createChatCompletionStream(clientConfig: ClientConfig, body: CreateChatCompletionRequest, options: RequestOptions? = null): Sequence<CreateChatCompletionStreamResponse> {
         return sequence {
-            for (_ev in
-                SdkClient.stream(
-                    SdkClient.RequestSpec(
-                        "POST",
-                        "/chat/completions",
-                        config = clientConfig,
-                        body = body,
-                        contentType = "application/json",
-                        operationId = "createChatCompletionStream",
-                        streamFormat = "sse",
-                        streamMediaType = "text/event-stream",
-                        chunkDomain = "bytes",
-                        options = options,
-                        errors =
-                            mapOf(
-                                "400" to ErrorResponse::class.java,
-                                "401" to ErrorResponse::class.java,
-                                "404" to ErrorResponse::class.java,
-                                "429" to ErrorResponse::class.java,
-                                "500" to ErrorResponse::class.java,
-                                "503" to ErrorResponse::class.java,
-                            ),
-                    )
-                )) {
+            for (_ev in SdkClient.stream(
+            SdkClient.RequestSpec(
+                "POST",
+                "/chat/completions",
+                config = clientConfig,
+                body = body,
+                contentType = "application/json",
+                operationId = "createChatCompletionStream",
+                streamFormat = "sse",
+                streamMediaType = "text/event-stream",
+                chunkDomain = "bytes",
+                options = options,
+                errors = mapOf("400" to ErrorResponse::class.java, "401" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java)
+            )
+        )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(
-                    try {
-                        SdkClient.mapper.readValue(
-                            _ev.data,
-                            CreateChatCompletionStreamResponse::class.java,
-                        )
-                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                        SdkClient.rethrowEventDecode(error, _ev.data)
-                    }
-                )
+                yield(try {
+                    SdkClient.mapper.readValue(_ev.data, CreateChatCompletionStreamResponse::class.java)
+                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                    SdkClient.rethrowEventDecode(error, _ev.data)
+                })
             }
         }
     }
 
+
+
     /**
-     * Get a stored chat completion. Only Chat Completions that have been created with the `store`
-     * parameter set to `true` will be returned.
+     * Get a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` will be returned.
      *
      * @param completionId The ID of the chat completion to retrieve.
      */
-    fun getChatCompletion(
-        clientConfig: ClientConfig,
-        completionId: String,
-        options: RequestOptions? = null,
-    ): CreateChatCompletionResponse {
-        return SdkClient.request<CreateChatCompletionResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/chat/completions/${SdkClient.encodePathSegment(completionId)}",
-                    config = clientConfig,
-                    operationId = "getChatCompletion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getChatCompletion(clientConfig: ClientConfig, completionId: String, options: RequestOptions? = null): CreateChatCompletionResponse {
+        return SdkClient.request<CreateChatCompletionResponse>(SdkClient.RequestSpec("GET", "/chat/completions/${SdkClient.encodePathSegment(completionId)}", config = clientConfig, operationId = "getChatCompletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates the metadata on a stored chat completion. The completion must have been created with
-     * `store` set to `true`, and metadata is the only supported modification. Use this operation to
-     * attach or replace structured key-value metadata on the completion.
+     * Updates the metadata on a stored chat completion. The completion must have been created with `store` set to `true`, and metadata is the only supported modification. Use this operation to attach or replace structured key-value metadata on the completion.
      *
-     * Modify a stored chat completion. Only Chat Completions that have been created with the
-     * `store` parameter set to `true` can be modified. Currently, the only supported modification
-     * is to update the `metadata` field.
+     * Modify a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` can be modified. Currently, the only supported modification is to update the `metadata` field.
      *
      * @param completionId The ID of the chat completion to update.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
-     *   useful for storing additional information about the object in a structured format, and
-     *   querying for objects via API or the dashboard. Keys are strings with a maximum length of 64
-     *   characters. Values are strings with a maximum length of 512 characters.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object.
+     *   This can be useful for storing additional information about the object in a
+     *   structured format, and querying for objects via API or the dashboard. Keys are
+     *   strings with a maximum length of 64 characters. Values are strings with a
+     *   maximum length of 512 characters.
      */
-    fun updateChatCompletion(
-        clientConfig: ClientConfig,
-        completionId: String,
-        metadata: Metadata?,
-        options: RequestOptions? = null,
-    ): CreateChatCompletionResponse {
-        return SdkClient.request<CreateChatCompletionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/chat/completions/${SdkClient.encodePathSegment(completionId)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("metadata" to (metadata)),
-                    operationId = "updateChatCompletion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateChatCompletion(clientConfig: ClientConfig, completionId: String, metadata: Metadata?, options: RequestOptions? = null): CreateChatCompletionResponse {
+        return SdkClient.request<CreateChatCompletionResponse>(SdkClient.RequestSpec("POST", "/chat/completions/${SdkClient.encodePathSegment(completionId)}", config = clientConfig, body = SdkClient.bodyMap("metadata" to (metadata)), operationId = "updateChatCompletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Delete a stored chat completion. Only Chat Completions that have been created with the
-     * `store` parameter set to `true` can be deleted.
+     * Delete a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` can be deleted.
      *
      * @param completionId The ID of the chat completion to delete.
      */
-    fun deleteChatCompletion(
-        clientConfig: ClientConfig,
-        completionId: String,
-        options: RequestOptions? = null,
-    ): ChatCompletionDeleted {
-        return SdkClient.request<ChatCompletionDeleted>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/chat/completions/${SdkClient.encodePathSegment(completionId)}",
-                    config = clientConfig,
-                    operationId = "deleteChatCompletion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteChatCompletion(clientConfig: ClientConfig, completionId: String, options: RequestOptions? = null): ChatCompletionDeleted {
+        return SdkClient.request<ChatCompletionDeleted>(SdkClient.RequestSpec("DELETE", "/chat/completions/${SdkClient.encodePathSegment(completionId)}", config = clientConfig, operationId = "deleteChatCompletion", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
-    /**
-     * Get the messages in a stored chat completion. Only Chat Completions that have been created
-     * with the `store` parameter set to `true` will be returned.
-     *
-     * @param completionId The ID of the chat completion to retrieve messages from.
-     * @param after Identifier for the last message from the previous pagination request.
-     * @param limit Number of messages to retrieve.
-     * @param order Sort order for messages by timestamp. Use `asc` for ascending order or `desc`
-     *   for descending order. Defaults to `asc`.
-     */
-    fun getChatCompletionMessages(
-        clientConfig: ClientConfig,
-        completionId: String,
-        after: String? = null,
-        limit: Long? = null,
-        order: GetChatCompletionMessagesParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): ChatCompletionMessageList {
-        return SdkClient.request<ChatCompletionMessageList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/chat/completions/${SdkClient.encodePathSegment(completionId)}/messages",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "getChatCompletionMessages",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
-    }
+
+
+
+
+
 
     /**
-     * Get the messages in a stored chat completion. Only Chat Completions that have been created
-     * with the `store` parameter set to `true` will be returned.
+     * Get the messages in a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` will be returned.
      *
      * @param completionId The ID of the chat completion to retrieve messages from.
-     * @param after Identifier for the last message from the previous pagination request.
+     * @param after Identifier for the last message from the previous pagination
+     *   request.
      * @param limit Number of messages to retrieve.
-     * @param order Sort order for messages by timestamp. Use `asc` for ascending order or `desc`
-     *   for descending order. Defaults to `asc`.
+     * @param order Sort order for messages by timestamp. Use `asc` for ascending
+     *   order or `desc` for descending order. Defaults to `asc`.
      */
-    fun getChatCompletionMessagesPaginated(
-        clientConfig: ClientConfig,
-        completionId: String,
-        after: String? = null,
-        limit: Long? = null,
-        order: GetChatCompletionMessagesParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (ChatCompletionMessageListDataItem) -> Boolean,
-    ) {
+    fun getChatCompletionMessages(clientConfig: ClientConfig, completionId: String, after: String? = null, limit: Long? = null, order: GetChatCompletionMessagesParameterEnum? = null, options: RequestOptions? = null): ChatCompletionMessageList {
+        return SdkClient.request<ChatCompletionMessageList>(SdkClient.RequestSpec("GET", "/chat/completions/${SdkClient.encodePathSegment(completionId)}/messages", config = clientConfig, query = mapOf("after" to SdkClient.queryValue(after, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "getChatCompletionMessages", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+    /**
+     * Get the messages in a stored chat completion. Only Chat Completions that have been created with the `store` parameter set to `true` will be returned.
+     *
+     * @param completionId The ID of the chat completion to retrieve messages from.
+     * @param after Identifier for the last message from the previous pagination
+     *   request.
+     * @param limit Number of messages to retrieve.
+     * @param order Sort order for messages by timestamp. Use `asc` for ascending
+     *   order or `desc` for descending order. Defaults to `asc`.
+     */
+    fun getChatCompletionMessagesPaginated(clientConfig: ClientConfig, completionId: String, after: String? = null, limit: Long? = null, order: GetChatCompletionMessagesParameterEnum? = null, options: RequestOptions? = null, yieldFn: (ChatCompletionMessageListDataItem) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                getChatCompletionMessages(clientConfig, completionId, cursor, limit, order, options)
+            val page = getChatCompletionMessages(clientConfig, completionId, cursor, limit, order, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -418,19 +241,10 @@ object Chat {
         val hasMore: Boolean,
     )
 
-    fun getChatCompletionMessagesPages(
-        clientConfig: ClientConfig,
-        completionId: String,
-        after: String? = null,
-        limit: Long? = null,
-        order: GetChatCompletionMessagesParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldPage: (GetChatCompletionMessagesPage) -> Boolean,
-    ) {
+    fun getChatCompletionMessagesPages(clientConfig: ClientConfig, completionId: String, after: String? = null, limit: Long? = null, order: GetChatCompletionMessagesParameterEnum? = null, options: RequestOptions? = null, yieldPage: (GetChatCompletionMessagesPage) -> Boolean) {
         var cursor = after
         while (true) {
-            val page =
-                getChatCompletionMessages(clientConfig, completionId, cursor, limit, order, options)
+            val page = getChatCompletionMessages(clientConfig, completionId, cursor, limit, order, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -440,4 +254,7 @@ object Chat {
             cursor = nextCursor
         }
     }
+
+
+
 }

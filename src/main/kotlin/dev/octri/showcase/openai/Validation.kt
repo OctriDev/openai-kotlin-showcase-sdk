@@ -5,7 +5,9 @@ package dev.octri.showcase.openai
 
 import java.net.URI
 
-/** Canonical validation helpers. Each throws [SdkValidationError] on failure. */
+/**
+ * Canonical validation helpers. Each throws [SdkValidationError] on failure.
+ */
 object Validation {
 
     fun validateEnum(field: String, value: Any?, allowed: List<Any?>) {
@@ -15,11 +17,8 @@ object Validation {
         // its JSON-tagged value).
         val s = value.toString()
         if (allowed.any { it?.toString() == s }) return
-        throw SdkValidationError(
-            field,
-            "enum",
-            "Validation failed for '$field': must be one of ${allowed.joinToString(", ")}",
-        )
+        throw SdkValidationError(field, "enum",
+            "Validation failed for '$field': must be one of ${allowed.joinToString(", ")}")
     }
 
     fun validateEnumItems(field: String, value: List<Any?>, allowed: List<Any?>) {
@@ -58,71 +57,32 @@ object Validation {
 
     fun validateLength(field: String, value: String, opts: LengthOpts) {
         val n = value.length
-        opts.min?.let {
-            if (n < it)
-                throw SdkValidationError(
-                    field,
-                    "length",
-                    "Validation failed for '$field': length must be >= $it",
-                )
-        }
-        opts.max?.let {
-            if (n > it)
-                throw SdkValidationError(
-                    field,
-                    "length",
-                    "Validation failed for '$field': length must be <= $it",
-                )
-        }
+        opts.min?.let { if (n < it) throw SdkValidationError(field, "length",
+            "Validation failed for '$field': length must be >= $it") }
+        opts.max?.let { if (n > it) throw SdkValidationError(field, "length",
+            "Validation failed for '$field': length must be <= $it") }
     }
 
     fun validateLength(field: String, value: ByteArray, opts: LengthOpts) {
         val n = value.size
-        opts.min?.let {
-            if (n < it)
-                throw SdkValidationError(
-                    field,
-                    "length",
-                    "Validation failed for '$field': length must be >= $it",
-                )
-        }
-        opts.max?.let {
-            if (n > it)
-                throw SdkValidationError(
-                    field,
-                    "length",
-                    "Validation failed for '$field': length must be <= $it",
-                )
-        }
+        opts.min?.let { if (n < it) throw SdkValidationError(field, "length",
+            "Validation failed for '$field': length must be >= $it") }
+        opts.max?.let { if (n > it) throw SdkValidationError(field, "length",
+            "Validation failed for '$field': length must be <= $it") }
     }
 
     fun validateItems(field: String, value: Collection<*>, opts: LengthOpts) {
         val n = value.size
-        opts.min?.let {
-            if (n < it)
-                throw SdkValidationError(
-                    field,
-                    "items",
-                    "Validation failed for '$field': must have at least $it items",
-                )
-        }
-        opts.max?.let {
-            if (n > it)
-                throw SdkValidationError(
-                    field,
-                    "items",
-                    "Validation failed for '$field': must have at most $it items",
-                )
-        }
+        opts.min?.let { if (n < it) throw SdkValidationError(field, "items",
+            "Validation failed for '$field': must have at least $it items") }
+        opts.max?.let { if (n > it) throw SdkValidationError(field, "items",
+            "Validation failed for '$field': must have at most $it items") }
     }
 
     fun validatePattern(field: String, value: String, pattern: String) {
         if (!Regex(pattern).containsMatchIn(value)) {
-            throw SdkValidationError(
-                field,
-                "pattern",
-                "Validation failed for '$field': must match pattern $pattern",
-            )
+            throw SdkValidationError(field, "pattern",
+                "Validation failed for '$field': must match pattern $pattern")
         }
     }
 
@@ -134,11 +94,9 @@ object Validation {
                 throw IllegalArgumentException("URI must include a scheme")
             }
         } catch (_: Exception) {
-            throw SdkValidationError(
-                field,
-                "format:uri",
-                "Validation failed for '$field': must be a valid URI",
-            )
+            throw SdkValidationError(field, "format:uri",
+                "Validation failed for '$field': must be a valid URI")
         }
     }
+
 }

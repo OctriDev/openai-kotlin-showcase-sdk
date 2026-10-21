@@ -3,194 +3,294 @@
 
 package dev.octri.showcase.openai.models
 
-/** Required object value serialized in the `certificate_details` wire field. */
+/**
+ * Required object value serialized in the `certificate_details` wire field.
+ */
 data class CertificateCertificateDetails(
-    /** The Unix timestamp (in seconds) of when the certificate becomes valid. */
+    /**
+     * The Unix timestamp (in seconds) of when the certificate becomes valid.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("valid_at") val validAt: Long? = null,
-    /** The Unix timestamp (in seconds) of when the certificate expires. */
+    /**
+     * The Unix timestamp (in seconds) of when the certificate expires.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
-    /** The content of the certificate in PEM format. */
-    val content: String? = null,
+    /**
+     * The content of the certificate in PEM format.
+     */
+    val content: String? = null
 )
 
-/** Represents an individual `certificate` uploaded to the organization. */
+/**
+ * Represents an individual `certificate` uploaded to the organization.
+ */
 data class Certificate(
     /**
-     * The object type. - If creating, updating, or getting a specific certificate, the object type
-     * is `certificate`. - If listing, activating, or deactivating certificates for the
-     * organization, the object type is `organization.certificate`. - If listing, activating, or
-     * deactivating certificates for a project, the object type is
-     * `organization.project.certificate`.
+     * The object type. - If creating, updating, or getting a specific certificate, the object type is `certificate`. - If listing, activating, or deactivating certificates for the organization, the object type is `organization.certificate`. - If listing, activating, or deactivating certificates for a project, the object type is `organization.project.certificate`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CertificateObjectEnum,
-    /** The identifier, which can be referenced in API endpoints */
-    val id: String,
-    /** The name of the certificate. */
-    @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /** The Unix timestamp (in seconds) of when the certificate was uploaded. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required object value serialized in the `certificate_details` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_details")
-    val certificateDetails: CertificateCertificateDetails,
     /**
-     * Whether the certificate is currently active at the specified scope. Not returned when getting
-     * details for a specific certificate.
+     * The identifier, which can be referenced in API endpoints
      */
-    val active: Boolean? = null,
-)
-
-/** Typed representation of the `DeleteCertificateResponse` API schema. */
-data class DeleteCertificateResponse(
-    /** The object type, must be `certificate.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeleteCertificateResponseObjectEnum,
-    /** The ID of the certificate that was deleted. */
     val id: String,
+    /**
+     * The name of the certificate.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
+    /**
+     * The Unix timestamp (in seconds) of when the certificate was uploaded.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * Required object value serialized in the `certificate_details` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_details") val certificateDetails: CertificateCertificateDetails,
+    /**
+     * Whether the certificate is currently active at the specified scope. Not returned when getting details for a specific certificate.
+     */
+    val active: Boolean? = null
 )
 
-/** Typed representation of the `ListCertificatesResponse` API schema. */
+/**
+ * Typed representation of the `DeleteCertificateResponse` API schema.
+ */
+data class DeleteCertificateResponse(
+    /**
+     * The object type, must be `certificate.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteCertificateResponseObjectEnum,
+    /**
+     * The ID of the certificate that was deleted.
+     */
+    val id: String
+)
+
+/**
+ * Typed representation of the `ListCertificatesResponse` API schema.
+ */
 data class ListCertificatesResponse(
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<OrganizationCertificate>,
-    /** Required `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
-    /** Required `string` value serialized in the `last_id` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationCertificate>,
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ListCertificatesResponseObjectEnum,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListCertificatesResponseObjectEnum
 )
 
-/** Typed representation of the `ListProjectCertificatesResponse` API schema. */
+/**
+ * Typed representation of the `ListProjectCertificatesResponse` API schema.
+ */
 data class ListProjectCertificatesResponse(
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<OrganizationProjectCertificate>,
-    /** Required `string` value serialized in the `first_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
-    val firstId: String?,
-    /** Required `string` value serialized in the `last_id` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationProjectCertificate>,
+    /**
+     * Required `string` value serialized in the `first_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
+    /**
+     * Required `string` value serialized in the `last_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ListProjectCertificatesResponseObjectEnum,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListProjectCertificatesResponseObjectEnum
 )
 
-/** Typed representation of the `ModifyCertificateRequest` API schema. */
+/**
+ * Typed representation of the `ModifyCertificateRequest` API schema.
+ */
 data class ModifyCertificateRequest(
-    /** The updated name for the certificate */
+    /**
+     * The updated name for the certificate
+     */
     val name: String? = null
 )
 
-/** Required object value serialized in the `certificate_details` wire field. */
+/**
+ * Required object value serialized in the `certificate_details` wire field.
+ */
 data class OrganizationCertificateCertificateDetails(
-    /** The Unix timestamp (in seconds) of when the certificate becomes valid. */
+    /**
+     * The Unix timestamp (in seconds) of when the certificate becomes valid.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("valid_at") val validAt: Long? = null,
-    /** The Unix timestamp (in seconds) of when the certificate expires. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
+    /**
+     * The Unix timestamp (in seconds) of when the certificate expires.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
 )
 
-/** Represents an individual certificate configured at the organization level. */
+/**
+ * Represents an individual certificate configured at the organization level.
+ */
 data class OrganizationCertificate(
-    /** The object type, which is always `organization.certificate`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationCertificateObjectEnum,
-    /** The identifier, which can be referenced in API endpoints */
+    /**
+     * The object type, which is always `organization.certificate`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationCertificateObjectEnum,
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
     val id: String,
-    /** The name of the certificate. */
+    /**
+     * The name of the certificate.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /** The Unix timestamp (in seconds) of when the certificate was uploaded. */
+    /**
+     * The Unix timestamp (in seconds) of when the certificate was uploaded.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required object value serialized in the `certificate_details` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_details")
-    val certificateDetails: OrganizationCertificateCertificateDetails,
-    /** Whether the certificate is currently active at the organization level. */
-    val active: Boolean,
+    /**
+     * Required object value serialized in the `certificate_details` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_details") val certificateDetails: OrganizationCertificateCertificateDetails,
+    /**
+     * Whether the certificate is currently active at the organization level.
+     */
+    val active: Boolean
 )
 
-/** Typed representation of the `OrganizationCertificateActivationResponse` API schema. */
+/**
+ * Typed representation of the `OrganizationCertificateActivationResponse` API schema.
+ */
 data class OrganizationCertificateActivationResponse(
-    /** The organization certificate activation result type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationCertificateActivationResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<OrganizationCertificate>,
+    /**
+     * The organization certificate activation result type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationCertificateActivationResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationCertificate>
 )
 
-/** Typed representation of the `OrganizationCertificateDeactivationResponse` API schema. */
+/**
+ * Typed representation of the `OrganizationCertificateDeactivationResponse` API schema.
+ */
 data class OrganizationCertificateDeactivationResponse(
-    /** The organization certificate deactivation result type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationCertificateDeactivationResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<OrganizationCertificate>,
+    /**
+     * The organization certificate deactivation result type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationCertificateDeactivationResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationCertificate>
 )
 
-/** Required object value serialized in the `certificate_details` wire field. */
+/**
+ * Required object value serialized in the `certificate_details` wire field.
+ */
 data class OrganizationProjectCertificateCertificateDetails(
-    /** The Unix timestamp (in seconds) of when the certificate becomes valid. */
+    /**
+     * The Unix timestamp (in seconds) of when the certificate becomes valid.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("valid_at") val validAt: Long? = null,
-    /** The Unix timestamp (in seconds) of when the certificate expires. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
+    /**
+     * The Unix timestamp (in seconds) of when the certificate expires.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
 )
 
-/** Represents an individual certificate configured at the project level. */
+/**
+ * Represents an individual certificate configured at the project level.
+ */
 data class OrganizationProjectCertificate(
-    /** The object type, which is always `organization.project.certificate`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationProjectCertificateObjectEnum,
-    /** The identifier, which can be referenced in API endpoints */
+    /**
+     * The object type, which is always `organization.project.certificate`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationProjectCertificateObjectEnum,
+    /**
+     * The identifier, which can be referenced in API endpoints
+     */
     val id: String,
-    /** The name of the certificate. */
+    /**
+     * The name of the certificate.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /** The Unix timestamp (in seconds) of when the certificate was uploaded. */
+    /**
+     * The Unix timestamp (in seconds) of when the certificate was uploaded.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required object value serialized in the `certificate_details` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_details")
-    val certificateDetails: OrganizationProjectCertificateCertificateDetails,
-    /** Whether the certificate is currently active at the project level. */
-    val active: Boolean,
+    /**
+     * Required object value serialized in the `certificate_details` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_details") val certificateDetails: OrganizationProjectCertificateCertificateDetails,
+    /**
+     * Whether the certificate is currently active at the project level.
+     */
+    val active: Boolean
 )
 
-/** Typed representation of the `OrganizationProjectCertificateActivationResponse` API schema. */
+/**
+ * Typed representation of the `OrganizationProjectCertificateActivationResponse` API schema.
+ */
 data class OrganizationProjectCertificateActivationResponse(
-    /** The project certificate activation result type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationProjectCertificateActivationResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<OrganizationProjectCertificate>,
+    /**
+     * The project certificate activation result type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationProjectCertificateActivationResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationProjectCertificate>
 )
 
-/** Typed representation of the `OrganizationProjectCertificateDeactivationResponse` API schema. */
+/**
+ * Typed representation of the `OrganizationProjectCertificateDeactivationResponse` API schema.
+ */
 data class OrganizationProjectCertificateDeactivationResponse(
-    /** The project certificate deactivation result type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationProjectCertificateDeactivationResponseObjectEnum,
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<OrganizationProjectCertificate>,
+    /**
+     * The project certificate deactivation result type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationProjectCertificateDeactivationResponseObjectEnum,
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationProjectCertificate>
 )
 
-/** Typed representation of the `ToggleCertificatesRequest` API schema. */
+/**
+ * Typed representation of the `ToggleCertificatesRequest` API schema.
+ */
 data class ToggleCertificatesRequest(
-    /** Required array value serialized in the `certificate_ids` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate_ids")
-    val certificateIds: List<String>
+    /**
+     * Required array value serialized in the `certificate_ids` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate_ids") val certificateIds: List<String>
 )
 
-/** Typed representation of the `UploadCertificateRequest` API schema. */
+/**
+ * Typed representation of the `UploadCertificateRequest` API schema.
+ */
 data class UploadCertificateRequest(
-    /** The certificate content in PEM format */
+    /**
+     * The certificate content in PEM format
+     */
     val certificate: String,
-    /** An optional name for the certificate */
-    val name: String? = null,
+    /**
+     * An optional name for the certificate
+     */
+    val name: String? = null
 )

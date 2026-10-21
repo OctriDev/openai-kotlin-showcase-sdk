@@ -13,100 +13,74 @@ import dev.octri.showcase.openai.UsageTimeBucket
 
 internal object UsageCostsOperation {
     /**
-     * Retrieves cost data for the organization over a specified time range. Set `start_time` and
-     * optionally use project, API key, line item, or grouping filters to narrow the results; use
-     * the returned cursor to fetch additional pages.
+     * Retrieves cost data for the organization over a specified time range. Set `start_time` and optionally use project, API key, line item, or grouping filters to narrow the results; use the returned cursor to fetch additional pages.
      *
      * Get costs details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently only `1d` is supported,
-     *   default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently only `1d`
+     *   is supported, default to `1d`.
      * @param projectIds Return only costs for these projects.
      * @param apiKeyIds Return only costs for these API keys.
-     * @param lineItems Return only costs for these exact line item names. Each value must match the
-     *   complete `line_item` value, for example `gpt-6-astra, input_tokens`.
-     * @param groupBy Group the costs by the specified fields. Supported fields include
-     *   `project_id`, `user_id`, `line_item`, `api_key_id`, and `api_source`. Support for combining
-     *   `user_id` with `project_id` grouping or the `project_ids` filter depends on the
-     *   organization and requested time range. Unsupported combinations return HTTP 400. When
-     *   grouped by `api_source`, results use `agents_api` for attributed Agents API activity and
-     *   `unlabeled` for all other activity. Without source grouping,…
-     * @param limit A limit on the number of buckets to be returned. Limit can range between 1 and
-     *   180, and the default is 7.
-     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
-     *   previous response.
+     * @param lineItems Return only costs for these exact line item names. Each value
+     *   must match the complete `line_item` value, for example `gpt-6-astra,
+     *   input_tokens`.
+     * @param groupBy Group the costs by the specified fields. Supported fields
+     *   include `project_id`, `user_id`, `line_item`, `api_key_id`, and `api_source`.
+     *   Support for combining `user_id` with `project_id` grouping or the
+     *   `project_ids` filter depends on the organization and requested time range.
+     *   Unsupported combinations return HTTP 400. When grouped by `api_source`,
+     *   results use `agents_api` for attributed Agents API activity and `unlabeled`
+     *   for all other activity. Without source grouping,…
+     * @param limit A limit on the number of buckets to be returned. Limit can range
+     *   between 1 and 180, and the default is 7.
+     * @param page A cursor for use in pagination. Corresponding to the `next_page`
+     *   field from the previous response.
      */
-    fun usageCosts(
-        clientConfig: ClientConfig,
-        request: Usage.UsageCostsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return SdkClient.request<UsageResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/costs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "start_time" to SdkClient.queryValue(request.startTime, "form", true),
-                            "end_time" to SdkClient.queryValue(request.endTime, "form", true),
-                            "bucket_width" to
-                                SdkClient.queryValue(request.bucketWidth, "form", true),
-                            "project_ids" to SdkClient.queryValue(request.projectIds, "form", true),
-                            "api_key_ids" to SdkClient.queryValue(request.apiKeyIds, "form", true),
-                            "line_items" to SdkClient.queryValue(request.lineItems, "form", true),
-                            "group_by" to SdkClient.queryValue(request.groupBy, "form", true),
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                        ),
-                    operationId = "usageCosts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun usageCosts(clientConfig: ClientConfig, request: Usage.UsageCostsRequest, options: RequestOptions? = null): UsageResponse {
+        return SdkClient.request<UsageResponse>(SdkClient.RequestSpec("GET", "/organization/costs", config = clientConfig, query = mapOf("start_time" to
+    SdkClient.queryValue(request.startTime, "form", true), "end_time" to
+    SdkClient.queryValue(request.endTime, "form", true), "bucket_width" to
+    SdkClient.queryValue(request.bucketWidth, "form", true), "project_ids" to
+    SdkClient.queryValue(request.projectIds, "form", true), "api_key_ids" to
+    SdkClient.queryValue(request.apiKeyIds, "form", true), "line_items" to
+    SdkClient.queryValue(request.lineItems, "form", true), "group_by" to
+    SdkClient.queryValue(request.groupBy, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "page" to SdkClient.queryValue(request.page, "form", true)), operationId = "usageCosts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Retrieves cost data for the organization over a specified time range. Set `start_time` and
-     * optionally use project, API key, line item, or grouping filters to narrow the results; use
-     * the returned cursor to fetch additional pages.
+     * Retrieves cost data for the organization over a specified time range. Set `start_time` and optionally use project, API key, line item, or grouping filters to narrow the results; use the returned cursor to fetch additional pages.
      *
      * Get costs details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently only `1d` is supported,
-     *   default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently only `1d`
+     *   is supported, default to `1d`.
      * @param projectIds Return only costs for these projects.
      * @param apiKeyIds Return only costs for these API keys.
-     * @param lineItems Return only costs for these exact line item names. Each value must match the
-     *   complete `line_item` value, for example `gpt-6-astra, input_tokens`.
-     * @param groupBy Group the costs by the specified fields. Supported fields include
-     *   `project_id`, `user_id`, `line_item`, `api_key_id`, and `api_source`. Support for combining
-     *   `user_id` with `project_id` grouping or the `project_ids` filter depends on the
-     *   organization and requested time range. Unsupported combinations return HTTP 400. When
-     *   grouped by `api_source`, results use `agents_api` for attributed Agents API activity and
-     *   `unlabeled` for all other activity. Without source grouping,…
-     * @param limit A limit on the number of buckets to be returned. Limit can range between 1 and
-     *   180, and the default is 7.
-     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
-     *   previous response.
+     * @param lineItems Return only costs for these exact line item names. Each value
+     *   must match the complete `line_item` value, for example `gpt-6-astra,
+     *   input_tokens`.
+     * @param groupBy Group the costs by the specified fields. Supported fields
+     *   include `project_id`, `user_id`, `line_item`, `api_key_id`, and `api_source`.
+     *   Support for combining `user_id` with `project_id` grouping or the
+     *   `project_ids` filter depends on the organization and requested time range.
+     *   Unsupported combinations return HTTP 400. When grouped by `api_source`,
+     *   results use `agents_api` for attributed Agents API activity and `unlabeled`
+     *   for all other activity. Without source grouping,…
+     * @param limit A limit on the number of buckets to be returned. Limit can range
+     *   between 1 and 180, and the default is 7.
+     * @param page A cursor for use in pagination. Corresponding to the `next_page`
+     *   field from the previous response.
      */
-    fun usageCostsPaginated(
-        clientConfig: ClientConfig,
-        request: Usage.UsageCostsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
+    fun usageCostsPaginated(clientConfig: ClientConfig, request: Usage.UsageCostsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
         var cursor = request.page
         while (true) {
             val page = usageCosts(clientConfig, request.copy(page = cursor), options)
@@ -121,12 +95,9 @@ internal object UsageCostsOperation {
         }
     }
 
-    fun usageCostsPages(
-        clientConfig: ClientConfig,
-        request: Usage.UsageCostsRequest,
-        options: RequestOptions? = null,
-        yieldPage: (Usage.UsageCostsPage) -> Boolean,
-    ) {
+
+
+    fun usageCostsPages(clientConfig: ClientConfig, request: Usage.UsageCostsRequest, options: RequestOptions? = null, yieldPage: (Usage.UsageCostsPage) -> Boolean) {
         var cursor = request.page
         while (true) {
             val page = usageCosts(clientConfig, request.copy(page = cursor), options)

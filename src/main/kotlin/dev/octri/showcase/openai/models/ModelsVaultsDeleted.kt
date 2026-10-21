@@ -3,24 +3,38 @@
 
 package dev.octri.showcase.openai.models
 
-/** Confirmation that a vault credential was deleted. */
+/**
+ * Confirmation that a vault credential was deleted.
+ */
 data class DeletedVaultCredentialResource(
-    /** The ID of the deleted credential. */
+    /**
+     * The ID of the deleted credential.
+     */
     val id: String,
-    /** The object type. Always `vault.credential.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeletedVaultCredentialResourceObjectEnum,
-    /** Whether the resource was deleted. Always `true`. */
-    val deleted: Boolean,
+    /**
+     * The object type. Always `vault.credential.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedVaultCredentialResourceObjectEnum,
+    /**
+     * Whether the resource was deleted. Always `true`.
+     */
+    val deleted: Boolean
 )
 
-/** Confirmation that a vault was deleted. */
+/**
+ * Confirmation that a vault was deleted.
+ */
 data class DeletedVaultResource(
-    /** The ID of the deleted vault. */
+    /**
+     * The ID of the deleted vault.
+     */
     val id: String,
-    /** The object type. Always `vault.deleted`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeletedVaultResourceObjectEnum,
-    /** Whether the resource was deleted. Always `true`. */
-    val deleted: Boolean,
+    /**
+     * The object type. Always `vault.deleted`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedVaultResourceObjectEnum,
+    /**
+     * Whether the resource was deleted. Always `true`.
+     */
+    val deleted: Boolean
 )

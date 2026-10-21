@@ -3,332 +3,182 @@
 
 package dev.octri.showcase.openai
 
+
 class UsageNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves cost data for the organization over a specified time range. Set `start_time` and
-     * optionally use project, API key, line item, or grouping filters to narrow the results; use
-     * the returned cursor to fetch additional pages.
+     * Retrieves cost data for the organization over a specified time range. Set `start_time` and optionally use project, API key, line item, or grouping filters to narrow the results; use the returned cursor to fetch additional pages.
      *
      * Get costs details for the organization.
      */
-    fun costs(
-        request: dev.octri.showcase.openai.methods.Usage.UsageCostsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
+    fun costs(request: dev.octri.showcase.openai.methods.Usage.UsageCostsRequest, options: RequestOptions? = null): UsageResponse {
         return dev.octri.showcase.openai.methods.Usage.usageCosts(clientConfig, request, options)
     }
 
     /**
-     * Retrieves cost data for the organization over a specified time range. Set `start_time` and
-     * optionally use project, API key, line item, or grouping filters to narrow the results; use
-     * the returned cursor to fetch additional pages.
+     * Retrieves cost data for the organization over a specified time range. Set `start_time` and optionally use project, API key, line item, or grouping filters to narrow the results; use the returned cursor to fetch additional pages.
      *
      * Get costs details for the organization.
      */
-    fun costsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageCostsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageCostsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
-    }
-
-    /** Get audio speeches usage details for the organization. */
-    fun audioSpeeches(
-        request: dev.octri.showcase.openai.methods.Usage.UsageAudioSpeechesRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageAudioSpeeches(
-            clientConfig,
-            request,
-            options,
-        )
-    }
-
-    /** Get audio speeches usage details for the organization. */
-    fun audioSpeechesPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageAudioSpeechesRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageAudioSpeechesPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
-    }
-
-    /** Get audio transcriptions usage details for the organization. */
-    fun audioTranscriptions(
-        request: dev.octri.showcase.openai.methods.Usage.UsageAudioTranscriptionsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageAudioTranscriptions(
-            clientConfig,
-            request,
-            options,
-        )
-    }
-
-    /** Get audio transcriptions usage details for the organization. */
-    fun audioTranscriptionsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageAudioTranscriptionsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageAudioTranscriptionsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
-    }
-
-    /** Get code interpreter sessions usage details for the organization. */
-    fun codeInterpreterSessions(
-        request: dev.octri.showcase.openai.methods.Usage.UsageCodeInterpreterSessionsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageCodeInterpreterSessions(
-            clientConfig,
-            request,
-            options,
-        )
-    }
-
-    /** Get code interpreter sessions usage details for the organization. */
-    fun codeInterpreterSessionsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageCodeInterpreterSessionsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageCodeInterpreterSessionsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
-    }
-
-    /** Get completions usage details for the organization. */
-    fun completions(
-        request: dev.octri.showcase.openai.methods.Usage.UsageCompletionsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageCompletions(
-            clientConfig,
-            request,
-            options,
-        )
-    }
-
-    /** Get completions usage details for the organization. */
-    fun completionsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageCompletionsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageCompletionsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
-    }
-
-    /** Get embeddings usage details for the organization. */
-    fun embeddings(
-        request: dev.octri.showcase.openai.methods.Usage.UsageEmbeddingsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageEmbeddings(
-            clientConfig,
-            request,
-            options,
-        )
-    }
-
-    /** Get embeddings usage details for the organization. */
-    fun embeddingsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageEmbeddingsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageEmbeddingsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
-    }
-
-    /** Get file search calls usage details for the organization. */
-    fun fileSearchCalls(
-        request: dev.octri.showcase.openai.methods.Usage.UsageFileSearchCallsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageFileSearchCalls(
-            clientConfig,
-            request,
-            options,
-        )
-    }
-
-    /** Get file search calls usage details for the organization. */
-    fun fileSearchCallsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageFileSearchCallsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageFileSearchCallsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    fun costsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageCostsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageCostsPaginated(clientConfig, request, options, yieldFn)
     }
 
     /**
-     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive
-     * start of the range, and filter by sources, image sizes, projects, users, API keys, or models
-     * as needed. Use the `next_page` value to retrieve the next page of results.
+     * Get audio speeches usage details for the organization.
+     */
+    fun audioSpeeches(request: dev.octri.showcase.openai.methods.Usage.UsageAudioSpeechesRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageAudioSpeeches(clientConfig, request, options)
+    }
+
+    /**
+     * Get audio speeches usage details for the organization.
+     */
+    fun audioSpeechesPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageAudioSpeechesRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageAudioSpeechesPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
+     * Get audio transcriptions usage details for the organization.
+     */
+    fun audioTranscriptions(request: dev.octri.showcase.openai.methods.Usage.UsageAudioTranscriptionsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageAudioTranscriptions(clientConfig, request, options)
+    }
+
+    /**
+     * Get audio transcriptions usage details for the organization.
+     */
+    fun audioTranscriptionsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageAudioTranscriptionsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageAudioTranscriptionsPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
+     * Get code interpreter sessions usage details for the organization.
+     */
+    fun codeInterpreterSessions(request: dev.octri.showcase.openai.methods.Usage.UsageCodeInterpreterSessionsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageCodeInterpreterSessions(clientConfig, request, options)
+    }
+
+    /**
+     * Get code interpreter sessions usage details for the organization.
+     */
+    fun codeInterpreterSessionsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageCodeInterpreterSessionsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageCodeInterpreterSessionsPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
+     * Get completions usage details for the organization.
+     */
+    fun completions(request: dev.octri.showcase.openai.methods.Usage.UsageCompletionsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageCompletions(clientConfig, request, options)
+    }
+
+    /**
+     * Get completions usage details for the organization.
+     */
+    fun completionsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageCompletionsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageCompletionsPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
+     * Get embeddings usage details for the organization.
+     */
+    fun embeddings(request: dev.octri.showcase.openai.methods.Usage.UsageEmbeddingsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageEmbeddings(clientConfig, request, options)
+    }
+
+    /**
+     * Get embeddings usage details for the organization.
+     */
+    fun embeddingsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageEmbeddingsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageEmbeddingsPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
+     * Get file search calls usage details for the organization.
+     */
+    fun fileSearchCalls(request: dev.octri.showcase.openai.methods.Usage.UsageFileSearchCallsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageFileSearchCalls(clientConfig, request, options)
+    }
+
+    /**
+     * Get file search calls usage details for the organization.
+     */
+    fun fileSearchCallsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageFileSearchCallsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageFileSearchCallsPaginated(clientConfig, request, options, yieldFn)
+    }
+
+    /**
+     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive start of the range, and filter by sources, image sizes, projects, users, API keys, or models as needed. Use the `next_page` value to retrieve the next page of results.
      *
      * Get images usage details for the organization.
      */
-    fun images(
-        request: dev.octri.showcase.openai.methods.Usage.UsageImagesRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
+    fun images(request: dev.octri.showcase.openai.methods.Usage.UsageImagesRequest, options: RequestOptions? = null): UsageResponse {
         return dev.octri.showcase.openai.methods.Usage.usageImages(clientConfig, request, options)
     }
 
     /**
-     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive
-     * start of the range, and filter by sources, image sizes, projects, users, API keys, or models
-     * as needed. Use the `next_page` value to retrieve the next page of results.
+     * Lists image usage for the organization in time buckets. Use `start_time` to set the inclusive start of the range, and filter by sources, image sizes, projects, users, API keys, or models as needed. Use the `next_page` value to retrieve the next page of results.
      *
      * Get images usage details for the organization.
      */
-    fun imagesPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageImagesRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageImagesPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    fun imagesPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageImagesRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageImagesPaginated(clientConfig, request, options, yieldFn)
     }
 
-    /** Get moderations usage details for the organization. */
-    fun moderations(
-        request: dev.octri.showcase.openai.methods.Usage.UsageModerationsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageModerations(
-            clientConfig,
-            request,
-            options,
-        )
+    /**
+     * Get moderations usage details for the organization.
+     */
+    fun moderations(request: dev.octri.showcase.openai.methods.Usage.UsageModerationsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageModerations(clientConfig, request, options)
     }
 
-    /** Get moderations usage details for the organization. */
-    fun moderationsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageModerationsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageModerationsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    /**
+     * Get moderations usage details for the organization.
+     */
+    fun moderationsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageModerationsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageModerationsPaginated(clientConfig, request, options, yieldFn)
     }
 
-    /** Get vector stores usage details for the organization. */
-    fun vectorStores(
-        request: dev.octri.showcase.openai.methods.Usage.UsageVectorStoresRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageVectorStores(
-            clientConfig,
-            request,
-            options,
-        )
+    /**
+     * Get vector stores usage details for the organization.
+     */
+    fun vectorStores(request: dev.octri.showcase.openai.methods.Usage.UsageVectorStoresRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageVectorStores(clientConfig, request, options)
     }
 
-    /** Get vector stores usage details for the organization. */
-    fun vectorStoresPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageVectorStoresRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageVectorStoresPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    /**
+     * Get vector stores usage details for the organization.
+     */
+    fun vectorStoresPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageVectorStoresRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageVectorStoresPaginated(clientConfig, request, options, yieldFn)
     }
 
-    /** Get web search calls usage details for the organization. */
-    fun webSearchCalls(
-        request: dev.octri.showcase.openai.methods.Usage.UsageWebSearchCallsRequest,
-        options: RequestOptions? = null,
-    ): UsageResponse {
-        return dev.octri.showcase.openai.methods.Usage.usageWebSearchCalls(
-            clientConfig,
-            request,
-            options,
-        )
+    /**
+     * Get web search calls usage details for the organization.
+     */
+    fun webSearchCalls(request: dev.octri.showcase.openai.methods.Usage.UsageWebSearchCallsRequest, options: RequestOptions? = null): UsageResponse {
+        return dev.octri.showcase.openai.methods.Usage.usageWebSearchCalls(clientConfig, request, options)
     }
 
-    /** Get web search calls usage details for the organization. */
-    fun webSearchCallsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.UsageWebSearchCallsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (UsageTimeBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.usageWebSearchCallsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    /**
+     * Get web search calls usage details for the organization.
+     */
+    fun webSearchCallsPaginated(request: dev.octri.showcase.openai.methods.Usage.UsageWebSearchCallsRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.usageWebSearchCallsPaginated(clientConfig, request, options, yieldFn)
     }
 
-    /** Get Decisions API usage details for the organization. */
-    fun decisions(
-        request: dev.octri.showcase.openai.methods.Usage.DecisionsUsageRequest,
-        options: RequestOptions? = null,
-    ): PublicDecisionsUsageResponseResource {
-        return dev.octri.showcase.openai.methods.Usage.decisionsUsage(
-            clientConfig,
-            request,
-            options,
-        )
+    /**
+     * Get Decisions API usage details for the organization.
+     */
+    fun decisions(request: dev.octri.showcase.openai.methods.Usage.DecisionsUsageRequest, options: RequestOptions? = null): PublicDecisionsUsageResponseResource {
+        return dev.octri.showcase.openai.methods.Usage.decisionsUsage(clientConfig, request, options)
     }
 
-    /** Get Decisions API usage details for the organization. */
-    fun decisionsPaginated(
-        request: dev.octri.showcase.openai.methods.Usage.DecisionsUsageRequest,
-        options: RequestOptions? = null,
-        yieldFn: (DecisionsUsageBucket) -> Boolean,
-    ) {
-        dev.octri.showcase.openai.methods.Usage.decisionsUsagePaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    /**
+     * Get Decisions API usage details for the organization.
+     */
+    fun decisionsPaginated(request: dev.octri.showcase.openai.methods.Usage.DecisionsUsageRequest, options: RequestOptions? = null, yieldFn: (DecisionsUsageBucket) -> Boolean) {
+        dev.octri.showcase.openai.methods.Usage.decisionsUsagePaginated(clientConfig, request, options, yieldFn)
     }
+
 }

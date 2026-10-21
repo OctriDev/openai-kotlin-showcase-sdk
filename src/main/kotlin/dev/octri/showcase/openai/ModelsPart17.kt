@@ -3,150 +3,105 @@
 
 package dev.octri.showcase.openai
 
-typealias RealtimeTranslationClientSecretCreateRequest =
-    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequest
+typealias RealtimeTranslationClientSecretCreateRequest = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequest
 
-typealias RealtimeTranslationClientSecretCreateRequestExpiresAfter =
-    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfter
+typealias RealtimeTranslationClientSecretCreateRequestExpiresAfter = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfter
 
-typealias RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum
+typealias RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum
 
-typealias RealtimeTranslationClientSecretCreateResponse =
-    dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateResponse
+typealias RealtimeTranslationClientSecretCreateResponse = dev.octri.showcase.openai.models.RealtimeTranslationClientSecretCreateResponse
 
-typealias RealtimeTranslationServerEvent =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEvent
+typealias RealtimeTranslationServerEvent = dev.octri.showcase.openai.models.RealtimeTranslationServerEvent
 
-typealias RealtimeTranslationServerEventSessionClosed =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosed
+typealias RealtimeTranslationServerEventSessionClosed = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosed
 
-typealias RealtimeTranslationServerEventSessionClosedTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosedTypeEnum
+typealias RealtimeTranslationServerEventSessionClosedTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionClosedTypeEnum
 
-typealias RealtimeTranslationServerEventSessionCreated =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreated
+typealias RealtimeTranslationServerEventSessionCreated = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreated
 
-typealias RealtimeTranslationServerEventSessionCreatedTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreatedTypeEnum
+typealias RealtimeTranslationServerEventSessionCreatedTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionCreatedTypeEnum
 
-typealias RealtimeTranslationServerEventSessionInputTranscriptDelta =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDelta
+typealias RealtimeTranslationServerEventSessionInputTranscriptDelta = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDelta
 
-typealias RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum
+typealias RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum
 
-typealias RealtimeTranslationServerEventSessionOutputAudioDelta =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDelta
+typealias RealtimeTranslationServerEventSessionOutputAudioDelta = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDelta
 
-typealias RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum
+typealias RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum
 
-typealias RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum
+typealias RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum
 
-typealias RealtimeTranslationServerEventSessionOutputTranscriptDelta =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDelta
+typealias RealtimeTranslationServerEventSessionOutputTranscriptDelta = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDelta
 
-typealias RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum
+typealias RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum
 
-typealias RealtimeTranslationServerEventSessionUpdated =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdated
+typealias RealtimeTranslationServerEventSessionUpdated = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdated
 
-typealias RealtimeTranslationServerEventSessionUpdatedTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdatedTypeEnum
+typealias RealtimeTranslationServerEventSessionUpdatedTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationServerEventSessionUpdatedTypeEnum
 
 typealias RealtimeTranslationSession = dev.octri.showcase.openai.models.RealtimeTranslationSession
 
-typealias RealtimeTranslationSessionAudio =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudio
+typealias RealtimeTranslationSessionAudio = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudio
 
-typealias RealtimeTranslationSessionAudioInput =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInput
+typealias RealtimeTranslationSessionAudioInput = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInput
 
-typealias RealtimeTranslationSessionAudioInputNoiseReduction =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInputNoiseReduction
+typealias RealtimeTranslationSessionAudioInputNoiseReduction = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInputNoiseReduction
 
-typealias RealtimeTranslationSessionAudioInputTranscription =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInputTranscription
+typealias RealtimeTranslationSessionAudioInputTranscription = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioInputTranscription
 
-typealias RealtimeTranslationSessionAudioOutput =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioOutput
+typealias RealtimeTranslationSessionAudioOutput = dev.octri.showcase.openai.models.RealtimeTranslationSessionAudioOutput
 
-typealias RealtimeTranslationSessionCreateRequest =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequest
+typealias RealtimeTranslationSessionCreateRequest = dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequest
 
-typealias RealtimeTranslationSessionCreateRequestAudio =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudio
+typealias RealtimeTranslationSessionCreateRequestAudio = dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudio
 
-typealias RealtimeTranslationSessionCreateRequestAudioInput =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioInput
+typealias RealtimeTranslationSessionCreateRequestAudioInput = dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioInput
 
-typealias RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction
+typealias RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction = dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction
 
-typealias RealtimeTranslationSessionCreateRequestAudioInputTranscription =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioInputTranscription
+typealias RealtimeTranslationSessionCreateRequestAudioInputTranscription = dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioInputTranscription
 
-typealias RealtimeTranslationSessionCreateRequestAudioOutput =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioOutput
+typealias RealtimeTranslationSessionCreateRequestAudioOutput = dev.octri.showcase.openai.models.RealtimeTranslationSessionCreateRequestAudioOutput
 
-typealias RealtimeTranslationSessionTypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionTypeEnum
+typealias RealtimeTranslationSessionTypeEnum = dev.octri.showcase.openai.models.RealtimeTranslationSessionTypeEnum
 
-typealias RealtimeTranslationSessionUpdateRequest =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequest
+typealias RealtimeTranslationSessionUpdateRequest = dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequest
 
-typealias RealtimeTranslationSessionUpdateRequestAudio =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudio
+typealias RealtimeTranslationSessionUpdateRequestAudio = dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudio
 
-typealias RealtimeTranslationSessionUpdateRequestAudioInput =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioInput
+typealias RealtimeTranslationSessionUpdateRequestAudioInput = dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioInput
 
-typealias RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction
+typealias RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction = dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction
 
-typealias RealtimeTranslationSessionUpdateRequestAudioInputTranscription =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioInputTranscription
+typealias RealtimeTranslationSessionUpdateRequestAudioInputTranscription = dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioInputTranscription
 
-typealias RealtimeTranslationSessionUpdateRequestAudioOutput =
-    dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioOutput
+typealias RealtimeTranslationSessionUpdateRequestAudioOutput = dev.octri.showcase.openai.models.RealtimeTranslationSessionUpdateRequestAudioOutput
 
 typealias RealtimeTruncation = dev.octri.showcase.openai.models.RealtimeTruncation
 
-typealias RealtimeTruncationVariant0Enum =
-    dev.octri.showcase.openai.models.RealtimeTruncationVariant0Enum
+typealias RealtimeTruncationVariant0Enum = dev.octri.showcase.openai.models.RealtimeTruncationVariant0Enum
 
 typealias RealtimeTruncationVariant1 = dev.octri.showcase.openai.models.RealtimeTruncationVariant1
 
-typealias RealtimeTruncationVariant1TokenLimits =
-    dev.octri.showcase.openai.models.RealtimeTruncationVariant1TokenLimits
+typealias RealtimeTruncationVariant1TokenLimits = dev.octri.showcase.openai.models.RealtimeTruncationVariant1TokenLimits
 
-typealias RealtimeTruncationVariant1TypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTruncationVariant1TypeEnum
+typealias RealtimeTruncationVariant1TypeEnum = dev.octri.showcase.openai.models.RealtimeTruncationVariant1TypeEnum
 
 typealias RealtimeTurnDetection = dev.octri.showcase.openai.models.RealtimeTurnDetection
 
-typealias RealtimeTurnDetectionVariant0 =
-    dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant0
+typealias RealtimeTurnDetectionVariant0 = dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant0
 
-typealias RealtimeTurnDetectionVariant0TypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant0TypeEnum
+typealias RealtimeTurnDetectionVariant0TypeEnum = dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant0TypeEnum
 
-typealias RealtimeTurnDetectionVariant1 =
-    dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant1
+typealias RealtimeTurnDetectionVariant1 = dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant1
 
-typealias RealtimeTurnDetectionVariant1EagernessEnum =
-    dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant1EagernessEnum
+typealias RealtimeTurnDetectionVariant1EagernessEnum = dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant1EagernessEnum
 
-typealias RealtimeTurnDetectionVariant1TypeEnum =
-    dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant1TypeEnum
+typealias RealtimeTurnDetectionVariant1TypeEnum = dev.octri.showcase.openai.models.RealtimeTurnDetectionVariant1TypeEnum
 
 typealias Reasoning = dev.octri.showcase.openai.models.Reasoning
 
-typealias ReasoningContextVariant0Enum =
-    dev.octri.showcase.openai.models.ReasoningContextVariant0Enum
+typealias ReasoningContextVariant0Enum = dev.octri.showcase.openai.models.ReasoningContextVariant0Enum
 
 typealias ReasoningEffort = dev.octri.showcase.openai.models.ReasoningEffort
 
@@ -156,15 +111,13 @@ typealias ReasoningEffortResource = dev.octri.showcase.openai.models.ReasoningEf
 
 typealias ReasoningEffortVariant0Enum = dev.octri.showcase.openai.models.ReasoningEffortVariant0Enum
 
-typealias ReasoningGenerateSummaryVariant0Enum =
-    dev.octri.showcase.openai.models.ReasoningGenerateSummaryVariant0Enum
+typealias ReasoningGenerateSummaryVariant0Enum = dev.octri.showcase.openai.models.ReasoningGenerateSummaryVariant0Enum
 
 typealias ReasoningItem = dev.octri.showcase.openai.models.ReasoningItem
 
 typealias ReasoningItemResource = dev.octri.showcase.openai.models.ReasoningItemResource
 
-typealias ReasoningItemResourceTypeEnum =
-    dev.octri.showcase.openai.models.ReasoningItemResourceTypeEnum
+typealias ReasoningItemResourceTypeEnum = dev.octri.showcase.openai.models.ReasoningItemResourceTypeEnum
 
 typealias ReasoningItemStatusEnum = dev.octri.showcase.openai.models.ReasoningItemStatusEnum
 
@@ -180,13 +133,11 @@ typealias ReasoningSummaryParam = dev.octri.showcase.openai.models.ReasoningSumm
 
 typealias ReasoningSummaryResource = dev.octri.showcase.openai.models.ReasoningSummaryResource
 
-typealias ReasoningSummaryVariant0Enum =
-    dev.octri.showcase.openai.models.ReasoningSummaryVariant0Enum
+typealias ReasoningSummaryVariant0Enum = dev.octri.showcase.openai.models.ReasoningSummaryVariant0Enum
 
 typealias ReasoningTextContent = dev.octri.showcase.openai.models.ReasoningTextContent
 
-typealias ReasoningTextContentTypeEnum =
-    dev.octri.showcase.openai.models.ReasoningTextContentTypeEnum
+typealias ReasoningTextContentTypeEnum = dev.octri.showcase.openai.models.ReasoningTextContentTypeEnum
 
 typealias RefusalContent = dev.octri.showcase.openai.models.RefusalContent
 
@@ -196,117 +147,83 @@ typealias Response = dev.octri.showcase.openai.models.Response
 
 typealias ResponseAudioDeltaEvent = dev.octri.showcase.openai.models.ResponseAudioDeltaEvent
 
-typealias ResponseAudioDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseAudioDeltaEventTypeEnum
+typealias ResponseAudioDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseAudioDeltaEventTypeEnum
 
 typealias ResponseAudioDoneEvent = dev.octri.showcase.openai.models.ResponseAudioDoneEvent
 
-typealias ResponseAudioDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseAudioDoneEventTypeEnum
+typealias ResponseAudioDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseAudioDoneEventTypeEnum
 
-typealias ResponseAudioTranscriptDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseAudioTranscriptDeltaEvent
+typealias ResponseAudioTranscriptDeltaEvent = dev.octri.showcase.openai.models.ResponseAudioTranscriptDeltaEvent
 
-typealias ResponseAudioTranscriptDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseAudioTranscriptDeltaEventTypeEnum
+typealias ResponseAudioTranscriptDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseAudioTranscriptDeltaEventTypeEnum
 
-typealias ResponseAudioTranscriptDoneEvent =
-    dev.octri.showcase.openai.models.ResponseAudioTranscriptDoneEvent
+typealias ResponseAudioTranscriptDoneEvent = dev.octri.showcase.openai.models.ResponseAudioTranscriptDoneEvent
 
-typealias ResponseAudioTranscriptDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseAudioTranscriptDoneEventTypeEnum
+typealias ResponseAudioTranscriptDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseAudioTranscriptDoneEventTypeEnum
 
-typealias ResponseCodeInterpreterCallCodeDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDeltaEvent
+typealias ResponseCodeInterpreterCallCodeDeltaEvent = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDeltaEvent
 
-typealias ResponseCodeInterpreterCallCodeDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDeltaEventTypeEnum
+typealias ResponseCodeInterpreterCallCodeDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDeltaEventTypeEnum
 
-typealias ResponseCodeInterpreterCallCodeDoneEvent =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDoneEvent
+typealias ResponseCodeInterpreterCallCodeDoneEvent = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDoneEvent
 
-typealias ResponseCodeInterpreterCallCodeDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDoneEventTypeEnum
+typealias ResponseCodeInterpreterCallCodeDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCodeDoneEventTypeEnum
 
-typealias ResponseCodeInterpreterCallCompletedEvent =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCompletedEvent
+typealias ResponseCodeInterpreterCallCompletedEvent = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCompletedEvent
 
-typealias ResponseCodeInterpreterCallCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCompletedEventTypeEnum
+typealias ResponseCodeInterpreterCallCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallCompletedEventTypeEnum
 
-typealias ResponseCodeInterpreterCallInProgressEvent =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInProgressEvent
+typealias ResponseCodeInterpreterCallInProgressEvent = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInProgressEvent
 
-typealias ResponseCodeInterpreterCallInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInProgressEventTypeEnum
+typealias ResponseCodeInterpreterCallInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInProgressEventTypeEnum
 
-typealias ResponseCodeInterpreterCallInterpretingEvent =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInterpretingEvent
+typealias ResponseCodeInterpreterCallInterpretingEvent = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInterpretingEvent
 
-typealias ResponseCodeInterpreterCallInterpretingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInterpretingEventTypeEnum
+typealias ResponseCodeInterpreterCallInterpretingEventTypeEnum = dev.octri.showcase.openai.models.ResponseCodeInterpreterCallInterpretingEventTypeEnum
 
-typealias ResponseCompactionCompactingEvent =
-    dev.octri.showcase.openai.models.ResponseCompactionCompactingEvent
+typealias ResponseCompactionCompactingEvent = dev.octri.showcase.openai.models.ResponseCompactionCompactingEvent
 
-typealias ResponseCompactionCompactingStreamingEvent =
-    dev.octri.showcase.openai.models.ResponseCompactionCompactingStreamingEvent
+typealias ResponseCompactionCompactingStreamingEvent = dev.octri.showcase.openai.models.ResponseCompactionCompactingStreamingEvent
 
-typealias ResponseCompactionCompactingStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCompactionCompactingStreamingEventTypeEnum
+typealias ResponseCompactionCompactingStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseCompactionCompactingStreamingEventTypeEnum
 
 typealias ResponseCompletedEvent = dev.octri.showcase.openai.models.ResponseCompletedEvent
 
-typealias ResponseCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCompletedEventTypeEnum
+typealias ResponseCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseCompletedEventTypeEnum
 
 typealias ResponseConfigurationUpdate = dev.octri.showcase.openai.models.ResponseConfigurationUpdate
 
-typealias ResponseConfigurationUpdateItemParam =
-    dev.octri.showcase.openai.models.ResponseConfigurationUpdateItemParam
+typealias ResponseConfigurationUpdateItemParam = dev.octri.showcase.openai.models.ResponseConfigurationUpdateItemParam
 
-typealias ResponseConfigurationUpdateItemParamReasoning =
-    dev.octri.showcase.openai.models.ResponseConfigurationUpdateItemParamReasoning
+typealias ResponseConfigurationUpdateItemParamReasoning = dev.octri.showcase.openai.models.ResponseConfigurationUpdateItemParamReasoning
 
-typealias ResponseConfigurationUpdateItemParamTypeEnum =
-    dev.octri.showcase.openai.models.ResponseConfigurationUpdateItemParamTypeEnum
+typealias ResponseConfigurationUpdateItemParamTypeEnum = dev.octri.showcase.openai.models.ResponseConfigurationUpdateItemParamTypeEnum
 
-typealias ResponseConfigurationUpdateReasoning =
-    dev.octri.showcase.openai.models.ResponseConfigurationUpdateReasoning
+typealias ResponseConfigurationUpdateReasoning = dev.octri.showcase.openai.models.ResponseConfigurationUpdateReasoning
 
-typealias ResponseConfigurationUpdateTypeEnum =
-    dev.octri.showcase.openai.models.ResponseConfigurationUpdateTypeEnum
+typealias ResponseConfigurationUpdateTypeEnum = dev.octri.showcase.openai.models.ResponseConfigurationUpdateTypeEnum
 
-typealias ResponseContentPartAddedEvent =
-    dev.octri.showcase.openai.models.ResponseContentPartAddedEvent
+typealias ResponseContentPartAddedEvent = dev.octri.showcase.openai.models.ResponseContentPartAddedEvent
 
-typealias ResponseContentPartAddedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseContentPartAddedEventTypeEnum
+typealias ResponseContentPartAddedEventTypeEnum = dev.octri.showcase.openai.models.ResponseContentPartAddedEventTypeEnum
 
-typealias ResponseContentPartDoneEvent =
-    dev.octri.showcase.openai.models.ResponseContentPartDoneEvent
+typealias ResponseContentPartDoneEvent = dev.octri.showcase.openai.models.ResponseContentPartDoneEvent
 
-typealias ResponseContentPartDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseContentPartDoneEventTypeEnum
+typealias ResponseContentPartDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseContentPartDoneEventTypeEnum
 
 typealias ResponseConversation = dev.octri.showcase.openai.models.ResponseConversation
 
 typealias ResponseCreatedEvent = dev.octri.showcase.openai.models.ResponseCreatedEvent
 
-typealias ResponseCreatedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCreatedEventTypeEnum
+typealias ResponseCreatedEventTypeEnum = dev.octri.showcase.openai.models.ResponseCreatedEventTypeEnum
 
-typealias ResponseCustomToolCallInputDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseCustomToolCallInputDeltaEvent
+typealias ResponseCustomToolCallInputDeltaEvent = dev.octri.showcase.openai.models.ResponseCustomToolCallInputDeltaEvent
 
-typealias ResponseCustomToolCallInputDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCustomToolCallInputDeltaEventTypeEnum
+typealias ResponseCustomToolCallInputDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseCustomToolCallInputDeltaEventTypeEnum
 
-typealias ResponseCustomToolCallInputDoneEvent =
-    dev.octri.showcase.openai.models.ResponseCustomToolCallInputDoneEvent
+typealias ResponseCustomToolCallInputDoneEvent = dev.octri.showcase.openai.models.ResponseCustomToolCallInputDoneEvent
 
-typealias ResponseCustomToolCallInputDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseCustomToolCallInputDoneEventTypeEnum
+typealias ResponseCustomToolCallInputDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseCustomToolCallInputDoneEventTypeEnum
 
 typealias ResponseError = dev.octri.showcase.openai.models.ResponseError
 
@@ -320,99 +237,73 @@ typealias ResponseFailedEvent = dev.octri.showcase.openai.models.ResponseFailedE
 
 typealias ResponseFailedEventTypeEnum = dev.octri.showcase.openai.models.ResponseFailedEventTypeEnum
 
-typealias ResponseFileSearchCallCompletedEvent =
-    dev.octri.showcase.openai.models.ResponseFileSearchCallCompletedEvent
+typealias ResponseFileSearchCallCompletedEvent = dev.octri.showcase.openai.models.ResponseFileSearchCallCompletedEvent
 
-typealias ResponseFileSearchCallCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFileSearchCallCompletedEventTypeEnum
+typealias ResponseFileSearchCallCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseFileSearchCallCompletedEventTypeEnum
 
-typealias ResponseFileSearchCallInProgressEvent =
-    dev.octri.showcase.openai.models.ResponseFileSearchCallInProgressEvent
+typealias ResponseFileSearchCallInProgressEvent = dev.octri.showcase.openai.models.ResponseFileSearchCallInProgressEvent
 
-typealias ResponseFileSearchCallInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFileSearchCallInProgressEventTypeEnum
+typealias ResponseFileSearchCallInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseFileSearchCallInProgressEventTypeEnum
 
-typealias ResponseFileSearchCallSearchingEvent =
-    dev.octri.showcase.openai.models.ResponseFileSearchCallSearchingEvent
+typealias ResponseFileSearchCallSearchingEvent = dev.octri.showcase.openai.models.ResponseFileSearchCallSearchingEvent
 
-typealias ResponseFileSearchCallSearchingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFileSearchCallSearchingEventTypeEnum
+typealias ResponseFileSearchCallSearchingEventTypeEnum = dev.octri.showcase.openai.models.ResponseFileSearchCallSearchingEventTypeEnum
 
 typealias ResponseFormatJsonObject = dev.octri.showcase.openai.models.ResponseFormatJsonObject
 
-typealias ResponseFormatJsonObjectTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFormatJsonObjectTypeEnum
+typealias ResponseFormatJsonObjectTypeEnum = dev.octri.showcase.openai.models.ResponseFormatJsonObjectTypeEnum
 
 typealias ResponseFormatJsonSchema = dev.octri.showcase.openai.models.ResponseFormatJsonSchema
 
-typealias ResponseFormatJsonSchemaJsonSchema =
-    dev.octri.showcase.openai.models.ResponseFormatJsonSchemaJsonSchema
+typealias ResponseFormatJsonSchemaJsonSchema = dev.octri.showcase.openai.models.ResponseFormatJsonSchemaJsonSchema
 
-typealias ResponseFormatJsonSchemaSchema =
-    dev.octri.showcase.openai.models.ResponseFormatJsonSchemaSchema
+typealias ResponseFormatJsonSchemaSchema = dev.octri.showcase.openai.models.ResponseFormatJsonSchemaSchema
 
-typealias ResponseFormatJsonSchemaTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFormatJsonSchemaTypeEnum
+typealias ResponseFormatJsonSchemaTypeEnum = dev.octri.showcase.openai.models.ResponseFormatJsonSchemaTypeEnum
 
 typealias ResponseFormatText = dev.octri.showcase.openai.models.ResponseFormatText
 
 typealias ResponseFormatTextGrammar = dev.octri.showcase.openai.models.ResponseFormatTextGrammar
 
-typealias ResponseFormatTextGrammarTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFormatTextGrammarTypeEnum
+typealias ResponseFormatTextGrammarTypeEnum = dev.octri.showcase.openai.models.ResponseFormatTextGrammarTypeEnum
 
 typealias ResponseFormatTextPython = dev.octri.showcase.openai.models.ResponseFormatTextPython
 
-typealias ResponseFormatTextPythonTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFormatTextPythonTypeEnum
+typealias ResponseFormatTextPythonTypeEnum = dev.octri.showcase.openai.models.ResponseFormatTextPythonTypeEnum
 
 typealias ResponseFormatTextTypeEnum = dev.octri.showcase.openai.models.ResponseFormatTextTypeEnum
 
-typealias ResponseFunctionCallArgumentsDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDeltaEvent
+typealias ResponseFunctionCallArgumentsDeltaEvent = dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDeltaEvent
 
-typealias ResponseFunctionCallArgumentsDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDeltaEventTypeEnum
+typealias ResponseFunctionCallArgumentsDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDeltaEventTypeEnum
 
-typealias ResponseFunctionCallArgumentsDoneEvent =
-    dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDoneEvent
+typealias ResponseFunctionCallArgumentsDoneEvent = dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDoneEvent
 
-typealias ResponseFunctionCallArgumentsDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDoneEventTypeEnum
+typealias ResponseFunctionCallArgumentsDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseFunctionCallArgumentsDoneEventTypeEnum
 
-typealias ResponseImageGenCallCompletedEvent =
-    dev.octri.showcase.openai.models.ResponseImageGenCallCompletedEvent
+typealias ResponseImageGenCallCompletedEvent = dev.octri.showcase.openai.models.ResponseImageGenCallCompletedEvent
 
-typealias ResponseImageGenCallCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseImageGenCallCompletedEventTypeEnum
+typealias ResponseImageGenCallCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseImageGenCallCompletedEventTypeEnum
 
-typealias ResponseImageGenCallGeneratingEvent =
-    dev.octri.showcase.openai.models.ResponseImageGenCallGeneratingEvent
+typealias ResponseImageGenCallGeneratingEvent = dev.octri.showcase.openai.models.ResponseImageGenCallGeneratingEvent
 
-typealias ResponseImageGenCallGeneratingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseImageGenCallGeneratingEventTypeEnum
+typealias ResponseImageGenCallGeneratingEventTypeEnum = dev.octri.showcase.openai.models.ResponseImageGenCallGeneratingEventTypeEnum
 
-typealias ResponseImageGenCallInProgressEvent =
-    dev.octri.showcase.openai.models.ResponseImageGenCallInProgressEvent
+typealias ResponseImageGenCallInProgressEvent = dev.octri.showcase.openai.models.ResponseImageGenCallInProgressEvent
 
-typealias ResponseImageGenCallInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseImageGenCallInProgressEventTypeEnum
+typealias ResponseImageGenCallInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseImageGenCallInProgressEventTypeEnum
 
-typealias ResponseImageGenCallPartialImageEvent =
-    dev.octri.showcase.openai.models.ResponseImageGenCallPartialImageEvent
+typealias ResponseImageGenCallPartialImageEvent = dev.octri.showcase.openai.models.ResponseImageGenCallPartialImageEvent
 
-typealias ResponseImageGenCallPartialImageEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseImageGenCallPartialImageEventTypeEnum
+typealias ResponseImageGenCallPartialImageEventTypeEnum = dev.octri.showcase.openai.models.ResponseImageGenCallPartialImageEventTypeEnum
 
 typealias ResponseIncompleteEvent = dev.octri.showcase.openai.models.ResponseIncompleteEvent
 
-typealias ResponseIncompleteEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseIncompleteEventTypeEnum
+typealias ResponseIncompleteEventTypeEnum = dev.octri.showcase.openai.models.ResponseIncompleteEventTypeEnum
 
 typealias ResponseInProgressEvent = dev.octri.showcase.openai.models.ResponseInProgressEvent
 
-typealias ResponseInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseInProgressEventTypeEnum
+typealias ResponseInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseInProgressEventTypeEnum
 
 typealias ResponseItemList = dev.octri.showcase.openai.models.ResponseItemList
 
@@ -420,86 +311,63 @@ typealias ResponseItemListObjectEnum = dev.octri.showcase.openai.models.Response
 
 typealias ResponseLogProb = dev.octri.showcase.openai.models.ResponseLogProb
 
-typealias ResponseLogProbTopLogprobsItem =
-    dev.octri.showcase.openai.models.ResponseLogProbTopLogprobsItem
+typealias ResponseLogProbTopLogprobsItem = dev.octri.showcase.openai.models.ResponseLogProbTopLogprobsItem
 
-typealias ResponseMCPCallArgumentsDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDeltaEvent
+typealias ResponseMCPCallArgumentsDeltaEvent = dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDeltaEvent
 
-typealias ResponseMCPCallArgumentsDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDeltaEventTypeEnum
+typealias ResponseMCPCallArgumentsDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDeltaEventTypeEnum
 
-typealias ResponseMCPCallArgumentsDoneEvent =
-    dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDoneEvent
+typealias ResponseMCPCallArgumentsDoneEvent = dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDoneEvent
 
-typealias ResponseMCPCallArgumentsDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDoneEventTypeEnum
+typealias ResponseMCPCallArgumentsDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPCallArgumentsDoneEventTypeEnum
 
-typealias ResponseMCPCallCompletedEvent =
-    dev.octri.showcase.openai.models.ResponseMCPCallCompletedEvent
+typealias ResponseMCPCallCompletedEvent = dev.octri.showcase.openai.models.ResponseMCPCallCompletedEvent
 
-typealias ResponseMCPCallCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPCallCompletedEventTypeEnum
+typealias ResponseMCPCallCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPCallCompletedEventTypeEnum
 
 typealias ResponseMCPCallFailedEvent = dev.octri.showcase.openai.models.ResponseMCPCallFailedEvent
 
-typealias ResponseMCPCallFailedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPCallFailedEventTypeEnum
+typealias ResponseMCPCallFailedEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPCallFailedEventTypeEnum
 
-typealias ResponseMCPCallInProgressEvent =
-    dev.octri.showcase.openai.models.ResponseMCPCallInProgressEvent
+typealias ResponseMCPCallInProgressEvent = dev.octri.showcase.openai.models.ResponseMCPCallInProgressEvent
 
-typealias ResponseMCPCallInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPCallInProgressEventTypeEnum
+typealias ResponseMCPCallInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPCallInProgressEventTypeEnum
 
-typealias ResponseMCPListToolsCompletedEvent =
-    dev.octri.showcase.openai.models.ResponseMCPListToolsCompletedEvent
+typealias ResponseMCPListToolsCompletedEvent = dev.octri.showcase.openai.models.ResponseMCPListToolsCompletedEvent
 
-typealias ResponseMCPListToolsCompletedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPListToolsCompletedEventTypeEnum
+typealias ResponseMCPListToolsCompletedEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPListToolsCompletedEventTypeEnum
 
-typealias ResponseMCPListToolsFailedEvent =
-    dev.octri.showcase.openai.models.ResponseMCPListToolsFailedEvent
+typealias ResponseMCPListToolsFailedEvent = dev.octri.showcase.openai.models.ResponseMCPListToolsFailedEvent
 
-typealias ResponseMCPListToolsFailedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPListToolsFailedEventTypeEnum
+typealias ResponseMCPListToolsFailedEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPListToolsFailedEventTypeEnum
 
-typealias ResponseMCPListToolsInProgressEvent =
-    dev.octri.showcase.openai.models.ResponseMCPListToolsInProgressEvent
+typealias ResponseMCPListToolsInProgressEvent = dev.octri.showcase.openai.models.ResponseMCPListToolsInProgressEvent
 
-typealias ResponseMCPListToolsInProgressEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseMCPListToolsInProgressEventTypeEnum
+typealias ResponseMCPListToolsInProgressEventTypeEnum = dev.octri.showcase.openai.models.ResponseMCPListToolsInProgressEventTypeEnum
 
 typealias ResponseModalities = dev.octri.showcase.openai.models.ResponseModalities
 
 typealias ResponseModalitiesItemEnum = dev.octri.showcase.openai.models.ResponseModalitiesItemEnum
 
-typealias ResponseOutputItemAddedEvent =
-    dev.octri.showcase.openai.models.ResponseOutputItemAddedEvent
+typealias ResponseOutputItemAddedEvent = dev.octri.showcase.openai.models.ResponseOutputItemAddedEvent
 
-typealias ResponseOutputItemAddedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseOutputItemAddedEventTypeEnum
+typealias ResponseOutputItemAddedEventTypeEnum = dev.octri.showcase.openai.models.ResponseOutputItemAddedEventTypeEnum
 
 typealias ResponseOutputItemDoneEvent = dev.octri.showcase.openai.models.ResponseOutputItemDoneEvent
 
-typealias ResponseOutputItemDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseOutputItemDoneEventTypeEnum
+typealias ResponseOutputItemDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseOutputItemDoneEventTypeEnum
 
 typealias ResponseOutputText = dev.octri.showcase.openai.models.ResponseOutputText
 
-typealias ResponseOutputTextAnnotationAddedEvent =
-    dev.octri.showcase.openai.models.ResponseOutputTextAnnotationAddedEvent
+typealias ResponseOutputTextAnnotationAddedEvent = dev.octri.showcase.openai.models.ResponseOutputTextAnnotationAddedEvent
 
-typealias ResponseOutputTextAnnotationAddedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseOutputTextAnnotationAddedEventTypeEnum
+typealias ResponseOutputTextAnnotationAddedEventTypeEnum = dev.octri.showcase.openai.models.ResponseOutputTextAnnotationAddedEventTypeEnum
 
-typealias ResponseOutputTextAnnotationsItem =
-    dev.octri.showcase.openai.models.ResponseOutputTextAnnotationsItem
+typealias ResponseOutputTextAnnotationsItem = dev.octri.showcase.openai.models.ResponseOutputTextAnnotationsItem
 
 typealias ResponseOutputTextTypeEnum = dev.octri.showcase.openai.models.ResponseOutputTextTypeEnum
 
-typealias ResponsePromptCacheOptionsParam =
-    dev.octri.showcase.openai.models.ResponsePromptCacheOptionsParam
+typealias ResponsePromptCacheOptionsParam = dev.octri.showcase.openai.models.ResponsePromptCacheOptionsParam
 
 typealias ResponsePromptVariables = dev.octri.showcase.openai.models.ResponsePromptVariables
 
@@ -509,89 +377,62 @@ typealias ResponseQueuedEvent = dev.octri.showcase.openai.models.ResponseQueuedE
 
 typealias ResponseQueuedEventTypeEnum = dev.octri.showcase.openai.models.ResponseQueuedEventTypeEnum
 
-typealias ResponseReasoningSummaryPartAddedEvent =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEvent
+typealias ResponseReasoningSummaryPartAddedEvent = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEvent
 
-typealias ResponseReasoningSummaryPartAddedEventPart =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEventPart
+typealias ResponseReasoningSummaryPartAddedEventPart = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEventPart
 
-typealias ResponseReasoningSummaryPartAddedEventPartTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEventPartTypeEnum
+typealias ResponseReasoningSummaryPartAddedEventPartTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEventPartTypeEnum
 
-typealias ResponseReasoningSummaryPartAddedEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEventTypeEnum
+typealias ResponseReasoningSummaryPartAddedEventTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartAddedEventTypeEnum
 
-typealias ResponseReasoningSummaryPartDoneEvent =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEvent
+typealias ResponseReasoningSummaryPartDoneEvent = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEvent
 
-typealias ResponseReasoningSummaryPartDoneEventPart =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventPart
+typealias ResponseReasoningSummaryPartDoneEventPart = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventPart
 
-typealias ResponseReasoningSummaryPartDoneEventPartTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventPartTypeEnum
+typealias ResponseReasoningSummaryPartDoneEventPartTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventPartTypeEnum
 
-typealias ResponseReasoningSummaryPartDoneEventStatusEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventStatusEnum
+typealias ResponseReasoningSummaryPartDoneEventStatusEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventStatusEnum
 
-typealias ResponseReasoningSummaryPartDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventTypeEnum
+typealias ResponseReasoningSummaryPartDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryPartDoneEventTypeEnum
 
-typealias ResponseReasoningSummaryTextDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDeltaEvent
+typealias ResponseReasoningSummaryTextDeltaEvent = dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDeltaEvent
 
-typealias ResponseReasoningSummaryTextDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDeltaEventTypeEnum
+typealias ResponseReasoningSummaryTextDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDeltaEventTypeEnum
 
-typealias ResponseReasoningSummaryTextDoneEvent =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDoneEvent
+typealias ResponseReasoningSummaryTextDoneEvent = dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDoneEvent
 
-typealias ResponseReasoningSummaryTextDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDoneEventTypeEnum
+typealias ResponseReasoningSummaryTextDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningSummaryTextDoneEventTypeEnum
 
-typealias ResponseReasoningTextDeltaEvent =
-    dev.octri.showcase.openai.models.ResponseReasoningTextDeltaEvent
+typealias ResponseReasoningTextDeltaEvent = dev.octri.showcase.openai.models.ResponseReasoningTextDeltaEvent
 
-typealias ResponseReasoningTextDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningTextDeltaEventTypeEnum
+typealias ResponseReasoningTextDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningTextDeltaEventTypeEnum
 
-typealias ResponseReasoningTextDoneEvent =
-    dev.octri.showcase.openai.models.ResponseReasoningTextDoneEvent
+typealias ResponseReasoningTextDoneEvent = dev.octri.showcase.openai.models.ResponseReasoningTextDoneEvent
 
-typealias ResponseReasoningTextDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseReasoningTextDoneEventTypeEnum
+typealias ResponseReasoningTextDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseReasoningTextDoneEventTypeEnum
 
 typealias ResponseRefusalDeltaEvent = dev.octri.showcase.openai.models.ResponseRefusalDeltaEvent
 
-typealias ResponseRefusalDeltaEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseRefusalDeltaEventTypeEnum
+typealias ResponseRefusalDeltaEventTypeEnum = dev.octri.showcase.openai.models.ResponseRefusalDeltaEventTypeEnum
 
 typealias ResponseRefusalDoneEvent = dev.octri.showcase.openai.models.ResponseRefusalDoneEvent
 
-typealias ResponseRefusalDoneEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseRefusalDoneEventTypeEnum
+typealias ResponseRefusalDoneEventTypeEnum = dev.octri.showcase.openai.models.ResponseRefusalDoneEventTypeEnum
 
 typealias ResponsesClientEvent = dev.octri.showcase.openai.models.ResponsesClientEvent
 
-typealias ResponsesClientEventResponseCreate =
-    dev.octri.showcase.openai.models.ResponsesClientEventResponseCreate
+typealias ResponsesClientEventResponseCreate = dev.octri.showcase.openai.models.ResponsesClientEventResponseCreate
 
-typealias ResponsesClientEventResponseCreateVariant0TypeEnum =
-    dev.octri.showcase.openai.models.ResponsesClientEventResponseCreateVariant0TypeEnum
+typealias ResponsesClientEventResponseCreateVariant0TypeEnum = dev.octri.showcase.openai.models.ResponsesClientEventResponseCreateVariant0TypeEnum
 
-typealias ResponseShellCallCommandAddedStreamingEvent =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandAddedStreamingEvent
+typealias ResponseShellCallCommandAddedStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallCommandAddedStreamingEvent
 
-typealias ResponseShellCallCommandAddedStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandAddedStreamingEventTypeEnum
+typealias ResponseShellCallCommandAddedStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallCommandAddedStreamingEventTypeEnum
 
-typealias ResponseShellCallCommandDeltaStreamingEvent =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandDeltaStreamingEvent
+typealias ResponseShellCallCommandDeltaStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallCommandDeltaStreamingEvent
 
-typealias ResponseShellCallCommandDeltaStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandDeltaStreamingEventTypeEnum
+typealias ResponseShellCallCommandDeltaStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallCommandDeltaStreamingEventTypeEnum
 
-typealias ResponseShellCallCommandDoneStreamingEvent =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEvent
+typealias ResponseShellCallCommandDoneStreamingEvent = dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEvent
 
-typealias ResponseShellCallCommandDoneStreamingEventTypeEnum =
-    dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum
+typealias ResponseShellCallCommandDoneStreamingEventTypeEnum = dev.octri.showcase.openai.models.ResponseShellCallCommandDoneStreamingEventTypeEnum

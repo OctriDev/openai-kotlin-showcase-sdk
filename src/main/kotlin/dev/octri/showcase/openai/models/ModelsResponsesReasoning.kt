@@ -3,22 +3,30 @@
 
 package dev.octri.showcase.openai.models
 
-/** Configuration options for reasoning models. */
+/**
+ * Configuration options for reasoning models.
+ */
 data class Reasoning(
     /**
-     * Controls the reasoning execution mode for the request. When returned on a response, this is
-     * the effective execution mode.
+     * Controls the reasoning execution mode for the request. When returned on a response, this is the effective execution mode.
      */
     val mode: ReasoningModeEnum? = null,
-    /** Optional API value serialized in the `effort` wire field. */
+    /**
+     * Optional API value serialized in the `effort` wire field.
+     */
     val effort: ReasoningEffort? = null,
-    /** Optional API value serialized in the `summary` wire field. */
+    /**
+     * Optional API value serialized in the `summary` wire field.
+     */
     val summary: ReasoningSummaryVariant0Enum? = null,
-    /** Optional API value serialized in the `context` wire field. */
+    /**
+     * Optional API value serialized in the `context` wire field.
+     */
     val context: ReasoningContextVariant0Enum? = null,
-    /** Optional API value serialized in the `generate_summary` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("generate_summary")
-    val generateSummary: ReasoningGenerateSummaryVariant0Enum? = null,
+    /**
+     * Optional API value serialized in the `generate_summary` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("generate_summary") val generateSummary: ReasoningGenerateSummaryVariant0Enum? = null
 )
 
 typealias ReasoningModeEnum = String

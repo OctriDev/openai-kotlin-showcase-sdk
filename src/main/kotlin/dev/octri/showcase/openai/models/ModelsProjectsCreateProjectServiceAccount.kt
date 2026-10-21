@@ -3,57 +3,80 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ProjectServiceAccountApiKey` API schema. */
+/**
+ * Typed representation of the `ProjectServiceAccountApiKey` API schema.
+ */
 data class ProjectServiceAccountApiKey(
-    /** The object type, which is always `organization.project.service_account.api_key` */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountApiKeyObjectEnum,
-    /** Required `string` value serialized in the `value` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /** Required `string` value serialized in the `name` wire field. */
-    val name: String,
-    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
-    /** The Unix timestamp (in seconds) when the API key expires, or null if it does not expire. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
-)
-
-/** Typed representation of the `ProjectServiceAccountCreateRequest` API schema. */
-data class ProjectServiceAccountCreateRequest(
-    /** The name of the service account being created. */
-    val name: String,
-    /** Optional `boolean` value serialized in the `create_service_account_only` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("create_service_account_only")
-    val createServiceAccountOnly: Boolean? = null,
     /**
-     * Number of seconds until the initial API key expires. If omitted or null, the key does not
-     * expire unless the effective organization or project policy requires an expiration. When a
-     * policy sets a maximum lifetime, this value must be provided and must not exceed that limit. A
-     * non-null value cannot be used when `create_service_account_only` is true.
+     * The object type, which is always `organization.project.service_account.api_key`
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds")
-    val expiresInSeconds: Long? = null,
-)
-
-/** Typed representation of the `ProjectServiceAccountCreateResponse` API schema. */
-data class ProjectServiceAccountCreateResponse(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ProjectServiceAccountCreateResponseObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
-    /** Required `string` value serialized in the `name` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountApiKeyObjectEnum,
+    /**
+     * Required `string` value serialized in the `value` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
     /**
-     * Service accounts created with default project membership have role `member`. Accounts created
-     * with `create_service_account_only` have role `none`.
+     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * The Unix timestamp (in seconds) when the API key expires, or null if it does not expire.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
+)
+
+/**
+ * Typed representation of the `ProjectServiceAccountCreateRequest` API schema.
+ */
+data class ProjectServiceAccountCreateRequest(
+    /**
+     * The name of the service account being created.
+     */
+    val name: String,
+    /**
+     * Optional `boolean` value serialized in the `create_service_account_only` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("create_service_account_only") val createServiceAccountOnly: Boolean? = null,
+    /**
+     * Number of seconds until the initial API key expires. If omitted or null, the key does not expire unless the effective organization or project policy requires an expiration. When a policy sets a maximum lifetime, this value must be provided and must not exceed that limit. A non-null value cannot be used when `create_service_account_only` is true.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_seconds") val expiresInSeconds: Long? = null
+)
+
+/**
+ * Typed representation of the `ProjectServiceAccountCreateResponse` API schema.
+ */
+data class ProjectServiceAccountCreateResponse(
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectServiceAccountCreateResponseObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String,
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
+    val name: String,
+    /**
+     * Service accounts created with default project membership have role `member`. Accounts created with `create_service_account_only` have role `none`.
      */
     val role: ProjectServiceAccountCreateResponseRoleEnum,
-    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
+    /**
+     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Required API value serialized in the `api_key` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key", required = true)
-    val apiKey: ProjectServiceAccountApiKey?,
+    /**
+     * Required API value serialized in the `api_key` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key", required = true) val apiKey: ProjectServiceAccountApiKey?
 )

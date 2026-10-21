@@ -3,129 +3,104 @@
 
 package dev.octri.showcase.openai.models
 
-/** Moderation results or errors for the response input and output. */
+/**
+ * Moderation results or errors for the response input and output.
+ */
 data class Moderation(
-    /** Moderation for the response input. */
+    /**
+     * Moderation for the response input.
+     */
     val input: ModerationInput,
-    /** Moderation for the response output. */
-    val output: ModerationOutput,
+    /**
+     * Moderation for the response output.
+     */
+    val output: ModerationOutput
 )
 
-/** An error produced while attempting moderation for the response input or output. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * An error produced while attempting moderation for the response input or output.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ModerationErrorBody(
-    /** The object type, which was always `error` for moderation failures. */
+    /**
+     * The object type, which was always `error` for moderation failures.
+     */
     val type: ModerationErrorBodyTypeEnum,
-    /** The error code. */
+    /**
+     * The error code.
+     */
     val code: String,
-    /** The error message. */
-    val message: String,
+    /**
+     * The error message.
+     */
+    val message: String
 ) : ModerationInput, ModerationOutput
 
-/** Moderation for the response input. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownModerationInput::class,
-)
+/**
+ * Moderation for the response input.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownModerationInput::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ModerationResultBody::class,
-        name = "moderation_result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ModerationErrorBody::class,
-        name = "error",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ModerationResultBody::class, name = "moderation_result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ModerationErrorBody::class, name = "error")
 )
 sealed interface ModerationInput
 
 /** A [ModerationInput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownModerationInput
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownModerationInput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ModerationInput {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Moderation for the response output. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownModerationOutput::class,
-)
+/**
+ * Moderation for the response output.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownModerationOutput::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ModerationResultBody::class,
-        name = "moderation_result",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ModerationErrorBody::class,
-        name = "error",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ModerationResultBody::class, name = "moderation_result"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ModerationErrorBody::class, name = "error")
 )
 sealed interface ModerationOutput
 
 /** A [ModerationOutput] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownModerationOutput
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownModerationOutput @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ModerationOutput {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A moderation result produced for the response input or output. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A moderation result produced for the response input or output.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ModerationResultBody(
-    /** The object type, which was always `moderation_result` for successful moderation results. */
+    /**
+     * The object type, which was always `moderation_result` for successful moderation results.
+     */
     val type: ModerationResultBodyTypeEnum,
-    /** The moderation model that produced this result. */
+    /**
+     * The moderation model that produced this result.
+     */
     val model: String,
-    /** A boolean indicating whether the content was flagged by any category. */
+    /**
+     * A boolean indicating whether the content was flagged by any category.
+     */
     val flagged: Boolean,
     /**
-     * A dictionary of moderation categories to booleans, True if the input is flagged under this
-     * category.
+     * A dictionary of moderation categories to booleans, True if the input is flagged under this category.
      */
     val categories: Map<String, Boolean>,
-    /** A dictionary of moderation categories to scores. */
-    @com.fasterxml.jackson.annotation.JsonProperty("category_scores")
-    val categoryScores: Map<String, Double>,
-    /** Which modalities of input are reflected by the score for each category. */
-    @com.fasterxml.jackson.annotation.JsonProperty("category_applied_input_types")
-    val categoryAppliedInputTypes: Map<String, List<ModerationInputType>>,
+    /**
+     * A dictionary of moderation categories to scores.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("category_scores") val categoryScores: Map<String, Double>,
+    /**
+     * Which modalities of input are reflected by the score for each category.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("category_applied_input_types") val categoryAppliedInputTypes: Map<String, List<ModerationInputType>>
 ) : ModerationInput, ModerationOutput

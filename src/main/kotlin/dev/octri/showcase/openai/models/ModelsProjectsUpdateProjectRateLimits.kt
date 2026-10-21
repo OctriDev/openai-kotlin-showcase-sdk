@@ -3,24 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ProjectRateLimitUpdateRequest` API schema. */
+/**
+ * Typed representation of the `ProjectRateLimitUpdateRequest` API schema.
+ */
 data class ProjectRateLimitUpdateRequest(
-    /** The maximum requests per minute. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_minute")
-    val maxRequestsPer1Minute: Long? = null,
-    /** The maximum tokens per minute. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_tokens_per_1_minute")
-    val maxTokensPer1Minute: Long? = null,
-    /** The maximum images per minute. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_images_per_1_minute")
-    val maxImagesPer1Minute: Long? = null,
-    /** The maximum audio megabytes per minute. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_audio_megabytes_per_1_minute")
-    val maxAudioMegabytesPer1Minute: Long? = null,
-    /** The maximum requests per day. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_day")
-    val maxRequestsPer1Day: Long? = null,
-    /** The maximum batch input tokens per day. Only relevant for certain models. */
-    @com.fasterxml.jackson.annotation.JsonProperty("batch_1_day_max_input_tokens")
-    val batch1DayMaxInputTokens: Long? = null,
+    /**
+     * The maximum requests per minute.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_minute") val maxRequestsPer1Minute: Long? = null,
+    /**
+     * The maximum tokens per minute.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_tokens_per_1_minute") val maxTokensPer1Minute: Long? = null,
+    /**
+     * The maximum images per minute. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_images_per_1_minute") val maxImagesPer1Minute: Long? = null,
+    /**
+     * The maximum audio megabytes per minute. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_audio_megabytes_per_1_minute") val maxAudioMegabytesPer1Minute: Long? = null,
+    /**
+     * The maximum requests per day. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_requests_per_1_day") val maxRequestsPer1Day: Long? = null,
+    /**
+     * The maximum batch input tokens per day. Only relevant for certain models.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("batch_1_day_max_input_tokens") val batch1DayMaxInputTokens: Long? = null
 )

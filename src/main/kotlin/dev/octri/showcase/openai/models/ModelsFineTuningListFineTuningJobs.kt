@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `ListPaginatedFineTuningJobsResponse` API schema. */
+/**
+ * Typed representation of the `ListPaginatedFineTuningJobsResponse` API schema.
+ */
 data class ListPaginatedFineTuningJobsResponse(
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<FineTuningJob>,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ListPaginatedFineTuningJobsResponseObjectEnum,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListPaginatedFineTuningJobsResponseObjectEnum
 )

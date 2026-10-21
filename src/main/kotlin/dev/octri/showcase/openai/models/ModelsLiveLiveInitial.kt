@@ -3,167 +3,137 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `LiveCustomVoiceParam` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `LiveCustomVoiceParam` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveCustomVoiceParam(
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String
 ) : LiveInitialSessionAudioOutputParamVoice
 
-/** An assistant message included in the initial text history of a Live session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * An assistant message included in the initial text history of a Live session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveInitialAssistantMessageItemParam(
-    /** The author of this history message. Always `assistant`. */
+    /**
+     * The author of this history message. Always `assistant`.
+     */
     val role: LiveInitialAssistantMessageItemParamRoleEnum,
     /**
      * The message content. Supply exactly one text part for the initial Live conversation history.
      */
     val content: List<LiveInitialAssistantMessageItemParamContentItem>,
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** The history item type. Always `message`. */
+    /**
+     * The history item type. Always `message`.
+     */
     val type: LiveInitialAssistantMessageItemParamTypeEnum? = null,
-    /** Optional API value serialized in the `status` wire field. */
-    val status: LiveInitialMessageStatus? = null,
+    /**
+     * Optional API value serialized in the `status` wire field.
+     */
+    val status: LiveInitialMessageStatus? = null
 ) : LiveInitialItem
 
-/** Required API value serialized in the `content[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownLiveInitialAssistantMessageItemParamContentItem::class,
-)
+/**
+ * Required API value serialized in the `content[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownLiveInitialAssistantMessageItemParamContentItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveInitialTextContentPartParam::class,
-        name = "text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveInitialOutputTextContentPartParam::class,
-        name = "output_text",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInitialTextContentPartParam::class, name = "text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInitialOutputTextContentPartParam::class, name = "output_text")
 )
 sealed interface LiveInitialAssistantMessageItemParamContentItem
 
-/**
- * A [LiveInitialAssistantMessageItemParamContentItem] whose `type` names no branch this SDK knows,
- * kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownLiveInitialAssistantMessageItemParamContentItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [LiveInitialAssistantMessageItemParamContentItem] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownLiveInitialAssistantMessageItemParamContentItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : LiveInitialAssistantMessageItemParamContentItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** A developer message included in the initial text history of a Live session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A developer message included in the initial text history of a Live session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveInitialDeveloperMessageItemParam(
-    /** The author of this history message. Always `developer`. */
+    /**
+     * The author of this history message. Always `developer`.
+     */
     val role: LiveInitialDeveloperMessageItemParamRoleEnum,
     /**
      * The message content. Supply exactly one text part for the initial Live conversation history.
      */
     val content: List<LiveInitialInputTextContentPartParam>,
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** The history item type. Always `message`. */
+    /**
+     * The history item type. Always `message`.
+     */
     val type: LiveInitialDeveloperMessageItemParamTypeEnum? = null,
-    /** Optional API value serialized in the `status` wire field. */
-    val status: LiveInitialMessageStatus? = null,
+    /**
+     * Optional API value serialized in the `status` wire field.
+     */
+    val status: LiveInitialMessageStatus? = null
 ) : LiveInitialItem
 
-/** Text supplied in a developer or user message when starting a Live session. */
+/**
+ * Text supplied in a developer or user message when starting a Live session.
+ */
 data class LiveInitialInputTextContentPartParam(
-    /** The message text to include in the Live session’s initial conversation history. */
+    /**
+     * The message text to include in the Live session’s initial conversation history.
+     */
     val text: String,
-    /** The text content type. Always `input_text`. */
-    val type: LiveInitialInputTextContentPartParamTypeEnum? = null,
+    /**
+     * The text content type. Always `input_text`.
+     */
+    val type: LiveInitialInputTextContentPartParamTypeEnum? = null
 )
 
 /**
  * A developer, user, or assistant message supplied as text history before the Live session starts.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "role",
-    visible = true,
-    defaultImpl = UnknownLiveInitialItem::class,
-)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "role", visible = true, defaultImpl = UnknownLiveInitialItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveInitialDeveloperMessageItemParam::class,
-        name = "developer",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveInitialUserMessageItemParam::class,
-        name = "user",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = LiveInitialAssistantMessageItemParam::class,
-        name = "assistant",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInitialDeveloperMessageItemParam::class, name = "developer"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInitialUserMessageItemParam::class, name = "user"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = LiveInitialAssistantMessageItemParam::class, name = "assistant")
 )
 sealed interface LiveInitialItem
 
 /** A [LiveInitialItem] whose `role` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownLiveInitialItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownLiveInitialItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : LiveInitialItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("role").asText()
+    val tag: String get() = raw.path("role").asText()
 }
 
-/** Assistant output text supplied as conversation history when starting a Live session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Assistant output text supplied as conversation history when starting a Live session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveInitialOutputTextContentPartParam(
-    /** The text content type. Always `output_text`. */
+    /**
+     * The text content type. Always `output_text`.
+     */
     val type: LiveInitialOutputTextContentPartParamTypeEnum,
-    /** The message text to include in the Live session’s initial conversation history. */
-    val text: String,
+    /**
+     * The message text to include in the Live session’s initial conversation history.
+     */
+    val text: String
 ) : LiveInitialAssistantMessageItemParamContentItem
 
 /**
@@ -171,31 +141,25 @@ data class LiveInitialOutputTextContentPartParam(
  */
 data class LiveInitialSessionAudioOutputParam(
     /**
-     * The voice used for Live speech, as a built-in voice name or a custom voice object containing
-     * its ID. Defaults to `marin` and cannot change after startup.
+     * The voice used for Live speech, as a built-in voice name or a custom voice object containing its ID. Defaults to `marin` and cannot change after startup.
      */
     val voice: LiveInitialSessionAudioOutputParamVoice? = null
 )
 
 /**
- * The voice used for Live speech, as a built-in voice name or a custom voice object containing its
- * ID. Defaults to `marin` and cannot change after startup.
+ * The voice used for Live speech, as a built-in voice name or a custom voice object containing its ID. Defaults to `marin` and cannot change after startup.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = LiveInitialSessionAudioOutputParamVoice.Deserializer::class
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = LiveInitialSessionAudioOutputParamVoice.Deserializer::class)
 sealed interface LiveInitialSessionAudioOutputParamVoice {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<LiveInitialSessionAudioOutputParamVoice>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<LiveInitialSessionAudioOutputParamVoice>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): LiveInitialSessionAudioOutputParamVoice {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out LiveInitialSessionAudioOutputParamVoice>> =
-                listOf(LiveCustomVoiceParam::class.java)
+            val objectTypes: List<Class<out LiveInitialSessionAudioOutputParamVoice>> = listOf(LiveCustomVoiceParam::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -204,80 +168,69 @@ sealed interface LiveInitialSessionAudioOutputParamVoice {
                 }
             }
             return when {
-                node.isTextual ->
-                    StringLiveInitialSessionAudioOutputParamVoice(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
-                        )
-                    )
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        LiveInitialSessionAudioOutputParamVoice::class.java,
-                        "no LiveInitialSessionAudioOutputParamVoice branch accepts this payload",
-                    )
+                node.isTextual -> StringLiveInitialSessionAudioOutputParamVoice(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, LiveInitialSessionAudioOutputParamVoice::class.java, "no LiveInitialSessionAudioOutputParamVoice branch accepts this payload")
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class StringLiveInitialSessionAudioOutputParamVoice(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String
-) : LiveInitialSessionAudioOutputParamVoice
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class StringLiveInitialSessionAudioOutputParamVoice(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : LiveInitialSessionAudioOutputParamVoice
 
 /**
- * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP
- * negotiate their media format. Voice and format are immutable after startup.
+ * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP negotiate their media format. Voice and format are immutable after startup.
  */
 data class LiveInitialSessionAudioParam(
     /**
-     * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection.
-     * WebRTC and SIP negotiate their media format separately.
+     * Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately.
      */
     val format: LiveAudioFormat? = null,
-    /** The voice used for speech generated by the Live model. */
-    val output: LiveInitialSessionAudioOutputParam? = null,
+    /**
+     * The voice used for speech generated by the Live model.
+     */
+    val output: LiveInitialSessionAudioOutputParam? = null
 )
 
-/** Assistant text supplied as conversation history when starting a Live session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Assistant text supplied as conversation history when starting a Live session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveInitialTextContentPartParam(
-    /** The message text to include in the Live session’s initial conversation history. */
+    /**
+     * The message text to include in the Live session’s initial conversation history.
+     */
     val text: String,
-    /** The text content type. Always `text`. */
-    val type: LiveInitialTextContentPartParamTypeEnum? = null,
+    /**
+     * The text content type. Always `text`.
+     */
+    val type: LiveInitialTextContentPartParamTypeEnum? = null
 ) : LiveInitialAssistantMessageItemParamContentItem
 
-/** A user message included in the initial text history of a Live session. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * A user message included in the initial text history of a Live session.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class LiveInitialUserMessageItemParam(
-    /** The author of this history message. Always `user`. */
+    /**
+     * The author of this history message. Always `user`.
+     */
     val role: LiveInitialUserMessageItemParamRoleEnum,
     /**
      * The message content. Supply exactly one text part for the initial Live conversation history.
      */
     val content: List<LiveInitialInputTextContentPartParam>,
-    /** Optional `string` value serialized in the `id` wire field. */
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
     val id: String? = null,
-    /** The history item type. Always `message`. */
+    /**
+     * The history item type. Always `message`.
+     */
     val type: LiveInitialUserMessageItemParamTypeEnum? = null,
-    /** Optional API value serialized in the `status` wire field. */
-    val status: LiveInitialMessageStatus? = null,
+    /**
+     * Optional API value serialized in the `status` wire field.
+     */
+    val status: LiveInitialMessageStatus? = null
 ) : LiveInitialItem

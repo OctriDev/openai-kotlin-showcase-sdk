@@ -26,82 +26,55 @@ import dev.octri.showcase.openai.SdkClient
 
 object Evals {
 
-    data class DeleteEvalResponse(
-        @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-        val deleted: Boolean,
-        @com.fasterxml.jackson.annotation.JsonProperty("eval_id") val evalId: String,
-    )
+data class DeleteEvalResponse(
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
+    val deleted: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty("eval_id") val evalId: String
+)
 
-    data class DeleteEvalRunResponse(
-        @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-        val deleted: Boolean? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("run_id") val runId: String? = null,
-    )
+data class DeleteEvalRunResponse(
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    val deleted: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("run_id") val runId: String? = null
+)
+
 
     /**
-     * Lists evaluations for a project. Use `after` to continue from a previous result and set
-     * `order` and `order_by` to control how evaluations are sorted.
+     * Lists evaluations for a project. Use `after` to continue from a previous result and set `order` and `order_by` to control how evaluations are sorted.
      *
      * List evaluations for a project.
      *
-     * @param after Identifier for the last eval from the previous pagination request.
+     * @param after Identifier for the last eval from the previous pagination
+     *   request.
      * @param limit Number of evals to retrieve.
-     * @param order Sort order for evals by timestamp. Use `asc` for ascending order or `desc` for
-     *   descending order.
-     * @param orderBy Evals can be ordered by creation time or last updated time. Use `created_at`
-     *   for creation time or `updated_at` for last updated time.
+     * @param order Sort order for evals by timestamp. Use `asc` for ascending order
+     *   or `desc` for descending order.
+     * @param orderBy Evals can be ordered by creation time or last updated time. Use
+     *   `created_at` for creation time or `updated_at` for last updated time.
      */
-    fun listEvals(
-        clientConfig: ClientConfig,
-        after: String? = null,
-        limit: Long? = null,
-        order: ListEvalsParameterEnum? = null,
-        orderBy: ListEvalsParameterEnumfa29acc2? = null,
-        options: RequestOptions? = null,
-    ): EvalList {
-        return SdkClient.request<EvalList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/evals",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "order_by" to SdkClient.queryValue(orderBy, "form", true),
-                        ),
-                    operationId = "listEvals",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("429" to ErrorResponse::class.java),
-                )
-            )
-            .data
+    fun listEvals(clientConfig: ClientConfig, after: String? = null, limit: Long? = null, order: ListEvalsParameterEnum? = null, orderBy: ListEvalsParameterEnumfa29acc2? = null, options: RequestOptions? = null): EvalList {
+        return SdkClient.request<EvalList>(SdkClient.RequestSpec("GET", "/evals", config = clientConfig, query = mapOf("after" to SdkClient.queryValue(after, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true)), operationId = "listEvals", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists evaluations for a project. Use `after` to continue from a previous result and set
-     * `order` and `order_by` to control how evaluations are sorted.
+     * Lists evaluations for a project. Use `after` to continue from a previous result and set `order` and `order_by` to control how evaluations are sorted.
      *
      * List evaluations for a project.
      *
-     * @param after Identifier for the last eval from the previous pagination request.
+     * @param after Identifier for the last eval from the previous pagination
+     *   request.
      * @param limit Number of evals to retrieve.
-     * @param order Sort order for evals by timestamp. Use `asc` for ascending order or `desc` for
-     *   descending order.
-     * @param orderBy Evals can be ordered by creation time or last updated time. Use `created_at`
-     *   for creation time or `updated_at` for last updated time.
+     * @param order Sort order for evals by timestamp. Use `asc` for ascending order
+     *   or `desc` for descending order.
+     * @param orderBy Evals can be ordered by creation time or last updated time. Use
+     *   `created_at` for creation time or `updated_at` for last updated time.
      */
-    fun listEvalsPaginated(
-        clientConfig: ClientConfig,
-        after: String? = null,
-        limit: Long? = null,
-        order: ListEvalsParameterEnum? = null,
-        orderBy: ListEvalsParameterEnumfa29acc2? = null,
-        options: RequestOptions? = null,
-        yieldFn: (Eval) -> Boolean,
-    ) {
+    fun listEvalsPaginated(clientConfig: ClientConfig, after: String? = null, limit: Long? = null, order: ListEvalsParameterEnum? = null, orderBy: ListEvalsParameterEnumfa29acc2? = null, options: RequestOptions? = null, yieldFn: (Eval) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listEvals(clientConfig, cursor, limit, order, orderBy, options)
@@ -122,15 +95,7 @@ object Evals {
         val hasMore: Boolean,
     )
 
-    fun listEvalsPages(
-        clientConfig: ClientConfig,
-        after: String? = null,
-        limit: Long? = null,
-        order: ListEvalsParameterEnum? = null,
-        orderBy: ListEvalsParameterEnumfa29acc2? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListEvalsPage) -> Boolean,
-    ) {
+    fun listEvalsPages(clientConfig: ClientConfig, after: String? = null, limit: Long? = null, order: ListEvalsParameterEnum? = null, orderBy: ListEvalsParameterEnumfa29acc2? = null, options: RequestOptions? = null, yieldPage: (ListEvalsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listEvals(clientConfig, cursor, limit, order, orderBy, options)
@@ -144,243 +109,129 @@ object Evals {
         }
     }
 
-    /**
-     * Creates an evaluation with a data source configuration and testing criteria for assessing
-     * model performance. Supply `data_source_config` to define the evaluation data and
-     * `testing_criteria` to specify the graders; `name` and `metadata` are optional. Run the
-     * evaluation against models and model configurations by creating an evaluation run.
-     *
-     * Create the structure of an evaluation that can be used to test a model's performance. An
-     * evaluation is a set of testing criteria and the config for a data source, which dictates the
-     * schema of the data used in the evaluation. After creating an evaluation, you can run it on
-     * different models and model parameters. We support several types of graders and datasources.
-     * For more information, see the Evals guide.
-     *
-     * @param dataSourceConfig The configuration for the data source used for the evaluation runs.
-     *   Dictates the schema of the data used in the evaluation.
-     * @param testingCriteria A list of graders for all eval runs in this group. Graders can
-     *   reference variables in the data source using double curly braces notation, like
-     *   `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie,
-     *   `{{sample.output_text}}`).
-     * @param name The name of the evaluation.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
-     *   useful for storing additional information about the object in a structured format, and
-     *   querying for objects via API or the dashboard. Keys are strings with a maximum length of 64
-     *   characters. Values are strings with a maximum length of 512 characters.
-     */
-    fun createEval(
-        clientConfig: ClientConfig,
-        dataSourceConfig: CreateEvalRequestDataSourceConfig,
-        testingCriteria: List<CreateEvalRequestTestingCriteriaItem>,
-        name: String? = null,
-        metadata: SdkClient.SdkOptional<Metadata?>? = null,
-        options: RequestOptions? = null,
-    ): Eval {
-        return SdkClient.request<Eval>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/evals",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "data_source_config" to (dataSourceConfig),
-                            "testing_criteria" to (testingCriteria),
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createEval",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
-    }
+
 
     /**
-     * Retrieves an evaluation by its identifier. Use this endpoint to inspect the evaluation's
-     * name, data source configuration, and testing criteria before creating a run or updating the
-     * evaluation.
+     * Creates an evaluation with a data source configuration and testing criteria for assessing model performance. Supply `data_source_config` to define the evaluation data and `testing_criteria` to specify the graders; `name` and `metadata` are optional. Run the evaluation against models and model configurations by creating an evaluation run.
+     *
+     * Create the structure of an evaluation that can be used to test a model's performance. An evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources. For more information, see the Evals guide.
+     *
+     * @param dataSourceConfig The configuration for the data source used for the
+     *   evaluation runs. Dictates the schema of the data used in the evaluation.
+     * @param testingCriteria A list of graders for all eval runs in this group.
+     *   Graders can reference variables in the data source using double curly braces
+     *   notation, like `{{item.variable_name}}`. To reference the model's output, use
+     *   the `sample` namespace (ie, `{{sample.output_text}}`).
+     * @param name The name of the evaluation.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object.
+     *   This can be useful for storing additional information about the object in a
+     *   structured format, and querying for objects via API or the dashboard. Keys are
+     *   strings with a maximum length of 64 characters. Values are strings with a
+     *   maximum length of 512 characters.
+     */
+    fun createEval(clientConfig: ClientConfig, dataSourceConfig: CreateEvalRequestDataSourceConfig, testingCriteria: List<CreateEvalRequestTestingCriteriaItem>, name: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): Eval {
+        return SdkClient.request<Eval>(SdkClient.RequestSpec("POST", "/evals", config = clientConfig, body = SdkClient.bodyMap("data_source_config" to (dataSourceConfig), "testing_criteria" to (testingCriteria), "name" to (SdkClient.omitIfNull(name)), "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted)), operationId = "createEval", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Retrieves an evaluation by its identifier. Use this endpoint to inspect the evaluation's name, data source configuration, and testing criteria before creating a run or updating the evaluation.
      *
      * Get an evaluation by ID.
      *
      * @param evalId The ID of the evaluation to retrieve.
      */
     fun getEval(clientConfig: ClientConfig, evalId: String, options: RequestOptions? = null): Eval {
-        return SdkClient.request<Eval>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}",
-                    config = clientConfig,
-                    operationId = "getEval",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Eval>(SdkClient.RequestSpec("GET", "/evals/${SdkClient.encodePathSegment(evalId)}", config = clientConfig, operationId = "getEval", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates an evaluation's name or metadata. Supply either or both fields to change the
-     * corresponding evaluation properties; the request does not replace the data source
-     * configuration or testing criteria.
+     * Updates an evaluation's name or metadata. Supply either or both fields to change the corresponding evaluation properties; the request does not replace the data source configuration or testing criteria.
      *
      * Update certain properties of an evaluation.
      *
      * @param evalId The ID of the evaluation to update.
      * @param name Rename the evaluation.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
-     *   useful for storing additional information about the object in a structured format, and
-     *   querying for objects via API or the dashboard. Keys are strings with a maximum length of 64
-     *   characters. Values are strings with a maximum length of 512 characters.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object.
+     *   This can be useful for storing additional information about the object in a
+     *   structured format, and querying for objects via API or the dashboard. Keys are
+     *   strings with a maximum length of 64 characters. Values are strings with a
+     *   maximum length of 512 characters.
      */
-    fun updateEval(
-        clientConfig: ClientConfig,
-        evalId: String,
-        name: String? = null,
-        metadata: SdkClient.SdkOptional<Metadata?>? = null,
-        options: RequestOptions? = null,
-    ): Eval {
-        return SdkClient.request<Eval>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateEval",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateEval(clientConfig: ClientConfig, evalId: String, name: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): Eval {
+        return SdkClient.request<Eval>(SdkClient.RequestSpec("POST", "/evals/${SdkClient.encodePathSegment(evalId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted)), operationId = "updateEval", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes an evaluation. Use this operation to remove an evaluation that you no longer need;
-     * deletion is unavailable while the evaluation has unfinished runs.
+     * Deletes an evaluation. Use this operation to remove an evaluation that you no longer need; deletion is unavailable while the evaluation has unfinished runs.
      *
      * Delete an evaluation.
      *
      * @param evalId The ID of the evaluation to delete.
      */
-    fun deleteEval(
-        clientConfig: ClientConfig,
-        evalId: String,
-        options: RequestOptions? = null,
-    ): DeleteEvalResponse {
-        return SdkClient.request<DeleteEvalResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}",
-                    config = clientConfig,
-                    operationId = "deleteEval",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteEval(clientConfig: ClientConfig, evalId: String, options: RequestOptions? = null): DeleteEvalResponse {
+        return SdkClient.request<DeleteEvalResponse>(SdkClient.RequestSpec("DELETE", "/evals/${SdkClient.encodePathSegment(evalId)}", config = clientConfig, operationId = "deleteEval", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status
-     * filtering. Use `after` to continue from a run in a previous response, and use `status` to
-     * limit results to runs in a particular state.
+     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status filtering. Use `after` to continue from a run in a previous response, and use `status` to limit results to runs in a particular state.
      *
      * Get a list of runs for an evaluation.
      *
      * @param evalId The ID of the evaluation to retrieve runs for.
      * @param after Identifier for the last run from the previous pagination request.
      * @param limit Number of runs to retrieve.
-     * @param order Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for
-     *   descending order. Defaults to `asc`.
-     * @param status Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed`
-     *   | `canceled`.
+     * @param order Sort order for runs by timestamp. Use `asc` for ascending order
+     *   or `desc` for descending order. Defaults to `asc`.
+     * @param status Filter runs by status. One of `queued` | `in_progress` |
+     *   `failed` | `completed` | `canceled`.
      */
-    fun getEvalRuns(
-        clientConfig: ClientConfig,
-        evalId: String,
-        after: String? = null,
-        limit: Long? = null,
-        order: GetEvalRunsParameterEnum? = null,
-        status: GetEvalRunsParameterEnum9a5a0254? = null,
-        options: RequestOptions? = null,
-    ): EvalRunList {
-        return SdkClient.request<EvalRunList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}/runs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                            "status" to SdkClient.queryValue(status, "form", true),
-                        ),
-                    operationId = "getEvalRuns",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getEvalRuns(clientConfig: ClientConfig, evalId: String, after: String? = null, limit: Long? = null, order: GetEvalRunsParameterEnum? = null, status: GetEvalRunsParameterEnum9a5a0254? = null, options: RequestOptions? = null): EvalRunList {
+        return SdkClient.request<EvalRunList>(SdkClient.RequestSpec("GET", "/evals/${SdkClient.encodePathSegment(evalId)}/runs", config = clientConfig, query = mapOf("after" to SdkClient.queryValue(after, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "status" to SdkClient.queryValue(status, "form", true)), operationId = "getEvalRuns", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status
-     * filtering. Use `after` to continue from a run in a previous response, and use `status` to
-     * limit results to runs in a particular state.
+     * Lists runs for a specified evaluation, with optional cursor pagination, ordering, and status filtering. Use `after` to continue from a run in a previous response, and use `status` to limit results to runs in a particular state.
      *
      * Get a list of runs for an evaluation.
      *
      * @param evalId The ID of the evaluation to retrieve runs for.
      * @param after Identifier for the last run from the previous pagination request.
      * @param limit Number of runs to retrieve.
-     * @param order Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for
-     *   descending order. Defaults to `asc`.
-     * @param status Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed`
-     *   | `canceled`.
+     * @param order Sort order for runs by timestamp. Use `asc` for ascending order
+     *   or `desc` for descending order. Defaults to `asc`.
+     * @param status Filter runs by status. One of `queued` | `in_progress` |
+     *   `failed` | `completed` | `canceled`.
      */
-    fun getEvalRunsPaginated(
-        clientConfig: ClientConfig,
-        evalId: String,
-        after: String? = null,
-        limit: Long? = null,
-        order: GetEvalRunsParameterEnum? = null,
-        status: GetEvalRunsParameterEnum9a5a0254? = null,
-        options: RequestOptions? = null,
-        yieldFn: (EvalRun) -> Boolean,
-    ) {
+    fun getEvalRunsPaginated(clientConfig: ClientConfig, evalId: String, after: String? = null, limit: Long? = null, order: GetEvalRunsParameterEnum? = null, status: GetEvalRunsParameterEnum9a5a0254? = null, options: RequestOptions? = null, yieldFn: (EvalRun) -> Boolean) {
         var cursor = after
         while (true) {
             val page = getEvalRuns(clientConfig, evalId, cursor, limit, order, status, options)
@@ -401,16 +252,7 @@ object Evals {
         val hasMore: Boolean,
     )
 
-    fun getEvalRunsPages(
-        clientConfig: ClientConfig,
-        evalId: String,
-        after: String? = null,
-        limit: Long? = null,
-        order: GetEvalRunsParameterEnum? = null,
-        status: GetEvalRunsParameterEnum9a5a0254? = null,
-        options: RequestOptions? = null,
-        yieldPage: (GetEvalRunsPage) -> Boolean,
-    ) {
+    fun getEvalRunsPages(clientConfig: ClientConfig, evalId: String, after: String? = null, limit: Long? = null, order: GetEvalRunsParameterEnum? = null, status: GetEvalRunsParameterEnum9a5a0254? = null, options: RequestOptions? = null, yieldPage: (GetEvalRunsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = getEvalRuns(clientConfig, evalId, cursor, limit, order, status, options)
@@ -424,154 +266,85 @@ object Evals {
         }
     }
 
+
+
     /**
-     * Creates and starts a run for an evaluation using a specified data source and model
-     * configuration. The run's data source is validated against the schema defined by the
-     * evaluation; provide `data_source` in one of the supported formats. Use the returned run
-     * identifier to monitor the evaluation run.
+     * Creates and starts a run for an evaluation using a specified data source and model configuration. The run's data source is validated against the schema defined by the evaluation; provide `data_source` in one of the supported formats. Use the returned run identifier to monitor the evaluation run.
      *
-     * Kicks off a new run for a given evaluation, specifying the data source, and what model
-     * configuration to use to test. The datasource will be validated against the schema specified
-     * in the config of the evaluation.
+     * Kicks off a new run for a given evaluation, specifying the data source, and what model configuration to use to test. The datasource will be validated against the schema specified in the config of the evaluation.
      *
      * @param evalId The ID of the evaluation to create a run for.
      * @param dataSource Details about the run's data source.
      * @param name The name of the run.
-     * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be
-     *   useful for storing additional information about the object in a structured format, and
-     *   querying for objects via API or the dashboard. Keys are strings with a maximum length of 64
-     *   characters. Values are strings with a maximum length of 512 characters.
+     * @param metadata Set of 16 key-value pairs that can be attached to an object.
+     *   This can be useful for storing additional information about the object in a
+     *   structured format, and querying for objects via API or the dashboard. Keys are
+     *   strings with a maximum length of 64 characters. Values are strings with a
+     *   maximum length of 512 characters.
      */
-    fun createEvalRun(
-        clientConfig: ClientConfig,
-        evalId: String,
-        dataSource: CreateEvalRunRequestDataSource,
-        name: String? = null,
-        metadata: SdkClient.SdkOptional<Metadata?>? = null,
-        options: RequestOptions? = null,
-    ): EvalRun {
-        return SdkClient.request<EvalRun>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}/runs",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "data_source" to (dataSource),
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createEvalRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                            "500" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createEvalRun(clientConfig: ClientConfig, evalId: String, dataSource: CreateEvalRunRequestDataSource, name: String? = null, metadata: SdkClient.SdkOptional<Metadata?>? = null, options: RequestOptions? = null): EvalRun {
+        return SdkClient.request<EvalRun>(SdkClient.RequestSpec("POST", "/evals/${SdkClient.encodePathSegment(evalId)}/runs", config = clientConfig, body = SdkClient.bodyMap("data_source" to (dataSource), "name" to (SdkClient.omitIfNull(name)), "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted)), operationId = "createEvalRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a specific run for an evaluation. Use this endpoint to inspect the run's status,
-     * results, report URL, and usage details after creating or canceling a run.
+     * Retrieves a specific run for an evaluation. Use this endpoint to inspect the run's status, results, report URL, and usage details after creating or canceling a run.
      *
      * Get an evaluation run by ID.
      *
      * @param evalId The ID of the evaluation to retrieve runs for.
      * @param runId The ID of the run to retrieve.
      */
-    fun getEvalRun(
-        clientConfig: ClientConfig,
-        evalId: String,
-        runId: String,
-        options: RequestOptions? = null,
-    ): EvalRun {
-        return SdkClient.request<EvalRun>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}",
-                    config = clientConfig,
-                    operationId = "getEvalRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getEvalRun(clientConfig: ClientConfig, evalId: String, runId: String, options: RequestOptions? = null): EvalRun {
+        return SdkClient.request<EvalRun>(SdkClient.RequestSpec("GET", "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}", config = clientConfig, operationId = "getEvalRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a run from an evaluation. Use this endpoint to remove a finished run; a run cannot be
-     * deleted while it is still in progress.
+     * Deletes a run from an evaluation. Use this endpoint to remove a finished run; a run cannot be deleted while it is still in progress.
      *
      * Delete an eval run.
      *
      * @param evalId The ID of the evaluation to delete the run from.
      * @param runId The ID of the run to delete.
      */
-    fun deleteEvalRun(
-        clientConfig: ClientConfig,
-        evalId: String,
-        runId: String,
-        options: RequestOptions? = null,
-    ): DeleteEvalRunResponse {
-        return SdkClient.request<DeleteEvalRunResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}",
-                    config = clientConfig,
-                    operationId = "deleteEvalRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteEvalRun(clientConfig: ClientConfig, evalId: String, runId: String, options: RequestOptions? = null): DeleteEvalRunResponse {
+        return SdkClient.request<DeleteEvalRunResponse>(SdkClient.RequestSpec("DELETE", "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}", config = clientConfig, operationId = "deleteEvalRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Cancels an ongoing evaluation run. Use this endpoint to stop a run that is still in progress;
-     * the response contains the canceled run object.
+     * Cancels an ongoing evaluation run. Use this endpoint to stop a run that is still in progress; the response contains the canceled run object.
      *
      * Cancel an ongoing evaluation run.
      *
      * @param evalId The ID of the evaluation whose run you want to cancel.
      * @param runId The ID of the run to cancel.
      */
-    fun cancelEvalRun(
-        clientConfig: ClientConfig,
-        evalId: String,
-        runId: String,
-        options: RequestOptions? = null,
-    ): EvalRun {
-        return SdkClient.request<EvalRun>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}/cancel",
-                    config = clientConfig,
-                    operationId = "cancelEvalRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("429" to ErrorResponse::class.java),
-                )
-            )
-            .data
+    fun cancelEvalRun(clientConfig: ClientConfig, evalId: String, runId: String, options: RequestOptions? = null): EvalRun {
+        return SdkClient.request<EvalRun>(SdkClient.RequestSpec("POST", "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}/cancel", config = clientConfig, operationId = "cancelEvalRun", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [getEvalRunOutputItems]. */
     data class GetEvalRunOutputItemsRequest(
@@ -580,78 +353,50 @@ object Evals {
         val after: String? = null,
         val limit: Long? = null,
         val status: GetEvalRunOutputItemsParameterEnum? = null,
-        val order: GetEvalRunOutputItemsParameterEnum10b7ed83? = null,
+        val order: GetEvalRunOutputItemsParameterEnum10b7ed83? = null
     )
 
     /**
-     * Lists output items for a specific evaluation run, with optional cursor pagination, status
-     * filtering, and timestamp ordering. Use `after` to continue from a previous response and
-     * `status` to view only passing or failing output items.
+     * Lists output items for a specific evaluation run, with optional cursor pagination, status filtering, and timestamp ordering. Use `after` to continue from a previous response and `status` to view only passing or failing output items.
      *
      * Get a list of output items for an evaluation run.
      *
      * @param evalId The ID of the evaluation to retrieve runs for.
      * @param runId The ID of the run to retrieve output items for.
-     * @param after Identifier for the last output item from the previous pagination request.
+     * @param after Identifier for the last output item from the previous pagination
+     *   request.
      * @param limit Number of output items to retrieve.
-     * @param status Filter output items by status. Use `failed` to filter by failed output items or
-     *   `pass` to filter by passed output items.
-     * @param order Sort order for output items by timestamp. Use `asc` for ascending order or
-     *   `desc` for descending order. Defaults to `asc`.
+     * @param status Filter output items by status. Use `failed` to filter by failed
+     *   output items or `pass` to filter by passed output items.
+     * @param order Sort order for output items by timestamp. Use `asc` for ascending
+     *   order or `desc` for descending order. Defaults to `asc`.
      */
-    fun getEvalRunOutputItems(
-        clientConfig: ClientConfig,
-        request: GetEvalRunOutputItemsRequest,
-        options: RequestOptions? = null,
-    ): EvalRunOutputItemList {
-        return SdkClient.request<EvalRunOutputItemList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/evals/${SdkClient.encodePathSegment(request.evalId)}/runs/${SdkClient.encodePathSegment(request.runId)}/output_items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "after" to SdkClient.queryValue(request.after, "form", true),
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "status" to SdkClient.queryValue(request.status, "form", true),
-                            "order" to SdkClient.queryValue(request.order, "form", true),
-                        ),
-                    operationId = "getEvalRunOutputItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getEvalRunOutputItems(clientConfig: ClientConfig, request: GetEvalRunOutputItemsRequest, options: RequestOptions? = null): EvalRunOutputItemList {
+        return SdkClient.request<EvalRunOutputItemList>(SdkClient.RequestSpec("GET", "/evals/${SdkClient.encodePathSegment(request.evalId)}/runs/${SdkClient.encodePathSegment(request.runId)}/output_items", config = clientConfig, query = mapOf("after" to SdkClient.queryValue(request.after, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "status" to
+    SdkClient.queryValue(request.status, "form", true), "order" to SdkClient.queryValue(request.order, "form", true)), operationId = "getEvalRunOutputItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists output items for a specific evaluation run, with optional cursor pagination, status
-     * filtering, and timestamp ordering. Use `after` to continue from a previous response and
-     * `status` to view only passing or failing output items.
+     * Lists output items for a specific evaluation run, with optional cursor pagination, status filtering, and timestamp ordering. Use `after` to continue from a previous response and `status` to view only passing or failing output items.
      *
      * Get a list of output items for an evaluation run.
      *
      * @param evalId The ID of the evaluation to retrieve runs for.
      * @param runId The ID of the run to retrieve output items for.
-     * @param after Identifier for the last output item from the previous pagination request.
+     * @param after Identifier for the last output item from the previous pagination
+     *   request.
      * @param limit Number of output items to retrieve.
-     * @param status Filter output items by status. Use `failed` to filter by failed output items or
-     *   `pass` to filter by passed output items.
-     * @param order Sort order for output items by timestamp. Use `asc` for ascending order or
-     *   `desc` for descending order. Defaults to `asc`.
+     * @param status Filter output items by status. Use `failed` to filter by failed
+     *   output items or `pass` to filter by passed output items.
+     * @param order Sort order for output items by timestamp. Use `asc` for ascending
+     *   order or `desc` for descending order. Defaults to `asc`.
      */
-    fun getEvalRunOutputItemsPaginated(
-        clientConfig: ClientConfig,
-        request: GetEvalRunOutputItemsRequest,
-        options: RequestOptions? = null,
-        yieldFn: (EvalRunOutputItem) -> Boolean,
-    ) {
+    fun getEvalRunOutputItemsPaginated(clientConfig: ClientConfig, request: GetEvalRunOutputItemsRequest, options: RequestOptions? = null, yieldFn: (EvalRunOutputItem) -> Boolean) {
         var cursor = request.after
         while (true) {
             val page = getEvalRunOutputItems(clientConfig, request.copy(after = cursor), options)
@@ -672,12 +417,7 @@ object Evals {
         val hasMore: Boolean,
     )
 
-    fun getEvalRunOutputItemsPages(
-        clientConfig: ClientConfig,
-        request: GetEvalRunOutputItemsRequest,
-        options: RequestOptions? = null,
-        yieldPage: (GetEvalRunOutputItemsPage) -> Boolean,
-    ) {
+    fun getEvalRunOutputItemsPages(clientConfig: ClientConfig, request: GetEvalRunOutputItemsRequest, options: RequestOptions? = null, yieldPage: (GetEvalRunOutputItemsPage) -> Boolean) {
         var cursor = request.after
         while (true) {
             val page = getEvalRunOutputItems(clientConfig, request.copy(after = cursor), options)
@@ -691,10 +431,10 @@ object Evals {
         }
     }
 
+
+
     /**
-     * Retrieves a specific output item from an evaluation run. Use `eval_id`, `run_id`, and
-     * `output_item_id` to identify the evaluation, run, and item whose grader results and sample
-     * you need.
+     * Retrieves a specific output item from an evaluation run. Use `eval_id`, `run_id`, and `output_item_id` to identify the evaluation, run, and item whose grader results and sample you need.
      *
      * Get an evaluation run output item by ID.
      *
@@ -702,29 +442,14 @@ object Evals {
      * @param runId The ID of the run to retrieve.
      * @param outputItemId The ID of the output item to retrieve.
      */
-    fun getEvalRunOutputItem(
-        clientConfig: ClientConfig,
-        evalId: String,
-        runId: String,
-        outputItemId: String,
-        options: RequestOptions? = null,
-    ): EvalRunOutputItem {
-        return SdkClient.request<EvalRunOutputItem>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}/output_items/${SdkClient.encodePathSegment(outputItemId)}",
-                    config = clientConfig,
-                    operationId = "getEvalRunOutputItem",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getEvalRunOutputItem(clientConfig: ClientConfig, evalId: String, runId: String, outputItemId: String, options: RequestOptions? = null): EvalRunOutputItem {
+        return SdkClient.request<EvalRunOutputItem>(SdkClient.RequestSpec("GET", "/evals/${SdkClient.encodePathSegment(evalId)}/runs/${SdkClient.encodePathSegment(runId)}/output_items/${SdkClient.encodePathSegment(outputItemId)}", config = clientConfig, operationId = "getEvalRunOutputItem", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -3,146 +3,120 @@
 
 package dev.octri.showcase.openai.models
 
-/** The output format for generated text. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownTextFormatParam::class,
-)
+/**
+ * The output format for generated text.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownTextFormatParam::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = TextFormatParamText::class,
-        name = "text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = TextFormatParamJsonSchema::class,
-        name = "json_schema",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = TextFormatParamText::class, name = "text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = TextFormatParamJsonSchema::class, name = "json_schema")
 )
 sealed interface TextFormatParam
 
 /** A [TextFormatParam] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownTextFormatParam
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownTextFormatParam @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : TextFormatParam {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Constrains generated text to a JSON Schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Constrains generated text to a JSON Schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class TextFormatParamJsonSchema(
-    /** The type of the object. Always `json_schema`. */
+    /**
+     * The type of the object. Always `json_schema`.
+     */
     val type: TextFormatParamJsonSchemaTypeEnum,
-    /** The JSON Schema that generated text must match. */
-    val schema: Map<String, Any>,
+    /**
+     * The JSON Schema that generated text must match.
+     */
+    val schema: Map<String, Any>
 ) : TextFormatParam
 
-/** Generates ordinary text without a structured-output constraint. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Generates ordinary text without a structured-output constraint.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class TextFormatParamText(
-    /** The type of the object. Always `text`. */
+    /**
+     * The type of the object. Always `text`.
+     */
     val type: TextFormatParamTextTypeEnum
 ) : TextFormatParam
 
-/** The effective output format for generated text. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownTextFormatResource::class,
-)
+/**
+ * The effective output format for generated text.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownTextFormatResource::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = TextFormatResourceText::class,
-        name = "text",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = TextFormatResourceJsonSchema::class,
-        name = "json_schema",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = TextFormatResourceText::class, name = "text"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = TextFormatResourceJsonSchema::class, name = "json_schema")
 )
 sealed interface TextFormatResource
 
 /** A [TextFormatResource] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownTextFormatResource
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownTextFormatResource @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : TextFormatResource {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Constrains generated text to a JSON Schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Constrains generated text to a JSON Schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class TextFormatResourceJsonSchema(
-    /** The type of the object. Always `json_schema`. */
+    /**
+     * The type of the object. Always `json_schema`.
+     */
     val type: TextFormatResourceJsonSchemaTypeEnum,
-    /** The JSON Schema that generated text must match. */
-    val schema: Map<String, Any>,
+    /**
+     * The JSON Schema that generated text must match.
+     */
+    val schema: Map<String, Any>
 ) : TextFormatResource
 
-/** Generates ordinary text without a structured-output constraint. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Generates ordinary text without a structured-output constraint.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class TextFormatResourceText(
-    /** The type of the object. Always `text`. */
+    /**
+     * The type of the object. Always `text`.
+     */
     val type: TextFormatResourceTextTypeEnum
 ) : TextFormatResource
 
-/** Configuration for text generated by the agent. */
+/**
+ * Configuration for text generated by the agent.
+ */
 data class TextParam(
-    /** The output format. Omission uses ordinary text (`{"type": "text"}`). */
+    /**
+     * The output format. Omission uses ordinary text (`{"type": "text"}`).
+     */
     val format: TextFormatParam? = null,
-    /** The amount of text the model should produce. Defaults to `medium`, matching Responses. */
-    val verbosity: VerbosityParam? = null,
+    /**
+     * The amount of text the model should produce. Defaults to `medium`, matching Responses.
+     */
+    val verbosity: VerbosityParam? = null
 )
 
-/** The text configuration used by an agent. */
+/**
+ * The text configuration used by an agent.
+ */
 data class TextResource(
-    /** The effective output format. Defaults to ordinary text. */
+    /**
+     * The effective output format. Defaults to ordinary text.
+     */
     val format: TextFormatResource,
-    /** The amount of text produced by the agent. Defaults to `medium`. */
-    val verbosity: VerbosityResource,
+    /**
+     * The amount of text produced by the agent. Defaults to `medium`.
+     */
+    val verbosity: VerbosityResource
 )

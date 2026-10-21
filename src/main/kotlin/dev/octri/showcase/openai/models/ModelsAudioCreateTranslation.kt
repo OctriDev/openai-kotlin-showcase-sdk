@@ -3,57 +3,46 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `CreateTranslationRequest` API schema. */
+/**
+ * Typed representation of the `CreateTranslationRequest` API schema.
+ */
 data class CreateTranslationRequest(
     /**
-     * The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4,
-     * mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format metadata for the
-     * file to be identified. We recommend an extension-bearing filename and an appropriate content
-     * type.
+     * The audio file object (not file name) translate, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. The request must include enough format metadata for the file to be identified. We recommend an extension-bearing filename and an appropriate content type.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: ByteArray,
     /**
-     * ID of the model to use. Only `whisper-1` (which is powered by our open source Whisper V2
-     * model) is currently available.
+     * ID of the model to use. Only `whisper-1` (which is powered by our open source Whisper V2 model) is currently available.
      */
     val model: String,
     /**
-     * An optional text to guide the model's style or continue a previous audio segment. The prompt
-     * should be in English.
+     * An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.
      */
     val prompt: String? = null,
     /**
-     * The format of the output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or
-     * `vtt`.
+     * The format of the output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
-    val responseFormat: CreateTranslationRequestResponseFormatEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: CreateTranslationRequestResponseFormatEnum? = null,
     /**
-     * The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
-     * random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
-     * the model will use log probability to automatically increase the temperature until certain
-     * thresholds are hit.
+     * The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
      */
-    val temperature: Double? = null,
+    val temperature: Double? = null
 )
 
-/** Typed representation of the `CreateTranslationResponse` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = CreateTranslationResponse.Deserializer::class
-)
+/**
+ * Typed representation of the `CreateTranslationResponse` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateTranslationResponse.Deserializer::class)
 sealed interface CreateTranslationResponse {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<CreateTranslationResponse>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateTranslationResponse>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): CreateTranslationResponse {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType =
-                CreateTranslationResponseOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }
-                    ?.second
+            val ownedType = CreateTranslationResponseOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -61,59 +50,50 @@ sealed interface CreateTranslationResponse {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out CreateTranslationResponse>> =
-                listOf(
-                    CreateTranslationResponseJson::class.java,
-                    CreateTranslationResponseVerboseJson::class.java,
-                )
-            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out CreateTranslationResponse>> = listOf(CreateTranslationResponseJson::class.java, CreateTranslationResponseVerboseJson::class.java)
+            dev.octri.showcase.openai.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        CreateTranslationResponse::class.java,
-                        "no CreateTranslationResponse branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateTranslationResponse::class.java, "no CreateTranslationResponse branch accepts this payload")
             }
         }
     }
 }
 
-internal val CreateTranslationResponseOwnedTypes:
-    List<Pair<List<String>, Class<out CreateTranslationResponse>>> =
-    listOf(
-        listOf("language", "duration", "segments") to
-            CreateTranslationResponseVerboseJson::class.java
-    )
+internal val CreateTranslationResponseOwnedTypes: List<Pair<List<String>, Class<out CreateTranslationResponse>>> = listOf(
+    listOf("language", "duration", "segments") to CreateTranslationResponseVerboseJson::class.java,
+)
 
-/** Typed representation of the `CreateTranslationResponseJson` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `CreateTranslationResponseJson` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranslationResponseJson(
-    /** Required `string` value serialized in the `text` wire field. */
+    /**
+     * Required `string` value serialized in the `text` wire field.
+     */
     val text: String
 ) : CreateTranslationResponse
 
-/** Typed representation of the `CreateTranslationResponseVerboseJson` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Typed representation of the `CreateTranslationResponseVerboseJson` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTranslationResponseVerboseJson(
-    /** The language of the output translation (always `english`). */
+    /**
+     * The language of the output translation (always `english`).
+     */
     val language: String,
-    /** The duration of the input audio. */
+    /**
+     * The duration of the input audio.
+     */
     val duration: Double,
-    /** The translated text. */
+    /**
+     * The translated text.
+     */
     val text: String,
-    /** Segments of the translated text and their corresponding details. */
-    val segments: List<TranscriptionSegment>? = null,
+    /**
+     * Segments of the translated text and their corresponding details.
+     */
+    val segments: List<TranscriptionSegment>? = null
 ) : CreateTranslationResponse

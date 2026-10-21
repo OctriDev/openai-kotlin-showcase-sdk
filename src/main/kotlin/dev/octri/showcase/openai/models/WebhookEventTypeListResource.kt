@@ -3,11 +3,16 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `WebhookEventTypeListResource` API schema. */
+/**
+ * Typed representation of the `WebhookEventTypeListResource` API schema.
+ */
 data class WebhookEventTypeListResource(
-    /** The object type, which is always list. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: WebhookEventTypeListResourceObjectEnum,
-    /** The webhook event types available to the authenticated project. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<String>,
+    /**
+     * The object type, which is always list.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookEventTypeListResourceObjectEnum,
+    /**
+     * The webhook event types available to the authenticated project.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<String>
 )

@@ -3,26 +3,42 @@
 
 package dev.octri.showcase.openai.models
 
-/** Typed representation of the `BetaImageGenToolCallError` API schema. */
+/**
+ * Typed representation of the `BetaImageGenToolCallError` API schema.
+ */
 data class BetaImageGenToolCallError(
-    /** Required `string` value serialized in the `code` wire field. */
+    /**
+     * Required `string` value serialized in the `code` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("code", required = true) val code: String?,
-    /** The error type. */
+    /**
+     * The error type.
+     */
     val type: String,
-    /** A description of the error. */
+    /**
+     * A description of the error.
+     */
     val message: String,
-    /** Required `string` value serialized in the `param` wire field. */
+    /**
+     * Required `string` value serialized in the `param` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
-    /** Public details for a `moderation_blocked` error, when available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("moderation_details")
-    val moderationDetails: BetaImageGenToolCallModerationDetails? = null,
+    /**
+     * Public details for a `moderation_blocked` error, when available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("moderation_details") val moderationDetails: BetaImageGenToolCallModerationDetails? = null
 )
 
-/** Typed representation of the `BetaImageGenToolCallModerationDetails` API schema. */
+/**
+ * Typed representation of the `BetaImageGenToolCallModerationDetails` API schema.
+ */
 data class BetaImageGenToolCallModerationDetails(
-    /** The stage where moderation blocked the image generation call. */
-    @com.fasterxml.jackson.annotation.JsonProperty("moderation_stage")
-    val moderationStage: BetaImageGenToolCallModerationDetailsModerationStageEnum,
-    /** Public moderation categories. New category values may be added over time. */
-    val categories: List<String>,
+    /**
+     * The stage where moderation blocked the image generation call.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("moderation_stage") val moderationStage: BetaImageGenToolCallModerationDetailsModerationStageEnum,
+    /**
+     * Public moderation categories. New category values may be added over time.
+     */
+    val categories: List<String>
 )

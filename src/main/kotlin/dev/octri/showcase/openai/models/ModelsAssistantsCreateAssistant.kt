@@ -3,212 +3,172 @@
 
 package dev.octri.showcase.openai.models
 
-/** Optional object value serialized in the `code_interpreter` wire field. */
+/**
+ * Optional object value serialized in the `code_interpreter` wire field.
+ */
 data class CreateAssistantRequestToolResourcesCodeInterpreter(
     /**
-     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of
-     * 20 files associated with the tool.
+     * A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files associated with the tool.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null
 )
 
-/** Required object value serialized in the `vector_stores[]` wire field. */
+/**
+ * Required object value serialized in the `vector_stores[]` wire field.
+ */
 data class CreateAssistantRequestToolResourcesFileSearchVectorStoresItem(
     /**
-     * A list of file IDs to add to the vector store. For vector stores created before Nov 2025,
-     * there can be a maximum of 10,000 files in a vector store. For vector stores created starting
-     * in Nov 2025, the limit is 100,000,000 files.
+     * A list of file IDs to add to the vector store. For vector stores created before Nov 2025, there can be a maximum of 10,000 files in a vector store. For vector stores created starting in Nov 2025, the limit is 100,000,000 files.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_ids") val fileIds: List<String>? = null,
     /**
      * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy")
-    val chunkingStrategy:
-        CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0? =
-        null,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunking_strategy") val chunkingStrategy: CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
      */
-    val metadata: Metadata? = null,
-)
-
-/** Optional object value serialized in the `file_search` wire field. */
-data class CreateAssistantRequestToolResourcesFileSearch(
-    /**
-     * The vector store attached to this assistant. There can be a maximum of 1 vector store
-     * attached to the assistant.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids")
-    val vectorStoreIds: List<String>? = null,
-    /**
-     * A helper to create a vector store with file_ids and attach it to this assistant. There can be
-     * a maximum of 1 vector store attached to the assistant.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("vector_stores")
-    val vectorStores: List<CreateAssistantRequestToolResourcesFileSearchVectorStoresItem>? = null,
+    val metadata: Metadata? = null
 )
 
 /**
- * A set of resources that are used by the assistant's tools. The resources are specific to the type
- * of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the
- * `file_search` tool requires a list of vector store IDs.
+ * Optional object value serialized in the `file_search` wire field.
  */
-data class CreateAssistantRequestToolResources(
-    /** Optional object value serialized in the `code_interpreter` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter")
-    val codeInterpreter: CreateAssistantRequestToolResourcesCodeInterpreter? = null,
-    /** Optional object value serialized in the `file_search` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("file_search")
-    val fileSearch: CreateAssistantRequestToolResourcesFileSearch? = null,
+data class CreateAssistantRequestToolResourcesFileSearch(
+    /**
+     * The vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_store_ids") val vectorStoreIds: List<String>? = null,
+    /**
+     * A helper to create a vector store with file_ids and attach it to this assistant. There can be a maximum of 1 vector store attached to the assistant.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("vector_stores") val vectorStores: List<CreateAssistantRequestToolResourcesFileSearchVectorStoresItem>? = null
 )
 
-/** Typed representation of the `CreateAssistantRequest` API schema. */
+/**
+ * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+ */
+data class CreateAssistantRequestToolResources(
+    /**
+     * Optional object value serialized in the `code_interpreter` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("code_interpreter") val codeInterpreter: CreateAssistantRequestToolResourcesCodeInterpreter? = null,
+    /**
+     * Optional object value serialized in the `file_search` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("file_search") val fileSearch: CreateAssistantRequestToolResourcesFileSearch? = null
+)
+
+/**
+ * Typed representation of the `CreateAssistantRequest` API schema.
+ */
 data class CreateAssistantRequest(
     /**
-     * ID of the model to use. You can use the List models API to see all of your available models,
-     * or see our Model overview for descriptions of them.
+     * ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them.
      */
     val model: String,
-    /** Optional API value serialized in the `name` wire field. */
-    val name: String? = null,
-    /** Optional API value serialized in the `description` wire field. */
-    val description: String? = null,
-    /** Optional API value serialized in the `instructions` wire field. */
-    val instructions: String? = null,
-    /** Optional API value serialized in the `reasoning_effort` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
-    val reasoningEffort: ReasoningEffort? = null,
     /**
-     * A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant.
-     * Tools can be of types `code_interpreter`, `file_search`, or `function`.
+     * Optional API value serialized in the `name` wire field.
+     */
+    val name: String? = null,
+    /**
+     * Optional API value serialized in the `description` wire field.
+     */
+    val description: String? = null,
+    /**
+     * Optional API value serialized in the `instructions` wire field.
+     */
+    val instructions: String? = null,
+    /**
+     * Optional API value serialized in the `reasoning_effort` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: ReasoningEffort? = null,
+    /**
+     * A list of tool enabled on the assistant. There can be a maximum of 128 tools per assistant. Tools can be of types `code_interpreter`, `file_search`, or `function`.
      */
     val tools: List<CreateAssistantRequestToolsItem>? = null,
     /**
-     * A set of resources that are used by the assistant's tools. The resources are specific to the
-     * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the
-     * `file_search` tool requires a list of vector store IDs.
+     * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources")
-    val toolResources: CreateAssistantRequestToolResources? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources") val toolResources: CreateAssistantRequestToolResources? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
-     * additional information about the object in a structured format, and querying for objects via
-     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
-     * strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
      */
     val metadata: Metadata? = null,
-    /** Optional API value serialized in the `temperature` wire field. */
+    /**
+     * Optional API value serialized in the `temperature` wire field.
+     */
     val temperature: Double? = null,
-    /** Optional API value serialized in the `top_p` wire field. */
+    /**
+     * Optional API value serialized in the `top_p` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("top_p") val topP: Double? = null,
-    /** Optional API value serialized in the `response_format` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_format")
-    val responseFormat: AssistantsApiResponseFormatOption? = null,
+    /**
+     * Optional API value serialized in the `response_format` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_format") val responseFormat: AssistantsApiResponseFormatOption? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX3af1be068b(
-    /** Always `auto`. */
+    /**
+     * Always `auto`.
+     */
     val type: CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX1ecde68bdf
 ) : CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0
 
-/** Required object value serialized in the `static` wire field. */
+/**
+ * Required object value serialized in the `static` wire field.
+ */
 data class CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX02f4521581(
     /**
-     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is
-     * `100` and the maximum value is `4096`.
+     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens")
-    val maxChunkSizeTokens: Long,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens") val maxChunkSizeTokens: Long,
     /**
-     * The number of tokens that overlap between chunks. The default value is `400`. Note that the
-     * overlap must not exceed half of `max_chunk_size_tokens`.
+     * The number of tokens that overlap between chunks. The default value is `400`. Note that the overlap must not exceed half of `max_chunk_size_tokens`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens")
-    val chunkOverlapTokens: Long,
+    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens") val chunkOverlapTokens: Long
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXa2a89b08ca(
-    /** Always `static`. */
+    /**
+     * Always `static`.
+     */
     val type: CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX2abb1524a6,
-    /** Required object value serialized in the `static` wire field. */
-    val static: CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX02f4521581,
+    /**
+     * Required object value serialized in the `static` wire field.
+     */
+    val static: CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX02f4521581
 ) : CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0
 
-/** The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-)
+/**
+ * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX3af1be068b::class,
-        name = "auto",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXa2a89b08ca::class,
-        name = "static",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateAssistantRequestToolResourcesFileSearchVectorStoresItemX3af1be068b::class, name = "auto"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXa2a89b08ca::class, name = "static")
 )
 sealed interface CreateAssistantRequestToolResourcesFileSearchVectorStoresItemXba30eed7a0
 
-/** Required API value serialized in the `tools[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownCreateAssistantRequestToolsItem::class,
-)
+/**
+ * Required API value serialized in the `tools[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownCreateAssistantRequestToolsItem::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AssistantToolsCode::class,
-        name = "code_interpreter",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AssistantToolsFileSearch::class,
-        name = "file_search",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AssistantToolsFunction::class,
-        name = "function",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsCode::class, name = "code_interpreter"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsFileSearch::class, name = "file_search"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AssistantToolsFunction::class, name = "function")
 )
 sealed interface CreateAssistantRequestToolsItem
 
-/**
- * A [CreateAssistantRequestToolsItem] whose `type` names no branch this SDK knows, kept as
- * received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownCreateAssistantRequestToolsItem
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [CreateAssistantRequestToolsItem] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownCreateAssistantRequestToolsItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : CreateAssistantRequestToolsItem {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

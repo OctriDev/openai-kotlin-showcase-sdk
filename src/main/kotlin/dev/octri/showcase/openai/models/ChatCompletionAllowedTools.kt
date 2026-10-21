@@ -3,19 +3,16 @@
 
 package dev.octri.showcase.openai.models
 
-/** Constrains the tools available to the model to a pre-defined set. */
+/**
+ * Constrains the tools available to the model to a pre-defined set.
+ */
 data class ChatCompletionAllowedTools(
     /**
-     * Constrains the tools available to the model to a pre-defined set. `auto` allows the model to
-     * pick from among the allowed tools and generate a message. `required` requires the model to
-     * call one or more of the allowed tools.
+     * Constrains the tools available to the model to a pre-defined set. `auto` allows the model to pick from among the allowed tools and generate a message. `required` requires the model to call one or more of the allowed tools.
      */
     val mode: ChatCompletionAllowedToolsModeEnum,
     /**
-     * A list of tool definitions that the model should be allowed to call. For the Chat Completions
-     * API, the list of tool definitions might look like: ```json [ { "type": "function",
-     * "function": { "name": "get_weather" } }, { "type": "function", "function": { "name":
-     * "get_time" } } ] ```
+     * A list of tool definitions that the model should be allowed to call. For the Chat Completions API, the list of tool definitions might look like: ```json [ { "type": "function", "function": { "name": "get_weather" } }, { "type": "function", "function": { "name": "get_time" } } ] ```
      */
-    val tools: List<Map<String, Any>>,
+    val tools: List<Map<String, Any>>
 )

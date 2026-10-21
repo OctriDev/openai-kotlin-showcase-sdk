@@ -3,413 +3,352 @@
 
 package dev.octri.showcase.openai.models
 
-/** The object of the event. Always `event`. */
-class WebhookRealtimeCallIncomingObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookRealtimeCallIncomingObjectEnum && value == other.value
-
+/**
+ * The object of the event. Always `event`.
+ */
+class WebhookRealtimeCallIncomingObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookRealtimeCallIncomingObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookRealtimeCallIncomingObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookRealtimeCallIncomingObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookRealtimeCallIncomingObjectEnum(value)
     }
 }
 
-/** The type of the event. Always `realtime.call.incoming`. */
-class WebhookRealtimeCallIncomingTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookRealtimeCallIncomingTypeEnum && value == other.value
-
+/**
+ * The type of the event. Always `realtime.call.incoming`.
+ */
+class WebhookRealtimeCallIncomingTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookRealtimeCallIncomingTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val REALTIME_CALL_INCOMING = WebhookRealtimeCallIncomingTypeEnum("realtime.call.incoming")
+        @JvmField val REALTIME_CALL_INCOMING = WebhookRealtimeCallIncomingTypeEnum("realtime.call.incoming")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookRealtimeCallIncomingTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookRealtimeCallIncomingTypeEnum(value)
     }
 }
 
-/** The object of the event. Always `event`. */
-class WebhookResponseCancelledObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseCancelledObjectEnum && value == other.value
-
+/**
+ * The object of the event. Always `event`.
+ */
+class WebhookResponseCancelledObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseCancelledObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookResponseCancelledObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseCancelledObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseCancelledObjectEnum(value)
     }
 }
 
-/** The type of the event. Always `response.cancelled`. */
-class WebhookResponseCancelledTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseCancelledTypeEnum && value == other.value
-
+/**
+ * The type of the event. Always `response.cancelled`.
+ */
+class WebhookResponseCancelledTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseCancelledTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RESPONSE_CANCELLED = WebhookResponseCancelledTypeEnum("response.cancelled")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseCancelledTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseCancelledTypeEnum(value)
     }
 }
 
-/** The object of the event. Always `event`. */
-class WebhookResponseCompletedObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseCompletedObjectEnum && value == other.value
-
+/**
+ * The object of the event. Always `event`.
+ */
+class WebhookResponseCompletedObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseCompletedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookResponseCompletedObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseCompletedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseCompletedObjectEnum(value)
     }
 }
 
-/** The type of the event. Always `response.completed`. */
-class WebhookResponseCompletedTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseCompletedTypeEnum && value == other.value
-
+/**
+ * The type of the event. Always `response.completed`.
+ */
+class WebhookResponseCompletedTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseCompletedTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RESPONSE_COMPLETED = WebhookResponseCompletedTypeEnum("response.completed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseCompletedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseCompletedTypeEnum(value)
     }
 }
 
-/** The object of the event. Always `event`. */
-class WebhookResponseFailedObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseFailedObjectEnum && value == other.value
-
+/**
+ * The object of the event. Always `event`.
+ */
+class WebhookResponseFailedObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseFailedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookResponseFailedObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseFailedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseFailedObjectEnum(value)
     }
 }
 
-/** The type of the event. Always `response.failed`. */
-class WebhookResponseFailedTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseFailedTypeEnum && value == other.value
-
+/**
+ * The type of the event. Always `response.failed`.
+ */
+class WebhookResponseFailedTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseFailedTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RESPONSE_FAILED = WebhookResponseFailedTypeEnum("response.failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseFailedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseFailedTypeEnum(value)
     }
 }
 
-/** The object of the event. Always `event`. */
-class WebhookResponseIncompleteObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseIncompleteObjectEnum && value == other.value
-
+/**
+ * The object of the event. Always `event`.
+ */
+class WebhookResponseIncompleteObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseIncompleteObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookResponseIncompleteObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseIncompleteObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseIncompleteObjectEnum(value)
     }
 }
 
-/** The type of the event. Always `response.incomplete`. */
-class WebhookResponseIncompleteTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookResponseIncompleteTypeEnum && value == other.value
-
+/**
+ * The type of the event. Always `response.incomplete`.
+ */
+class WebhookResponseIncompleteTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookResponseIncompleteTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RESPONSE_INCOMPLETE = WebhookResponseIncompleteTypeEnum("response.incomplete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookResponseIncompleteTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookResponseIncompleteTypeEnum(value)
     }
 }
 
-/** Always `event`. */
-class WebhookSafetyAlertCreatedObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyAlertCreatedObjectEnum && value == other.value
-
+/**
+ * Always `event`.
+ */
+class WebhookSafetyAlertCreatedObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyAlertCreatedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookSafetyAlertCreatedObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyAlertCreatedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyAlertCreatedObjectEnum(value)
     }
 }
 
-/** Always `safety.alert.created`. */
-class WebhookSafetyAlertCreatedTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyAlertCreatedTypeEnum && value == other.value
-
+/**
+ * Always `safety.alert.created`.
+ */
+class WebhookSafetyAlertCreatedTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyAlertCreatedTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SAFETY_ALERT_CREATED = WebhookSafetyAlertCreatedTypeEnum("safety.alert.created")
+        @JvmField val SAFETY_ALERT_CREATED = WebhookSafetyAlertCreatedTypeEnum("safety.alert.created")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyAlertCreatedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyAlertCreatedTypeEnum(value)
     }
 }
 
-/** Always `event`. */
-class WebhookSafetyDeactivationIssuedObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyDeactivationIssuedObjectEnum && value == other.value
-
+/**
+ * Always `event`.
+ */
+class WebhookSafetyDeactivationIssuedObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyDeactivationIssuedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookSafetyDeactivationIssuedObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyDeactivationIssuedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyDeactivationIssuedObjectEnum(value)
     }
 }
 
-/** Always `safety.deactivation_issued`. */
-class WebhookSafetyDeactivationIssuedTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyDeactivationIssuedTypeEnum && value == other.value
-
+/**
+ * Always `safety.deactivation_issued`.
+ */
+class WebhookSafetyDeactivationIssuedTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyDeactivationIssuedTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SAFETY_DEACTIVATION_ISSUED =
-            WebhookSafetyDeactivationIssuedTypeEnum("safety.deactivation_issued")
+        @JvmField val SAFETY_DEACTIVATION_ISSUED = WebhookSafetyDeactivationIssuedTypeEnum("safety.deactivation_issued")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyDeactivationIssuedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyDeactivationIssuedTypeEnum(value)
     }
 }
 
-/** Always `event`. */
-class WebhookSafetyOrgAlertCreatedObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyOrgAlertCreatedObjectEnum && value == other.value
-
+/**
+ * Always `event`.
+ */
+class WebhookSafetyOrgAlertCreatedObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyOrgAlertCreatedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookSafetyOrgAlertCreatedObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyOrgAlertCreatedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyOrgAlertCreatedObjectEnum(value)
     }
 }
 
-/** Always `safety.org_alert.created`. */
-class WebhookSafetyOrgAlertCreatedTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyOrgAlertCreatedTypeEnum && value == other.value
-
+/**
+ * Always `safety.org_alert.created`.
+ */
+class WebhookSafetyOrgAlertCreatedTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyOrgAlertCreatedTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SAFETY_ORG_ALERT_CREATED =
-            WebhookSafetyOrgAlertCreatedTypeEnum("safety.org_alert.created")
+        @JvmField val SAFETY_ORG_ALERT_CREATED = WebhookSafetyOrgAlertCreatedTypeEnum("safety.org_alert.created")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyOrgAlertCreatedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyOrgAlertCreatedTypeEnum(value)
     }
 }
 
-/** Always `event`. */
-class WebhookSafetyWarningIssuedObjectEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyWarningIssuedObjectEnum && value == other.value
-
+/**
+ * Always `event`.
+ */
+class WebhookSafetyWarningIssuedObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyWarningIssuedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EVENT = WebhookSafetyWarningIssuedObjectEnum("event")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyWarningIssuedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyWarningIssuedObjectEnum(value)
     }
 }
 
-/** Always `safety.warning_issued`. */
-class WebhookSafetyWarningIssuedTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebhookSafetyWarningIssuedTypeEnum && value == other.value
-
+/**
+ * Always `safety.warning_issued`.
+ */
+class WebhookSafetyWarningIssuedTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebhookSafetyWarningIssuedTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val SAFETY_WARNING_ISSUED = WebhookSafetyWarningIssuedTypeEnum("safety.warning_issued")
+        @JvmField val SAFETY_WARNING_ISSUED = WebhookSafetyWarningIssuedTypeEnum("safety.warning_issued")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebhookSafetyWarningIssuedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebhookSafetyWarningIssuedTypeEnum(value)
     }
 }
 
-/** The action type. */
-enum class WebSearchActionFindTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The action type.
+ */
+enum class WebSearchActionFindTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FIND_IN_PAGE("find_in_page");
 
     override fun toString() = value
@@ -417,16 +356,15 @@ enum class WebSearchActionFindTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The action type. */
-enum class WebSearchActionOpenPageTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The action type.
+ */
+enum class WebSearchActionOpenPageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     OPEN_PAGE("open_page");
 
     override fun toString() = value
@@ -434,16 +372,15 @@ enum class WebSearchActionOpenPageTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `find_in_page`. */
-enum class WebSearchActionResourceFindInPageTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `find_in_page`.
+ */
+enum class WebSearchActionResourceFindInPageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     FIND_IN_PAGE("find_in_page");
 
     override fun toString() = value
@@ -451,16 +388,15 @@ enum class WebSearchActionResourceFindInPageTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `open_page`. */
-enum class WebSearchActionResourceOpenPageTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `open_page`.
+ */
+enum class WebSearchActionResourceOpenPageTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     OPEN_PAGE("open_page");
 
     override fun toString() = value
@@ -468,16 +404,15 @@ enum class WebSearchActionResourceOpenPageTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `other`. */
-enum class WebSearchActionResourceOtherTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `other`.
+ */
+enum class WebSearchActionResourceOtherTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     OTHER("other");
 
     override fun toString() = value
@@ -485,16 +420,15 @@ enum class WebSearchActionResourceOtherTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of the object. Always `search`. */
-enum class WebSearchActionResourceSearchTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The type of the object. Always `search`.
+ */
+enum class WebSearchActionResourceSearchTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     SEARCH("search");
 
     override fun toString() = value
@@ -502,38 +436,34 @@ enum class WebSearchActionResourceSearchTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of source. Always `url`. */
-class WebSearchActionSearchSourcesItemTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebSearchActionSearchSourcesItemTypeEnum && value == other.value
-
+/**
+ * The type of source. Always `url`.
+ */
+class WebSearchActionSearchSourcesItemTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebSearchActionSearchSourcesItemTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val URL = WebSearchActionSearchSourcesItemTypeEnum("url")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebSearchActionSearchSourcesItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebSearchActionSearchSourcesItemTypeEnum(value)
     }
 }
 
-/** The action type. */
-enum class WebSearchActionSearchTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The action type.
+ */
+enum class WebSearchActionSearchTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     SEARCH("search");
 
     override fun toString() = value
@@ -541,38 +471,34 @@ enum class WebSearchActionSearchTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The type of location approximation. Always `approximate`. */
-class WebSearchApproximateLocationTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebSearchApproximateLocationTypeEnum && value == other.value
-
+/**
+ * The type of location approximation. Always `approximate`.
+ */
+class WebSearchApproximateLocationTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebSearchApproximateLocationTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val APPROXIMATE = WebSearchApproximateLocationTypeEnum("approximate")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebSearchApproximateLocationTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebSearchApproximateLocationTypeEnum(value)
     }
 }
 
-/** The item type. Always `web_search_call`. */
-enum class WebSearchCallItemResourceTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The item type. Always `web_search_call`.
+ */
+enum class WebSearchCallItemResourceTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     WEB_SEARCH_CALL("web_search_call");
 
     override fun toString() = value
@@ -580,19 +506,19 @@ enum class WebSearchCallItemResourceTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** Typed representation of the `WebSearchCallStatus` API schema. */
-class WebSearchCallStatus
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * Typed representation of the `WebSearchCallStatus` API schema.
+ */
+class WebSearchCallStatus private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is WebSearchCallStatus && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -603,25 +529,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val FAILED = WebSearchCallStatus("failed")
         @JvmField val INCOMPLETE = WebSearchCallStatus("incomplete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebSearchCallStatus(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebSearchCallStatus(value)
     }
 }
 
 /**
- * High level guidance for the amount of context window space to use for the search. One of `low`,
- * `medium`, or `high`. `medium` is the default.
+ * High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
  */
-class WebSearchContextSize
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebSearchContextSize && value == other.value
-
+class WebSearchContextSize private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebSearchContextSize && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -630,22 +550,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val MEDIUM = WebSearchContextSize("medium")
         @JvmField val HIGH = WebSearchContextSize("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebSearchContextSize(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebSearchContextSize(value)
     }
 }
 
-/** The amount of web search context made available to the model. */
-class WebSearchContextSizeParam
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebSearchContextSizeParam && value == other.value
-
+/**
+ * The amount of web search context made available to the model.
+ */
+class WebSearchContextSizeParam private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebSearchContextSizeParam && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -654,22 +571,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val MEDIUM = WebSearchContextSizeParam("medium")
         @JvmField val HIGH = WebSearchContextSizeParam("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebSearchContextSizeParam(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebSearchContextSizeParam(value)
     }
 }
 
-/** The amount of web search context made available to the model. */
-class WebSearchContextSizeResource
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is WebSearchContextSizeResource && value == other.value
-
+/**
+ * The amount of web search context made available to the model.
+ */
+class WebSearchContextSizeResource private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is WebSearchContextSizeResource && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -678,10 +592,7 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val MEDIUM = WebSearchContextSizeResource("medium")
         @JvmField val HIGH = WebSearchContextSizeResource("high")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = WebSearchContextSizeResource(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = WebSearchContextSizeResource(value)
     }
 }

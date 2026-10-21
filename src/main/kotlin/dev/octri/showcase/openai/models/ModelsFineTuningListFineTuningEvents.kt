@@ -3,32 +3,54 @@
 
 package dev.octri.showcase.openai.models
 
-/** Fine-tuning job event object */
+/**
+ * Fine-tuning job event object
+ */
 data class FineTuningJobEvent(
-    /** The object type, which is always "fine_tuning.job.event". */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: FineTuningJobEventObjectEnum,
-    /** The object identifier. */
+    /**
+     * The object type, which is always "fine_tuning.job.event".
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: FineTuningJobEventObjectEnum,
+    /**
+     * The object identifier.
+     */
     val id: String,
-    /** The Unix timestamp (in seconds) for when the fine-tuning job was created. */
+    /**
+     * The Unix timestamp (in seconds) for when the fine-tuning job was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The log level of the event. */
+    /**
+     * The log level of the event.
+     */
     val level: FineTuningJobEventLevelEnum,
-    /** The message of the event. */
+    /**
+     * The message of the event.
+     */
     val message: String,
-    /** The type of event. */
+    /**
+     * The type of event.
+     */
     val type: FineTuningJobEventTypeEnum? = null,
-    /** The data associated with the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null,
+    /**
+     * The data associated with the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Map<String, Any>? = null
 )
 
-/** Typed representation of the `ListFineTuningJobEventsResponse` API schema. */
+/**
+ * Typed representation of the `ListFineTuningJobEventsResponse` API schema.
+ */
 data class ListFineTuningJobEventsResponse(
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<FineTuningJobEvent>,
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ListFineTuningJobEventsResponseObjectEnum,
-    /** Required `boolean` value serialized in the `has_more` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListFineTuningJobEventsResponseObjectEnum,
+    /**
+     * Required `boolean` value serialized in the `has_more` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
 )

@@ -3,551 +3,548 @@
 
 package dev.octri.showcase.openai.models
 
-/** Details of the error. */
+/**
+ * Details of the error.
+ */
 data class RealtimeServerEventErrorError(
-    /** The type of error (e.g., "invalid_request_error", "server_error"). */
+    /**
+     * The type of error (e.g., "invalid_request_error", "server_error").
+     */
     val type: String,
-    /** A human-readable error message. */
+    /**
+     * A human-readable error message.
+     */
     val message: String,
-    /** Optional `string` value serialized in the `code` wire field. */
+    /**
+     * Optional `string` value serialized in the `code` wire field.
+     */
     val code: String? = null,
-    /** Optional `string` value serialized in the `param` wire field. */
+    /**
+     * Optional `string` value serialized in the `param` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("param") val `param`: String? = null,
-    /** Optional `string` value serialized in the `event_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional `string` value serialized in the `event_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 )
 
 /**
- * Returned when an error occurs, which could be a client problem or a server problem. Most errors
- * are recoverable and the session will stay open, we recommend to implementors to monitor and log
- * error messages by default.
+ * Returned when an error occurs, which could be a client problem or a server problem. Most errors are recoverable and the session will stay open, we recommend to implementors to monitor and log error messages by default.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeServerEventError(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `error`. */
+    /**
+     * The event type, must be `error`.
+     */
     val type: RealtimeServerEventErrorTypeEnum,
-    /** Details of the error. */
-    val error: RealtimeServerEventErrorError,
+    /**
+     * Details of the error.
+     */
+    val error: RealtimeServerEventErrorError
 ) : RealtimeServerEvent, RealtimeTranslationServerEvent
 
-/** A Realtime translation client event. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeTranslationClientEvent::class,
-)
+/**
+ * A Realtime translation client event.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeTranslationClientEvent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationClientEventSessionUpdate::class,
-        name = "session.update",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationClientEventInputAudioBufferAppend::class,
-        name = "session.input_audio_buffer.append",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationClientEventSessionClose::class,
-        name = "session.close",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationClientEventSessionUpdate::class, name = "session.update"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationClientEventInputAudioBufferAppend::class, name = "session.input_audio_buffer.append"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationClientEventSessionClose::class, name = "session.close")
 )
 sealed interface RealtimeTranslationClientEvent
 
-/**
- * A [RealtimeTranslationClientEvent] whose `type` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeTranslationClientEvent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [RealtimeTranslationClientEvent] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeTranslationClientEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeTranslationClientEvent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
 /**
- * Send this event to append audio bytes to the translation session input audio buffer. WebSocket
- * translation sessions accept base64-encoded 24 kHz PCM16 mono little-endian raw audio bytes.
- * Unsupported websocket audio formats return a validation error because lower-quality audio
- * materially degrades translation quality. Translation consumes 200 ms engine frames. For best
- * realtime behavior, append audio in 200 ms chunks. If a chunk is shorter, the server buffers it
- * until it has…
+ * Send this event to append audio bytes to the translation session input audio buffer. WebSocket translation sessions accept base64-encoded 24 kHz PCM16 mono little-endian raw audio bytes. Unsupported websocket audio formats return a validation error because lower-quality audio materially degrades translation quality. Translation consumes 200 ms engine frames. For best realtime behavior, append audio in 200 ms chunks. If a chunk is shorter, the server buffers it until it has…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationClientEventInputAudioBufferAppend(
-    /** The event type, must be `session.input_audio_buffer.append`. */
+    /**
+     * The event type, must be `session.input_audio_buffer.append`.
+     */
     val type: RealtimeTranslationClientEventInputAudioBufferAppendTypeEnum,
-    /** Base64-encoded 24 kHz PCM16 mono audio bytes. */
+    /**
+     * Base64-encoded 24 kHz PCM16 mono audio bytes.
+     */
     val audio: String,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeTranslationClientEvent
 
 /**
- * Gracefully close the realtime translation session. The server flushes pending input audio and
- * emits any remaining translated output before closing the session.
+ * Gracefully close the realtime translation session. The server flushes pending input audio and emits any remaining translated output before closing the session.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationClientEventSessionClose(
-    /** The event type, must be `session.close`. */
+    /**
+     * The event type, must be `session.close`.
+     */
     val type: RealtimeTranslationClientEventSessionCloseTypeEnum,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeTranslationClientEvent
 
 /**
- * Send this event to update the translation session configuration. Translation sessions support
- * updates to `audio.output.language`, `audio.input.transcription`, and
- * `audio.input.noise_reduction`.
+ * Send this event to update the translation session configuration. Translation sessions support updates to `audio.output.language`, `audio.input.transcription`, and `audio.input.noise_reduction`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationClientEventSessionUpdate(
-    /** The event type, must be `session.update`. */
+    /**
+     * The event type, must be `session.update`.
+     */
     val type: RealtimeTranslationClientEventSessionUpdateTypeEnum,
     /**
-     * Translation session fields to update. The session `type` and `model` are set at creation and
-     * cannot be changed with `session.update`.
+     * Translation session fields to update. The session `type` and `model` are set at creation and cannot be changed with `session.update`.
      */
     val session: RealtimeTranslationSessionUpdateRequest,
-    /** Optional client-generated ID used to identify this event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null,
+    /**
+     * Optional client-generated ID used to identify this event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String? = null
 ) : RealtimeTranslationClientEvent
 
 /**
- * Configuration for the client secret expiration. Expiration refers to the time after which a
- * client secret will no longer be valid for creating sessions. The session itself may continue
- * after that time once started. A secret can be used to create multiple sessions until it expires.
+ * Configuration for the client secret expiration. Expiration refers to the time after which a client secret will no longer be valid for creating sessions. The session itself may continue after that time once started. A secret can be used to create multiple sessions until it expires.
  */
 data class RealtimeTranslationClientSecretCreateRequestExpiresAfter(
     /**
-     * The anchor point for the client secret expiration, meaning that `seconds` will be added to
-     * the `created_at` time of the client secret to produce an expiration timestamp. Only
-     * `created_at` is currently supported.
+     * The anchor point for the client secret expiration, meaning that `seconds` will be added to the `created_at` time of the client secret to produce an expiration timestamp. Only `created_at` is currently supported.
      */
     val anchor: RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum? = null,
     /**
-     * The number of seconds from the anchor point to the expiration. Select a value between `10`
-     * and `7200` (2 hours). This default to 600 seconds (10 minutes) if not specified.
+     * The number of seconds from the anchor point to the expiration. Select a value between `10` and `7200` (2 hours). This default to 600 seconds (10 minutes) if not specified.
      */
-    val seconds: Long? = null,
+    val seconds: Long? = null
 )
 
-/** Create a translation session and client secret for the Realtime API. */
+/**
+ * Create a translation session and client secret for the Realtime API.
+ */
 data class RealtimeTranslationClientSecretCreateRequest(
     /**
-     * Realtime translation session configuration. Translation sessions stream source audio in and
-     * translated audio plus transcript deltas out continuously.
+     * Realtime translation session configuration. Translation sessions stream source audio in and translated audio plus transcript deltas out continuously.
      */
     val session: RealtimeTranslationSessionCreateRequest,
     /**
-     * Configuration for the client secret expiration. Expiration refers to the time after which a
-     * client secret will no longer be valid for creating sessions. The session itself may continue
-     * after that time once started. A secret can be used to create multiple sessions until it
-     * expires.
+     * Configuration for the client secret expiration. Expiration refers to the time after which a client secret will no longer be valid for creating sessions. The session itself may continue after that time once started. A secret can be used to create multiple sessions until it expires.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_after")
-    val expiresAfter: RealtimeTranslationClientSecretCreateRequestExpiresAfter? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_after") val expiresAfter: RealtimeTranslationClientSecretCreateRequestExpiresAfter? = null
 )
 
-/** Response from creating a translation session and client secret for the Realtime API. */
+/**
+ * Response from creating a translation session and client secret for the Realtime API.
+ */
 data class RealtimeTranslationClientSecretCreateResponse(
-    /** The generated client secret value. */
+    /**
+     * The generated client secret value.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /** Expiration timestamp for the client secret, in seconds since epoch. */
+    /**
+     * Expiration timestamp for the client secret, in seconds since epoch.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
     /**
-     * A Realtime translation session. Translation sessions continuously translate input audio into
-     * the configured output language.
+     * A Realtime translation session. Translation sessions continuously translate input audio into the configured output language.
      */
-    val session: RealtimeTranslationSession,
+    val session: RealtimeTranslationSession
 )
 
-/** A Realtime translation server event. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownRealtimeTranslationServerEvent::class,
-)
+/**
+ * A Realtime translation server event.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownRealtimeTranslationServerEvent::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeServerEventError::class,
-        name = "error",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationServerEventSessionCreated::class,
-        name = "session.created",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationServerEventSessionUpdated::class,
-        name = "session.updated",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationServerEventSessionClosed::class,
-        name = "session.closed",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationServerEventSessionInputTranscriptDelta::class,
-        name = "session.input_transcript.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationServerEventSessionOutputTranscriptDelta::class,
-        name = "session.output_transcript.delta",
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = RealtimeTranslationServerEventSessionOutputAudioDelta::class,
-        name = "session.output_audio.delta",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeServerEventError::class, name = "error"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationServerEventSessionCreated::class, name = "session.created"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationServerEventSessionUpdated::class, name = "session.updated"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationServerEventSessionClosed::class, name = "session.closed"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationServerEventSessionInputTranscriptDelta::class, name = "session.input_transcript.delta"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationServerEventSessionOutputTranscriptDelta::class, name = "session.output_transcript.delta"),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RealtimeTranslationServerEventSessionOutputAudioDelta::class, name = "session.output_audio.delta")
 )
 sealed interface RealtimeTranslationServerEvent
 
-/**
- * A [RealtimeTranslationServerEvent] whose `type` names no branch this SDK knows, kept as received.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownRealtimeTranslationServerEvent
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+/** A [RealtimeTranslationServerEvent] whose `type` names no branch this SDK knows, kept as received. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownRealtimeTranslationServerEvent @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : RealtimeTranslationServerEvent {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }
 
-/** Returned when a realtime translation session is closed. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Returned when a realtime translation session is closed.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationServerEventSessionClosed(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.closed`. */
-    val type: RealtimeTranslationServerEventSessionClosedTypeEnum,
+    /**
+     * The event type, must be `session.closed`.
+     */
+    val type: RealtimeTranslationServerEventSessionClosedTypeEnum
 ) : RealtimeTranslationServerEvent
 
 /**
- * Returned when a translation session is created. Emitted automatically when a new connection is
- * established as the first server event. This event contains the default translation session
- * configuration.
+ * Returned when a translation session is created. Emitted automatically when a new connection is established as the first server event. This event contains the default translation session configuration.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationServerEventSessionCreated(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.created`. */
+    /**
+     * The event type, must be `session.created`.
+     */
     val type: RealtimeTranslationServerEventSessionCreatedTypeEnum,
-    /** The translation session configuration. */
-    val session: RealtimeTranslationSession,
+    /**
+     * The translation session configuration.
+     */
+    val session: RealtimeTranslationSession
 ) : RealtimeTranslationServerEvent
 
 /**
- * Returned when optional source-language transcript text is available. This event is emitted only
- * when `audio.input.transcription` is configured. Transcript deltas are append-only text fragments.
- * Clients should not insert unconditional spaces between deltas.
+ * Returned when optional source-language transcript text is available. This event is emitted only when `audio.input.transcription` is configured. Transcript deltas are append-only text fragments. Clients should not insert unconditional spaces between deltas.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationServerEventSessionInputTranscriptDelta(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.input_transcript.delta`. */
+    /**
+     * The event type, must be `session.input_transcript.delta`.
+     */
     val type: RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum,
-    /** Append-only source-language transcript text. */
+    /**
+     * Append-only source-language transcript text.
+     */
     val delta: String,
-    /** Optional `integer` value serialized in the `elapsed_ms` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("elapsed_ms") val elapsedMs: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `elapsed_ms` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("elapsed_ms") val elapsedMs: Long? = null
 ) : RealtimeTranslationServerEvent
 
 /**
- * Returned when translated output audio is available. The `delta` contains a PCM16 audio chunk
- * whose length can vary. Clients should decode and queue the complete delta instead of assuming a
- * fixed byte or sample count.
+ * Returned when translated output audio is available. The `delta` contains a PCM16 audio chunk whose length can vary. Clients should decode and queue the complete delta instead of assuming a fixed byte or sample count.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationServerEventSessionOutputAudioDelta(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.output_audio.delta`. */
+    /**
+     * The event type, must be `session.output_audio.delta`.
+     */
     val type: RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum,
-    /** Base64-encoded translated audio data. */
+    /**
+     * Base64-encoded translated audio data.
+     */
     val delta: String,
-    /** Sample rate of the audio delta. */
+    /**
+     * Sample rate of the audio delta.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("sample_rate") val sampleRate: Long? = null,
-    /** Number of audio channels. */
+    /**
+     * Number of audio channels.
+     */
     val channels: Long? = null,
-    /** Audio encoding for `delta`. */
+    /**
+     * Audio encoding for `delta`.
+     */
     val format: RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum? = null,
-    /** Optional `integer` value serialized in the `elapsed_ms` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("elapsed_ms") val elapsedMs: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `elapsed_ms` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("elapsed_ms") val elapsedMs: Long? = null
 ) : RealtimeTranslationServerEvent
 
 /**
- * Returned when translated transcript text is available. Transcript deltas are append-only text
- * fragments. Clients should not insert unconditional spaces between deltas.
+ * Returned when translated transcript text is available. Transcript deltas are append-only text fragments. Clients should not insert unconditional spaces between deltas.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationServerEventSessionOutputTranscriptDelta(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.output_transcript.delta`. */
+    /**
+     * The event type, must be `session.output_transcript.delta`.
+     */
     val type: RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum,
-    /** Append-only transcript text for the translated output audio. */
+    /**
+     * Append-only transcript text for the translated output audio.
+     */
     val delta: String,
-    /** Optional `integer` value serialized in the `elapsed_ms` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("elapsed_ms") val elapsedMs: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `elapsed_ms` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("elapsed_ms") val elapsedMs: Long? = null
 ) : RealtimeTranslationServerEvent
 
 /**
- * Returned when a translation session is updated with a `session.update` event, unless there is an
- * error.
+ * Returned when a translation session is updated with a `session.update` event, unless there is an error.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class RealtimeTranslationServerEventSessionUpdated(
-    /** The unique ID of the server event. */
+    /**
+     * The unique ID of the server event.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("event_id") val eventId: String,
-    /** The event type, must be `session.updated`. */
+    /**
+     * The event type, must be `session.updated`.
+     */
     val type: RealtimeTranslationServerEventSessionUpdatedTypeEnum,
-    /** The translation session configuration. */
-    val session: RealtimeTranslationSession,
+    /**
+     * The translation session configuration.
+     */
+    val session: RealtimeTranslationSession
 ) : RealtimeTranslationServerEvent
 
 /**
- * Optional source-language transcription. When configured, the server emits
- * `session.input_transcript.delta` events. Translation itself still runs from the input audio
- * stream.
+ * Optional source-language transcription. When configured, the server emits `session.input_transcript.delta` events. Translation itself still runs from the input audio stream.
  */
 data class RealtimeTranslationSessionAudioInputTranscription(
-    /** The transcription model used for source transcript deltas. */
+    /**
+     * The transcription model used for source transcript deltas.
+     */
     val model: String
 )
 
-/** Optional input noise reduction. */
+/**
+ * Optional input noise reduction.
+ */
 data class RealtimeTranslationSessionAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
-     * `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType
 )
 
-/** Optional object value serialized in the `input` wire field. */
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
 data class RealtimeTranslationSessionAudioInput(
     /**
-     * Optional source-language transcription. When configured, the server emits
-     * `session.input_transcript.delta` events. Translation itself still runs from the input audio
-     * stream.
+     * Optional source-language transcription. When configured, the server emits `session.input_transcript.delta` events. Translation itself still runs from the input audio stream.
      */
     val transcription: RealtimeTranslationSessionAudioInputTranscription? = null,
-    /** Optional input noise reduction. */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
-    val noiseReduction: RealtimeTranslationSessionAudioInputNoiseReduction? = null,
-)
-
-/** Optional object value serialized in the `output` wire field. */
-data class RealtimeTranslationSessionAudioOutput(
-    /** Target language for translated output audio and transcript deltas. */
-    val language: String? = null
-)
-
-/** Configuration for translation input and output audio. */
-data class RealtimeTranslationSessionAudio(
-    /** Optional object value serialized in the `input` wire field. */
-    val input: RealtimeTranslationSessionAudioInput? = null,
-    /** Optional object value serialized in the `output` wire field. */
-    val output: RealtimeTranslationSessionAudioOutput? = null,
+    /**
+     * Optional input noise reduction.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeTranslationSessionAudioInputNoiseReduction? = null
 )
 
 /**
- * A Realtime translation session. Translation sessions continuously translate input audio into the
- * configured output language.
+ * Optional object value serialized in the `output` wire field.
+ */
+data class RealtimeTranslationSessionAudioOutput(
+    /**
+     * Target language for translated output audio and transcript deltas.
+     */
+    val language: String? = null
+)
+
+/**
+ * Configuration for translation input and output audio.
+ */
+data class RealtimeTranslationSessionAudio(
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
+    val input: RealtimeTranslationSessionAudioInput? = null,
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
+    val output: RealtimeTranslationSessionAudioOutput? = null
+)
+
+/**
+ * A Realtime translation session. Translation sessions continuously translate input audio into the configured output language.
  */
 data class RealtimeTranslationSession(
-    /** Unique identifier for the session that looks like `sess_1234567890abcdef`. */
+    /**
+     * Unique identifier for the session that looks like `sess_1234567890abcdef`.
+     */
     val id: String,
-    /** The session type. Always `translation` for Realtime translation sessions. */
+    /**
+     * The session type. Always `translation` for Realtime translation sessions.
+     */
     val type: RealtimeTranslationSessionTypeEnum,
-    /** Expiration timestamp for the session, in seconds since epoch. */
+    /**
+     * Expiration timestamp for the session, in seconds since epoch.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
     /**
-     * The Realtime translation model used for this session. This field is set at session creation
-     * and cannot be changed with `session.update`.
+     * The Realtime translation model used for this session. This field is set at session creation and cannot be changed with `session.update`.
      */
     val model: String,
-    /** Configuration for translation input and output audio. */
-    val audio: RealtimeTranslationSessionAudio,
+    /**
+     * Configuration for translation input and output audio.
+     */
+    val audio: RealtimeTranslationSessionAudio
 )
 
 /**
- * Optional source-language transcription. When configured, the server emits
- * `session.input_transcript.delta` events. Translation itself still runs from the input audio
- * stream.
+ * Optional source-language transcription. When configured, the server emits `session.input_transcript.delta` events. Translation itself still runs from the input audio stream.
  */
 data class RealtimeTranslationSessionCreateRequestAudioInputTranscription(
-    /** The transcription model to use for source transcript deltas. */
+    /**
+     * The transcription model to use for source transcript deltas.
+     */
     val model: String
 )
 
-/** Optional input noise reduction. Set to `null` to disable it. */
+/**
+ * Optional input noise reduction. Set to `null` to disable it.
+ */
 data class RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
-     * `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType
 )
 
-/** Optional object value serialized in the `input` wire field. */
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
 data class RealtimeTranslationSessionCreateRequestAudioInput(
     /**
-     * Optional source-language transcription. When configured, the server emits
-     * `session.input_transcript.delta` events. Translation itself still runs from the input audio
-     * stream.
+     * Optional source-language transcription. When configured, the server emits `session.input_transcript.delta` events. Translation itself still runs from the input audio stream.
      */
     val transcription: RealtimeTranslationSessionCreateRequestAudioInputTranscription? = null,
-    /** Optional input noise reduction. Set to `null` to disable it. */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
-    val noiseReduction: RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction? = null,
+    /**
+     * Optional input noise reduction. Set to `null` to disable it.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction? = null
 )
 
-/** Optional object value serialized in the `output` wire field. */
+/**
+ * Optional object value serialized in the `output` wire field.
+ */
 data class RealtimeTranslationSessionCreateRequestAudioOutput(
-    /** Target language for translated output audio and transcript deltas. */
+    /**
+     * Target language for translated output audio and transcript deltas.
+     */
     val language: String? = null
 )
 
-/** Configuration for translation input and output audio. */
+/**
+ * Configuration for translation input and output audio.
+ */
 data class RealtimeTranslationSessionCreateRequestAudio(
-    /** Optional object value serialized in the `input` wire field. */
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
     val input: RealtimeTranslationSessionCreateRequestAudioInput? = null,
-    /** Optional object value serialized in the `output` wire field. */
-    val output: RealtimeTranslationSessionCreateRequestAudioOutput? = null,
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
+    val output: RealtimeTranslationSessionCreateRequestAudioOutput? = null
 )
 
 /**
- * Realtime translation session configuration. Translation sessions stream source audio in and
- * translated audio plus transcript deltas out continuously.
+ * Realtime translation session configuration. Translation sessions stream source audio in and translated audio plus transcript deltas out continuously.
  */
 data class RealtimeTranslationSessionCreateRequest(
-    /** The Realtime translation model used for this session. */
+    /**
+     * The Realtime translation model used for this session.
+     */
     val model: String,
-    /** Configuration for translation input and output audio. */
-    val audio: RealtimeTranslationSessionCreateRequestAudio? = null,
+    /**
+     * Configuration for translation input and output audio.
+     */
+    val audio: RealtimeTranslationSessionCreateRequestAudio? = null
 )
 
 /**
- * Optional source-language transcription. When configured, the server emits
- * `session.input_transcript.delta` events. Translation itself still runs from the input audio
- * stream.
+ * Optional source-language transcription. When configured, the server emits `session.input_transcript.delta` events. Translation itself still runs from the input audio stream.
  */
 data class RealtimeTranslationSessionUpdateRequestAudioInputTranscription(
-    /** The transcription model to use for source transcript deltas. */
+    /**
+     * The transcription model to use for source transcript deltas.
+     */
     val model: String
 )
 
-/** Optional input noise reduction. Set to `null` to disable it. */
+/**
+ * Optional input noise reduction. Set to `null` to disable it.
+ */
 data class RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction(
     /**
-     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones,
-     * `far_field` is for far-field microphones such as laptop or conference room microphones.
+     * Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
      */
     val type: NoiseReductionType
 )
 
-/** Optional object value serialized in the `input` wire field. */
+/**
+ * Optional object value serialized in the `input` wire field.
+ */
 data class RealtimeTranslationSessionUpdateRequestAudioInput(
     /**
-     * Optional source-language transcription. When configured, the server emits
-     * `session.input_transcript.delta` events. Translation itself still runs from the input audio
-     * stream.
+     * Optional source-language transcription. When configured, the server emits `session.input_transcript.delta` events. Translation itself still runs from the input audio stream.
      */
     val transcription: RealtimeTranslationSessionUpdateRequestAudioInputTranscription? = null,
-    /** Optional input noise reduction. Set to `null` to disable it. */
-    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction")
-    val noiseReduction: RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction? = null,
+    /**
+     * Optional input noise reduction. Set to `null` to disable it.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("noise_reduction") val noiseReduction: RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction? = null
 )
 
-/** Optional object value serialized in the `output` wire field. */
+/**
+ * Optional object value serialized in the `output` wire field.
+ */
 data class RealtimeTranslationSessionUpdateRequestAudioOutput(
-    /** Target language for translated output audio and transcript deltas. */
+    /**
+     * Target language for translated output audio and transcript deltas.
+     */
     val language: String? = null
 )
 
-/** Configuration for translation input and output audio. */
+/**
+ * Configuration for translation input and output audio.
+ */
 data class RealtimeTranslationSessionUpdateRequestAudio(
-    /** Optional object value serialized in the `input` wire field. */
+    /**
+     * Optional object value serialized in the `input` wire field.
+     */
     val input: RealtimeTranslationSessionUpdateRequestAudioInput? = null,
-    /** Optional object value serialized in the `output` wire field. */
-    val output: RealtimeTranslationSessionUpdateRequestAudioOutput? = null,
+    /**
+     * Optional object value serialized in the `output` wire field.
+     */
+    val output: RealtimeTranslationSessionUpdateRequestAudioOutput? = null
 )
 
-/** Realtime translation session fields that can be updated with `session.update`. */
+/**
+ * Realtime translation session fields that can be updated with `session.update`.
+ */
 data class RealtimeTranslationSessionUpdateRequest(
-    /** Configuration for translation input and output audio. */
+    /**
+     * Configuration for translation input and output audio.
+     */
     val audio: RealtimeTranslationSessionUpdateRequestAudio? = null
 )

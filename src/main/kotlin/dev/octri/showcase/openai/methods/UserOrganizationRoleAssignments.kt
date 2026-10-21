@@ -17,71 +17,39 @@ import dev.octri.showcase.openai.Validation
 
 object UserOrganizationRoleAssignments {
 
+
     /**
      * Lists the organization roles assigned to a user within the organization.
      *
      * @param userId The ID of the user to inspect.
      * @param limit A limit on the number of organization role assignments to return.
-     * @param after Cursor for pagination. Provide the value from the previous response's `next`
-     *   field to continue listing organization roles.
+     * @param after Cursor for pagination. Provide the value from the previous
+     *   response's `next` field to continue listing organization roles.
      * @param order Sort order for the returned organization roles.
      */
-    fun listUserRoleAssignments(
-        clientConfig: ClientConfig,
-        userId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListUserRoleAssignmentsParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): RoleListResource {
+    fun listUserRoleAssignments(clientConfig: ClientConfig, userId: String, limit: Long? = null, after: String? = null, order: ListUserRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null): RoleListResource {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 0.0, max = 1000.0))
-        }
+}
 
-        return SdkClient.request<RoleListResource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/users/${SdkClient.encodePathSegment(userId)}/roles",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listUserRoleAssignments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<RoleListResource>(SdkClient.RequestSpec("GET", "/organization/users/${SdkClient.encodePathSegment(userId)}/roles", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listUserRoleAssignments", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
 
     /**
      * Lists the organization roles assigned to a user within the organization.
      *
      * @param userId The ID of the user to inspect.
      * @param limit A limit on the number of organization role assignments to return.
-     * @param after Cursor for pagination. Provide the value from the previous response's `next`
-     *   field to continue listing organization roles.
+     * @param after Cursor for pagination. Provide the value from the previous
+     *   response's `next` field to continue listing organization roles.
      * @param order Sort order for the returned organization roles.
      */
-    fun listUserRoleAssignmentsPaginated(
-        clientConfig: ClientConfig,
-        userId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListUserRoleAssignmentsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldFn: (AssignedRoleDetails) -> Boolean,
-    ) {
+    fun listUserRoleAssignmentsPaginated(clientConfig: ClientConfig, userId: String, limit: Long? = null, after: String? = null, order: ListUserRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (AssignedRoleDetails) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listUserRoleAssignments(clientConfig, userId, limit, cursor, order, options)
@@ -102,15 +70,7 @@ object UserOrganizationRoleAssignments {
         val hasMore: Boolean,
     )
 
-    fun listUserRoleAssignmentsPages(
-        clientConfig: ClientConfig,
-        userId: String,
-        limit: Long? = null,
-        after: String? = null,
-        order: ListUserRoleAssignmentsParameterEnum? = null,
-        options: RequestOptions? = null,
-        yieldPage: (ListUserRoleAssignmentsPage) -> Boolean,
-    ) {
+    fun listUserRoleAssignmentsPages(clientConfig: ClientConfig, userId: String, limit: Long? = null, after: String? = null, order: ListUserRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldPage: (ListUserRoleAssignmentsPage) -> Boolean) {
         var cursor = after
         while (true) {
             val page = listUserRoleAssignments(clientConfig, userId, limit, cursor, order, options)
@@ -124,38 +84,23 @@ object UserOrganizationRoleAssignments {
         }
     }
 
+
+
     /**
      * Assigns an organization role to a user within the organization.
      *
      * @param userId The ID of the user that should receive the organization role.
      * @param roleId Identifier of the role to assign.
      */
-    fun assignUserRole(
-        clientConfig: ClientConfig,
-        userId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): UserRoleAssignment {
-        return SdkClient.request<UserRoleAssignment>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization/users/${SdkClient.encodePathSegment(userId)}/roles",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("role_id" to (roleId)),
-                    operationId = "assignUserRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun assignUserRole(clientConfig: ClientConfig, userId: String, roleId: String, options: RequestOptions? = null): UserRoleAssignment {
+        return SdkClient.request<UserRoleAssignment>(SdkClient.RequestSpec("POST", "/organization/users/${SdkClient.encodePathSegment(userId)}/roles", config = clientConfig, body = SdkClient.bodyMap("role_id" to (roleId)), operationId = "assignUserRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Retrieves an organization role assigned to a user.
@@ -163,31 +108,15 @@ object UserOrganizationRoleAssignments {
      * @param userId The ID of the user to inspect.
      * @param roleId The ID of the organization role to retrieve for the user.
      */
-    fun retrieveUserRole(
-        clientConfig: ClientConfig,
-        userId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): AssignedRoleDetails {
-        return SdkClient.request<AssignedRoleDetails>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization/users/${SdkClient.encodePathSegment(userId)}/roles/${SdkClient.encodePathSegment(roleId)}",
-                    config = clientConfig,
-                    operationId = "retrieveUserRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun retrieveUserRole(clientConfig: ClientConfig, userId: String, roleId: String, options: RequestOptions? = null): AssignedRoleDetails {
+        return SdkClient.request<AssignedRoleDetails>(SdkClient.RequestSpec("GET", "/organization/users/${SdkClient.encodePathSegment(userId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "retrieveUserRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Unassigns an organization role from a user within the organization.
@@ -195,29 +124,14 @@ object UserOrganizationRoleAssignments {
      * @param userId The ID of the user to modify.
      * @param roleId The ID of the organization role to remove from the user.
      */
-    fun unassignUserRole(
-        clientConfig: ClientConfig,
-        userId: String,
-        roleId: String,
-        options: RequestOptions? = null,
-    ): DeletedRoleAssignmentResource {
-        return SdkClient.request<DeletedRoleAssignmentResource>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization/users/${SdkClient.encodePathSegment(userId)}/roles/${SdkClient.encodePathSegment(roleId)}",
-                    config = clientConfig,
-                    operationId = "unassignUserRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ErrorResponse::class.java,
-                            "403" to PermissionErrorResponse::class.java,
-                            "404" to ErrorResponse::class.java,
-                            "429" to ErrorResponse::class.java,
-                        ),
-                )
-            )
-            .data
+    fun unassignUserRole(clientConfig: ClientConfig, userId: String, roleId: String, options: RequestOptions? = null): DeletedRoleAssignmentResource {
+        return SdkClient.request<DeletedRoleAssignmentResource>(SdkClient.RequestSpec("DELETE", "/organization/users/${SdkClient.encodePathSegment(userId)}/roles/${SdkClient.encodePathSegment(roleId)}", config = clientConfig, operationId = "unassignUserRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
     }
+
+
+
+
+
+
+
 }
