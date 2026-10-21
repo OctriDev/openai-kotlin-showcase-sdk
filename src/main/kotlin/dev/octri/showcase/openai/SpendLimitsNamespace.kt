@@ -89,14 +89,14 @@ class SpendLimitsNamespace(private val clientConfig: ClientConfig) {
      *
      * Create or replace a project's hard spend limit.
      */
-    fun updateProject(
+    fun update(
         projectId: String,
         thresholdAmount: Long,
         currency: UpdateProjectSpendLimitBodyCurrencyEnum,
         interval: UpdateProjectSpendLimitBodyIntervalEnum,
         options: RequestOptions? = null,
     ): ProjectSpendLimitResource {
-        return dev.octri.showcase.openai.methods.SpendLimits.updateSpendLimitsProject(
+        return dev.octri.showcase.openai.methods.SpendLimits.updateProjectSpendLimit(
             clientConfig,
             projectId,
             thresholdAmount,

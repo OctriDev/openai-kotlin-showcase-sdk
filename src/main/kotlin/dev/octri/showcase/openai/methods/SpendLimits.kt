@@ -200,7 +200,7 @@ object SpendLimits {
      * @param interval The time interval for evaluating spend against the threshold. Currently, only
      *   `month` is supported.
      */
-    fun updateSpendLimitsProject(
+    fun updateProjectSpendLimit(
         clientConfig: ClientConfig,
         projectId: String,
         thresholdAmount: Long,
@@ -225,7 +225,7 @@ object SpendLimits {
                             "currency" to (currency),
                             "interval" to (interval),
                         ),
-                    operationId = "updateSpendLimitsProject",
+                    operationId = "updateProjectSpendLimit",
                     decoder = SdkClient.ResponseDecoder.JSON,
                     options = options,
                     errors =
