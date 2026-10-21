@@ -121,10 +121,10 @@ object SpendLimits {
      * @param interval The time interval for evaluating spend against the threshold.
      *   Currently, only `month` is supported.
      */
-    fun updateSpendLimitsProject(clientConfig: ClientConfig, projectId: String, thresholdAmount: Long, currency: UpdateProjectSpendLimitBodyCurrencyEnum, interval: UpdateProjectSpendLimitBodyIntervalEnum, options: RequestOptions? = null): ProjectSpendLimitResource {
+    fun updateProjectSpendLimit(clientConfig: ClientConfig, projectId: String, thresholdAmount: Long, currency: UpdateProjectSpendLimitBodyCurrencyEnum, interval: UpdateProjectSpendLimitBodyIntervalEnum, options: RequestOptions? = null): ProjectSpendLimitResource {
         Validation.validateRange("threshold_amount", thresholdAmount, Validation.RangeOpts(min = 1.0))
 
-        return SdkClient.request<ProjectSpendLimitResource>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_limit", config = clientConfig, body = SdkClient.bodyMap("threshold_amount" to (thresholdAmount), "currency" to (currency), "interval" to (interval)), operationId = "updateSpendLimitsProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
+        return SdkClient.request<ProjectSpendLimitResource>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/spend_limit", config = clientConfig, body = SdkClient.bodyMap("threshold_amount" to (thresholdAmount), "currency" to (currency), "interval" to (interval)), operationId = "updateProjectSpendLimit", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java))).data
     }
 
 
