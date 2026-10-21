@@ -4,136 +4,153 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Options to create a new thread. If no thread is provided when running a request, an empty thread will be created.
+ * Options to create a new thread. If no thread is provided when running a request, an empty thread
+ * will be created.
  */
 data class CreateThreadRequest(
-    /**
-     * A list of messages to start the thread with.
-     */
+    /** A list of messages to start the thread with. */
     val messages: List<CreateMessageRequest>? = null,
     /**
-     * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+     * A set of resources that are made available to the assistant's tools in this thread. The
+     * resources are specific to the type of tool. For example, the `code_interpreter` tool requires
+     * a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources") val toolResources: CreateThreadRequestToolResources? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("tool_resources")
+    val toolResources: CreateThreadRequestToolResources? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
-    val metadata: Metadata? = null
+    val metadata: Metadata? = null,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51(
-    /**
-     * Always `auto`.
-     */
+    /** Always `auto`. */
     val type: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX1758507317
 ) : CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
 
-/**
- * Required object value serialized in the `static` wire field.
- */
+/** Required object value serialized in the `static` wire field. */
 data class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce(
     /**
-     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
+     * The maximum number of tokens in each chunk. The default value is `800`. The minimum value is
+     * `100` and the maximum value is `4096`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens") val maxChunkSizeTokens: Long,
+    @com.fasterxml.jackson.annotation.JsonProperty("max_chunk_size_tokens")
+    val maxChunkSizeTokens: Long,
     /**
-     * The number of tokens that overlap between chunks. The default value is `400`. Note that the overlap must not exceed half of `max_chunk_size_tokens`.
+     * The number of tokens that overlap between chunks. The default value is `400`. Note that the
+     * overlap must not exceed half of `max_chunk_size_tokens`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens") val chunkOverlapTokens: Long
+    @com.fasterxml.jackson.annotation.JsonProperty("chunk_overlap_tokens")
+    val chunkOverlapTokens: Long,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4(
-    /**
-     * Always `static`.
-     */
+    /** Always `static`. */
     val type: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX206f2112e7,
-    /**
-     * Required object value serialized in the `static` wire field.
-     */
-    val static: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce
+    /** Required object value serialized in the `static` wire field. */
+    val static: CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX9d5f3948ce,
 ) : CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
 
-/**
- * The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+/** The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51::class, name = "auto"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4::class, name = "static")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7cd9c16c51::class,
+        name = "auto",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuXd0152ee8f4::class,
+        name = "static",
+    ),
 )
 sealed interface CreateThreadRequestToolResourcesFileSearchVectorStoresItemChuX7aa7dff179
 
-/**
- * Required object value serialized in the `image_file` wire field.
- */
+/** Required object value serialized in the `image_file` wire field. */
 data class MessageContentImageFileObjectImageFile(
     /**
-     * The File ID of the image in the message content. Set `purpose="vision"` when uploading the File if you need to later display the file content.
+     * The File ID of the image in the message content. Set `purpose="vision"` when uploading the
+     * File if you need to later display the file content.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("file_id") val fileId: String,
     /**
-     * Specifies the detail level of the image if specified by the user. `low` uses fewer tokens, you can opt in to high resolution using `high`.
+     * Specifies the detail level of the image if specified by the user. `low` uses fewer tokens,
+     * you can opt in to high resolution using `high`.
      */
-    val detail: MessageContentImageFileObjectImageFileDetailEnum? = null
+    val detail: MessageContentImageFileObjectImageFileDetailEnum? = null,
 )
 
-/**
- * References an image File in the content of a message.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** References an image File in the content of a message. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageContentImageFileObject(
-    /**
-     * Always `image_file`.
-     */
+    /** Always `image_file`. */
     val type: MessageContentImageFileObjectTypeEnum,
-    /**
-     * Required object value serialized in the `image_file` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_file") val imageFile: MessageContentImageFileObjectImageFile
+    /** Required object value serialized in the `image_file` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_file")
+    val imageFile: MessageContentImageFileObjectImageFile,
 ) : MessageObjectContentItem, CreateMessageRequestContentItem
 
-/**
- * Required object value serialized in the `image_url` wire field.
- */
+/** Required object value serialized in the `image_url` wire field. */
 data class MessageContentImageUrlObjectImageUrl(
     /**
      * The external URL of the image, must be a supported image types: jpeg, jpg, png, gif, webp.
      */
     val url: String,
     /**
-     * Specifies the detail level of the image. `low` uses fewer tokens, you can opt in to high resolution using `high`. Default value is `auto`
+     * Specifies the detail level of the image. `low` uses fewer tokens, you can opt in to high
+     * resolution using `high`. Default value is `auto`
      */
-    val detail: MessageContentImageUrlObjectImageUrlDetailEnum? = null
+    val detail: MessageContentImageUrlObjectImageUrlDetailEnum? = null,
 )
 
-/**
- * References an image URL in the content of a message.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** References an image URL in the content of a message. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageContentImageUrlObject(
-    /**
-     * The type of the content part.
-     */
+    /** The type of the content part. */
     val type: MessageContentImageUrlObjectTypeEnum,
-    /**
-     * Required object value serialized in the `image_url` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: MessageContentImageUrlObjectImageUrl
+    /** Required object value serialized in the `image_url` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url")
+    val imageUrl: MessageContentImageUrlObjectImageUrl,
 ) : MessageObjectContentItem, CreateMessageRequestContentItem
 
-/**
- * The text content that is part of a message.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The text content that is part of a message. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MessageRequestContentTextObject(
-    /**
-     * Always `text`.
-     */
+    /** Always `text`. */
     val type: MessageRequestContentTextObjectTypeEnum,
-    /**
-     * Text content to be sent to the model
-     */
-    val text: String
+    /** Text content to be sent to the model */
+    val text: String,
 ) : CreateMessageRequestContentItem

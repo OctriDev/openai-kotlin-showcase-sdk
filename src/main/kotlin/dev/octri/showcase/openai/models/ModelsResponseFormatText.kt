@@ -4,25 +4,21 @@
 package dev.octri.showcase.openai.models
 
 /**
- * A custom grammar for the model to follow when generating text. Learn more in the custom grammars guide.
+ * A custom grammar for the model to follow when generating text. Learn more in the custom grammars
+ * guide.
  */
 data class ResponseFormatTextGrammar(
-    /**
-     * The type of response format being defined. Always `grammar`.
-     */
+    /** The type of response format being defined. Always `grammar`. */
     val type: ResponseFormatTextGrammarTypeEnum,
-    /**
-     * The custom grammar for the model to follow.
-     */
-    val grammar: String
+    /** The custom grammar for the model to follow. */
+    val grammar: String,
 )
 
 /**
- * Configure the model to generate valid Python code. See the custom grammars guide for more details.
+ * Configure the model to generate valid Python code. See the custom grammars guide for more
+ * details.
  */
 data class ResponseFormatTextPython(
-    /**
-     * The type of response format being defined. Always `python`.
-     */
+    /** The type of response format being defined. Always `python`. */
     val type: ResponseFormatTextPythonTypeEnum
 )

@@ -3,24 +3,52 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Required API value serialized in the `testing_criteria[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownEvalTestingCriteriaItem::class)
+/** Required API value serialized in the `testing_criteria[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownEvalTestingCriteriaItem::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderLabelModel::class, name = "label_model"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderStringCheck::class, name = "string_check"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderTextSimilarity::class, name = "text_similarity"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderPython::class, name = "python"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = EvalGraderScoreModel::class, name = "score_model")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderLabelModel::class,
+        name = "label_model",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderStringCheck::class,
+        name = "string_check",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderTextSimilarity::class,
+        name = "text_similarity",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderPython::class,
+        name = "python",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = EvalGraderScoreModel::class,
+        name = "score_model",
+    ),
 )
 sealed interface EvalTestingCriteriaItem
 
 /** A [EvalTestingCriteriaItem] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownEvalTestingCriteriaItem @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownEvalTestingCriteriaItem
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : EvalTestingCriteriaItem {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

@@ -3,381 +3,302 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A log of a user action or configuration change within this organization.
- */
+/** A log of a user action or configuration change within this organization. */
 class AuditLog(
-    /**
-     * The ID of this log.
-     */
+    /** The ID of this log. */
     val id: String,
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: AuditLogEventType,
-    /**
-     * The Unix timestamp (in seconds) of the event.
-     */
+    /** The Unix timestamp (in seconds) of the event. */
     @com.fasterxml.jackson.annotation.JsonProperty("effective_at") val effectiveAt: Long,
     /**
-     * The project that the action was scoped to. Absent for actions not scoped to projects. Note that any admin actions taken via Admin API keys are associated with the default project.
+     * The project that the action was scoped to. Absent for actions not scoped to projects. Note
+     * that any admin actions taken via Admin API keys are associated with the default project.
      */
     val project: AuditLogProject? = null,
-    /**
-     * Optional API value serialized in the `actor` wire field.
-     */
+    /** Optional API value serialized in the `actor` wire field. */
     val actor: AuditLogActor? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key.created") val apiKeyCreated: AuditLogApiKeyCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key.updated") val apiKeyUpdated: AuditLogApiKeyUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key.deleted") val apiKeyDeleted: AuditLogApiKeyDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key.created")
+    val apiKeyCreated: AuditLogApiKeyCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key.updated")
+    val apiKeyUpdated: AuditLogApiKeyUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key.deleted")
+    val apiKeyDeleted: AuditLogApiKeyDeleted? = null,
     /**
      * The project and fine-tuned model checkpoint that the checkpoint permission was created for.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint.permission.created") val checkpointPermissionCreated: AuditLogCheckpointPermissionCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint.permission.deleted") val checkpointPermissionDeleted: AuditLogCheckpointPermissionDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key.registered") val externalKeyRegistered: AuditLogExternalKeyRegistered? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key.removed") val externalKeyRemoved: AuditLogExternalKeyRemoved? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_storage.registered") val externalStorageRegistered: AuditLogExternalStorageRegistered? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_storage.removed") val externalStorageRemoved: AuditLogExternalStorageRemoved? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("group.created") val groupCreated: AuditLogGroupCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("group.updated") val groupUpdated: AuditLogGroupUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("group.deleted") val groupDeleted: AuditLogGroupDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim.enabled") val scimEnabled: AuditLogScimEnabled? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim.disabled") val scimDisabled: AuditLogScimDisabled? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("invite.sent") val inviteSent: AuditLogInviteSent? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("invite.accepted") val inviteAccepted: AuditLogInviteAccepted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("invite.deleted") val inviteDeleted: AuditLogInviteDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.created") val ipAllowlistCreated: AuditLogIpAllowlistCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.updated") val ipAllowlistUpdated: AuditLogIpAllowlistUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.deleted") val ipAllowlistDeleted: AuditLogIpAllowlistDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.config.activated") val ipAllowlistConfigActivated: AuditLogIpAllowlistConfigActivated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.config.deactivated") val ipAllowlistConfigDeactivated: AuditLogIpAllowlistConfigDeactivated? = null,
-    /**
-     * This event has no additional fields beyond the standard audit log attributes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("login.succeeded") val loginSucceeded: Map<String, Any>? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("login.failed") val loginFailed: AuditLogLoginFailed? = null,
-    /**
-     * This event has no additional fields beyond the standard audit log attributes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("logout.succeeded") val logoutSucceeded: Map<String, Any>? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("logout.failed") val logoutFailed: AuditLogLogoutFailed? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("organization.updated") val organizationUpdated: AuditLogOrganizationUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("project.created") val projectCreated: AuditLogProjectCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("project.updated") val projectUpdated: AuditLogProjectUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("project.archived") val projectArchived: AuditLogProjectArchived? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("project.deleted") val projectDeleted: AuditLogProjectDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("rate_limit.updated") val rateLimitUpdated: AuditLogRateLimitUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("rate_limit.deleted") val rateLimitDeleted: AuditLogRateLimitDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.created") val roleCreated: AuditLogRoleCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.updated") val roleUpdated: AuditLogRoleUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.deleted") val roleDeleted: AuditLogRoleDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.assignment.created") val roleAssignmentCreated: AuditLogRoleAssignmentCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.assignment.deleted") val roleAssignmentDeleted: AuditLogRoleAssignmentDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.bound_to_resource") val roleBoundToResource: AuditLogRoleBoundToResource? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role.unbound_from_resource") val roleUnboundFromResource: AuditLogRoleUnboundFromResource? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_account.created") val serviceAccountCreated: AuditLogServiceAccountCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_account.updated") val serviceAccountUpdated: AuditLogServiceAccountUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_account.deleted") val serviceAccountDeleted: AuditLogServiceAccountDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider.created") val workloadIdentityProviderCreated: AuditLogWorkloadIdentityProviderCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider.updated") val workloadIdentityProviderUpdated: AuditLogWorkloadIdentityProviderUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider.deleted") val workloadIdentityProviderDeleted: AuditLogWorkloadIdentityProviderDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_mapping.created") val workloadIdentityProviderMappingCreated: AuditLogWorkloadIdentityProviderMappingCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_mapping.updated") val workloadIdentityProviderMappingUpdated: AuditLogWorkloadIdentityProviderMappingUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_mapping.deleted") val workloadIdentityProviderMappingDeleted: AuditLogWorkloadIdentityProviderMappingDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user.added") val userAdded: AuditLogUserAdded? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user.updated") val userUpdated: AuditLogUserUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user.deleted") val userDeleted: AuditLogUserDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate.created") val certificateCreated: AuditLogCertificateCreated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate.updated") val certificateUpdated: AuditLogCertificateUpdated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificate.deleted") val certificateDeleted: AuditLogCertificateDeleted? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificates.activated") val certificatesActivated: AuditLogCertificatesActivated? = null,
-    /**
-     * The details for events with this `type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("certificates.deactivated") val certificatesDeactivated: AuditLogCertificatesDeactivated? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint.permission.created")
+    val checkpointPermissionCreated: AuditLogCheckpointPermissionCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("checkpoint.permission.deleted")
+    val checkpointPermissionDeleted: AuditLogCheckpointPermissionDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key.registered")
+    val externalKeyRegistered: AuditLogExternalKeyRegistered? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key.removed")
+    val externalKeyRemoved: AuditLogExternalKeyRemoved? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_storage.registered")
+    val externalStorageRegistered: AuditLogExternalStorageRegistered? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_storage.removed")
+    val externalStorageRemoved: AuditLogExternalStorageRemoved? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("group.created")
+    val groupCreated: AuditLogGroupCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("group.updated")
+    val groupUpdated: AuditLogGroupUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("group.deleted")
+    val groupDeleted: AuditLogGroupDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim.enabled")
+    val scimEnabled: AuditLogScimEnabled? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim.disabled")
+    val scimDisabled: AuditLogScimDisabled? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("invite.sent")
+    val inviteSent: AuditLogInviteSent? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("invite.accepted")
+    val inviteAccepted: AuditLogInviteAccepted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("invite.deleted")
+    val inviteDeleted: AuditLogInviteDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.created")
+    val ipAllowlistCreated: AuditLogIpAllowlistCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.updated")
+    val ipAllowlistUpdated: AuditLogIpAllowlistUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.deleted")
+    val ipAllowlistDeleted: AuditLogIpAllowlistDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.config.activated")
+    val ipAllowlistConfigActivated: AuditLogIpAllowlistConfigActivated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist.config.deactivated")
+    val ipAllowlistConfigDeactivated: AuditLogIpAllowlistConfigDeactivated? = null,
+    /** This event has no additional fields beyond the standard audit log attributes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("login.succeeded")
+    val loginSucceeded: Map<String, Any>? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("login.failed")
+    val loginFailed: AuditLogLoginFailed? = null,
+    /** This event has no additional fields beyond the standard audit log attributes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("logout.succeeded")
+    val logoutSucceeded: Map<String, Any>? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("logout.failed")
+    val logoutFailed: AuditLogLogoutFailed? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("organization.updated")
+    val organizationUpdated: AuditLogOrganizationUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("project.created")
+    val projectCreated: AuditLogProjectCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("project.updated")
+    val projectUpdated: AuditLogProjectUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("project.archived")
+    val projectArchived: AuditLogProjectArchived? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("project.deleted")
+    val projectDeleted: AuditLogProjectDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("rate_limit.updated")
+    val rateLimitUpdated: AuditLogRateLimitUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("rate_limit.deleted")
+    val rateLimitDeleted: AuditLogRateLimitDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.created")
+    val roleCreated: AuditLogRoleCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.updated")
+    val roleUpdated: AuditLogRoleUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.deleted")
+    val roleDeleted: AuditLogRoleDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.assignment.created")
+    val roleAssignmentCreated: AuditLogRoleAssignmentCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.assignment.deleted")
+    val roleAssignmentDeleted: AuditLogRoleAssignmentDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.bound_to_resource")
+    val roleBoundToResource: AuditLogRoleBoundToResource? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role.unbound_from_resource")
+    val roleUnboundFromResource: AuditLogRoleUnboundFromResource? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_account.created")
+    val serviceAccountCreated: AuditLogServiceAccountCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_account.updated")
+    val serviceAccountUpdated: AuditLogServiceAccountUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_account.deleted")
+    val serviceAccountDeleted: AuditLogServiceAccountDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider.created")
+    val workloadIdentityProviderCreated: AuditLogWorkloadIdentityProviderCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider.updated")
+    val workloadIdentityProviderUpdated: AuditLogWorkloadIdentityProviderUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider.deleted")
+    val workloadIdentityProviderDeleted: AuditLogWorkloadIdentityProviderDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_mapping.created")
+    val workloadIdentityProviderMappingCreated: AuditLogWorkloadIdentityProviderMappingCreated? =
+        null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_mapping.updated")
+    val workloadIdentityProviderMappingUpdated: AuditLogWorkloadIdentityProviderMappingUpdated? =
+        null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("workload_identity_provider_mapping.deleted")
+    val workloadIdentityProviderMappingDeleted: AuditLogWorkloadIdentityProviderMappingDeleted? =
+        null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user.added")
+    val userAdded: AuditLogUserAdded? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user.updated")
+    val userUpdated: AuditLogUserUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user.deleted")
+    val userDeleted: AuditLogUserDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate.created")
+    val certificateCreated: AuditLogCertificateCreated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate.updated")
+    val certificateUpdated: AuditLogCertificateUpdated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificate.deleted")
+    val certificateDeleted: AuditLogCertificateDeleted? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificates.activated")
+    val certificatesActivated: AuditLogCertificatesActivated? = null,
+    /** The details for events with this `type`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("certificates.deactivated")
+    val certificatesDeactivated: AuditLogCertificatesDeactivated? = null,
 )
 
-/**
- * The actor who performed the audit logged action.
- */
+/** The actor who performed the audit logged action. */
 data class AuditLogActor(
-    /**
-     * The type of actor. Is either `session` or `api_key`.
-     */
+    /** The type of actor. Is either `session` or `api_key`. */
     val type: AuditLogActorTypeEnum? = null,
-    /**
-     * The session in which the audit logged action was performed.
-     */
+    /** The session in which the audit logged action was performed. */
     val session: AuditLogActorSession? = null,
-    /**
-     * The API Key used to perform the audit logged action.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: AuditLogActorApiKey? = null
+    /** The API Key used to perform the audit logged action. */
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key")
+    val apiKey: AuditLogActorApiKey? = null,
 )
 
-/**
- * The API Key used to perform the audit logged action.
- */
+/** The API Key used to perform the audit logged action. */
 data class AuditLogActorApiKey(
-    /**
-     * The tracking id of the API key.
-     */
+    /** The tracking id of the API key. */
     val id: String? = null,
-    /**
-     * The type of API key. Can be either `user` or `service_account`.
-     */
+    /** The type of API key. Can be either `user` or `service_account`. */
     val type: AuditLogActorApiKeyTypeEnum? = null,
-    /**
-     * The user who performed the audit logged action.
-     */
+    /** The user who performed the audit logged action. */
     val user: AuditLogActorUser? = null,
-    /**
-     * The service account that performed the audit logged action.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("service_account") val serviceAccount: AuditLogActorServiceAccount? = null
+    /** The service account that performed the audit logged action. */
+    @com.fasterxml.jackson.annotation.JsonProperty("service_account")
+    val serviceAccount: AuditLogActorServiceAccount? = null,
 )
 
-/**
- * The service account that performed the audit logged action.
- */
+/** The service account that performed the audit logged action. */
 data class AuditLogActorServiceAccount(
-    /**
-     * The service account id.
-     */
+    /** The service account id. */
     val id: String? = null
 )
 
-/**
- * The session in which the audit logged action was performed.
- */
+/** The session in which the audit logged action was performed. */
 data class AuditLogActorSession(
-    /**
-     * The user who performed the audit logged action.
-     */
+    /** The user who performed the audit logged action. */
     val user: AuditLogActorUser? = null,
-    /**
-     * The IP address from which the action was performed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_address") val ipAddress: String? = null
+    /** The IP address from which the action was performed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_address") val ipAddress: String? = null,
 )
 
-/**
- * The user who performed the audit logged action.
- */
+/** The user who performed the audit logged action. */
 data class AuditLogActorUser(
-    /**
-     * The user id.
-     */
+    /** The user id. */
     val id: String? = null,
-    /**
-     * The user email.
-     */
-    val email: String? = null
+    /** The user email. */
+    val email: String? = null,
 )
 
-/**
- * Typed representation of the `ListAuditLogsResponse` API schema.
- */
+/** Typed representation of the `ListAuditLogsResponse` API schema. */
 data class ListAuditLogsResponse(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListAuditLogsResponseObjectEnum,
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ListAuditLogsResponseObjectEnum,
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<AuditLog>,
-    /**
-     * Required `boolean` value serialized in the `has_more` wire field.
-     */
+    /** Required `boolean` value serialized in the `has_more` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Optional `string` value serialized in the `first_id` wire field.
-     */
+    /** Optional `string` value serialized in the `first_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /**
-     * Optional `string` value serialized in the `last_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+    /** Optional `string` value serialized in the `last_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
 )
 
-/**
- * Typed representation of the `Provider` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownProvider::class)
+/** Typed representation of the `Provider` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownProvider::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AwsExternalStorageProviderResponse::class, name = "aws"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AzureExternalStorageProviderResponse::class, name = "azure"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GcpExternalStorageProviderResponse::class, name = "gcp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = OciExternalStorageProviderResponse::class, name = "oci")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AwsExternalStorageProviderResponse::class,
+        name = "aws",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = AzureExternalStorageProviderResponse::class,
+        name = "azure",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GcpExternalStorageProviderResponse::class,
+        name = "gcp",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = OciExternalStorageProviderResponse::class,
+        name = "oci",
+    ),
 )
 sealed interface Provider
 
 /** A [Provider] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownProvider @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownProvider
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : Provider {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }

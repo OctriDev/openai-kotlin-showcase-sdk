@@ -3,35 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `InputMessageResource` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `InputMessageResource` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class InputMessageResource(
-    /**
-     * The type of the message input. Always set to `message`.
-     */
+    /** The type of the message input. Always set to `message`. */
     val type: InputMessageTypeEnum,
-    /**
-     * The role of the message input. One of `user`, `system`, or `developer`.
-     */
+    /** The role of the message input. One of `user`, `system`, or `developer`. */
     val role: InputMessageRoleEnum,
-    /**
-     * A list of one or many input items to the model, containing different content types.
-     */
+    /** A list of one or many input items to the model, containing different content types. */
     val content: InputMessageContentList,
-    /**
-     * The unique ID of the message input.
-     */
+    /** The unique ID of the message input. */
     val id: String,
     /**
-     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of item. One of `in_progress`, `completed`, or `incomplete`. Populated when items
+     * are returned via API.
      */
-    val status: InputMessageStatusEnum? = null
+    val status: InputMessageStatusEnum? = null,
 ) : ItemResource
 
 /**
- * Text, image, or file inputs to the model, used to generate a response. Learn more: - Text inputs and outputs - Image inputs - File inputs - Conversation state - Function calling
+ * Text, image, or file inputs to the model, used to generate a response. Learn more: - Text inputs
+ * and outputs - Image inputs - File inputs - Conversation state - Function calling
  */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = InputParam.Deserializer::class)
 sealed interface InputParam {
@@ -44,17 +41,47 @@ sealed interface InputParam {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                node.isTextual -> StringInputParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<String>() {}))
-                node.isArray -> ListInputParam(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<List<InputItem>>() {}))
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, InputParam::class.java, "no InputParam branch accepts this payload")
+                node.isTextual ->
+                    StringInputParam(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<String>() {},
+                        )
+                    )
+                node.isArray ->
+                    ListInputParam(
+                        mapper.convertValue(
+                            node,
+                            object :
+                                com.fasterxml.jackson.core.type.TypeReference<List<InputItem>>() {},
+                        )
+                    )
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        InputParam::class.java,
+                        "no InputParam branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class StringInputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) : InputParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class StringInputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) :
+    InputParam
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ListInputParam(@get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputItem>) : InputParam
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ListInputParam(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: List<InputItem>
+) : InputParam

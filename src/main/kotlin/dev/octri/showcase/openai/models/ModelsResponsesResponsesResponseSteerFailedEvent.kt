@@ -4,110 +4,114 @@
 package dev.octri.showcase.openai.models
 
 /**
- * Emitted when steering input is rejected or cannot be committed to a successor response. Returns the original, uncommitted input so the client can carry it into `response.create` when appropriate. Invalid input must be corrected before retrying. Failures after acceptance include the same steering ID. Failures before an ID is allocated omit `steer.id`. A lost connection or missing acknowledgement leaves the outcome unknown; it is not proof that the input was rejected.
+ * Emitted when steering input is rejected or cannot be committed to a successor response. Returns
+ * the original, uncommitted input so the client can carry it into `response.create` when
+ * appropriate. Invalid input must be corrected before retrying. Failures after acceptance include
+ * the same steering ID. Failures before an ID is allocated omit `steer.id`. A lost connection or
+ * missing acknowledgement leaves the outcome unknown; it is not proof that the input was rejected.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseSteerFailedEvent(
-    /**
-     * The event discriminator. Always `response.steer.failed`.
-     */
+    /** The event discriminator. Always `response.steer.failed`. */
     val type: ResponseSteerFailedEventTypeEnum,
-    /**
-     * The sequence number for this event.
-     */
+    /** The sequence number for this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The steering submission that could not be committed.
-     */
+    /** The steering submission that could not be committed. */
     val steer: ResponseSteerFailedEventSteer,
-    /**
-     * Information about why the input could not be committed.
-     */
+    /** Information about why the input could not be committed. */
     val error: ResponseSteerFailedEventError,
     /**
-     * The WebSocket lane that emitted this event, when the target response is available and its `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event, when the target response is available and its
+     * `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
 ) : ResponsesServerEvent
 
-/**
- * The steering submission that remains queued.
- */
+/** The steering submission that remains queued. */
 data class ResponseSteerPendingEventSteer(
-    /**
-     * The ID assigned to the steering submission.
-     */
+    /** The ID assigned to the steering submission. */
     val id: String,
-    /**
-     * The ID of the response being steered.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id") val previousResponseId: String
+    /** The ID of the response being steered. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_response_id")
+    val previousResponseId: String,
 )
 
 /**
- * Emitted when accepted steering input remains queued after the target response completes. The server still owns the input. Do not resend it. The successor's `response.created` event is the commit point. When `reason` is `waiting_for_required_input`, this event follows `response.completed` while the response waits for the tool results or approval decisions identified by `required_input`. Copy those stubs, fill their result fields using the ordinary `response.create` input…
+ * Emitted when accepted steering input remains queued after the target response completes. The
+ * server still owns the input. Do not resend it. The successor's `response.created` event is the
+ * commit point. When `reason` is `waiting_for_required_input`, this event follows
+ * `response.completed` while the response waits for the tool results or approval decisions
+ * identified by `required_input`. Copy those stubs, fill their result fields using the ordinary
+ * `response.create` input…
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseSteerPendingEvent(
-    /**
-     * The event discriminator. Always `response.steer.pending`.
-     */
+    /** The event discriminator. Always `response.steer.pending`. */
     val type: ResponseSteerPendingEventTypeEnum,
-    /**
-     * The sequence number for this event.
-     */
+    /** The sequence number for this event. */
     @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long,
-    /**
-     * The steering submission that remains queued.
-     */
+    /** The steering submission that remains queued. */
     val steer: ResponseSteerPendingEventSteer,
     /**
-     * An extensible enum describing why accepted steering input is still queued. Clients should handle unknown values because additional reasons may be introduced. Known values include: - `waiting_for_required_input`: The response is waiting for the tool results or approval decisions identified by `required_input`.
+     * An extensible enum describing why accepted steering input is still queued. Clients should
+     * handle unknown values because additional reasons may be introduced. Known values include: -
+     * `waiting_for_required_input`: The response is waiting for the tool results or approval
+     * decisions identified by `required_input`.
      */
     val reason: ResponseSteerPendingReason,
     /**
-     * Input stubs identifying outstanding client-owned tool results or approval decisions. Each stub contains identifying fields only; the client supplies the result before including it in `response.create`.
+     * Input stubs identifying outstanding client-owned tool results or approval decisions. Each
+     * stub contains identifying fields only; the client supplies the result before including it in
+     * `response.create`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_input") val requiredInput: List<ResponseSteerRequiredInput>,
+    @com.fasterxml.jackson.annotation.JsonProperty("required_input")
+    val requiredInput: List<ResponseSteerRequiredInput>,
     /**
-     * The WebSocket lane that emitted this event. This field is present when the target response's `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the target response's
+     * `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
 ) : ResponsesServerEvent
 
-/**
- * Typed representation of the `ResponsesWebSocketStreamEvent` API schema.
- */
+/** Typed representation of the `ResponsesWebSocketStreamEvent` API schema. */
 data class ResponsesWebSocketStreamEvent(
     /**
-     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 )
 
-/**
- * Emitted when an error occurs while processing a Responses WebSocket request.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Emitted when an error occurs while processing a Responses WebSocket request. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class ResponseWsError(
-    /**
-     * The type of the event. Always `error`.
-     */
+    /** The type of the event. Always `error`. */
     val type: ResponseWsErrorTypeEnum,
-    /**
-     * Details about the error.
-     */
+    /** Details about the error. */
     val error: ErrorPayload,
-    /**
-     * The HTTP status code associated with a WebSocket protocol error.
-     */
+    /** The HTTP status code associated with a WebSocket protocol error. */
     val status: Long? = null,
+    /** The sequence number of an error emitted by the response stream. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number")
+    val sequenceNumber: Long? = null,
     /**
-     * The sequence number of an error emitted by the response stream.
+     * The WebSocket lane that emitted this event. This field is present when the originating
+     * `response.create` event supplied a `stream_id`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("sequence_number") val sequenceNumber: Long? = null,
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the originating `response.create` event supplied a `stream_id`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
 ) : ResponsesServerEvent

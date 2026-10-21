@@ -4,68 +4,94 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate, single channel (mono), and little-endian byte order.
+ * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input
+ * audio must be 16-bit PCM at a 24kHz sample rate, single channel (mono), and little-endian byte
+ * order.
  */
-class RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum && value == other.value
+class RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val PCM16 = RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum("pcm16")
-        @JvmField val G711_ULAW = RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum("g711_ulaw")
-        @JvmField val G711_ALAW = RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum("g711_alaw")
+        @JvmField
+        val G711_ULAW = RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum("g711_ulaw")
+        @JvmField
+        val G711_ALAW = RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum("g711_alaw")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranscriptionSessionCreateRequestInputAudioFormatEnum(value)
     }
 }
 
-/**
- * Type of turn detection. Only `server_vad` is currently supported for transcription sessions.
- */
-class RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum && value == other.value
+/** Type of turn detection. Only `server_vad` is currently supported for transcription sessions. */
+class RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val SERVER_VAD = RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum("server_vad")
+        @JvmField
+        val SERVER_VAD =
+            RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum("server_vad")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranscriptionSessionCreateRequestTurnDetectionTypeEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `include[]` wire field.
- */
-class RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum && value == other.value
+/** Required enumerated value serialized in the `include[]` wire field. */
+class RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val ITEM_INPUT_AUDIO_TRANSCRIPTION_LOGPROBS = RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum("item.input_audio_transcription.logprobs")
+        @JvmField
+        val ITEM_INPUT_AUDIO_TRANSCRIPTION_LOGPROBS =
+            RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum(
+                "item.input_audio_transcription.logprobs"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranscriptionSessionCreateRequestGAIncludeItemEnum(value)
     }
 }
 
-/**
- * The type of session to create. Always `transcription` for transcription sessions.
- */
-enum class RealtimeTranscriptionSessionCreateRequestGATypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of session to create. Always `transcription` for transcription sessions. */
+enum class RealtimeTranscriptionSessionCreateRequestGATypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     TRANSCRIPTION("transcription");
 
     override fun toString() = value
@@ -73,19 +99,21 @@ enum class RealtimeTranscriptionSessionCreateRequestGATypeEnum(@com.fasterxml.ja
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Required enumerated value serialized in the `modalities[]` wire field.
- */
-class RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum && value == other.value
+/** Required enumerated value serialized in the `modalities[]` wire field. */
+class RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -93,34 +121,46 @@ class RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum private const
         @JvmField val TEXT = RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum("text")
         @JvmField val AUDIO = RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum("audio")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranscriptionSessionCreateResponseModalitiesItemEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `include[]` wire field.
- */
-class RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum && value == other.value
+/** Required enumerated value serialized in the `include[]` wire field. */
+class RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val ITEM_INPUT_AUDIO_TRANSCRIPTION_LOGPROBS = RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum("item.input_audio_transcription.logprobs")
+        @JvmField
+        val ITEM_INPUT_AUDIO_TRANSCRIPTION_LOGPROBS =
+            RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum(
+                "item.input_audio_transcription.logprobs"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranscriptionSessionCreateResponseGAIncludeItemEnum(value)
     }
 }
 
-/**
- * The type of session. Always `transcription` for transcription sessions.
- */
-enum class RealtimeTranscriptionSessionCreateResponseGATypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of session. Always `transcription` for transcription sessions. */
+enum class RealtimeTranscriptionSessionCreateResponseGATypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     TRANSCRIPTION("transcription");
 
     override fun toString() = value
@@ -128,15 +168,16 @@ enum class RealtimeTranscriptionSessionCreateResponseGATypeEnum(@com.fasterxml.j
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.input_audio_buffer.append`.
- */
-enum class RealtimeTranslationClientEventInputAudioBufferAppendTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.input_audio_buffer.append`. */
+enum class RealtimeTranslationClientEventInputAudioBufferAppendTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_INPUT_AUDIO_BUFFER_APPEND("session.input_audio_buffer.append");
 
     override fun toString() = value
@@ -144,15 +185,16 @@ enum class RealtimeTranslationClientEventInputAudioBufferAppendTypeEnum(@com.fas
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.close`.
- */
-enum class RealtimeTranslationClientEventSessionCloseTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.close`. */
+enum class RealtimeTranslationClientEventSessionCloseTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_CLOSE("session.close");
 
     override fun toString() = value
@@ -160,15 +202,16 @@ enum class RealtimeTranslationClientEventSessionCloseTypeEnum(@com.fasterxml.jac
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.update`.
- */
-enum class RealtimeTranslationClientEventSessionUpdateTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.update`. */
+enum class RealtimeTranslationClientEventSessionUpdateTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_UPDATE("session.update");
 
     override fun toString() = value
@@ -176,34 +219,46 @@ enum class RealtimeTranslationClientEventSessionUpdateTypeEnum(@com.fasterxml.ja
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * The anchor point for the client secret expiration, meaning that `seconds` will be added to the `created_at` time of the client secret to produce an expiration timestamp. Only `created_at` is currently supported.
+ * The anchor point for the client secret expiration, meaning that `seconds` will be added to the
+ * `created_at` time of the client secret to produce an expiration timestamp. Only `created_at` is
+ * currently supported.
  */
-class RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum && value == other.value
+class RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CREATED_AT = RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum("created_at")
+        @JvmField
+        val CREATED_AT =
+            RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum("created_at")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranslationClientSecretCreateRequestExpiresAfterAnchorEnum(value)
     }
 }
 
-/**
- * The event type, must be `session.closed`.
- */
-enum class RealtimeTranslationServerEventSessionClosedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.closed`. */
+enum class RealtimeTranslationServerEventSessionClosedTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_CLOSED("session.closed");
 
     override fun toString() = value
@@ -211,15 +266,16 @@ enum class RealtimeTranslationServerEventSessionClosedTypeEnum(@com.fasterxml.ja
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.created`.
- */
-enum class RealtimeTranslationServerEventSessionCreatedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.created`. */
+enum class RealtimeTranslationServerEventSessionCreatedTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_CREATED("session.created");
 
     override fun toString() = value
@@ -227,15 +283,16 @@ enum class RealtimeTranslationServerEventSessionCreatedTypeEnum(@com.fasterxml.j
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.input_transcript.delta`.
- */
-enum class RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.input_transcript.delta`. */
+enum class RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_INPUT_TRANSCRIPT_DELTA("session.input_transcript.delta");
 
     override fun toString() = value
@@ -243,34 +300,41 @@ enum class RealtimeTranslationServerEventSessionInputTranscriptDeltaTypeEnum(@co
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Audio encoding for `delta`.
- */
-class RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum && value == other.value
+/** Audio encoding for `delta`. */
+class RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val PCM16 = RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum("pcm16")
+        @JvmField
+        val PCM16 = RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum("pcm16")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeTranslationServerEventSessionOutputAudioDeltaFormatEnum(value)
     }
 }
 
-/**
- * The event type, must be `session.output_audio.delta`.
- */
-enum class RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.output_audio.delta`. */
+enum class RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_OUTPUT_AUDIO_DELTA("session.output_audio.delta");
 
     override fun toString() = value
@@ -278,15 +342,16 @@ enum class RealtimeTranslationServerEventSessionOutputAudioDeltaTypeEnum(@com.fa
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.output_transcript.delta`.
- */
-enum class RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.output_transcript.delta`. */
+enum class RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_OUTPUT_TRANSCRIPT_DELTA("session.output_transcript.delta");
 
     override fun toString() = value
@@ -294,15 +359,16 @@ enum class RealtimeTranslationServerEventSessionOutputTranscriptDeltaTypeEnum(@c
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type, must be `session.updated`.
- */
-enum class RealtimeTranslationServerEventSessionUpdatedTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type, must be `session.updated`. */
+enum class RealtimeTranslationServerEventSessionUpdatedTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SESSION_UPDATED("session.updated");
 
     override fun toString() = value
@@ -310,38 +376,46 @@ enum class RealtimeTranslationServerEventSessionUpdatedTypeEnum(@com.fasterxml.j
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The session type. Always `translation` for Realtime translation sessions.
- */
-class RealtimeTranslationSessionTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTranslationSessionTypeEnum && value == other.value
+/** The session type. Always `translation` for Realtime translation sessions. */
+class RealtimeTranslationSessionTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTranslationSessionTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val TRANSLATION = RealtimeTranslationSessionTypeEnum("translation")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTranslationSessionTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeTranslationSessionTypeEnum(value)
     }
 }
 
 /**
- * The truncation strategy to use for the session. `auto` is the default truncation strategy. `disabled` will disable truncation and emit errors when the conversation exceeds the input token limit.
+ * The truncation strategy to use for the session. `auto` is the default truncation strategy.
+ * `disabled` will disable truncation and emit errors when the conversation exceeds the input token
+ * limit.
  */
-class RealtimeTruncationVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTruncationVariant0Enum && value == other.value
+class RealtimeTruncationVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTruncationVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -349,34 +423,40 @@ class RealtimeTruncationVariant0Enum private constructor(
         @JvmField val AUTO = RealtimeTruncationVariant0Enum("auto")
         @JvmField val DISABLED = RealtimeTruncationVariant0Enum("disabled")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTruncationVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeTruncationVariant0Enum(value)
     }
 }
 
-/**
- * Use retention ratio truncation.
- */
-class RealtimeTruncationVariant1TypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTruncationVariant1TypeEnum && value == other.value
+/** Use retention ratio truncation. */
+class RealtimeTruncationVariant1TypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTruncationVariant1TypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RETENTION_RATIO = RealtimeTruncationVariant1TypeEnum("retention_ratio")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTruncationVariant1TypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeTruncationVariant1TypeEnum(value)
     }
 }
 
-/**
- * Type of turn detection, `server_vad` to turn on simple Server VAD.
- */
-enum class RealtimeTurnDetectionVariant0TypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Type of turn detection, `server_vad` to turn on simple Server VAD. */
+enum class RealtimeTurnDetectionVariant0TypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SERVER_VAD("server_vad");
 
     override fun toString() = value
@@ -384,19 +464,25 @@ enum class RealtimeTurnDetectionVariant0TypeEnum(@com.fasterxml.jackson.annotati
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Used only for `semantic_vad` mode. The eagerness of the model to respond. `low` will wait longer for the user to continue speaking, `high` will respond more quickly. `auto` is the default and is equivalent to `medium`. `low`, `medium`, and `high` have max timeouts of 8s, 4s, and 2s respectively.
+ * Used only for `semantic_vad` mode. The eagerness of the model to respond. `low` will wait longer
+ * for the user to continue speaking, `high` will respond more quickly. `auto` is the default and is
+ * equivalent to `medium`. `low`, `medium`, and `high` have max timeouts of 8s, 4s, and 2s
+ * respectively.
  */
-class RealtimeTurnDetectionVariant1EagernessEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeTurnDetectionVariant1EagernessEnum && value == other.value
+class RealtimeTurnDetectionVariant1EagernessEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeTurnDetectionVariant1EagernessEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -406,15 +492,18 @@ class RealtimeTurnDetectionVariant1EagernessEnum private constructor(
         @JvmField val HIGH = RealtimeTurnDetectionVariant1EagernessEnum("high")
         @JvmField val AUTO = RealtimeTurnDetectionVariant1EagernessEnum("auto")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeTurnDetectionVariant1EagernessEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeTurnDetectionVariant1EagernessEnum(value)
     }
 }
 
-/**
- * Type of turn detection, `semantic_vad` to turn on Semantic VAD.
- */
-enum class RealtimeTurnDetectionVariant1TypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Type of turn detection, `semantic_vad` to turn on Semantic VAD. */
+enum class RealtimeTurnDetectionVariant1TypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     SEMANTIC_VAD("semantic_vad");
 
     override fun toString() = value
@@ -422,19 +511,25 @@ enum class RealtimeTurnDetectionVariant1TypeEnum(@com.fasterxml.jackson.annotati
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Controls which reasoning items are rendered back to the model on later turns. If omitted or set to `auto`, the model determines the context mode. The `gpt-5.6` model family defaults to `all_turns`; earlier models default to `current_turn`. When returned on a response, this is the effective reasoning context mode used for the response.
+ * Controls which reasoning items are rendered back to the model on later turns. If omitted or set
+ * to `auto`, the model determines the context mode. The `gpt-5.6` model family defaults to
+ * `all_turns`; earlier models default to `current_turn`. When returned on a response, this is the
+ * effective reasoning context mode used for the response.
  */
-class ReasoningContextVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningContextVariant0Enum && value == other.value
+class ReasoningContextVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningContextVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -443,19 +538,26 @@ class ReasoningContextVariant0Enum private constructor(
         @JvmField val CURRENT_TURN = ReasoningContextVariant0Enum("current_turn")
         @JvmField val ALL_TURNS = ReasoningContextVariant0Enum("all_turns")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningContextVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningContextVariant0Enum(value)
     }
 }
 
 /**
- * **Deprecated:** use `summary` instead. A summary of the reasoning performed by the model. This can be useful for debugging and understanding the model's reasoning process. One of `auto`, `concise`, or `detailed`.
+ * **Deprecated:** use `summary` instead. A summary of the reasoning performed by the model. This
+ * can be useful for debugging and understanding the model's reasoning process. One of `auto`,
+ * `concise`, or `detailed`.
  */
-class ReasoningGenerateSummaryVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningGenerateSummaryVariant0Enum && value == other.value
+class ReasoningGenerateSummaryVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningGenerateSummaryVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -464,19 +566,26 @@ class ReasoningGenerateSummaryVariant0Enum private constructor(
         @JvmField val CONCISE = ReasoningGenerateSummaryVariant0Enum("concise")
         @JvmField val DETAILED = ReasoningGenerateSummaryVariant0Enum("detailed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningGenerateSummaryVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningGenerateSummaryVariant0Enum(value)
     }
 }
 
 /**
- * A summary of the reasoning performed by the model. This can be useful for debugging and understanding the model's reasoning process. One of `auto`, `concise`, or `detailed`. `concise` is supported for `computer-use-preview` models and all reasoning models after `gpt-5`.
+ * A summary of the reasoning performed by the model. This can be useful for debugging and
+ * understanding the model's reasoning process. One of `auto`, `concise`, or `detailed`. `concise`
+ * is supported for `computer-use-preview` models and all reasoning models after `gpt-5`.
  */
-class ReasoningSummaryVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningSummaryVariant0Enum && value == other.value
+class ReasoningSummaryVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningSummaryVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -485,19 +594,27 @@ class ReasoningSummaryVariant0Enum private constructor(
         @JvmField val CONCISE = ReasoningSummaryVariant0Enum("concise")
         @JvmField val DETAILED = ReasoningSummaryVariant0Enum("detailed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningSummaryVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningSummaryVariant0Enum(value)
     }
 }
 
 /**
- * Constrains effort on reasoning for reasoning models. Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response. Not all reasoning models support every value. See the reasoning guide for model-specific support.
+ * Constrains effort on reasoning for reasoning models. Currently supported values are `none`,
+ * `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in
+ * faster responses and fewer tokens used on reasoning in a response. Not all reasoning models
+ * support every value. See the reasoning guide for model-specific support.
  */
-class ReasoningEffortVariant0Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningEffortVariant0Enum && value == other.value
+class ReasoningEffortVariant0Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningEffortVariant0Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -510,19 +627,22 @@ class ReasoningEffortVariant0Enum private constructor(
         @JvmField val XHIGH = ReasoningEffortVariant0Enum("xhigh")
         @JvmField val MAX = ReasoningEffortVariant0Enum("max")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningEffortVariant0Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningEffortVariant0Enum(value)
     }
 }
 
-/**
- * The amount of reasoning effort the model should use.
- */
-class ReasoningEffortParam private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningEffortParam && value == other.value
+/** The amount of reasoning effort the model should use. */
+class ReasoningEffortParam
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningEffortParam && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -535,19 +655,22 @@ class ReasoningEffortParam private constructor(
         @JvmField val XHIGH = ReasoningEffortParam("xhigh")
         @JvmField val MAX = ReasoningEffortParam("max")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningEffortParam(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningEffortParam(value)
     }
 }
 
-/**
- * The amount of reasoning effort used by an agent.
- */
-class ReasoningEffortResource private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningEffortResource && value == other.value
+/** The amount of reasoning effort used by an agent. */
+class ReasoningEffortResource
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningEffortResource && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -560,19 +683,25 @@ class ReasoningEffortResource private constructor(
         @JvmField val XHIGH = ReasoningEffortResource("xhigh")
         @JvmField val MAX = ReasoningEffortResource("max")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningEffortResource(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningEffortResource(value)
     }
 }
 
 /**
- * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+ * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items
+ * are returned via API.
  */
-class ReasoningItemStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReasoningItemStatusEnum && value == other.value
+class ReasoningItemStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReasoningItemStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -581,14 +710,15 @@ class ReasoningItemStatusEnum private constructor(
         @JvmField val COMPLETED = ReasoningItemStatusEnum("completed")
         @JvmField val INCOMPLETE = ReasoningItemStatusEnum("incomplete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReasoningItemStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReasoningItemStatusEnum(value)
     }
 }
 
-/**
- * The type of the object. Always `reasoning`.
- */
+/** The type of the object. Always `reasoning`. */
 enum class ReasoningItemTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     REASONING("reasoning");
 
@@ -597,7 +727,8 @@ enum class ReasoningItemTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

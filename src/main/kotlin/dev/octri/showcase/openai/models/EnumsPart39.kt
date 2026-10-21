@@ -3,109 +3,132 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * The event type, must be `response.cancel`.
- */
-class RealtimeBetaClientEventResponseCancelTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaClientEventResponseCancelTypeEnum && value == other.value
+/** The event type, must be `response.cancel`. */
+class RealtimeBetaClientEventResponseCancelTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaClientEventResponseCancelTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val RESPONSE_CANCEL = RealtimeBetaClientEventResponseCancelTypeEnum("response.cancel")
+        @JvmField
+        val RESPONSE_CANCEL = RealtimeBetaClientEventResponseCancelTypeEnum("response.cancel")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaClientEventResponseCancelTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaClientEventResponseCancelTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `response.create`.
- */
-class RealtimeBetaClientEventResponseCreateTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaClientEventResponseCreateTypeEnum && value == other.value
+/** The event type, must be `response.create`. */
+class RealtimeBetaClientEventResponseCreateTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaClientEventResponseCreateTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val RESPONSE_CREATE = RealtimeBetaClientEventResponseCreateTypeEnum("response.create")
+        @JvmField
+        val RESPONSE_CREATE = RealtimeBetaClientEventResponseCreateTypeEnum("response.create")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaClientEventResponseCreateTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaClientEventResponseCreateTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `session.update`.
- */
-class RealtimeBetaClientEventSessionUpdateTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaClientEventSessionUpdateTypeEnum && value == other.value
+/** The event type, must be `session.update`. */
+class RealtimeBetaClientEventSessionUpdateTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaClientEventSessionUpdateTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val SESSION_UPDATE = RealtimeBetaClientEventSessionUpdateTypeEnum("session.update")
+        @JvmField
+        val SESSION_UPDATE = RealtimeBetaClientEventSessionUpdateTypeEnum("session.update")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaClientEventSessionUpdateTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaClientEventSessionUpdateTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `transcription_session.update`.
- */
-class RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum && value == other.value
+/** The event type, must be `transcription_session.update`. */
+class RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val TRANSCRIPTION_SESSION_UPDATE = RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum("transcription_session.update")
+        @JvmField
+        val TRANSCRIPTION_SESSION_UPDATE =
+            RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum(
+                "transcription_session.update"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaClientEventTranscriptionSessionUpdateTypeEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `max_output_tokens` wire field.
- */
-class RealtimeBetaResponseMaxOutputTokensVariant1Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseMaxOutputTokensVariant1Enum && value == other.value
+/** Optional enumerated value serialized in the `max_output_tokens` wire field. */
+class RealtimeBetaResponseMaxOutputTokensVariant1Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseMaxOutputTokensVariant1Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INF = RealtimeBetaResponseMaxOutputTokensVariant1Enum("inf")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseMaxOutputTokensVariant1Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseMaxOutputTokensVariant1Enum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `modalities[]` wire field.
- */
-class RealtimeBetaResponseModalitiesItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseModalitiesItemEnum && value == other.value
+/** Required enumerated value serialized in the `modalities[]` wire field. */
+class RealtimeBetaResponseModalitiesItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseModalitiesItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -113,38 +136,44 @@ class RealtimeBetaResponseModalitiesItemEnum private constructor(
         @JvmField val TEXT = RealtimeBetaResponseModalitiesItemEnum("text")
         @JvmField val AUDIO = RealtimeBetaResponseModalitiesItemEnum("audio")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseModalitiesItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseModalitiesItemEnum(value)
     }
 }
 
-/**
- * The object type, must be `realtime.response`.
- */
-class RealtimeBetaResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseObjectEnum && value == other.value
+/** The object type, must be `realtime.response`. */
+class RealtimeBetaResponseObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val REALTIME_RESPONSE = RealtimeBetaResponseObjectEnum("realtime.response")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseObjectEnum(value)
     }
 }
 
-/**
- * The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
- */
-class RealtimeBetaResponseOutputAudioFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseOutputAudioFormatEnum && value == other.value
+/** The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. */
+class RealtimeBetaResponseOutputAudioFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseOutputAudioFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -153,19 +182,25 @@ class RealtimeBetaResponseOutputAudioFormatEnum private constructor(
         @JvmField val G711_ULAW = RealtimeBetaResponseOutputAudioFormatEnum("g711_ulaw")
         @JvmField val G711_ALAW = RealtimeBetaResponseOutputAudioFormatEnum("g711_alaw")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseOutputAudioFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseOutputAudioFormatEnum(value)
     }
 }
 
 /**
- * The final status of the response (`completed`, `cancelled`, `failed`, or `incomplete`, `in_progress`).
+ * The final status of the response (`completed`, `cancelled`, `failed`, or `incomplete`,
+ * `in_progress`).
  */
-class RealtimeBetaResponseStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseStatusEnum && value == other.value
+class RealtimeBetaResponseStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -176,41 +211,57 @@ class RealtimeBetaResponseStatusEnum private constructor(
         @JvmField val INCOMPLETE = RealtimeBetaResponseStatusEnum("incomplete")
         @JvmField val IN_PROGRESS = RealtimeBetaResponseStatusEnum("in_progress")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseStatusEnum(value)
     }
 }
 
 /**
- * The reason the Response did not complete. For a `cancelled` Response, one of `turn_detected` (the server VAD detected a new start of speech) or `client_cancelled` (the client sent a cancel event). For an `incomplete` Response, one of `max_output_tokens` or `content_filter` (the server-side safety filter activated and cut off the response).
+ * The reason the Response did not complete. For a `cancelled` Response, one of `turn_detected` (the
+ * server VAD detected a new start of speech) or `client_cancelled` (the client sent a cancel
+ * event). For an `incomplete` Response, one of `max_output_tokens` or `content_filter` (the
+ * server-side safety filter activated and cut off the response).
  */
-class RealtimeBetaResponseStatusDetailsReasonEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseStatusDetailsReasonEnum && value == other.value
+class RealtimeBetaResponseStatusDetailsReasonEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseStatusDetailsReasonEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val TURN_DETECTED = RealtimeBetaResponseStatusDetailsReasonEnum("turn_detected")
-        @JvmField val CLIENT_CANCELLED = RealtimeBetaResponseStatusDetailsReasonEnum("client_cancelled")
-        @JvmField val MAX_OUTPUT_TOKENS = RealtimeBetaResponseStatusDetailsReasonEnum("max_output_tokens")
+        @JvmField
+        val CLIENT_CANCELLED = RealtimeBetaResponseStatusDetailsReasonEnum("client_cancelled")
+        @JvmField
+        val MAX_OUTPUT_TOKENS = RealtimeBetaResponseStatusDetailsReasonEnum("max_output_tokens")
         @JvmField val CONTENT_FILTER = RealtimeBetaResponseStatusDetailsReasonEnum("content_filter")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseStatusDetailsReasonEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseStatusDetailsReasonEnum(value)
     }
 }
 
 /**
- * The type of error that caused the response to fail, corresponding with the `status` field (`completed`, `cancelled`, `incomplete`, `failed`).
+ * The type of error that caused the response to fail, corresponding with the `status` field
+ * (`completed`, `cancelled`, `incomplete`, `failed`).
  */
-class RealtimeBetaResponseStatusDetailsTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseStatusDetailsTypeEnum && value == other.value
+class RealtimeBetaResponseStatusDetailsTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseStatusDetailsTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -220,19 +271,22 @@ class RealtimeBetaResponseStatusDetailsTypeEnum private constructor(
         @JvmField val FAILED = RealtimeBetaResponseStatusDetailsTypeEnum("failed")
         @JvmField val INCOMPLETE = RealtimeBetaResponseStatusDetailsTypeEnum("incomplete")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseStatusDetailsTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseStatusDetailsTypeEnum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `conversation` wire field.
- */
-class RealtimeBetaResponseCreateParamsConversationVariant1Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseCreateParamsConversationVariant1Enum && value == other.value
+/** Optional enumerated value serialized in the `conversation` wire field. */
+class RealtimeBetaResponseCreateParamsConversationVariant1Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseCreateParamsConversationVariant1Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -240,38 +294,46 @@ class RealtimeBetaResponseCreateParamsConversationVariant1Enum private construct
         @JvmField val AUTO = RealtimeBetaResponseCreateParamsConversationVariant1Enum("auto")
         @JvmField val NONE = RealtimeBetaResponseCreateParamsConversationVariant1Enum("none")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseCreateParamsConversationVariant1Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaResponseCreateParamsConversationVariant1Enum(value)
     }
 }
 
-/**
- * Optional enumerated value serialized in the `max_output_tokens` wire field.
- */
-class RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum && value == other.value
+/** Optional enumerated value serialized in the `max_output_tokens` wire field. */
+class RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INF = RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum("inf")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaResponseCreateParamsMaxOutputTokensVariant1Enum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `modalities[]` wire field.
- */
-class RealtimeBetaResponseCreateParamsModalitiesItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseCreateParamsModalitiesItemEnum && value == other.value
+/** Required enumerated value serialized in the `modalities[]` wire field. */
+class RealtimeBetaResponseCreateParamsModalitiesItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseCreateParamsModalitiesItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -279,19 +341,22 @@ class RealtimeBetaResponseCreateParamsModalitiesItemEnum private constructor(
         @JvmField val TEXT = RealtimeBetaResponseCreateParamsModalitiesItemEnum("text")
         @JvmField val AUDIO = RealtimeBetaResponseCreateParamsModalitiesItemEnum("audio")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseCreateParamsModalitiesItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseCreateParamsModalitiesItemEnum(value)
     }
 }
 
-/**
- * The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
- */
-class RealtimeBetaResponseCreateParamsOutputAudioFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseCreateParamsOutputAudioFormatEnum && value == other.value
+/** The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. */
+class RealtimeBetaResponseCreateParamsOutputAudioFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseCreateParamsOutputAudioFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -300,292 +365,393 @@ class RealtimeBetaResponseCreateParamsOutputAudioFormatEnum private constructor(
         @JvmField val G711_ULAW = RealtimeBetaResponseCreateParamsOutputAudioFormatEnum("g711_ulaw")
         @JvmField val G711_ALAW = RealtimeBetaResponseCreateParamsOutputAudioFormatEnum("g711_alaw")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseCreateParamsOutputAudioFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseCreateParamsOutputAudioFormatEnum(value)
     }
 }
 
-/**
- * The type of the tool, i.e. `function`.
- */
-class RealtimeBetaResponseCreateParamsToolsItemTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaResponseCreateParamsToolsItemTypeEnum && value == other.value
+/** The type of the tool, i.e. `function`. */
+class RealtimeBetaResponseCreateParamsToolsItemTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaResponseCreateParamsToolsItemTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val FUNCTION = RealtimeBetaResponseCreateParamsToolsItemTypeEnum("function")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaResponseCreateParamsToolsItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaResponseCreateParamsToolsItemTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.created`.
- */
-class RealtimeBetaServerEventConversationItemCreatedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemCreatedTypeEnum && value == other.value
+/** The event type, must be `conversation.item.created`. */
+class RealtimeBetaServerEventConversationItemCreatedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemCreatedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_CREATED = RealtimeBetaServerEventConversationItemCreatedTypeEnum("conversation.item.created")
+        @JvmField
+        val CONVERSATION_ITEM_CREATED =
+            RealtimeBetaServerEventConversationItemCreatedTypeEnum("conversation.item.created")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemCreatedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaServerEventConversationItemCreatedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.deleted`.
- */
-class RealtimeBetaServerEventConversationItemDeletedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemDeletedTypeEnum && value == other.value
+/** The event type, must be `conversation.item.deleted`. */
+class RealtimeBetaServerEventConversationItemDeletedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemDeletedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_DELETED = RealtimeBetaServerEventConversationItemDeletedTypeEnum("conversation.item.deleted")
+        @JvmField
+        val CONVERSATION_ITEM_DELETED =
+            RealtimeBetaServerEventConversationItemDeletedTypeEnum("conversation.item.deleted")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemDeletedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaServerEventConversationItemDeletedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.input_audio_transcription.completed`.
- */
-class RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8 private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8 && value == other.value
+/** The event type, must be `conversation.item.input_audio_transcription.completed`. */
+class RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8 &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_COMPLETED = RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8("conversation.item.input_audio_transcription.completed")
+        @JvmField
+        val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_COMPLETED =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8(
+                "conversation.item.input_audio_transcription.completed"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioX6865bb29f8(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.input_audio_transcription.delta`.
- */
-class RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea && value == other.value
+/** The event type, must be `conversation.item.input_audio_transcription.delta`. */
+class RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_DELTA = RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea("conversation.item.input_audio_transcription.delta")
+        @JvmField
+        val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_DELTA =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea(
+                "conversation.item.input_audio_transcription.delta"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioX443540eeea(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.input_audio_transcription.failed`.
- */
-class RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239 private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239 && value == other.value
+/** The event type, must be `conversation.item.input_audio_transcription.failed`. */
+class RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239 &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_FAILED = RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239("conversation.item.input_audio_transcription.failed")
+        @JvmField
+        val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_FAILED =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239(
+                "conversation.item.input_audio_transcription.failed"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioX42d925f239(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.input_audio_transcription.segment`.
- */
-class RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659 private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659 && value == other.value
+/** The event type, must be `conversation.item.input_audio_transcription.segment`. */
+class RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659 &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_SEGMENT = RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659("conversation.item.input_audio_transcription.segment")
+        @JvmField
+        val CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_SEGMENT =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659(
+                "conversation.item.input_audio_transcription.segment"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventConversationItemInputAudioTranscriptioXbdf2905659(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.retrieved`.
- */
-class RealtimeBetaServerEventConversationItemRetrievedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemRetrievedTypeEnum && value == other.value
+/** The event type, must be `conversation.item.retrieved`. */
+class RealtimeBetaServerEventConversationItemRetrievedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemRetrievedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_RETRIEVED = RealtimeBetaServerEventConversationItemRetrievedTypeEnum("conversation.item.retrieved")
+        @JvmField
+        val CONVERSATION_ITEM_RETRIEVED =
+            RealtimeBetaServerEventConversationItemRetrievedTypeEnum("conversation.item.retrieved")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemRetrievedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventConversationItemRetrievedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `conversation.item.truncated`.
- */
-class RealtimeBetaServerEventConversationItemTruncatedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventConversationItemTruncatedTypeEnum && value == other.value
+/** The event type, must be `conversation.item.truncated`. */
+class RealtimeBetaServerEventConversationItemTruncatedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventConversationItemTruncatedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val CONVERSATION_ITEM_TRUNCATED = RealtimeBetaServerEventConversationItemTruncatedTypeEnum("conversation.item.truncated")
+        @JvmField
+        val CONVERSATION_ITEM_TRUNCATED =
+            RealtimeBetaServerEventConversationItemTruncatedTypeEnum("conversation.item.truncated")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventConversationItemTruncatedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventConversationItemTruncatedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `error`.
- */
-class RealtimeBetaServerEventErrorTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventErrorTypeEnum && value == other.value
+/** The event type, must be `error`. */
+class RealtimeBetaServerEventErrorTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventErrorTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ERROR = RealtimeBetaServerEventErrorTypeEnum("error")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventErrorTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaServerEventErrorTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `input_audio_buffer.cleared`.
- */
-class RealtimeBetaServerEventInputAudioBufferClearedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventInputAudioBufferClearedTypeEnum && value == other.value
+/** The event type, must be `input_audio_buffer.cleared`. */
+class RealtimeBetaServerEventInputAudioBufferClearedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventInputAudioBufferClearedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INPUT_AUDIO_BUFFER_CLEARED = RealtimeBetaServerEventInputAudioBufferClearedTypeEnum("input_audio_buffer.cleared")
+        @JvmField
+        val INPUT_AUDIO_BUFFER_CLEARED =
+            RealtimeBetaServerEventInputAudioBufferClearedTypeEnum("input_audio_buffer.cleared")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventInputAudioBufferClearedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaServerEventInputAudioBufferClearedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `input_audio_buffer.committed`.
- */
-class RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum && value == other.value
+/** The event type, must be `input_audio_buffer.committed`. */
+class RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INPUT_AUDIO_BUFFER_COMMITTED = RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum("input_audio_buffer.committed")
+        @JvmField
+        val INPUT_AUDIO_BUFFER_COMMITTED =
+            RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum("input_audio_buffer.committed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventInputAudioBufferCommittedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `input_audio_buffer.speech_started`.
- */
-class RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum && value == other.value
+/** The event type, must be `input_audio_buffer.speech_started`. */
+class RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INPUT_AUDIO_BUFFER_SPEECH_STARTED = RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum("input_audio_buffer.speech_started")
+        @JvmField
+        val INPUT_AUDIO_BUFFER_SPEECH_STARTED =
+            RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum(
+                "input_audio_buffer.speech_started"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventInputAudioBufferSpeechStartedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `input_audio_buffer.speech_stopped`.
- */
-class RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum && value == other.value
+/** The event type, must be `input_audio_buffer.speech_stopped`. */
+class RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INPUT_AUDIO_BUFFER_SPEECH_STOPPED = RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum("input_audio_buffer.speech_stopped")
+        @JvmField
+        val INPUT_AUDIO_BUFFER_SPEECH_STOPPED =
+            RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum(
+                "input_audio_buffer.speech_stopped"
+            )
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RealtimeBetaServerEventInputAudioBufferSpeechStoppedTypeEnum(value)
     }
 }
 
-/**
- * The event type, must be `mcp_list_tools.completed`.
- */
-class RealtimeBetaServerEventMCPListToolsCompletedTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RealtimeBetaServerEventMCPListToolsCompletedTypeEnum && value == other.value
+/** The event type, must be `mcp_list_tools.completed`. */
+class RealtimeBetaServerEventMCPListToolsCompletedTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RealtimeBetaServerEventMCPListToolsCompletedTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val MCP_LIST_TOOLS_COMPLETED = RealtimeBetaServerEventMCPListToolsCompletedTypeEnum("mcp_list_tools.completed")
+        @JvmField
+        val MCP_LIST_TOOLS_COMPLETED =
+            RealtimeBetaServerEventMCPListToolsCompletedTypeEnum("mcp_list_tools.completed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RealtimeBetaServerEventMCPListToolsCompletedTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RealtimeBetaServerEventMCPListToolsCompletedTypeEnum(value)
     }
 }

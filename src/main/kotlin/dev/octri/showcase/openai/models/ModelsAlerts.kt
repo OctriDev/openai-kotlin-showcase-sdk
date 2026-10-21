@@ -3,48 +3,32 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `SafetyAlertResource` API schema.
- */
+/** Typed representation of the `SafetyAlertResource` API schema. */
 data class SafetyAlertResource(
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SafetyAlertResourceObjectEnum,
-    /**
-     * Required `unixtime`-formatted value serialized in the `created_at` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SafetyAlertResourceObjectEnum,
+    /** Required `unixtime`-formatted value serialized in the `created_at` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Required `string` value serialized in the `request_id` wire field.
-     */
+    /** Required `string` value serialized in the `request_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("request_id") val requestId: String,
-    /**
-     * Required `string` value serialized in the `response_id` wire field.
-     */
+    /** Required `string` value serialized in the `response_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("response_id") val responseId: String,
-    /**
-     * Required `string` value serialized in the `model` wire field.
-     */
+    /** Required `string` value serialized in the `model` wire field. */
     val model: String,
     /**
-     * Whether block registration succeeded for this request. This does not confirm that response execution stopped.
+     * Whether block registration succeeded for this request. This does not confirm that response
+     * execution stopped.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("request_paused") val requestPaused: Boolean,
-    /**
-     * Required enumerated value serialized in the `error_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_type") val errorType: SafetyAlertErrorType,
-    /**
-     * Required `string` value serialized in the `reason` wire field.
-     */
+    /** Required enumerated value serialized in the `error_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_type")
+    val errorType: SafetyAlertErrorType,
+    /** Required `string` value serialized in the `reason` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("reason", required = true) val reason: String?,
-    /**
-     * Optional `string` value serialized in the `detailed_explanation` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("detailed_explanation") val detailedExplanation: String? = null
+    /** Optional `string` value serialized in the `detailed_explanation` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("detailed_explanation")
+    val detailedExplanation: String? = null,
 )

@@ -3,37 +3,87 @@
 
 package dev.octri.showcase.openai
 
-
 class FilesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists uploaded files, with optional filtering, sorting, and cursor-based pagination. Use `purpose` to filter the results, and use `after` with the last file ID from a page to retrieve the next page.
+     * Lists uploaded files, with optional filtering, sorting, and cursor-based pagination. Use
+     * `purpose` to filter the results, and use `after` with the last file ID from a page to
+     * retrieve the next page.
      *
      * Returns a list of files.
      */
-    fun list(purpose: String? = null, limit: Long? = null, order: ListFilesParameterEnum? = null, after: String? = null, options: RequestOptions? = null): ListFilesResponse {
-        return dev.octri.showcase.openai.methods.Files.listFiles(clientConfig, purpose, limit, order, after, options)
+    fun list(
+        purpose: String? = null,
+        limit: Long? = null,
+        order: ListFilesParameterEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ListFilesResponse {
+        return dev.octri.showcase.openai.methods.Files.listFiles(
+            clientConfig,
+            purpose,
+            limit,
+            order,
+            after,
+            options,
+        )
     }
 
     /**
-     * Lists uploaded files, with optional filtering, sorting, and cursor-based pagination. Use `purpose` to filter the results, and use `after` with the last file ID from a page to retrieve the next page.
+     * Lists uploaded files, with optional filtering, sorting, and cursor-based pagination. Use
+     * `purpose` to filter the results, and use `after` with the last file ID from a page to
+     * retrieve the next page.
      *
      * Returns a list of files.
      */
-    fun listPaginated(purpose: String? = null, limit: Long? = null, order: ListFilesParameterEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (OpenAIFile) -> Boolean) {
-        dev.octri.showcase.openai.methods.Files.listFilesPaginated(clientConfig, purpose, limit, order, after, options, yieldFn)
+    fun listPaginated(
+        purpose: String? = null,
+        limit: Long? = null,
+        order: ListFilesParameterEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (OpenAIFile) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Files.listFilesPaginated(
+            clientConfig,
+            purpose,
+            limit,
+            order,
+            after,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Uploads a file for use across supported API endpoints. Send the file and its `purpose` as multipart form data, and use `expires_after` when you want to set an expiration policy. File uploads are limited to 512 MB per file and 2.5 TB of storage per project.
+     * Uploads a file for use across supported API endpoints. Send the file and its `purpose` as
+     * multipart form data, and use `expires_after` when you want to set an expiration policy. File
+     * uploads are limited to 512 MB per file and 2.5 TB of storage per project.
      *
-     * Upload a file that can be used across various endpoints. Individual files can be up to 512 MB, and each project can store up to 2.5 TB of files in total. There is no organization-wide storage limit. Uploads to this endpoint are rate-limited to 1,000 requests per minute per authenticated user. - The Assistants API supports files up to 2 million tokens and of specific file types. See the Assistants Tools guide for details. - The Fine-tuning API only supports `.jsonl` files.…
+     * Upload a file that can be used across various endpoints. Individual files can be up to 512
+     * MB, and each project can store up to 2.5 TB of files in total. There is no organization-wide
+     * storage limit. Uploads to this endpoint are rate-limited to 1,000 requests per minute per
+     * authenticated user. - The Assistants API supports files up to 2 million tokens and of
+     * specific file types. See the Assistants Tools guide for details. - The Fine-tuning API only
+     * supports `.jsonl` files.…
      */
-    fun create(file: SdkClient.UploadFile, purpose: CreateFileRequestPurposeEnum, expiresAfter: FileExpirationAfter? = null, options: RequestOptions? = null): OpenAIFile {
-        return dev.octri.showcase.openai.methods.Files.createFile(clientConfig, file, purpose, expiresAfter, options)
+    fun create(
+        file: SdkClient.UploadFile,
+        purpose: CreateFileRequestPurposeEnum,
+        expiresAfter: FileExpirationAfter? = null,
+        options: RequestOptions? = null,
+    ): OpenAIFile {
+        return dev.octri.showcase.openai.methods.Files.createFile(
+            clientConfig,
+            file,
+            purpose,
+            expiresAfter,
+            options,
+        )
     }
 
     /**
-     * Deletes a file and removes it from all vector stores. Use `file_id` to identify the file to remove.
+     * Deletes a file and removes it from all vector stores. Use `file_id` to identify the file to
+     * remove.
      *
      * Delete a file and remove it from all vector stores.
      */
@@ -42,7 +92,8 @@ class FilesNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Retrieves metadata for a specific uploaded file. Use `file_id` to identify the file whose purpose, size, status, and timestamps you need.
+     * Retrieves metadata for a specific uploaded file. Use `file_id` to identify the file whose
+     * purpose, size, status, and timestamps you need.
      *
      * Returns information about a specific file.
      */
@@ -51,12 +102,12 @@ class FilesNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Retrieves the contents of a specific uploaded file. Use `file_id` to identify the file, and note that some file purposes or account permissions do not allow downloads.
+     * Retrieves the contents of a specific uploaded file. Use `file_id` to identify the file, and
+     * note that some file purposes or account permissions do not allow downloads.
      *
      * Returns a response containing the contents of the specified file.
      */
     fun download(fileId: String, options: RequestOptions? = null): ByteArray {
         return dev.octri.showcase.openai.methods.Files.downloadFile(clientConfig, fileId, options)
     }
-
 }

@@ -3,334 +3,255 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `BetaMultiAgentCall` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaMultiAgentCall` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaMultiAgentCall(
-    /**
-     * The type of the multi-agent call. Always `multi_agent_call`.
-     */
+    /** The type of the multi-agent call. Always `multi_agent_call`. */
     val type: BetaMultiAgentCallTypeEnum,
-    /**
-     * The unique ID of the multi-agent call item.
-     */
+    /** The unique ID of the multi-agent call item. */
     val id: String,
-    /**
-     * The unique ID linking this call to its output.
-     */
+    /** The unique ID linking this call to its output. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The multi-agent action to execute.
-     */
+    /** The multi-agent action to execute. */
     val action: BetaMultiAgentAction,
-    /**
-     * The JSON string of arguments generated for the action.
-     */
+    /** The JSON string of arguments generated for the action. */
     val arguments: String,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that produced this item. */
+    val agent: BetaAgentTag? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * Typed representation of the `BetaMultiAgentCallOutput` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaMultiAgentCallOutput` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaMultiAgentCallOutput(
-    /**
-     * The type of the multi-agent result. Always `multi_agent_call_output`.
-     */
+    /** The type of the multi-agent result. Always `multi_agent_call_output`. */
     val type: BetaMultiAgentCallOutputTypeEnum,
-    /**
-     * The unique ID of the multi-agent call output item.
-     */
+    /** The unique ID of the multi-agent call output item. */
     val id: String,
-    /**
-     * The unique ID of the multi-agent call.
-     */
+    /** The unique ID of the multi-agent call. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The multi-agent action that produced this result.
-     */
+    /** The multi-agent action that produced this result. */
     val action: BetaMultiAgentAction,
-    /**
-     * Text output returned by the multi-agent action.
-     */
+    /** Text output returned by the multi-agent action. */
     val output: List<BetaOutputTextContent>,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null
+    /** The agent that produced this item. */
+    val agent: BetaAgentTag? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * An output message from the model.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** An output message from the model. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaOutputMessage(
-    /**
-     * The unique ID of the output message.
-     */
+    /** The unique ID of the output message. */
     val id: String,
-    /**
-     * The type of the output message. Always `message`.
-     */
+    /** The type of the output message. Always `message`. */
     val type: BetaOutputMessageTypeEnum,
-    /**
-     * The role of the output message. Always `assistant`.
-     */
+    /** The role of the output message. Always `assistant`. */
     val role: BetaOutputMessageRoleEnum,
-    /**
-     * The content of the output message.
-     */
+    /** The content of the output message. */
     val content: List<BetaOutputMessageContent>,
     /**
-     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`. Populated when input items are returned via API.
+     * The status of the message input. One of `in_progress`, `completed`, or `incomplete`.
+     * Populated when input items are returned via API.
      */
     val status: BetaOutputMessageStatusEnum,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * Optional API value serialized in the `phase` wire field.
-     */
-    val phase: BetaMessagePhase? = null
+    /** Optional API value serialized in the `phase` wire field. */
+    val phase: BetaMessagePhase? = null,
 ) : BetaItem, BetaItemResource, BetaOutputItem
 
-/**
- * Typed representation of the `BetaProgram` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaProgram` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaProgram(
-    /**
-     * The type of the item. Always `program`.
-     */
+    /** The type of the item. Always `program`. */
     val type: BetaProgramTypeEnum,
-    /**
-     * The unique ID of the program item.
-     */
+    /** The unique ID of the program item. */
     val id: String,
-    /**
-     * The stable call ID of the program item.
-     */
+    /** The stable call ID of the program item. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The JavaScript source executed by programmatic tool calling.
-     */
+    /** The JavaScript source executed by programmatic tool calling. */
     val code: String,
-    /**
-     * Opaque program replay fingerprint that must be round-tripped.
-     */
+    /** Opaque program replay fingerprint that must be round-tripped. */
     val fingerprint: String,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaItemResource, BetaItemField, BetaOutputItem
-
-/**
- * Typed representation of the `BetaProgramOutput` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaProgramOutput(
-    /**
-     * The type of the item. Always `program_output`.
-     */
-    val type: BetaProgramOutputTypeEnum,
-    /**
-     * The unique ID of the program output item.
-     */
-    val id: String,
-    /**
-     * The call ID of the program item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
-    /**
-     * The result produced by the program item.
-     */
-    val result: String,
-    /**
-     * The terminal status of the program output item.
-     */
-    val status: BetaProgramOutputStatus,
-    /**
-     * The agent that produced this item.
-     */
-    val agent: BetaAgentTag? = null
-) : BetaItemResource, BetaItemField, BetaOutputItem
-
-/**
- * A description of the chain of thought used by a reasoning model while generating a response. Be sure to include these items in your `input` to the Responses API for subsequent turns of a conversation if you are manually managing context.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class BetaReasoningItem(
-    /**
-     * The type of the object. Always `reasoning`.
-     */
-    val type: BetaReasoningItemTypeEnum,
-    /**
-     * The unique identifier of the reasoning content.
-     */
-    val id: String,
-    /**
-     * Reasoning summary content.
-     */
-    val summary: List<BetaSummaryTextContent>,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * Optional `string` value serialized in the `encrypted_content` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content") val encryptedContent: String? = null,
-    /**
-     * Reasoning text content.
-     */
+) : BetaItemResource, BetaItemField, BetaOutputItem
+
+/** Typed representation of the `BetaProgramOutput` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaProgramOutput(
+    /** The type of the item. Always `program_output`. */
+    val type: BetaProgramOutputTypeEnum,
+    /** The unique ID of the program output item. */
+    val id: String,
+    /** The call ID of the program item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_id") val callId: String,
+    /** The result produced by the program item. */
+    val result: String,
+    /** The terminal status of the program output item. */
+    val status: BetaProgramOutputStatus,
+    /** The agent that produced this item. */
+    val agent: BetaAgentTag? = null,
+) : BetaItemResource, BetaItemField, BetaOutputItem
+
+/**
+ * A description of the chain of thought used by a reasoning model while generating a response. Be
+ * sure to include these items in your `input` to the Responses API for subsequent turns of a
+ * conversation if you are manually managing context.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class BetaReasoningItem(
+    /** The type of the object. Always `reasoning`. */
+    val type: BetaReasoningItemTypeEnum,
+    /** The unique identifier of the reasoning content. */
+    val id: String,
+    /** Reasoning summary content. */
+    val summary: List<BetaSummaryTextContent>,
+    /** The agent that produced this item. */
+    val agent: BetaAgentTag? = null,
+    /** Optional `string` value serialized in the `encrypted_content` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("encrypted_content")
+    val encryptedContent: String? = null,
+    /** Reasoning text content. */
     val content: List<BetaReasoningTextContent>? = null,
     /**
-     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API.
+     * The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when
+     * items are returned via API.
      */
-    val status: BetaReasoningItemStatusEnum? = null
+    val status: BetaReasoningItemStatusEnum? = null,
 ) : BetaItem, BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * The reasoning configuration applied by this update.
- */
+/** The reasoning configuration applied by this update. */
 data class BetaResponseConfigurationUpdateReasoning(
     /**
-     * The reasoning effort used for subsequent responses until another configuration update replaces it.
+     * The reasoning effort used for subsequent responses until another configuration update
+     * replaces it.
      */
     val effort: BetaReasoningEffort? = null
 )
 
 /**
- * A configuration update that applies to subsequent responses until it is replaced by another configuration update.
+ * A configuration update that applies to subsequent responses until it is replaced by another
+ * configuration update.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaResponseConfigurationUpdate(
-    /**
-     * The unique ID of the configuration update item.
-     */
+    /** The unique ID of the configuration update item. */
     val id: String,
-    /**
-     * The item type. Always `configuration_update`.
-     */
+    /** The item type. Always `configuration_update`. */
     val type: BetaResponseConfigurationUpdateTypeEnum,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * The reasoning configuration applied by this update.
-     */
-    val reasoning: BetaResponseConfigurationUpdateReasoning? = null
+    /** The reasoning configuration applied by this update. */
+    val reasoning: BetaResponseConfigurationUpdateReasoning? = null,
 ) : BetaItemResource
 
-/**
- * Typed representation of the `BetaToolSearchCall` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchCall` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchCall(
-    /**
-     * The type of the item. Always `tool_search_call`.
-     */
+    /** The type of the item. Always `tool_search_call`. */
     val type: BetaToolSearchCallTypeEnum,
-    /**
-     * The unique ID of the tool search call item.
-     */
+    /** The unique ID of the tool search call item. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `call_id` wire field.
-     */
+    /** Required `string` value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id", required = true) val callId: String?,
-    /**
-     * Whether tool search was executed by the server or by the client.
-     */
+    /** Whether tool search was executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType,
-    /**
-     * Arguments used for the tool search call.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true) val arguments: Any?,
-    /**
-     * The status of the tool search call item that was recorded.
-     */
+    /** Arguments used for the tool search call. */
+    @com.fasterxml.jackson.annotation.JsonProperty("arguments", required = true)
+    val arguments: Any?,
+    /** The status of the tool search call item that was recorded. */
     val status: BetaFunctionCallStatus,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * Typed representation of the `BetaToolSearchOutput` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `BetaToolSearchOutput` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaToolSearchOutput(
-    /**
-     * The type of the item. Always `tool_search_output`.
-     */
+    /** The type of the item. Always `tool_search_output`. */
     val type: BetaToolSearchOutputTypeEnum,
-    /**
-     * The unique ID of the tool search output item.
-     */
+    /** The unique ID of the tool search output item. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `call_id` wire field.
-     */
+    /** Required `string` value serialized in the `call_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("call_id", required = true) val callId: String?,
-    /**
-     * Whether tool search was executed by the server or by the client.
-     */
+    /** Whether tool search was executed by the server or by the client. */
     val execution: BetaToolSearchExecutionType,
-    /**
-     * The loaded tool definitions returned by tool search.
-     */
+    /** The loaded tool definitions returned by tool search. */
     val tools: List<BetaTool>,
-    /**
-     * The status of the tool search output item that was recorded.
-     */
+    /** The status of the tool search output item that was recorded. */
     val status: BetaFunctionCallOutputStatusEnum,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * The identifier of the actor that created the item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null
+    /** The identifier of the actor that created the item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by") val createdBy: String? = null,
 ) : BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * The results of a web search tool call. See the web search guide for more information.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** The results of a web search tool call. See the web search guide for more information. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaWebSearchToolCall(
-    /**
-     * The unique ID of the web search tool call.
-     */
+    /** The unique ID of the web search tool call. */
     val id: String,
-    /**
-     * The type of the web search tool call. Always `web_search_call`.
-     */
+    /** The type of the web search tool call. Always `web_search_call`. */
     val type: BetaWebSearchToolCallTypeEnum,
-    /**
-     * The status of the web search tool call.
-     */
+    /** The status of the web search tool call. */
     val status: BetaWebSearchCallStatus,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
     /**
-     * An object describing the specific action taken in this web search call. Includes details on how the model used the web (search, open_page, find_in_page).
+     * An object describing the specific action taken in this web search call. Includes details on
+     * how the model used the web (search, open_page, find_in_page).
      */
-    val action: BetaWebSearchToolCallAction? = null
+    val action: BetaWebSearchToolCallAction? = null,
 ) : BetaItem, BetaItemResource, BetaItemField, BetaOutputItem

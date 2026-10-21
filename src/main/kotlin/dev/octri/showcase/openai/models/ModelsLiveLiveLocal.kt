@@ -3,35 +3,26 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `LiveLocalEnvironmentParam` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `LiveLocalEnvironmentParam` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class LiveLocalEnvironmentParam(
-    /**
-     * Use a local computer environment.
-     */
+    /** Use a local computer environment. */
     val type: LiveLocalEnvironmentParamTypeEnum,
-    /**
-     * An optional list of skills.
-     */
-    val skills: List<LiveLocalSkillParam>? = null
+    /** An optional list of skills. */
+    val skills: List<LiveLocalSkillParam>? = null,
 ) : LiveHostedShellToolInputParamEnvironment
 
-/**
- * Typed representation of the `LiveLocalSkillParam` API schema.
- */
+/** Typed representation of the `LiveLocalSkillParam` API schema. */
 data class LiveLocalSkillParam(
-    /**
-     * The name of the skill.
-     */
+    /** The name of the skill. */
     val name: String,
-    /**
-     * The description of the skill.
-     */
+    /** The description of the skill. */
     val description: String,
-    /**
-     * The path to the directory containing the skill.
-     */
-    val path: String
+    /** The path to the directory containing the skill. */
+    val path: String,
 )

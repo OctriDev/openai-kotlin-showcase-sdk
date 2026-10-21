@@ -3,487 +3,457 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * The hyperparameters used for the DPO fine-tuning job.
- */
+/** The hyperparameters used for the DPO fine-tuning job. */
 data class FineTuneDPOHyperparameters(
     /**
-     * The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model.
+     * The beta value for the DPO method. A higher beta value will increase the weight of the
+     * penalty between the policy and reference model.
      */
     val beta: Any? = null,
     /**
-     * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+     * Number of examples in each batch. A larger batch size means that model parameters are updated
+     * less frequently, but with lower variance.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("batch_size") val batchSize: Any? = null,
     /**
-     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+     * overfitting.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier") val learningRateMultiplier: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier")
+    val learningRateMultiplier: Any? = null,
     /**
-     * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs") @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs") val nEpochs: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    val nEpochs: Any? = null,
 )
 
-/**
- * Configuration for the DPO fine-tuning method.
- */
+/** Configuration for the DPO fine-tuning method. */
 data class FineTuneDPOMethod(
-    /**
-     * The hyperparameters used for the DPO fine-tuning job.
-     */
+    /** The hyperparameters used for the DPO fine-tuning job. */
     val hyperparameters: FineTuneDPOHyperparameters? = null
 )
 
-/**
- * The method used for fine-tuning.
- */
+/** The method used for fine-tuning. */
 data class FineTuneMethod(
-    /**
-     * The type of method. Is either `supervised`, `dpo`, or `reinforcement`.
-     */
+    /** The type of method. Is either `supervised`, `dpo`, or `reinforcement`. */
     val type: FineTuneMethodTypeEnum,
-    /**
-     * Configuration for the supervised fine-tuning method.
-     */
+    /** Configuration for the supervised fine-tuning method. */
     val supervised: FineTuneSupervisedMethod? = null,
-    /**
-     * Configuration for the DPO fine-tuning method.
-     */
+    /** Configuration for the DPO fine-tuning method. */
     val dpo: FineTuneDPOMethod? = null,
-    /**
-     * Configuration for the reinforcement fine-tuning method.
-     */
-    val reinforcement: FineTuneReinforcementMethod? = null
+    /** Configuration for the reinforcement fine-tuning method. */
+    val reinforcement: FineTuneReinforcementMethod? = null,
 )
 
-/**
- * The hyperparameters used for the reinforcement fine-tuning job.
- */
+/** The hyperparameters used for the reinforcement fine-tuning job. */
 data class FineTuneReinforcementHyperparameters(
     /**
-     * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+     * Number of examples in each batch. A larger batch size means that model parameters are updated
+     * less frequently, but with lower variance.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("batch_size") val batchSize: Any? = null,
     /**
-     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+     * overfitting.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier") val learningRateMultiplier: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier")
+    val learningRateMultiplier: Any? = null,
     /**
-     * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs") @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs") val nEpochs: Any? = null,
-    /**
-     * Level of reasoning effort.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort") val reasoningEffort: FineTuneReinforcementHyperparametersReasoningEffortEnum? = null,
-    /**
-     * Multiplier on amount of compute used for exploring search space during training.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("compute_multiplier") val computeMultiplier: Any? = null,
-    /**
-     * The number of training steps between evaluation runs.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    val nEpochs: Any? = null,
+    /** Level of reasoning effort. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reasoning_effort")
+    val reasoningEffort: FineTuneReinforcementHyperparametersReasoningEffortEnum? = null,
+    /** Multiplier on amount of compute used for exploring search space during training. */
+    @com.fasterxml.jackson.annotation.JsonProperty("compute_multiplier")
+    val computeMultiplier: Any? = null,
+    /** The number of training steps between evaluation runs. */
     @com.fasterxml.jackson.annotation.JsonProperty("eval_interval") val evalInterval: Any? = null,
-    /**
-     * Number of evaluation samples to generate per training step.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("eval_samples") val evalSamples: Any? = null
+    /** Number of evaluation samples to generate per training step. */
+    @com.fasterxml.jackson.annotation.JsonProperty("eval_samples") val evalSamples: Any? = null,
 )
 
-/**
- * Configuration for the reinforcement fine-tuning method.
- */
+/** Configuration for the reinforcement fine-tuning method. */
 data class FineTuneReinforcementMethod(
-    /**
-     * The grader used for the fine-tuning job.
-     */
+    /** The grader used for the fine-tuning job. */
     val grader: FineTuneReinforcementMethodGrader,
-    /**
-     * The hyperparameters used for the reinforcement fine-tuning job.
-     */
-    val hyperparameters: FineTuneReinforcementHyperparameters? = null
+    /** The hyperparameters used for the reinforcement fine-tuning job. */
+    val hyperparameters: FineTuneReinforcementHyperparameters? = null,
 )
 
-/**
- * The grader used for the fine-tuning job.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownFineTuneReinforcementMethodGrader::class)
+/** The grader used for the fine-tuning job. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+    defaultImpl = UnknownFineTuneReinforcementMethodGrader::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderStringCheck::class, name = "string_check"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderTextSimilarity::class, name = "text_similarity"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderPython::class, name = "python"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderScoreModel::class, name = "score_model"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderStringCheck::class,
+        name = "string_check",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderTextSimilarity::class,
+        name = "text_similarity",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderPython::class,
+        name = "python",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = GraderScoreModel::class,
+        name = "score_model",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = GraderMulti::class, name = "multi"),
 )
 sealed interface FineTuneReinforcementMethodGrader
 
-/** A [FineTuneReinforcementMethodGrader] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownFineTuneReinforcementMethodGrader @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+/**
+ * A [FineTuneReinforcementMethodGrader] whose `type` names no branch this SDK knows, kept as
+ * received.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownFineTuneReinforcementMethodGrader
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : FineTuneReinforcementMethodGrader {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("type").asText()
+    val tag: String
+        get() = raw.path("type").asText()
 }
 
-/**
- * The hyperparameters used for the fine-tuning job.
- */
+/** The hyperparameters used for the fine-tuning job. */
 data class FineTuneSupervisedHyperparameters(
     /**
-     * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+     * Number of examples in each batch. A larger batch size means that model parameters are updated
+     * less frequently, but with lower variance.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("batch_size") val batchSize: Any? = null,
     /**
-     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+     * overfitting.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier") val learningRateMultiplier: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier")
+    val learningRateMultiplier: Any? = null,
     /**
-     * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs") @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs") val nEpochs: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    val nEpochs: Any? = null,
 )
 
-/**
- * Configuration for the supervised fine-tuning method.
- */
+/** Configuration for the supervised fine-tuning method. */
 data class FineTuneSupervisedMethod(
-    /**
-     * The hyperparameters used for the fine-tuning job.
-     */
+    /** The hyperparameters used for the fine-tuning job. */
     val hyperparameters: FineTuneSupervisedHyperparameters? = null
 )
 
-/**
- * The `checkpoint.permission` object represents a permission for a fine-tuned model checkpoint.
- */
+/** The `checkpoint.permission` object represents a permission for a fine-tuned model checkpoint. */
 data class FineTuningCheckpointPermission(
-    /**
-     * The permission identifier, which can be referenced in the API endpoints.
-     */
+    /** The permission identifier, which can be referenced in the API endpoints. */
     val id: String,
-    /**
-     * The Unix timestamp (in seconds) for when the permission was created.
-     */
+    /** The Unix timestamp (in seconds) for when the permission was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The project identifier that the permission is for.
-     */
+    /** The project identifier that the permission is for. */
     @com.fasterxml.jackson.annotation.JsonProperty("project_id") val projectId: String,
-    /**
-     * The object type, which is always "checkpoint.permission".
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: FineTuningCheckpointPermissionObjectEnum
+    /** The object type, which is always "checkpoint.permission". */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: FineTuningCheckpointPermissionObjectEnum,
 )
 
 /**
- * The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.
+ * The settings for your integration with Weights and Biases. This payload specifies the project
+ * that metrics will be sent to. Optionally, you can set an explicit display name for your run, add
+ * tags to your run, and set a default entity (team, username, etc) to be associated with your run.
  */
 data class FineTuningIntegrationWandb(
-    /**
-     * The name of the project that the new run will be created under.
-     */
+    /** The name of the project that the new run will be created under. */
     val project: String,
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `entity` wire field.
-     */
+    /** Optional `string` value serialized in the `entity` wire field. */
     val entity: String? = null,
     /**
-     * A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: "openai/finetune", "openai/{base-model}", "openai/{ftjob-abcdef}".
+     * A list of tags to be attached to the newly created run. These tags are passed through
+     * directly to WandB. Some default tags are generated by OpenAI: "openai/finetune",
+     * "openai/{base-model}", "openai/{ftjob-abcdef}".
      */
-    val tags: List<String>? = null
+    val tags: List<String>? = null,
 )
 
-/**
- * Typed representation of the `FineTuningIntegration` API schema.
- */
+/** Typed representation of the `FineTuningIntegration` API schema. */
 data class FineTuningIntegration(
-    /**
-     * The type of the integration being enabled for the fine-tuning job
-     */
+    /** The type of the integration being enabled for the fine-tuning job */
     val type: FineTuningIntegrationTypeEnum,
     /**
-     * The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.
+     * The settings for your integration with Weights and Biases. This payload specifies the project
+     * that metrics will be sent to. Optionally, you can set an explicit display name for your run,
+     * add tags to your run, and set a default entity (team, username, etc) to be associated with
+     * your run.
      */
-    val wandb: FineTuningIntegrationWandb
+    val wandb: FineTuningIntegrationWandb,
 )
 
 /**
- * For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
+ * For fine-tuning jobs that have `failed`, this will contain more information on the cause of the
+ * failure.
  */
 data class FineTuningJobErrorVariant0(
-    /**
-     * A machine-readable error code.
-     */
+    /** A machine-readable error code. */
     val code: String,
-    /**
-     * A human-readable error message.
-     */
+    /** A human-readable error message. */
     val message: String,
-    /**
-     * Required `string` value serialized in the `param` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?
+    /** Required `string` value serialized in the `param` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("param", required = true) val `param`: String?,
 )
 
 /**
- * The hyperparameters used for the fine-tuning job. This value will only be returned when running `supervised` jobs.
+ * The hyperparameters used for the fine-tuning job. This value will only be returned when running
+ * `supervised` jobs.
  */
 data class FineTuningJobHyperparameters(
     /**
-     * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+     * Number of examples in each batch. A larger batch size means that model parameters are updated
+     * less frequently, but with lower variance.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("batch_size") val batchSize: Any? = null,
     /**
-     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+     * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+     * overfitting.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier") val learningRateMultiplier: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("learning_rate_multiplier")
+    val learningRateMultiplier: Any? = null,
     /**
-     * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs") @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs") val nEpochs: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    @get:com.fasterxml.jackson.annotation.JsonProperty("n_epochs")
+    val nEpochs: Any? = null,
 )
 
 /**
  * The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
  */
 data class FineTuningJob(
-    /**
-     * The object identifier, which can be referenced in the API endpoints.
-     */
+    /** The object identifier, which can be referenced in the API endpoints. */
     val id: String,
-    /**
-     * The Unix timestamp (in seconds) for when the fine-tuning job was created.
-     */
+    /** The Unix timestamp (in seconds) for when the fine-tuning job was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Required API value serialized in the `error` wire field.
-     */
+    /** Required API value serialized in the `error` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("error", required = true) val error: Any?,
-    /**
-     * Required `string` value serialized in the `fine_tuned_model` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("fine_tuned_model", required = true) val fineTunedModel: String?,
-    /**
-     * Required API value serialized in the `finished_at` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("finished_at", required = true) val finishedAt: Long?,
-    /**
-     * The base model that is being fine-tuned.
-     */
+    /** Required `string` value serialized in the `fine_tuned_model` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("fine_tuned_model", required = true)
+    val fineTunedModel: String?,
+    /** Required API value serialized in the `finished_at` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("finished_at", required = true)
+    val finishedAt: Long?,
+    /** The base model that is being fine-tuned. */
     val model: String,
-    /**
-     * The object type, which is always "fine_tuning.job".
-     */
+    /** The object type, which is always "fine_tuning.job". */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: FineTuningJobObjectEnum,
-    /**
-     * The organization that owns the fine-tuning job.
-     */
+    /** The organization that owns the fine-tuning job. */
     @com.fasterxml.jackson.annotation.JsonProperty("organization_id") val organizationId: String,
     /**
-     * The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the Files API.
+     * The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with
+     * the Files API.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("result_files") val resultFiles: List<String>,
     /**
-     * The current status of the fine-tuning job, which can be `validating_files`, `queued`, `running`, `pausing`, `paused`, `succeeded`, `failed`, or `cancelled`.
+     * The current status of the fine-tuning job, which can be `validating_files`, `queued`,
+     * `running`, `pausing`, `paused`, `succeeded`, `failed`, or `cancelled`.
      */
     val status: FineTuningJobStatusEnum,
-    /**
-     * Required `integer` value serialized in the `trained_tokens` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("trained_tokens", required = true) val trainedTokens: Long?,
-    /**
-     * The file ID used for training. You can retrieve the training data with the Files API.
-     */
+    /** Required `integer` value serialized in the `trained_tokens` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("trained_tokens", required = true)
+    val trainedTokens: Long?,
+    /** The file ID used for training. You can retrieve the training data with the Files API. */
     @com.fasterxml.jackson.annotation.JsonProperty("training_file") val trainingFile: String,
-    /**
-     * Required `string` value serialized in the `validation_file` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("validation_file", required = true) val validationFile: String?,
-    /**
-     * The seed used for the fine-tuning job.
-     */
+    /** Required `string` value serialized in the `validation_file` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("validation_file", required = true)
+    val validationFile: String?,
+    /** The seed used for the fine-tuning job. */
     @com.fasterxml.jackson.annotation.JsonProperty("seed", required = true) val seed: Long?,
     /**
-     * The hyperparameters used for the fine-tuning job. This value will only be returned when running `supervised` jobs.
+     * The hyperparameters used for the fine-tuning job. This value will only be returned when
+     * running `supervised` jobs.
      */
     val hyperparameters: FineTuningJobHyperparameters? = null,
-    /**
-     * A list of integrations to enable for this fine-tuning job.
-     */
+    /** A list of integrations to enable for this fine-tuning job. */
     val integrations: List<FineTuningIntegration>? = null,
-    /**
-     * Optional API value serialized in the `estimated_finish` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("estimated_finish") val estimatedFinish: Long? = null,
-    /**
-     * Optional API value serialized in the `method` wire field.
-     */
+    /** Optional API value serialized in the `estimated_finish` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("estimated_finish")
+    val estimatedFinish: Long? = null,
+    /** Optional API value serialized in the `method` wire field. */
     val method: FineTuneMethod? = null,
     /**
-     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+     * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing
+     * additional information about the object in a structured format, and querying for objects via
+     * API or the dashboard. Keys are strings with a maximum length of 64 characters. Values are
+     * strings with a maximum length of 512 characters.
      */
-    val metadata: Metadata? = null
+    val metadata: Metadata? = null,
 )
 
-/**
- * A MultiGrader object combines the output of multiple graders to produce a single score.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A MultiGrader object combines the output of multiple graders to produce a single score. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GraderMulti(
-    /**
-     * The object type, which is always `multi`.
-     */
+    /** The object type, which is always `multi`. */
     val type: GraderMultiTypeEnum,
-    /**
-     * The name of the grader.
-     */
+    /** The name of the grader. */
     val name: String,
-    /**
-     * Required object value serialized in the `graders` wire field.
-     */
+    /** Required object value serialized in the `graders` wire field. */
     val graders: Map<String, Any>,
-    /**
-     * A formula to calculate the output based on grader results.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("calculate_output") val calculateOutput: String
-) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+    /** A formula to calculate the output based on grader results. */
+    @com.fasterxml.jackson.annotation.JsonProperty("calculate_output") val calculateOutput: String,
+) :
+    FineTuneReinforcementMethodGrader,
+    RunGraderRequestGrader,
+    ValidateGraderRequestGrader,
+    ValidateGraderResponseGrader
 
-/**
- * A PythonGrader object that runs a python script on the input.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A PythonGrader object that runs a python script on the input. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GraderPython(
-    /**
-     * The object type, which is always `python`.
-     */
+    /** The object type, which is always `python`. */
     val type: GraderPythonTypeEnum,
-    /**
-     * The name of the grader.
-     */
+    /** The name of the grader. */
     val name: String,
-    /**
-     * The source code of the python script.
-     */
+    /** The source code of the python script. */
     val source: String,
-    /**
-     * The image tag to use for the python script.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_tag") val imageTag: String? = null
-) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+    /** The image tag to use for the python script. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_tag") val imageTag: String? = null,
+) :
+    FineTuneReinforcementMethodGrader,
+    RunGraderRequestGrader,
+    ValidateGraderRequestGrader,
+    ValidateGraderResponseGrader
 
-/**
- * A ScoreModelGrader object that uses a model to assign a score to the input.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A ScoreModelGrader object that uses a model to assign a score to the input. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GraderScoreModel(
-    /**
-     * The object type, which is always `score_model`.
-     */
+    /** The object type, which is always `score_model`. */
     val type: GraderScoreModelTypeEnum,
-    /**
-     * The name of the grader.
-     */
+    /** The name of the grader. */
     val name: String,
-    /**
-     * The model to use for the evaluation.
-     */
+    /** The model to use for the evaluation. */
     val model: String,
     /**
-     * The input messages evaluated by the grader. Supports text, output text, input image, and input audio content blocks, and may include template strings.
+     * The input messages evaluated by the grader. Supports text, output text, input image, and
+     * input audio content blocks, and may include template strings.
      */
     val input: List<EvalItem>,
-    /**
-     * The sampling parameters for the model.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params") val samplingParams: GraderScoreModelSamplingParams? = null,
-    /**
-     * The service requires two numbers for the score range. Defaults to `[0, 1]`.
-     */
-    val range: List<Double>? = null
-) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+    /** The sampling parameters for the model. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sampling_params")
+    val samplingParams: GraderScoreModelSamplingParams? = null,
+    /** The service requires two numbers for the score range. Defaults to `[0, 1]`. */
+    val range: List<Double>? = null,
+) :
+    FineTuneReinforcementMethodGrader,
+    RunGraderRequestGrader,
+    ValidateGraderRequestGrader,
+    ValidateGraderResponseGrader
 
 /**
- * A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.
+ * A StringCheckGrader object that performs a string comparison between input and reference using a
+ * specified operation.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GraderStringCheck(
-    /**
-     * The object type, which is always `string_check`.
-     */
+    /** The object type, which is always `string_check`. */
     val type: GraderStringCheckTypeEnum,
-    /**
-     * The name of the grader.
-     */
+    /** The name of the grader. */
     val name: String,
-    /**
-     * The input text. This may include template strings.
-     */
+    /** The input text. This may include template strings. */
     val input: String,
-    /**
-     * The reference text. This may include template strings.
-     */
+    /** The reference text. This may include template strings. */
     val reference: String,
-    /**
-     * The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
-     */
-    val operation: GraderStringCheckOperationEnum
-) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+    /** The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`. */
+    val operation: GraderStringCheckOperationEnum,
+) :
+    FineTuneReinforcementMethodGrader,
+    RunGraderRequestGrader,
+    ValidateGraderRequestGrader,
+    ValidateGraderResponseGrader
 
-/**
- * A TextSimilarityGrader object which grades text based on similarity metrics.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A TextSimilarityGrader object which grades text based on similarity metrics. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class GraderTextSimilarity(
-    /**
-     * The type of grader.
-     */
+    /** The type of grader. */
     val type: GraderTextSimilarityTypeEnum,
-    /**
-     * The name of the grader.
-     */
+    /** The name of the grader. */
     val name: String,
-    /**
-     * The text being graded.
-     */
+    /** The text being graded. */
     val input: String,
-    /**
-     * The text being graded against.
-     */
+    /** The text being graded against. */
     val reference: String,
     /**
-     * The evaluation metric to use. One of `cosine`, `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
+     * The evaluation metric to use. One of `cosine`, `fuzzy_match`, `bleu`, `gleu`, `meteor`,
+     * `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_metric") val evaluationMetric: GraderTextSimilarityEvaluationMetricEnum
-) : FineTuneReinforcementMethodGrader, RunGraderRequestGrader, ValidateGraderRequestGrader, ValidateGraderResponseGrader
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluation_metric")
+    val evaluationMetric: GraderTextSimilarityEvaluationMetricEnum,
+) :
+    FineTuneReinforcementMethodGrader,
+    RunGraderRequestGrader,
+    ValidateGraderRequestGrader,
+    ValidateGraderResponseGrader
 
-/**
- * Typed representation of the `ListFineTuningCheckpointPermissionResponse` API schema.
- */
+/** Typed representation of the `ListFineTuningCheckpointPermissionResponse` API schema. */
 data class ListFineTuningCheckpointPermissionResponse(
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<FineTuningCheckpointPermission>,
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListFineTuningCheckpointPermissionResponseObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `has_more` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<FineTuningCheckpointPermission>,
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ListFineTuningCheckpointPermissionResponseObjectEnum,
+    /** Required `boolean` value serialized in the `has_more` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Optional `string` value serialized in the `first_id` wire field.
-     */
+    /** Optional `string` value serialized in the `first_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_id") val firstId: String? = null,
-    /**
-     * Optional `string` value serialized in the `last_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null
+    /** Optional `string` value serialized in the `last_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_id") val lastId: String? = null,
 )

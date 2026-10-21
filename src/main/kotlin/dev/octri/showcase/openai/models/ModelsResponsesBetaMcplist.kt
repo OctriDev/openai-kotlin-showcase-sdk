@@ -3,55 +3,37 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * A list of tools available on an MCP server.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** A list of tools available on an MCP server. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class BetaMCPListTools(
-    /**
-     * The type of the item. Always `mcp_list_tools`.
-     */
+    /** The type of the item. Always `mcp_list_tools`. */
     val type: BetaMCPListToolsTypeEnum,
-    /**
-     * The unique ID of the list.
-     */
+    /** The unique ID of the list. */
     val id: String,
-    /**
-     * The label of the MCP server.
-     */
+    /** The label of the MCP server. */
     @com.fasterxml.jackson.annotation.JsonProperty("server_label") val serverLabel: String,
-    /**
-     * The tools available on the server.
-     */
+    /** The tools available on the server. */
     val tools: List<BetaMCPListToolsTool>,
-    /**
-     * The agent that produced this item.
-     */
+    /** The agent that produced this item. */
     val agent: BetaAgentTag? = null,
-    /**
-     * Optional `string` value serialized in the `error` wire field.
-     */
-    val error: String? = null
+    /** Optional `string` value serialized in the `error` wire field. */
+    val error: String? = null,
 ) : BetaItem, BetaItemResource, BetaItemField, BetaOutputItem
 
-/**
- * A tool available on an MCP server.
- */
+/** A tool available on an MCP server. */
 data class BetaMCPListToolsTool(
-    /**
-     * The name of the tool.
-     */
+    /** The name of the tool. */
     val name: String,
-    /**
-     * The JSON schema describing the tool's input.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_schema") val inputSchema: Map<String, Any>,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** The JSON schema describing the tool's input. */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_schema")
+    val inputSchema: Map<String, Any>,
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional object value serialized in the `annotations` wire field.
-     */
-    val annotations: Map<String, Any>? = null
+    /** Optional object value serialized in the `annotations` wire field. */
+    val annotations: Map<String, Any>? = null,
 )

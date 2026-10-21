@@ -17,48 +17,72 @@ internal object UsageVectorStoresOperation {
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
      * @param projectIds Return only usage for these projects.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageVectorStores(clientConfig: ClientConfig, request: Usage.UsageVectorStoresRequest, options: RequestOptions? = null): UsageResponse {
-        return SdkClient.request<UsageResponse>(SdkClient.RequestSpec("GET", "/organization/usage/vector_stores", config = clientConfig, query = mapOf("start_time" to
-    SdkClient.queryValue(request.startTime, "form", true), "end_time" to
-    SdkClient.queryValue(request.endTime, "form", true), "bucket_width" to
-    SdkClient.queryValue(request.bucketWidth, "form", true), "project_ids" to
-    SdkClient.queryValue(request.projectIds, "form", true), "group_by" to
-    SdkClient.queryValue(request.groupBy, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "page" to SdkClient.queryValue(request.page, "form", true)), operationId = "usageVectorStores", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java))).data
+    fun usageVectorStores(
+        clientConfig: ClientConfig,
+        request: Usage.UsageVectorStoresRequest,
+        options: RequestOptions? = null,
+    ): UsageResponse {
+        return SdkClient.request<UsageResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization/usage/vector_stores",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "start_time" to SdkClient.queryValue(request.startTime, "form", true),
+                            "end_time" to SdkClient.queryValue(request.endTime, "form", true),
+                            "bucket_width" to
+                                SdkClient.queryValue(request.bucketWidth, "form", true),
+                            "project_ids" to SdkClient.queryValue(request.projectIds, "form", true),
+                            "group_by" to SdkClient.queryValue(request.groupBy, "form", true),
+                            "limit" to SdkClient.queryValue(request.limit, "form", true),
+                            "page" to SdkClient.queryValue(request.page, "form", true),
+                        ),
+                    operationId = "usageVectorStores",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to PermissionErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
 
     /**
      * Get vector stores usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range, inclusive.
      * @param endTime End time (Unix seconds) of the query time range, exclusive.
-     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h`
-     *   and `1d` are supported, default to `1d`.
+     * @param bucketWidth Width of each time bucket in response. Currently `1m`, `1h` and `1d` are
+     *   supported, default to `1d`.
      * @param projectIds Return only usage for these projects.
-     * @param groupBy Group the usage data by the specified fields. Support fields
-     *   include `project_id`.
-     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`:
-     *   default: 7, max: 31 - `bucket_width=1h`: default: 24, max: 168 -
-     *   `bucket_width=1m`: default: 60, max: 1440
-     * @param page A cursor for use in pagination. Corresponding to the `next_page`
-     *   field from the previous response.
+     * @param groupBy Group the usage data by the specified fields. Support fields include
+     *   `project_id`.
+     * @param limit Specifies the number of buckets to return. - `bucket_width=1d`: default: 7, max:
+     *   31 - `bucket_width=1h`: default: 24, max: 168 - `bucket_width=1m`: default: 60, max: 1440
+     * @param page A cursor for use in pagination. Corresponding to the `next_page` field from the
+     *   previous response.
      */
-    fun usageVectorStoresPaginated(clientConfig: ClientConfig, request: Usage.UsageVectorStoresRequest, options: RequestOptions? = null, yieldFn: (UsageTimeBucket) -> Boolean) {
+    fun usageVectorStoresPaginated(
+        clientConfig: ClientConfig,
+        request: Usage.UsageVectorStoresRequest,
+        options: RequestOptions? = null,
+        yieldFn: (UsageTimeBucket) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
             val page = usageVectorStores(clientConfig, request.copy(page = cursor), options)
@@ -73,9 +97,12 @@ internal object UsageVectorStoresOperation {
         }
     }
 
-
-
-    fun usageVectorStoresPages(clientConfig: ClientConfig, request: Usage.UsageVectorStoresRequest, options: RequestOptions? = null, yieldPage: (Usage.UsageVectorStoresPage) -> Boolean) {
+    fun usageVectorStoresPages(
+        clientConfig: ClientConfig,
+        request: Usage.UsageVectorStoresRequest,
+        options: RequestOptions? = null,
+        yieldPage: (Usage.UsageVectorStoresPage) -> Boolean,
+    ) {
         var cursor = request.page
         while (true) {
             val page = usageVectorStores(clientConfig, request.copy(page = cursor), options)

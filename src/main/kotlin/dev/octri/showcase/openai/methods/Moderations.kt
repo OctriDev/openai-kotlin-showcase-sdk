@@ -11,25 +11,49 @@ import dev.octri.showcase.openai.SdkClient
 
 object Moderations {
 
-
     /**
-     * Classifies text and image inputs for potentially harmful content. Supply `input` as a string, an array of strings, or supported multimodal input; `model` defaults to `omni-moderation-latest`. Use the returned results to review moderation flags, categories, and category scores.
+     * Classifies text and image inputs for potentially harmful content. Supply `input` as a string,
+     * an array of strings, or supported multimodal input; `model` defaults to
+     * `omni-moderation-latest`. Use the returned results to review moderation flags, categories,
+     * and category scores.
      *
-     * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation guide.
+     * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation
+     * guide.
      *
-     * @param input Input (or inputs) to classify. Can be a single string, an array
-     *   of strings, or an array of multi-modal input objects similar to other models.
-     * @param model The content moderation model you would like to use. Learn more in
-     *   the moderation guide, and learn about available models here.
+     * @param input Input (or inputs) to classify. Can be a single string, an array of strings, or
+     *   an array of multi-modal input objects similar to other models.
+     * @param model The content moderation model you would like to use. Learn more in the moderation
+     *   guide, and learn about available models here.
      */
-    fun createModeration(clientConfig: ClientConfig, input: Any, model: String? = null, options: RequestOptions? = null): CreateModerationResponse {
-        return SdkClient.request<CreateModerationResponse>(SdkClient.RequestSpec("POST", "/moderations", config = clientConfig, body = SdkClient.bodyMap("input" to (input), "model" to (SdkClient.omitIfNull(model))), operationId = "createModeration", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to ErrorResponse::class.java, "429" to ErrorResponse::class.java, "500" to ErrorResponse::class.java, "503" to ErrorResponse::class.java))).data
+    fun createModeration(
+        clientConfig: ClientConfig,
+        input: Any,
+        model: String? = null,
+        options: RequestOptions? = null,
+    ): CreateModerationResponse {
+        return SdkClient.request<CreateModerationResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/moderations",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "input" to (input),
+                            "model" to (SdkClient.omitIfNull(model)),
+                        ),
+                    operationId = "createModeration",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ErrorResponse::class.java,
+                            "403" to ErrorResponse::class.java,
+                            "429" to ErrorResponse::class.java,
+                            "500" to ErrorResponse::class.java,
+                            "503" to ErrorResponse::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

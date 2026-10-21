@@ -3,24 +3,24 @@
 
 package dev.octri.showcase.openai.models
 
-/**
- * Typed representation of the `ProjectCreateRequest` API schema.
- */
+/** Typed representation of the `ProjectCreateRequest` API schema. */
 data class ProjectCreateRequest(
-    /**
-     * The friendly name of the project, this name appears in reports.
-     */
+    /** The friendly name of the project, this name appears in reports. */
     val name: String,
     /**
-     * Create the project with the specified data residency region. Your organization must have access to Data residency functionality in order to use. See data residency controls to review the functionality and limitations of setting this field. Deprecated: use `residency` instead. Do not provide both `geography` and `residency`.
+     * Create the project with the specified data residency region. Your organization must have
+     * access to Data residency functionality in order to use. See data residency controls to review
+     * the functionality and limitations of setting this field. Deprecated: use `residency` instead.
+     * Do not provide both `geography` and `residency`.
      */
     val geography: String? = null,
     /**
-     * Create the project with the specified residency configuration. Your organization must have access to the requested residency configuration in order to use it. See data residency controls to review the functionality and limitations of setting this field.
+     * Create the project with the specified residency configuration. Your organization must have
+     * access to the requested residency configuration in order to use it. See data residency
+     * controls to review the functionality and limitations of setting this field.
      */
     val residency: PublicProjectResidency? = null,
-    /**
-     * External key ID to associate with the project.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id") val externalKeyId: String? = null
+    /** External key ID to associate with the project. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_key_id")
+    val externalKeyId: String? = null,
 )
