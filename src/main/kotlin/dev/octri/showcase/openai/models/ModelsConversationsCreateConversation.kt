@@ -5,16 +5,12 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Typed representation of the `CreateConversationBody` API schema.
- */
+/** Typed representation of the `CreateConversationBody` API schema. */
 data class CreateConversationBody(
-    /**
-     * Optional API value serialized in the `metadata` wire field.
-     */
+    /** Optional API value serialized in the `metadata` wire field. */
     val metadata: Metadata? = null,
     /**
      * Initial items to include in the conversation context. You may add up to 20 items at a time.
      */
-    val items: List<InputItem>? = null
+    val items: List<InputItem>? = null,
 ) : SdkResource()

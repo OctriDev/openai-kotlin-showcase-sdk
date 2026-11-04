@@ -3,75 +3,140 @@
 
 package dev.octri.showcase.openai
 
-
 class UserOrganizationRoleAssignmentsNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Lists the organization roles assigned to a user within the organization.
-     */
-    fun listUserRoleAssignments(userId: String, limit: Long? = null, after: String? = null, order: ListUserRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null): RoleListResource {
-        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.listUserRoleAssignments(clientConfig, userId, limit, after, order, options)
+    /** Lists the organization roles assigned to a user within the organization. */
+    fun listUserRoleAssignments(
+        userId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListUserRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): RoleListResource {
+        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments
+            .listUserRoleAssignments(clientConfig, userId, limit, after, order, options)
+    }
+
+    /** Lists the organization roles assigned to a user within the organization. */
+    fun listUserRoleAssignmentsPaginated(
+        userId: String,
+        limit: Long? = null,
+        after: String? = null,
+        order: ListUserRoleAssignmentsParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AssignedRoleDetails) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments
+            .listUserRoleAssignmentsPaginated(
+                clientConfig,
+                userId,
+                limit,
+                after,
+                order,
+                options,
+                yieldFn,
+            )
+    }
+
+    /** Assigns an organization role to a user within the organization. */
+    fun assignUserRole(
+        userId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): UserRoleAssignment {
+        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.assignUserRole(
+            clientConfig,
+            userId,
+            roleId,
+            options,
+        )
+    }
+
+    /** Retrieves an organization role assigned to a user. */
+    fun retrieveUserRole(
+        userId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): AssignedRoleDetails {
+        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.retrieveUserRole(
+            clientConfig,
+            userId,
+            roleId,
+            options,
+        )
+    }
+
+    /** Unassigns an organization role from a user within the organization. */
+    fun unassignUserRole(
+        userId: String,
+        roleId: String,
+        options: RequestOptions? = null,
+    ): DeletedRoleAssignmentResource {
+        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.unassignUserRole(
+            clientConfig,
+            userId,
+            roleId,
+            options,
+        )
     }
 
     /**
-     * Lists the organization roles assigned to a user within the organization.
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun listUserRoleAssignmentsPaginated(userId: String, limit: Long? = null, after: String? = null, order: ListUserRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (AssignedRoleDetails) -> Boolean) {
-        dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.listUserRoleAssignmentsPaginated(clientConfig, userId, limit, after, order, options, yieldFn)
-    }
-
-    /**
-     * Assigns an organization role to a user within the organization.
-     */
-    fun assignUserRole(userId: String, roleId: String, options: RequestOptions? = null): UserRoleAssignment {
-        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.assignUserRole(clientConfig, userId, roleId, options)
-    }
-
-    /**
-     * Retrieves an organization role assigned to a user.
-     */
-    fun retrieveUserRole(userId: String, roleId: String, options: RequestOptions? = null): AssignedRoleDetails {
-        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.retrieveUserRole(clientConfig, userId, roleId, options)
-    }
-
-    /**
-     * Unassigns an organization role from a user within the organization.
-     */
-    fun unassignUserRole(userId: String, roleId: String, options: RequestOptions? = null): DeletedRoleAssignmentResource {
-        return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.unassignUserRole(clientConfig, userId, roleId, options)
-    }
-
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [UserOrganizationRoleAssignmentsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [UserOrganizationRoleAssignmentsNamespace], returning the [SdkResponse]
+     * envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
-        /**
-         * Lists the organization roles assigned to a user within the organization.
-         */
-        fun listUserRoleAssignments(userId: String, limit: Long? = null, after: String? = null, order: ListUserRoleAssignmentsParameterEnum? = null, options: RequestOptions? = null): SdkResponse<RoleListResource> {
-            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.listUserRoleAssignmentsWithRawResponse(clientConfig, userId, limit, after, order, options)
+        /** Lists the organization roles assigned to a user within the organization. */
+        fun listUserRoleAssignments(
+            userId: String,
+            limit: Long? = null,
+            after: String? = null,
+            order: ListUserRoleAssignmentsParameterEnum? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<RoleListResource> {
+            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments
+                .listUserRoleAssignmentsWithRawResponse(
+                    clientConfig,
+                    userId,
+                    limit,
+                    after,
+                    order,
+                    options,
+                )
         }
 
-        /**
-         * Assigns an organization role to a user within the organization.
-         */
-        fun assignUserRole(userId: String, roleId: String, options: RequestOptions? = null): SdkResponse<UserRoleAssignment> {
-            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.assignUserRoleWithRawResponse(clientConfig, userId, roleId, options)
+        /** Assigns an organization role to a user within the organization. */
+        fun assignUserRole(
+            userId: String,
+            roleId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<UserRoleAssignment> {
+            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments
+                .assignUserRoleWithRawResponse(clientConfig, userId, roleId, options)
         }
 
-        /**
-         * Retrieves an organization role assigned to a user.
-         */
-        fun retrieveUserRole(userId: String, roleId: String, options: RequestOptions? = null): SdkResponse<AssignedRoleDetails> {
-            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.retrieveUserRoleWithRawResponse(clientConfig, userId, roleId, options)
+        /** Retrieves an organization role assigned to a user. */
+        fun retrieveUserRole(
+            userId: String,
+            roleId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<AssignedRoleDetails> {
+            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments
+                .retrieveUserRoleWithRawResponse(clientConfig, userId, roleId, options)
         }
 
-        /**
-         * Unassigns an organization role from a user within the organization.
-         */
-        fun unassignUserRole(userId: String, roleId: String, options: RequestOptions? = null): SdkResponse<DeletedRoleAssignmentResource> {
-            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments.unassignUserRoleWithRawResponse(clientConfig, userId, roleId, options)
+        /** Unassigns an organization role from a user within the organization. */
+        fun unassignUserRole(
+            userId: String,
+            roleId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<DeletedRoleAssignmentResource> {
+            return dev.octri.showcase.openai.methods.UserOrganizationRoleAssignments
+                .unassignUserRoleWithRawResponse(clientConfig, userId, roleId, options)
         }
-
     }
 }

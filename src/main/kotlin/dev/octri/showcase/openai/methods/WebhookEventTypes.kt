@@ -12,23 +12,32 @@ import dev.octri.showcase.openai.WebhookEventTypeListResource
 
 object WebhookEventTypes {
 
-    /**
-     * Returns webhook event types visible to the authenticated project.
-     */
-    fun listWebhookEventTypes(clientConfig: ClientConfig, options: RequestOptions? = null): WebhookEventTypeListResource {
+    /** Returns webhook event types visible to the authenticated project. */
+    fun listWebhookEventTypes(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): WebhookEventTypeListResource {
         return listWebhookEventTypesWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [listWebhookEventTypes], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listWebhookEventTypesWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<WebhookEventTypeListResource> {
-        return SdkClient.request<WebhookEventTypeListResource>(SdkClient.RequestSpec("GET", "/webhook_event_types", config = clientConfig, operationId = "listWebhookEventTypes", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ErrorResponse::class.java)))
+    /**
+     * [listWebhookEventTypes], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun listWebhookEventTypesWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<WebhookEventTypeListResource> {
+        return SdkClient.request<WebhookEventTypeListResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/webhook_event_types",
+                config = clientConfig,
+                operationId = "listWebhookEventTypes",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("401" to ErrorResponse::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

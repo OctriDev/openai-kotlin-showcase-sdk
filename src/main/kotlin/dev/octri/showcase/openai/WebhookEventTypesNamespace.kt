@@ -3,26 +3,30 @@
 
 package dev.octri.showcase.openai
 
-
 class WebhookEventTypesNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Returns webhook event types visible to the authenticated project.
-     */
+    /** Returns webhook event types visible to the authenticated project. */
     fun list(options: RequestOptions? = null): WebhookEventTypeListResource {
-        return dev.octri.showcase.openai.methods.WebhookEventTypes.listWebhookEventTypes(clientConfig, options)
+        return dev.octri.showcase.openai.methods.WebhookEventTypes.listWebhookEventTypes(
+            clientConfig,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [WebhookEventTypesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [WebhookEventTypesNamespace], returning the [SdkResponse] envelope around
+     * each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
-        /**
-         * Returns webhook event types visible to the authenticated project.
-         */
+        /** Returns webhook event types visible to the authenticated project. */
         fun list(options: RequestOptions? = null): SdkResponse<WebhookEventTypeListResource> {
-            return dev.octri.showcase.openai.methods.WebhookEventTypes.listWebhookEventTypesWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.openai.methods.WebhookEventTypes
+                .listWebhookEventTypesWithRawResponse(clientConfig, options)
         }
-
     }
 }

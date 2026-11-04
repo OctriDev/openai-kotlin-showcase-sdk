@@ -30,49 +30,104 @@ internal object AgentsListAgentSessionSubagentsOperation {
      * Lists subagents in a session, including nested and closed subagents. See subagent workflows.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagents(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): Agents.ListAgentSessionSubagentsResponse {
-        return listAgentSessionSubagentsWithRawResponse(clientConfig, sessionId, limit, order, after, options).data
+    fun listAgentSessionSubagents(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): Agents.ListAgentSessionSubagentsResponse {
+        return listAgentSessionSubagentsWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
+            .data
     }
 
-
-    /** [listAgentSessionSubagents], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAgentSessionSubagentsWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<Agents.ListAgentSessionSubagentsResponse> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+    /**
+     * [listAgentSessionSubagents], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listAgentSessionSubagentsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Agents.ListAgentSessionSubagentsResponse> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        }
 
-        return SdkClient.request<Agents.ListAgentSessionSubagentsResponse>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionSubagents", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<Agents.ListAgentSessionSubagentsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "order" to SdkClient.queryValue(order, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "listAgentSessionSubagents",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Lists subagents in a session, including nested and closed subagents. See subagent workflows.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SubagentResource) -> Boolean) {
+    fun listAgentSessionSubagentsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SubagentResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
+            val page =
+                listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -84,12 +139,19 @@ internal object AgentsListAgentSessionSubagentsOperation {
         }
     }
 
-
-
-    fun listAgentSessionSubagentsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentsPage) -> Boolean) {
+    fun listAgentSessionSubagentsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentSessionSubagentsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
+            val page =
+                listAgentSessionSubagents(clientConfig, sessionId, limit, order, cursor, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -108,18 +170,63 @@ internal object AgentsRetrieveAgentSessionSubagentOperation {
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
      */
-    fun retrieveAgentSessionSubagent(clientConfig: ClientConfig, sessionId: String, subagentId: String, options: RequestOptions? = null): SubagentResource {
-        return retrieveAgentSessionSubagentWithRawResponse(clientConfig, sessionId, subagentId, options).data
+    fun retrieveAgentSessionSubagent(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        options: RequestOptions? = null,
+    ): SubagentResource {
+        return retrieveAgentSessionSubagentWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [retrieveAgentSessionSubagent], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun retrieveAgentSessionSubagentWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SubagentResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [retrieveAgentSessionSubagent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveAgentSessionSubagentWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, options: RequestOptions? = null): SdkResponse<SubagentResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "subagent_id",
+            subagentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<SubagentResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}", config = clientConfig, operationId = "retrieveAgentSessionSubagent", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SubagentResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}",
+                config = clientConfig,
+                operationId = "retrieveAgentSessionSubagent",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -129,52 +236,123 @@ internal object AgentsListAgentSessionSubagentItemsOperation {
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentItems(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource {
-        return listAgentSessionSubagentItemsWithRawResponse(clientConfig, sessionId, subagentId, limit, order, after, options).data
+    fun listAgentSessionSubagentItems(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionItemListResource {
+        return listAgentSessionSubagentItemsWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [listAgentSessionSubagentItems], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listAgentSessionSubagentItemsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionItemListResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [listAgentSessionSubagentItems], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAgentSessionSubagentItemsWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionItemListResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "subagent_id",
+            subagentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        }
 
-        return SdkClient.request<SessionItemListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionSubagentItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionItemListResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/items",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "order" to SdkClient.queryValue(order, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "listAgentSessionSubagentItems",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Lists this subagent's own items across all of its turns. See subagent workflows.
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentItemsPaginated(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) {
+    fun listAgentSessionSubagentItemsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnItemResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionSubagentItems(clientConfig, sessionId, subagentId, limit, order, cursor, options)
+            val page =
+                listAgentSessionSubagentItems(
+                    clientConfig,
+                    sessionId,
+                    subagentId,
+                    limit,
+                    order,
+                    cursor,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -186,12 +364,28 @@ internal object AgentsListAgentSessionSubagentItemsOperation {
         }
     }
 
-
-
-    fun listAgentSessionSubagentItemsPages(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentItemsPage) -> Boolean) {
+    fun listAgentSessionSubagentItemsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentSessionSubagentItemsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionSubagentItems(clientConfig, sessionId, subagentId, limit, order, cursor, options)
+            val page =
+                listAgentSessionSubagentItems(
+                    clientConfig,
+                    sessionId,
+                    subagentId,
+                    limit,
+                    order,
+                    cursor,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -209,52 +403,123 @@ internal object AgentsListAgentSessionSubagentTurnsOperation {
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurns(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTurnListResource {
-        return listAgentSessionSubagentTurnsWithRawResponse(clientConfig, sessionId, subagentId, limit, order, after, options).data
+    fun listAgentSessionSubagentTurns(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionTurnListResource {
+        return listAgentSessionSubagentTurnsWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [listAgentSessionSubagentTurns], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listAgentSessionSubagentTurnsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionTurnListResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [listAgentSessionSubagentTurns], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAgentSessionSubagentTurnsWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionTurnListResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "subagent_id",
+            subagentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        }
 
-        return SdkClient.request<SessionTurnListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listAgentSessionSubagentTurns", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionTurnListResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "order" to SdkClient.queryValue(order, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "listAgentSessionSubagentTurns",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Lists all turns of this subagent, including turns after a resume. See subagent workflows.
      *
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurnsPaginated(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (TurnResource) -> Boolean) {
+    fun listAgentSessionSubagentTurnsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (TurnResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionSubagentTurns(clientConfig, sessionId, subagentId, limit, order, cursor, options)
+            val page =
+                listAgentSessionSubagentTurns(
+                    clientConfig,
+                    sessionId,
+                    subagentId,
+                    limit,
+                    order,
+                    cursor,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -266,12 +531,28 @@ internal object AgentsListAgentSessionSubagentTurnsOperation {
         }
     }
 
-
-
-    fun listAgentSessionSubagentTurnsPages(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentTurnsPage) -> Boolean) {
+    fun listAgentSessionSubagentTurnsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentSessionSubagentTurnsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionSubagentTurns(clientConfig, sessionId, subagentId, limit, order, cursor, options)
+            val page =
+                listAgentSessionSubagentTurns(
+                    clientConfig,
+                    sessionId,
+                    subagentId,
+                    limit,
+                    order,
+                    cursor,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -291,20 +572,68 @@ internal object AgentsRetrieveAgentSessionSubagentTurnOperation {
      * @param subagentId The ID of the subagent in this session.
      * @param turnId The ID of a turn belonging to this subagent.
      */
-    fun retrieveAgentSessionSubagentTurn(clientConfig: ClientConfig, sessionId: String, subagentId: String, turnId: String, options: RequestOptions? = null): TurnResource {
-        return retrieveAgentSessionSubagentTurnWithRawResponse(clientConfig, sessionId, subagentId, turnId, options).data
+    fun retrieveAgentSessionSubagentTurn(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        turnId: String,
+        options: RequestOptions? = null,
+    ): TurnResource {
+        return retrieveAgentSessionSubagentTurnWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                turnId,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [retrieveAgentSessionSubagentTurn], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun retrieveAgentSessionSubagentTurnWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        turnId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<TurnResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [retrieveAgentSessionSubagentTurn], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveAgentSessionSubagentTurnWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, turnId: String, options: RequestOptions? = null): SdkResponse<TurnResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        Validation.validateLength("subagent_id", subagentId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "subagent_id",
+            subagentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         Validation.validateLength("turn_id", turnId, Validation.LengthOpts(min = 0, max = 1048576))
 
-        return SdkClient.request<TurnResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns/${SdkClient.encodePathSegment(turnId)}", config = clientConfig, operationId = "retrieveAgentSessionSubagentTurn", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<TurnResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/subagents/${SdkClient.encodePathSegment(subagentId)}/turns/${SdkClient.encodePathSegment(turnId)}",
+                config = clientConfig,
+                operationId = "retrieveAgentSessionSubagentTurn",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -315,45 +644,94 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
      * @param turnId The ID of a turn belonging to this subagent.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurnItems(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null): SessionItemListResource {
+    fun listAgentSessionSubagentTurnItems(
+        clientConfig: ClientConfig,
+        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+    ): SessionItemListResource {
         return listAgentSessionSubagentTurnItemsWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [listAgentSessionSubagentTurnItems], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAgentSessionSubagentTurnItemsWithRawResponse(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null): SdkResponse<SessionItemListResource> {
+    /**
+     * [listAgentSessionSubagentTurnItems], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun listAgentSessionSubagentTurnItemsWithRawResponse(
+        clientConfig: ClientConfig,
+        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionItemListResource> {
         validateListAgentSessionSubagentTurnItemsRequest(request)
 
-        return SdkClient.request<SessionItemListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/subagents/${SdkClient.encodePathSegment(request.subagentId)}/turns/${SdkClient.encodePathSegment(request.turnId)}/items", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(request.limit, "form", true), "order" to SdkClient.queryValue(request.order, "form", true), "after" to SdkClient.queryValue(request.after, "form", true)), operationId = "listAgentSessionSubagentTurnItems", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionItemListResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(request.sessionId)}/subagents/${SdkClient.encodePathSegment(request.subagentId)}/turns/${SdkClient.encodePathSegment(request.turnId)}/items",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(request.limit, "form", true),
+                        "order" to SdkClient.queryValue(request.order, "form", true),
+                        "after" to SdkClient.queryValue(request.after, "form", true),
+                    ),
+                operationId = "listAgentSessionSubagentTurnItems",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 
+    private fun validateListAgentSessionSubagentTurnItemsRequest(
+        request: Agents.ListAgentSessionSubagentTurnItemsRequest
+    ) {
+        Validation.validateLength(
+            "session_id",
+            request.sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    private fun validateListAgentSessionSubagentTurnItemsRequest(request: Agents.ListAgentSessionSubagentTurnItemsRequest) {
-        Validation.validateLength("session_id", request.sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "subagent_id",
+            request.subagentId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        Validation.validateLength("subagent_id", request.subagentId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        Validation.validateLength("turn_id", request.turnId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "turn_id",
+            request.turnId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         if (request.limit != null) {
-            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+            Validation.validateRange(
+                "limit",
+                request.limit,
+                Validation.RangeOpts(min = 1.0, max = 100.0),
+            )
+        }
 
         if (request.after != null) {
-            Validation.validateLength("after", request.after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+            Validation.validateLength(
+                "after",
+                request.after,
+                Validation.LengthOpts(min = 0, max = 1048576),
+            )
+        }
     }
-
-
-
-
 
     /**
      * Lists items belonging to one turn of this subagent. See subagent workflows.
@@ -361,15 +739,24 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
      * @param sessionId The ID of the session.
      * @param subagentId The ID of the subagent in this session.
      * @param turnId The ID of a turn belonging to this subagent.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
      */
-    fun listAgentSessionSubagentTurnItemsPaginated(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) {
+    fun listAgentSessionSubagentTurnItemsPaginated(
+        clientConfig: ClientConfig,
+        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnItemResource) -> Boolean,
+    ) {
         var cursor = request.after
         while (true) {
-            val page = listAgentSessionSubagentTurnItems(clientConfig, request.copy(after = cursor), options)
+            val page =
+                listAgentSessionSubagentTurnItems(
+                    clientConfig,
+                    request.copy(after = cursor),
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -381,17 +768,26 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
         }
     }
 
-
-
-    fun listAgentSessionSubagentTurnItemsPages(clientConfig: ClientConfig, request: Agents.ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionSubagentTurnItemsPage) -> Boolean) {
+    fun listAgentSessionSubagentTurnItemsPages(
+        clientConfig: ClientConfig,
+        request: Agents.ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentSessionSubagentTurnItemsPage) -> Boolean,
+    ) {
         var cursor = request.after
         while (true) {
-            val page = listAgentSessionSubagentTurnItems(clientConfig, request.copy(after = cursor), options)
+            val page =
+                listAgentSessionSubagentTurnItems(
+                    clientConfig,
+                    request.copy(after = cursor),
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
             val hasMore = page.hasMore == true && nextCursor != null
-            if (!yieldPage(Agents.ListAgentSessionSubagentTurnItemsPage(page, items, hasMore))) return
+            if (!yieldPage(Agents.ListAgentSessionSubagentTurnItemsPage(page, items, hasMore)))
+                return
             if (!hasMore) return
             cursor = nextCursor
         }
@@ -400,53 +796,103 @@ internal object AgentsListAgentSessionSubagentTurnItemsOperation {
 
 internal object AgentsListAgentSessionsOperation {
     /**
-     * Lists managed agent sessions using ID-based pagination and the requested sort order. See managing sessions.
+     * Lists managed agent sessions using ID-based pagination and the requested sort order. See
+     * managing sessions.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
-     * @param agentId Only return sessions whose root agent has this ID. Omit to
-     *   return sessions for all agents.
+     * @param agentId Only return sessions whose root agent has this ID. Omit to return sessions for
+     *   all agents.
      */
-    fun listAgentSessions(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null): SessionListResource {
-        return listAgentSessionsWithRawResponse(clientConfig, limit, order, after, agentId, options).data
+    fun listAgentSessions(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+    ): SessionListResource {
+        return listAgentSessionsWithRawResponse(clientConfig, limit, order, after, agentId, options)
+            .data
     }
 
-
-    /** [listAgentSessions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAgentSessionsWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null): SdkResponse<SessionListResource> {
+    /**
+     * [listAgentSessions], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun listAgentSessionsWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionListResource> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        }
 
         if (agentId != null) {
-            Validation.validateLength("agent_id", agentId, Validation.LengthOpts(min = 0, max = 1048576))
-}
+            Validation.validateLength(
+                "agent_id",
+                agentId,
+                Validation.LengthOpts(min = 0, max = 1048576),
+            )
+        }
 
-        return SdkClient.request<SessionListResource>(SdkClient.RequestSpec("GET", "/agents/sessions", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "agent_id" to SdkClient.queryValue(agentId, "form", true)), operationId = "listAgentSessions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionListResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "order" to SdkClient.queryValue(order, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "agent_id" to SdkClient.queryValue(agentId, "form", true),
+                    ),
+                operationId = "listAgentSessions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists managed agent sessions using ID-based pagination and the requested sort order. See managing sessions.
+     * Lists managed agent sessions using ID-based pagination and the requested sort order. See
+     * managing sessions.
      *
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
-     * @param agentId Only return sessions whose root agent has this ID. Omit to
-     *   return sessions for all agents.
+     * @param agentId Only return sessions whose root agent has this ID. Omit to return sessions for
+     *   all agents.
      */
-    fun listAgentSessionsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null, yieldFn: (SessionResource) -> Boolean) {
+    fun listAgentSessionsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listAgentSessions(clientConfig, limit, order, cursor, agentId, options)
@@ -461,9 +907,15 @@ internal object AgentsListAgentSessionsOperation {
         }
     }
 
-
-
-    fun listAgentSessionsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionsPage) -> Boolean) {
+    fun listAgentSessionsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentSessionsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listAgentSessions(clientConfig, limit, order, cursor, agentId, options)
@@ -480,104 +932,168 @@ internal object AgentsListAgentSessionsOperation {
 
 internal object AgentsCreateAgentSessionOperation {
     /**
-     * Creates a managed agent session, optionally submits initial input, and returns the session or streams its events when stream is true. See running sessions.
+     * Creates a managed agent session, optionally submits initial input, and returns the session or
+     * streams its events when stream is true. See running sessions.
      *
-     * @param environment An inline execution environment or a reference to an
-     *   environment template.
-     * @param spendControl Optional spending limit in USD cents. Omission or null
-     *   creates an unlimited session.
-     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values
-     *   up to 512 characters. Omission or null defaults to an empty map.
-     * @param agent Agent configuration. With `agent_id`, supplied fields override
-     *   the saved agent for this session. Without `agent_id`, `model` is required.
-     * @param agentId The ID of a saved reusable agent. Omit `agent` to use its
-     *   configuration unchanged.
+     * @param environment An inline execution environment or a reference to an environment template.
+     * @param spendControl Optional spending limit in USD cents. Omission or null creates an
+     *   unlimited session.
+     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values up to 512
+     *   characters. Omission or null defaults to an empty map.
+     * @param agent Agent configuration. With `agent_id`, supplied fields override the saved agent
+     *   for this session. Without `agent_id`, `model` is required.
+     * @param agentId The ID of a saved reusable agent. Omit `agent` to use its configuration
+     *   unchanged.
      * @param vaultIds The IDs of vaults made available to the session.
-     * @param input Initial input to submit when the session is created. A string is
-     *   shorthand for a single user message. Required when `environment.type` is
-     *   `none`, or when `stream` is `true` for an environment that is not
-     *   `self_hosted`; optional for self-hosted and non-streaming execution
-     *   environments.
-     * @param stream Whether to stream session events as server-sent events. Defaults
-     *   to `false`.
+     * @param input Initial input to submit when the session is created. A string is shorthand for a
+     *   single user message. Required when `environment.type` is `none`, or when `stream` is `true`
+     *   for an environment that is not `self_hosted`; optional for self-hosted and non-streaming
+     *   execution environments.
+     * @param stream Whether to stream session events as server-sent events. Defaults to `false`.
      */
-    fun createAgentSession(clientConfig: ClientConfig, request: Agents.CreateAgentSessionRequest, options: RequestOptions? = null): SessionResource {
+    fun createAgentSession(
+        clientConfig: ClientConfig,
+        request: Agents.CreateAgentSessionRequest,
+        options: RequestOptions? = null,
+    ): SessionResource {
         return createAgentSessionWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [createAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createAgentSessionWithRawResponse(clientConfig: ClientConfig, request: Agents.CreateAgentSessionRequest, options: RequestOptions? = null): SdkResponse<SessionResource> {
+    /**
+     * [createAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun createAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        request: Agents.CreateAgentSessionRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionResource> {
         validateCreateAgentSessionRequest(request)
 
-        return SdkClient.request<SessionResource>(SdkClient.RequestSpec("POST", "/agents/sessions", config = clientConfig, body = SdkClient.bodyMap("environment" to (request.environment), "spend_control" to
-    (request.spendControl ?: SdkClient.SdkOptional.Omitted), "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted), "agent" to (SdkClient.omitIfNull(request.agent)), "agent_id" to (SdkClient.omitIfNull(request.agentId)), "vault_ids" to
-    (request.vaultIds ?: SdkClient.SdkOptional.Omitted), "input" to (request.input ?: SdkClient.SdkOptional.Omitted), "stream" to (SdkClient.omitIfNull(request.stream))), operationId = "createAgentSession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "429" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionResource>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/agents/sessions",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "environment" to (request.environment),
+                        "spend_control" to (request.spendControl ?: SdkClient.SdkOptional.Omitted),
+                        "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
+                        "agent" to (SdkClient.omitIfNull(request.agent)),
+                        "agent_id" to (SdkClient.omitIfNull(request.agentId)),
+                        "vault_ids" to (request.vaultIds ?: SdkClient.SdkOptional.Omitted),
+                        "input" to (request.input ?: SdkClient.SdkOptional.Omitted),
+                        "stream" to (SdkClient.omitIfNull(request.stream)),
+                    ),
+                operationId = "createAgentSession",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "429" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
-
 
     private fun validateCreateAgentSessionRequest(request: Agents.CreateAgentSessionRequest) {
         if (request.agentId != null) {
-            Validation.validateLength("agent_id", request.agentId, Validation.LengthOpts(min = 0, max = 64))
-}
+            Validation.validateLength(
+                "agent_id",
+                request.agentId,
+                Validation.LengthOpts(min = 0, max = 64),
+            )
+        }
 
         val vaultIdsValue = request.vaultIds?.getOrNull()
-if (vaultIdsValue != null) {
-            Validation.validateItems("vault_ids", vaultIdsValue, Validation.LengthOpts(min = 0, max = 16384))
-}
+        if (vaultIdsValue != null) {
+            Validation.validateItems(
+                "vault_ids",
+                vaultIdsValue,
+                Validation.LengthOpts(min = 0, max = 16384),
+            )
+        }
     }
 }
 
 internal object AgentsCreateAgentSessionStreamOperation {
     /**
-     * Creates a managed agent session, optionally submits initial input, and returns the session or streams its events when stream is true. See running sessions.
+     * Creates a managed agent session, optionally submits initial input, and returns the session or
+     * streams its events when stream is true. See running sessions.
      *
-     * @param environment An inline execution environment or a reference to an
-     *   environment template.
-     * @param spendControl Optional spending limit in USD cents. Omission or null
-     *   creates an unlimited session.
-     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values
-     *   up to 512 characters. Omission or null defaults to an empty map.
-     * @param agent Agent configuration. With `agent_id`, supplied fields override
-     *   the saved agent for this session. Without `agent_id`, `model` is required.
-     * @param agentId The ID of a saved reusable agent. Omit `agent` to use its
-     *   configuration unchanged.
+     * @param environment An inline execution environment or a reference to an environment template.
+     * @param spendControl Optional spending limit in USD cents. Omission or null creates an
+     *   unlimited session.
+     * @param metadata Up to 16 string key-value pairs, with keys up to 64 and values up to 512
+     *   characters. Omission or null defaults to an empty map.
+     * @param agent Agent configuration. With `agent_id`, supplied fields override the saved agent
+     *   for this session. Without `agent_id`, `model` is required.
+     * @param agentId The ID of a saved reusable agent. Omit `agent` to use its configuration
+     *   unchanged.
      * @param vaultIds The IDs of vaults made available to the session.
-     * @param input Initial input to submit when the session is created. A string is
-     *   shorthand for a single user message. Required when `environment.type` is
-     *   `none`, or when `stream` is `true` for an environment that is not
-     *   `self_hosted`; optional for self-hosted and non-streaming execution
-     *   environments.
+     * @param input Initial input to submit when the session is created. A string is shorthand for a
+     *   single user message. Required when `environment.type` is `none`, or when `stream` is `true`
+     *   for an environment that is not `self_hosted`; optional for self-hosted and non-streaming
+     *   execution environments.
      */
-    fun createAgentSessionStream(clientConfig: ClientConfig, request: Agents.CreateAgentSessionStreamRequest, options: RequestOptions? = null): Sequence<SessionEvent> {
+    fun createAgentSessionStream(
+        clientConfig: ClientConfig,
+        request: Agents.CreateAgentSessionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<SessionEvent> {
         return sequence {
-            for (_ev in SdkClient.stream(
-            SdkClient.RequestSpec(
-                "POST",
-                "/agents/sessions",
-                config = clientConfig,
-                body = SdkClient.bodyMap("environment" to (request.environment), "spend_control" to
-    (request.spendControl ?: SdkClient.SdkOptional.Omitted), "metadata" to
-    (request.metadata ?: SdkClient.SdkOptional.Omitted), "agent" to (SdkClient.omitIfNull(request.agent)), "agent_id" to (SdkClient.omitIfNull(request.agentId)), "vault_ids" to
-    (request.vaultIds ?: SdkClient.SdkOptional.Omitted), "input" to (request.input ?: SdkClient.SdkOptional.Omitted)),
-                contentType = "application/json",
-                operationId = "createAgentSessionStream",
-                streamFormat = "sse",
-                streamMediaType = "text/event-stream",
-                chunkDomain = "bytes",
-                options = options,
-                errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "429" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)
-            )
-        )) {
+            for (_ev in
+                SdkClient.stream(
+                    SdkClient.RequestSpec(
+                        "POST",
+                        "/agents/sessions",
+                        config = clientConfig,
+                        body =
+                            SdkClient.bodyMap(
+                                "environment" to (request.environment),
+                                "spend_control" to
+                                    (request.spendControl ?: SdkClient.SdkOptional.Omitted),
+                                "metadata" to (request.metadata ?: SdkClient.SdkOptional.Omitted),
+                                "agent" to (SdkClient.omitIfNull(request.agent)),
+                                "agent_id" to (SdkClient.omitIfNull(request.agentId)),
+                                "vault_ids" to (request.vaultIds ?: SdkClient.SdkOptional.Omitted),
+                                "input" to (request.input ?: SdkClient.SdkOptional.Omitted),
+                            ),
+                        contentType = "application/json",
+                        operationId = "createAgentSessionStream",
+                        streamFormat = "sse",
+                        streamMediaType = "text/event-stream",
+                        chunkDomain = "bytes",
+                        options = options,
+                        errors =
+                            mapOf(
+                                "400" to ErrorResponse2::class.java,
+                                "401" to ErrorResponse2::class.java,
+                                "403" to ErrorResponse2::class.java,
+                                "404" to ErrorResponse2::class.java,
+                                "409" to ErrorResponse2::class.java,
+                                "429" to ErrorResponse2::class.java,
+                                "500" to ErrorResponse2::class.java,
+                                "503" to ErrorResponse2::class.java,
+                            ),
+                    )
+                )) {
                 if (_ev.data == "[DONE]") return@sequence
-                yield(try {
-                    SdkClient.mapper.readValue(_ev.data, SessionEvent::class.java)
-                } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
-                    SdkClient.rethrowEventDecode(error, _ev.data)
-                })
+                yield(
+                    try {
+                        SdkClient.mapper.readValue(_ev.data, SessionEvent::class.java)
+                    } catch (error: com.fasterxml.jackson.core.JsonProcessingException) {
+                        SdkClient.rethrowEventDecode(error, _ev.data)
+                    }
+                )
             }
         }
     }
@@ -589,62 +1105,182 @@ internal object AgentsRetrieveAgentSessionOperation {
      *
      * @param sessionId The ID of the session.
      */
-    fun retrieveAgentSession(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SessionResource {
+    fun retrieveAgentSession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SessionResource {
         return retrieveAgentSessionWithRawResponse(clientConfig, sessionId, options).data
     }
 
+    /**
+     * [retrieveAgentSession], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun retrieveAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [retrieveAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveAgentSessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SdkResponse<SessionResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<SessionResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}", config = clientConfig, operationId = "retrieveAgentSession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}",
+                config = clientConfig,
+                operationId = "retrieveAgentSession",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentsUpdateAgentSessionOperation {
     /**
-     * Updates session metadata, model, reasoning effort, or service tier. Model settings apply to subsequent turns. Omitted fields are unchanged. See managing sessions.
+     * Updates session metadata, model, reasoning effort, or service tier. Model settings apply to
+     * subsequent turns. Omitted fields are unchanged. See managing sessions.
      *
      * @param sessionId The ID of the session.
-     * @param spendControl Omit to retain the limit; null or a null limit removes it
-     *   without resetting spend.
-     * @param agent Model settings for subsequent turns. Omitted fields stay
-     *   unchanged.
-     * @param metadata Replaces all metadata. Omit to leave unchanged, or pass null
-     *   or {} to clear it. Up to 16 string key-value pairs, with keys up to 64 and
-     *   values up to 512 characters.
+     * @param spendControl Omit to retain the limit; null or a null limit removes it without
+     *   resetting spend.
+     * @param agent Model settings for subsequent turns. Omitted fields stay unchanged.
+     * @param metadata Replaces all metadata. Omit to leave unchanged, or pass null or {} to clear
+     *   it. Up to 16 string key-value pairs, with keys up to 64 and values up to 512 characters.
      */
-    fun updateAgentSession(clientConfig: ClientConfig, sessionId: String, spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null, agent: UpdateSessionAgentParam? = null, metadata: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): SessionResource {
-        return updateAgentSessionWithRawResponse(clientConfig, sessionId, spendControl, agent, metadata, options).data
+    fun updateAgentSession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null,
+        agent: UpdateSessionAgentParam? = null,
+        metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
+        options: RequestOptions? = null,
+    ): SessionResource {
+        return updateAgentSessionWithRawResponse(
+                clientConfig,
+                sessionId,
+                spendControl,
+                agent,
+                metadata,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [updateAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun updateAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null,
+        agent: UpdateSessionAgentParam? = null,
+        metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [updateAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateAgentSessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null, agent: UpdateSessionAgentParam? = null, metadata: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): SdkResponse<SessionResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<SessionResource>(SdkClient.RequestSpec("POST", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}", config = clientConfig, body = SdkClient.bodyMap("spend_control" to
-    (spendControl ?: SdkClient.SdkOptional.Omitted), "agent" to (SdkClient.omitIfNull(agent)), "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted)), operationId = "updateAgentSession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionResource>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "spend_control" to (spendControl ?: SdkClient.SdkOptional.Omitted),
+                        "agent" to (SdkClient.omitIfNull(agent)),
+                        "metadata" to (metadata ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "updateAgentSession",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentsDeleteAgentSessionOperation {
     /**
-     * Removes a managed agent session from the public API and returns a deletion confirmation. If backend execution has ended, deletion can cancel a still-open public turn and abandon unpublished outputs. Running execution must be cancelled first. Physical cleanup may continue asynchronously. See managing sessions.
+     * Removes a managed agent session from the public API and returns a deletion confirmation. If
+     * backend execution has ended, deletion can cancel a still-open public turn and abandon
+     * unpublished outputs. Running execution must be cancelled first. Physical cleanup may continue
+     * asynchronously. See managing sessions.
      *
      * @param sessionId The ID of the session.
      */
-    fun deleteAgentSession(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): DeletedSessionResource {
+    fun deleteAgentSession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): DeletedSessionResource {
         return deleteAgentSessionWithRawResponse(clientConfig, sessionId, options).data
     }
 
+    /**
+     * [deleteAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun deleteAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedSessionResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [deleteAgentSession], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteAgentSessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SdkResponse<DeletedSessionResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<DeletedSessionResource>(SdkClient.RequestSpec("DELETE", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}", config = clientConfig, operationId = "deleteAgentSession", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<DeletedSessionResource>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}",
+                config = clientConfig,
+                operationId = "deleteAgentSession",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -653,59 +1289,128 @@ internal object AgentsListAgentSessionArtifactsOperation {
      * Lists immutable artifacts published by completed hosted session turns. See session artifacts.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
-     * @param environmentId Restrict the listing to artifacts produced by this
-     *   environment.
+     * @param environmentId Restrict the listing to artifacts produced by this environment.
      */
-    fun listAgentSessionArtifacts(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SessionArtifactListResource {
-        return listAgentSessionArtifactsWithRawResponse(clientConfig, sessionId, limit, order, after, environmentId, options).data
+    fun listAgentSessionArtifacts(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SessionArtifactListResource {
+        return listAgentSessionArtifactsWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                environmentId,
+                options,
+            )
+            .data
     }
 
-
-    /** [listAgentSessionArtifacts], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAgentSessionArtifactsWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<SessionArtifactListResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+    /**
+     * [listAgentSessionArtifacts], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listAgentSessionArtifactsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionArtifactListResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         if (after != null) {
             Validation.validateLength("after", after, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        }
 
         val environmentIdValue = environmentId?.getOrNull()
-if (environmentIdValue != null) {
-            Validation.validateLength("environment_id", environmentIdValue, Validation.LengthOpts(min = 0, max = 1048576))
-}
+        if (environmentIdValue != null) {
+            Validation.validateLength(
+                "environment_id",
+                environmentIdValue,
+                Validation.LengthOpts(min = 0, max = 1048576),
+            )
+        }
 
-        return SdkClient.request<SessionArtifactListResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "order" to SdkClient.queryValue(order, "form", true), "after" to SdkClient.queryValue(after, "form", true), "environment_id" to
-    SdkClient.queryValue(environmentId, "form", true)), operationId = "listAgentSessionArtifacts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionArtifactListResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "order" to SdkClient.queryValue(order, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "environment_id" to SdkClient.queryValue(environmentId, "form", true),
+                    ),
+                operationId = "listAgentSessionArtifacts",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Lists immutable artifacts published by completed hosted session turns. See session artifacts.
      *
      * @param sessionId The ID of the session.
-     * @param limit The maximum number of resources to return, between 1 and 100.
-     *   Defaults to 20.
+     * @param limit The maximum number of resources to return, between 1 and 100. Defaults to 20.
      * @param order The order in which resources are returned. Defaults to `desc`.
      * @param after Return resources after this resource ID in the selected order.
-     * @param environmentId Restrict the listing to artifacts produced by this
-     *   environment.
+     * @param environmentId Restrict the listing to artifacts produced by this environment.
      */
-    fun listAgentSessionArtifactsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null, yieldFn: (SessionArtifactResource) -> Boolean) {
+    fun listAgentSessionArtifactsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionArtifactResource) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionArtifacts(clientConfig, sessionId, limit, order, cursor, environmentId, options)
+            val page =
+                listAgentSessionArtifacts(
+                    clientConfig,
+                    sessionId,
+                    limit,
+                    order,
+                    cursor,
+                    environmentId,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -717,12 +1422,28 @@ if (environmentIdValue != null) {
         }
     }
 
-
-
-    fun listAgentSessionArtifactsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null, yieldPage: (Agents.ListAgentSessionArtifactsPage) -> Boolean) {
+    fun listAgentSessionArtifactsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Agents.ListAgentSessionArtifactsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
-            val page = listAgentSessionArtifacts(clientConfig, sessionId, limit, order, cursor, environmentId, options)
+            val page =
+                listAgentSessionArtifacts(
+                    clientConfig,
+                    sessionId,
+                    limit,
+                    order,
+                    cursor,
+                    environmentId,
+                    options,
+                )
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.lastId
@@ -741,61 +1462,198 @@ internal object AgentsRetrieveAgentSessionArtifactOperation {
      * @param sessionId The ID of the session that owns the artifact.
      * @param artifactId The immutable session artifact ID.
      */
-    fun retrieveAgentSessionArtifact(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SessionArtifactResource {
-        return retrieveAgentSessionArtifactWithRawResponse(clientConfig, sessionId, artifactId, options).data
+    fun retrieveAgentSessionArtifact(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SessionArtifactResource {
+        return retrieveAgentSessionArtifactWithRawResponse(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [retrieveAgentSessionArtifact], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun retrieveAgentSessionArtifactWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionArtifactResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [retrieveAgentSessionArtifact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveAgentSessionArtifactWithRawResponse(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SdkResponse<SessionArtifactResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "artifact_id",
+            artifactId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        Validation.validateLength("artifact_id", artifactId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<SessionArtifactResource>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts/${SdkClient.encodePathSegment(artifactId)}", config = clientConfig, operationId = "retrieveAgentSessionArtifact", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<SessionArtifactResource>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts/${SdkClient.encodePathSegment(artifactId)}",
+                config = clientConfig,
+                operationId = "retrieveAgentSessionArtifact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentsDeleteAgentSessionArtifactOperation {
     /**
-     * Deletes an immutable session artifact without deleting its live environment file or original Files API object. See session artifacts.
+     * Deletes an immutable session artifact without deleting its live environment file or original
+     * Files API object. See session artifacts.
      *
      * @param sessionId The ID of the session that owns the artifact.
      * @param artifactId The immutable session artifact ID.
      */
-    fun deleteAgentSessionArtifact(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): DeletedSessionArtifactResource {
-        return deleteAgentSessionArtifactWithRawResponse(clientConfig, sessionId, artifactId, options).data
+    fun deleteAgentSessionArtifact(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): DeletedSessionArtifactResource {
+        return deleteAgentSessionArtifactWithRawResponse(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [deleteAgentSessionArtifact], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteAgentSessionArtifactWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedSessionArtifactResource> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [deleteAgentSessionArtifact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteAgentSessionArtifactWithRawResponse(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SdkResponse<DeletedSessionArtifactResource> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "artifact_id",
+            artifactId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        Validation.validateLength("artifact_id", artifactId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<DeletedSessionArtifactResource>(SdkClient.RequestSpec("DELETE", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts/${SdkClient.encodePathSegment(artifactId)}", config = clientConfig, operationId = "deleteAgentSessionArtifact", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<DeletedSessionArtifactResource>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts/${SdkClient.encodePathSegment(artifactId)}",
+                config = clientConfig,
+                operationId = "deleteAgentSessionArtifact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object AgentsRetrieveAgentSessionArtifactContentOperation {
     /**
-     * Downloads immutable session artifact bytes after the execution environment expires. See session artifacts.
+     * Downloads immutable session artifact bytes after the execution environment expires. See
+     * session artifacts.
      *
      * @param sessionId The ID of the session that owns the artifact.
      * @param artifactId The immutable session artifact ID.
      */
-    fun retrieveAgentSessionArtifactContent(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): ByteArray {
-        return retrieveAgentSessionArtifactContentWithRawResponse(clientConfig, sessionId, artifactId, options).data
+    fun retrieveAgentSessionArtifactContent(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
+        return retrieveAgentSessionArtifactContentWithRawResponse(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
+            .data
     }
 
+    /**
+     * [retrieveAgentSessionArtifactContent], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun retrieveAgentSessionArtifactContentWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ByteArray> {
+        Validation.validateLength(
+            "session_id",
+            sessionId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-    /** [retrieveAgentSessionArtifactContent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveAgentSessionArtifactContentWithRawResponse(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SdkResponse<ByteArray> {
-        Validation.validateLength("session_id", sessionId, Validation.LengthOpts(min = 0, max = 1048576))
+        Validation.validateLength(
+            "artifact_id",
+            artifactId,
+            Validation.LengthOpts(min = 0, max = 1048576),
+        )
 
-        Validation.validateLength("artifact_id", artifactId, Validation.LengthOpts(min = 0, max = 1048576))
-
-        return SdkClient.request<ByteArray>(SdkClient.RequestSpec("GET", "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts/${SdkClient.encodePathSegment(artifactId)}/content", config = clientConfig, operationId = "retrieveAgentSessionArtifactContent", decoder = SdkClient.ResponseDecoder.BYTES, options = options, errors = mapOf("400" to ErrorResponse2::class.java, "401" to ErrorResponse2::class.java, "403" to ErrorResponse2::class.java, "404" to ErrorResponse2::class.java, "409" to ErrorResponse2::class.java, "500" to ErrorResponse2::class.java, "503" to ErrorResponse2::class.java)))
+        return SdkClient.request<ByteArray>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/agents/sessions/${SdkClient.encodePathSegment(sessionId)}/artifacts/${SdkClient.encodePathSegment(artifactId)}/content",
+                config = clientConfig,
+                operationId = "retrieveAgentSessionArtifactContent",
+                decoder = SdkClient.ResponseDecoder.BYTES,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse2::class.java,
+                        "401" to ErrorResponse2::class.java,
+                        "403" to ErrorResponse2::class.java,
+                        "404" to ErrorResponse2::class.java,
+                        "409" to ErrorResponse2::class.java,
+                        "500" to ErrorResponse2::class.java,
+                        "503" to ErrorResponse2::class.java,
+                    ),
+            )
+        )
     }
 }

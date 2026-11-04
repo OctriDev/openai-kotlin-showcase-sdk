@@ -16,47 +16,88 @@ import dev.octri.showcase.openai.UserListResponse
 object Users {
 
     /**
-     * Lists users in the organization. Use `emails` to filter the list by email address and `limit` and `after` to control the page of results. The response includes pagination fields to help you retrieve additional users.
+     * Lists users in the organization. Use `emails` to filter the list by email address and `limit`
+     * and `after` to control the page of results. The response includes pagination fields to help
+     * you retrieve additional users.
      *
      * Lists all of the users in the organization.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      * @param emails Filter by the email address of users.
      */
-    fun listUsers(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, emails: List<String>? = null, options: RequestOptions? = null): UserListResponse {
+    fun listUsers(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        emails: List<String>? = null,
+        options: RequestOptions? = null,
+    ): UserListResponse {
         return listUsersWithRawResponse(clientConfig, limit, after, emails, options).data
     }
 
-
-    /** [listUsers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listUsersWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, emails: List<String>? = null, options: RequestOptions? = null): SdkResponse<UserListResponse> {
-        return SdkClient.request<UserListResponse>(SdkClient.RequestSpec("GET", "/organization/users", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "emails" to SdkClient.queryValue(emails, "form", true)), operationId = "listUsers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [listUsers], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listUsersWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        emails: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<UserListResponse> {
+        return SdkClient.request<UserListResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/users",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "emails" to SdkClient.queryValue(emails, "form", true),
+                    ),
+                operationId = "listUsers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists users in the organization. Use `emails` to filter the list by email address and `limit` and `after` to control the page of results. The response includes pagination fields to help you retrieve additional users.
+     * Lists users in the organization. Use `emails` to filter the list by email address and `limit`
+     * and `after` to control the page of results. The response includes pagination fields to help
+     * you retrieve additional users.
      *
      * Lists all of the users in the organization.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      * @param emails Filter by the email address of users.
      */
-    fun listUsersPaginated(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, emails: List<String>? = null, options: RequestOptions? = null, yieldFn: (User) -> Boolean) {
+    fun listUsersPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        emails: List<String>? = null,
+        options: RequestOptions? = null,
+        yieldFn: (User) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listUsers(clientConfig, limit, cursor, emails, options)
@@ -77,7 +118,14 @@ object Users {
         val hasMore: Boolean,
     )
 
-    fun listUsersPages(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, emails: List<String>? = null, options: RequestOptions? = null, yieldPage: (ListUsersPage) -> Boolean) {
+    fun listUsersPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        emails: List<String>? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListUsersPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listUsers(clientConfig, limit, cursor, emails, options)
@@ -91,31 +139,53 @@ object Users {
         }
     }
 
-
     /**
-     * Retrieves a user from the organization by their identifier. Use this operation to view the user's organization role, account details, and associated user metadata.
+     * Retrieves a user from the organization by their identifier. Use this operation to view the
+     * user's organization role, account details, and associated user metadata.
      *
      * Retrieves a user by their identifier.
      *
      * @param userId The ID of the user.
      */
-    fun retrieveUser(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): User {
+    fun retrieveUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): User {
         return retrieveUserWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [retrieveUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveUserWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<User> {
-        return SdkClient.request<User>(SdkClient.RequestSpec("GET", "/organization/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "retrieveUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [retrieveUser], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<User> {
+        return SdkClient.request<User>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                operationId = "retrieveUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Updates a user's role or metadata in the organization. Supply the body fields you want to change, such as `role`, `role_id`, `technical_level`, or `developer_persona`. The response contains the updated organization user.
+     * Updates a user's role or metadata in the organization. Supply the body fields you want to
+     * change, such as `role`, `role_id`, `technical_level`, or `developer_persona`. The response
+     * contains the updated organization user.
      *
      * Modifies a user's role in the organization.
      *
@@ -125,44 +195,107 @@ object Users {
      * @param technicalLevel Technical level metadata.
      * @param developerPersona Developer persona metadata.
      */
-    fun modifyUser(clientConfig: ClientConfig, userId: String, role: SdkClient.SdkOptional<String?>? = null, roleId: SdkClient.SdkOptional<String?>? = null, technicalLevel: SdkClient.SdkOptional<String?>? = null, developerPersona: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): User {
-        return modifyUserWithRawResponse(clientConfig, userId, role, roleId, technicalLevel, developerPersona, options).data
+    fun modifyUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        role: SdkClient.SdkOptional<String?>? = null,
+        roleId: SdkClient.SdkOptional<String?>? = null,
+        technicalLevel: SdkClient.SdkOptional<String?>? = null,
+        developerPersona: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): User {
+        return modifyUserWithRawResponse(
+                clientConfig,
+                userId,
+                role,
+                roleId,
+                technicalLevel,
+                developerPersona,
+                options,
+            )
+            .data
     }
-
-
-    /** [modifyUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun modifyUserWithRawResponse(clientConfig: ClientConfig, userId: String, role: SdkClient.SdkOptional<String?>? = null, roleId: SdkClient.SdkOptional<String?>? = null, technicalLevel: SdkClient.SdkOptional<String?>? = null, developerPersona: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<User> {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/organization/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, body = SdkClient.bodyMap("role" to (role ?: SdkClient.SdkOptional.Omitted), "role_id" to (roleId ?: SdkClient.SdkOptional.Omitted), "technical_level" to
-    (technicalLevel ?: SdkClient.SdkOptional.Omitted), "developer_persona" to
-    (developerPersona ?: SdkClient.SdkOptional.Omitted)), operationId = "modifyUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Deletes a user from the organization. Use this operation to remove a user who is no longer part of the organization. The response confirms deletion and includes the user's ID.
+     * [modifyUser], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun modifyUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        role: SdkClient.SdkOptional<String?>? = null,
+        roleId: SdkClient.SdkOptional<String?>? = null,
+        technicalLevel: SdkClient.SdkOptional<String?>? = null,
+        developerPersona: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<User> {
+        return SdkClient.request<User>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "role" to (role ?: SdkClient.SdkOptional.Omitted),
+                        "role_id" to (roleId ?: SdkClient.SdkOptional.Omitted),
+                        "technical_level" to (technicalLevel ?: SdkClient.SdkOptional.Omitted),
+                        "developer_persona" to (developerPersona ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "modifyUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Deletes a user from the organization. Use this operation to remove a user who is no longer
+     * part of the organization. The response confirms deletion and includes the user's ID.
      *
      * Deletes a user from the organization.
      *
      * @param userId The ID of the user.
      */
-    fun deleteUser(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): UserDeleteResponse {
+    fun deleteUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): UserDeleteResponse {
         return deleteUserWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [deleteUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteUserWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<UserDeleteResponse> {
-        return SdkClient.request<UserDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "deleteUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [deleteUser], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun deleteUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<UserDeleteResponse> {
+        return SdkClient.request<UserDeleteResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/organization/users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                operationId = "deleteUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

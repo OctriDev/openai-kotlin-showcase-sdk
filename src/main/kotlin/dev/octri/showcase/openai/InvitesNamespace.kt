@@ -3,85 +3,166 @@
 
 package dev.octri.showcase.openai
 
-
 class InvitesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists organization invites and their status, role, and project access details. Use `limit` to control the number of results and `after` to continue from an invite ID. The response includes `has_more` and cursor IDs to help you paginate.
+     * Lists organization invites and their status, role, and project access details. Use `limit` to
+     * control the number of results and `after` to continue from an invite ID. The response
+     * includes `has_more` and cursor IDs to help you paginate.
      *
      * Returns a list of invites in the organization.
      */
-    fun list(limit: Long? = null, after: String? = null, options: RequestOptions? = null): InviteListResponse {
-        return dev.octri.showcase.openai.methods.Invites.listInvites(clientConfig, limit, after, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): InviteListResponse {
+        return dev.octri.showcase.openai.methods.Invites.listInvites(
+            clientConfig,
+            limit,
+            after,
+            options,
+        )
     }
 
     /**
-     * Lists organization invites and their status, role, and project access details. Use `limit` to control the number of results and `after` to continue from an invite ID. The response includes `has_more` and cursor IDs to help you paginate.
+     * Lists organization invites and their status, role, and project access details. Use `limit` to
+     * control the number of results and `after` to continue from an invite ID. The response
+     * includes `has_more` and cursor IDs to help you paginate.
      *
      * Returns a list of invites in the organization.
      */
-    fun listPaginated(limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (Invite) -> Boolean) {
-        dev.octri.showcase.openai.methods.Invites.listInvitesPaginated(clientConfig, limit, after, options, yieldFn)
+    fun listPaginated(
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Invite) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Invites.listInvitesPaginated(
+            clientConfig,
+            limit,
+            after,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Create an invite for a user to the organization. The invite must be accepted by the user before they have access to the organization.
+     * Create an invite for a user to the organization. The invite must be accepted by the user
+     * before they have access to the organization.
      */
-    fun create(email: String, role: InviteRequestRoleEnum, projects: List<dev.octri.showcase.openai.methods.Invites.InviteRequestProjectsItem>? = null, options: RequestOptions? = null): Invite {
-        return dev.octri.showcase.openai.methods.Invites.createInvites(clientConfig, email, role, projects, options)
+    fun create(
+        email: String,
+        role: InviteRequestRoleEnum,
+        projects: List<dev.octri.showcase.openai.methods.Invites.InviteRequestProjectsItem>? = null,
+        options: RequestOptions? = null,
+    ): Invite {
+        return dev.octri.showcase.openai.methods.Invites.createInvites(
+            clientConfig,
+            email,
+            role,
+            projects,
+            options,
+        )
     }
 
     /**
-     * Retrieves an organization invite by its identifier. Use `invite_id` to select the invite whose email address, role, status, and project access you need to inspect.
+     * Retrieves an organization invite by its identifier. Use `invite_id` to select the invite
+     * whose email address, role, status, and project access you need to inspect.
      *
      * Retrieves an invite.
      */
     fun retrieve(inviteId: String, options: RequestOptions? = null): Invite {
-        return dev.octri.showcase.openai.methods.Invites.retrieveInvite(clientConfig, inviteId, options)
+        return dev.octri.showcase.openai.methods.Invites.retrieveInvite(
+            clientConfig,
+            inviteId,
+            options,
+        )
+    }
+
+    /** Delete an invite. If the invite has already been accepted, it cannot be deleted. */
+    fun delete(inviteId: String, options: RequestOptions? = null): InviteDeleteResponse {
+        return dev.octri.showcase.openai.methods.Invites.deleteInvite(
+            clientConfig,
+            inviteId,
+            options,
+        )
     }
 
     /**
-     * Delete an invite. If the invite has already been accepted, it cannot be deleted.
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun delete(inviteId: String, options: RequestOptions? = null): InviteDeleteResponse {
-        return dev.octri.showcase.openai.methods.Invites.deleteInvite(clientConfig, inviteId, options)
-    }
-
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [InvitesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [InvitesNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Lists organization invites and their status, role, and project access details. Use `limit` to control the number of results and `after` to continue from an invite ID. The response includes `has_more` and cursor IDs to help you paginate.
+         * Lists organization invites and their status, role, and project access details. Use
+         * `limit` to control the number of results and `after` to continue from an invite ID. The
+         * response includes `has_more` and cursor IDs to help you paginate.
          *
          * Returns a list of invites in the organization.
          */
-        fun list(limit: Long? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<InviteListResponse> {
-            return dev.octri.showcase.openai.methods.Invites.listInvitesWithRawResponse(clientConfig, limit, after, options)
+        fun list(
+            limit: Long? = null,
+            after: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<InviteListResponse> {
+            return dev.octri.showcase.openai.methods.Invites.listInvitesWithRawResponse(
+                clientConfig,
+                limit,
+                after,
+                options,
+            )
         }
 
         /**
-         * Create an invite for a user to the organization. The invite must be accepted by the user before they have access to the organization.
+         * Create an invite for a user to the organization. The invite must be accepted by the user
+         * before they have access to the organization.
          */
-        fun create(email: String, role: InviteRequestRoleEnum, projects: List<dev.octri.showcase.openai.methods.Invites.InviteRequestProjectsItem>? = null, options: RequestOptions? = null): SdkResponse<Invite> {
-            return dev.octri.showcase.openai.methods.Invites.createInvitesWithRawResponse(clientConfig, email, role, projects, options)
+        fun create(
+            email: String,
+            role: InviteRequestRoleEnum,
+            projects: List<dev.octri.showcase.openai.methods.Invites.InviteRequestProjectsItem>? =
+                null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Invite> {
+            return dev.octri.showcase.openai.methods.Invites.createInvitesWithRawResponse(
+                clientConfig,
+                email,
+                role,
+                projects,
+                options,
+            )
         }
 
         /**
-         * Retrieves an organization invite by its identifier. Use `invite_id` to select the invite whose email address, role, status, and project access you need to inspect.
+         * Retrieves an organization invite by its identifier. Use `invite_id` to select the invite
+         * whose email address, role, status, and project access you need to inspect.
          *
          * Retrieves an invite.
          */
         fun retrieve(inviteId: String, options: RequestOptions? = null): SdkResponse<Invite> {
-            return dev.octri.showcase.openai.methods.Invites.retrieveInviteWithRawResponse(clientConfig, inviteId, options)
+            return dev.octri.showcase.openai.methods.Invites.retrieveInviteWithRawResponse(
+                clientConfig,
+                inviteId,
+                options,
+            )
         }
 
-        /**
-         * Delete an invite. If the invite has already been accepted, it cannot be deleted.
-         */
-        fun delete(inviteId: String, options: RequestOptions? = null): SdkResponse<InviteDeleteResponse> {
-            return dev.octri.showcase.openai.methods.Invites.deleteInviteWithRawResponse(clientConfig, inviteId, options)
+        /** Delete an invite. If the invite has already been accepted, it cannot be deleted. */
+        fun delete(
+            inviteId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<InviteDeleteResponse> {
+            return dev.octri.showcase.openai.methods.Invites.deleteInviteWithRawResponse(
+                clientConfig,
+                inviteId,
+                options,
+            )
         }
-
     }
 }

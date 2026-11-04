@@ -3,192 +3,427 @@
 
 package dev.octri.showcase.openai
 
-
 class ContainersNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists containers available to the authenticated user. Filter the results by `name` and use `after` to continue from a container ID returned in a previous page. Results are ordered by creation time, descending by default.
+     * Lists containers available to the authenticated user. Filter the results by `name` and use
+     * `after` to continue from a container ID returned in a previous page. Results are ordered by
+     * creation time, descending by default.
      *
      * List Containers
      */
-    fun list(limit: Long? = null, order: ListContainersParameterEnum? = null, after: String? = null, name: String? = null, options: RequestOptions? = null): ContainerListResource {
-        return dev.octri.showcase.openai.methods.Containers.listContainers(clientConfig, limit, order, after, name, options)
+    fun list(
+        limit: Long? = null,
+        order: ListContainersParameterEnum? = null,
+        after: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+    ): ContainerListResource {
+        return dev.octri.showcase.openai.methods.Containers.listContainers(
+            clientConfig,
+            limit,
+            order,
+            after,
+            name,
+            options,
+        )
     }
 
     /**
-     * Lists containers available to the authenticated user. Filter the results by `name` and use `after` to continue from a container ID returned in a previous page. Results are ordered by creation time, descending by default.
+     * Lists containers available to the authenticated user. Filter the results by `name` and use
+     * `after` to continue from a container ID returned in a previous page. Results are ordered by
+     * creation time, descending by default.
      *
      * List Containers
      */
-    fun listPaginated(limit: Long? = null, order: ListContainersParameterEnum? = null, after: String? = null, name: String? = null, options: RequestOptions? = null, yieldFn: (ContainerResource) -> Boolean) {
-        dev.octri.showcase.openai.methods.Containers.listContainersPaginated(clientConfig, limit, order, after, name, options, yieldFn)
+    fun listPaginated(
+        limit: Long? = null,
+        order: ListContainersParameterEnum? = null,
+        after: String? = null,
+        name: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ContainerResource) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Containers.listContainersPaginated(
+            clientConfig,
+            limit,
+            order,
+            after,
+            name,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a container with the specified name and optional configuration. Use `file_ids` to copy files into the container and configure expiration, memory, network access, or skills as needed. The memory limit defaults to `1g` when omitted.
+     * Creates a container with the specified name and optional configuration. Use `file_ids` to
+     * copy files into the container and configure expiration, memory, network access, or skills as
+     * needed. The memory limit defaults to `1g` when omitted.
      *
      * Create Container
      */
-    fun create(request: dev.octri.showcase.openai.methods.Containers.CreateContainerRequest, options: RequestOptions? = null): ContainerResource {
-        return dev.octri.showcase.openai.methods.Containers.createContainer(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.openai.methods.Containers.CreateContainerRequest,
+        options: RequestOptions? = null,
+    ): ContainerResource {
+        return dev.octri.showcase.openai.methods.Containers.createContainer(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a container by its unique identifier. Use this operation to inspect the container's status and configuration, including its expiration, memory limit, and network policy.
+     * Retrieves a container by its unique identifier. Use this operation to inspect the container's
+     * status and configuration, including its expiration, memory limit, and network policy.
      *
      * Retrieve Container
      */
     fun retrieve(containerId: String, options: RequestOptions? = null): ContainerResource {
-        return dev.octri.showcase.openai.methods.Containers.retrieveContainer(clientConfig, containerId, options)
+        return dev.octri.showcase.openai.methods.Containers.retrieveContainer(
+            clientConfig,
+            containerId,
+            options,
+        )
     }
 
     /**
-     * Deletes a container by its unique identifier. Use this operation when the container is no longer needed; the response confirms whether the container was deleted.
+     * Deletes a container by its unique identifier. Use this operation when the container is no
+     * longer needed; the response confirms whether the container was deleted.
      *
      * Delete Container
      */
-    fun delete(containerId: String, options: RequestOptions? = null): dev.octri.showcase.openai.methods.Containers.DeleteContainerResponse {
-        return dev.octri.showcase.openai.methods.Containers.deleteContainer(clientConfig, containerId, options)
+    fun delete(
+        containerId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.openai.methods.Containers.DeleteContainerResponse {
+        return dev.octri.showcase.openai.methods.Containers.deleteContainer(
+            clientConfig,
+            containerId,
+            options,
+        )
     }
 
     /**
-     * Creates a file in a container from raw multipart file content or a file ID supplied in a JSON request. Choose the request format based on whether you are uploading file content or referencing a file, and use `container_id` to identify the destination container.
+     * Creates a file in a container from raw multipart file content or a file ID supplied in a JSON
+     * request. Choose the request format based on whether you are uploading file content or
+     * referencing a file, and use `container_id` to identify the destination container.
      *
-     * Create a Container File You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.
+     * Create a Container File You can send either a multipart/form-data request with the raw file
+     * content, or a JSON request with a file ID.
      */
-    fun createFile(containerId: String, fileId: String? = null, file: ByteArray? = null, contentType: String? = null, options: RequestOptions? = null): ContainerFileResource {
-        return dev.octri.showcase.openai.methods.Containers.createContainerFile(clientConfig, containerId, fileId, file, contentType, options)
+    fun createFile(
+        containerId: String,
+        fileId: String? = null,
+        file: ByteArray? = null,
+        contentType: String? = null,
+        options: RequestOptions? = null,
+    ): ContainerFileResource {
+        return dev.octri.showcase.openai.methods.Containers.createContainerFile(
+            clientConfig,
+            containerId,
+            fileId,
+            file,
+            contentType,
+            options,
+        )
     }
 
     /**
-     * Lists files associated with a container. Use `after` to continue from a file ID returned in a previous page, and `limit` and `order` to control the result page. The container must exist and must not have expired.
+     * Lists files associated with a container. Use `after` to continue from a file ID returned in a
+     * previous page, and `limit` and `order` to control the result page. The container must exist
+     * and must not have expired.
      *
      * List Container files
      */
-    fun listFiles(containerId: String, limit: Long? = null, order: ListContainerFilesParameterEnum? = null, after: String? = null, options: RequestOptions? = null): ContainerFileListResource {
-        return dev.octri.showcase.openai.methods.Containers.listContainerFiles(clientConfig, containerId, limit, order, after, options)
+    fun listFiles(
+        containerId: String,
+        limit: Long? = null,
+        order: ListContainerFilesParameterEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ContainerFileListResource {
+        return dev.octri.showcase.openai.methods.Containers.listContainerFiles(
+            clientConfig,
+            containerId,
+            limit,
+            order,
+            after,
+            options,
+        )
     }
 
     /**
-     * Lists files associated with a container. Use `after` to continue from a file ID returned in a previous page, and `limit` and `order` to control the result page. The container must exist and must not have expired.
+     * Lists files associated with a container. Use `after` to continue from a file ID returned in a
+     * previous page, and `limit` and `order` to control the result page. The container must exist
+     * and must not have expired.
      *
      * List Container files
      */
-    fun listFilesPaginated(containerId: String, limit: Long? = null, order: ListContainerFilesParameterEnum? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ContainerFileResource) -> Boolean) {
-        dev.octri.showcase.openai.methods.Containers.listContainerFilesPaginated(clientConfig, containerId, limit, order, after, options, yieldFn)
+    fun listFilesPaginated(
+        containerId: String,
+        limit: Long? = null,
+        order: ListContainerFilesParameterEnum? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ContainerFileResource) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Containers.listContainerFilesPaginated(
+            clientConfig,
+            containerId,
+            limit,
+            order,
+            after,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Retrieves a file's metadata from a container. Use `container_id` and `file_id` to identify the container and file whose details you need.
+     * Retrieves a file's metadata from a container. Use `container_id` and `file_id` to identify
+     * the container and file whose details you need.
      *
      * Retrieve Container File
      */
-    fun retrieveFile(containerId: String, fileId: String, options: RequestOptions? = null): ContainerFileResource {
-        return dev.octri.showcase.openai.methods.Containers.retrieveContainerFile(clientConfig, containerId, fileId, options)
+    fun retrieveFile(
+        containerId: String,
+        fileId: String,
+        options: RequestOptions? = null,
+    ): ContainerFileResource {
+        return dev.octri.showcase.openai.methods.Containers.retrieveContainerFile(
+            clientConfig,
+            containerId,
+            fileId,
+            options,
+        )
     }
 
     /**
-     * Deletes a file from a container. Use `container_id` and `file_id` to identify the file to remove.
+     * Deletes a file from a container. Use `container_id` and `file_id` to identify the file to
+     * remove.
      *
      * Delete Container File
      */
-    fun deleteFile(containerId: String, fileId: String, options: RequestOptions? = null): dev.octri.showcase.openai.methods.Containers.DeleteContainerFileResponse {
-        return dev.octri.showcase.openai.methods.Containers.deleteContainerFile(clientConfig, containerId, fileId, options)
+    fun deleteFile(
+        containerId: String,
+        fileId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.openai.methods.Containers.DeleteContainerFileResponse {
+        return dev.octri.showcase.openai.methods.Containers.deleteContainerFile(
+            clientConfig,
+            containerId,
+            fileId,
+            options,
+        )
     }
 
     /**
-     * Retrieves the raw content of a file in a container. Use `container_id` and `file_id` to identify the file whose content you want to download.
+     * Retrieves the raw content of a file in a container. Use `container_id` and `file_id` to
+     * identify the file whose content you want to download.
      *
      * Retrieve Container File Content
      */
-    fun retrieveFileContent(containerId: String, fileId: String, options: RequestOptions? = null): ByteArray {
-        return dev.octri.showcase.openai.methods.Containers.retrieveContainerFileContent(clientConfig, containerId, fileId, options)
+    fun retrieveFileContent(
+        containerId: String,
+        fileId: String,
+        options: RequestOptions? = null,
+    ): ByteArray {
+        return dev.octri.showcase.openai.methods.Containers.retrieveContainerFileContent(
+            clientConfig,
+            containerId,
+            fileId,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [ContainersNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [ContainersNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Lists containers available to the authenticated user. Filter the results by `name` and use `after` to continue from a container ID returned in a previous page. Results are ordered by creation time, descending by default.
+         * Lists containers available to the authenticated user. Filter the results by `name` and
+         * use `after` to continue from a container ID returned in a previous page. Results are
+         * ordered by creation time, descending by default.
          *
          * List Containers
          */
-        fun list(limit: Long? = null, order: ListContainersParameterEnum? = null, after: String? = null, name: String? = null, options: RequestOptions? = null): SdkResponse<ContainerListResource> {
-            return dev.octri.showcase.openai.methods.Containers.listContainersWithRawResponse(clientConfig, limit, order, after, name, options)
+        fun list(
+            limit: Long? = null,
+            order: ListContainersParameterEnum? = null,
+            after: String? = null,
+            name: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ContainerListResource> {
+            return dev.octri.showcase.openai.methods.Containers.listContainersWithRawResponse(
+                clientConfig,
+                limit,
+                order,
+                after,
+                name,
+                options,
+            )
         }
 
         /**
-         * Creates a container with the specified name and optional configuration. Use `file_ids` to copy files into the container and configure expiration, memory, network access, or skills as needed. The memory limit defaults to `1g` when omitted.
+         * Creates a container with the specified name and optional configuration. Use `file_ids` to
+         * copy files into the container and configure expiration, memory, network access, or skills
+         * as needed. The memory limit defaults to `1g` when omitted.
          *
          * Create Container
          */
-        fun create(request: dev.octri.showcase.openai.methods.Containers.CreateContainerRequest, options: RequestOptions? = null): SdkResponse<ContainerResource> {
-            return dev.octri.showcase.openai.methods.Containers.createContainerWithRawResponse(clientConfig, request, options)
+        fun create(
+            request: dev.octri.showcase.openai.methods.Containers.CreateContainerRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<ContainerResource> {
+            return dev.octri.showcase.openai.methods.Containers.createContainerWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Retrieves a container by its unique identifier. Use this operation to inspect the container's status and configuration, including its expiration, memory limit, and network policy.
+         * Retrieves a container by its unique identifier. Use this operation to inspect the
+         * container's status and configuration, including its expiration, memory limit, and network
+         * policy.
          *
          * Retrieve Container
          */
-        fun retrieve(containerId: String, options: RequestOptions? = null): SdkResponse<ContainerResource> {
-            return dev.octri.showcase.openai.methods.Containers.retrieveContainerWithRawResponse(clientConfig, containerId, options)
+        fun retrieve(
+            containerId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<ContainerResource> {
+            return dev.octri.showcase.openai.methods.Containers.retrieveContainerWithRawResponse(
+                clientConfig,
+                containerId,
+                options,
+            )
         }
 
         /**
-         * Deletes a container by its unique identifier. Use this operation when the container is no longer needed; the response confirms whether the container was deleted.
+         * Deletes a container by its unique identifier. Use this operation when the container is no
+         * longer needed; the response confirms whether the container was deleted.
          *
          * Delete Container
          */
-        fun delete(containerId: String, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.openai.methods.Containers.DeleteContainerResponse> {
-            return dev.octri.showcase.openai.methods.Containers.deleteContainerWithRawResponse(clientConfig, containerId, options)
+        fun delete(
+            containerId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.openai.methods.Containers.DeleteContainerResponse> {
+            return dev.octri.showcase.openai.methods.Containers.deleteContainerWithRawResponse(
+                clientConfig,
+                containerId,
+                options,
+            )
         }
 
         /**
-         * Creates a file in a container from raw multipart file content or a file ID supplied in a JSON request. Choose the request format based on whether you are uploading file content or referencing a file, and use `container_id` to identify the destination container.
+         * Creates a file in a container from raw multipart file content or a file ID supplied in a
+         * JSON request. Choose the request format based on whether you are uploading file content
+         * or referencing a file, and use `container_id` to identify the destination container.
          *
-         * Create a Container File You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.
+         * Create a Container File You can send either a multipart/form-data request with the raw
+         * file content, or a JSON request with a file ID.
          */
-        fun createFile(containerId: String, fileId: String? = null, file: ByteArray? = null, contentType: String? = null, options: RequestOptions? = null): SdkResponse<ContainerFileResource> {
-            return dev.octri.showcase.openai.methods.Containers.createContainerFileWithRawResponse(clientConfig, containerId, fileId, file, contentType, options)
+        fun createFile(
+            containerId: String,
+            fileId: String? = null,
+            file: ByteArray? = null,
+            contentType: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ContainerFileResource> {
+            return dev.octri.showcase.openai.methods.Containers.createContainerFileWithRawResponse(
+                clientConfig,
+                containerId,
+                fileId,
+                file,
+                contentType,
+                options,
+            )
         }
 
         /**
-         * Lists files associated with a container. Use `after` to continue from a file ID returned in a previous page, and `limit` and `order` to control the result page. The container must exist and must not have expired.
+         * Lists files associated with a container. Use `after` to continue from a file ID returned
+         * in a previous page, and `limit` and `order` to control the result page. The container
+         * must exist and must not have expired.
          *
          * List Container files
          */
-        fun listFiles(containerId: String, limit: Long? = null, order: ListContainerFilesParameterEnum? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<ContainerFileListResource> {
-            return dev.octri.showcase.openai.methods.Containers.listContainerFilesWithRawResponse(clientConfig, containerId, limit, order, after, options)
+        fun listFiles(
+            containerId: String,
+            limit: Long? = null,
+            order: ListContainerFilesParameterEnum? = null,
+            after: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ContainerFileListResource> {
+            return dev.octri.showcase.openai.methods.Containers.listContainerFilesWithRawResponse(
+                clientConfig,
+                containerId,
+                limit,
+                order,
+                after,
+                options,
+            )
         }
 
         /**
-         * Retrieves a file's metadata from a container. Use `container_id` and `file_id` to identify the container and file whose details you need.
+         * Retrieves a file's metadata from a container. Use `container_id` and `file_id` to
+         * identify the container and file whose details you need.
          *
          * Retrieve Container File
          */
-        fun retrieveFile(containerId: String, fileId: String, options: RequestOptions? = null): SdkResponse<ContainerFileResource> {
-            return dev.octri.showcase.openai.methods.Containers.retrieveContainerFileWithRawResponse(clientConfig, containerId, fileId, options)
+        fun retrieveFile(
+            containerId: String,
+            fileId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<ContainerFileResource> {
+            return dev.octri.showcase.openai.methods.Containers
+                .retrieveContainerFileWithRawResponse(clientConfig, containerId, fileId, options)
         }
 
         /**
-         * Deletes a file from a container. Use `container_id` and `file_id` to identify the file to remove.
+         * Deletes a file from a container. Use `container_id` and `file_id` to identify the file to
+         * remove.
          *
          * Delete Container File
          */
-        fun deleteFile(containerId: String, fileId: String, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.openai.methods.Containers.DeleteContainerFileResponse> {
-            return dev.octri.showcase.openai.methods.Containers.deleteContainerFileWithRawResponse(clientConfig, containerId, fileId, options)
+        fun deleteFile(
+            containerId: String,
+            fileId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.openai.methods.Containers.DeleteContainerFileResponse> {
+            return dev.octri.showcase.openai.methods.Containers.deleteContainerFileWithRawResponse(
+                clientConfig,
+                containerId,
+                fileId,
+                options,
+            )
         }
 
         /**
-         * Retrieves the raw content of a file in a container. Use `container_id` and `file_id` to identify the file whose content you want to download.
+         * Retrieves the raw content of a file in a container. Use `container_id` and `file_id` to
+         * identify the file whose content you want to download.
          *
          * Retrieve Container File Content
          */
-        fun retrieveFileContent(containerId: String, fileId: String, options: RequestOptions? = null): SdkResponse<ByteArray> {
-            return dev.octri.showcase.openai.methods.Containers.retrieveContainerFileContentWithRawResponse(clientConfig, containerId, fileId, options)
+        fun retrieveFileContent(
+            containerId: String,
+            fileId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<ByteArray> {
+            return dev.octri.showcase.openai.methods.Containers
+                .retrieveContainerFileContentWithRawResponse(
+                    clientConfig,
+                    containerId,
+                    fileId,
+                    options,
+                )
         }
-
     }
 }

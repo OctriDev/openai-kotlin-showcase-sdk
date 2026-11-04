@@ -3,28 +3,54 @@
 
 package dev.octri.showcase.openai
 
-
 class GroupsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists groups in the organization, with controls for page size, cursor position, and sort order. Use `after` with a group ID from the previous page to continue through the results.
+     * Lists groups in the organization, with controls for page size, cursor position, and sort
+     * order. Use `after` with a group ID from the previous page to continue through the results.
      *
      * Lists all groups in the organization.
      */
-    fun list(limit: Long? = null, after: String? = null, order: ListGroupsParameterEnum? = null, options: RequestOptions? = null): GroupListResource {
-        return dev.octri.showcase.openai.methods.Groups.listGroups(clientConfig, limit, after, order, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        order: ListGroupsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): GroupListResource {
+        return dev.octri.showcase.openai.methods.Groups.listGroups(
+            clientConfig,
+            limit,
+            after,
+            order,
+            options,
+        )
     }
 
     /**
-     * Lists groups in the organization, with controls for page size, cursor position, and sort order. Use `after` with a group ID from the previous page to continue through the results.
+     * Lists groups in the organization, with controls for page size, cursor position, and sort
+     * order. Use `after` with a group ID from the previous page to continue through the results.
      *
      * Lists all groups in the organization.
      */
-    fun listPaginated(limit: Long? = null, after: String? = null, order: ListGroupsParameterEnum? = null, options: RequestOptions? = null, yieldFn: (GroupResponse) -> Boolean) {
-        dev.octri.showcase.openai.methods.Groups.listGroupsPaginated(clientConfig, limit, after, order, options, yieldFn)
+    fun listPaginated(
+        limit: Long? = null,
+        after: String? = null,
+        order: ListGroupsParameterEnum? = null,
+        options: RequestOptions? = null,
+        yieldFn: (GroupResponse) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.Groups.listGroupsPaginated(
+            clientConfig,
+            limit,
+            after,
+            order,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a new group in the organization. Provide a human-readable `name` between 1 and 255 characters; the response includes the group's generated ID and management details.
+     * Creates a new group in the organization. Provide a human-readable `name` between 1 and 255
+     * characters; the response includes the group's generated ID and management details.
      *
      * Creates a new group in the organization.
      */
@@ -33,25 +59,42 @@ class GroupsNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Retrieves a group from the organization by its ID. Use `group_id` to identify the group whose name, creation time, management status, and type you need.
+     * Retrieves a group from the organization by its ID. Use `group_id` to identify the group whose
+     * name, creation time, management status, and type you need.
      *
      * Retrieves a group.
      */
     fun retrieve(groupId: String, options: RequestOptions? = null): GroupResponse {
-        return dev.octri.showcase.openai.methods.Groups.retrieveGroup(clientConfig, groupId, options)
+        return dev.octri.showcase.openai.methods.Groups.retrieveGroup(
+            clientConfig,
+            groupId,
+            options,
+        )
     }
 
     /**
-     * Updates a group's display name in the organization. Supply `name` as a string between 1 and 255 characters. The response includes the group's identifier, updated name, creation timestamp, and SCIM management status.
+     * Updates a group's display name in the organization. Supply `name` as a string between 1 and
+     * 255 characters. The response includes the group's identifier, updated name, creation
+     * timestamp, and SCIM management status.
      *
      * Updates a group's information.
      */
-    fun update(groupId: String, name: String, options: RequestOptions? = null): GroupResourceWithSuccess {
-        return dev.octri.showcase.openai.methods.Groups.updateGroup(clientConfig, groupId, name, options)
+    fun update(
+        groupId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): GroupResourceWithSuccess {
+        return dev.octri.showcase.openai.methods.Groups.updateGroup(
+            clientConfig,
+            groupId,
+            name,
+            options,
+        )
     }
 
     /**
-     * Deletes a group from the organization. Use the group's identifier to select which group to remove. The response confirms the deleted group by its identifier and deletion status.
+     * Deletes a group from the organization. Use the group's identifier to select which group to
+     * remove. The response confirms the deleted group by its identifier and deletion status.
      *
      * Deletes a group from the organization.
      */
@@ -59,55 +102,101 @@ class GroupsNamespace(private val clientConfig: ClientConfig) {
         return dev.octri.showcase.openai.methods.Groups.deleteGroup(clientConfig, groupId, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [GroupsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [GroupsNamespace], returning the [SdkResponse] envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Lists groups in the organization, with controls for page size, cursor position, and sort order. Use `after` with a group ID from the previous page to continue through the results.
+         * Lists groups in the organization, with controls for page size, cursor position, and sort
+         * order. Use `after` with a group ID from the previous page to continue through the
+         * results.
          *
          * Lists all groups in the organization.
          */
-        fun list(limit: Long? = null, after: String? = null, order: ListGroupsParameterEnum? = null, options: RequestOptions? = null): SdkResponse<GroupListResource> {
-            return dev.octri.showcase.openai.methods.Groups.listGroupsWithRawResponse(clientConfig, limit, after, order, options)
+        fun list(
+            limit: Long? = null,
+            after: String? = null,
+            order: ListGroupsParameterEnum? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<GroupListResource> {
+            return dev.octri.showcase.openai.methods.Groups.listGroupsWithRawResponse(
+                clientConfig,
+                limit,
+                after,
+                order,
+                options,
+            )
         }
 
         /**
-         * Creates a new group in the organization. Provide a human-readable `name` between 1 and 255 characters; the response includes the group's generated ID and management details.
+         * Creates a new group in the organization. Provide a human-readable `name` between 1 and
+         * 255 characters; the response includes the group's generated ID and management details.
          *
          * Creates a new group in the organization.
          */
         fun create(name: String, options: RequestOptions? = null): SdkResponse<GroupResponse> {
-            return dev.octri.showcase.openai.methods.Groups.createGroupWithRawResponse(clientConfig, name, options)
+            return dev.octri.showcase.openai.methods.Groups.createGroupWithRawResponse(
+                clientConfig,
+                name,
+                options,
+            )
         }
 
         /**
-         * Retrieves a group from the organization by its ID. Use `group_id` to identify the group whose name, creation time, management status, and type you need.
+         * Retrieves a group from the organization by its ID. Use `group_id` to identify the group
+         * whose name, creation time, management status, and type you need.
          *
          * Retrieves a group.
          */
         fun retrieve(groupId: String, options: RequestOptions? = null): SdkResponse<GroupResponse> {
-            return dev.octri.showcase.openai.methods.Groups.retrieveGroupWithRawResponse(clientConfig, groupId, options)
+            return dev.octri.showcase.openai.methods.Groups.retrieveGroupWithRawResponse(
+                clientConfig,
+                groupId,
+                options,
+            )
         }
 
         /**
-         * Updates a group's display name in the organization. Supply `name` as a string between 1 and 255 characters. The response includes the group's identifier, updated name, creation timestamp, and SCIM management status.
+         * Updates a group's display name in the organization. Supply `name` as a string between 1
+         * and 255 characters. The response includes the group's identifier, updated name, creation
+         * timestamp, and SCIM management status.
          *
          * Updates a group's information.
          */
-        fun update(groupId: String, name: String, options: RequestOptions? = null): SdkResponse<GroupResourceWithSuccess> {
-            return dev.octri.showcase.openai.methods.Groups.updateGroupWithRawResponse(clientConfig, groupId, name, options)
+        fun update(
+            groupId: String,
+            name: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<GroupResourceWithSuccess> {
+            return dev.octri.showcase.openai.methods.Groups.updateGroupWithRawResponse(
+                clientConfig,
+                groupId,
+                name,
+                options,
+            )
         }
 
         /**
-         * Deletes a group from the organization. Use the group's identifier to select which group to remove. The response confirms the deleted group by its identifier and deletion status.
+         * Deletes a group from the organization. Use the group's identifier to select which group
+         * to remove. The response confirms the deleted group by its identifier and deletion status.
          *
          * Deletes a group from the organization.
          */
-        fun delete(groupId: String, options: RequestOptions? = null): SdkResponse<GroupDeletedResource> {
-            return dev.octri.showcase.openai.methods.Groups.deleteGroupWithRawResponse(clientConfig, groupId, options)
+        fun delete(
+            groupId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<GroupDeletedResource> {
+            return dev.octri.showcase.openai.methods.Groups.deleteGroupWithRawResponse(
+                clientConfig,
+                groupId,
+                options,
+            )
         }
-
     }
 }

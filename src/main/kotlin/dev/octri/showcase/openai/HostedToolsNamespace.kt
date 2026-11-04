@@ -3,48 +3,88 @@
 
 package dev.octri.showcase.openai
 
-
 class HostedToolsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves the hosted tool permission settings for a project. Use `project_id` to identify the project whose permissions you want to inspect. The response includes an enabled state for each hosted tool.
+     * Retrieves the hosted tool permission settings for a project. Use `project_id` to identify the
+     * project whose permissions you want to inspect. The response includes an enabled state for
+     * each hosted tool.
      *
      * Returns hosted tool permissions for a project.
      */
-    fun retrievePermissions(projectId: String, options: RequestOptions? = null): ProjectHostedToolPermissions {
-        return dev.octri.showcase.openai.methods.HostedTools.retrieveProjectHostedToolPermissions(clientConfig, projectId, options)
+    fun retrievePermissions(
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectHostedToolPermissions {
+        return dev.octri.showcase.openai.methods.HostedTools.retrieveProjectHostedToolPermissions(
+            clientConfig,
+            projectId,
+            options,
+        )
     }
 
     /**
-     * Updates the hosted tool permissions for a project. Supply settings for the tools you want to change using `file_search`, `web_search`, `image_generation`, `mcp`, or `code_interpreter`. The response returns the project's resulting permission states.
+     * Updates the hosted tool permissions for a project. Supply settings for the tools you want to
+     * change using `file_search`, `web_search`, `image_generation`, `mcp`, or `code_interpreter`.
+     * The response returns the project's resulting permission states.
      *
      * Updates hosted tool permissions for a project.
      */
-    fun updatePermissions(request: dev.octri.showcase.openai.methods.HostedTools.UpdateProjectHostedToolPermissionsRequest, options: RequestOptions? = null): ProjectHostedToolPermissions {
-        return dev.octri.showcase.openai.methods.HostedTools.updateProjectHostedToolPermissions(clientConfig, request, options)
+    fun updatePermissions(
+        request:
+            dev.octri.showcase.openai.methods.HostedTools.UpdateProjectHostedToolPermissionsRequest,
+        options: RequestOptions? = null,
+    ): ProjectHostedToolPermissions {
+        return dev.octri.showcase.openai.methods.HostedTools.updateProjectHostedToolPermissions(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [HostedToolsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [HostedToolsNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Retrieves the hosted tool permission settings for a project. Use `project_id` to identify the project whose permissions you want to inspect. The response includes an enabled state for each hosted tool.
+         * Retrieves the hosted tool permission settings for a project. Use `project_id` to identify
+         * the project whose permissions you want to inspect. The response includes an enabled state
+         * for each hosted tool.
          *
          * Returns hosted tool permissions for a project.
          */
-        fun retrievePermissions(projectId: String, options: RequestOptions? = null): SdkResponse<ProjectHostedToolPermissions> {
-            return dev.octri.showcase.openai.methods.HostedTools.retrieveProjectHostedToolPermissionsWithRawResponse(clientConfig, projectId, options)
+        fun retrievePermissions(
+            projectId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<ProjectHostedToolPermissions> {
+            return dev.octri.showcase.openai.methods.HostedTools
+                .retrieveProjectHostedToolPermissionsWithRawResponse(
+                    clientConfig,
+                    projectId,
+                    options,
+                )
         }
 
         /**
-         * Updates the hosted tool permissions for a project. Supply settings for the tools you want to change using `file_search`, `web_search`, `image_generation`, `mcp`, or `code_interpreter`. The response returns the project's resulting permission states.
+         * Updates the hosted tool permissions for a project. Supply settings for the tools you want
+         * to change using `file_search`, `web_search`, `image_generation`, `mcp`, or
+         * `code_interpreter`. The response returns the project's resulting permission states.
          *
          * Updates hosted tool permissions for a project.
          */
-        fun updatePermissions(request: dev.octri.showcase.openai.methods.HostedTools.UpdateProjectHostedToolPermissionsRequest, options: RequestOptions? = null): SdkResponse<ProjectHostedToolPermissions> {
-            return dev.octri.showcase.openai.methods.HostedTools.updateProjectHostedToolPermissionsWithRawResponse(clientConfig, request, options)
+        fun updatePermissions(
+            request:
+                dev.octri.showcase.openai.methods.HostedTools.UpdateProjectHostedToolPermissionsRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<ProjectHostedToolPermissions> {
+            return dev.octri.showcase.openai.methods.HostedTools
+                .updateProjectHostedToolPermissionsWithRawResponse(clientConfig, request, options)
         }
-
     }
 }

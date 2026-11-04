@@ -56,31 +56,25 @@ import dev.octri.showcase.openai.TurnResource
 import dev.octri.showcase.openai.UpdateSessionAgentParam
 
 object Agents {
-/**
- * A page of Agents API resources, with IDs for retrieving additional pages.
- */
-data class ListAgentSessionSubagentsResponse(
-    /**
-     * The object type, which is always `list`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListAgentSessionSubagentsResponseObjectEnum,
-    /**
-     * The resources returned in this page, in the requested sort order.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SubagentResource>,
-    /**
-     * The ID of the first resource in `data`, or `null` if the page is empty.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true) val firstId: String?,
-    /**
-     * The ID of the last resource in `data`, or `null` if the page is empty. Pass this as `after` with the same order and filters.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true) val lastId: String?,
-    /**
-     * Whether there are more resources to retrieve after this page.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean
-) : SdkResource()
+    /** A page of Agents API resources, with IDs for retrieving additional pages. */
+    data class ListAgentSessionSubagentsResponse(
+        /** The object type, which is always `list`. */
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: ListAgentSessionSubagentsResponseObjectEnum,
+        /** The resources returned in this page, in the requested sort order. */
+        @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SubagentResource>,
+        /** The ID of the first resource in `data`, or `null` if the page is empty. */
+        @com.fasterxml.jackson.annotation.JsonProperty("first_id", required = true)
+        val firstId: String?,
+        /**
+         * The ID of the last resource in `data`, or `null` if the page is empty. Pass this as
+         * `after` with the same order and filters.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_id", required = true)
+        val lastId: String?,
+        /** Whether there are more resources to retrieve after this page. */
+        @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
+    ) : SdkResource()
 
     data class ListAgentEnvironmentsPage(
         val data: AgentEnvironmentListResource,
@@ -113,7 +107,7 @@ data class ListAgentSessionSubagentsResponse(
         val turnId: String,
         val limit: Long? = null,
         val order: ListOrderParam? = null,
-        val after: String? = null
+        val after: String? = null,
     )
 
     data class ListAgentSessionSubagentTurnItemsPage(
@@ -138,7 +132,7 @@ data class ListAgentSessionSubagentsResponse(
         val serviceTier: SdkClient.SdkOptional<ServiceTierParam?>? = null,
         val instructions: SdkClient.SdkOptional<String?>? = null,
         val tools: SdkClient.SdkOptional<List<PersistedAgentToolConfigParam>?>? = null,
-        val multiAgent: SdkClient.SdkOptional<MultiAgentConfigCurrentParam?>? = null
+        val multiAgent: SdkClient.SdkOptional<MultiAgentConfigCurrentParam?>? = null,
     )
 
     /** Parameters for [updateAgent]. */
@@ -152,7 +146,7 @@ data class ListAgentSessionSubagentsResponse(
         val multiAgent: SdkClient.SdkOptional<MultiAgentConfigCurrentParam?>? = null,
         val metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
         val name: SdkClient.SdkOptional<String?>? = null,
-        val tools: SdkClient.SdkOptional<List<PersistedAgentToolConfigParam>?>? = null
+        val tools: SdkClient.SdkOptional<List<PersistedAgentToolConfigParam>?>? = null,
     )
 
     data class ListAgentEnvironmentTemplatesPage(
@@ -172,7 +166,7 @@ data class ListAgentSessionSubagentsResponse(
         val skills: SdkClient.SdkOptional<List<HostedSkillParam>?>? = null,
         val plugins: SdkClient.SdkOptional<List<HostedPluginParam>?>? = null,
         val files: SdkClient.SdkOptional<List<HostedEnvironmentFileParam>?>? = null,
-        val name: SdkClient.SdkOptional<String?>? = null
+        val name: SdkClient.SdkOptional<String?>? = null,
     )
 
     /** Parameters for [updateAgentEnvironmentTemplate]. */
@@ -187,7 +181,7 @@ data class ListAgentSessionSubagentsResponse(
         val capabilityDirectories: SdkClient.SdkOptional<List<String>?>? = null,
         val skills: SdkClient.SdkOptional<List<HostedSkillParam>?>? = null,
         val plugins: SdkClient.SdkOptional<List<HostedPluginParam>?>? = null,
-        val files: SdkClient.SdkOptional<List<HostedEnvironmentFileParam>?>? = null
+        val files: SdkClient.SdkOptional<List<HostedEnvironmentFileParam>?>? = null,
     )
 
     data class ListAgentSessionsPage(
@@ -205,7 +199,7 @@ data class ListAgentSessionSubagentsResponse(
         val agentId: String? = null,
         val vaultIds: SdkClient.SdkOptional<List<String>?>? = null,
         val input: SdkClient.SdkOptional<CreateSessionInputParam?>? = null,
-        val stream: Boolean? = null
+        val stream: Boolean? = null,
     )
 
     data class CreateAgentSessionStreamRequest(
@@ -215,7 +209,7 @@ data class ListAgentSessionSubagentsResponse(
         val agent: SessionAgentConfigParam? = null,
         val agentId: String? = null,
         val vaultIds: SdkClient.SdkOptional<List<String>?>? = null,
-        val input: SdkClient.SdkOptional<CreateSessionInputParam?>? = null
+        val input: SdkClient.SdkOptional<CreateSessionInputParam?>? = null,
     )
 
     data class ListAgentSessionArtifactsPage(
@@ -249,415 +243,710 @@ data class ListAgentSessionSubagentsResponse(
     )
 
     /**
-     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the prewarming beta.
+     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the
+     * prewarming beta.
      */
-    fun listAgentEnvironments(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null): AgentEnvironmentListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation.listAgentEnvironments(
-            clientConfig,
-            limit,
-            order,
-            after,
-            type,
-            options,
-        )
+    fun listAgentEnvironments(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        type: EnvironmentTypeParam? = null,
+        options: RequestOptions? = null,
+    ): AgentEnvironmentListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation
+            .listAgentEnvironments(
+                clientConfig,
+                limit,
+                order,
+                after,
+                type,
+                options,
+            )
 
     /**
-     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the prewarming beta.
+     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the
+     * prewarming beta.
      */
-    fun listAgentEnvironmentsWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null): SdkResponse<AgentEnvironmentListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation.listAgentEnvironmentsWithRawResponse(
-            clientConfig,
-            limit,
-            order,
-            after,
-            type,
-            options,
-        )
+    fun listAgentEnvironmentsWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        type: EnvironmentTypeParam? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AgentEnvironmentListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation
+            .listAgentEnvironmentsWithRawResponse(
+                clientConfig,
+                limit,
+                order,
+                after,
+                type,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the prewarming beta.
+     * Iterates through all pages: Lists OpenAI-hosted environments owned by the authenticated
+     * principal. Requires access to the prewarming beta.
      */
-    fun listAgentEnvironmentsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null, yieldFn: (PublicEnvironmentResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation.listAgentEnvironmentsPaginated(
-            clientConfig,
-            limit,
-            order,
-            after,
-            type,
-            options,
-            yieldFn,
-        )
+    fun listAgentEnvironmentsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        type: EnvironmentTypeParam? = null,
+        options: RequestOptions? = null,
+        yieldFn: (PublicEnvironmentResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation
+            .listAgentEnvironmentsPaginated(
+                clientConfig,
+                limit,
+                order,
+                after,
+                type,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the prewarming beta.
+     * Lists OpenAI-hosted environments owned by the authenticated principal. Requires access to the
+     * prewarming beta.
      */
-    fun listAgentEnvironmentsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, type: EnvironmentTypeParam? = null, options: RequestOptions? = null, yieldPage: (ListAgentEnvironmentsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation.listAgentEnvironmentsPages(
-            clientConfig,
-            limit,
-            order,
-            after,
-            type,
-            options,
-            yieldPage,
-        )
+    fun listAgentEnvironmentsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        type: EnvironmentTypeParam? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentEnvironmentsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentsOperation
+            .listAgentEnvironmentsPages(
+                clientConfig,
+                limit,
+                order,
+                after,
+                type,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Creates an OpenAI-hosted environment before creating a session. Requires access to the prewarming beta.
+     * Creates an OpenAI-hosted environment before creating a session. Requires access to the
+     * prewarming beta.
      */
-    fun createAgentEnvironment(clientConfig: ClientConfig, environment: CreateEnvironmentParam, idempotencyKey: String? = null, vaultIds: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): PublicEnvironmentResource =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentOperation.createAgentEnvironment(
-            clientConfig,
-            environment,
-            idempotencyKey,
-            vaultIds,
-            options,
-        )
+    fun createAgentEnvironment(
+        clientConfig: ClientConfig,
+        environment: CreateEnvironmentParam,
+        idempotencyKey: String? = null,
+        vaultIds: SdkClient.SdkOptional<List<String>?>? = null,
+        options: RequestOptions? = null,
+    ): PublicEnvironmentResource =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentOperation
+            .createAgentEnvironment(
+                clientConfig,
+                environment,
+                idempotencyKey,
+                vaultIds,
+                options,
+            )
 
     /**
-     * Creates an OpenAI-hosted environment before creating a session. Requires access to the prewarming beta.
+     * Creates an OpenAI-hosted environment before creating a session. Requires access to the
+     * prewarming beta.
      */
-    fun createAgentEnvironmentWithRawResponse(clientConfig: ClientConfig, environment: CreateEnvironmentParam, idempotencyKey: String? = null, vaultIds: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): SdkResponse<PublicEnvironmentResource> =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentOperation.createAgentEnvironmentWithRawResponse(
-            clientConfig,
-            environment,
-            idempotencyKey,
-            vaultIds,
-            options,
-        )
+    fun createAgentEnvironmentWithRawResponse(
+        clientConfig: ClientConfig,
+        environment: CreateEnvironmentParam,
+        idempotencyKey: String? = null,
+        vaultIds: SdkClient.SdkOptional<List<String>?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<PublicEnvironmentResource> =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentOperation
+            .createAgentEnvironmentWithRawResponse(
+                clientConfig,
+                environment,
+                idempotencyKey,
+                vaultIds,
+                options,
+            )
 
     /**
-     * Retrieves an execution environment's connection status and safe installed metadata. See [environment lifecycle](https://developers.openai.com/api/docs/guides/agents-api/environments/lifecycle).
+     * Retrieves an execution environment's connection status and safe installed metadata. See
+     * [environment lifecycle](https://developers.openai.com/api/docs/guides/agents-api/environments/lifecycle).
      */
-    fun retrieveAgentEnvironment(clientConfig: ClientConfig, environmentId: String, options: RequestOptions? = null): PublicEnvironmentResource =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentOperation.retrieveAgentEnvironment(
-            clientConfig,
-            environmentId,
-            options,
-        )
+    fun retrieveAgentEnvironment(
+        clientConfig: ClientConfig,
+        environmentId: String,
+        options: RequestOptions? = null,
+    ): PublicEnvironmentResource =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentOperation
+            .retrieveAgentEnvironment(
+                clientConfig,
+                environmentId,
+                options,
+            )
 
     /**
-     * Retrieves an execution environment's connection status and safe installed metadata. See [environment lifecycle](https://developers.openai.com/api/docs/guides/agents-api/environments/lifecycle).
+     * Retrieves an execution environment's connection status and safe installed metadata. See
+     * [environment lifecycle](https://developers.openai.com/api/docs/guides/agents-api/environments/lifecycle).
      */
-    fun retrieveAgentEnvironmentWithRawResponse(clientConfig: ClientConfig, environmentId: String, options: RequestOptions? = null): SdkResponse<PublicEnvironmentResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentOperation.retrieveAgentEnvironmentWithRawResponse(
-            clientConfig,
-            environmentId,
-            options,
-        )
+    fun retrieveAgentEnvironmentWithRawResponse(
+        clientConfig: ClientConfig,
+        environmentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<PublicEnvironmentResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentOperation
+            .retrieveAgentEnvironmentWithRawResponse(
+                clientConfig,
+                environmentId,
+                options,
+            )
 
     /**
-     * Lists live files on a connected execution environment with optional directory filtering and opaque cursor pagination. See [environment files](https://developers.openai.com/api/docs/guides/agents-api/environments/files).
+     * Lists live files on a connected execution environment with optional directory filtering and
+     * opaque cursor pagination. See
+     * [environment files](https://developers.openai.com/api/docs/guides/agents-api/environments/files).
      */
-    fun listAgentEnvironmentFiles(clientConfig: ClientConfig, environmentId: String, path: SdkClient.SdkOptional<String?>? = null, limit: SdkClient.SdkOptional<Long?>? = null, order: ListOrderParam? = null, page: String? = null, options: RequestOptions? = null): EnvironmentFileListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentFilesOperation.listAgentEnvironmentFiles(
-            clientConfig,
-            environmentId,
-            path,
-            limit,
-            order,
-            page,
-            options,
-        )
+    fun listAgentEnvironmentFiles(
+        clientConfig: ClientConfig,
+        environmentId: String,
+        path: SdkClient.SdkOptional<String?>? = null,
+        limit: SdkClient.SdkOptional<Long?>? = null,
+        order: ListOrderParam? = null,
+        page: String? = null,
+        options: RequestOptions? = null,
+    ): EnvironmentFileListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentFilesOperation
+            .listAgentEnvironmentFiles(
+                clientConfig,
+                environmentId,
+                path,
+                limit,
+                order,
+                page,
+                options,
+            )
 
     /**
-     * Lists live files on a connected execution environment with optional directory filtering and opaque cursor pagination. See [environment files](https://developers.openai.com/api/docs/guides/agents-api/environments/files).
+     * Lists live files on a connected execution environment with optional directory filtering and
+     * opaque cursor pagination. See
+     * [environment files](https://developers.openai.com/api/docs/guides/agents-api/environments/files).
      */
-    fun listAgentEnvironmentFilesWithRawResponse(clientConfig: ClientConfig, environmentId: String, path: SdkClient.SdkOptional<String?>? = null, limit: SdkClient.SdkOptional<Long?>? = null, order: ListOrderParam? = null, page: String? = null, options: RequestOptions? = null): SdkResponse<EnvironmentFileListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentFilesOperation.listAgentEnvironmentFilesWithRawResponse(
-            clientConfig,
-            environmentId,
-            path,
-            limit,
-            order,
-            page,
-            options,
-        )
+    fun listAgentEnvironmentFilesWithRawResponse(
+        clientConfig: ClientConfig,
+        environmentId: String,
+        path: SdkClient.SdkOptional<String?>? = null,
+        limit: SdkClient.SdkOptional<Long?>? = null,
+        order: ListOrderParam? = null,
+        page: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<EnvironmentFileListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentFilesOperation
+            .listAgentEnvironmentFilesWithRawResponse(
+                clientConfig,
+                environmentId,
+                path,
+                limit,
+                order,
+                page,
+                options,
+            )
 
     /**
-     * Writes a file to a connected agent execution environment, using either inline base64 data or a file uploaded through the Files API. Choose the `inline` or `file_id` body variant and provide the absolute destination `path`; writing to an existing regular file at that path replaces it. Upload the file between turns and wait for success before starting the next turn.
+     * Writes a file to a connected agent execution environment, using either inline base64 data or
+     * a file uploaded through the Files API. Choose the `inline` or `file_id` body variant and
+     * provide the absolute destination `path`; writing to an existing regular file at that path
+     * replaces it. Upload the file between turns and wait for success before starting the next
+     * turn.
      */
-    fun createAgentEnvironmentFile(clientConfig: ClientConfig, environmentId: String, body: HostedEnvironmentFileParam? = null, options: RequestOptions? = null): EnvironmentFileResource =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentFileOperation.createAgentEnvironmentFile(
-            clientConfig,
-            environmentId,
-            body,
-            options,
-        )
+    fun createAgentEnvironmentFile(
+        clientConfig: ClientConfig,
+        environmentId: String,
+        body: HostedEnvironmentFileParam? = null,
+        options: RequestOptions? = null,
+    ): EnvironmentFileResource =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentFileOperation
+            .createAgentEnvironmentFile(
+                clientConfig,
+                environmentId,
+                body,
+                options,
+            )
 
     /**
-     * Writes a file to a connected agent execution environment, using either inline base64 data or a file uploaded through the Files API. Choose the `inline` or `file_id` body variant and provide the absolute destination `path`; writing to an existing regular file at that path replaces it. Upload the file between turns and wait for success before starting the next turn.
+     * Writes a file to a connected agent execution environment, using either inline base64 data or
+     * a file uploaded through the Files API. Choose the `inline` or `file_id` body variant and
+     * provide the absolute destination `path`; writing to an existing regular file at that path
+     * replaces it. Upload the file between turns and wait for success before starting the next
+     * turn.
      */
-    fun createAgentEnvironmentFileWithRawResponse(clientConfig: ClientConfig, environmentId: String, body: HostedEnvironmentFileParam? = null, options: RequestOptions? = null): SdkResponse<EnvironmentFileResource> =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentFileOperation.createAgentEnvironmentFileWithRawResponse(
-            clientConfig,
-            environmentId,
-            body,
-            options,
-        )
+    fun createAgentEnvironmentFileWithRawResponse(
+        clientConfig: ClientConfig,
+        environmentId: String,
+        body: HostedEnvironmentFileParam? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<EnvironmentFileResource> =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentFileOperation
+            .createAgentEnvironmentFileWithRawResponse(
+                clientConfig,
+                environmentId,
+                body,
+                options,
+            )
 
     /**
-     * Lists subagents in a session, including nested and closed subagents. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists subagents in a session, including nested and closed subagents. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagents(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): ListAgentSessionSubagentsResponse =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation.listAgentSessionSubagents(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionSubagents(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ListAgentSessionSubagentsResponse =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation
+            .listAgentSessionSubagents(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists subagents in a session, including nested and closed subagents. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists subagents in a session, including nested and closed subagents. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentsWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<ListAgentSessionSubagentsResponse> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation.listAgentSessionSubagentsWithRawResponse(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionSubagentsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListAgentSessionSubagentsResponse> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation
+            .listAgentSessionSubagentsWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists subagents in a session, including nested and closed subagents. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Iterates through all pages: Lists subagents in a session, including nested and closed
+     * subagents. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SubagentResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation.listAgentSessionSubagentsPaginated(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionSubagentsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SubagentResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation
+            .listAgentSessionSubagentsPaginated(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists subagents in a session, including nested and closed subagents. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists subagents in a session, including nested and closed subagents. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionSubagentsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation.listAgentSessionSubagentsPages(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionSubagentsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionSubagentsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentsOperation
+            .listAgentSessionSubagentsPages(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Retrieves a subagent belonging to this session. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Retrieves a subagent belonging to this session. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun retrieveAgentSessionSubagent(clientConfig: ClientConfig, sessionId: String, subagentId: String, options: RequestOptions? = null): SubagentResource =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentOperation.retrieveAgentSessionSubagent(
-            clientConfig,
-            sessionId,
-            subagentId,
-            options,
-        )
+    fun retrieveAgentSessionSubagent(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        options: RequestOptions? = null,
+    ): SubagentResource =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentOperation
+            .retrieveAgentSessionSubagent(
+                clientConfig,
+                sessionId,
+                subagentId,
+                options,
+            )
 
     /**
-     * Retrieves a subagent belonging to this session. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Retrieves a subagent belonging to this session. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun retrieveAgentSessionSubagentWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, options: RequestOptions? = null): SdkResponse<SubagentResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentOperation.retrieveAgentSessionSubagentWithRawResponse(
-            clientConfig,
-            sessionId,
-            subagentId,
-            options,
-        )
+    fun retrieveAgentSessionSubagentWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SubagentResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentOperation
+            .retrieveAgentSessionSubagentWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                options,
+            )
 
     /**
-     * Lists this subagent's own items across all of its turns. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists this subagent's own items across all of its turns. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentItems(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation.listAgentSessionSubagentItems(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionSubagentItems(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionItemListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation
+            .listAgentSessionSubagentItems(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists this subagent's own items across all of its turns. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists this subagent's own items across all of its turns. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentItemsWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionItemListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation.listAgentSessionSubagentItemsWithRawResponse(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionSubagentItemsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionItemListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation
+            .listAgentSessionSubagentItemsWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists this subagent's own items across all of its turns. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Iterates through all pages: Lists this subagent's own items across all of its turns. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentItemsPaginated(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation.listAgentSessionSubagentItemsPaginated(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionSubagentItemsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnItemResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation
+            .listAgentSessionSubagentItemsPaginated(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists this subagent's own items across all of its turns. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists this subagent's own items across all of its turns. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentItemsPages(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionSubagentItemsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation.listAgentSessionSubagentItemsPages(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionSubagentItemsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionSubagentItemsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentItemsOperation
+            .listAgentSessionSubagentItemsPages(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Lists all turns of this subagent, including turns after a resume. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists all turns of this subagent, including turns after a resume. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurns(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTurnListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation.listAgentSessionSubagentTurns(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionSubagentTurns(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionTurnListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation
+            .listAgentSessionSubagentTurns(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists all turns of this subagent, including turns after a resume. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists all turns of this subagent, including turns after a resume. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnsWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionTurnListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation.listAgentSessionSubagentTurnsWithRawResponse(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionSubagentTurnsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionTurnListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation
+            .listAgentSessionSubagentTurnsWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists all turns of this subagent, including turns after a resume. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Iterates through all pages: Lists all turns of this subagent, including turns after a resume.
+     * See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnsPaginated(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (TurnResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation.listAgentSessionSubagentTurnsPaginated(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionSubagentTurnsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (TurnResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation
+            .listAgentSessionSubagentTurnsPaginated(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists all turns of this subagent, including turns after a resume. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists all turns of this subagent, including turns after a resume. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnsPages(clientConfig: ClientConfig, sessionId: String, subagentId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionSubagentTurnsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation.listAgentSessionSubagentTurnsPages(
-            clientConfig,
-            sessionId,
-            subagentId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionSubagentTurnsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionSubagentTurnsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnsOperation
+            .listAgentSessionSubagentTurnsPages(
+                clientConfig,
+                sessionId,
+                subagentId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Retrieves a turn belonging to this subagent. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Retrieves a turn belonging to this subagent. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun retrieveAgentSessionSubagentTurn(clientConfig: ClientConfig, sessionId: String, subagentId: String, turnId: String, options: RequestOptions? = null): TurnResource =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentTurnOperation.retrieveAgentSessionSubagentTurn(
-            clientConfig,
-            sessionId,
-            subagentId,
-            turnId,
-            options,
-        )
+    fun retrieveAgentSessionSubagentTurn(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        turnId: String,
+        options: RequestOptions? = null,
+    ): TurnResource =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentTurnOperation
+            .retrieveAgentSessionSubagentTurn(
+                clientConfig,
+                sessionId,
+                subagentId,
+                turnId,
+                options,
+            )
 
     /**
-     * Retrieves a turn belonging to this subagent. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Retrieves a turn belonging to this subagent. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun retrieveAgentSessionSubagentTurnWithRawResponse(clientConfig: ClientConfig, sessionId: String, subagentId: String, turnId: String, options: RequestOptions? = null): SdkResponse<TurnResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentTurnOperation.retrieveAgentSessionSubagentTurnWithRawResponse(
-            clientConfig,
-            sessionId,
-            subagentId,
-            turnId,
-            options,
-        )
+    fun retrieveAgentSessionSubagentTurnWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        subagentId: String,
+        turnId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<TurnResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionSubagentTurnOperation
+            .retrieveAgentSessionSubagentTurnWithRawResponse(
+                clientConfig,
+                sessionId,
+                subagentId,
+                turnId,
+                options,
+            )
 
     /**
-     * Lists items belonging to one turn of this subagent. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists items belonging to one turn of this subagent. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnItems(clientConfig: ClientConfig, request: ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null): SessionItemListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation.listAgentSessionSubagentTurnItems(
-            clientConfig,
-            request,
-            options,
-        )
+    fun listAgentSessionSubagentTurnItems(
+        clientConfig: ClientConfig,
+        request: ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+    ): SessionItemListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation
+            .listAgentSessionSubagentTurnItems(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Lists items belonging to one turn of this subagent. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists items belonging to one turn of this subagent. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnItemsWithRawResponse(clientConfig: ClientConfig, request: ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null): SdkResponse<SessionItemListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation.listAgentSessionSubagentTurnItemsWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun listAgentSessionSubagentTurnItemsWithRawResponse(
+        clientConfig: ClientConfig,
+        request: ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionItemListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation
+            .listAgentSessionSubagentTurnItemsWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists items belonging to one turn of this subagent. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Iterates through all pages: Lists items belonging to one turn of this subagent. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnItemsPaginated(clientConfig: ClientConfig, request: ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation.listAgentSessionSubagentTurnItemsPaginated(
-            clientConfig,
-            request,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionSubagentTurnItemsPaginated(
+        clientConfig: ClientConfig,
+        request: ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnItemResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation
+            .listAgentSessionSubagentTurnItemsPaginated(
+                clientConfig,
+                request,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists items belonging to one turn of this subagent. See [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
+     * Lists items belonging to one turn of this subagent. See
+     * [subagent workflows](https://developers.openai.com/api/docs/guides/agents-api/multi-agent).
      */
-    fun listAgentSessionSubagentTurnItemsPages(clientConfig: ClientConfig, request: ListAgentSessionSubagentTurnItemsRequest, options: RequestOptions? = null, yieldPage: (ListAgentSessionSubagentTurnItemsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation.listAgentSessionSubagentTurnItemsPages(
-            clientConfig,
-            request,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionSubagentTurnItemsPages(
+        clientConfig: ClientConfig,
+        request: ListAgentSessionSubagentTurnItemsRequest,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionSubagentTurnItemsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionSubagentTurnItemsOperation
+            .listAgentSessionSubagentTurnItemsPages(
+                clientConfig,
+                request,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Lists reusable agents in the current project. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Lists reusable agents in the current project. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun listAgents(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): AgentListResource =
+    fun listAgents(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): AgentListResource =
         dev.octri.showcase.openai.methods.AgentsListAgentsOperation.listAgents(
             clientConfig,
             limit,
@@ -667,9 +956,16 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Lists reusable agents in the current project. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Lists reusable agents in the current project. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun listAgentsWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<AgentListResource> =
+    fun listAgentsWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AgentListResource> =
         dev.octri.showcase.openai.methods.AgentsListAgentsOperation.listAgentsWithRawResponse(
             clientConfig,
             limit,
@@ -679,9 +975,17 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Iterates through all pages: Lists reusable agents in the current project. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Iterates through all pages: Lists reusable agents in the current project. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun listAgentsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (AgentResource) -> Boolean) =
+    fun listAgentsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (AgentResource) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AgentsListAgentsOperation.listAgentsPaginated(
             clientConfig,
             limit,
@@ -692,9 +996,17 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Lists reusable agents in the current project. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Lists reusable agents in the current project. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun listAgentsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentsPage) -> Boolean) =
+    fun listAgentsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentsPage) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AgentsListAgentsOperation.listAgentsPages(
             clientConfig,
             limit,
@@ -705,9 +1017,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Creates a reusable agent without storing credentials. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Creates a reusable agent without storing credentials. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun createAgent(clientConfig: ClientConfig, request: CreateAgentRequest, options: RequestOptions? = null): AgentResource =
+    fun createAgent(
+        clientConfig: ClientConfig,
+        request: CreateAgentRequest,
+        options: RequestOptions? = null,
+    ): AgentResource =
         dev.octri.showcase.openai.methods.AgentsCreateAgentOperation.createAgent(
             clientConfig,
             request,
@@ -715,9 +1032,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Creates a reusable agent without storing credentials. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Creates a reusable agent without storing credentials. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun createAgentWithRawResponse(clientConfig: ClientConfig, request: CreateAgentRequest, options: RequestOptions? = null): SdkResponse<AgentResource> =
+    fun createAgentWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateAgentRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<AgentResource> =
         dev.octri.showcase.openai.methods.AgentsCreateAgentOperation.createAgentWithRawResponse(
             clientConfig,
             request,
@@ -725,9 +1047,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Retrieves a reusable agent by ID. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Retrieves a reusable agent by ID. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun retrieveAgent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): AgentResource =
+    fun retrieveAgent(
+        clientConfig: ClientConfig,
+        agentId: String,
+        options: RequestOptions? = null,
+    ): AgentResource =
         dev.octri.showcase.openai.methods.AgentsRetrieveAgentOperation.retrieveAgent(
             clientConfig,
             agentId,
@@ -735,9 +1062,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Retrieves a reusable agent by ID. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Retrieves a reusable agent by ID. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun retrieveAgentWithRawResponse(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): SdkResponse<AgentResource> =
+    fun retrieveAgentWithRawResponse(
+        clientConfig: ClientConfig,
+        agentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<AgentResource> =
         dev.octri.showcase.openai.methods.AgentsRetrieveAgentOperation.retrieveAgentWithRawResponse(
             clientConfig,
             agentId,
@@ -745,9 +1077,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Updates a reusable agent. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Updates a reusable agent. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun updateAgent(clientConfig: ClientConfig, request: UpdateAgentRequest, options: RequestOptions? = null): AgentResource =
+    fun updateAgent(
+        clientConfig: ClientConfig,
+        request: UpdateAgentRequest,
+        options: RequestOptions? = null,
+    ): AgentResource =
         dev.octri.showcase.openai.methods.AgentsUpdateAgentOperation.updateAgent(
             clientConfig,
             request,
@@ -755,9 +1092,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Updates a reusable agent. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Updates a reusable agent. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun updateAgentWithRawResponse(clientConfig: ClientConfig, request: UpdateAgentRequest, options: RequestOptions? = null): SdkResponse<AgentResource> =
+    fun updateAgentWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateAgentRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<AgentResource> =
         dev.octri.showcase.openai.methods.AgentsUpdateAgentOperation.updateAgentWithRawResponse(
             clientConfig,
             request,
@@ -765,9 +1107,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Deletes a reusable agent. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Deletes a reusable agent. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun deleteAgent(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): DeletedAgentResource =
+    fun deleteAgent(
+        clientConfig: ClientConfig,
+        agentId: String,
+        options: RequestOptions? = null,
+    ): DeletedAgentResource =
         dev.octri.showcase.openai.methods.AgentsDeleteAgentOperation.deleteAgent(
             clientConfig,
             agentId,
@@ -775,9 +1122,14 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Deletes a reusable agent. See [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
+     * Deletes a reusable agent. See
+     * [agent configuration](https://developers.openai.com/api/docs/guides/agents-api/configuration).
      */
-    fun deleteAgentWithRawResponse(clientConfig: ClientConfig, agentId: String, options: RequestOptions? = null): SdkResponse<DeletedAgentResource> =
+    fun deleteAgentWithRawResponse(
+        clientConfig: ClientConfig,
+        agentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedAgentResource> =
         dev.octri.showcase.openai.methods.AgentsDeleteAgentOperation.deleteAgentWithRawResponse(
             clientConfig,
             agentId,
@@ -785,139 +1137,232 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Lists reusable environment templates without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Lists reusable environment templates without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun listAgentEnvironmentTemplates(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): EnvironmentTemplateListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation.listAgentEnvironmentTemplates(
-            clientConfig,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentEnvironmentTemplates(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): EnvironmentTemplateListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation
+            .listAgentEnvironmentTemplates(
+                clientConfig,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists reusable environment templates without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Lists reusable environment templates without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun listAgentEnvironmentTemplatesWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<EnvironmentTemplateListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation.listAgentEnvironmentTemplatesWithRawResponse(
-            clientConfig,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentEnvironmentTemplatesWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<EnvironmentTemplateListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation
+            .listAgentEnvironmentTemplatesWithRawResponse(
+                clientConfig,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists reusable environment templates without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Iterates through all pages: Lists reusable environment templates without returning
+     * confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun listAgentEnvironmentTemplatesPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (EnvironmentTemplateResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation.listAgentEnvironmentTemplatesPaginated(
-            clientConfig,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentEnvironmentTemplatesPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (EnvironmentTemplateResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation
+            .listAgentEnvironmentTemplatesPaginated(
+                clientConfig,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists reusable environment templates without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Lists reusable environment templates without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun listAgentEnvironmentTemplatesPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentEnvironmentTemplatesPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation.listAgentEnvironmentTemplatesPages(
-            clientConfig,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentEnvironmentTemplatesPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentEnvironmentTemplatesPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentEnvironmentTemplatesOperation
+            .listAgentEnvironmentTemplatesPages(
+                clientConfig,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Creates reusable environment configuration without returning confidential setup commands or environment values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Creates reusable environment configuration without returning confidential setup commands or
+     * environment values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun createAgentEnvironmentTemplate(clientConfig: ClientConfig, request: CreateAgentEnvironmentTemplateRequest, options: RequestOptions? = null): EnvironmentTemplateResource =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentTemplateOperation.createAgentEnvironmentTemplate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createAgentEnvironmentTemplate(
+        clientConfig: ClientConfig,
+        request: CreateAgentEnvironmentTemplateRequest,
+        options: RequestOptions? = null,
+    ): EnvironmentTemplateResource =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentTemplateOperation
+            .createAgentEnvironmentTemplate(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates reusable environment configuration without returning confidential setup commands or environment values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Creates reusable environment configuration without returning confidential setup commands or
+     * environment values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun createAgentEnvironmentTemplateWithRawResponse(clientConfig: ClientConfig, request: CreateAgentEnvironmentTemplateRequest, options: RequestOptions? = null): SdkResponse<EnvironmentTemplateResource> =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentTemplateOperation.createAgentEnvironmentTemplateWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createAgentEnvironmentTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateAgentEnvironmentTemplateRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<EnvironmentTemplateResource> =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentEnvironmentTemplateOperation
+            .createAgentEnvironmentTemplateWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Retrieves reusable environment configuration without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Retrieves reusable environment configuration without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun retrieveAgentEnvironmentTemplate(clientConfig: ClientConfig, environmentTemplateId: String, options: RequestOptions? = null): EnvironmentTemplateResource =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentTemplateOperation.retrieveAgentEnvironmentTemplate(
-            clientConfig,
-            environmentTemplateId,
-            options,
-        )
+    fun retrieveAgentEnvironmentTemplate(
+        clientConfig: ClientConfig,
+        environmentTemplateId: String,
+        options: RequestOptions? = null,
+    ): EnvironmentTemplateResource =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentTemplateOperation
+            .retrieveAgentEnvironmentTemplate(
+                clientConfig,
+                environmentTemplateId,
+                options,
+            )
 
     /**
-     * Retrieves reusable environment configuration without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Retrieves reusable environment configuration without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun retrieveAgentEnvironmentTemplateWithRawResponse(clientConfig: ClientConfig, environmentTemplateId: String, options: RequestOptions? = null): SdkResponse<EnvironmentTemplateResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentTemplateOperation.retrieveAgentEnvironmentTemplateWithRawResponse(
-            clientConfig,
-            environmentTemplateId,
-            options,
-        )
+    fun retrieveAgentEnvironmentTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        environmentTemplateId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<EnvironmentTemplateResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentEnvironmentTemplateOperation
+            .retrieveAgentEnvironmentTemplateWithRawResponse(
+                clientConfig,
+                environmentTemplateId,
+                options,
+            )
 
     /**
-     * Updates reusable environment configuration without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Updates reusable environment configuration without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun updateAgentEnvironmentTemplate(clientConfig: ClientConfig, request: UpdateAgentEnvironmentTemplateRequest, options: RequestOptions? = null): EnvironmentTemplateResource =
-        dev.octri.showcase.openai.methods.AgentsUpdateAgentEnvironmentTemplateOperation.updateAgentEnvironmentTemplate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateAgentEnvironmentTemplate(
+        clientConfig: ClientConfig,
+        request: UpdateAgentEnvironmentTemplateRequest,
+        options: RequestOptions? = null,
+    ): EnvironmentTemplateResource =
+        dev.octri.showcase.openai.methods.AgentsUpdateAgentEnvironmentTemplateOperation
+            .updateAgentEnvironmentTemplate(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Updates reusable environment configuration without returning confidential values. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Updates reusable environment configuration without returning confidential values. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun updateAgentEnvironmentTemplateWithRawResponse(clientConfig: ClientConfig, request: UpdateAgentEnvironmentTemplateRequest, options: RequestOptions? = null): SdkResponse<EnvironmentTemplateResource> =
-        dev.octri.showcase.openai.methods.AgentsUpdateAgentEnvironmentTemplateOperation.updateAgentEnvironmentTemplateWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateAgentEnvironmentTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateAgentEnvironmentTemplateRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<EnvironmentTemplateResource> =
+        dev.octri.showcase.openai.methods.AgentsUpdateAgentEnvironmentTemplateOperation
+            .updateAgentEnvironmentTemplateWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Deletes reusable environment configuration and all confidential template inputs. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Deletes reusable environment configuration and all confidential template inputs. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun deleteAgentEnvironmentTemplate(clientConfig: ClientConfig, environmentTemplateId: String, options: RequestOptions? = null): DeletedEnvironmentTemplateResource =
-        dev.octri.showcase.openai.methods.AgentsDeleteAgentEnvironmentTemplateOperation.deleteAgentEnvironmentTemplate(
-            clientConfig,
-            environmentTemplateId,
-            options,
-        )
+    fun deleteAgentEnvironmentTemplate(
+        clientConfig: ClientConfig,
+        environmentTemplateId: String,
+        options: RequestOptions? = null,
+    ): DeletedEnvironmentTemplateResource =
+        dev.octri.showcase.openai.methods.AgentsDeleteAgentEnvironmentTemplateOperation
+            .deleteAgentEnvironmentTemplate(
+                clientConfig,
+                environmentTemplateId,
+                options,
+            )
 
     /**
-     * Deletes reusable environment configuration and all confidential template inputs. See [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
+     * Deletes reusable environment configuration and all confidential template inputs. See
+     * [reusing a hosted setup](https://developers.openai.com/api/docs/guides/agents-api/tools#reuse-a-hosted-plugin-setup).
      */
-    fun deleteAgentEnvironmentTemplateWithRawResponse(clientConfig: ClientConfig, environmentTemplateId: String, options: RequestOptions? = null): SdkResponse<DeletedEnvironmentTemplateResource> =
-        dev.octri.showcase.openai.methods.AgentsDeleteAgentEnvironmentTemplateOperation.deleteAgentEnvironmentTemplateWithRawResponse(
-            clientConfig,
-            environmentTemplateId,
-            options,
-        )
+    fun deleteAgentEnvironmentTemplateWithRawResponse(
+        clientConfig: ClientConfig,
+        environmentTemplateId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedEnvironmentTemplateResource> =
+        dev.octri.showcase.openai.methods.AgentsDeleteAgentEnvironmentTemplateOperation
+            .deleteAgentEnvironmentTemplateWithRawResponse(
+                clientConfig,
+                environmentTemplateId,
+                options,
+            )
 
     /**
-     * Lists managed agent sessions using ID-based pagination and the requested sort order. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Lists managed agent sessions using ID-based pagination and the requested sort order. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun listAgentSessions(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null): SessionListResource =
+    fun listAgentSessions(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+    ): SessionListResource =
         dev.octri.showcase.openai.methods.AgentsListAgentSessionsOperation.listAgentSessions(
             clientConfig,
             limit,
@@ -928,36 +1373,65 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Lists managed agent sessions using ID-based pagination and the requested sort order. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Lists managed agent sessions using ID-based pagination and the requested sort order. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun listAgentSessionsWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null): SdkResponse<SessionListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionsOperation.listAgentSessionsWithRawResponse(
-            clientConfig,
-            limit,
-            order,
-            after,
-            agentId,
-            options,
-        )
+    fun listAgentSessionsWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionsOperation
+            .listAgentSessionsWithRawResponse(
+                clientConfig,
+                limit,
+                order,
+                after,
+                agentId,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists managed agent sessions using ID-based pagination and the requested sort order. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Iterates through all pages: Lists managed agent sessions using ID-based pagination and the
+     * requested sort order. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun listAgentSessionsPaginated(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null, yieldFn: (SessionResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionsOperation.listAgentSessionsPaginated(
-            clientConfig,
-            limit,
-            order,
-            after,
-            agentId,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionsOperation
+            .listAgentSessionsPaginated(
+                clientConfig,
+                limit,
+                order,
+                after,
+                agentId,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists managed agent sessions using ID-based pagination and the requested sort order. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Lists managed agent sessions using ID-based pagination and the requested sort order. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun listAgentSessionsPages(clientConfig: ClientConfig, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, agentId: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionsPage) -> Boolean) =
+    fun listAgentSessionsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        agentId: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionsPage) -> Boolean,
+    ) =
         dev.octri.showcase.openai.methods.AgentsListAgentSessionsOperation.listAgentSessionsPages(
             clientConfig,
             limit,
@@ -969,9 +1443,15 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Creates a managed agent session, optionally submits initial input, and returns the session or streams its events when stream is true. See [running sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions).
+     * Creates a managed agent session, optionally submits initial input, and returns the session or
+     * streams its events when stream is true. See
+     * [running sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions).
      */
-    fun createAgentSession(clientConfig: ClientConfig, request: CreateAgentSessionRequest, options: RequestOptions? = null): SessionResource =
+    fun createAgentSession(
+        clientConfig: ClientConfig,
+        request: CreateAgentSessionRequest,
+        options: RequestOptions? = null,
+    ): SessionResource =
         dev.octri.showcase.openai.methods.AgentsCreateAgentSessionOperation.createAgentSession(
             clientConfig,
             request,
@@ -979,29 +1459,48 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Creates a managed agent session, optionally submits initial input, and returns the session or streams its events when stream is true. See [running sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions).
+     * Creates a managed agent session, optionally submits initial input, and returns the session or
+     * streams its events when stream is true. See
+     * [running sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions).
      */
-    fun createAgentSessionWithRawResponse(clientConfig: ClientConfig, request: CreateAgentSessionRequest, options: RequestOptions? = null): SdkResponse<SessionResource> =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionOperation.createAgentSessionWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateAgentSessionRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionResource> =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionOperation
+            .createAgentSessionWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Creates a managed agent session, optionally submits initial input, and returns the session or streams its events when stream is true. See [running sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions).
+     * Creates a managed agent session, optionally submits initial input, and returns the session or
+     * streams its events when stream is true. See
+     * [running sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions).
      */
-    fun createAgentSessionStream(clientConfig: ClientConfig, request: CreateAgentSessionStreamRequest, options: RequestOptions? = null): Sequence<SessionEvent> =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionStreamOperation.createAgentSessionStream(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createAgentSessionStream(
+        clientConfig: ClientConfig,
+        request: CreateAgentSessionStreamRequest,
+        options: RequestOptions? = null,
+    ): Sequence<SessionEvent> =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionStreamOperation
+            .createAgentSessionStream(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Retrieves the current state of a managed agent session. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Retrieves the current state of a managed agent session. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun retrieveAgentSession(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SessionResource =
+    fun retrieveAgentSession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SessionResource =
         dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionOperation.retrieveAgentSession(
             clientConfig,
             sessionId,
@@ -1009,19 +1508,34 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Retrieves the current state of a managed agent session. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Retrieves the current state of a managed agent session. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun retrieveAgentSessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SdkResponse<SessionResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionOperation.retrieveAgentSessionWithRawResponse(
-            clientConfig,
-            sessionId,
-            options,
-        )
+    fun retrieveAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionOperation
+            .retrieveAgentSessionWithRawResponse(
+                clientConfig,
+                sessionId,
+                options,
+            )
 
     /**
-     * Updates session metadata, model, reasoning effort, or service tier. Model settings apply to subsequent turns. Omitted fields are unchanged. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Updates session metadata, model, reasoning effort, or service tier. Model settings apply to
+     * subsequent turns. Omitted fields are unchanged. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun updateAgentSession(clientConfig: ClientConfig, sessionId: String, spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null, agent: UpdateSessionAgentParam? = null, metadata: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): SessionResource =
+    fun updateAgentSession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null,
+        agent: UpdateSessionAgentParam? = null,
+        metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
+        options: RequestOptions? = null,
+    ): SessionResource =
         dev.octri.showcase.openai.methods.AgentsUpdateAgentSessionOperation.updateAgentSession(
             clientConfig,
             sessionId,
@@ -1032,22 +1546,40 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Updates session metadata, model, reasoning effort, or service tier. Model settings apply to subsequent turns. Omitted fields are unchanged. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Updates session metadata, model, reasoning effort, or service tier. Model settings apply to
+     * subsequent turns. Omitted fields are unchanged. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun updateAgentSessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null, agent: UpdateSessionAgentParam? = null, metadata: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): SdkResponse<SessionResource> =
-        dev.octri.showcase.openai.methods.AgentsUpdateAgentSessionOperation.updateAgentSessionWithRawResponse(
-            clientConfig,
-            sessionId,
-            spendControl,
-            agent,
-            metadata,
-            options,
-        )
+    fun updateAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        spendControl: SdkClient.SdkOptional<SessionSpendControlParam?>? = null,
+        agent: UpdateSessionAgentParam? = null,
+        metadata: SdkClient.SdkOptional<Map<String, String>?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionResource> =
+        dev.octri.showcase.openai.methods.AgentsUpdateAgentSessionOperation
+            .updateAgentSessionWithRawResponse(
+                clientConfig,
+                sessionId,
+                spendControl,
+                agent,
+                metadata,
+                options,
+            )
 
     /**
-     * Removes a managed agent session from the public API and returns a deletion confirmation. If backend execution has ended, deletion can cancel a still-open public turn and abandon unpublished outputs. Running execution must be cancelled first. Physical cleanup may continue asynchronously. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Removes a managed agent session from the public API and returns a deletion confirmation. If
+     * backend execution has ended, deletion can cancel a still-open public turn and abandon
+     * unpublished outputs. Running execution must be cancelled first. Physical cleanup may continue
+     * asynchronously. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun deleteAgentSession(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): DeletedSessionResource =
+    fun deleteAgentSession(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): DeletedSessionResource =
         dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionOperation.deleteAgentSession(
             clientConfig,
             sessionId,
@@ -1055,412 +1587,727 @@ data class ListAgentSessionSubagentsResponse(
         )
 
     /**
-     * Removes a managed agent session from the public API and returns a deletion confirmation. If backend execution has ended, deletion can cancel a still-open public turn and abandon unpublished outputs. Running execution must be cancelled first. Physical cleanup may continue asynchronously. See [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
+     * Removes a managed agent session from the public API and returns a deletion confirmation. If
+     * backend execution has ended, deletion can cancel a still-open public turn and abandon
+     * unpublished outputs. Running execution must be cancelled first. Physical cleanup may continue
+     * asynchronously. See
+     * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
      */
-    fun deleteAgentSessionWithRawResponse(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): SdkResponse<DeletedSessionResource> =
-        dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionOperation.deleteAgentSessionWithRawResponse(
-            clientConfig,
-            sessionId,
-            options,
-        )
+    fun deleteAgentSessionWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedSessionResource> =
+        dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionOperation
+            .deleteAgentSessionWithRawResponse(
+                clientConfig,
+                sessionId,
+                options,
+            )
 
     /**
-     * Lists immutable artifacts published by completed hosted session turns. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Lists immutable artifacts published by completed hosted session turns. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun listAgentSessionArtifacts(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SessionArtifactListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation.listAgentSessionArtifacts(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            environmentId,
-            options,
-        )
+    fun listAgentSessionArtifacts(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SessionArtifactListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation
+            .listAgentSessionArtifacts(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                environmentId,
+                options,
+            )
 
     /**
-     * Lists immutable artifacts published by completed hosted session turns. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Lists immutable artifacts published by completed hosted session turns. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun listAgentSessionArtifactsWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<SessionArtifactListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation.listAgentSessionArtifactsWithRawResponse(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            environmentId,
-            options,
-        )
+    fun listAgentSessionArtifactsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionArtifactListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation
+            .listAgentSessionArtifactsWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                environmentId,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists immutable artifacts published by completed hosted session turns. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Iterates through all pages: Lists immutable artifacts published by completed hosted session
+     * turns. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun listAgentSessionArtifactsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null, yieldFn: (SessionArtifactResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation.listAgentSessionArtifactsPaginated(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            environmentId,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionArtifactsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionArtifactResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation
+            .listAgentSessionArtifactsPaginated(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                environmentId,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists immutable artifacts published by completed hosted session turns. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Lists immutable artifacts published by completed hosted session turns. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun listAgentSessionArtifactsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, environmentId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionArtifactsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation.listAgentSessionArtifactsPages(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            environmentId,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionArtifactsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        environmentId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionArtifactsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionArtifactsOperation
+            .listAgentSessionArtifactsPages(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                environmentId,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Retrieves immutable metadata for one durable session artifact. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Retrieves immutable metadata for one durable session artifact. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun retrieveAgentSessionArtifact(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SessionArtifactResource =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactOperation.retrieveAgentSessionArtifact(
-            clientConfig,
-            sessionId,
-            artifactId,
-            options,
-        )
+    fun retrieveAgentSessionArtifact(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SessionArtifactResource =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactOperation
+            .retrieveAgentSessionArtifact(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
 
     /**
-     * Retrieves immutable metadata for one durable session artifact. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Retrieves immutable metadata for one durable session artifact. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun retrieveAgentSessionArtifactWithRawResponse(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SdkResponse<SessionArtifactResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactOperation.retrieveAgentSessionArtifactWithRawResponse(
-            clientConfig,
-            sessionId,
-            artifactId,
-            options,
-        )
+    fun retrieveAgentSessionArtifactWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionArtifactResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactOperation
+            .retrieveAgentSessionArtifactWithRawResponse(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
 
     /**
-     * Deletes an immutable session artifact without deleting its live environment file or original Files API object. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Deletes an immutable session artifact without deleting its live environment file or original
+     * Files API object. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun deleteAgentSessionArtifact(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): DeletedSessionArtifactResource =
-        dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionArtifactOperation.deleteAgentSessionArtifact(
-            clientConfig,
-            sessionId,
-            artifactId,
-            options,
-        )
+    fun deleteAgentSessionArtifact(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): DeletedSessionArtifactResource =
+        dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionArtifactOperation
+            .deleteAgentSessionArtifact(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
 
     /**
-     * Deletes an immutable session artifact without deleting its live environment file or original Files API object. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Deletes an immutable session artifact without deleting its live environment file or original
+     * Files API object. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun deleteAgentSessionArtifactWithRawResponse(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SdkResponse<DeletedSessionArtifactResource> =
-        dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionArtifactOperation.deleteAgentSessionArtifactWithRawResponse(
-            clientConfig,
-            sessionId,
-            artifactId,
-            options,
-        )
+    fun deleteAgentSessionArtifactWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedSessionArtifactResource> =
+        dev.octri.showcase.openai.methods.AgentsDeleteAgentSessionArtifactOperation
+            .deleteAgentSessionArtifactWithRawResponse(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
 
     /**
-     * Downloads immutable session artifact bytes after the execution environment expires. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Downloads immutable session artifact bytes after the execution environment expires. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun retrieveAgentSessionArtifactContent(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): ByteArray =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactContentOperation.retrieveAgentSessionArtifactContent(
-            clientConfig,
-            sessionId,
-            artifactId,
-            options,
-        )
+    fun retrieveAgentSessionArtifactContent(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): ByteArray =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactContentOperation
+            .retrieveAgentSessionArtifactContent(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
 
     /**
-     * Downloads immutable session artifact bytes after the execution environment expires. See [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
+     * Downloads immutable session artifact bytes after the execution environment expires. See
+     * [session artifacts](https://developers.openai.com/api/docs/guides/agents-api/environments/files#openai-hosted-artifacts).
      */
-    fun retrieveAgentSessionArtifactContentWithRawResponse(clientConfig: ClientConfig, sessionId: String, artifactId: String, options: RequestOptions? = null): SdkResponse<ByteArray> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactContentOperation.retrieveAgentSessionArtifactContentWithRawResponse(
-            clientConfig,
-            sessionId,
-            artifactId,
-            options,
-        )
+    fun retrieveAgentSessionArtifactContentWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        artifactId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ByteArray> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionArtifactContentOperation
+            .retrieveAgentSessionArtifactContentWithRawResponse(
+                clientConfig,
+                sessionId,
+                artifactId,
+                options,
+            )
 
     /**
-     * Streams live events for an agent session. See [session events](https://developers.openai.com/api/docs/guides/agents-api/sessions/events).
+     * Streams live events for an agent session. See
+     * [session events](https://developers.openai.com/api/docs/guides/agents-api/sessions/events).
      */
-    fun listAgentSessionEvents(clientConfig: ClientConfig, sessionId: String, options: RequestOptions? = null): Sequence<SessionEvent> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionEventsOperation.listAgentSessionEvents(
-            clientConfig,
-            sessionId,
-            options,
-        )
+    fun listAgentSessionEvents(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        options: RequestOptions? = null,
+    ): Sequence<SessionEvent> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionEventsOperation
+            .listAgentSessionEvents(
+                clientConfig,
+                sessionId,
+                options,
+            )
 
     /**
-     * Submits message, cancellation, tool-result, or computer-use approval-response events to a managed agent session. Cancellation can recover a still-open turn whose backend execution has ended by marking it cancelled and abandoning unpublished outputs. Saved results, published files, and existing terminal outcomes are preserved. HTTP 202 confirms acceptance, not durable completion. See [session events](https://developers.openai.com/api/docs/guides/agents-api/sessions/events).
+     * Submits message, cancellation, tool-result, or computer-use approval-response events to a
+     * managed agent session. Cancellation can recover a still-open turn whose backend execution has
+     * ended by marking it cancelled and abandoning unpublished outputs. Saved results, published
+     * files, and existing terminal outcomes are preserved. HTTP 202 confirms acceptance, not
+     * durable completion. See
+     * [session events](https://developers.openai.com/api/docs/guides/agents-api/sessions/events).
      */
-    fun createAgentSessionEvents(clientConfig: ClientConfig, sessionId: String, events: List<SessionInputParam>, idempotencyKey: String? = null, options: RequestOptions? = null): Unit =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionEventsOperation.createAgentSessionEvents(
-            clientConfig,
-            sessionId,
-            events,
-            idempotencyKey,
-            options,
-        )
+    fun createAgentSessionEvents(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        events: List<SessionInputParam>,
+        idempotencyKey: String? = null,
+        options: RequestOptions? = null,
+    ): Unit =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionEventsOperation
+            .createAgentSessionEvents(
+                clientConfig,
+                sessionId,
+                events,
+                idempotencyKey,
+                options,
+            )
 
     /**
-     * Submits message, cancellation, tool-result, or computer-use approval-response events to a managed agent session. Cancellation can recover a still-open turn whose backend execution has ended by marking it cancelled and abandoning unpublished outputs. Saved results, published files, and existing terminal outcomes are preserved. HTTP 202 confirms acceptance, not durable completion. See [session events](https://developers.openai.com/api/docs/guides/agents-api/sessions/events).
+     * Submits message, cancellation, tool-result, or computer-use approval-response events to a
+     * managed agent session. Cancellation can recover a still-open turn whose backend execution has
+     * ended by marking it cancelled and abandoning unpublished outputs. Saved results, published
+     * files, and existing terminal outcomes are preserved. HTTP 202 confirms acceptance, not
+     * durable completion. See
+     * [session events](https://developers.openai.com/api/docs/guides/agents-api/sessions/events).
      */
-    fun createAgentSessionEventsWithRawResponse(clientConfig: ClientConfig, sessionId: String, events: List<SessionInputParam>, idempotencyKey: String? = null, options: RequestOptions? = null): SdkResponse<Unit> =
-        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionEventsOperation.createAgentSessionEventsWithRawResponse(
-            clientConfig,
-            sessionId,
-            events,
-            idempotencyKey,
-            options,
-        )
+    fun createAgentSessionEventsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        events: List<SessionInputParam>,
+        idempotencyKey: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> =
+        dev.octri.showcase.openai.methods.AgentsCreateAgentSessionEventsOperation
+            .createAgentSessionEventsWithRawResponse(
+                clientConfig,
+                sessionId,
+                events,
+                idempotencyKey,
+                options,
+            )
 
     /**
-     * Lists items produced by the session's root agent, including its interactions with subagents. Each subagent has its own item history. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Lists items produced by the session's root agent, including its interactions with subagents.
+     * Each subagent has its own item history. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionItems(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation.listAgentSessionItems(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionItems(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionItemListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation
+            .listAgentSessionItems(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists items produced by the session's root agent, including its interactions with subagents. Each subagent has its own item history. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Lists items produced by the session's root agent, including its interactions with subagents.
+     * Each subagent has its own item history. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionItemsWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionItemListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation.listAgentSessionItemsWithRawResponse(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionItemsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionItemListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation
+            .listAgentSessionItemsWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists items produced by the session's root agent, including its interactions with subagents. Each subagent has its own item history. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Iterates through all pages: Lists items produced by the session's root agent, including its
+     * interactions with subagents. Each subagent has its own item history. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionItemsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation.listAgentSessionItemsPaginated(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionItemsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnItemResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation
+            .listAgentSessionItemsPaginated(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists items produced by the session's root agent, including its interactions with subagents. Each subagent has its own item history. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Lists items produced by the session's root agent, including its interactions with subagents.
+     * Each subagent has its own item history. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionItemsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionItemsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation.listAgentSessionItemsPages(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionItemsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionItemsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionItemsOperation
+            .listAgentSessionItemsPages(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID. Unpublished traces are skipped. Each page returns data available when read; it does not wait for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the limit is exceeded, request fewer traces.
+     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID.
+     * Unpublished traces are skipped. Each page returns data available when read; it does not wait
+     * for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the
+     * limit is exceeded, request fewer traces.
      */
-    fun listAgentSessionTraces(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTraceListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation.listAgentSessionTraces(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionTraces(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionTraceListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation
+            .listAgentSessionTraces(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID. Unpublished traces are skipped. Each page returns data available when read; it does not wait for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the limit is exceeded, request fewer traces.
+     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID.
+     * Unpublished traces are skipped. Each page returns data available when read; it does not wait
+     * for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the
+     * limit is exceeded, request fewer traces.
      */
-    fun listAgentSessionTracesWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionTraceListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation.listAgentSessionTracesWithRawResponse(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionTracesWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionTraceListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation
+            .listAgentSessionTracesWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID. Unpublished traces are skipped. Each page returns data available when read; it does not wait for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the limit is exceeded, request fewer traces.
+     * Iterates through all pages: Lists published root-turn traces as OTLP JSON, ordered by turn
+     * creation time and ID. Unpublished traces are skipped. Each page returns data available when
+     * read; it does not wait for late traces. Trace reads and the JSON response are limited to 16
+     * MiB per request. If the limit is exceeded, request fewer traces.
      */
-    fun listAgentSessionTracesPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnTraceResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation.listAgentSessionTracesPaginated(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionTracesPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnTraceResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation
+            .listAgentSessionTracesPaginated(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID. Unpublished traces are skipped. Each page returns data available when read; it does not wait for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the limit is exceeded, request fewer traces.
+     * Lists published root-turn traces as OTLP JSON, ordered by turn creation time and ID.
+     * Unpublished traces are skipped. Each page returns data available when read; it does not wait
+     * for late traces. Trace reads and the JSON response are limited to 16 MiB per request. If the
+     * limit is exceeded, request fewer traces.
      */
-    fun listAgentSessionTracesPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionTracesPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation.listAgentSessionTracesPages(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionTracesPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionTracesPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTracesOperation
+            .listAgentSessionTracesPages(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected order. See [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
+     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected
+     * order. See
+     * [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
      */
-    fun listAgentSessionTurns(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionTurnListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation.listAgentSessionTurns(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionTurns(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionTurnListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation
+            .listAgentSessionTurns(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected order. See [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
+     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected
+     * order. See
+     * [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
      */
-    fun listAgentSessionTurnsWithRawResponse(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionTurnListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation.listAgentSessionTurnsWithRawResponse(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionTurnsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionTurnListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation
+            .listAgentSessionTurnsWithRawResponse(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists turns by creation time and turn ID. The after cursor is exclusive in the selected order. See [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
+     * Iterates through all pages: Lists turns by creation time and turn ID. The after cursor is
+     * exclusive in the selected order. See
+     * [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
      */
-    fun listAgentSessionTurnsPaginated(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (TurnResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation.listAgentSessionTurnsPaginated(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionTurnsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (TurnResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation
+            .listAgentSessionTurnsPaginated(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected order. See [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
+     * Lists turns by creation time and turn ID. The after cursor is exclusive in the selected
+     * order. See
+     * [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
      */
-    fun listAgentSessionTurnsPages(clientConfig: ClientConfig, sessionId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionTurnsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation.listAgentSessionTurnsPages(
-            clientConfig,
-            sessionId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionTurnsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionTurnsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnsOperation
+            .listAgentSessionTurnsPages(
+                clientConfig,
+                sessionId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 
     /**
-     * Retrieves a turn's current status, timestamps, usage, and error. Returns 404 if the turn does not belong to the session. See [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
+     * Retrieves a turn's current status, timestamps, usage, and error. Returns 404 if the turn does
+     * not belong to the session. See
+     * [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
      */
-    fun retrieveAgentSessionTurn(clientConfig: ClientConfig, sessionId: String, turnId: String, options: RequestOptions? = null): TurnResource =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionTurnOperation.retrieveAgentSessionTurn(
-            clientConfig,
-            sessionId,
-            turnId,
-            options,
-        )
+    fun retrieveAgentSessionTurn(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        turnId: String,
+        options: RequestOptions? = null,
+    ): TurnResource =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionTurnOperation
+            .retrieveAgentSessionTurn(
+                clientConfig,
+                sessionId,
+                turnId,
+                options,
+            )
 
     /**
-     * Retrieves a turn's current status, timestamps, usage, and error. Returns 404 if the turn does not belong to the session. See [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
+     * Retrieves a turn's current status, timestamps, usage, and error. Returns 404 if the turn does
+     * not belong to the session. See
+     * [session turns](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage#inspect-session-turns).
      */
-    fun retrieveAgentSessionTurnWithRawResponse(clientConfig: ClientConfig, sessionId: String, turnId: String, options: RequestOptions? = null): SdkResponse<TurnResource> =
-        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionTurnOperation.retrieveAgentSessionTurnWithRawResponse(
-            clientConfig,
-            sessionId,
-            turnId,
-            options,
-        )
+    fun retrieveAgentSessionTurnWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        turnId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<TurnResource> =
+        dev.octri.showcase.openai.methods.AgentsRetrieveAgentSessionTurnOperation
+            .retrieveAgentSessionTurnWithRawResponse(
+                clientConfig,
+                sessionId,
+                turnId,
+                options,
+            )
 
     /**
-     * Lists items belonging to one root-agent turn, including its interactions with subagents. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Lists items belonging to one root-agent turn, including its interactions with subagents. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionTurnItems(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SessionItemListResource =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation.listAgentSessionTurnItems(
-            clientConfig,
-            sessionId,
-            turnId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionTurnItems(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        turnId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SessionItemListResource =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation
+            .listAgentSessionTurnItems(
+                clientConfig,
+                sessionId,
+                turnId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Lists items belonging to one root-agent turn, including its interactions with subagents. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Lists items belonging to one root-agent turn, including its interactions with subagents. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionTurnItemsWithRawResponse(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<SessionItemListResource> =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation.listAgentSessionTurnItemsWithRawResponse(
-            clientConfig,
-            sessionId,
-            turnId,
-            limit,
-            order,
-            after,
-            options,
-        )
+    fun listAgentSessionTurnItemsWithRawResponse(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        turnId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SessionItemListResource> =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation
+            .listAgentSessionTurnItemsWithRawResponse(
+                clientConfig,
+                sessionId,
+                turnId,
+                limit,
+                order,
+                after,
+                options,
+            )
 
     /**
-     * Iterates through all pages: Lists items belonging to one root-agent turn, including its interactions with subagents. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Iterates through all pages: Lists items belonging to one root-agent turn, including its
+     * interactions with subagents. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionTurnItemsPaginated(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (SessionTurnItemResource) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation.listAgentSessionTurnItemsPaginated(
-            clientConfig,
-            sessionId,
-            turnId,
-            limit,
-            order,
-            after,
-            options,
-            yieldFn,
-        )
+    fun listAgentSessionTurnItemsPaginated(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        turnId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (SessionTurnItemResource) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation
+            .listAgentSessionTurnItemsPaginated(
+                clientConfig,
+                sessionId,
+                turnId,
+                limit,
+                order,
+                after,
+                options,
+                yieldFn,
+            )
 
     /**
-     * Lists items belonging to one root-agent turn, including its interactions with subagents. See [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
+     * Lists items belonging to one root-agent turn, including its interactions with subagents. See
+     * [inspecting agent output](https://developers.openai.com/api/docs/guides/agents-api/observability).
      */
-    fun listAgentSessionTurnItemsPages(clientConfig: ClientConfig, sessionId: String, turnId: String, limit: Long? = null, order: ListOrderParam? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (ListAgentSessionTurnItemsPage) -> Boolean) =
-        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation.listAgentSessionTurnItemsPages(
-            clientConfig,
-            sessionId,
-            turnId,
-            limit,
-            order,
-            after,
-            options,
-            yieldPage,
-        )
+    fun listAgentSessionTurnItemsPages(
+        clientConfig: ClientConfig,
+        sessionId: String,
+        turnId: String,
+        limit: Long? = null,
+        order: ListOrderParam? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAgentSessionTurnItemsPage) -> Boolean,
+    ) =
+        dev.octri.showcase.openai.methods.AgentsListAgentSessionTurnItemsOperation
+            .listAgentSessionTurnItemsPages(
+                clientConfig,
+                sessionId,
+                turnId,
+                limit,
+                order,
+                after,
+                options,
+                yieldPage,
+            )
 }

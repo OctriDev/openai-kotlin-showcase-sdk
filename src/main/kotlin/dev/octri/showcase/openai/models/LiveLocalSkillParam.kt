@@ -5,20 +5,12 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Typed representation of the `LiveLocalSkillParam` API schema.
- */
+/** Typed representation of the `LiveLocalSkillParam` API schema. */
 data class LiveLocalSkillParam(
-    /**
-     * The name of the skill.
-     */
+    /** The name of the skill. */
     val name: String,
-    /**
-     * The description of the skill.
-     */
+    /** The description of the skill. */
     val description: String,
-    /**
-     * The path to the directory containing the skill.
-     */
-    val path: String
+    /** The path to the directory containing the skill. */
+    val path: String,
 ) : SdkResource()

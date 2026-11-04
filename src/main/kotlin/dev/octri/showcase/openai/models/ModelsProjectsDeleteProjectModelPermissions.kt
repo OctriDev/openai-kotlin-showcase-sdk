@@ -5,16 +5,11 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Confirmation payload returned after deleting project model permissions.
- */
+/** Confirmation payload returned after deleting project model permissions. */
 data class ProjectModelPermissionsDeleteResponse(
-    /**
-     * The object type, which is always `project.model_permissions.deleted`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProjectModelPermissionsDeleteResponseObjectEnum,
-    /**
-     * Whether the project model permissions were deleted.
-     */
-    val deleted: Boolean
+    /** The object type, which is always `project.model_permissions.deleted`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: ProjectModelPermissionsDeleteResponseObjectEnum,
+    /** Whether the project model permissions were deleted. */
+    val deleted: Boolean,
 ) : SdkResource()

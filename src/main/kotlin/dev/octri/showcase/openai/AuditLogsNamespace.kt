@@ -3,33 +3,54 @@
 
 package dev.octri.showcase.openai
 
-
 class AuditLogsNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * List user actions and configuration changes within this organization.
-     */
-    fun list(request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest, options: RequestOptions? = null): ListAuditLogsResponse {
-        return dev.octri.showcase.openai.methods.AuditLogs.listAuditLogs(clientConfig, request, options)
+    /** List user actions and configuration changes within this organization. */
+    fun list(
+        request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest,
+        options: RequestOptions? = null,
+    ): ListAuditLogsResponse {
+        return dev.octri.showcase.openai.methods.AuditLogs.listAuditLogs(
+            clientConfig,
+            request,
+            options,
+        )
+    }
+
+    /** List user actions and configuration changes within this organization. */
+    fun listPaginated(
+        request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest,
+        options: RequestOptions? = null,
+        yieldFn: (AuditLog) -> Boolean,
+    ) {
+        dev.octri.showcase.openai.methods.AuditLogs.listAuditLogsPaginated(
+            clientConfig,
+            request,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * List user actions and configuration changes within this organization.
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun listPaginated(request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest, options: RequestOptions? = null, yieldFn: (AuditLog) -> Boolean) {
-        dev.octri.showcase.openai.methods.AuditLogs.listAuditLogsPaginated(clientConfig, request, options, yieldFn)
-    }
-
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [AuditLogsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [AuditLogsNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
-        /**
-         * List user actions and configuration changes within this organization.
-         */
-        fun list(request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest, options: RequestOptions? = null): SdkResponse<ListAuditLogsResponse> {
-            return dev.octri.showcase.openai.methods.AuditLogs.listAuditLogsWithRawResponse(clientConfig, request, options)
+        /** List user actions and configuration changes within this organization. */
+        fun list(
+            request: dev.octri.showcase.openai.methods.AuditLogs.ListAuditLogsRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<ListAuditLogsResponse> {
+            return dev.octri.showcase.openai.methods.AuditLogs.listAuditLogsWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
-
     }
 }

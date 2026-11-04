@@ -5,12 +5,8 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Typed representation of the `ProjectUserUpdateRequest` API schema.
- */
+/** Typed representation of the `ProjectUserUpdateRequest` API schema. */
 data class ProjectUserUpdateRequest(
-    /**
-     * `owner` or `member`
-     */
+    /** `owner` or `member` */
     val role: String? = null
 ) : SdkResource()

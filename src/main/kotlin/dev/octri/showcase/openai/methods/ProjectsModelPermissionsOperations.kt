@@ -15,26 +15,55 @@ import dev.octri.showcase.openai.SdkResponse
 
 internal object ProjectsRetrieveProjectModelPermissionsOperation {
     /**
-     * Retrieves the model permission policy for a project. Use `project_id` to identify the project whose model access policy you want to inspect. The response includes the policy mode and the model IDs it applies to.
+     * Retrieves the model permission policy for a project. Use `project_id` to identify the project
+     * whose model access policy you want to inspect. The response includes the policy mode and the
+     * model IDs it applies to.
      *
      * Returns model permissions for a project.
      *
      * @param projectId The ID of the project.
      */
-    fun retrieveProjectModelPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectModelPermissions {
+    fun retrieveProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissions {
         return retrieveProjectModelPermissionsWithRawResponse(clientConfig, projectId, options).data
     }
 
-
-    /** [retrieveProjectModelPermissions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveProjectModelPermissionsWithRawResponse(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): SdkResponse<ProjectModelPermissions> {
-        return SdkClient.request<ProjectModelPermissions>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions", config = clientConfig, operationId = "retrieveProjectModelPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [retrieveProjectModelPermissions], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun retrieveProjectModelPermissionsWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectModelPermissions> {
+        return SdkClient.request<ProjectModelPermissions>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions",
+                config = clientConfig,
+                operationId = "retrieveProjectModelPermissions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsUpdateProjectModelPermissionsOperation {
     /**
-     * Updates a project's model permission policy. Provide `mode` and `model_ids` to specify whether the listed models are allowed or denied. The response returns the updated policy.
+     * Updates a project's model permission policy. Provide `mode` and `model_ids` to specify
+     * whether the listed models are allowed or denied. The response returns the updated policy.
      *
      * Updates model permissions for a project.
      *
@@ -42,32 +71,97 @@ internal object ProjectsUpdateProjectModelPermissionsOperation {
      * @param mode The model permissions mode to apply.
      * @param modelIds The model IDs included in this permissions policy.
      */
-    fun updateProjectModelPermissions(clientConfig: ClientConfig, projectId: String, mode: ProjectModelPermissionsUpdateRequestModeEnum, modelIds: List<String>, options: RequestOptions? = null): ProjectModelPermissions {
-        return updateProjectModelPermissionsWithRawResponse(clientConfig, projectId, mode, modelIds, options).data
+    fun updateProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        mode: ProjectModelPermissionsUpdateRequestModeEnum,
+        modelIds: List<String>,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissions {
+        return updateProjectModelPermissionsWithRawResponse(
+                clientConfig,
+                projectId,
+                mode,
+                modelIds,
+                options,
+            )
+            .data
     }
 
-
-    /** [updateProjectModelPermissions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateProjectModelPermissionsWithRawResponse(clientConfig: ClientConfig, projectId: String, mode: ProjectModelPermissionsUpdateRequestModeEnum, modelIds: List<String>, options: RequestOptions? = null): SdkResponse<ProjectModelPermissions> {
-        return SdkClient.request<ProjectModelPermissions>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions", config = clientConfig, body = SdkClient.bodyMap("mode" to (mode), "model_ids" to (modelIds)), operationId = "updateProjectModelPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [updateProjectModelPermissions], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun updateProjectModelPermissionsWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        mode: ProjectModelPermissionsUpdateRequestModeEnum,
+        modelIds: List<String>,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectModelPermissions> {
+        return SdkClient.request<ProjectModelPermissions>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions",
+                config = clientConfig,
+                body = SdkClient.bodyMap("mode" to (mode), "model_ids" to (modelIds)),
+                operationId = "updateProjectModelPermissions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsDeleteProjectModelPermissionsOperation {
     /**
-     * Deletes the model permission policy for a project. Use `project_id` to identify the project whose policy you want to remove. The response confirms whether the permissions were deleted.
+     * Deletes the model permission policy for a project. Use `project_id` to identify the project
+     * whose policy you want to remove. The response confirms whether the permissions were deleted.
      *
      * Deletes model permissions for a project.
      *
      * @param projectId The ID of the project.
      */
-    fun deleteProjectModelPermissions(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): ProjectModelPermissionsDeleteResponse {
+    fun deleteProjectModelPermissions(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): ProjectModelPermissionsDeleteResponse {
         return deleteProjectModelPermissionsWithRawResponse(clientConfig, projectId, options).data
     }
 
-
-    /** [deleteProjectModelPermissions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteProjectModelPermissionsWithRawResponse(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): SdkResponse<ProjectModelPermissionsDeleteResponse> {
-        return SdkClient.request<ProjectModelPermissionsDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions", config = clientConfig, operationId = "deleteProjectModelPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [deleteProjectModelPermissions], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteProjectModelPermissionsWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectModelPermissionsDeleteResponse> {
+        return SdkClient.request<ProjectModelPermissionsDeleteResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/model_permissions",
+                config = clientConfig,
+                operationId = "deleteProjectModelPermissions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }

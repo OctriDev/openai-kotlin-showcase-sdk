@@ -5,34 +5,24 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Workflow metadata and state returned for the session.
- */
+/** Workflow metadata and state returned for the session. */
 data class ChatkitWorkflow(
-    /**
-     * Identifier of the workflow backing the session.
-     */
+    /** Identifier of the workflow backing the session. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `version` wire field.
-     */
+    /** Required `string` value serialized in the `version` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("version", required = true) val version: String?,
     /**
-     * State variable key-value pairs applied when invoking the workflow. Defaults to null when no overrides were provided.
+     * State variable key-value pairs applied when invoking the workflow. Defaults to null when no
+     * overrides were provided.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("state_variables", required = true) val stateVariables: Map<String, Any>?,
-    /**
-     * Tracing settings applied to the workflow.
-     */
-    val tracing: ChatkitWorkflowTracing
+    @com.fasterxml.jackson.annotation.JsonProperty("state_variables", required = true)
+    val stateVariables: Map<String, Any>?,
+    /** Tracing settings applied to the workflow. */
+    val tracing: ChatkitWorkflowTracing,
 ) : SdkResource()
 
-/**
- * Controls diagnostic tracing during the session.
- */
+/** Controls diagnostic tracing during the session. */
 data class ChatkitWorkflowTracing(
-    /**
-     * Indicates whether tracing is enabled.
-     */
+    /** Indicates whether tracing is enabled. */
     val enabled: Boolean
 ) : SdkResource()

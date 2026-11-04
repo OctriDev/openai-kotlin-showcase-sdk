@@ -3,30 +3,60 @@
 
 package dev.octri.showcase.openai
 
-
 class ModerationsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Classifies text and image inputs for potentially harmful content. Supply `input` as a string, an array of strings, or supported multimodal input; `model` defaults to `omni-moderation-latest`. Use the returned results to review moderation flags, categories, and category scores.
+     * Classifies text and image inputs for potentially harmful content. Supply `input` as a string,
+     * an array of strings, or supported multimodal input; `model` defaults to
+     * `omni-moderation-latest`. Use the returned results to review moderation flags, categories,
+     * and category scores.
      *
-     * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation guide.
+     * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation
+     * guide.
      */
-    fun create(input: Any, model: String? = null, options: RequestOptions? = null): CreateModerationResponse {
-        return dev.octri.showcase.openai.methods.Moderations.createModeration(clientConfig, input, model, options)
+    fun create(
+        input: Any,
+        model: String? = null,
+        options: RequestOptions? = null,
+    ): CreateModerationResponse {
+        return dev.octri.showcase.openai.methods.Moderations.createModeration(
+            clientConfig,
+            input,
+            model,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [ModerationsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [ModerationsNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Classifies text and image inputs for potentially harmful content. Supply `input` as a string, an array of strings, or supported multimodal input; `model` defaults to `omni-moderation-latest`. Use the returned results to review moderation flags, categories, and category scores.
+         * Classifies text and image inputs for potentially harmful content. Supply `input` as a
+         * string, an array of strings, or supported multimodal input; `model` defaults to
+         * `omni-moderation-latest`. Use the returned results to review moderation flags,
+         * categories, and category scores.
          *
-         * Classifies if text and/or image inputs are potentially harmful. Learn more in the moderation guide.
+         * Classifies if text and/or image inputs are potentially harmful. Learn more in the
+         * moderation guide.
          */
-        fun create(input: Any, model: String? = null, options: RequestOptions? = null): SdkResponse<CreateModerationResponse> {
-            return dev.octri.showcase.openai.methods.Moderations.createModerationWithRawResponse(clientConfig, input, model, options)
+        fun create(
+            input: Any,
+            model: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CreateModerationResponse> {
+            return dev.octri.showcase.openai.methods.Moderations.createModerationWithRawResponse(
+                clientConfig,
+                input,
+                model,
+                options,
+            )
         }
-
     }
 }

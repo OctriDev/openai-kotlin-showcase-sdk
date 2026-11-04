@@ -4,33 +4,40 @@
 package dev.octri.showcase.openai.models
 
 /**
- * The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.
+ * The reason why the run is incomplete. This will point to which specific token limit was reached
+ * over the course of the run.
  */
-class RunObjectIncompleteDetailsReasonEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunObjectIncompleteDetailsReasonEnum && value == other.value
+class RunObjectIncompleteDetailsReasonEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunObjectIncompleteDetailsReasonEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val MAX_COMPLETION_TOKENS = RunObjectIncompleteDetailsReasonEnum("max_completion_tokens")
+        @JvmField
+        val MAX_COMPLETION_TOKENS = RunObjectIncompleteDetailsReasonEnum("max_completion_tokens")
         @JvmField val MAX_PROMPT_TOKENS = RunObjectIncompleteDetailsReasonEnum("max_prompt_tokens")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunObjectIncompleteDetailsReasonEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunObjectIncompleteDetailsReasonEnum(value)
     }
 }
 
-/**
- * One of `server_error`, `rate_limit_exceeded`, or `invalid_prompt`.
- */
-class RunObjectLastErrorCodeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunObjectLastErrorCodeEnum && value == other.value
+/** One of `server_error`, `rate_limit_exceeded`, or `invalid_prompt`. */
+class RunObjectLastErrorCodeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunObjectLastErrorCodeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -39,57 +46,67 @@ class RunObjectLastErrorCodeEnum private constructor(
         @JvmField val RATE_LIMIT_EXCEEDED = RunObjectLastErrorCodeEnum("rate_limit_exceeded")
         @JvmField val INVALID_PROMPT = RunObjectLastErrorCodeEnum("invalid_prompt")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunObjectLastErrorCodeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunObjectLastErrorCodeEnum(value)
     }
 }
 
-/**
- * The object type, which is always `thread.run`.
- */
-class RunObjectObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** The object type, which is always `thread.run`. */
+class RunObjectObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is RunObjectObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val THREAD_RUN = RunObjectObjectEnum("thread.run")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunObjectObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunObjectObjectEnum(value)
     }
 }
 
-/**
- * For now, this is always `submit_tool_outputs`.
- */
-class RunObjectRequiredActionTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunObjectRequiredActionTypeEnum && value == other.value
+/** For now, this is always `submit_tool_outputs`. */
+class RunObjectRequiredActionTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunObjectRequiredActionTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val SUBMIT_TOOL_OUTPUTS = RunObjectRequiredActionTypeEnum("submit_tool_outputs")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunObjectRequiredActionTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunObjectRequiredActionTypeEnum(value)
     }
 }
 
 /**
- * The status of the run, which can be either `queued`, `in_progress`, `requires_action`, `cancelling`, `cancelled`, `failed`, `completed`, `incomplete`, or `expired`.
+ * The status of the run, which can be either `queued`, `in_progress`, `requires_action`,
+ * `cancelling`, `cancelled`, `failed`, `completed`, `incomplete`, or `expired`.
  */
-class RunObjectStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+class RunObjectStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is RunObjectStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -104,34 +121,40 @@ class RunObjectStatusEnum private constructor(
         @JvmField val INCOMPLETE = RunObjectStatusEnum("incomplete")
         @JvmField val EXPIRED = RunObjectStatusEnum("expired")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunObjectStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunObjectStatusEnum(value)
     }
 }
 
-/**
- * The object type, which is always `thread.run.step.delta`.
- */
-class RunStepDeltaObjectObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunStepDeltaObjectObjectEnum && value == other.value
+/** The object type, which is always `thread.run.step.delta`. */
+class RunStepDeltaObjectObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunStepDeltaObjectObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val THREAD_RUN_STEP_DELTA = RunStepDeltaObjectObjectEnum("thread.run.step.delta")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunStepDeltaObjectObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunStepDeltaObjectObjectEnum(value)
     }
 }
 
-/**
- * Always `message_creation`.
- */
-enum class RunStepDeltaStepDetailsMessageCreationObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `message_creation`. */
+enum class RunStepDeltaStepDetailsMessageCreationObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MESSAGE_CREATION("message_creation");
 
     override fun toString() = value
@@ -139,15 +162,18 @@ enum class RunStepDeltaStepDetailsMessageCreationObjectTypeEnum(@com.fasterxml.j
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
  * The type of tool call. This is always going to be `code_interpreter` for this type of tool call.
  */
-enum class RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     CODE_INTERPRETER("code_interpreter");
 
     override fun toString() = value
@@ -155,15 +181,16 @@ enum class RunStepDeltaStepDetailsToolCallsCodeObjectTypeEnum(@com.fasterxml.jac
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `image`.
- */
-enum class RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `image`. */
+enum class RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE("image");
 
     override fun toString() = value
@@ -171,15 +198,16 @@ enum class RunStepDeltaStepDetailsToolCallsCodeOutputImageObjectTypeEnum(@com.fa
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `logs`.
- */
-enum class RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `logs`. */
+enum class RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     LOGS("logs");
 
     override fun toString() = value
@@ -187,15 +215,16 @@ enum class RunStepDeltaStepDetailsToolCallsCodeOutputLogsObjectTypeEnum(@com.fas
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of tool call. This is always going to be `file_search` for this type of tool call.
- */
-enum class RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of tool call. This is always going to be `file_search` for this type of tool call. */
+enum class RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FILE_SEARCH("file_search");
 
     override fun toString() = value
@@ -203,15 +232,16 @@ enum class RunStepDeltaStepDetailsToolCallsFileSearchObjectTypeEnum(@com.fasterx
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of tool call. This is always going to be `function` for this type of tool call.
- */
-enum class RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of tool call. This is always going to be `function` for this type of tool call. */
+enum class RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FUNCTION("function");
 
     override fun toString() = value
@@ -219,15 +249,16 @@ enum class RunStepDeltaStepDetailsToolCallsFunctionObjectTypeEnum(@com.fasterxml
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `tool_calls`.
- */
-enum class RunStepDeltaStepDetailsToolCallsObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `tool_calls`. */
+enum class RunStepDeltaStepDetailsToolCallsObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     TOOL_CALLS("tool_calls");
 
     override fun toString() = value
@@ -235,15 +266,16 @@ enum class RunStepDeltaStepDetailsToolCallsObjectTypeEnum(@com.fasterxml.jackson
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `message_creation`.
- */
-enum class RunStepDetailsMessageCreationObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `message_creation`. */
+enum class RunStepDetailsMessageCreationObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     MESSAGE_CREATION("message_creation");
 
     override fun toString() = value
@@ -251,15 +283,18 @@ enum class RunStepDetailsMessageCreationObjectTypeEnum(@com.fasterxml.jackson.an
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
  * The type of tool call. This is always going to be `code_interpreter` for this type of tool call.
  */
-enum class RunStepDetailsToolCallsCodeObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepDetailsToolCallsCodeObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     CODE_INTERPRETER("code_interpreter");
 
     override fun toString() = value
@@ -267,15 +302,16 @@ enum class RunStepDetailsToolCallsCodeObjectTypeEnum(@com.fasterxml.jackson.anno
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `image`.
- */
-enum class RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `image`. */
+enum class RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     IMAGE("image");
 
     override fun toString() = value
@@ -283,15 +319,16 @@ enum class RunStepDetailsToolCallsCodeOutputImageObjectTypeEnum(@com.fasterxml.j
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `logs`.
- */
-enum class RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `logs`. */
+enum class RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     LOGS("logs");
 
     override fun toString() = value
@@ -299,15 +336,16 @@ enum class RunStepDetailsToolCallsCodeOutputLogsObjectTypeEnum(@com.fasterxml.ja
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of tool call. This is always going to be `file_search` for this type of tool call.
- */
-enum class RunStepDetailsToolCallsFileSearchObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of tool call. This is always going to be `file_search` for this type of tool call. */
+enum class RunStepDetailsToolCallsFileSearchObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FILE_SEARCH("file_search");
 
     override fun toString() = value
@@ -315,34 +353,41 @@ enum class RunStepDetailsToolCallsFileSearchObjectTypeEnum(@com.fasterxml.jackso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The type of the content.
- */
-class RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum && value == other.value
+/** The type of the content. */
+class RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val TEXT = RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum("text")
+        @JvmField
+        val TEXT = RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum("text")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            RunStepDetailsToolCallsFileSearchResultObjectContentItemTypeEnum(value)
     }
 }
 
-/**
- * The type of tool call. This is always going to be `function` for this type of tool call.
- */
-enum class RunStepDetailsToolCallsFunctionObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The type of tool call. This is always going to be `function` for this type of tool call. */
+enum class RunStepDetailsToolCallsFunctionObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     FUNCTION("function");
 
     override fun toString() = value
@@ -350,15 +395,16 @@ enum class RunStepDetailsToolCallsFunctionObjectTypeEnum(@com.fasterxml.jackson.
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * Always `tool_calls`.
- */
-enum class RunStepDetailsToolCallsObjectTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** Always `tool_calls`. */
+enum class RunStepDetailsToolCallsObjectTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     TOOL_CALLS("tool_calls");
 
     override fun toString() = value
@@ -366,19 +412,20 @@ enum class RunStepDetailsToolCallsObjectTypeEnum(@com.fasterxml.jackson.annotati
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * One of `server_error` or `rate_limit_exceeded`.
- */
-class RunStepObjectLastErrorCodeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunStepObjectLastErrorCodeEnum && value == other.value
+/** One of `server_error` or `rate_limit_exceeded`. */
+class RunStepObjectLastErrorCodeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunStepObjectLastErrorCodeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -386,38 +433,47 @@ class RunStepObjectLastErrorCodeEnum private constructor(
         @JvmField val SERVER_ERROR = RunStepObjectLastErrorCodeEnum("server_error")
         @JvmField val RATE_LIMIT_EXCEEDED = RunStepObjectLastErrorCodeEnum("rate_limit_exceeded")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunStepObjectLastErrorCodeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunStepObjectLastErrorCodeEnum(value)
     }
 }
 
-/**
- * The object type, which is always `thread.run.step`.
- */
-class RunStepObjectObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunStepObjectObjectEnum && value == other.value
+/** The object type, which is always `thread.run.step`. */
+class RunStepObjectObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunStepObjectObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val THREAD_RUN_STEP = RunStepObjectObjectEnum("thread.run.step")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunStepObjectObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunStepObjectObjectEnum(value)
     }
 }
 
 /**
- * The status of the run step, which can be either `in_progress`, `cancelled`, `failed`, `completed`, or `expired`.
+ * The status of the run step, which can be either `in_progress`, `cancelled`, `failed`,
+ * `completed`, or `expired`.
  */
-class RunStepObjectStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunStepObjectStatusEnum && value == other.value
+class RunStepObjectStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunStepObjectStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -428,19 +484,22 @@ class RunStepObjectStatusEnum private constructor(
         @JvmField val COMPLETED = RunStepObjectStatusEnum("completed")
         @JvmField val EXPIRED = RunStepObjectStatusEnum("expired")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunStepObjectStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunStepObjectStatusEnum(value)
     }
 }
 
-/**
- * The type of run step, which can be either `message_creation` or `tool_calls`.
- */
-class RunStepObjectTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RunStepObjectTypeEnum && value == other.value
+/** The type of run step, which can be either `message_creation` or `tool_calls`. */
+class RunStepObjectTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RunStepObjectTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -448,12 +507,17 @@ class RunStepObjectTypeEnum private constructor(
         @JvmField val MESSAGE_CREATION = RunStepObjectTypeEnum("message_creation")
         @JvmField val TOOL_CALLS = RunStepObjectTypeEnum("tool_calls")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RunStepObjectTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RunStepObjectTypeEnum(value)
     }
 }
 
-enum class RunStepStreamEventVariant0EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant0EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_CREATED("thread.run.step.created");
 
     override fun toString() = value
@@ -461,12 +525,15 @@ enum class RunStepStreamEventVariant0EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStepStreamEventVariant1EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant1EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_IN_PROGRESS("thread.run.step.in_progress");
 
     override fun toString() = value
@@ -474,12 +541,15 @@ enum class RunStepStreamEventVariant1EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStepStreamEventVariant2EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant2EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_DELTA("thread.run.step.delta");
 
     override fun toString() = value
@@ -487,12 +557,15 @@ enum class RunStepStreamEventVariant2EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStepStreamEventVariant3EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant3EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_COMPLETED("thread.run.step.completed");
 
     override fun toString() = value
@@ -500,12 +573,15 @@ enum class RunStepStreamEventVariant3EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStepStreamEventVariant4EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant4EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_FAILED("thread.run.step.failed");
 
     override fun toString() = value
@@ -513,12 +589,15 @@ enum class RunStepStreamEventVariant4EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStepStreamEventVariant5EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant5EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_CANCELLED("thread.run.step.cancelled");
 
     override fun toString() = value
@@ -526,12 +605,15 @@ enum class RunStepStreamEventVariant5EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStepStreamEventVariant6EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStepStreamEventVariant6EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_STEP_EXPIRED("thread.run.step.expired");
 
     override fun toString() = value
@@ -539,12 +621,15 @@ enum class RunStepStreamEventVariant6EventEnum(@com.fasterxml.jackson.annotation
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStreamEventVariant0EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStreamEventVariant0EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_CREATED("thread.run.created");
 
     override fun toString() = value
@@ -552,12 +637,15 @@ enum class RunStreamEventVariant0EventEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStreamEventVariant1EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStreamEventVariant1EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_QUEUED("thread.run.queued");
 
     override fun toString() = value
@@ -565,12 +653,15 @@ enum class RunStreamEventVariant1EventEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStreamEventVariant2EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStreamEventVariant2EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_IN_PROGRESS("thread.run.in_progress");
 
     override fun toString() = value
@@ -578,12 +669,15 @@ enum class RunStreamEventVariant2EventEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-enum class RunStreamEventVariant3EventEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+enum class RunStreamEventVariant3EventEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     THREAD_RUN_REQUIRES_ACTION("thread.run.requires_action");
 
     override fun toString() = value
@@ -591,7 +685,8 @@ enum class RunStreamEventVariant3EventEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }

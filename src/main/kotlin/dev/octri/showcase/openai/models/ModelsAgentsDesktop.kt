@@ -5,22 +5,14 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Desktop configuration for an OpenAI-hosted environment.
- */
+/** Desktop configuration for an OpenAI-hosted environment. */
 data class DesktopParam(
-    /**
-     * Whether to provision the desktop and its browser proxy.
-     */
+    /** Whether to provision the desktop and its browser proxy. */
     val enabled: Boolean
 ) : SdkResource()
 
-/**
- * The effective desktop configuration for an OpenAI-hosted environment.
- */
+/** The effective desktop configuration for an OpenAI-hosted environment. */
 data class DesktopResource(
-    /**
-     * Whether the environment provisions a desktop and browser proxy.
-     */
+    /** Whether the environment provisions a desktop and browser proxy. */
     val enabled: Boolean
 ) : SdkResource()

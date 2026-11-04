@@ -3,84 +3,146 @@
 
 package dev.octri.showcase.openai
 
-
 class DataRetentionNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves the organization's data retention controls. Use this endpoint to inspect the configured retention type, such as zero data retention or modified abuse monitoring.
+     * Retrieves the organization's data retention controls. Use this endpoint to inspect the
+     * configured retention type, such as zero data retention or modified abuse monitoring.
      *
      * Retrieves organization data retention controls.
      */
     fun retrieveOrganization(options: RequestOptions? = null): OrganizationDataRetention {
-        return dev.octri.showcase.openai.methods.DataRetention.retrieveOrganizationDataRetention(clientConfig, options)
+        return dev.octri.showcase.openai.methods.DataRetention.retrieveOrganizationDataRetention(
+            clientConfig,
+            options,
+        )
     }
 
     /**
-     * Updates the organization's data retention controls. Set `retention_type` to one of the supported retention modes; the requested setting or transition must be valid for the organization.
+     * Updates the organization's data retention controls. Set `retention_type` to one of the
+     * supported retention modes; the requested setting or transition must be valid for the
+     * organization.
      *
      * Updates organization data retention controls.
      */
-    fun updateOrganization(retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum, options: RequestOptions? = null): OrganizationDataRetention {
-        return dev.octri.showcase.openai.methods.DataRetention.updateOrganizationDataRetention(clientConfig, retentionType, options)
+    fun updateOrganization(
+        retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum,
+        options: RequestOptions? = null,
+    ): OrganizationDataRetention {
+        return dev.octri.showcase.openai.methods.DataRetention.updateOrganizationDataRetention(
+            clientConfig,
+            retentionType,
+            options,
+        )
     }
 
     /**
-     * Retrieves the data retention controls configured for a project. Use this operation to inspect the project's current retention type before changing its settings.
+     * Retrieves the data retention controls configured for a project. Use this operation to inspect
+     * the project's current retention type before changing its settings.
      *
      * Retrieves project data retention controls.
      */
     fun retrieve(projectId: String, options: RequestOptions? = null): ProjectDataRetention {
-        return dev.octri.showcase.openai.methods.DataRetention.retrieveProjectDataRetention(clientConfig, projectId, options)
+        return dev.octri.showcase.openai.methods.DataRetention.retrieveProjectDataRetention(
+            clientConfig,
+            projectId,
+            options,
+        )
     }
 
     /**
-     * Updates the data retention controls for a project. Set `retention_type` to one of the supported retention settings to configure the project.
+     * Updates the data retention controls for a project. Set `retention_type` to one of the
+     * supported retention settings to configure the project.
      *
      * Updates project data retention controls.
      */
-    fun update(projectId: String, retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum, options: RequestOptions? = null): ProjectDataRetention {
-        return dev.octri.showcase.openai.methods.DataRetention.updateProjectDataRetention(clientConfig, projectId, retentionType, options)
+    fun update(
+        projectId: String,
+        retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum,
+        options: RequestOptions? = null,
+    ): ProjectDataRetention {
+        return dev.octri.showcase.openai.methods.DataRetention.updateProjectDataRetention(
+            clientConfig,
+            projectId,
+            retentionType,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [DataRetentionNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [DataRetentionNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Retrieves the organization's data retention controls. Use this endpoint to inspect the configured retention type, such as zero data retention or modified abuse monitoring.
+         * Retrieves the organization's data retention controls. Use this endpoint to inspect the
+         * configured retention type, such as zero data retention or modified abuse monitoring.
          *
          * Retrieves organization data retention controls.
          */
-        fun retrieveOrganization(options: RequestOptions? = null): SdkResponse<OrganizationDataRetention> {
-            return dev.octri.showcase.openai.methods.DataRetention.retrieveOrganizationDataRetentionWithRawResponse(clientConfig, options)
+        fun retrieveOrganization(
+            options: RequestOptions? = null
+        ): SdkResponse<OrganizationDataRetention> {
+            return dev.octri.showcase.openai.methods.DataRetention
+                .retrieveOrganizationDataRetentionWithRawResponse(clientConfig, options)
         }
 
         /**
-         * Updates the organization's data retention controls. Set `retention_type` to one of the supported retention modes; the requested setting or transition must be valid for the organization.
+         * Updates the organization's data retention controls. Set `retention_type` to one of the
+         * supported retention modes; the requested setting or transition must be valid for the
+         * organization.
          *
          * Updates organization data retention controls.
          */
-        fun updateOrganization(retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum, options: RequestOptions? = null): SdkResponse<OrganizationDataRetention> {
-            return dev.octri.showcase.openai.methods.DataRetention.updateOrganizationDataRetentionWithRawResponse(clientConfig, retentionType, options)
+        fun updateOrganization(
+            retentionType: UpdateOrganizationDataRetentionBodyRetentionTypeEnum,
+            options: RequestOptions? = null,
+        ): SdkResponse<OrganizationDataRetention> {
+            return dev.octri.showcase.openai.methods.DataRetention
+                .updateOrganizationDataRetentionWithRawResponse(
+                    clientConfig,
+                    retentionType,
+                    options,
+                )
         }
 
         /**
-         * Retrieves the data retention controls configured for a project. Use this operation to inspect the project's current retention type before changing its settings.
+         * Retrieves the data retention controls configured for a project. Use this operation to
+         * inspect the project's current retention type before changing its settings.
          *
          * Retrieves project data retention controls.
          */
-        fun retrieve(projectId: String, options: RequestOptions? = null): SdkResponse<ProjectDataRetention> {
-            return dev.octri.showcase.openai.methods.DataRetention.retrieveProjectDataRetentionWithRawResponse(clientConfig, projectId, options)
+        fun retrieve(
+            projectId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<ProjectDataRetention> {
+            return dev.octri.showcase.openai.methods.DataRetention
+                .retrieveProjectDataRetentionWithRawResponse(clientConfig, projectId, options)
         }
 
         /**
-         * Updates the data retention controls for a project. Set `retention_type` to one of the supported retention settings to configure the project.
+         * Updates the data retention controls for a project. Set `retention_type` to one of the
+         * supported retention settings to configure the project.
          *
          * Updates project data retention controls.
          */
-        fun update(projectId: String, retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum, options: RequestOptions? = null): SdkResponse<ProjectDataRetention> {
-            return dev.octri.showcase.openai.methods.DataRetention.updateProjectDataRetentionWithRawResponse(clientConfig, projectId, retentionType, options)
+        fun update(
+            projectId: String,
+            retentionType: UpdateProjectDataRetentionBodyRetentionTypeEnum,
+            options: RequestOptions? = null,
+        ): SdkResponse<ProjectDataRetention> {
+            return dev.octri.showcase.openai.methods.DataRetention
+                .updateProjectDataRetentionWithRawResponse(
+                    clientConfig,
+                    projectId,
+                    retentionType,
+                    options,
+                )
         }
-
     }
 }

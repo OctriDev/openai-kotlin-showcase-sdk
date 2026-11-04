@@ -15,47 +15,86 @@ import dev.octri.showcase.openai.SdkResponse
 
 internal object ProjectsListProjectUsersOperation {
     /**
-     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
+     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of
+     * results and pass an `after` cursor from a previous response to continue through the list.
      *
      * Returns a list of users in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectUsers(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ProjectUserListResponse {
+    fun listProjectUsers(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectUserListResponse {
         return listProjectUsersWithRawResponse(clientConfig, projectId, limit, after, options).data
     }
 
-
-    /** [listProjectUsers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listProjectUsersWithRawResponse(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<ProjectUserListResponse> {
-        return SdkClient.request<ProjectUserListResponse>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listProjectUsers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [listProjectUsers], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun listProjectUsersWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectUserListResponse> {
+        return SdkClient.request<ProjectUserListResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "listProjectUsers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of results and pass an `after` cursor from a previous response to continue through the list.
+     * Lists users in a project using cursor-based pagination. Set `limit` to control the number of
+     * results and pass an `after` cursor from a previous response to continue through the list.
      *
      * Returns a list of users in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectUsersPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ProjectUser) -> Boolean) {
+    fun listProjectUsersPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectUser) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectUsers(clientConfig, projectId, limit, cursor, options)
@@ -70,9 +109,14 @@ internal object ProjectsListProjectUsersOperation {
         }
     }
 
-
-
-    fun listProjectUsersPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectUsersPage) -> Boolean) {
+    fun listProjectUsersPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectUsersPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectUsers(clientConfig, projectId, limit, cursor, options)
@@ -89,47 +133,125 @@ internal object ProjectsListProjectUsersOperation {
 
 internal object ProjectsCreateProjectUserOperation {
     /**
-     * Adds a user to the project. Users must already be members of the organization to be added to a project.
+     * Adds a user to the project. Users must already be members of the organization to be added to
+     * a project.
      *
      * @param projectId The ID of the project.
      * @param role `owner` or `member`
      * @param userId The ID of the user.
      * @param email Email of the user to add.
      */
-    fun createProjectUser(clientConfig: ClientConfig, projectId: String, role: String, userId: SdkClient.SdkOptional<String?>? = null, email: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): ProjectUser {
-        return createProjectUserWithRawResponse(clientConfig, projectId, role, userId, email, options).data
+    fun createProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        role: String,
+        userId: SdkClient.SdkOptional<String?>? = null,
+        email: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectUser {
+        return createProjectUserWithRawResponse(
+                clientConfig,
+                projectId,
+                role,
+                userId,
+                email,
+                options,
+            )
+            .data
     }
 
-
-    /** [createProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createProjectUserWithRawResponse(clientConfig: ClientConfig, projectId: String, role: String, userId: SdkClient.SdkOptional<String?>? = null, email: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<ProjectUser> {
-        return SdkClient.request<ProjectUser>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users", config = clientConfig, body = SdkClient.bodyMap("role" to (role), "user_id" to (userId ?: SdkClient.SdkOptional.Omitted), "email" to (email ?: SdkClient.SdkOptional.Omitted)), operationId = "createProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [createProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun createProjectUserWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        role: String,
+        userId: SdkClient.SdkOptional<String?>? = null,
+        email: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectUser> {
+        return SdkClient.request<ProjectUser>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "role" to (role),
+                        "user_id" to (userId ?: SdkClient.SdkOptional.Omitted),
+                        "email" to (email ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "createProjectUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "409" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsRetrieveProjectUserOperation {
     /**
-     * Retrieves a user's membership details for a project. Use `project_id` and `user_id` to identify the project and user, and review the returned role and membership timestamp.
+     * Retrieves a user's membership details for a project. Use `project_id` and `user_id` to
+     * identify the project and user, and review the returned role and membership timestamp.
      *
      * Retrieves a user in the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
      */
-    fun retrieveProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): ProjectUser {
+    fun retrieveProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): ProjectUser {
         return retrieveProjectUserWithRawResponse(clientConfig, projectId, userId, options).data
     }
 
-
-    /** [retrieveProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveProjectUserWithRawResponse(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): SdkResponse<ProjectUser> {
-        return SdkClient.request<ProjectUser>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "retrieveProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [retrieveProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun retrieveProjectUserWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectUser> {
+        return SdkClient.request<ProjectUser>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                operationId = "retrieveProjectUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsModifyProjectUserOperation {
     /**
-     * Updates a user's role in a project. Use `project_id` and `user_id` to identify the project membership, and set `role` to `owner` or `member` when changing the role.
+     * Updates a user's role in a project. Use `project_id` and `user_id` to identify the project
+     * membership, and set `role` to `owner` or `member` when changing the role.
      *
      * Modifies a user's role in the project.
      *
@@ -137,31 +259,91 @@ internal object ProjectsModifyProjectUserOperation {
      * @param userId The ID of the user.
      * @param role `owner` or `member`
      */
-    fun modifyProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, role: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): ProjectUser {
+    fun modifyProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        role: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectUser {
         return modifyProjectUserWithRawResponse(clientConfig, projectId, userId, role, options).data
     }
 
-
-    /** [modifyProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun modifyProjectUserWithRawResponse(clientConfig: ClientConfig, projectId: String, userId: String, role: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<ProjectUser> {
-        return SdkClient.request<ProjectUser>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, body = SdkClient.bodyMap("role" to (role ?: SdkClient.SdkOptional.Omitted)), operationId = "modifyProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [modifyProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun modifyProjectUserWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        role: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectUser> {
+        return SdkClient.request<ProjectUser>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("role" to (role ?: SdkClient.SdkOptional.Omitted)),
+                operationId = "modifyProjectUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsDeleteProjectUserOperation {
     /**
-     * Deletes a user from the project. Returns confirmation of project user deletion, or an error if the project is archived (archived projects have no users).
+     * Deletes a user from the project. Returns confirmation of project user deletion, or an error
+     * if the project is archived (archived projects have no users).
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
      */
-    fun deleteProjectUser(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): ProjectUserDeleteResponse {
+    fun deleteProjectUser(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): ProjectUserDeleteResponse {
         return deleteProjectUserWithRawResponse(clientConfig, projectId, userId, options).data
     }
 
-
-    /** [deleteProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteProjectUserWithRawResponse(clientConfig: ClientConfig, projectId: String, userId: String, options: RequestOptions? = null): SdkResponse<ProjectUserDeleteResponse> {
-        return SdkClient.request<ProjectUserDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "deleteProjectUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [deleteProjectUser], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun deleteProjectUserWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectUserDeleteResponse> {
+        return SdkClient.request<ProjectUserDeleteResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                operationId = "deleteProjectUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }

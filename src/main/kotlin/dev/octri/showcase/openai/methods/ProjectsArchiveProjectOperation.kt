@@ -17,13 +17,39 @@ internal object ProjectsArchiveProjectOperation {
      *
      * @param projectId The ID of the project.
      */
-    fun archiveProject(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): Project {
+    fun archiveProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): Project {
         return archiveProjectWithRawResponse(clientConfig, projectId, options).data
     }
 
-
-    /** [archiveProject], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun archiveProjectWithRawResponse(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): SdkResponse<Project> {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/archive", config = clientConfig, operationId = "archiveProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [archiveProject], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun archiveProjectWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Project> {
+        return SdkClient.request<Project>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/archive",
+                config = clientConfig,
+                operationId = "archiveProject",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }

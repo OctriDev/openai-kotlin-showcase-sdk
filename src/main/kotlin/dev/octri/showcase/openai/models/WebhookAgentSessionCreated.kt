@@ -5,25 +5,17 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Sent when an agent session is created.
- */
+/** Sent when an agent session is created. */
 data class WebhookAgentSessionCreated(
-    /**
-     * The unique ID of the event.
-     */
+    /** The unique ID of the event. */
     val id: String,
-    /**
-     * The object type. Always `event`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WebhookAgentSessionEnvelopeObjectEnum,
-    /**
-     * The Unix timestamp, in seconds, when the event was created.
-     */
+    /** The object type. Always `event`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: WebhookAgentSessionEnvelopeObjectEnum,
+    /** The Unix timestamp, in seconds, when the event was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The event type. Always `agent.session.created`.
-     */
+    /** The event type. Always `agent.session.created`. */
     val type: WebhookAgentSessionCreatedVariant1TypeEnum,
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: AgentSessionCreatedPayloadResource
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: AgentSessionCreatedPayloadResource,
 ) : SdkResource()

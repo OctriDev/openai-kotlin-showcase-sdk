@@ -21,40 +21,84 @@ internal object ProjectsListProjectServiceAccountsOperation {
      * Returns a list of service accounts in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectServiceAccounts(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ProjectServiceAccountListResponse {
-        return listProjectServiceAccountsWithRawResponse(clientConfig, projectId, limit, after, options).data
+    fun listProjectServiceAccounts(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountListResponse {
+        return listProjectServiceAccountsWithRawResponse(
+                clientConfig,
+                projectId,
+                limit,
+                after,
+                options,
+            )
+            .data
     }
 
-
-    /** [listProjectServiceAccounts], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listProjectServiceAccountsWithRawResponse(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<ProjectServiceAccountListResponse> {
-        return SdkClient.request<ProjectServiceAccountListResponse>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "listProjectServiceAccounts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [listProjectServiceAccounts], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listProjectServiceAccountsWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectServiceAccountListResponse> {
+        return SdkClient.request<ProjectServiceAccountListResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "listProjectServiceAccounts",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Returns a list of service accounts in the project.
      *
      * @param projectId The ID of the project.
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
      */
-    fun listProjectServiceAccountsPaginated(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldFn: (ProjectServiceAccount) -> Boolean) {
+    fun listProjectServiceAccountsPaginated(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ProjectServiceAccount) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectServiceAccounts(clientConfig, projectId, limit, cursor, options)
@@ -69,9 +113,14 @@ internal object ProjectsListProjectServiceAccountsOperation {
         }
     }
 
-
-
-    fun listProjectServiceAccountsPages(clientConfig: ClientConfig, projectId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectServiceAccountsPage) -> Boolean) {
+    fun listProjectServiceAccountsPages(
+        clientConfig: ClientConfig,
+        projectId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectServiceAccountsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjectServiceAccounts(clientConfig, projectId, limit, cursor, options)
@@ -88,56 +137,140 @@ internal object ProjectsListProjectServiceAccountsOperation {
 
 internal object ProjectsCreateProjectServiceAccountOperation {
     /**
-     * Creates a service account in a project and, by default, returns an unredacted API key for it. Supply a `name`; set `create_service_account_only` to create the account without default roles or an API key, and use `expires_in_seconds` to configure the initial key's lifetime.
+     * Creates a service account in a project and, by default, returns an unredacted API key for it.
+     * Supply a `name`; set `create_service_account_only` to create the account without default
+     * roles or an API key, and use `expires_in_seconds` to configure the initial key's lifetime.
      *
-     * Creates a new service account in the project. By default, this also returns an unredacted API key for the service account.
+     * Creates a new service account in the project. By default, this also returns an unredacted API
+     * key for the service account.
      *
      * @param projectId The ID of the project.
      * @param name The name of the service account being created.
      * @param createServiceAccountOnly Optional `boolean` value serialized in the
      *   `create_service_account_only` wire field.
-     * @param expiresInSeconds Number of seconds until the initial API key expires.
-     *   If omitted or null, the key does not expire unless the effective organization
-     *   or project policy requires an expiration. When a policy sets a maximum
-     *   lifetime, this value must be provided and must not exceed that limit. A
-     *   non-null value cannot be used when `create_service_account_only` is true.
+     * @param expiresInSeconds Number of seconds until the initial API key expires. If omitted or
+     *   null, the key does not expire unless the effective organization or project policy requires
+     *   an expiration. When a policy sets a maximum lifetime, this value must be provided and must
+     *   not exceed that limit. A non-null value cannot be used when `create_service_account_only`
+     *   is true.
      */
-    fun createProjectServiceAccount(clientConfig: ClientConfig, projectId: String, name: String, createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): ProjectServiceAccountCreateResponse {
-        return createProjectServiceAccountWithRawResponse(clientConfig, projectId, name, createServiceAccountOnly, expiresInSeconds, options).data
+    fun createProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: String,
+        createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountCreateResponse {
+        return createProjectServiceAccountWithRawResponse(
+                clientConfig,
+                projectId,
+                name,
+                createServiceAccountOnly,
+                expiresInSeconds,
+                options,
+            )
+            .data
     }
 
-
-    /** [createProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createProjectServiceAccountWithRawResponse(clientConfig: ClientConfig, projectId: String, name: String, createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): SdkResponse<ProjectServiceAccountCreateResponse> {
-        return SdkClient.request<ProjectServiceAccountCreateResponse>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "create_service_account_only" to
-    (createServiceAccountOnly ?: SdkClient.SdkOptional.Omitted), "expires_in_seconds" to
-    (expiresInSeconds ?: SdkClient.SdkOptional.Omitted)), operationId = "createProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [createProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun createProjectServiceAccountWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: String,
+        createServiceAccountOnly: SdkClient.SdkOptional<Boolean?>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectServiceAccountCreateResponse> {
+        return SdkClient.request<ProjectServiceAccountCreateResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (name),
+                        "create_service_account_only" to
+                            (createServiceAccountOnly ?: SdkClient.SdkOptional.Omitted),
+                        "expires_in_seconds" to (expiresInSeconds ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "createProjectServiceAccount",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsRetrieveProjectServiceAccountOperation {
     /**
-     * Retrieves a service account in a project. Use the project and service account identifiers to inspect the account's name, role, and creation timestamp.
+     * Retrieves a service account in a project. Use the project and service account identifiers to
+     * inspect the account's name, role, and creation timestamp.
      *
      * Retrieves a service account in the project.
      *
      * @param projectId The ID of the project.
      * @param serviceAccountId The ID of the service account.
      */
-    fun retrieveProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): ProjectServiceAccount {
-        return retrieveProjectServiceAccountWithRawResponse(clientConfig, projectId, serviceAccountId, options).data
+    fun retrieveProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccount {
+        return retrieveProjectServiceAccountWithRawResponse(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                options,
+            )
+            .data
     }
 
-
-    /** [retrieveProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveProjectServiceAccountWithRawResponse(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): SdkResponse<ProjectServiceAccount> {
-        return SdkClient.request<ProjectServiceAccount>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}", config = clientConfig, operationId = "retrieveProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [retrieveProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun retrieveProjectServiceAccountWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectServiceAccount> {
+        return SdkClient.request<ProjectServiceAccount>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}",
+                config = clientConfig,
+                operationId = "retrieveProjectServiceAccount",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsUpdateProjectServiceAccountOperation {
     /**
-     * Updates a service account in a project. Supply `name` or `role` to change the corresponding account property; the role must be `member` or `owner`.
+     * Updates a service account in a project. Supply `name` or `role` to change the corresponding
+     * account property; the role must be `member` or `owner`.
      *
      * Updates a service account in the project.
      *
@@ -146,38 +279,120 @@ internal object ProjectsUpdateProjectServiceAccountOperation {
      * @param name The updated service account name.
      * @param role The updated service account role.
      */
-    fun updateProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, role: UpdateProjectServiceAccountBodyRoleEnum? = null, options: RequestOptions? = null): ProjectServiceAccount {
-        return updateProjectServiceAccountWithRawResponse(clientConfig, projectId, serviceAccountId, name, role, options).data
+    fun updateProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        role: UpdateProjectServiceAccountBodyRoleEnum? = null,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccount {
+        return updateProjectServiceAccountWithRawResponse(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                name,
+                role,
+                options,
+            )
+            .data
     }
 
-
-    /** [updateProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateProjectServiceAccountWithRawResponse(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, role: UpdateProjectServiceAccountBodyRoleEnum? = null, options: RequestOptions? = null): SdkResponse<ProjectServiceAccount> {
-        return SdkClient.request<ProjectServiceAccount>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "role" to (SdkClient.omitIfNull(role))), operationId = "updateProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [updateProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun updateProjectServiceAccountWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        role: UpdateProjectServiceAccountBodyRoleEnum? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectServiceAccount> {
+        return SdkClient.request<ProjectServiceAccount>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (SdkClient.omitIfNull(name)),
+                        "role" to (SdkClient.omitIfNull(role)),
+                    ),
+                operationId = "updateProjectServiceAccount",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsDeleteProjectServiceAccountOperation {
     /**
-     * Deletes a service account from the project. Returns confirmation of service account deletion, or an error if the project is archived (archived projects have no service accounts).
+     * Deletes a service account from the project. Returns confirmation of service account deletion,
+     * or an error if the project is archived (archived projects have no service accounts).
      *
      * @param projectId The ID of the project.
      * @param serviceAccountId The ID of the service account.
      */
-    fun deleteProjectServiceAccount(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): ProjectServiceAccountDeleteResponse {
-        return deleteProjectServiceAccountWithRawResponse(clientConfig, projectId, serviceAccountId, options).data
+    fun deleteProjectServiceAccount(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): ProjectServiceAccountDeleteResponse {
+        return deleteProjectServiceAccountWithRawResponse(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                options,
+            )
+            .data
     }
 
-
-    /** [deleteProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteProjectServiceAccountWithRawResponse(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, options: RequestOptions? = null): SdkResponse<ProjectServiceAccountDeleteResponse> {
-        return SdkClient.request<ProjectServiceAccountDeleteResponse>(SdkClient.RequestSpec("DELETE", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}", config = clientConfig, operationId = "deleteProjectServiceAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [deleteProjectServiceAccount], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteProjectServiceAccountWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectServiceAccountDeleteResponse> {
+        return SdkClient.request<ProjectServiceAccountDeleteResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}",
+                config = clientConfig,
+                operationId = "deleteProjectServiceAccount",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsCreateProjectsServiceAccountApiKeyOperation {
     /**
-     * Creates an API key for a service account in a project. Use `name` and `scopes` to set the key's label and scopes, and `expires_in_seconds` to configure its lifetime. The response includes the unredacted key value and its identifier.
+     * Creates an API key for a service account in a project. Use `name` and `scopes` to set the
+     * key's label and scopes, and `expires_in_seconds` to configure its lifetime. The response
+     * includes the unredacted key value and its identifier.
      *
      * Creates an API key for a service account in the project.
      *
@@ -185,17 +400,65 @@ internal object ProjectsCreateProjectsServiceAccountApiKeyOperation {
      * @param serviceAccountId The ID of the service account.
      * @param name API key name.
      * @param scopes API key scopes.
-     * @param expiresInSeconds Optional API value serialized in the
-     *   `expires_in_seconds` wire field.
+     * @param expiresInSeconds Optional API value serialized in the `expires_in_seconds` wire field.
      */
-    fun createProjectsServiceAccountApiKey(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, scopes: List<String>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): ServiceAccountApiKeyBody {
-        return createProjectsServiceAccountApiKeyWithRawResponse(clientConfig, projectId, serviceAccountId, name, scopes, expiresInSeconds, options).data
+    fun createProjectsServiceAccountApiKey(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        scopes: List<String>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): ServiceAccountApiKeyBody {
+        return createProjectsServiceAccountApiKeyWithRawResponse(
+                clientConfig,
+                projectId,
+                serviceAccountId,
+                name,
+                scopes,
+                expiresInSeconds,
+                options,
+            )
+            .data
     }
 
-
-    /** [createProjectsServiceAccountApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createProjectsServiceAccountApiKeyWithRawResponse(clientConfig: ClientConfig, projectId: String, serviceAccountId: String, name: String? = null, scopes: List<String>? = null, expiresInSeconds: SdkClient.SdkOptional<Long?>? = null, options: RequestOptions? = null): SdkResponse<ServiceAccountApiKeyBody> {
-        return SdkClient.request<ServiceAccountApiKeyBody>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}/api_keys", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "scopes" to (SdkClient.omitIfNull(scopes)), "expires_in_seconds" to
-    (expiresInSeconds ?: SdkClient.SdkOptional.Omitted)), operationId = "createProjectsServiceAccountApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "409" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [createProjectsServiceAccountApiKey], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun createProjectsServiceAccountApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        serviceAccountId: String,
+        name: String? = null,
+        scopes: List<String>? = null,
+        expiresInSeconds: SdkClient.SdkOptional<Long?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ServiceAccountApiKeyBody> {
+        return SdkClient.request<ServiceAccountApiKeyBody>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}/service_accounts/${SdkClient.encodePathSegment(serviceAccountId)}/api_keys",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (SdkClient.omitIfNull(name)),
+                        "scopes" to (SdkClient.omitIfNull(scopes)),
+                        "expires_in_seconds" to (expiresInSeconds ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "createProjectsServiceAccountApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "409" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }

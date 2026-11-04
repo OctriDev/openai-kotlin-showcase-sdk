@@ -5,12 +5,11 @@ package dev.octri.showcase.openai.models
 
 import dev.octri.showcase.openai.SdkResource
 
-/**
- * Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.
- */
+/** Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`. */
 data class RealtimeReasoning(
     /**
-     * Constrains effort on reasoning for reasoning-capable Realtime models such as `gpt-realtime-2`.
+     * Constrains effort on reasoning for reasoning-capable Realtime models such as
+     * `gpt-realtime-2`.
      */
     val effort: RealtimeReasoningEffort? = null
 ) : SdkResource()

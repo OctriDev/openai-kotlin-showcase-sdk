@@ -15,50 +15,92 @@ import dev.octri.showcase.openai.SdkResponse
 
 internal object ProjectsListProjectsOperation {
     /**
-     * Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * Lists projects in the organization. Use `include_archived` to include archived projects and
+     * `limit` and `after` to control and continue through the results. The response includes a
+     * `has_more` flag and cursor IDs for pagination.
      *
      * Returns a list of projects.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param includeArchived If `true` returns all projects including those that
-     *   have been `archived`. Archived projects are not included by default.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param includeArchived If `true` returns all projects including those that have been
+     *   `archived`. Archived projects are not included by default.
      */
-    fun listProjects(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null): ProjectListResponse {
-        return listProjectsWithRawResponse(clientConfig, limit, after, includeArchived, options).data
+    fun listProjects(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+    ): ProjectListResponse {
+        return listProjectsWithRawResponse(clientConfig, limit, after, includeArchived, options)
+            .data
     }
-
-
-    /** [listProjects], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listProjectsWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null): SdkResponse<ProjectListResponse> {
-        return SdkClient.request<ProjectListResponse>(SdkClient.RequestSpec("GET", "/organization/projects", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "include_archived" to
-    SdkClient.queryValue(includeArchived, "form", true)), operationId = "listProjects", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Lists projects in the organization. Use `include_archived` to include archived projects and `limit` and `after` to control and continue through the results. The response includes a `has_more` flag and cursor IDs for pagination.
+     * [listProjects], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listProjectsWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ProjectListResponse> {
+        return SdkClient.request<ProjectListResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "include_archived" to SdkClient.queryValue(includeArchived, "form", true),
+                    ),
+                operationId = "listProjects",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Lists projects in the organization. Use `include_archived` to include archived projects and
+     * `limit` and `after` to control and continue through the results. The response includes a
+     * `has_more` flag and cursor IDs for pagination.
      *
      * Returns a list of projects.
      *
-     * @param limit A limit on the number of objects to be returned. Limit can range
-     *   between 1 and 100, and the default is 20.
-     * @param after A cursor for use in pagination. `after` is an object ID that
-     *   defines your place in the list. For instance, if you make a list request and
-     *   receive 100 objects, ending with obj_foo, your subsequent call can include
-     *   after=obj_foo in order to fetch the next page of the list.
-     * @param includeArchived If `true` returns all projects including those that
-     *   have been `archived`. Archived projects are not included by default.
+     * @param limit A limit on the number of objects to be returned. Limit can range between 1 and
+     *   100, and the default is 20.
+     * @param after A cursor for use in pagination. `after` is an object ID that defines your place
+     *   in the list. For instance, if you make a list request and receive 100 objects, ending with
+     *   obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of
+     *   the list.
+     * @param includeArchived If `true` returns all projects including those that have been
+     *   `archived`. Archived projects are not included by default.
      */
-    fun listProjectsPaginated(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null, yieldFn: (Project) -> Boolean) {
+    fun listProjectsPaginated(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Project) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjects(clientConfig, limit, cursor, includeArchived, options)
@@ -73,9 +115,14 @@ internal object ProjectsListProjectsOperation {
         }
     }
 
-
-
-    fun listProjectsPages(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, includeArchived: Boolean? = null, options: RequestOptions? = null, yieldPage: (Projects.ListProjectsPage) -> Boolean) {
+    fun listProjectsPages(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        includeArchived: Boolean? = null,
+        options: RequestOptions? = null,
+        yieldPage: (Projects.ListProjectsPage) -> Boolean,
+    ) {
         var cursor = after
         while (true) {
             val page = listProjects(clientConfig, limit, cursor, includeArchived, options)
@@ -92,72 +139,190 @@ internal object ProjectsListProjectsOperation {
 
 internal object ProjectsCreateProjectOperation {
     /**
-     * Create a new project in the organization. Projects can be created and archived, but cannot be deleted.
+     * Create a new project in the organization. Projects can be created and archived, but cannot be
+     * deleted.
      *
      * @param name The friendly name of the project, this name appears in reports.
-     * @param geography Create the project with the specified data residency region.
-     *   Your organization must have access to Data residency functionality in order to
-     *   use. See data residency controls to review the functionality and limitations
-     *   of setting this field. Deprecated: use `residency` instead. Do not provide
-     *   both `geography` and `residency`.
-     * @param residency Create the project with the specified residency
-     *   configuration. Your organization must have access to the requested residency
-     *   configuration in order to use it. See data residency controls to review the
-     *   functionality and limitations of setting this field.
+     * @param geography Create the project with the specified data residency region. Your
+     *   organization must have access to Data residency functionality in order to use. See data
+     *   residency controls to review the functionality and limitations of setting this field.
+     *   Deprecated: use `residency` instead. Do not provide both `geography` and `residency`.
+     * @param residency Create the project with the specified residency configuration. Your
+     *   organization must have access to the requested residency configuration in order to use it.
+     *   See data residency controls to review the functionality and limitations of setting this
+     *   field.
      * @param externalKeyId External key ID to associate with the project.
      */
-    fun createProject(clientConfig: ClientConfig, name: String, geography: SdkClient.SdkOptional<String?>? = null, residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Project {
-        return createProjectWithRawResponse(clientConfig, name, geography, residency, externalKeyId, options).data
+    fun createProject(
+        clientConfig: ClientConfig,
+        name: String,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Project {
+        return createProjectWithRawResponse(
+                clientConfig,
+                name,
+                geography,
+                residency,
+                externalKeyId,
+                options,
+            )
+            .data
     }
 
-
-    /** [createProject], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createProjectWithRawResponse(clientConfig: ClientConfig, name: String, geography: SdkClient.SdkOptional<String?>? = null, residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<Project> {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("POST", "/organization/projects", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "geography" to (geography ?: SdkClient.SdkOptional.Omitted), "residency" to (residency ?: SdkClient.SdkOptional.Omitted), "external_key_id" to
-    (externalKeyId ?: SdkClient.SdkOptional.Omitted)), operationId = "createProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [createProject], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createProjectWithRawResponse(
+        clientConfig: ClientConfig,
+        name: String,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        residency: SdkClient.SdkOptional<PublicProjectResidency?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Project> {
+        return SdkClient.request<Project>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (name),
+                        "geography" to (geography ?: SdkClient.SdkOptional.Omitted),
+                        "residency" to (residency ?: SdkClient.SdkOptional.Omitted),
+                        "external_key_id" to (externalKeyId ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "createProject",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsRetrieveProjectOperation {
     /**
-     * Retrieves a project in the organization by its identifier. Use `project_id` to select the project whose name, status, and residency configuration you need to inspect.
+     * Retrieves a project in the organization by its identifier. Use `project_id` to select the
+     * project whose name, status, and residency configuration you need to inspect.
      *
      * Retrieves a project.
      *
      * @param projectId The ID of the project.
      */
-    fun retrieveProject(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): Project {
+    fun retrieveProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): Project {
         return retrieveProjectWithRawResponse(clientConfig, projectId, options).data
     }
 
-
-    /** [retrieveProject], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveProjectWithRawResponse(clientConfig: ClientConfig, projectId: String, options: RequestOptions? = null): SdkResponse<Project> {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("GET", "/organization/projects/${SdkClient.encodePathSegment(projectId)}", config = clientConfig, operationId = "retrieveProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [retrieveProject], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveProjectWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Project> {
+        return SdkClient.request<Project>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}",
+                config = clientConfig,
+                operationId = "retrieveProject",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ProjectsModifyProjectOperation {
     /**
-     * Updates a project in the organization. Supply any of `name`, `external_key_id`, or `geography` to change the corresponding project value; omitted fields are not specified for update. The `geography` field is retained for backward compatibility, while data residency is configured with `residency` when creating a project.
+     * Updates a project in the organization. Supply any of `name`, `external_key_id`, or
+     * `geography` to change the corresponding project value; omitted fields are not specified for
+     * update. The `geography` field is retained for backward compatibility, while data residency is
+     * configured with `residency` when creating a project.
      *
      * Modifies a project in the organization.
      *
      * @param projectId The ID of the project.
      * @param name The updated name of the project, this name appears in reports.
      * @param externalKeyId External key ID to associate with the project.
-     * @param geography Geography for the project. Deprecated: use `residency` when
-     *   creating a project to configure data residency. This field is retained for
-     *   backward compatibility.
+     * @param geography Geography for the project. Deprecated: use `residency` when creating a
+     *   project to configure data residency. This field is retained for backward compatibility.
      */
-    fun modifyProject(clientConfig: ClientConfig, projectId: String, name: SdkClient.SdkOptional<String?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, geography: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Project {
-        return modifyProjectWithRawResponse(clientConfig, projectId, name, externalKeyId, geography, options).data
+    fun modifyProject(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: SdkClient.SdkOptional<String?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Project {
+        return modifyProjectWithRawResponse(
+                clientConfig,
+                projectId,
+                name,
+                externalKeyId,
+                geography,
+                options,
+            )
+            .data
     }
 
-
-    /** [modifyProject], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun modifyProjectWithRawResponse(clientConfig: ClientConfig, projectId: String, name: SdkClient.SdkOptional<String?>? = null, externalKeyId: SdkClient.SdkOptional<String?>? = null, geography: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<Project> {
-        return SdkClient.request<Project>(SdkClient.RequestSpec("POST", "/organization/projects/${SdkClient.encodePathSegment(projectId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name ?: SdkClient.SdkOptional.Omitted), "external_key_id" to
-    (externalKeyId ?: SdkClient.SdkOptional.Omitted), "geography" to (geography ?: SdkClient.SdkOptional.Omitted)), operationId = "modifyProject", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ErrorResponse::class.java, "403" to PermissionErrorResponse::class.java, "404" to ErrorResponse::class.java, "429" to ErrorResponse::class.java)))
+    /**
+     * [modifyProject], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun modifyProjectWithRawResponse(
+        clientConfig: ClientConfig,
+        projectId: String,
+        name: SdkClient.SdkOptional<String?>? = null,
+        externalKeyId: SdkClient.SdkOptional<String?>? = null,
+        geography: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Project> {
+        return SdkClient.request<Project>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/organization/projects/${SdkClient.encodePathSegment(projectId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (name ?: SdkClient.SdkOptional.Omitted),
+                        "external_key_id" to (externalKeyId ?: SdkClient.SdkOptional.Omitted),
+                        "geography" to (geography ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "modifyProject",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ErrorResponse::class.java,
+                        "403" to PermissionErrorResponse::class.java,
+                        "404" to ErrorResponse::class.java,
+                        "429" to ErrorResponse::class.java,
+                    ),
+            )
+        )
     }
 }
